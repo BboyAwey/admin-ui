@@ -1,0 +1,11 @@
+{
+	"files.exclude": {
+		"node_modules": true,
+		"documentation/node_modules": true,
+		"npm-debug.log.*": true,
+		"dist": false
+	},
+	"search.exclude": {
+		"node_modules": true
+	}
+}

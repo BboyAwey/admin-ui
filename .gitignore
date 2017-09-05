@@ -14,3 +14,15 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+
+# documentation build files
+documentation/node_modules/
+documentation/_book/
+documentation/*.epub
+documentation/*.mobi
+documentation/*.pdf
+
+
+
+
+

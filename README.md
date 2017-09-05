@@ -1,30 +1,12 @@
-# admin-ui-2
+# Admin UI 2
 
-> A Vue.js project
+> The realization of background-management-system-like UI design specifications. This is ths version 2 of Admin UI.
 
-## Build Setup
+## 开发文档
 
+开发文档使用gitbook编写，参与开发时请首先阅读开发文档（也可阅读线上版本：[Admin UI 2 开发文档](https://bboyawey.gitbooks.io/admin-ui-2/content/)）：
 ``` bash
-# install dependencies
-npm install
+cd documentation
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+gitbook serve
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

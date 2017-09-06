@@ -11,12 +11,12 @@ var themes = ['light', 'dark']
 
 themes.forEach(theme => {
   sass.render({
-    file: `./src/admin-ui-2/themes/${theme}.scss`,
+    file: `./src/admin-ui-2/themes/default/${theme}.scss`,
     outputStyle: 'expanded'
   }, function (err, res) {
     if (err) throw err
     // No errors during the compilation, write this result on the disk 
-    fs.writeFile(`./src/admin-ui-2/themes/${theme}.css`, res.css, function(err){
+    fs.writeFile(`./src/admin-ui-2/themes/default/${theme}.css`, res.css, function(err){
       if(err) throw err
       console.log(chalk.cyan(`  ${theme} theme build complete.\n`))
     })

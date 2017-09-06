@@ -1,0 +1,192 @@
+// colors
+$color-map: (
+  primary: #0e9ee2,
+  info: #28b7eb,
+  warning: #fec500,
+  danger: #f35555,
+  success: #4fca72,
+);
+
+$light-color-map: (
+  primary-light: #0e9ee2,
+  info-light: #28b7eb,
+  warning-light: #fec500,
+  danger-light: #f35555,
+  success-light: #4fca72,
+);
+
+$dark-color-map: (
+  primary-dark: #0e9ee2,
+  info-dark: #28b7eb,
+  warning-dark: #fec500,
+  danger-dark: #f35555,
+  success-dark: #4fca72,
+);
+
+$font-neutral-map: (
+  white: #fff,
+  black: #000,
+  gray: #666,
+  light-gray: #999,
+  dark-gray: #333,
+);
+
+$border-neutral-map: (
+  white: #fff,
+  black: #000,
+  gray: #666,
+  light-gray: #999,
+  dark-gray: #333,
+);
+
+$background-neutral-map: (
+  white: #fff,
+  black: #000,
+  gray: #666,
+  light-gray: #999,
+  dark-gray: #333,
+);
+
+// interface type
+$interface-list: 
+  link,
+  visited,
+  active,
+  hover,
+  focus,
+  first-child,
+  last-child,
+  before,
+  after,
+  enabled,
+  disabled,
+  checked;
+
+// font color
+@each $color, $number in $color-map {
+  .au-theme-font-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-font-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+@each $color, $number in $light-color-map {
+  .au-theme-font-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-font-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+@each $color, $number in $dark-color-map {
+  .au-theme-font-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-font-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+// font neutral
+@each $color, $number in $font-neutral-map {
+  .au-theme-font-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-font-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+
+// border color
+@each $color, $number in $color-map {
+  .au-theme-border-color-#{$color} {
+    border-color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-border-color-#{$color}-#{$interface}:#{$interface} {
+      border-color: #{$number};
+    }
+  }
+};
+@each $color, $number in $light-color-map {
+  .au-theme-border-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-border-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+@each $color, $number in $dark-color-map {
+  .au-theme-border-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-border-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+// border neutral
+@each $color, $number in $border-neutral-map {
+  .au-theme-border-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-border-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+
+// background color
+@each $color, $number in $color-map {
+  .au-theme-background-color-#{$color} {
+    background-color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-background-color-#{$color}-#{$interface}:#{$interface} {
+      background-color: #{$number};
+    }
+  }
+};
+@each $color, $number in $light-color-map {
+  .au-theme-background-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-background-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+@each $color, $number in $dark-color-map {
+  .au-theme-background-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-background-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};
+// background neutral
+@each $color, $number in $background-neutral-map {
+  .au-theme-background-color-#{$color} {
+    color: #{$number};
+  }
+  @each $interface in $interface-list {
+    .au-theme-background-color-#{$color}-#{$interface}:#{$interface} {
+      color: #{$number};
+    }
+  }
+};

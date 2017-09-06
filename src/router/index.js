@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'global-style',
-      component: (resolve) => require(['../examples/global-style.vue'], resolve)
+      name: 'au-button',
+      component: (resolve) => require(['../examples/au-button-examples.vue'], resolve)
     }
   ]
 })

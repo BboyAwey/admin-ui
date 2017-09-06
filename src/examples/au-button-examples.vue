@@ -6,6 +6,7 @@
 <template>
   <div class="global-style">
     {{ test }}
+    <au-button></au-button>
   </div>
 </template>
 <script>

@@ -40,5 +40,7 @@ export default {
       'base-4': '#ddd',
       'base-5': '#fff'
     }
-  }
+  },
+  shadowColor: '#000',
+  borderRadius: true
 }

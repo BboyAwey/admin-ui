@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import adminUi2 from './admin-ui-2'
+
+Vue.use(adminUi2)
 
 Vue.config.productionTip = false
 

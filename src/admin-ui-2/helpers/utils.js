@@ -4,36 +4,17 @@ export function getGlobal () {
 
 let glo = getGlobal()
 
-export function deepCopy (obj) {
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
-
+export function deepClone (obj) {
   if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object')
   return JSON.parse(JSON.stringify(obj))
 }
 
 export function isEmptyString (str) {
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
   return str === '' || /^\s+$/g.test(str)
 }
 
 if (!glo.adminUiNameSpace) glo.adminUiNameSpace = {}
 export let namespace = {
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
   set: function (key, value) {
     glo.adminUiNameSpace[key] = value
     return glo.adminUiNameSpace[key]
@@ -77,13 +58,6 @@ function getBody (xhr) {
 }
 
 export function upload (option) {
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
-
   // copy from element
   // ### option
   // * option.action // submit url

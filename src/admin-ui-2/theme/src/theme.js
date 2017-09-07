@@ -62,25 +62,14 @@ export default function (theme) {
     } else {
       throw new Error('Admin UI@ theme.colors should be an object')
     }
-    if (typeof theme.neutrals === 'object') {
-      for (let key in theme.neutrals) {
-        Object.assign(finalTheme.neutrals[key], theme.neutrals[key])
-      }
-    } else {
-      throw new Error('Admin UI@ theme.neutrals should be an object')
-    }
   }
 
-  let { colors, neutrals, shadowColor, borderRadius } = finalTheme
+  let { colors, shadowColor, borderRadius } = finalTheme
   let res = ''
   scenes.forEach(scene => {
     // generate color
     for (let color in colors) {
       res += genColorStyle(scene, color, colors[color])
-    }
-    // generate neutral
-    for (let color in neutrals[scene]) {
-      res += genColorStyle(scene, color, neutrals[scene][color])
     }
   })
   // generate shadow
@@ -89,5 +78,6 @@ export default function (theme) {
   })
   // generate border radius
   res += genRadiusStyle(borderRadius, radius)
+  console.log(res.length)
   return res
 }

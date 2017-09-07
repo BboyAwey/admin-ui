@@ -1,23 +1,32 @@
+import './style/reset.css'
 import themeGenerator from './theme'
 import { getGlobal } from './helpers/utils'
 const glo = getGlobal()
 
 // import all comps
 import auButton from './components/au-button'
+import auMenu from './components/au-menu'
+import auIcon from './components/au-icon'
 
 // add all comps into an array
 const components = [
-  auButton
+  auButton,
+  auMenu,
+  auIcon
 ]
 
 // export comps one by one
 export {
-  auButton
+  auButton,
+  auMenu,
+  auIcon
 }
 
 // export all comps as an object
 const adminUi = {
-  auButton
+  auButton,
+  auMenu,
+  auIcon
 }
 
 adminUi.install = function (Vue, options = {}) {

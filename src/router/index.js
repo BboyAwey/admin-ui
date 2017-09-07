@@ -6,7 +6,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/au-button',
       name: 'au-button',
       component: (resolve) => require(['../examples/au-button-examples.vue'], resolve)
     }

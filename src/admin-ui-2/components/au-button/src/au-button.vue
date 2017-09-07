@@ -1,20 +1,16 @@
 <style lang="scss">
-  @import '../../../style/vars.scss';
+  @import '../../../style/vars';
   .au-button {
     position: relative;
     min-width: 88px;
     height: 32px;
     padding: 0 16px;
-    // border-radius: 2px;
     border: 0;
     outline: none;
-    // background: none;
-    // color: #fff;
     font-size: $normal;
     line-height: 32px;
     cursor: pointer;
     font-family: $fontFamily;
-    transition: box-shadow .2s ease;
   }
 </style>
 <template>

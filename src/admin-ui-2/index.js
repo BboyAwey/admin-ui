@@ -1,32 +1,36 @@
 import './style/reset.css'
-import themeGenerator from './theme'
-import { getGlobal } from './helpers/utils'
-const glo = getGlobal()
+import ThemeGenerator from './theme'
+
+import Directives from './directives'
 
 // import all comps
-import auButton from './components/au-button'
-import auMenu from './components/au-menu'
-import auIcon from './components/au-icon'
+import AuButton from './components/au-button'
+import AuMenu from './components/au-menu'
+import AuIcon from './components/au-icon'
+import Collapse from './components/au-collapse'
 
 // add all comps into an array
 const components = [
-  auButton,
-  auMenu,
-  auIcon
+  AuButton,
+  AuMenu,
+  AuIcon,
+  Collapse
 ]
 
 // export comps one by one
 export {
-  auButton,
-  auMenu,
-  auIcon
+  AuButton,
+  AuMenu,
+  AuIcon,
+  Collapse
 }
 
 // export all comps as an object
 const adminUi = {
-  auButton,
-  auMenu,
-  auIcon
+  AuButton,
+  AuMenu,
+  AuIcon,
+  Collapse
 }
 
 adminUi.install = function (Vue, options = {}) {
@@ -41,14 +45,20 @@ adminUi.install = function (Vue, options = {}) {
   // Vue.prototype.$toast = AdminToast
 }
 
-adminUi.theme = function (theme) {
-  if (glo.document && glo.document.querySelector) {
-    let styleTag = glo.document.querySelector('style#admin-ui-theme') || glo.document.createElement('style')
-
-    styleTag.id = 'admin-ui-theme'
-    styleTag.innerHTML = themeGenerator(theme)
-    glo.document.querySelector('head').appendChild(styleTag)
+// add direvtives installing function
+adminUi.direvtive = function (Vue) {
+  for (let name in Directives) {
+    Vue.directive(name, Directives[name])
   }
+}
+
+// add theme generator function
+adminUi.theme = function (theme) {
+  let styleTag = window.document.querySelector('style#admin-ui-theme') || window.document.createElement('style')
+
+  styleTag.id = 'admin-ui-theme'
+  styleTag.innerHTML = ThemeGenerator(theme)
+  window.document.querySelector('head').appendChild(styleTag)
 }
 // gen default theme
 adminUi.theme()

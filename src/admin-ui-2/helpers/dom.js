@@ -1,5 +1,4 @@
-import { isEmptyString, getGlobal } from './utils'
-let glo = getGlobal()
+import { isEmptyString } from './utils'
 
 export function getElementSize (el, isFragment) {
   function getSize (el) {
@@ -31,8 +30,8 @@ export function getElementSize (el, isFragment) {
 
 export function getWindowSize () {
   return {
-    width: glo.innerWidth,
-    height: glo.innerHeight
+    width: window.innerWidth,
+    height: window.innerHeight
   }
 }
 

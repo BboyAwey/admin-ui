@@ -13,7 +13,7 @@
 <script>
   import '../../../style/font-awesome/css/font-awesome.min.css'
   export default {
-    name: 'admin-icon',
+    name: 'au-icon',
     props: {
       type: {
         type: String,

@@ -1,8 +1,3 @@
-export function getGlobal () {
-  return window || global
-}
-
-let glo = getGlobal()
 
 export function deepClone (obj) {
   if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object')
@@ -13,17 +8,17 @@ export function isEmptyString (str) {
   return str === '' || /^\s+$/g.test(str)
 }
 
-if (!glo.adminUiNameSpace) glo.adminUiNameSpace = {}
+if (!window.adminUiNameSpace) window.adminUiNameSpace = {}
 export let namespace = {
   set: function (key, value) {
-    glo.adminUiNameSpace[key] = value
-    return glo.adminUiNameSpace[key]
+    window.adminUiNameSpace[key] = value
+    return window.adminUiNameSpace[key]
   },
   get: function (key) {
-    return glo.adminUiNameSpace[key]
+    return window.adminUiNameSpace[key]
   },
   delete: function (key) {
-    return delete glo.adminUiNameSpace[key]
+    return delete window.adminUiNameSpace[key]
   }
 }
 
@@ -74,11 +69,11 @@ export function upload (option) {
   // * option.onError(e)
   // * option.onSuccess()
 
-  if (typeof glo.XMLHttpRequest === 'undefined') {
+  if (typeof window.XMLHttpRequest === 'undefined') {
     return
   }
 
-  const xhr = new glo.XMLHttpRequest()
+  const xhr = new window.XMLHttpRequest()
   const action = option.action
 
   if (xhr.upload) {
@@ -92,7 +87,7 @@ export function upload (option) {
     }
   }
 
-  const formData = new glo.FormData()
+  const formData = new window.FormData()
 
   if (option.data) {
     Object.keys(option.data).map(key => {

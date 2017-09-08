@@ -1,9 +1,15 @@
 <style lang="scss">
   @import '../../../style/vars';
+  .color-bg-transition {
+    transition-property: background-color, color;
+    transition-duration: .15s;
+    transition-timing-function: ease-in-out;
+  }
   .au-menu {
     list-style: none;
     & > li {
       position: relative;
+      // @extend .color-bg-transition;
     }
     & > li.active {
       // color: $primary;
@@ -12,6 +18,7 @@
       // color: $primary;
     }
     .menu {
+      // @extend .color-bg-transition;
       position: relative;
       height: 40px;
       padding: 0 16px 0 0;
@@ -30,6 +37,7 @@
       height: 100%;
       line-height: 40px;
       font-size: $large;
+      transition: transform .2s ease-in-out;
       // color: $grayDarken25;
     }
     .next-level-container {
@@ -82,52 +90,49 @@
       v-for="(item, i) in localItems"
       :class="{
         'collapse': item.active,
-        'children-active au-theme-background-color--primary-lighter': item.childrenActive,
-        'active au-theme-font-color--primary': item.active
+        'children-active au-theme-background-color--primary-5': item.childrenActive,
+        'active au-theme-font-color--primary-3': item.active
       }"
       :key="i">
       <div
-        class="menu au-theme-hover-font-color--primary"
-        :class="{'au-theme-hover-background-color--primary-lighter': !item.active}"
+        class="menu au-theme-hover-font-color--primary-3"
+        :class="{'au-theme-hover-background-color--primary-5': !item.active}"
         @click="select(item)">
         <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
         <span class="menu-text">{{ item.text }}</span>
         <au-icon class="menu-fold-icon
-          au-theme-font-color--base-3
-          au-theme-hover-font-color--primary"
+          au-theme-font-color--base-4
+          au-theme-hover-font-color--primary-3"
           type="angle-down"
           v-if="item.children && item.children.length" 
-          v-show="!item.collapse"
-          @click.native.stop="toggleCollapse(item)"></au-icon>
-        <au-icon class="menu-fold-icon
-          au-theme-font-color--base-3
-          au-theme-hover-font-color--primary"
-          type="angle-right"
-          v-if="item.children && item.children.length" 
-          v-show="item.collapse"
+          :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
           @click.native.stop="toggleCollapse(item)"></au-icon>
       </div>
-      <div
+      <au-collapse
         class="next-level-container"
         :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
-        v-if="item.children && item.children.length"
-        v-show="!item.collapse">
+        :collapse="item.collapse"
+        v-if="item.children && item.children.length">
         <au-menu
           :items="item.children"
           :is-top-level="false"
           :all="isTopLevel ? localItems : all"
           @admin-menu-select="item => { $emit('admin-menu-select', item) }"></au-menu>
-      </div>
+      </au-collapse>
     </li>
   </ul>
 </template>
 <script>
-  import auIcon from '../../au-icon'
+  import AuIcon from '../../au-icon'
+  import Collapse from '../../../directives/src/collapse'
   import { deepClone } from '../../../helpers/utils'
   
   export default {
     name: 'au-menu',
-    components: { auIcon },
+    components: { AuIcon },
+    directives: {
+      collapse: Collapse
+    },
     data () {
       return {
         localItems: []

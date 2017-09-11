@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import adminUi2 from './admin-ui-2'
 
-adminUi2.theme()
+// adminUi2.theme()
 Vue.use(adminUi2)
 
 Vue.config.productionTip = false

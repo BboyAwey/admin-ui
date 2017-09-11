@@ -36,9 +36,9 @@ export function getWindowSize () {
 }
 
 export let isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-export function mousewheel (element, handler) {
-  if (element && element.addEventListener) {
-    element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', handler)
+export function mousewheel (action, element, handler) {
+  if (element && element[action + 'EventListener']) {
+    element[action + 'EventListener'](isFirefox ? 'DOMMouseScroll' : 'mousewheel', handler)
   }
 }
 

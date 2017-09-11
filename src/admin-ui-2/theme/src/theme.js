@@ -26,7 +26,7 @@ const shadowLevel = [
   2,
   1
 ]
-const radius = 2
+const radius = 3
 
 const genColorStyle = function (scene, colorName, colorNumber) {
   let res = ''
@@ -44,12 +44,14 @@ const genShadowStyle = function (color, level) {
   })
   return res
 }
-const genRadiusStyle = function (borderRadius, radius) {
+const genRadiusStyle = function (borderRadius) {
   let res = ''
-  res += `.au-theme-radius--${borderRadius}{border-radius:${radius}px}`
-  pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-radius--${borderRadius}:${pseudo}{border-radius:${radius}px}`
-  })
+  if (borderRadius) {
+    res += `.au-theme-radius{border-radius:${radius}px}`
+    pseudos.forEach(pseudo => {
+      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px}`
+    })
+  }
   return res
 }
 
@@ -76,8 +78,8 @@ export default function (theme) {
   shadowLevel.forEach(level => {
     res += genShadowStyle(shadowColor, level)
   })
-  // generate border radius
-  res += genRadiusStyle(borderRadius, radius)
+  // generate border-radius
+  res += genRadiusStyle(borderRadius)
   console.log(res.length)
   return res
 }

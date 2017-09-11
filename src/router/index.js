@@ -6,9 +6,14 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/au-button',
-      name: 'au-button',
+      path: '/button',
+      name: 'button',
       component: (resolve) => require(['../examples/au-button-examples.vue'], resolve)
+    },
+    {
+      path: '/scroller',
+      name: 'scroller',
+      component: (resolve) => require(['../examples/au-scroller-examples.vue'], resolve)
     }
   ]
 })

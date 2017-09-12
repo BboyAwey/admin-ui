@@ -124,18 +124,21 @@
       select (item) {
         if (item.url) {
           this.deactivate(this.isTopLevel ? this.localItems : this.all)
-          item.active = true
+          this.$set(item, 'active', true)
         }
         item.collapse = !item.collapse
         this.$emit('select', item)
       },
-      deactivate (localItems) {
-        localItems.forEach(item => {
-          item.active = false
-          if (item.children && item.children.length) {
-            this.deactivate(item.children)
-          }
-        })
+      deactivate (allItems) {
+        let deactive = (items) => {
+          items.forEach(item => {
+            this.$set(item, 'active', false)
+            if (item.children && item.children.length) {
+              deactive(item.children)
+            }
+          })
+        }
+        deactive(allItems)
       },
       setInfo (items, parentIndex) {
         let result = []
@@ -155,7 +158,7 @@
         return result
       },
       toggleCollapse (item) {
-        item.collapse = !item.collapse
+        this.$set(item, 'collapse', !item.collapse)
       },
       calcPaddingLeft (item) {
         return (20 + 32 * (item.indexes.length - 1) + (item.icon ? 0 : 14)) + 'px'

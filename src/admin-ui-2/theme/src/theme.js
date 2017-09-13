@@ -21,35 +21,30 @@ const pseudos = [
   'disabled',
   'checked'
 ]
-const shadowLevel = [
-  3,
-  2,
-  1
-]
 const radius = 3
 
 const genColorStyle = function (scene, colorName, colorNumber) {
   let res = ''
-  res += `.au-theme-${scene}-color--${colorName}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
+  res += `.au-theme-${scene}-color--${colorName}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
   pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-${scene}-color--${colorName}:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
+    res += `.au-theme-${pseudo}-${scene}-color--${colorName}:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
   })
   return res
 }
-const genShadowStyle = function (color, level) {
+const genShadowStyle = function (level, value) {
   let res = ''
-  res += `.au-theme-shadow--level-${level}{box-shadow:1px 2px 4px rgba(${color}, .${level})}`
+  res += `.au-theme-shadow--${level}{box-shadow:${value} !important}`
   pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-shadow--level-${level}:${pseudo}{box-shadow:1px 2px 4px rgba(${color}, .${level})}`
+    res += `.au-theme-${pseudo}-shadow--${level}:${pseudo}{box-shadow:${value} !important}`
   })
   return res
 }
 const genRadiusStyle = function (borderRadius) {
   let res = ''
   if (borderRadius) {
-    res += `.au-theme-radius{border-radius:${radius}px}`
+    res += `.au-theme-radius{border-radius:${radius}px !important}`
     pseudos.forEach(pseudo => {
-      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px}`
+      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px !important}`
     })
   }
   return res
@@ -66,7 +61,7 @@ export default function (theme) {
     }
   }
 
-  let { colors, shadowColor, borderRadius } = finalTheme
+  let { colors, shadows, borderRadius } = finalTheme
   let res = ''
   scenes.forEach(scene => {
     // generate color
@@ -75,11 +70,11 @@ export default function (theme) {
     }
   })
   // generate shadow
-  shadowLevel.forEach(level => {
-    res += genShadowStyle(shadowColor, level)
-  })
+  for (let level in shadows) {
+    res += genShadowStyle(level, shadows[level])
+  }
   // generate border-radius
   res += genRadiusStyle(borderRadius)
-  console.log(res.length)
+  // console.log(res)
   return res
 }

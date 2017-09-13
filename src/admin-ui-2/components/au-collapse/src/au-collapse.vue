@@ -1,11 +1,15 @@
 <style lang="scss">
   .au-collapse {
-    transition: height .2s ease-in-out;
+    transition-property: width, height;
+    transition-timing-function: ease-out;
+    transition-duration: .2s;
+    // transition: height .2s ease-in-out;
     overflow: hidden;
+    width: 100%;
   }
 </style>
 <template>
-  <div class="au-collapse" :style="{ height }" ref="el">
+  <div class="au-collapse" :style="{ height, width }" ref="el">
     <slot></slot>
   </div>
 </template>
@@ -14,49 +18,52 @@
 
   export default {
     name: 'au-collapse',
-    data () {
-      return {
-        height: ''
-      }
-    },
     mounted () {
-      this.calcHeight()
+      this.calculate()
       let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       let observer = new MutationObserver((mutations) => {
         if (mutations.find((mutation) => {
           return mutation.target !== this.$refs.el
-        })) this.calcHeight()
+        })) this.calculate()
       })
       let config = { attributes: true, childList: true, subtree: true }
       observer.observe(this.$refs.el, config)
     },
-    destroyed () {},
+    data () {
+      return {
+        height: '',
+        width: ''
+      }
+    },
     props: {
       collapse: {
         type: Boolean,
         defalut: false
       },
+      horizontal: Boolean,
       min: String,
       max: String
     },
     watch: {
       collapse () {
-        this.calcHeight()
+        this.calculate()
       },
       min () {
-        this.calcHeight()
+        this.calculate()
       },
       max () {
-        this.calcHeight()
+        this.calculate()
       }
     },
     methods: {
-      calcHeight () {
-        if (this.collapse) this.height = this.min || 0 + 'px'
+      calculate () {
+        let key = this.horizontal ? 'width' : 'height'
+        if (this.collapse) this[key] = this.min || 0 + 'px'
         else {
-          this.height = this.max
-            ? (Math.min(parseInt(this.max), this.getContentSize().height) + 'px')
-            : this.getContentSize().height + 'px'
+          this[key] = this.max || this.getContentSize()[key] + 'px'
+          // this[key] = this.max
+          //   ? (Math.min(parseInt(this.max), this.getContentSize()[key]) + 'px')
+          //   : this.getContentSize()[key] + 'px'
         }
       },
       getContentSize () {

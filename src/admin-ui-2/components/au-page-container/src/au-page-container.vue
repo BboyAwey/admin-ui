@@ -8,7 +8,9 @@
     overflow: hidden;
     // background-color: $grayBrighten20; // class
     .au-page-header {
+      position: relative;
       display: block;
+      z-index: 1;
       // padding: 12px 16px;
       // background-color: $primary; // class
       color: #fff;
@@ -19,12 +21,13 @@
       clear: both;
     }
     .au-page-sidebar {
+      display: inline-block;
       position: relative;
       float: left;
       height: 100%;
-      min-width: 200px;
-      width: 15%;
-      padding: 16px 0;
+      // min-width: 200px;
+      // width: 15%;
+      // padding: 16px 0;
       // background-color: #fff;
       // box-shadow: $shadowLevel3; // class
     }
@@ -67,12 +70,12 @@
   }
 </style>
 <template>
-  <div class="au-page-container au-theme-background-color--base-11" ref="container">
-    <div class="au-page-header au-theme-background-color--primary-3" ref="header">
+  <div class="au-page-container au-theme-background-color--base-10" ref="container">
+    <div class="au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-3" ref="header">
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <div class="au-page-sidebar au-theme-background-color--base-12" ref="sidebar" :style="{ width: sidebarWidth }">
+      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
         <slot name="sidebar"></slot>
       </div>
       <div class="au-page-content" ref="content">
@@ -118,7 +121,7 @@
       }
     },
     props: {
-      sidebarWidth: [Number, String],
+      sidebarWidth: String,
       sidebarAdjustable: Boolean // TODO: resize by user
     },
     watch: {

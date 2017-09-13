@@ -1,9 +1,12 @@
 <style lang="scss">
   @import '../../../style/vars';
   .au-menu {
+    position: relative;
+    min-width: 150px;
     list-style: none;
     & > li {
       position: relative;
+      transition: all .2s ease-out;
     }
     .menu {
       position: relative;
@@ -12,19 +15,26 @@
       line-height: 40px;
       font-size: $normal;
       cursor: pointer;
+      transition-property: height, padding, line-height;
+      transition-duration: .2s;
+      transition-timing-function: ease-out;
+    }
+    .menu-text {
+      display: inline-block;
+      // transition: all .2s ease-in-out;
     }
     .menu-icon {
       position: relative;
       top: 1px;
       margin-right: 10px;
       font-size: 18px;
+      transition: all .2s ease-out;
     }
     .menu-fold-icon {
       float: right;
       height: 100%;
       line-height: 40px;
       font-size: $large;
-      transition: transform .2s ease-in-out;
       // color: $grayDarken25;
     }
     .active:before {
@@ -38,69 +48,133 @@
       width: 4px;
       // background-color: $primary;
     }
+    .collapse-handle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      padding: 0 10px;
+      line-height: 40px;
+      border-bottom: 1px solid;
+      text-align: right;
+      font-size: $huge;
+      cursor: pointer;
+    }
+    .collapse-handle-icon {
+      transition: transform .2s ease-out;
+    }
+  }
+  .au-menu.top-level {
+    padding-top: 40px;
+  }
+  .au-menu.collapse {
+    min-width: auto;
+    .menu {
+      height: 60px;
+      padding: 0;
+      line-height: 60px;
+      cursor: pointer;
+    }
+    & > li {
+      height: 60px;
+      line-height: 60px;
+    }
+    .menu-icon {
+      top: 4px;
+      left: 10px;
+      margin-right: 10px;
+      font-size: 26px;
+    }
+    .menu-text {
+      display: block;
+      opacity: 0;
+      // width: 0;
+      // height: 0;
+      // transform: scale(0) translateX(100px) translateY(-100px);
+    }
+    .collapse-handle {
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+    }
   }
 </style>
 <template>
-  <ul class="
-    au-menu
-    au-theme-font-color--base-4" :class="isTopLevel ? 'top-level au-theme-background-color--base-12 ' : ''">
-    <li
-      v-for="(item, i) in localItems"
+  <au-collapse :collapse="localCollapse" :horizontal="true" min="80px" max="300px">
+    <ul
+      class="au-menu au-theme-font-color--base-3"
       :class="{
-        'collapse': item.active,
-        'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
-        'au-theme-font-color--base-8': !item.url,
-      }"
-      :key="i">
-      <div
-        class="menu au-theme-hover-background-color--primary-5"
+        'top-level au-theme-background-color--base-12': isTopLevel,
+        'collapse': localCollapse
+      }">
+      <li
+        v-for="(item, i) in localItems"
         :class="{
-          'au-theme-hover-font-color--primary-3': !item.active && item.url
-        }"
-        :style="{ paddingLeft: calcPaddingLeft(item)  }"
-        @click="select(item)">
-        <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
-        <span class="menu-text">{{ item.text }}</span>
-        <au-icon class="menu-fold-icon
-          au-theme-font-color--base-4
-          au-theme-hover-font-color--primary-3"
-          type="angle-down"
-          v-if="item.children && item.children.length" 
-          :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
-          @click.native.stop="toggleCollapse(item)"></au-icon>
-      </div>
-      <au-collapse
-        class="next-level-container"
-        :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
-        :collapse="item.collapse"
-        v-if="item.children && item.children.length">
-        <au-menu
-          :items="item.children"
-          :is-top-level="false"
-          :all="isTopLevel ? localItems : all"
-          @select="item => { $emit('select', item) }"></au-menu>
-      </au-collapse>
-    </li>
-  </ul>
+          'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
+          'au-theme-font-color--base-7': !item.url,
+        }" :key="i">
+        <div
+          class="menu"
+          :class="{
+            'au-theme-hover-background-color--base-10' : !item.active,
+            'au-theme-hover-font-color--primary-3': !item.active && item.url
+          }"
+          :style="{ paddingLeft: calcPaddingLeft(item)  }"
+          @click="select(item)">
+          <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+          <span class="menu-text">{{ item.text }}</span>
+          <au-icon class="menu-fold-icon
+            au-theme-font-color--base-3
+            au-theme-hover-font-color--primary-3"
+            type="angle-down"
+            v-if="item.children && item.children.length"
+            v-show="!localCollapse"
+            :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
+            @click.native.stop="toggleCollapse(item)"></au-icon>
+        </div>
+        <au-collapse
+          class="next-level-container"
+          :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
+          :collapse="item.collapse"
+          v-show="!localCollapse"
+          v-if="item.children && item.children.length">
+          <au-menu
+            :items="item.children"
+            :is-top-level="false"
+            :all="isTopLevel ? localItems : all"
+            @select="item => { $emit('select', item) }"></au-menu>
+        </au-collapse>
+      </li>
+      <li
+        class="collapse-handle au-theme-border-color--base-8 au-theme-font-color--base-3"
+        @click="toggle"
+        v-if="isTopLevel">
+        <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
+          transform: localCollapse ? '' : 'rotate(180deg)'
+        }"></au-icon>
+      </li>
+    </ul>
+  </au-collapse>
 </template>
 <script>
   import AuIcon from '../../au-icon'
-  import Collapse from '../../../directives/src/collapse'
+  import AuCollapse from '../../au-collapse'
   import { deepClone } from '../../../helpers/utils'
   
   export default {
     name: 'au-menu',
-    components: { AuIcon },
-    directives: {
-      collapse: Collapse
-    },
+    components: { AuIcon, AuCollapse },
     data () {
       return {
-        localItems: []
+        localItems: [],
+        localCollapse: this.collapse
       }
     },
     props: {
       items: Array,
+      collapse: Boolean,
+
       all: Array,
       isTopLevel: {
         type: Boolean,
@@ -118,6 +192,12 @@
           if (this.isTopLevel) this.localItems = this.setInfo(this.items, [])
           else this.localItems = this.items
         }
+      },
+      collapse (v) {
+        this.localCollapse = v
+      },
+      localCollapse (v) {
+        this.$emit('collapse', v)
       }
     },
     methods: {
@@ -173,7 +253,11 @@
             (/\/$/g.test(rest))
         }
         return false
+      },
+      toggle () {
+        this.localCollapse = !this.localCollapse
       }
     }
+    // TODO: toolbox
   }
 </script>

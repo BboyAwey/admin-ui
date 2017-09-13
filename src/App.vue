@@ -1,21 +1,21 @@
 <style lang="scss" scoped>
-#app {
-  height: 100%;
-  .admin-ui-banner {
-    font-size: 30px;
-    padding: 20px;
+  #app {
+    height: 100%;
+    .admin-ui-banner {
+      font-size: 30px;
+      padding: 20px;
+    }
   }
-}
 </style>
 
 <template>
   <div id="app">
-    <au-page-container sidebar-width="280px">
+    <au-page-container>
       <div slot="header">
         <h3 class="admin-ui-banner">Admin-UI</h3>
       </div>
       <div slot="sidebar">
-        <au-menu :items="menu" @select="go"></au-menu>
+        <au-menu :items="menu" @select="go" class="menu"></au-menu>
       </div>
       <div slot="content">
         <router-view></router-view>
@@ -39,6 +39,11 @@ export default {
           'text': '安装',
           'url': '/installation',
           'icon': 'cog'
+        },
+        {
+          'text': '主题',
+          'url': '/theme',
+          'icon': 'th-large'
         },
         {
           'text': '组件',

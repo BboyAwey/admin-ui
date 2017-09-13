@@ -43,6 +43,11 @@ export default {
     'success-4': '#0ebc74',
     'success-5': '#ace6ce'
   },
-  shadowColor: '#3c4147',
+  // shadows: '#3c4147',
+  shadows: {
+    'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
+    'level-2': '0 3px 6px rgba(60, 65, 71, .4)',
+    'level-3': '0 5px 8px rgba(60, 65, 71, .3)'
+  },
   borderRadius: true
 }

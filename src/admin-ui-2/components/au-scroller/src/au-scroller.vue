@@ -41,7 +41,7 @@
   }
 </style>
 <template>
-  <div class="au-scroller" :style="{ height }"
+  <div class="au-scroller"
     @mouseover="handleMouseover"
     @mouseout="handleMouseout"
     ref="monitor">
@@ -80,12 +80,6 @@
     },
     destroyed () {
       window.removeEventListener('resize', this.handlerResize)
-    },
-    props: {
-      height: {
-        required: true,
-        type: String
-      }
     },
     data () {
       return {

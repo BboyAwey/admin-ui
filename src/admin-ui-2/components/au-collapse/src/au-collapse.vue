@@ -2,7 +2,7 @@
   .au-collapse {
     transition-property: width, height;
     transition-timing-function: ease-out;
-    transition-duration: .2s;
+    transition-duration: .1s;
     // transition: height .2s ease-in-out;
     overflow: hidden;
     width: 100%;

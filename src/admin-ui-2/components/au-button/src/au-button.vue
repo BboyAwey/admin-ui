@@ -14,11 +14,9 @@
   }
 </style>
 <template>
-  <button class="
-    au-button
-    au-theme-background-color--primary
-    au-theme-radius--true
-    au-theme-font-color--base-5">theme!!!</button>
+  <button :class="buttonClasses">
+      <slot></slot>
+  </button>
 </template>
 <script>
   export default {
@@ -26,8 +24,18 @@
     data () {
       return {}
     },
+    props: {
+      type: 'default'
+    },
     computed: {
-      buttonClasses () {}
+      buttonClasses () {
+        let color = (this.type === 'default' || !this.type) ? 'base-3' : this.type
+        return `
+          au-button
+          au-theme-background-color--${color}
+          au-theme-radius
+          au-theme-font-color--base-12`
+      }
     }
   }
 </script>

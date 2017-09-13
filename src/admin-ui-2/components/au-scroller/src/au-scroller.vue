@@ -8,7 +8,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    transition: top .2s ease-out;
+    transition: top .3s ease-out;
   }
   .au-scroller-bar-container,
   .au-scroller-bar,
@@ -29,7 +29,7 @@
     border-radius: 12px;
     opacity: .3;
     transition-property: top, width, opacity;
-    transition-duration: .2s;
+    transition-duration: .3s;
     transition-timing-function: ease-out;
     cursor: pointer;
   }

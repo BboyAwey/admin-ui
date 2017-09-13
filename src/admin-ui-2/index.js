@@ -10,6 +10,7 @@ import AuIcon from './components/au-icon'
 import Collapse from './components/au-collapse'
 import PageContainer from './components/au-page-container'
 import Scroller from './components/au-scroller'
+import Popover from './components/au-popover'
 
 // add all comps into an array
 const components = [
@@ -18,7 +19,8 @@ const components = [
   AuIcon,
   Collapse,
   PageContainer,
-  Scroller
+  Scroller,
+  Popover
 ]
 
 // export comps one by one
@@ -28,7 +30,8 @@ export {
   AuIcon,
   Collapse,
   PageContainer,
-  Scroller
+  Scroller,
+  Popover
 }
 
 // export all comps as an object
@@ -38,7 +41,8 @@ const adminUi = {
   AuIcon,
   Collapse,
   PageContainer,
-  Scroller
+  Scroller,
+  Popover
 }
 
 adminUi.install = function (Vue, options = {}) {

@@ -6,7 +6,9 @@
     list-style: none;
     & > li {
       position: relative;
-      transition: all .2s ease-out;
+      transition-property: height, padding, line-height;
+      transition-duration: .2s;
+      transition-timing-function: ease-out;
     }
     .menu {
       position: relative;
@@ -28,7 +30,9 @@
       top: 1px;
       margin-right: 10px;
       font-size: 18px;
-      transition: all .2s ease-out;
+      transition-property: top, margin-right, font-size;
+      transition-duration: .2s;
+      transition-timing-function: ease-out;
     }
     .menu-fold-icon {
       float: right;
@@ -84,14 +88,10 @@
       top: 4px;
       left: 10px;
       margin-right: 10px;
-      font-size: 26px;
+      font-size: $huge;
     }
     .menu-text {
-      display: block;
-      opacity: 0;
-      // width: 0;
-      // height: 0;
-      // transform: scale(0) translateX(100px) translateY(-100px);
+      display: none;
     }
     .collapse-handle {
       height: 36px;

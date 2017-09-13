@@ -14,6 +14,11 @@ export default new Router({
       path: '/scroller',
       name: 'scroller',
       component: (resolve) => require(['../examples/au-scroller-examples.vue'], resolve)
+    },
+    {
+      path: '/popover',
+      name: 'popover',
+      component: (resolve) => require(['../examples/au-popover-examples.vue'], resolve)
     }
   ]
 })

@@ -46,8 +46,8 @@ export default {
   // shadows: '#3c4147',
   shadows: {
     'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
-    'level-2': '0 3px 6px rgba(60, 65, 71, .4)',
-    'level-3': '0 5px 8px rgba(60, 65, 71, .3)'
+    'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
+    'level-3': '0 3px 6px rgba(60, 65, 71, .3)'
   },
   borderRadius: true
 }

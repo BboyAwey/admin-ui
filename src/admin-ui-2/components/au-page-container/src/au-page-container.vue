@@ -71,7 +71,7 @@
 </style>
 <template>
   <div class="au-page-container au-theme-background-color--base-10" ref="container">
-    <div class="au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-3" ref="header">
+    <div class="au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-2" ref="header">
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
@@ -90,13 +90,6 @@
   </div>
 </template>
 <script>
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
-
   import { getElementSize } from '../../../helpers/dom'
 
   export default {
@@ -121,8 +114,7 @@
       }
     },
     props: {
-      sidebarWidth: String,
-      sidebarAdjustable: Boolean // TODO: resize by user
+      sidebarWidth: String
     },
     watch: {
       sidebarWidth () {

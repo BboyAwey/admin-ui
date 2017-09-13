@@ -59,6 +59,14 @@ export default {
               'url': '/button'
             },
             {
+              'text': '手风琴',
+              'url': '/collapse'
+            },
+            {
+              'text': '气泡',
+              'url': '/popover'
+            },
+            {
               'text': '滚动条',
               'url': '/scroller'
             }

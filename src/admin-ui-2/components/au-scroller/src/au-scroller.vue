@@ -163,6 +163,7 @@
         this.diff = e.pageY - this.$refs.core.getBoundingClientRect().top
         window.addEventListener('mousemove', this.handleMousemove)
         window.addEventListener('mouseup', this.handleCoreMouseUp)
+        this.$refs.core.style.transitionDuration = '.1s'
       },
       handleMousemove (e) {
         e.preventDefault()
@@ -176,6 +177,7 @@
           this.$refs.bar.style.width = '6px'
           this.$refs.core.style.width = '6px'
         }
+        this.$refs.core.style.transitionDuration = '.3s'
       },
       handleBarClick (e) {
         let mouseY = e.pageY

@@ -147,7 +147,7 @@
         </au-collapse>
       </li>
       <li
-        class="collapse-handle au-theme-border-color--base-8 au-theme-font-color--base-3"
+        class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
         @click="toggle"
         v-if="isTopLevel">
         <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{

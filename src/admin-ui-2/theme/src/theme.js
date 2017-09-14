@@ -10,8 +10,8 @@ const scenes = [
 const pseudos = [
   'link',
   'visited',
-  'active',
   'hover',
+  'active',
   'focus',
   'first-child',
   'last-child',
@@ -25,26 +25,32 @@ const radius = 3
 
 const genColorStyle = function (scene, colorName, colorNumber) {
   let res = ''
-  res += `.au-theme-${scene}-color--${colorName}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
+  res += `.au-theme-${scene}-color--${colorName}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
+  res += `.au-theme-${scene}-color--${colorName}-important{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
   pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-${scene}-color--${colorName}:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
+    res += `.au-theme-${pseudo}-${scene}-color--${colorName}:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
+    res += `.au-theme-${pseudo}-${scene}-color--${colorName}-important:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
   })
   return res
 }
 const genShadowStyle = function (level, value) {
   let res = ''
-  res += `.au-theme-shadow--${level}{box-shadow:${value} !important}`
+  res += `.au-theme-shadow--${level}{box-shadow:${value}}`
+  res += `.au-theme-shadow--${level}-important{box-shadow:${value} !important}`
   pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-shadow--${level}:${pseudo}{box-shadow:${value} !important}`
+    res += `.au-theme-${pseudo}-shadow--${level}:${pseudo}{box-shadow:${value}}`
+    res += `.au-theme-${pseudo}-shadow--${level}-important:${pseudo}{box-shadow:${value} !important}`
   })
   return res
 }
 const genRadiusStyle = function (borderRadius) {
   let res = ''
   if (borderRadius) {
-    res += `.au-theme-radius{border-radius:${radius}px !important}`
+    res += `.au-theme-radius{border-radius:${radius}px}`
+    res += `.au-theme-radius--important{border-radius:${radius}px !important}`
     pseudos.forEach(pseudo => {
-      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px !important}`
+      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px}`
+      res += `.au-theme-${pseudo}-radius-important:${pseudo}{border-radius:${radius}px !important}`
     })
   }
   return res

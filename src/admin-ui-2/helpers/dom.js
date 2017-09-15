@@ -2,9 +2,11 @@ import { isEmptyString } from './utils'
 
 export function getElementSize (el, isFragment) {
   function getSize (el) {
+    let computed = window.getComputedStyle(el)
+    let rect = el.getBoundingClientRect()
     return {
-      width: el.offsetWidth,
-      height: el.offsetHeight
+      width: el.offsetWidth || rect.width || parseInt(computed.width),
+      height: el.offsetHeight || rect.height || parseInt(computed.height)
     }
   }
 
@@ -26,6 +28,37 @@ export function getElementSize (el, isFragment) {
   if (isFragment) document.body.removeChild(copy)
   else el.parentNode.removeChild(copy)
   return res
+}
+
+export function getElementPagePos (el) {
+  function getLeft (el) {
+    let actualLeft = el.offsetLeft
+    let current = el.offsetParent
+
+    while (current !== null) {
+      actualLeft += current.offsetLeft
+      current = current.offsetParent
+    }
+
+    return actualLeft
+  }
+
+  function getTop (el) {
+    let actualTop = el.offsetTop
+    let current = el.offsetParent
+
+    while (current !== null) {
+      actualTop += current.offsetTop
+      current = current.offsetParent
+    }
+
+    return actualTop
+  }
+
+  return {
+    left: getLeft(el),
+    top: getTop(el)
+  }
 }
 
 export function getWindowSize () {

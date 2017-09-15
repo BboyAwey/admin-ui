@@ -17,7 +17,8 @@
     top: 0;
   }
   .au-scroller-bar-container {
-    right: 2px;
+    top: 10px;
+    right: 10px;
     width: 12px;
     height: 100%;
   }
@@ -69,6 +70,7 @@
   export default {
     name: 'au-scroller',
     mounted () {
+      this.calcCoreHeight()
       mousewheel('add', this.$refs.monitor, (e) => {
         if (!this.needScroll) return
         let direction = e.deltaY || e.detail // chrome,edge / firefox
@@ -92,6 +94,11 @@
         onOver: false,
         scrollEnd: false,
         needScroll: false
+      }
+    },
+    watch: {
+      contentTop (v) {
+        this.$emit('scroll', v * -1)
       }
     },
     methods: {
@@ -132,13 +139,18 @@
           this.coreHeight = monitor * monitor / content
         }
       },
+      setBarPos (monitor) {
+        this.$refs.barContainer.style.height = monitor - 20 + 'px'
+      },
       handleMouseover () {
         this.$refs.bar.style.opacity = '.3'
         this.$refs.core.style.opacity = '.5'
+        let monitorHeight = getElementSize(this.$refs.monitor).height
         this.calcCoreHeight(
-          getElementSize(this.$refs.monitor).height,
+          monitorHeight,
           getElementSize(this.$refs.content).height
         )
+        this.setBarPos(monitorHeight)
       },
       handleMouseout () {
         if (!this.onDrag) {
@@ -164,6 +176,7 @@
         window.addEventListener('mousemove', this.handleMousemove)
         window.addEventListener('mouseup', this.handleCoreMouseUp)
         this.$refs.core.style.transitionDuration = '.1s'
+        this.$refs.content.style.transitionDuration = '.1s'
       },
       handleMousemove (e) {
         e.preventDefault()
@@ -178,6 +191,7 @@
           this.$refs.core.style.width = '6px'
         }
         this.$refs.core.style.transitionDuration = '.3s'
+        this.$refs.content.style.transitionDuration = '.3s'
       },
       handleBarClick (e) {
         let mouseY = e.pageY
@@ -187,6 +201,7 @@
         this.setScrollTop(mouseY - barY - coreHeight / 2)
       },
       setScrollTop (v) {
+        if (!this.needScroll) return
         let barHeight = getElementSize(this.$refs.bar).height
         let coreHeight = getElementSize(this.$refs.core).height
         let monitorHeight = this.getMonitorHeight()

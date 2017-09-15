@@ -1,0 +1,7 @@
+// 渐隐和出现动画
+.au-fade-enter-active, .au-fade-leave-active {
+  transition: opacity .1s
+}
+.au-fade-enter, .au-fade-leave-to {
+  opacity: 0
+}

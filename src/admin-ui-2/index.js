@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import './style/reset.css'
 import ThemeGenerator from './theme'
 
@@ -7,20 +8,20 @@ import Directives from './directives'
 import AuButton from './components/au-button'
 import AuMenu from './components/au-menu'
 import AuIcon from './components/au-icon'
-import Collapse from './components/au-collapse'
-import PageContainer from './components/au-page-container'
-import Scroller from './components/au-scroller'
-import Popover from './components/au-popover'
+import AuCollapse from './components/au-collapse'
+import AuFrame from './components/au-frame'
+import AuScroller from './components/au-scroller'
+import AuPopover from './components/au-popover'
 
 // add all comps into an array
 const components = [
   AuButton,
   AuMenu,
   AuIcon,
-  Collapse,
-  PageContainer,
-  Scroller,
-  Popover
+  AuCollapse,
+  AuFrame,
+  AuScroller,
+  AuPopover
 ]
 
 // export comps one by one
@@ -28,10 +29,10 @@ export {
   AuButton,
   AuMenu,
   AuIcon,
-  Collapse,
-  PageContainer,
-  Scroller,
-  Popover
+  AuCollapse,
+  AuFrame,
+  AuScroller,
+  AuPopover
 }
 
 // export all comps as an object
@@ -39,10 +40,10 @@ const adminUi = {
   AuButton,
   AuMenu,
   AuIcon,
-  Collapse,
-  PageContainer,
-  Scroller,
-  Popover
+  AuCollapse,
+  AuFrame,
+  AuScroller,
+  AuPopover
 }
 
 adminUi.install = function (Vue, options = {}) {
@@ -74,4 +75,6 @@ adminUi.theme = function (theme) {
 }
 // gen default theme
 adminUi.theme()
+// gen directive
+adminUi.direvtive(Vue)
 export default adminUi

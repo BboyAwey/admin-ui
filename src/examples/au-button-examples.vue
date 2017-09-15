@@ -21,6 +21,7 @@
     <au-button class="button" :plain="true" size="mini" type="danger">mini</au-button>
     <au-button class="button" :plain="true" size="" type="info">{{ test }}</au-button>
     <au-button class="button" :plain="true" type="warning">{{ test }}</au-button>
+    <!-- <div style="height: 10000px; background-color: #f63;"></div> -->
   </div>
 </template>
 <script>

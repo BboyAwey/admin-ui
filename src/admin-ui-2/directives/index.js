@@ -1,5 +1,5 @@
-import Collapse from './src/collapse'
+// import Popover from './src/popover'
 
 export default {
-  Collapse
+  // Popover
 }

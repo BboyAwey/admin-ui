@@ -10,7 +10,7 @@
 
 <template>
   <div id="app">
-    <au-page-container>
+    <au-frame>
       <div slot="header">
         <h3 class="admin-ui-banner">Admin-UI</h3>
       </div>
@@ -20,7 +20,7 @@
       <div slot="content">
         <router-view></router-view>
       </div>
-    </au-page-container>
+    </au-frame>
   </div>
 </template>
 
@@ -67,8 +67,16 @@ export default {
               'url': '/popover'
             },
             {
+              'text': '菜单',
+              'url': '/menu'
+            },
+            {
               'text': '滚动条',
               'url': '/scroller'
+            },
+            {
+              'text': '框架',
+              'url': '/frame'
             }
           ]
         }

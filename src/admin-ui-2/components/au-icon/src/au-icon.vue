@@ -17,7 +17,7 @@
     props: {
       type: {
         type: String,
-        required: true
+        default: 'home'
       },
       size: {
         type: String

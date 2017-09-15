@@ -94,8 +94,8 @@
       display: none;
     }
     .collapse-handle {
-      height: 36px;
-      line-height: 36px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
     }
   }
@@ -114,8 +114,7 @@
           'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
           'au-theme-font-color--base-7': !item.url,
         }" :key="i">
-        <div
-          class="menu"
+        <div class="menu"
           :class="{
             'au-theme-hover-background-color--base-10' : !item.active,
             'au-theme-hover-font-color--primary-3': !item.active && item.url
@@ -161,7 +160,7 @@
   import AuIcon from '../../au-icon'
   import AuCollapse from '../../au-collapse'
   import { deepClone } from '../../../helpers/utils'
-  
+
   export default {
     name: 'au-menu',
     components: { AuIcon, AuCollapse },

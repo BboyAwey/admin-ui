@@ -163,6 +163,7 @@
     },
     destroyed () {
       window.removeEventListener('resize', this.calPos)
+      this.hide(true)
     },
     watch: {
       trigger () {
@@ -186,6 +187,7 @@
         let target = this.$refs.target
         let pop = this.$refs.pop
 
+        pop.setAttribute('id', 'au-popover-' + this._uid)
         if (target.parentNode === pop) pop.parentNode.insertBefore(target, pop)
         if (pop.parentNode !== document.body) document.body.appendChild(pop)
       },
@@ -220,15 +222,19 @@
         this.calPos(target, placement)
         this.display = true
       },
-      hide () {
+      hide (destroy) {
         // if (this.disabled) return
         // this.calPos()
-        this.display = false
-        let fix = () => {
-          this.fixSize(this.originPopSize)
-          this.$refs.pop.removeEventListener('transitionend', fix)
+        if (!destroy) {
+          this.display = false
+          let fix = () => {
+            this.fixSize(this.originPopSize)
+            this.$refs.pop.removeEventListener('transitionend', fix)
+          }
+          this.$refs.pop.addEventListener('transitionend', fix)
+        } else {
+          document.querySelector(`#au-popover-${this._uid}`).style.display = 'none'
         }
-        this.$refs.pop.addEventListener('transitionend', fix)
       },
       calPos () {
         let targetSize = getElementSize(this.$refs.target)

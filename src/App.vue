@@ -15,7 +15,7 @@
         <h3 class="admin-ui-banner">Admin-UI</h3>
       </div>
       <div slot="sidebar">
-        <au-menu :items="menu" @select="go" class="menu"></au-menu>
+        <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="true"></au-menu>
       </div>
       <div slot="content">
         <router-view></router-view>

@@ -3,6 +3,7 @@
   .au-menu {
     position: relative;
     min-width: 150px;
+    // padding-top: 10px;
     list-style: none;
     & > li {
       position: relative;
@@ -70,6 +71,9 @@
     }
   }
   .au-menu.top-level {
+    padding-top: 10px;
+  }
+  .au-menu.collapsable {
     padding-top: 40px;
   }
   .au-menu.collapse {
@@ -99,86 +103,141 @@
       text-align: center;
     }
   }
+  .au-menu-pop-content {
+    padding: 12px;
+  }
+  // .au-menu-has-children-triangle,
+  // .au-menu-has-children-pop {
+  //   border-width: 1px;
+  //   border-style: solid;
+  // }
+  .au-menu-children-popup {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 1;
+    border: 1px solid red;
+  }
 </style>
 <template>
-  <au-collapse :collapse="localCollapse" :horizontal="true" min="80px" max="300px">
-    <ul
-      class="au-menu au-theme-font-color--base-3"
-      :class="{
-        'top-level au-theme-background-color--base-12': isTopLevel,
-        'collapse': localCollapse
-      }">
-      <li
-        v-for="(item, i) in localItems"
+  <div>
+    <au-collapse :collapse="localCollapse" :horizontal="true" min="80px" :max="!isPopover ? '250px' : ''">
+      <ul
+        class="au-menu au-theme-font-color--base-3"
         :class="{
-          'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
-          'au-theme-font-color--base-7': !item.url,
-        }" :key="i">
-        <div class="menu"
+          'top-level au-theme-background-color--base-12': isTopLevel,
+          'collapsable': collapsable && isTopLevel,
+          'collapse': localCollapse
+        }"
+        v-if="localItems.length">
+        <!-- <li
+          v-for="(item, i) in localItems"
+          @mouseenter="popupChildren(item.children, $event)" -->
+        <li
+          v-for="(item, i) in localItems"
           :class="{
-            'au-theme-hover-background-color--base-10' : !item.active,
-            'au-theme-hover-font-color--primary-3': !item.active && item.url
+            'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
+            'au-theme-font-color--base-7': !item.url,
           }"
-          :style="{ paddingLeft: calcPaddingLeft(item)  }"
-          @click="select(item)">
-          <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
-          <span class="menu-text">{{ item.text }}</span>
-          <au-icon class="menu-fold-icon
-            au-theme-font-color--base-3
-            au-theme-hover-font-color--primary-3"
-            type="angle-down"
-            v-if="item.children && item.children.length"
+          :key="i">
+          <!-- <au-popover
+            :plain="hasChildren(item)"
+            :placement="hasChildren(item) ? 'right top' : 'right middle'" -->
+          <au-popover
+            :disabled="!localCollapse"
+            placement="right middle"
+            :fix="hasChildren(item) ? 0 : '-2px'">
+            <div class="menu"
+              slot="target"
+              :class="{
+                'au-theme-hover-background-color--base-10' : !item.active,
+                'au-theme-hover-font-color--primary-3': !item.active && item.url
+              }"
+              :style="{ paddingLeft: calcPaddingLeft(item)  }"
+              @click="select(item)">
+              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+              <span class="menu-text">{{ item.text }}</span>
+              <au-icon class="menu-fold-icon
+                au-theme-font-color--base-3
+                au-theme-hover-font-color--primary-3"
+                type="angle-down"
+                v-if="hasChildren(item)"
+                v-show="!localCollapse"
+                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
+                @click.native.stop="toggleCollapse(item)"></au-icon>
+            </div>
+            <div slot="content" class="au-menu-pop-content">
+              {{ item.text }}
+            </div>
+            <!-- <div v-if="!item.children || !item.children.length" slot="content" class="au-menu-pop-content">
+              {{ item.text }}
+            </div> -->
+            <!-- <div v-if="hasChildren(item)" slot="content" class="au-theme-font-color--base-3">
+              <au-menu :items="item.children" :collapsable="false" :isPopover="true"></au-menu>
+            </div> -->
+          </au-popover>
+          <au-collapse
+            class="next-level-container"
+            :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
+            :collapse="item.collapse"
             v-show="!localCollapse"
-            :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
-            @click.native.stop="toggleCollapse(item)"></au-icon>
-        </div>
-        <au-collapse
-          class="next-level-container"
-          :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
-          :collapse="item.collapse"
-          v-show="!localCollapse"
-          v-if="item.children && item.children.length">
-          <au-menu
-            :items="item.children"
-            :is-top-level="false"
-            :all="isTopLevel ? localItems : all"
-            @select="item => { $emit('select', item) }"></au-menu>
-        </au-collapse>
-      </li>
-      <li
-        class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
-        @click="toggle"
-        v-if="isTopLevel">
-        <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
-          transform: localCollapse ? '' : 'rotate(180deg)'
-        }"></au-icon>
-      </li>
-    </ul>
-  </au-collapse>
+            v-if="hasChildren(item)">
+            <au-menu
+              :items="item.children"
+              :is-top-level="false"
+              :all="isTopLevel ? localItems : all"
+              @select="item => { $emit('select', item) }"></au-menu>
+          </au-collapse>
+          <!-- <div class="au-menu-children-popup" v-show="item.childrenPopup">
+            <au-menu :items="item.children" :collapsable="false"></au-menu>
+          </div> -->
+        </li>
+        <li
+          class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
+          @click="toggle"
+          v-if="collapsable && isTopLevel">
+          <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
+            transform: localCollapse ? '' : 'rotate(180deg)'
+          }"></au-icon>
+        </li>
+      </ul>
+    </au-collapse>
+    <!-- <div ref="childrenPop" class="au-menu-children-popup" v-show="currPopupChildren.length">
+      <au-menu v-if="currPopupChildren.length" :items="currPopupChildren" :collapsable="false"></au-menu>
+    </div> -->
+  </div>
 </template>
 <script>
   import AuIcon from '../../au-icon'
+  import AuPopover from '../../au-popover'
   import AuCollapse from '../../au-collapse'
   import { deepClone } from '../../../helpers/utils'
+  // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
   export default {
     name: 'au-menu',
-    components: { AuIcon, AuCollapse },
+    components: { AuIcon, AuCollapse, AuPopover },
     data () {
       return {
         localItems: [],
-        localCollapse: this.collapse
+        localCollapse: this.collapse,
+        currPopupChildren: []
       }
     },
     props: {
       items: Array,
       collapse: Boolean,
+      collapsable: {
+        type: Boolean,
+        default: true
+      },
 
       all: Array,
       isTopLevel: {
         type: Boolean,
         default: true
-      }
+      },
+      isPopover: Boolean
     },
     mounted () {
       if (this.isTopLevel) this.localItems = this.setInfo(this.items, [])
@@ -212,7 +271,7 @@
         let deactive = (items) => {
           items.forEach(item => {
             this.$set(item, 'active', false)
-            if (item.children && item.children.length) {
+            if (this.hasChildren(item)) {
               deactive(item.children)
             }
           })
@@ -228,6 +287,7 @@
             res.push(indexes)
             item.indexes = res
             item.children = this.setInfo(item.children, item.indexes)
+            item.childrenPopup = false
 
             if (item.url && this.isCurrent(item.url)) {
               item.active = true
@@ -255,8 +315,23 @@
       },
       toggle () {
         this.localCollapse = !this.localCollapse
+      },
+      hasChildren (item) {
+        return !!(item.children && item.children.length)
       }
+      // popupChildren (items, e) {
+      //   let targetSize = getElementSize(e.target)
+      //   let targetPos = getElementPagePos(e.target)
+      //   console.log(targetSize, targetPos)
+      //   this.currPopupChildren = items
+      //   document.body.appendChild(this.$refs.childrenPop)
+      //   this.$refs.childrenPop.style.top = targetSize.width + targetPos.left + 10 + 'px'
+      //   this.$refs.childrenPop.style.left = targetSize.height + 'px'
+      // },
+      // popdownChildren () {
+      //   this.currPopupChildren = []
+      // }
     }
-    // TODO: toolbox
   }
+  // TODO: popover显示子集菜单，被注释部分代码为已经实现的部分代码
 </script>

@@ -6,116 +6,123 @@
     top: 0; // TODO: set to huge
     left: 0; // TODO: set to huge
     z-index: $z-level-3;
+    // min-height: 30px;
     // opacity: .95;
   }
-  .au-popover-trangle {
+  .au-popover-triangle {
     position: absolute;
-    left: 5px;
-    bottom: -8px;
+    left: 8px;
+    bottom: -5px;
+    z-index: -1;
     display: inline-block;
-    width: 20px;
-    height: 10px;
-    overflow: hidden;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
   }
-  .au-popover-trangle:before {
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-width: 10px;
+  .au-popover-triangle.top-center {
+    left: 50%;
+    margin-left: -7px;
+  }
+  .au-popover-triangle.top-right {
+    right: 8px;
+    left: auto;
+  }
+  .au-popover-triangle.bottom-left {
+    top: -5px;
+    bottom: auto;
+    left: 8px;
+    right: auto;
+  }
+  .au-popover-triangle.bottom-center {
+    top: -5px;
+    bottom: auto;
+    left: 50%;
+    margin-left: -7px;
+  }
+  .au-popover-triangle.bottom-right {
+    top: -5px;
+    bottom: auto;
+    right: 10px;
+    left: auto;
+  }
+  .au-popover-triangle.left-top {
+    left: auto;
+    right: -5px;
+    top: 8px;
+    bottom: auto;
+    transform: rotate(-45deg);
+  }
+  .au-popover-triangle.left-middle {
+    left: auto;
+    right: -5px;
+    top: 50%;
+    margin-top: -7px;
+    bottom: auto;
+    transform: rotate(-45deg);
+  }
+  .au-popover-triangle.left-bottom {
+    left: auto;
+    right: -5px;
+    top: auto;
+    bottom: 8px;
+    transform: rotate(-45deg);
+  }
+  .au-popover-triangle.right-bottom {
+    right: auto;
+    left: -5px;
+    top: auto;
+    bottom: 8px;
+    transform: rotate(45deg);
+  }
+  .au-popover-triangle.right-middle {
+    right: auto;
+    left: -5px;
+    top: 50%;
+    margin-top: -7px;
+    transform: rotate(45deg);
+  }
+  .au-popover-triangle.right-top {
+    right: auto;
+    left: -5px;
+    top: 8px;
+    bottom: auto;
+    transform: rotate(45deg);
+  }
+  .au-popover-plain-triangle,
+  .au-popover-plain {
+    border-width: 1px;
     border-style: solid;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-  }
-  .au-popover-trangle.top-center {
-    left: 50%;
-    margin-left: -10px;
-  }
-  .au-popover-trangle.top-right {
-    right: 10px;
-    left: auto;
-  }
-  .au-popover-content.bottom-left {
-    top: -10px;
-    bottom: auto;
-    transform: rotate(180deg);
-  }
-  .au-popover-trangle.bottom-center {
-    top: -10px;
-    bottom: auto;
-    left: 50%;
-    margin-left: -10px;
-    transform: rotate(180deg);
-  }
-  .au-popover-trangle.bottom-right {
-    top: -10px;
-    bottom: auto;
-    right: 10px;
-    transform: rotate(180deg);
-  }
-  .au-popover-trangle.left-top {
-    left: auto;
-    right: -12px;
-    top: 10px;
-    bottom: auto;
-    transform: rotate(-90deg);
-  }
-  .au-popover-trangle.left-middle {
-    left: auto;
-    right: -12px;
-    top: 50%;
-    margin-top: -3px;
-    bottom: auto;
-    transform: rotate(-90deg);
-  }
-  .au-popover-trangle.left-bottom {
-    left: auto;
-    right: -12px;
-    top: auto;
-    bottom: 10px;
-    transform: rotate(-90deg);
-  }
-  .au-popover-trangle.right-bottom {
-    right: auto;
-    left: -12px;
-    top: auto;
-    bottom: 10px;
-    transform: rotate(90deg);
-  }
-  .au-popover-trangle.right-middle {
-    right: auto;
-    left: -12px;
-    top: 50%;
-    margin-top: -3px;
-    transform: rotate(90deg);
-  }
-  .au-popover-trangle.right-bottom {
-    right: auto;
-    left: -12px;
-    top: auto;
-    bottom: 10px;
-    transform: rotate(90deg);
   }
 </style>
 <template>
   <transition name="au-fade">
-    <div class="
-      au-popover
-      au-theme-background-color--base-2
-      au-theme-font-color--base-12
-      au-theme-radius"
-      :class="popClass" ref="pop" v-show="display">
+    <div
+      class="au-popover au-theme-radius"
+      :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+      ref="pop"
+      v-show="display">
       <span ref="target">
         <slot name="target"></slot>
       </span>
-      <span ref="content" class="au-popover-content">
+      <div ref="content" :class="{
+        'au-popover-content': true,
+        'au-theme-radius': true,
+        'au-theme-background-color--base-2': !plain,
+        'au-theme-font-color--base-12': !plain,
+        'au-theme-background-color--base-12': plain,
+        'au-theme-font-color--base-3': plain
+      }">
         <slot name="content"></slot>
-      </span>
+      </div>
       <span
         v-show="triangle"
-        class="au-popover-trangle au-theme-before-border-color--base-2"
-        :class="placement.split(/\s+/).join('-') + ' ' + popClass"></span>
+        :class="{
+          'au-popover-triangle': true,
+          [localPlacement.split(/\s+/).join('-')]: true,
+          'au-theme-background-color--base-2': !plain,
+          'au-theme-background-color--base-12': plain,
+          'au-popover-plain-triangle au-theme-border-color--base-8': plain
+        }"></span>
     </div>
   </transition>
 </template>
@@ -130,24 +137,32 @@
         type: Boolean,
         default: true
       },
-      triangleClass: String,
-      popClass: String,
+      plain: Boolean,
       placement: {
         type: String,
         default: 'top center'
       },
-      disabled: Boolean
+      disabled: Boolean,
+      fix: {
+        type: [String, Number],
+        default: '0px'
+      }
     },
     data () {
       return {
         display: false,
-        originPopSize: {}
+        originPopSize: {},
+        localPlacement: ''
       }
     },
     mounted () {
       this.reconstruct()
       this.addEvents()
       // this.calPos()
+      window.addEventListener('resize', this.calPos)
+    },
+    destroyed () {
+      window.removeEventListener('resize', this.calPos)
     },
     watch: {
       trigger () {
@@ -160,11 +175,14 @@
       },
       disabled (v) {
         this.reconstruct()
+      },
+      placement (v) {
+        this.calPos()
       }
     },
     methods: {
       reconstruct () {
-        if (this.disabled) return
+        // if (this.disabled) return
         let target = this.$refs.target
         let pop = this.$refs.pop
 
@@ -203,7 +221,7 @@
         this.display = true
       },
       hide () {
-        if (this.disabled) return
+        // if (this.disabled) return
         // this.calPos()
         this.display = false
         let fix = () => {
@@ -212,9 +230,9 @@
         }
         this.$refs.pop.addEventListener('transitionend', fix)
       },
-      calPos (target, placement) {
-        let targetSize = getElementSize(target || this.$refs.target)
-        let targetPos = getElementPagePos(target || this.$refs.target)
+      calPos () {
+        let targetSize = getElementSize(this.$refs.target)
+        let targetPos = getElementPagePos(this.$refs.target)
         let popSize = getElementSize(this.$refs.pop)
 
         // fix the size bug witch caused by the wordwrap
@@ -225,9 +243,9 @@
 
         let vertical = {
           x: {
-            left: targetPos.left,
-            center: targetPos.left + targetSize.width / 2 - popSize.width / 2,
-            right: targetPos.left + targetSize.width - popSize.width
+            left: targetPos.left + parseInt(this.fix),
+            center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.fix),
+            right: targetPos.left + targetSize.width - popSize.width + parseInt(this.fix)
           },
           y: {
             top: targetPos.top - popSize.height - offset,
@@ -240,14 +258,19 @@
             right: targetPos.left + targetSize.width + offset
           },
           y: {
-            top: targetPos.top,
-            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2, // do not kown why should add 2 but it works
-            bottom: targetPos.top + targetSize.height - popSize.height + 11 // do not kown why should add 10 but it works
+            top: targetPos.top + parseInt(this.fix),
+            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.fix), // do not kown why should add 2 but it works
+            bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.fix)// do not kown why should add 10 but it works
           }
         }
 
-        let keys = placement ? placement.split(/\s+/) : this.placement.split(/\s+/)
-        if (keys.length !== 2) keys = ['top', 'center']
+        let keys = this.placement.split(/\s+/)
+        let xes = new Set(['top', 'bottom', 'left', 'right'])
+        let ys = new Set(['left', 'center', 'right', 'top', 'middle', 'bottom'])
+        if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
+          keys = ['top', 'center']
+        }
+        this.localPlacement = keys.join(' ')
 
         let res = {}
         if (keys[0] === 'top' || keys[0] === 'bottom') {

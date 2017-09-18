@@ -66,7 +66,7 @@
 </template>
 <script>
   import { getElementSize, mousewheel } from '../../../helpers/dom'
-  
+
   export default {
     name: 'au-scroller',
     mounted () {
@@ -154,8 +154,8 @@
       },
       handleMouseout () {
         if (!this.onDrag) {
-          this.$refs.bar.style.opacity = 0
-          this.$refs.core.style.opacity = 0
+          this.$refs.bar.style.opacity = '.1'
+          this.$refs.core.style.opacity = '.2'
         }
       },
       handleBarMouseover () {

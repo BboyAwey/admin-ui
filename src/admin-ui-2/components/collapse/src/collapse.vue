@@ -21,18 +21,25 @@
     mounted () {
       this.calculate()
       let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-      let observer = new MutationObserver((mutations) => {
-        if (mutations.find((mutation) => {
-          return mutation.target !== this.$refs.el
-        })) this.calculate()
-      })
-      let config = { attributes: true, childList: true, subtree: true }
-      observer.observe(this.$refs.el, config)
+      if (MutationObserver) {
+        this.observer = new MutationObserver((mutations) => {
+          if (mutations.find((mutation) => {
+            return mutation.target !== this.$refs.el
+          })) this.calculate()
+        })
+        let config = { attributes: true, childList: true, subtree: true }
+        this.observer.observe(this.$refs.el, config)
+      }
+    },
+    destroyed () {
+      if (this.observe) this.observer.disconnect()
+      this.observer = null
     },
     data () {
       return {
         height: '',
-        width: ''
+        width: '',
+        observer: null
       }
     },
     props: {

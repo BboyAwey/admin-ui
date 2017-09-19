@@ -26,7 +26,8 @@
 </template>
 
 <script>
-  import { hasClass, getElementSize } from '../../../helpers/dom'
+  // import { hasClass, getElementSize } from '../../../helpers/dom'
+  import { getElementSize } from '../../../helpers/dom'
 
   function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
 
@@ -74,21 +75,36 @@
           lg: 1170,
           md: 970,
           sm: 750
-        }
+        },
+        observer: null
       }
     },
     mounted () {
-      if (!hasClass(this.$parent.$el, 'au-grid-container')) {
-        throw new Error('Admin UI@<au-grid> should be a child of <au-grid-container>')
-      }
+      // if (!hasClass(this.$parent.$el, 'au-grid-container')) {
+      //   throw new Error('Admin UI@<au-grid> should be a child of <au-grid-container>')
+      // }
       if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
         throw new Error('Admin UI@ Atleast you should pass one width-* prop to grid')
       }
+      this.setContainer()
       this.getNumber()
       window.addEventListener('resize', this.getNumber)
+      let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+      if (MutationObserver) {
+        this.observer = new MutationObserver((mutations) => {
+          mutations.forEach(m => {
+            if (m.attributeName === 'style' && m.target.style.display !== 'none') {
+              m.target.style.display = 'flex'
+            }
+          })
+        })
+        let config = { attributes: true, childList: false, subtree: false }
+        this.observer.observe(this.$el.parentNode, config)
+      }
     },
     destroyed () {
       window.removeEventListener('resize', this.getNumber)
+      if (this.observe) this.observer.disconnect()
     },
     watch: {
       widthLg () {
@@ -105,12 +121,17 @@
       }
     },
     methods: {
+      setContainer () {
+        let container = this.$el.parentNode
+        container.style.display = 'flex'
+        container.style.flexWrap = 'wrap'
+      },
       getNumber () {
         this.getCellNumber()
         this.getOffsetNumber()
       },
       getCellNumber () {
-        let containerWidth = getElementSize(this.$parent.$el).width
+        let containerWidth = getElementSize(this.$el.parentNode).width
 
         if (this.widthLg && containerWidth >= this.breakPoint.lg) {
           this.cellNumber = this.widthLg
@@ -130,7 +151,7 @@
         }
       },
       getOffsetNumber () {
-        let containerWidth = getElementSize(this.$parent.$el).width
+        let containerWidth = getElementSize(this.$el.parentNode).width
 
         if (this.offsetLg && containerWidth >= this.breakPoint.lg) {
           this.offsetNumber = this.offsetLg

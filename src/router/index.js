@@ -24,6 +24,11 @@ export default new Router({
       path: '/grid',
       name: 'grid',
       component: (resolve) => require(['../examples/grid-examples.vue'], resolve)
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: (resolve) => require(['../examples/table-examples.vue'], resolve)
     }
   ]
 })

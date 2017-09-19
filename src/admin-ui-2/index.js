@@ -13,7 +13,7 @@ import Frame from './components/frame'
 import Scroller from './components/scroller'
 import Popover from './components/popover'
 import Grid from './components/grid'
-import GridContainer from './components/grid-container'
+import Table from './components/table'
 
 // add all comps into an array
 const components = [
@@ -25,7 +25,7 @@ const components = [
   Scroller,
   Popover,
   Grid,
-  GridContainer
+  Table
 ]
 
 // export comps one by one
@@ -38,7 +38,7 @@ export {
   Scroller,
   Popover,
   Grid,
-  GridContainer
+  Table
 }
 
 // export all comps as an object
@@ -51,7 +51,7 @@ const adminUi = {
   Scroller,
   Popover,
   Grid,
-  GridContainer
+  Table
 }
 
 adminUi.install = function (Vue, options = {}) {

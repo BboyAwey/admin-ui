@@ -98,3 +98,7 @@ export function removeClass (el, className) {
     el.className = temp.join(' ')
   }
 }
+
+export function hasClass (el, className) {
+  return getOriginClasses(el).indexOf(className.trim()) !== -1
+}

@@ -8,17 +8,22 @@ export default new Router({
     {
       path: '/button',
       name: 'button',
-      component: (resolve) => require(['../examples/au-button-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/button-examples.vue'], resolve)
     },
     {
       path: '/scroller',
       name: 'scroller',
-      component: (resolve) => require(['../examples/au-scroller-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/scroller-examples.vue'], resolve)
     },
     {
       path: '/popover',
       name: 'popover',
-      component: (resolve) => require(['../examples/au-popover-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/popover-examples.vue'], resolve)
+    },
+    {
+      path: '/grid',
+      name: 'grid',
+      component: (resolve) => require(['../examples/grid-examples.vue'], resolve)
     }
   ]
 })

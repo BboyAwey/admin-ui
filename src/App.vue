@@ -12,7 +12,7 @@
   <div id="app">
     <au-frame>
       <div slot="header">
-        <h3 class="admin-ui-banner">Admin-UI</h3>
+        <h3 class="admin-ui-banner">Admin UI 2</h3>
       </div>
       <div slot="sidebar">
         <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
@@ -77,6 +77,14 @@ export default {
             {
               'text': '框架',
               'url': '/frame'
+            },
+            {
+              'text': '网格',
+              'url': '/grid'
+            },
+            {
+              'text': '表格',
+              'url': '/table'
             }
           ]
         }

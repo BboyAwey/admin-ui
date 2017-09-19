@@ -93,11 +93,11 @@
 </template>
 <script>
   import { getElementSize } from '../../../helpers/dom'
-  import AuScroller from '../../au-scroller'
+  import Scroller from '../../scroller'
 
   export default {
     name: 'au-frame',
-    components: { AuScroller },
+    components: { Scroller },
     created () {
       window.addEventListener('resize', this.resize)
     },

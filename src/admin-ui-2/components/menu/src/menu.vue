@@ -208,15 +208,15 @@
   </div>
 </template>
 <script>
-  import AuIcon from '../../au-icon'
-  import AuPopover from '../../au-popover'
-  import AuCollapse from '../../au-collapse'
+  import Icon from '../../icon'
+  import Popover from '../../popover'
+  import Collapse from '../../collapse'
   import { deepClone } from '../../../helpers/utils'
   // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
   export default {
     name: 'au-menu',
-    components: { AuIcon, AuCollapse, AuPopover },
+    components: { Icon, Collapse, Popover },
     data () {
       return {
         localItems: [],

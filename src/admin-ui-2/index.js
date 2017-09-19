@@ -5,45 +5,53 @@ import ThemeGenerator from './theme'
 import Directives from './directives'
 
 // import all comps
-import AuButton from './components/au-button'
-import AuMenu from './components/au-menu'
-import AuIcon from './components/au-icon'
-import AuCollapse from './components/au-collapse'
-import AuFrame from './components/au-frame'
-import AuScroller from './components/au-scroller'
-import AuPopover from './components/au-popover'
+import Button from './components/button'
+import Menu from './components/menu'
+import Icon from './components/icon'
+import Collapse from './components/collapse'
+import Frame from './components/frame'
+import Scroller from './components/scroller'
+import Popover from './components/popover'
+import Grid from './components/grid'
+import GridContainer from './components/grid-container'
 
 // add all comps into an array
 const components = [
-  AuButton,
-  AuMenu,
-  AuIcon,
-  AuCollapse,
-  AuFrame,
-  AuScroller,
-  AuPopover
+  Button,
+  Menu,
+  Icon,
+  Collapse,
+  Frame,
+  Scroller,
+  Popover,
+  Grid,
+  GridContainer
 ]
 
 // export comps one by one
 export {
-  AuButton,
-  AuMenu,
-  AuIcon,
-  AuCollapse,
-  AuFrame,
-  AuScroller,
-  AuPopover
+  Button,
+  Menu,
+  Icon,
+  Collapse,
+  Frame,
+  Scroller,
+  Popover,
+  Grid,
+  GridContainer
 }
 
 // export all comps as an object
 const adminUi = {
-  AuButton,
-  AuMenu,
-  AuIcon,
-  AuCollapse,
-  AuFrame,
-  AuScroller,
-  AuPopover
+  Button,
+  Menu,
+  Icon,
+  Collapse,
+  Frame,
+  Scroller,
+  Popover,
+  Grid,
+  GridContainer
 }
 
 adminUi.install = function (Vue, options = {}) {

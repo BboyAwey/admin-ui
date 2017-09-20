@@ -1,1 +1,1 @@
-export { default } from './src/menu.vue'
+export { default } from './src/menu-without-transition.vue'

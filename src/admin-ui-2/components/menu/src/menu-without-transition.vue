@@ -2,14 +2,11 @@
   @import '../../../style/vars';
   .au-menu {
     position: relative;
-    min-width: 150px;
+    min-width: 200px;
     // padding-top: 10px;
     list-style: none;
     & > li {
       position: relative;
-      transition-property: height, padding, line-height;
-      transition-duration: .2s;
-      transition-timing-function: ease-out;
     }
     .menu {
       position: relative;
@@ -18,22 +15,15 @@
       line-height: 40px;
       font-size: $normal;
       cursor: pointer;
-      transition-property: height, padding, line-height;
-      transition-duration: .2s;
-      transition-timing-function: ease-out;
     }
     .menu-text {
       display: inline-block;
-      // transition: all .2s ease-in-out;
     }
     .menu-icon {
       position: relative;
       top: 1px;
       margin-right: 10px;
       font-size: 18px;
-      transition-property: top, margin-right, font-size;
-      transition-duration: .2s;
-      transition-timing-function: ease-out;
     }
     .menu-fold-icon {
       float: right;
@@ -63,7 +53,7 @@
       line-height: 40px;
       border-bottom: 1px solid;
       text-align: right;
-      font-size: $huge;
+      font-size: $large;
       cursor: pointer;
     }
     .collapse-handle-icon {
@@ -77,22 +67,22 @@
     padding-top: 40px;
   }
   .au-menu.collapse {
-    min-width: auto;
+    min-width: 60px;
     .menu {
-      height: 60px;
+      // height: 60px;
       padding: 0;
-      line-height: 60px;
+      // line-height: 60px;
       cursor: pointer;
     }
-    & > li {
-      height: 60px;
-      line-height: 60px;
-    }
+    // & > li {
+    //   height: 60px;
+    //   line-height: 60px;
+    // }
     .menu-icon {
-      top: 4px;
-      left: 10px;
+      // top: 4px;
+      // left: 10px;
       margin-right: 10px;
-      font-size: $huge;
+      // font-size: $huge;
     }
     .menu-text {
       display: none;
@@ -116,107 +106,91 @@
     top: 0;
     left: 100%;
     z-index: 1;
-    border: 1px solid red;
   }
 </style>
 <template>
-  <div>
-    <au-collapse :collapse="localCollapse" :horizontal="true" min="80px" :max="!isPopover ? '250px' : ''">
-      <ul
-        class="au-menu au-theme-font-color--base-3"
-        :class="{
-          'top-level au-theme-background-color--base-12': isTopLevel,
-          'collapsable': collapsable && isTopLevel,
-          'collapse': localCollapse
-        }"
-        v-if="localItems.length">
-        <!-- <li
-          v-for="(item, i) in localItems"
-          @mouseenter="popupChildren(item.children, $event)" -->
-        <li
-          v-for="(item, i) in localItems"
+  <ul
+    class="au-menu au-theme-font-color--base-3"
+    :class="{
+      'top-level au-theme-background-color--base-12': isTopLevel,
+      'collapsable': collapsable && isTopLevel,
+      'collapse': localCollapse
+    }"
+    v-if="localItems.length">
+    <li
+      v-for="(item, i) in localItems"
+      :class="{
+        'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
+        'au-theme-font-color--base-7': !item.url,
+      }"
+      :key="i">
+      <au-popover
+        :disabled="!localCollapse || hasChildren(item)"
+        placement="right middle"
+        :fix="hasChildren(item) ? 0 : '-2px'">
+        <div class="menu"
+          slot="target"
           :class="{
-            'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': item.active,
-            'au-theme-font-color--base-7': !item.url,
+            'au-theme-hover-background-color--base-10' : !item.active,
+            'au-theme-hover-font-color--primary-3': !item.active && item.url
           }"
-          :key="i">
-          <!-- <au-popover
-            :plain="hasChildren(item)"
-            :placement="hasChildren(item) ? 'right top' : 'right middle'" -->
-          <au-popover
-            :disabled="!localCollapse"
-            placement="right middle"
-            :fix="hasChildren(item) ? 0 : '-2px'">
-            <div class="menu"
-              slot="target"
-              :class="{
-                'au-theme-hover-background-color--base-10' : !item.active,
-                'au-theme-hover-font-color--primary-3': !item.active && item.url
-              }"
-              :style="{ paddingLeft: calcPaddingLeft(item)  }"
-              @click="select(item)">
-              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
-              <span class="menu-text">{{ item.text }}</span>
-              <au-icon class="menu-fold-icon
-                au-theme-font-color--base-3
-                au-theme-hover-font-color--primary-3"
-                type="angle-down"
-                v-if="hasChildren(item)"
-                v-show="!localCollapse"
-                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
-                @click.native.stop="toggleCollapse(item)"></au-icon>
-            </div>
-            <div slot="content" class="au-menu-pop-content">
-              {{ item.text }}
-            </div>
-            <!-- <div v-if="!item.children || !item.children.length" slot="content" class="au-menu-pop-content">
-              {{ item.text }}
-            </div> -->
-            <!-- <div v-if="hasChildren(item)" slot="content" class="au-theme-font-color--base-3">
-              <au-menu :items="item.children" :collapsable="false" :isPopover="true"></au-menu>
-            </div> -->
-          </au-popover>
-          <au-collapse
-            class="next-level-container"
-            :class="item.icon ? 'self-has-icon' : 'self-no-icon'"
-            :collapse="item.collapse"
+          :style="{ paddingLeft: calcPaddingLeft(item)  }"
+          @click="select(item)">
+          <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+          <span class="menu-text">{{ item.text }}</span>
+          <au-icon class="menu-fold-icon
+            au-theme-font-color--base-3
+            au-theme-hover-font-color--primary-3"
+            type="angle-down"
+            v-if="hasChildren(item)"
             v-show="!localCollapse"
-            v-if="hasChildren(item)">
-            <au-menu
-              :items="item.children"
-              :is-top-level="false"
-              :all="isTopLevel ? localItems : all"
-              @select="item => { $emit('select', item) }"></au-menu>
-          </au-collapse>
-          <!-- <div class="au-menu-children-popup" v-show="item.childrenPopup">
-            <au-menu :items="item.children" :collapsable="false"></au-menu>
-          </div> -->
-        </li>
-        <li
-          class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
-          @click="toggle"
-          v-if="collapsable && isTopLevel">
-          <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
-            transform: localCollapse ? '' : 'rotate(180deg)'
-          }"></au-icon>
-        </li>
-      </ul>
-    </au-collapse>
-    <!-- <div ref="childrenPop" class="au-menu-children-popup" v-show="currPopupChildren.length">
-      <au-menu v-if="currPopupChildren.length" :items="currPopupChildren" :collapsable="false"></au-menu>
-    </div> -->
-  </div>
+            :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`}"
+            @click.native.stop="toggleCollapse(item)"></au-icon>
+        </div>
+        <div slot="content" class="au-menu-pop-content">
+          {{ item.text }}
+        </div>
+        <!-- <div v-if="!item.children || !item.children.length" slot="content" class="au-menu-pop-content">
+          {{ item.text }}
+        </div> -->
+        <!-- <div v-if="hasChildren(item)" slot="content" class="au-theme-font-color--base-3">
+          <au-menu :items="item.children" :collapsable="false" :isPopover="true"></au-menu>
+        </div> -->
+      </au-popover>
+      <au-menu
+        v-if="hasChildren(item)"
+        v-show="!localCollapse && !item.collapse"
+        :items="item.children"
+        :is-top-level="false"
+        :all="isTopLevel ? localItems : all"
+        @select="item => { $emit('select', item) }"></au-menu>
+      <!-- <div class="au-menu-children-popup" v-show="item.childrenPopup">
+        <au-menu :items="item.children" :collapsable="false"></au-menu>
+      </div> -->
+      <div class="au-menu-children-popup" ref="childrenPop" v-if="hasChildren(item)" v-show="currPopupChildren.length">
+        shit
+      </div>
+    </li>
+    <li
+      class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
+      @click="toggle"
+      v-if="collapsable && isTopLevel">
+      <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
+        transform: localCollapse ? '' : 'rotate(180deg)'
+      }"></au-icon>
+    </li>
+  </ul>
 </template>
 <script>
   import Icon from '../../icon'
   import Popover from '../../popover'
-  import Collapse from '../../collapse'
+  import Scroller from '../../scroller'
   import { deepClone } from '../../../helpers/utils'
   // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
   export default {
     name: 'au-menu',
-    components: { Icon, Collapse, Popover },
+    components: { Icon, Scroller, Popover },
     data () {
       return {
         localItems: [],
@@ -320,13 +294,16 @@
         return !!(item.children && item.children.length)
       }
       // popupChildren (items, e) {
+      //   if (!this.localCollapse) return
+
       //   let targetSize = getElementSize(e.target)
       //   let targetPos = getElementPagePos(e.target)
+
       //   console.log(targetSize, targetPos)
       //   this.currPopupChildren = items
-      //   document.body.appendChild(this.$refs.childrenPop)
-      //   this.$refs.childrenPop.style.top = targetSize.width + targetPos.left + 10 + 'px'
-      //   this.$refs.childrenPop.style.left = targetSize.height + 'px'
+
+      //   this.$refs.childrenPop.style.left = targetSize.width + targetPos.left + 10 + 'px'
+      //   this.$refs.childrenPop.style.top = targetPos.top + 'px'
       // },
       // popdownChildren () {
       //   this.currPopupChildren = []

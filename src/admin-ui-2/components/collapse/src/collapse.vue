@@ -1,15 +1,16 @@
 <style lang="scss">
   .au-collapse {
-    transition-property: width, height;
-    transition-timing-function: ease-out;
-    transition-duration: .1s;
-    // transition: height .2s ease-in-out;
     overflow: hidden;
     width: 100%;
   }
+  .au-collapse-transition {
+    transition-property: width, height;
+    transition-timing-function: ease-out;
+    transition-duration: .1s;
+  }
 </style>
 <template>
-  <div class="au-collapse" :style="{ height, width }" ref="el">
+  <div class="au-collapse" :class="{'au-collapse-transition': transition}" :style="{ height, width }" ref="el">
     <slot></slot>
   </div>
 </template>
@@ -49,7 +50,11 @@
       },
       horizontal: Boolean,
       min: String,
-      max: String
+      max: String,
+      transition: {
+        type: Boolean,
+        default: true
+      }
     },
     watch: {
       collapse () {

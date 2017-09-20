@@ -1,9 +1,9 @@
 <style lang="scss">
   .au-grid {
     display: block;
-    transition-property: width, margin-left;
-    transition-duration: .2s;
-    transition-timing-function: ease-out;
+    // transition-property: width, margin-left;
+    // transition-duration: .2s;
+    // transition-timing-function: ease-out;
   }
   // 12 sizes of grid cell
   @for $i from 1 through 12 {

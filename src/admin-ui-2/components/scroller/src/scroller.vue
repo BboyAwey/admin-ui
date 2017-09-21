@@ -99,6 +99,9 @@
     watch: {
       contentTop (v) {
         this.$emit('scroll', v * -1)
+      },
+      needScroll (v) {
+        if (!v) this.setContentTop(0)
       }
     },
     methods: {

@@ -5,8 +5,8 @@ export function getElementSize (el, isFragment) {
     let computed = window.getComputedStyle(el)
     let rect = el.getBoundingClientRect()
     return {
-      width: el.offsetWidth || rect.width || parseInt(computed.width),
-      height: el.offsetHeight || rect.height || parseInt(computed.height)
+      width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
+      height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
     }
   }
 
@@ -16,17 +16,19 @@ export function getElementSize (el, isFragment) {
   // clone the el
   let copy = el.cloneNode(true)
   // ste some style to minimize the influence to the document
-  copy.setAttribute('style', 'visibility: hidden; display: block !important; position: absolute !important;')
+  copy.setAttribute('style', 'visibility:hidden !important; display:block !important; position:absolute !important; top: -9999 !important; left: -9999 !important;')
 
   let res = null
   // insert it to document
-  if (isFragment) document.body.appendChild(copy)
-  else el.parentNode.insertBefore(copy, el)
+  // if (isFragment) document.body.appendChild(copy)
+  // else el.parentNode.insertBefore(copy, el)
+  document.body.appendChild(copy)
   res = getSize(copy)
 
   // remove it
-  if (isFragment) document.body.removeChild(copy)
-  else el.parentNode.removeChild(copy)
+  // if (isFragment) document.body.removeChild(copy)
+  // else el.parentNode.removeChild(copy)
+  document.body.removeChild(copy)
   return res
 }
 

@@ -77,9 +77,9 @@
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
+      <au-scroller class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
         <slot name="sidebar"></slot>
-      </div>
+      </au-scroller>
       <au-scroller class="au-page-content" ref="content">
         <div class="au-page-content-main" ref="contentMain">
           <slot name="content"></slot>

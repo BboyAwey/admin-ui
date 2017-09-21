@@ -1,9 +1,12 @@
 <style lang="scss" scoped>
   #app {
     height: 100%;
-    .admin-ui-banner {
+    .banner {
       font-size: 30px;
       padding: 20px;
+    }
+    .menu {
+      width: 200px;
     }
   }
 </style>
@@ -12,7 +15,7 @@
   <div id="app">
     <au-frame>
       <div slot="header">
-        <h3 class="admin-ui-banner">Admin UI 2</h3>
+        <h3 class="banner">Admin UI 2</h3>
       </div>
       <div slot="sidebar">
         <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>

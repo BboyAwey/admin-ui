@@ -9,6 +9,9 @@
     // min-height: 30px;
     // opacity: .95;
   }
+  .au-popover:focus {
+    outline: none;
+  }
   .au-popover-triangle {
     position: absolute;
     left: 8px;
@@ -88,10 +91,18 @@
     bottom: auto;
     transform: rotate(45deg);
   }
+  .au-popover-plain {
+    box-sizing: content-box;
+  }
   .au-popover-plain-triangle,
   .au-popover-plain {
     border-width: 1px;
     border-style: solid;
+  }
+
+  .au-popover-target-container {
+    // display: inline-block;
+    // border: 1px solid red;
   }
 </style>
 <template>
@@ -99,9 +110,11 @@
     <div
       class="au-popover au-theme-radius"
       :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+      :tabindex="_uid"
+      @blur="handleBlur($event)"
       ref="pop"
       v-show="display">
-      <span ref="target">
+      <span ref="target" class="au-popover-target-container">
         <slot name="target"></slot>
       </span>
       <div ref="content" :class="{
@@ -110,6 +123,7 @@
         'au-theme-background-color--base-2': !plain,
         'au-theme-font-color--base-12': !plain,
         'au-theme-background-color--base-12': plain,
+        'au-theme-border-color--base-8': plain,
         'au-theme-font-color--base-3': plain
       }">
         <slot name="content"></slot>
@@ -158,12 +172,23 @@
     mounted () {
       this.reconstruct()
       this.addEvents()
-      // this.calPos()
+      this.calPos() // TODO:
       window.addEventListener('resize', this.calPos)
+
+      // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+      // if (MutationObserver) {
+      //   this.observer = new MutationObserver((mutations) => {
+      //     console.log(mutations)
+      //     this.calPos()
+      //   })
+      //   let config = { attributes: true, childList: true, subtree: true }
+      //   this.observer.observe(this.$refs.pop, config)
+      // }
     },
     destroyed () {
       window.removeEventListener('resize', this.calPos)
       this.hide(true)
+      if (this.observe) this.observer.disconnect()
     },
     watch: {
       trigger () {
@@ -194,6 +219,7 @@
       addEvents () {
         if (this.trigger === 'click') {
           this.$refs.target.addEventListener('click', this.handleClick)
+          // this.$refs.pop.addEventListener('blur', this.handleBlur)
         } else {
           this.$refs.target.addEventListener('mouseenter', this.handleMouseover)
           this.$refs.target.addEventListener('mouseleave', this.handleMouseout)
@@ -201,11 +227,15 @@
       },
       removeEvents () {
         this.$refs.target.removeEventListener('click', this.handleClick)
+        // this.$refs.pop.removeEventListener('blur', this.handleBlur)
         this.$refs.target.removeEventListener('mouseenter', this.handleMouseover)
         this.$refs.target.removeEventListener('mouseleave', this.handleMouseout)
       },
       handleClick () {
-        !this.display ? this.show() : this.hide()
+        this.display ? this.hide() : this.show()
+      },
+      handleBlur () { // pop blur
+        this.hide()
       },
       handleMouseover () {
         this.show()
@@ -213,14 +243,17 @@
       handleMouseout () {
         this.hide()
       },
-      show (target, placement) {
+      show () {
         if (this.disabled) return
-        this.originPopSize = {
-          width: window.getComputedStyle(this.$refs.pop).width,
-          height: window.getComputedStyle(this.$refs.pop).height
-        }
-        this.calPos(target, placement)
+        this.calPos()
+        // this.originPopSize = {
+        //   width: window.getComputedStyle(this.$refs.pop).width,
+        //   height: window.getComputedStyle(this.$refs.pop).height
+        // }
         this.display = true
+        this.$nextTick(() => {
+          this.$refs.pop.focus()
+        })
       },
       hide (destroy) {
         // if (this.disabled) return
@@ -228,7 +261,7 @@
         if (!destroy) {
           this.display = false
           let fix = () => {
-            this.fixSize(this.originPopSize)
+            // this.fixSize(this.originPopSize)
             this.$refs.pop.removeEventListener('transitionend', fix)
           }
           this.$refs.pop.addEventListener('transitionend', fix)
@@ -237,13 +270,23 @@
         }
       },
       calPos () {
+        let targetElm = this.$slots.target[0].elm
+        if (!targetElm) return
+
+        let targetElmDisplay = window.getComputedStyle(targetElm).display
+        if (targetElmDisplay !== 'none') this.$refs.target.style.display = targetElmDisplay
+
+        // let popElmSize = getElementSize(this.$slots.content[0].elm)
+        // this.$refs.pop.style.width = popElmSize.width + 'px'
+        // this.$refs.pop.style.height = popElmSize.height + 'px'
+
         let targetSize = getElementSize(this.$refs.target)
         let targetPos = getElementPagePos(this.$refs.target)
-        let popSize = getElementSize(this.$refs.pop)
+        let popSize = getElementSize(this.$refs.content)
 
         // fix the size bug witch caused by the wordwrap
-        this.$refs.pop.style.width = popSize.width + 'px'
-        this.$refs.pop.style.height = popSize.height + 'px'
+        // this.$refs.pop.style.width = popSize.width + 'px'
+        // this.$refs.pop.style.height = popSize.height + 'px'
 
         let offset = 10
 

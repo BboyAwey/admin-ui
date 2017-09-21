@@ -29,45 +29,7 @@ export default [
       },
       {
         'text': '手风琴',
-        'url': '/collapse',
-        'children': [
-          {
-            'text': '测试测试案发时安利房间爱上；了就发生；了看就；拉开分级',
-            'url': '/icon'
-          },
-          {
-            'text': 'b',
-            'url': '/button'
-          },
-          {
-            'text': 'c',
-            'url': '/collapse'
-          },
-          {
-            'text': 'd',
-            'url': '/popover'
-          },
-          {
-            'text': 'eee',
-            'url': '/menu'
-          },
-          {
-            'text': 'fff',
-            'url': '/scroller'
-          },
-          {
-            'text': 'ggg',
-            'url': '/frame'
-          },
-          {
-            'text': 'hhh',
-            'url': '/grid'
-          },
-          {
-            'text': 'iiiii',
-            'url': '/table'
-          }
-        ]
+        'url': '/collapse'
       },
       {
         'text': '气泡',

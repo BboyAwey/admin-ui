@@ -6,6 +6,16 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      name: 'home',
+      redirect: {name: 'intro'}
+    },
+    {
+      path: '/intro',
+      name: 'intro',
+      component: (resolve) => require(['../examples/intro.vue'], resolve)
+    },
+    {
       path: '/button',
       name: 'button',
       component: (resolve) => require(['../examples/button-examples.vue'], resolve)

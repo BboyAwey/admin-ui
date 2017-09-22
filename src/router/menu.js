@@ -54,6 +54,10 @@ export default [
       {
         'text': '表格',
         'url': '/table'
+      },
+      {
+        'text': '面板',
+        'url': '/panel'
       }
     ]
   }

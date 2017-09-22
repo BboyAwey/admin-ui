@@ -1,5 +1,5 @@
 <style lang="scss">
-  code .number {
+  .code-h .number {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -8,24 +8,29 @@
     min-width: 25px;
     display: inline-block;
     text-align: right;
-    color: #464646;
+    color: #555555;
     font-size: 14px;
     margin-right: 12px;
+    line-height: 24px;
   }
   .number .hljs-number {
-    font-size: 14px;
-    color: #464646;
+    font-size: 12px;
+    color: #555555;
   }
 </style>
 <template>
-  <pre>
+  <pre class="code-h">
     <code :class="lang" ref="codeBlock">
       <slot></slot>
     </code>
   </pre>
 </template>
 <script>
+  import hljs from 'highlightjs'
+  import 'highlightjs/styles/atom-one-dark.css'
+
   export default {
+    name: 'code-h',
     data () {
       return {}
     },
@@ -75,7 +80,7 @@
       },
       highlight () {
         this.escapeHtml()
-        window.hljs.highlightBlock(this.$refs.codeBlock)
+        hljs.highlightBlock(this.$refs.codeBlock, this.lang)
         this.addLineNumbers()
       }
     }

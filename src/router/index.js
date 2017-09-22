@@ -16,6 +16,11 @@ export default new Router({
       component: (resolve) => require(['../examples/intro.vue'], resolve)
     },
     {
+      path: '/icon',
+      name: 'icon',
+      component: (resolve) => require(['../examples/icon-examples.vue'], resolve)
+    },
+    {
       path: '/button',
       name: 'button',
       component: (resolve) => require(['../examples/button-examples.vue'], resolve)

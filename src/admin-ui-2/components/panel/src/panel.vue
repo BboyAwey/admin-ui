@@ -8,15 +8,15 @@
       border-bottom-width: 1px;
       border-bottom-style: solid;
       // margin-bottom: 24px;
-      padding: 24px 24px 16px 24px;
+      padding: 24px;
       font-size: $large;
-      // font-weight: bold;
+      font-weight: bold;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
     }
     .au-panel-content {
-      padding: 16px 24px 24px 24px;
+      padding: 24px;
     }
   }
 </style>

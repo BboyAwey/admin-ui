@@ -2,11 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import codeH from './examples/helper/codeHighlighter.vue'
 import router from './router'
 import adminUi2 from './admin-ui-2'
 
 // adminUi2.theme()
 Vue.use(adminUi2)
+
+Vue.component('code-h', codeH)
 
 Vue.config.productionTip = false
 

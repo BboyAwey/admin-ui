@@ -5,6 +5,7 @@
     // border-radius: 4px;
     // the border around table
     // every tr except the last one in tbody has a bottom line
+    width: 100%;
     & > tr:not(:last-child),
     tbody > tr,
     tfoot > tr:not(:last-child),
@@ -144,7 +145,7 @@
       if (thead.length) {
         addClass(thead[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important')
       }
-      if (tbody.length) {
+      if (tbody.length && tfoot.length) {
         addClass(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important')
       }
     }

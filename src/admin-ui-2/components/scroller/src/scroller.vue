@@ -158,8 +158,8 @@
       },
       handleMouseout () {
         if (!this.onDrag) {
-          this.$refs.bar.style.opacity = '.1'
-          this.$refs.core.style.opacity = '.2'
+          this.$refs.bar.style.opacity = '0'
+          this.$refs.core.style.opacity = '0'
         }
       },
       handleBarMouseover () {

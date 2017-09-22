@@ -20,7 +20,7 @@
 </style>
 <template>
   <pre class="code-h">
-    <code :class="lang" ref="codeBlock">
+    <code :class="lang" class="au-theme-radius" ref="codeBlock">
       <slot></slot>
     </code>
   </pre>

@@ -83,7 +83,6 @@
       type: String,
       size: String,
       plain: Boolean,
-      loading: Boolean,
       disabled: Boolean,
       nativeType: String // button,submit,reset
     },

@@ -18,32 +18,32 @@ export default new Router({
     {
       path: '/icon',
       name: 'icon',
-      component: (resolve) => require(['../examples/icon-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/icon.vue'], resolve)
     },
     {
       path: '/button',
       name: 'button',
-      component: (resolve) => require(['../examples/button-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/button.vue'], resolve)
     },
     {
       path: '/scroller',
       name: 'scroller',
-      component: (resolve) => require(['../examples/scroller-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/scroller.vue'], resolve)
     },
     {
       path: '/popover',
       name: 'popover',
-      component: (resolve) => require(['../examples/popover-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/popover.vue'], resolve)
     },
     {
       path: '/grid',
       name: 'grid',
-      component: (resolve) => require(['../examples/grid-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/grid.vue'], resolve)
     },
     {
       path: '/table',
       name: 'table',
-      component: (resolve) => require(['../examples/table-examples.vue'], resolve)
+      component: (resolve) => require(['../examples/table.vue'], resolve)
     }
   ]
 })

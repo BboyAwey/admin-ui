@@ -12,7 +12,7 @@
         <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome</a>
         ，我们将其内置到了Admin UI 2中
       </p>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-6">
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
         Admin UI 1中的图标组件是基于
         <a class="au-theme-font-color--info-3" href="http://ionicons.com/" target="_blank">Ionicons</a>
         ，但由于其图标数量较少，这一版本中我们替换了它
@@ -136,5 +136,3 @@
     name: 'examples'
   }
 </script>
-
-

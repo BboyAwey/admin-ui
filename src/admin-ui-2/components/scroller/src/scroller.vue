@@ -70,7 +70,10 @@
   export default {
     name: 'au-scroller',
     mounted () {
-      this.calcCoreHeight()
+      this.calcCoreHeight(
+        getElementSize(this.$refs.monitor).height,
+        getElementSize(this.$refs.content).height
+      )
       mousewheel('add', this.$refs.monitor, (e) => {
         if (!this.needScroll) return
         let direction = e.deltaY || e.detail // chrome,edge / firefox
@@ -99,9 +102,6 @@
     watch: {
       contentTop (v) {
         this.$emit('scroll', v * -1)
-      },
-      needScroll (v) {
-        if (!v) this.setContentTop(0)
       }
     },
     methods: {
@@ -137,6 +137,7 @@
       calcCoreHeight (monitor, content) {
         if (content <= monitor) {
           this.needScroll = false
+          this.contentTop = 0
         } else {
           this.needScroll = true
           this.coreHeight = monitor * monitor / content

@@ -1,5 +1,8 @@
 <style lang="scss" scoped>
   @import '../style/common';
+  .icon-item {
+    margin-right: 12px;
+  }
 </style>
 <template>
   <div class="page">
@@ -14,6 +17,14 @@
         <a class="au-theme-font-color--info-3" href="http://ionicons.com/" target="_blank">Ionicons</a>
         ，但由于其图标数量较少，这一版本中我们替换了它
       </cite>
+      <!-- 组件示例 -->
+      <div class="component-example">
+        <au-icon class="icon-item au-theme-font-color--primary-3" type="home" size="48px"></au-icon>
+        <au-icon class="icon-item au-theme-font-color--success-3" type="heart" size="44px"></au-icon>
+        <au-icon class="icon-item au-theme-font-color--danger-3" type="globe" size="46px"></au-icon>
+        <au-icon class="icon-item au-theme-font-color--warning-3" type="user" size="46px"></au-icon>
+      </div>
+      <!-- 组件示例 -->
     </au-panel>
     <au-panel class="section" title="Props">
       <au-table>

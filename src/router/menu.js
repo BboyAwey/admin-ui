@@ -58,6 +58,10 @@ export default [
       {
         'text': '面板',
         'url': '/panel'
+      },
+      {
+        'text': '图片预览器',
+        'url': '/previewer'
       }
     ]
   }

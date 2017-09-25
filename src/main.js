@@ -4,10 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import codeH from './examples/helper/codeHighlighter.vue'
 import router from './router'
-import adminUi2 from './admin-ui-2'
+import adminUi from './admin-ui'
 
 // adminUi2.theme()
-Vue.use(adminUi2)
+Vue.use(adminUi)
 
 Vue.component('code-h', codeH)
 

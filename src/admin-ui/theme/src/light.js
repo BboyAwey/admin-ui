@@ -1,5 +1,6 @@
 export default {
   colors: {
+    'base-0': '#000',
     'base-1': '#3c4147',
     'base-2': '#575e66',
     'base-3': '#757f8a ',

@@ -44,6 +44,11 @@ export default new Router({
       path: '/table',
       name: 'table',
       component: (resolve) => require(['../examples/table.vue'], resolve)
+    },
+    {
+      path: '/previewer',
+      name: 'previewer',
+      component: (resolve) => require(['../examples/previewer.vue'], resolve)
     }
   ]
 })

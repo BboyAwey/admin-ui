@@ -25,6 +25,7 @@
       font-size: $large;
       height: 56px;
       line-height: 56px;
+      cursor: pointer;
     }
     .au-previewer-content {
       position: relative;
@@ -97,12 +98,15 @@
       transform: rotate(180deg);
     }
     .au-previewer-disabled:hover {
-      // background-color: rgba(0, 0, 0, .1);
       cursor: not-allowed;
     }
-    .au-previewer-disabled:after,
-    .au-previewer-disabled:after {
-      // border-color: $grayDarken25;
+    .au-previewer-disabled:hover:before,
+    .au-previewer-disabled:hover:before {
+      opacity: .1;
+    }
+    .au-previewer-disabled:hover:after,
+    .au-previewer-disabled:hover:after {
+      opacity: .2;
     }
   }
   .au-previewer:before {
@@ -133,13 +137,15 @@
       <span
         class="au-previewer-prev au-theme-before-background-color--base-0 au-theme-after-border-color--base-12"
         @click.stop="prev"
-        :class="{'au-previewer-disabled': !images || !images.length || localCurrent <= 0 }"></span>
+        v-show="allow('prev')"
+        :class="{'au-previewer-disabled au-theme-': !allow('prev')}"></span>
       <i class="au-previewer-va-helper"></i>
       <img v-for="(img, i) in images" :src="img.src" v-show="i == localCurrent" :alt="img.alt" :key="i">
       <span
         class="au-previewer-next au-theme-before-background-color--base-0 au-theme-after-border-color--base-12"
         @click.stop="next"
-        :class="{'au-previewer-disabled': !images || !images.length || localCurrent >= images.length - 1 }"></span>
+        v-show="allow('next')"
+        :class="{'au-previewer-disabled au-theme-': !allow('next')}"></span>
     </div>
   </div>
 </template>
@@ -220,6 +226,10 @@
         if (!(this.images && this.images.length)) return true
         c = Number(c)
         return c >= 0 && c <= this.images.length - 1
+      },
+      allow (direc) {
+        if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0
+        else return this.images && this.images.length && this.localCurrent < this.images.length - 1
       }
     }
   }

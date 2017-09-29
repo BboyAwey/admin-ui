@@ -2,41 +2,44 @@ var express = require('express')
 var router = express.Router()
 var multiparty = require('multiparty')
 var fs = require('fs')
-var util = require('util')
 
 router.get('/upload', (req, res) => {
+  console.log(res.writeHead)
   res.end('Can not use GET to upload files')
 })
 router.post('/upload', (req, res) => {
   var form = new multiparty.Form({
-    uploadDir: './files'
+    uploadDir: '../../../static/files/'
   })
   form.parse(req, (err, fields, files) => {
-    var filesTmp = JSON.stringify(files, null, 2)
     if (err) {
       console.log('parse error: ' + err)
     } else {
-      console.log('parse file: ' + filesTmp)
-      var inputFile = files.inputFile[0]
+      var inputFile = null
+      for (let name in files) {
+        inputFile = files[name][0]
+      }
       var uploadedPath = inputFile.path
-      var dstPsth = './files/' + inputFile.originalFilename
+      var dstPsth = '../../../static/files/' + inputFile.originalFilename
       fs.rename(uploadedPath, dstPsth, err => {
         if (err) console.log('rename error: ' + err)
-        else console.log('rename OK')
+        else {
+          res.end(JSON.stringify({url: '/static/files/' + inputFile.originalFilename}))
+        }
       })
     }
-    res.writeHead(200, {
-      'Content-Type': 'text/plain;charset=utf-8'
-    })
-    res.write('received upload: \n\n')
-    res.end(util.inspect({
-      fields,
-      files: filesTmp
-    }))
   })
 })
 var app = express()
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With')
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+  res.header('Content-Type', 'application/json;charset=utf-8')
+  next()
+})
+
 app.use('/', router)
-app.listen(7000, () => {
-  console.log('srever run on 3000')
+app.listen(3480, () => {
+  console.log('srever run on 3480')
 })

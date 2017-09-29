@@ -49,6 +49,11 @@ export default new Router({
       path: '/previewer',
       name: 'previewer',
       component: (resolve) => require(['../examples/previewer.vue'], resolve)
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: (resolve) => require(['../examples/upload.vue'], resolve)
     }
   ]
 })

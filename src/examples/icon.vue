@@ -133,6 +133,6 @@
 </template>
 <script>
   export default {
-    name: 'examples'
+    name: 'icon-examples'
   }
 </script>

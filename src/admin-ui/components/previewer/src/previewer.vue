@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import '../../../style/_vars.scss';
+  @import '../../../style/vars';
   .au-previewer {
     position: fixed;
     top: 0;

@@ -1,10 +1,3 @@
-// Author: Awey
-// email: chenwei@rongcapital.cn
-// github: https://github.com/BboyAwey
-// blog: http://www.jianshu.com/u/3c8fe1455914
-
-// Modifier:
-
 // enhanced form components common api
 export default {
   data () {
@@ -38,10 +31,10 @@ export default {
   computed: {
     classes () {
       let classes = ''
-      if (this.hasLocalWarnings || this.warnings) classes += 'admin-form-warning '
-      if (this.small) classes += 'admin-form-small '
-      if (this.iconClass) classes += this.iconPosition === 'right' ? 'admin-form-icon-right ' : 'admin-form-icon '
-      if (this.disabled) classes += 'admin-form-disabled'
+      if (this.hasLocalWarnings || this.warnings) classes += 'au-form-warning '
+      if (this.small) classes += 'au-form-small '
+      if (this.iconClass) classes += this.iconPosition === 'right' ? 'au-form-icon-right ' : 'au-form-icon '
+      if (this.disabled) classes += 'au-form-disabled'
       return classes
     }
   },

@@ -25,12 +25,6 @@ const radius = 3
 
 const genColorStyle = function (scene, colorName, colorNumber) {
   let res = ''
-  // res += `.au-theme-${scene}-color--${colorName}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
-  // res += `.au-theme-${scene}-color--${colorName}-important{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
-  // pseudos.forEach(pseudo => {
-  //   res += `.au-theme-${pseudo}-${scene}-color--${colorName}:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber}}`
-  //   res += `.au-theme-${pseudo}-${scene}-color--${colorName}-important:${pseudo}{${scene === 'font' ? '' : (scene + '-')}color:${colorNumber} !important}`
-  // })
   switch (scene) {
     case 'font':
       res += `.au-theme-font-color--${colorName}{color:${colorNumber}}`
@@ -39,6 +33,11 @@ const genColorStyle = function (scene, colorName, colorNumber) {
         res += `.au-theme-${pseudo}-font-color--${colorName}:${pseudo}{color:${colorNumber}}`
         res += `.au-theme-${pseudo}-font-color--${colorName}-important:${pseudo}{color:${colorNumber} !important}`
       })
+      // placeholder color
+      res += `.au-theme-placeholder-color--${colorName}::-webkit-input-placeholder{color:${colorNumber}}`
+      res += `.au-theme-placeholder-color--${colorName}:-moz-placeholder{color:${colorNumber}}`
+      res += `.au-theme-placeholder-color--${colorName}::-moz-placeholder{color:${colorNumber}}`
+      res += `.au-theme-placeholder-color--${colorName}:-ms-input-placeholder{color:${colorNumber}}`
       break
     case 'border':
       res += `.au-theme-border-color--${colorName}{border-color:${colorNumber}}`

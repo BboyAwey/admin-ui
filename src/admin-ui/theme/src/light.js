@@ -48,7 +48,12 @@ export default {
   shadows: {
     'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
     'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
-    'level-3': '0 3px 6px rgba(60, 65, 71, .3)'
+    'level-3': '0 3px 6px rgba(60, 65, 71, .3)',
+    'primary': '0 1px 3px rgba(28, 134, 226, .5)',
+    'info': '0 1px 3px rgba(50, 162, 234, .5)',
+    'warning': '0 1px 3px rgba(245, 174, 8, .5)',
+    'danger': '0 1px 3px rgba(234, 58, 70, .5)',
+    'success': '0 1px 3px rgba(12, 180, 112, .5)'
   },
   borderRadius: true
 }

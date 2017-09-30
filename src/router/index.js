@@ -54,6 +54,11 @@ export default new Router({
       path: '/upload',
       name: 'upload',
       component: (resolve) => require(['../examples/upload.vue'], resolve)
+    },
+    {
+      path: '/input',
+      name: 'input',
+      component: (resolve) => require(['../examples/input.vue'], resolve)
     }
   ]
 })

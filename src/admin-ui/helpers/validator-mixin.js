@@ -43,16 +43,20 @@ export default {
         }
       }
       return false
+    },
+    hasWarnings () {
+      return this.hasLocalWarnings || !!(this.warnings && this.warnings.length)
     }
   },
   methods: {
     validate () {
-      if (this.warnings && this.warnings.length) return false
-      if (!this.validators) return false
+      let vm = this
+      if (vm.warnings && vm.warnings.length) return false
+      if (!vm.validators) return false
       // separate async and sync
       let syncStack = []
       let asyncStack = []
-      this.validators.forEach((v) => {
+      vm.validators.forEach((v) => {
         if (v.async) {
           asyncStack.push(v)
         } else {
@@ -62,41 +66,34 @@ export default {
       // handler warnings
       let handleWarnings = (res, i, warning) => {
         if (!res) {
-          this.$set(this.localWarnings, i, warning)
+          vm.$set(vm.localWarnings, i, warning)
         } else {
-          this.$delete(this.localWarnings, i)
+          vm.$delete(vm.localWarnings, i)
         }
       }
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         let asyncCount = asyncStack.length
         // execute sync validation first
         syncStack.forEach((v, i) => {
-          handleWarnings(v.validator(this.value), i, v.warning)
+          handleWarnings(v.validator(vm.value), i, v.warning)
         })
         // if sync validation passed, execute async validationg
-        if (!this.hasLocalWarnings) {
+        if (!vm.hasLocalWarnings) {
           if (asyncCount <= 0) { // no async
-            resolve('done', !this.hasLocalWarnings)
+            resolve(!vm.hasLocalWarnings)
           } else {
-            asyncStack.forEach((v, i) => { // async exist
-              v.validator(this.value).then((res) => {
-                handleWarnings(res, i, v.warning)
-                asyncCount--
-                if (asyncCount <= 0) this.$emit('done', !this.hasLocalWarnings)
-              })
-            })
             Promise.all(asyncStack.map((av, i) => {
-              return av.validator(this.value).then(res => {
+              return av.validator(vm.value).then(res => {
                 handleWarnings(res, i, av.warning)
               })
             })).then(results => {
-              if (results.includes(false)) reject(!this.hasLocalWarnings)
-              else resolve(!this.hasLocalWarnings)
+              if (results.includes(false)) resolve(!vm.hasLocalWarnings)
+              else resolve(!vm.hasLocalWarnings)
             })
           }
         } else { // if sync validation failed
-          reject(!this.hasLocalWarnings)
+          resolve(!vm.hasLocalWarnings)
         }
       })
     }

@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-  @import "../style/common";
+  // @import "../style/common";
 </style>
 <template>
   <div class="page">

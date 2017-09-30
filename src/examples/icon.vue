@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-  @import '../style/common';
+  // @import '../style/common';
   .icon-item {
     margin-right: 12px;
   }

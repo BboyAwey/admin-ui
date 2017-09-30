@@ -66,6 +66,10 @@ export default [
       {
         'text': '文件上传',
         'url': '/upload'
+      },
+      {
+        'text': '文本输入框',
+        'url': '/input'
       }
     ]
   }

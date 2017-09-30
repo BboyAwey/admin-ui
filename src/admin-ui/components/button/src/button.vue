@@ -1,14 +1,15 @@
 <style lang="scss">
   @import '../../../style/vars';
+  @import '../../../style/size';
   .au-button {
     position: relative;
     // min-width: 88px;
-    height: $size-normal;
+    // height: $size-normal;
     padding: 0 16px;
     border-width: 0;
     outline: none;
     font-size: $normal;
-    line-height: $size-normal;
+    // line-height: $size-normal;
     cursor: pointer;
     font-family: $fontFamily;
   }
@@ -45,18 +46,6 @@
     border-width: 1px;
     border-style: solid;
   }
-  .au-button.large {
-    height: $size-large;
-    line-height: $size-large;
-  }
-  .au-button.small {
-    height: $size-small;
-    line-height: $size-small;
-  }
-  .au-button.mini {
-    height: $size-mini;
-    line-height: $size-mini;
-  }
 </style>
 <template>
   <button
@@ -81,7 +70,10 @@
     },
     props: {
       type: String,
-      size: String,
+      size: {
+        type: String,
+        default: 'normal'
+      },
       plain: Boolean,
       disabled: Boolean,
       nativeType: String // button,submit,reset
@@ -136,7 +128,7 @@
           }
         }
 
-        res.push(this.size)
+        res.push('au-size-' + this.size)
 
         return res.join(' ')
       }

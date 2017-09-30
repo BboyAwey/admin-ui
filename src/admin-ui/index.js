@@ -16,6 +16,7 @@ import Grid from './components/grid'
 import Table from './components/table'
 import Panel from './components/panel'
 import Upload from './components/upload'
+import Input from './components/input'
 
 // add all comps into an array
 const components = [
@@ -29,7 +30,8 @@ const components = [
   Grid,
   Table,
   Panel,
-  Upload
+  Upload,
+  Input
 ]
 
 // export comps one by one
@@ -44,7 +46,8 @@ export {
   Grid,
   Table,
   Panel,
-  Upload
+  Upload,
+  Input
 }
 
 // export all comps as an object
@@ -59,7 +62,8 @@ const adminUi = {
   Grid,
   Table,
   Panel,
-  Upload
+  Upload,
+  Input
 }
 
 adminUi.install = function (Vue, options = {}) {

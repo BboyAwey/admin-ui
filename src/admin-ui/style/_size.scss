@@ -1,0 +1,18 @@
+@import "./vars";
+
+.au-size-mini {
+  height: $size-mini;
+  line-height: $size-mini;
+}
+.au-size-small {
+  height: $size-small;
+  line-height: $size-small;
+}
+.au-size-normal {
+  height: $size-normal;
+  line-height: $size-normal;
+}
+.au-size-large {
+  height: $size-large;
+  line-height: $size-large;
+}

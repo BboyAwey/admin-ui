@@ -29,16 +29,6 @@ export default {
       }
     }
   },
-  computed: {
-    classes () {
-      // let classes = ''
-      // if (this.hasLocalWarnings || this.warnings) classes += 'au-form-warning '
-      // if (this.small) classes += 'au-form-small '
-      // if (this.iconClass) classes += this.iconPosition === 'right' ? 'au-form-icon-right ' : 'au-form-icon '
-      // if (this.disabled) classes += 'au-form-disabled'
-      // return classes
-    }
-  },
   methods: {
     input (e) {
       this.$emit('input', this.localValue, e)

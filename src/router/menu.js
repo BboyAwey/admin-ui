@@ -70,6 +70,10 @@ export default [
       {
         'text': '文本输入框',
         'url': '/input'
+      },
+      {
+        'text': '多选框',
+        'url': '/checkbox'
       }
     ]
   }

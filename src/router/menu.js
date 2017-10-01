@@ -78,6 +78,10 @@ export default [
       {
         'text': '单选框',
         'url': '/radio'
+      },
+      {
+        'text': '下拉选择',
+        'url': '/select'
       }
     ]
   }

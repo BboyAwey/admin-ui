@@ -69,6 +69,11 @@ export default new Router({
       path: '/radio',
       name: 'radio',
       component: (resolve) => require(['../examples/radio.vue'], resolve)
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: (resolve) => require(['../examples/select.vue'], resolve)
     }
   ]
 })

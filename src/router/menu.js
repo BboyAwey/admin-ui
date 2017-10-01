@@ -74,6 +74,10 @@ export default [
       {
         'text': '多选框',
         'url': '/checkbox'
+      },
+      {
+        'text': '单选框',
+        'url': '/radio'
       }
     ]
   }

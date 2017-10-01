@@ -1,5 +1,7 @@
 <style lang="scss">
   @import '../../../style/vars';
+  @import '../../../style/label';
+  @import '../../../style/warnings';
   .au-checkbox {
     display: inline-block;
     font-size: $normal;
@@ -25,7 +27,6 @@
       left: 2px;
     }
     .au-checkbox-hook-disabled {
-      position: absolute;
       top: 1px;
       left: 1px;
     }
@@ -36,12 +37,18 @@
 </style>
 <template>
   <div class="au-checkbox">
-    <div class="au-checkbox-label"
+    <div class="au-form-label"
       :class="{
         'au-theme-font-color--danger-3': hasWarnings,
         'au-theme-font-color--base-3': !hasWarnings,
       }">{{ label }}</div>
-    <div class="au-checkbox-container" v-if="!multiple" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" @click="handleClick">
+    <div class="au-checkbox-container" v-if="!multiple"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @click="handleClick"
+      :style="{
+        cursor: disabled ? 'not-allowed' : 'default'
+      }">
       <span class="au-checkbox-core au-theme-radius" tabindex="0"
       :class="{
         'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue,
@@ -54,10 +61,11 @@
       :style="{
         border: localValue && !disabled ? 'none' : ''
       }">
-        <au-icon v-show="localValue" type="check" size="12px" class="au-checkbox-hook au-theme-font-color--base-12"
+        <au-icon v-show="localValue" type="check" size="12px" class="au-checkbox-hook"
         :class="{
           'au-checkbox-hook-disabled': disabled,
-          'au-theme-font-color--base-6-important': disabled
+          'au-theme-font-color--base-12': !disabled,
+          'au-theme-font-color--base-6': disabled
         }"></au-icon>
       </span>
       <span class="au-checkbox-text"
@@ -97,6 +105,7 @@
       }">{{ checkbox.text }}</span>
     </div>
     <div class="au-form-warnings au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
+    <div class="au-form-warnings au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>
   </div>
 </template>
 <script>
@@ -158,10 +167,6 @@
       }
     },
     methods: {
-      change (e) {
-        this.input() // input first to ensure changes of father comp
-        this.$emit('change', this.localValue, e)
-      },
       handleMouseEnter (index) {
         this.handleHover(true, index)
       },

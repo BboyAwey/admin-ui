@@ -1,13 +1,12 @@
 <style lang="scss">
   @import '../../../style/vars';
   @import '../../../style/size';
+  @import '../../../style/label';
+  @import '../../../style/warnings';
   .au-input {
     display: inline-block;
     width: 198px;
-    .au-input-label {
-      display: inline-block;
-    }
-    .au-input-label-text {
+    .au-form-label {
       margin-bottom: 4px;
       font-size: $normal;
     }
@@ -18,7 +17,6 @@
     .au-input-container {
       position: relative;
       width: 100%;
-      line-height: 32px;
       display: inline-block;
     }
     .au-input-icon {
@@ -32,8 +30,6 @@
     }
     .au-input-core {
       width: 198px;
-      // height: $size-normal;
-      // line-height: 32px;
       width: 100%;
       border-width: 1px;
       border-style: solid;
@@ -75,22 +71,15 @@
       cursor: pointer;
     }
   }
-  .au-input.au-form-warning {
-    .au-input-warning {
-      margin-top: 6px;
-      font-size: $small;
-    }
-  }
 </style>
 <template>
   <div class="au-input">
     <div
-      class="au-input-label-text"
+      class="au-form-label"
       :class="{
         'au-theme-font-color--base-3': !hasWarnings,
         'au-theme-font-color--danger-3': hasWarnings
       }"
-      v-if="label"
       @click.stop="labelClick()">{{ label }}</div>
     <textarea
       v-if="type==='textarea'"
@@ -249,8 +238,8 @@
           :key="index">{{ association }}</li>
       </ul>
     </span>
-    <div class="au-input-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
-    <div class="au-input-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
   </div>
 
 </template>

@@ -1,6 +1,7 @@
 <style lang="scss">
   @import '../../../style/vars';
   @import '../../../style/size';
+  @import '../../../style/sizegap';
   @import '../../../style/label';
   @import '../../../style/warnings';
   .au-input {
@@ -46,17 +47,19 @@
       height: auto;
     }
   }
-  .au-input-associations-container {
+  .au-input-associations-scroller {
     position: absolute;
     z-index: 9990;
-    top: 36px;
+    // top: 36px;
     min-width: 84px;
     width: 100%;
     max-height: 237px;
     padding: 4px 0;
-    overflow-y: auto;
     border-width: 1px;
     border-style: solid;
+    outline: none;
+  }
+  .au-input-associations {
     outline: none;
     & > li {
       height: 32px;
@@ -87,7 +90,7 @@
       :class="{
         'au-theme-radius au-theme-placeholder-color--base-7': true,
         'au-theme-border-color--base-8': !active && !hasWarnings,
-        'au-theme-border-color--info-3': active && !hasWarnings,
+        'au-theme-border-color--primary-3': active && !hasWarnings,
         'au-theme-border-color--danger-3': hasWarnings,
         'au-theme-focus-shadow--primary': !hasWarnings,
         'au-theme-focus-shadow--danger': hasWarnings,
@@ -128,7 +131,7 @@
           [`au-size-${size}`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--info-3': active && !hasWarnings,
+          'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
@@ -161,7 +164,7 @@
         :class="{
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--info-3': active && !hasWarnings,
+          'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
@@ -192,7 +195,7 @@
         :class="{
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--info-3': active && !hasWarnings,
+          'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
@@ -216,27 +219,30 @@
         @keypress="keypress($event)"
         @keydown="keydown($event)"
         ref="core">
-      <ul class="au-input-associations-container"
-        :class="{
-          'au-theme-border-color--base-8': true,
-          'au-theme-shadow-color--level-3': true,
-          'au-theme-background-color--base-12': true,
-          'au-theme-radius': true
-        }"
+      <au-scroller class="au-input-associations-scroller"
         v-show="type !== 'textarea' && associationsShow"
-        ref="associations"
-        tabindex="0"
-        @blur="associationsBlur">
-        <li
-          v-for="(association, index) in associations"
-          @click="selectAssociation(association)"
-          :class="{
-            'au-theme-font-color--base-3': true,
-            'au-theme-background-color--base-10': association === localValue,
-            'au-theme-hover-background-color--base-10': association !== localValue
-          }"
-          :key="index">{{ association }}</li>
-      </ul>
+        :class="`
+          au-theme-border-color--base-8
+          au-theme-shadow--level-3
+          au-theme-background-color--base-12
+          au-theme-radius
+          au-sizegap-${size}
+        `">
+        <ul class="au-input-associations"
+          ref="associations"
+          tabindex="0"
+          @blur="associationsBlur">
+          <li
+            v-for="(association, index) in associations"
+            @click="selectAssociation(association)"
+            :class="{
+              'au-theme-font-color--base-3': true,
+              'au-theme-background-color--primary-5': association === localValue,
+              'au-theme-hover-background-color--base-10': association !== localValue
+            }"
+            :key="index">{{ association }}</li>
+        </ul>
+      </au-scroller>
     </span>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
@@ -247,11 +253,12 @@
   import ValidatorMixin from '../../../helpers/validator-mixin'
   import FormApiMixin from '../../../helpers/form-api-mixin'
   import AuIcon from '../../icon'
+  import AuScroller from '../../scroller'
 
   export default {
     name: 'au-input',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: [AuIcon],
+    components: [AuIcon, AuScroller],
     data () {
       return {
         // is the throttlling on

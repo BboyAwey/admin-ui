@@ -19,6 +19,7 @@ import Upload from './components/upload'
 import Input from './components/input'
 import Checkbox from './components/checkbox'
 import Radio from './components/radio'
+import Select from './components/select'
 
 // add all comps into an array
 const components = [
@@ -35,7 +36,8 @@ const components = [
   Upload,
   Input,
   Checkbox,
-  Radio
+  Radio,
+  Select
 ]
 
 // export comps one by one
@@ -53,7 +55,8 @@ export {
   Upload,
   Input,
   Checkbox,
-  Radio
+  Radio,
+  Select
 }
 
 // export all comps as an object
@@ -71,7 +74,8 @@ const adminUi = {
   Upload,
   Input,
   Checkbox,
-  Radio
+  Radio,
+  Select
 }
 
 adminUi.install = function (Vue, options = {}) {

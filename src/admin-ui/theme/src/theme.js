@@ -104,7 +104,7 @@ export default function (theme) {
     if (theme.colors && typeof theme.colors === 'object') {
       Object.assign(finalTheme.colors, theme.colors)
     } else {
-      throw new Error('Admin UI@ theme.colors should be an object')
+      throw new Error('Admin UI@theme-system@ theme.colors should be an object')
     }
   }
 

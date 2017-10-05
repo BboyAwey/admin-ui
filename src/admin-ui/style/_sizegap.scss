@@ -1,0 +1,14 @@
+@import "./vars";
+
+.au-sizegap-mini {
+  top: $size-mini + 4px;
+}
+.au-sizegap-small {
+  top: $size-small + 4px;
+}
+.au-sizegap-normal {
+  top: $size-normal + 4px;
+}
+.au-sizegap-large {
+  top: $size-large + 4px;
+}

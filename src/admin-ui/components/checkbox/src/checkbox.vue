@@ -104,8 +104,8 @@
         'au-theme-font-color--danger-3': hasWarnings
       }">{{ checkbox.text }}</span>
     </div>
-    <div class="au-form-warnings au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
-    <div class="au-form-warnings au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>
   </div>
 </template>
 <script>

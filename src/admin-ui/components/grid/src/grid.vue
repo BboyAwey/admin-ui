@@ -80,11 +80,8 @@
       }
     },
     mounted () {
-      // if (!hasClass(this.$parent.$el, 'au-grid-container')) {
-      //   throw new Error('Admin UI@<au-grid> should be a child of <au-grid-container>')
-      // }
       if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
-        throw new Error('Admin UI@ Atleast you should pass one width-* prop to grid')
+        throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
       }
       this.setContainer()
       this.getNumber()

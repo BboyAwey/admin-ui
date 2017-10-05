@@ -1,35 +1,31 @@
 <style lang="scss">
-  @import '../style/vars.scss';
+  @import '../../../style/vars';
+  @import '../../../style/size';
+  @import '../../../style/sizegap';
+  @import '../../../style/label';
+  @import '../../../style/warnings';
   .au-select {
     position: relative;
     width: 198px;
     display: inline-block;
   }
-  .au-select-label-text {
-    font-size: $normal;
-    margin-bottom: 8px;
-    color: $grayDarken35;
-  }
   .au-select-core-container {
     position: relative;
-    height: 32px;
     outline: none;
   }
   .au-select-core {
     position: relative;
     display: inline-block;
-    border-radius: 2px;
-    border: 1px solid $grayBrighten5;
     padding: 0 8px;
     padding-right: 26px;
     width: 100%;
-    line-height: 30px;
+    border-width: 1px;
+    border-style: solid;
     word-break: keep-all;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: $fontFamily;
-    color: $grayDarken45;
     font-size: $normal;
     outline: none;
     user-select: none;
@@ -38,110 +34,35 @@
   .au-select-arrow {
     display: inline-block;
     position: absolute;
-    height: 24px;
-    top: 0;
+    height: 18px;
+    top: 50%;
+    margin-top: -9px;
     right: 8px;
-    font-size: 20px;
+    font-size: $large;
   }
-  .au-select:not(.au-form-disabled) .au-select-active {
-    .au-select-core {
-      border-color: $info;
-      box-shadow: 0 0 4px $info;
-    }
-  }
-  .au-select-arrow-active {
-    color: $info;
-  }
-  .au-select-option-container {
+  .au-select-option-scroller {
     z-index: 9990;
-    top: 36px;
     position: absolute;
-    border: 1px solid $grayBrighten5;
-    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
     padding: 4px 0;
     min-width: 84px;
     width: 100%;
     max-height: 237px;
-    overflow-y: auto;
-    box-shadow: $shadowLevel3;
-    background-color: #fff;
+  }
+  .au-select-option {
+    outline: none;
     & > li {
       height: 28px;
       padding: 0 8px;
       line-height: 28px;
       font-size: $normal;
-      color: $grayDarken45;
       word-break: keep-all;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       user-select: none;
       cursor: default;
-    }
-    & > li:not(.selected):hover {
-      background-color: $grayBrighten15;
-      // background-color: $primary;
-      // color: #fff;
-    }
-    & > .disabled {
-      color: $grayBrighten5;
-    }
-    & > .selected {
-      background-color: $primary;
-      color: #fff;
-    }
-  }
-  .au-select.au-form-warning {
-    .au-select-core {
-      border-color:  $danger;
-    }
-
-    .au-select-warning {
-      margin-top: 6px;
-      font-size: $small;
-      color: $danger;
-    }
-    .au-select-arrow-active {
-      color: $danger;
-    }
-  }
-  .au-select.au-form-warning:not(.disabled) .au-select-active {
-    .au-select-core {
-      border-color:  $danger;
-      box-shadow: 0 0 4px  $danger;
-    }
-  }
-  .au-select.au-form-small {
-    .au-select-core-container {
-      height: 26px;
-    }
-    .au-select-core {
-      height: 26px;
-      line-height: 24px;
-    }
-    .au-select-option-container {
-      top: 28px;
-      li {
-        height: 22px;
-        padding: 0 8px;
-        line-height: 22px;
-        font-size: $small;
-      }
-    }
-  }
-  .au-form-disabled .au-select-core, .au-form-disabled .au-select-label-text {
-    cursor: not-allowed;
-  }
-  .au-form-disabled .au-select-core {
-    background-color: $grayBrighten20;
-  }
-  .au-select-search-input {
-    position: relative;
-    .au-select-search-input-icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      margin-top: -9.5px;
     }
   }
   .au-select-multiple {
@@ -158,38 +79,69 @@
   .au-select-close-icon {
     cursor: pointer;
   }
-  .au-select-placeholder {
-    color: $grayBrighten5;
-  }
 </style>
 <template>
-  <div class="au-select" :class="classes">
-    <div class="au-select-label-text" @click="labelClick" v-if="label" @click.stop="()=>{}">{{ label }}</div>
-    <div class="au-select-core-container" :class="{ 'au-select-active': active}">
-      <div id="test" class="au-select-core" ref="core" tabindex="0" @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur">
-        <ul class="au-select-multiple">
-          <li v-show="!selectedOptions.length" class="au-select-placeholder">{{ placeholder }}</span></li>
+  <div class="au-select au-theme-font-color--base-3">
+    <div class="au-form-label" :class="{
+      'au-theme-font-color--danger-3': hasWarnings
+    }" :style="{
+      cursor: disabled ? 'not-allowed' : 'default'
+    }" @click="labelClick" v-if="label" @click.stop="()=>{}">{{ label }}</div>
+    <div :class="`au-select-core-container au-size-${size}`" ref="coreContainer">
+      <div
+        class="au-select-core au-theme-radius"
+        ref="core"
+        tabindex="0"
+        @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
+        :class="{
+          [`au-size-${size}`]: true,
+          'au-theme-background-color--base-12': !disabled,
+          'au-theme-background-color--base-9': disabled,
+          'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
+          'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
+          'au-theme-border-color--danger-3': hasWarnings,
+          'au-theme-shadow--primary': !disabled && active,
+          'au-theme-font-color--danger-3': hasWarnings
+        }" :style="{
+          cursor: disabled ? 'not-allowed' : 'default'
+        }">
+        <ul class="au-select-multiple" ref="selectMultiple">
+          <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</span></li>
           <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
-          <li v-else v-for="(option, index) in selectedOptions">
+          <li v-else v-for="(option, i) in selectedOptions" :key="i">
             <span>{{ option.text }}</span>
-            <span @click.stop="deleteSelectedOption(index)" class="au-select-close-icon">
-              <au-icon type="ion-android-close"></au-icon>
+            <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
+              <au-icon type="times"></au-icon>
             </span>
           </li>
         </ul>
-        <span  class="au-select-arrow" :class="optionDisplay ? 'au-select-arrow-active' : ''">
-          <au-icon type="ion-android-arrow-dropdown"></au-icon>
-        </span>
+        <au-icon class="au-select-arrow" type="caret-down"
+        :class="{
+          'au-theme-font-color--primary-3': !disabled && active
+        }"></au-icon>
       </div>
-      <ul class="au-select-option-container" v-show="optionDisplay" ref="options" tabindex="0" @blur="optionsBlur">
-        <li
-          v-for="option in options"
-          :class="{'selected': multiple ? localValue.includes(option.value) : (localValue === option.value)}"
-          @click.stop="select(option, $event)">{{ option.text }}</li>
-      </ul>
+      <au-scroller class="au-select-option-scroller"
+        ref="selectScroller"
+        :class="`
+        au-sizegap-${size}
+        au-select-option
+        au-theme-background-color--base-12
+        au-theme-border-color--base-8
+        au-theme-shadow--level-3
+        au-theme-radius`" v-show="optionDisplay">
+        <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
+          <li
+            v-for="(option, i) in options" :key="i"
+            :class="{
+              'au-theme-background-color--primary-5': isSelected(option.value),
+              'au-theme-hover-background-color--base-10': !isSelected(option.value)
+            }"
+            @click.stop="select(option, $event)">{{ option.text }}</li>
+        </ul>
+      </au-scroller>
     </div>
-    <div class="au-select-warning" v-for="warning in warnings">{{ warning }}</div>
-    <div class="au-select-warning" v-for="warning in localWarnings">{{ warning }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="i">{{ warning }}</div>
+    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in localWarnings" :key="i">{{ warning }}</div>
   </div>
 </template>
 <script>
@@ -201,24 +153,23 @@
   // Modifier: lianghao
   // email: lianghao@rongcapital.cn
 
-  import localValidatorMixin from '../helpers/local-validator-mixin'
-  import standardFormApiMixin from '../helpers/standard-form-api-mixin'
-  import { getElementSize } from '../helpers/common'
-  import auIcon from './au-icon'
-  import auInput from './au-input'
+  import ValidatorMixin from '../../../helpers/validator-mixin'
+  import FormApiMixin from '../../../helpers/form-api-mixin'
+  import { getElementSize } from '../../../helpers/dom'
+  import AuIcon from '../../icon'
+  import AuInput from '../../input'
+  import AuScroller from '../../scroller'
+
   export default {
     name: 'au-select',
-    mixins: [localValidatorMixin, standardFormApiMixin],
-    components: {
-      auIcon,
-      auInput
-    },
+    mixins: [ValidatorMixin, FormApiMixin],
+    components: {AuIcon, AuInput, AuScroller},
     created () {
       this.localValueToSelectedOptions()
     },
     mounted () {
       if (this.multiple && !(this.value instanceof Array)) {
-        console.error('au-select: value should be Array if multiple selecting allowed.')
+        console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
       }
       this.reposPopup()
     },
@@ -253,7 +204,6 @@
       options: {
         deep: true,
         handler (v) {
-          console.log(v)
           this.localValueToSelectedOptions()
         }
       }
@@ -262,11 +212,12 @@
       deleteSelectedOption (index) {
         this.selectedOptions.splice(index, 1)
         this.localValue.splice(index, 1)
+        this.$nextTick(this.resize)
       },
       labelClick () {
         if (this.disabled) return false
+        this.$refs.core.click()
         this.$refs.core.focus()
-        this.optionDisplay = true
       },
       coreClick () {
         if (this.disabled) return false
@@ -298,6 +249,7 @@
           } else {
             this.localValue.splice(this.localValue.indexOf(option.value), 1)
           }
+          this.$nextTick(this.resize)
         } else {
           if (this.localValue !== option.value) {
             this.selectedOptions = [option]
@@ -308,16 +260,30 @@
         this.active = false
         if (!silent) this.$emit('select', option, e)
       },
+      resize () {
+        let height = getElementSize(this.$refs.selectMultiple).height
+        this.$refs.coreContainer.style.height = height + 'px'
+        this.$refs.core.style.height = height + 'px'
+        this.$refs.selectScroller.$el.style.top = height + 2 + 'px'
+      },
       localValueToSelectedOptions () {
         let {options, localValue} = this
         let res = []
-        for (let i = 0; i < options.length; i++) {
-          if (localValue instanceof Array && localValue.includes(options[i].value)) {
-            res.push(options[i])
-          } else if (localValue === options[i].value) {
-            res.push(options[i])
-            break
+        let findSelectedOptionByValue = (value, options) => {
+          for (let i = 0; i < options.length; i++) {
+            if (options[i].value === value) {
+              return options[i]
+            }
           }
+        }
+        if (localValue instanceof Array) {
+          for (let i = 0; i < localValue.length; i++) {
+            let option = findSelectedOptionByValue(localValue[i], options)
+            if (option) res.push(option)
+          }
+        } else {
+          let option = findSelectedOptionByValue(localValue, options)
+          if (option) res.push(option)
         }
         this.selectedOptions = res
       },
@@ -327,6 +293,9 @@
           let options = this.$refs.options
           options.style.top = coreHeight + 2 + 'px'
         }
+      },
+      isSelected (value) {
+        return this.multiple ? this.localValue.includes(value) : (this.localValue === value)
       }
     }
   }

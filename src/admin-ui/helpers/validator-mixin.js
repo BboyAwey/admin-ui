@@ -45,7 +45,7 @@ export default {
       return false
     },
     hasWarnings () {
-      return this.hasLocalWarnings || !!(this.warnings && this.warnings.length)
+      return this.hasLocalWarnings || this.warnings instanceof Array
     }
   },
   methods: {

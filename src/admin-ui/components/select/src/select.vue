@@ -6,7 +6,7 @@
   @import '../../../style/warnings';
   .au-select {
     position: relative;
-    width: 198px;
+    width: auto;
     display: inline-block;
   }
   .au-select-core-container {

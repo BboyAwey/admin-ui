@@ -74,6 +74,11 @@ export default new Router({
       path: '/select',
       name: 'select',
       component: (resolve) => require(['../examples/select.vue'], resolve)
+    },
+    {
+      path: '/cascading',
+      name: 'cascading',
+      component: (resolve) => require(['../examples/cascading.vue'], resolve)
     }
   ]
 })

@@ -82,6 +82,10 @@ export default [
       {
         'text': '下拉选择',
         'url': '/select'
+      },
+      {
+        'text': '级联下拉',
+        'url': '/cascading'
       }
     ]
   }

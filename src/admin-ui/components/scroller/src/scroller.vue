@@ -43,15 +43,15 @@
 </style>
 <template>
   <div class="au-scroller"
-    @mouseover="handleMouseover"
-    @mouseout="handleMouseout"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
     ref="monitor">
     <div class="au-scroller-content" ref="content" :style="{ top: contentTop + 'px' }" :class="{ 'au-no-select': onDrag }">
       <slot></slot>
     </div>
     <div class="au-scroller-bar-container"
-      @mouseover="handleBarMouseover"
-      @mouseout="handleBarMouseout"
+      @mouseenter="handleBarMouseenter"
+      @mouseleave="handleBarMouseleave"
       v-show="needScroll"
       ref="barContainer">
       <div class="au-scroller-bar au-theme-background-color--base-1" ref="bar" @click="handleBarClick"></div>
@@ -140,34 +140,36 @@
           this.contentTop = 0
         } else {
           this.needScroll = true
-          this.coreHeight = monitor * monitor / content
+          let barHeight = getElementSize(this.$refs.barContainer).height
+          this.coreHeight = monitor * barHeight / content
         }
       },
-      setBarPos (monitor) {
+      setBarHeight (monitor) {
         this.$refs.barContainer.style.height = monitor - 20 + 'px'
       },
-      handleMouseover () {
+      handleMouseenter () {
         this.$refs.bar.style.opacity = '.3'
         this.$refs.core.style.opacity = '.5'
         let monitorHeight = getElementSize(this.$refs.monitor).height
+        this.setBarHeight(monitorHeight)
         this.calcCoreHeight(
           monitorHeight,
-          getElementSize(this.$refs.content).height
+          getElementSize(this.$refs.content).height,
+          getElementSize(this.$refs.bar).height
         )
-        this.setBarPos(monitorHeight)
       },
-      handleMouseout () {
+      handleMouseleave () {
         if (!this.onDrag) {
           this.$refs.bar.style.opacity = '0'
           this.$refs.core.style.opacity = '0'
         }
       },
-      handleBarMouseover () {
+      handleBarMouseenter () {
         this.onOver = true
         this.$refs.bar.style.width = '12px'
         this.$refs.core.style.width = '12px'
       },
-      handleBarMouseout () {
+      handleBarMouseleave () {
         this.onOver = false
         if (!this.onDrag) {
           this.$refs.bar.style.width = '6px'
@@ -212,6 +214,7 @@
         let contentHeight = getElementSize(this.$refs.content).height
 
         let scrollTopMax = barHeight - coreHeight
+        console.log(barHeight, coreHeight)
         let contentTopMax = monitorHeight - contentHeight
 
         let scrollTop = v
@@ -221,8 +224,7 @@
 
         let contentTop = scrollTop * contentHeight / barHeight * -1
         contentTop = contentTop >= 0 ? 0 : (contentTop <= contentTopMax ? contentTopMax : contentTop)
-
-        this.scrollTop = scrollTop
+        this.scrollTop = scrollTop <= 0 ? 0 : scrollTop
         this.contentTop = scrollTop >= scrollTopMax ? contentTopMax : contentTop
       },
       handlerResize () {

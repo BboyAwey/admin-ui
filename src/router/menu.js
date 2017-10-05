@@ -86,6 +86,10 @@ export default [
       {
         'text': '级联下拉',
         'url': '/cascading'
+      },
+      {
+        'text': '日期选择',
+        'url': '/datepicker'
       }
     ]
   }

@@ -27,6 +27,9 @@
       position: relative;
       float: left;
       height: 100%;
+      & > div {
+        height: 100%;
+      }
       // min-width: 200px;
       // width: 15%;
       // padding: 16px 0;
@@ -77,9 +80,9 @@
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <au-scroller class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
+      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
         <slot name="sidebar"></slot>
-      </au-scroller>
+      </div>
       <au-scroller class="au-page-content" ref="content">
         <div class="au-page-content-main" ref="contentMain">
           <slot name="content"></slot>

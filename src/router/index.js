@@ -79,6 +79,11 @@ export default new Router({
       path: '/cascading',
       name: 'cascading',
       component: (resolve) => require(['../examples/cascading.vue'], resolve)
+    },
+    {
+      path: '/datepicker',
+      name: 'datepicker',
+      component: (resolve) => require(['../examples/datepicker.vue'], resolve)
     }
   ]
 })

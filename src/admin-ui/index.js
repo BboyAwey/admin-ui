@@ -21,6 +21,7 @@ import Checkbox from './components/checkbox'
 import Radio from './components/radio'
 import Select from './components/select'
 import Cascading from './components/cascading'
+import Datepicker from './components/datepicker'
 
 // add all comps into an array
 const components = [
@@ -39,7 +40,8 @@ const components = [
   Checkbox,
   Radio,
   Select,
-  Cascading
+  Cascading,
+  Datepicker
 ]
 
 // export comps one by one
@@ -59,7 +61,8 @@ export {
   Checkbox,
   Radio,
   Select,
-  Cascading
+  Cascading,
+  Datepicker
 }
 
 // export all comps as an object
@@ -79,7 +82,8 @@ const adminUi = {
   Checkbox,
   Radio,
   Select,
-  Cascading
+  Cascading,
+  Datepicker
 }
 
 adminUi.install = function (Vue, options = {}) {

@@ -21,7 +21,9 @@
         <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
       </div>
       <div slot="content">
-        <router-view></router-view>
+        <au-scroller style="height: 100%;">
+          <router-view></router-view>
+        </au-scroller>
       </div>
     </au-frame>
   </div>

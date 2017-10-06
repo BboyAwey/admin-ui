@@ -60,7 +60,7 @@ export default [
         'url': '/panel'
       },
       {
-        'text': '图片预览器',
+        'text': '图片预览',
         'url': '/previewer'
       },
       {
@@ -90,6 +90,10 @@ export default [
       {
         'text': '日期选择',
         'url': '/datepicker'
+      },
+      {
+        'text': '时间选择',
+        'url': '/timepicker'
       }
     ]
   }

@@ -22,6 +22,7 @@ import Radio from './components/radio'
 import Select from './components/select'
 import Cascading from './components/cascading'
 import Datepicker from './components/datepicker'
+import Timepicker from './components/timepicker'
 
 // add all comps into an array
 const components = [
@@ -41,7 +42,8 @@ const components = [
   Radio,
   Select,
   Cascading,
-  Datepicker
+  Datepicker,
+  Timepicker
 ]
 
 // export comps one by one
@@ -62,7 +64,8 @@ export {
   Radio,
   Select,
   Cascading,
-  Datepicker
+  Datepicker,
+  Timepicker
 }
 
 // export all comps as an object
@@ -83,7 +86,8 @@ const adminUi = {
   Radio,
   Select,
   Cascading,
-  Datepicker
+  Datepicker,
+  Timepicker
 }
 
 adminUi.install = function (Vue, options = {}) {

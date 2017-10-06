@@ -112,6 +112,8 @@
     <div class="au-form-label" :class="{
       'au-theme-font-color--base-3': disabled || !hasWarnings,
       'au-theme-font-color--danger-3': hasWarnings
+    }" :style="{
+      cursor: disabled ? 'not-allowed' : 'default'
     }" v-if="label" @click="labelClick">{{ label }}</div>
     <div class="au-datepicker-container">
       <au-input

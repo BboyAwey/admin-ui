@@ -1,43 +1,41 @@
 <style lang="scss">
-  @import '../style/vars';
-  .admin-datepicker {
+  @import '../../../style/vars';
+  @import '../../../style/label';
+  @import '../../../style/sizegap';
+  .au-datepicker {
     display: inline-block;
     position: relative;
     width: 198px;
   }
-  .admin-datepicker-label-text {
+  .au-datepicker-label-text {
     margin-bottom: 8px;
     font-size: $normal;
-    color: $grayDarken35;
   }
-  .admin-datepicker-container {
+  .au-datepicker-container {
     position: relative;
     width: 100%;
   }
-  .admin-datepicker-input {
+  .au-datepicker-input {
     width: 100%;
   }
-  .admin-datepicker-popup-container {
+  .au-datepicker-popup-container {
     position: absolute;
     left: 0;
     top: 34px;
     width: 276px;
     z-index: 9990;
     font-size: $small;
-    box-shadow: $shadowLevel3;
     user-select: none;
     outline: none;
     td span {
       cursor: default;
     }
   }
-  .admin-datepicker-dates-header {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    background-color: $primary;
-    color: #fff;
+  .au-datepicker-dates-header {
+    // border-top-left-radius: 2px;
+    // border-top-right-radius: 2px;
   }
-  .admin-datepicker-fastmoves {
+  .au-datepicker-fastmoves {
     padding-top: 12px;
     font-size: $normal;
     cursor: default;
@@ -57,17 +55,21 @@
       padding-right: 12px;
     }
     .simu {
-      transform: rotate(180deg);
-      text-align: right;
+      font-size: 20px;
+    }
+    .simu2 {
+      position: relative;
+      top: -2px;
     }
   }
-  .admin-datepicker-fastmove {
+  span.au-datepicker-fastmove {
     display: inline-block;
     width: 18px;
     height: 18px;
     line-height: 18px;
+    cursor: pointer !important;
   }
-  .admin-datepicker-week {
+  .au-datepicker-week {
     width: 100%;
     td {
       text-align: center;
@@ -75,18 +77,17 @@
       vertical-align: middle;
     }
   }
-  .admin-datepicker-dates-body {
+  .au-datepicker-dates-body {
     padding: 4px;
-    border-left: 1px solid $grayBrighten5;
-    border-right: 1px solid $grayBrighten5;
-    border-bottom: 1px solid $grayBrighten5;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    background-color: #fff;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
   }
-  .admin-datepicker-dates-table {
+  .au-datepicker-dates-table {
     width: 100%;
-    color: $grayDarken45;
     td {
       position: relative;
       width: 38px;
@@ -94,113 +95,76 @@
       text-align: center;
       vertical-align: middle;
     }
-    td span {
+    td > span {
       display: inline-block;
       width: 32px;
       height: 32px;
       box-sizing: border-box;
       border-radius: 100%;
       border: 1px solid transparent;
-      line-height: 32px;
-    }
-    td:hover span {
-      border-color: $primary;
-    }
-    td.selected span {
-      background-color: $primary;
-    }
-    .not-curr-month {
-      color: $gray;
-      size: $small;
-    }
-    .today {
-      color: $primary;
-      size: $normal;
-    }
-    .selected {
-      size: $normal;
-      color: #fff;
-    }
-  }
-  /*hack input-icon*/
-  .active .admin-input-icon {
-    color: $primary;
-  }
-  /*warning*/
-  .admin-datepicker.warning {
-    .admin-datepicker-core {
-      border-color: $danger;
-    }
-    .admin-datepicker-core:focus {
-      border-color: $danger;
-      box-shadow: 0 0 4px $danger;
-    }
-    .admin-datepicker-warning {
-      margin-top: 6px;
-      font-size: $small;
-      color: $danger;
-    }
-  }
-  .admin-datepicker.admin-form-small {
-    .admin-datepicker-popup-container {
-      top: 30px;
-    }
-  }
-  .admin-datepicker.admin-form-disabled {
-    .admin-datepicker-label-text {
-      cursor: not-allowed;
+      line-height: 30px;
+      cursor: pointer;
     }
   }
 </style>
 <template>
-  <div class="admin-datepicker" :class="classes">
-    <div class="admin-datepicker-label-text" v-if="label" @click="labelClick">{{ label }}</div>
-    <div class="admin-datepicker-container">
-      <admin-input
-        class="admin-datepicker-input"
+  <div class="au-datepicker">
+    <div class="au-form-label" :class="{
+      'au-theme-font-color--base-3': disabled || !hasWarnings,
+      'au-theme-font-color--danger-3': hasWarnings
+    }" v-if="label" @click="labelClick">{{ label }}</div>
+    <div class="au-datepicker-container">
+      <au-input
+        class="au-datepicker-input"
         v-model="inputValue"
         @change="changeInputValue(inputValue, $event)"
         :warnings="calcedWarnings"
-        iconClass="ion-calendar"
+        icon="calendar"
         @focus="coreFocus"
         @blur="coreBlur"
-        :small="small"
+        :size="size"
         :disabled="disabled"
         :placeholder="placeholder"
         ref="core"/>
       <div
-        class="admin-datepicker-popup-container"
+        class="au-datepicker-popup-container au-theme-shadow--level-3"
+        :class="`au-sizegap-${size}`"
         v-show="popup"
         @blur="popupBlur"
         tabindex="0"
         ref="popup">
-        <div class="admin-datepicker-dates-header">
-          <div class="admin-datepicker-fastmoves">
+        <div class="
+          au-datepicker-dates-header
+          au-theme-font-color--base-12
+          au-theme-top-left-radius
+          au-theme-top-right-radius
+          au-theme-background-color--primary-3">
+          <div class="au-datepicker-fastmoves">
             <table>
               <tr>
                 <td>
                   <span
-                    class="admin-datepicker-fastmove"
-                    @click="step(true)"><admin-icon type="ion-ios-rewind" color="#fff"></admin-icon></span>
+                    class="au-datepicker-fastmove simu2"
+                    @click="step(true)"><au-icon type="backward"></au-icon></span>
                   <span
-                    class="admin-datepicker-fastmove simu"
-                    @click="step(false)"><admin-icon type="ion-ios-play" color="#fff"></admin-icon></span>
+                    class="au-datepicker-fastmove simu"
+                    @click="step(false)"><au-icon type="caret-left"></au-icon></span>
                 </td>
                 <td>
                   {{ renderedDateObj.month }}月&nbsp;&nbsp;{{ renderedDateObj.year }}
                 </td>
                 <td>
                   <span
-                    class="admin-datepicker-fastmove"
-                    @click="step(false, true)"><admin-icon type="ion-ios-play" color="#fff"></admin-icon></span>
+                    class="au-datepicker-fastmove simu"
+                    @click="step(false, true)"><au-icon type="caret-right"></au-icon></span>
                   <span
-                    class="admin-datepicker-fastmove"
-                    @click="step(true, true)"><admin-icon type="ion-ios-fastforward" color="#fff"></admin-icon></span>
+                    class="au-datepicker-fastmove simu2"
+                    @click="step(true, true)"><au-icon type="forward"></au-icon></span>
                 </td>
               </tr>
             </table>
           </div>
-          <table class="admin-datepicker-week">
+          <table class="au-datepicker-week">
             <tr>
               <td>日</td>
               <td>一</td>
@@ -212,14 +176,22 @@
             </tr>
           </table>
         </div>
-        <div class="admin-datepicker-dates-body">
-          <table class="admin-datepicker-dates-table">
-            <tr v-for="row in dates">
+        <div class="
+          au-datepicker-dates-body
+          au-theme-border-color--base-8
+          au-theme-background-color--base-12">
+          <table class="au-datepicker-dates-table">
+            <tr v-for="(row, i) in dates" :key="i">
               <td
-                v-for="date in row"
-                @click="selectDate(date)"
-                :class="tdClass(date)">
-                <span>{{ isToday(date) ? '今天' : date.date }}</span>
+                v-for="(date, j) in row"
+                :key="j">
+                <span :class="{
+                  'au-theme-hover-border-color--primary-3': !isSelected(date),
+                  'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
+                  'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
+                  'au-theme-font-color--base-6': renderedDateObj.month !== date.month,
+                  'au-theme-font-color--primary-3': isToday(date)&&!isSelected(date),
+                }" @click="selectDate(date)">{{ isToday(date) ? '今天' : date.date }}</span>
               </td>
             </tr>
           </table>
@@ -229,23 +201,16 @@
   </div>
 </template>
 <script>
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier:
-
-  import LocalValidatorMixin from '../helpers/local-validator-mixin'
-  import StandardFormApiMixin from '../helpers/standard-form-api-mixin'
-  import { isEmptyString } from '../helpers/common'
-  import AdminInput from './admin-input'
-  import AdminIcon from './admin-icon'
+  import ValidatorMixin from '../../../helpers/validator-mixin'
+  import FormApiMixin from '../../../helpers/form-api-mixin'
+  import { isEmptyString } from '../../../helpers/utils'
+  import AuInput from '../../input'
+  import AuIcon from '../../icon'
 
   export default {
-    name: 'admin-datepicker',
-    mixins: [LocalValidatorMixin, StandardFormApiMixin],
-    components: { AdminInput, AdminIcon },
+    name: 'au-datepicker',
+    mixins: [ValidatorMixin, FormApiMixin],
+    components: { AuInput, AuIcon },
     data () {
       return {
         dateObj: {},
@@ -462,17 +427,6 @@
           if (dateObj[k].toString() !== currObj[k].toString()) return false
         }
         return true
-      },
-      tdClass (dateObj) {
-        let res = ''
-        res += this.isSelected(dateObj) ? 'selected ' : ''
-        res += this.isToday(dateObj) ? 'today ' : ''
-        if (isEmptyString(this.inputValue)) {
-          res += this.renderedDateObj.month !== dateObj.month ? 'not-curr-month' : ''
-        } else {
-          res += this.renderedDateObj.month !== dateObj.month ? 'not-curr-month' : ''
-        }
-        return res
       },
       selectDate (dateObj) {
         this.changeInputValue(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)

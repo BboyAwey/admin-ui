@@ -79,6 +79,7 @@
   <div class="au-input">
     <div
       class="au-form-label"
+      v-if="label"
       :class="{
         'au-theme-font-color--base-3': !hasWarnings,
         'au-theme-font-color--danger-3': hasWarnings
@@ -114,8 +115,8 @@
       <au-icon
         v-if="icon"
         class="au-input-icon"
+        :type="icon"
         :class="{
-          [icon]: true,
           'au-theme-font-color--base-3': !active,
           'au-theme-font-color--primary-3': active && !hasWarnings,
           'au-theme-font-color--danger-3': hasWarnings,

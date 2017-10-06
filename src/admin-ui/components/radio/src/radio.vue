@@ -38,7 +38,7 @@
 </style>
 <template>
   <div class="au-radio">
-    <div class="au-form-label"
+    <div class="au-form-label" v-if="label"
       :class="{
         'au-theme-font-color--danger-3': hasWarnings,
         'au-theme-font-color--base-3': !hasWarnings,

@@ -88,10 +88,26 @@ const genRadiusStyle = function (borderRadius) {
   let res = ''
   if (borderRadius) {
     res += `.au-theme-radius{border-radius:${radius}px}`
+    res += `.au-theme-top-left-radius{border-top-left-radius:${radius}px}`
+    res += `.au-theme-top-right-radius{border-top-right-radius:${radius}px}`
+    res += `.au-theme-bottom-left-radius{border-bottom-left-radius:${radius}px}`
+    res += `.au-theme-bottom-right-radius{border-bottom-right-radius:${radius}px}`
     res += `.au-theme-radius--important{border-radius:${radius}px !important}`
+    res += `.au-theme-top-left-radius--important{border-top-left-radius:${radius}px !important}`
+    res += `.au-theme-top-right-radius--important{border-top-right-radius:${radius}px !important}`
+    res += `.au-theme-bottom-left-radius--important{border-bottom-left-radius:${radius}px !important}`
+    res += `.au-theme-bottom-right-radius--important{border-bottom-right-radius:${radius}px !important}`
     pseudos.forEach(pseudo => {
       res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px}`
       res += `.au-theme-${pseudo}-radius-important:${pseudo}{border-radius:${radius}px !important}`
+      res += `.au-theme-${pseudo}-top-left-radius:${pseudo}{border-top-left-radius:${radius}pxj}`
+      res += `.au-theme-${pseudo}-top-left-radius--important:${pseudo}{border-top-left-radius:${radius}px !important}`
+      res += `.au-theme-${pseudo}-top-right-radius:${pseudo}{border-top-right-radius:${radius}px}`
+      res += `.au-theme-${pseudo}-top-right-radius--important:${pseudo}{border-top-right-radius:${radius}px !important}`
+      res += `.au-theme-${pseudo}-bottom-left-radius:${pseudo}{border-bottom-left-radius:${radius}px}`
+      res += `.au-theme-${pseudo}-bottom-left-radius--important:${pseudo}{border-bottom-left-radius:${radius}px !important}`
+      res += `.au-theme-${pseudo}-bottom-right-radius:${pseudo}{border-bottom-right-radius:${radius}px}`
+      res += `.au-theme-${pseudo}-bottom-right-radius--important:${pseudo}{border-bottom-right-radius:${radius}px !important}`
     })
   }
   return res

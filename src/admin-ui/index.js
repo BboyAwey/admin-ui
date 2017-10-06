@@ -23,6 +23,7 @@ import Select from './components/select'
 import Cascading from './components/cascading'
 import Datepicker from './components/datepicker'
 import Timepicker from './components/timepicker'
+import Toast from './components/toast'
 
 // add all comps into an array
 const components = [
@@ -43,7 +44,8 @@ const components = [
   Select,
   Cascading,
   Datepicker,
-  Timepicker
+  Timepicker,
+  Toast
 ]
 
 // export comps one by one
@@ -65,7 +67,8 @@ export {
   Select,
   Cascading,
   Datepicker,
-  Timepicker
+  Timepicker,
+  Toast
 }
 
 // export all comps as an object
@@ -87,7 +90,8 @@ const adminUi = {
   Select,
   Cascading,
   Datepicker,
-  Timepicker
+  Timepicker,
+  Toast
 }
 
 adminUi.install = function (Vue, options = {}) {
@@ -99,7 +103,7 @@ adminUi.install = function (Vue, options = {}) {
   // Vue.prototype.$alert = AdminMessageBox.alert
   // Vue.prototype.$confirm = AdminMessageBox.confirm
   // Vue.prototype.$prompt = AdminMessageBox.prompt
-  // Vue.prototype.$toast = AdminToast
+  Vue.prototype.$toast = Toast
 }
 
 // add direvtives installing function

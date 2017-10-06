@@ -89,6 +89,11 @@ export default new Router({
       path: '/timepicker',
       name: 'timepicker',
       component: (resolve) => require(['../examples/timepicker.vue'], resolve)
+    },
+    {
+      path: '/toast',
+      name: 'toast',
+      component: (resolve) => require(['../examples/toast.vue'], resolve)
     }
   ]
 })

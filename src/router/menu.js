@@ -94,6 +94,10 @@ export default [
       {
         'text': '时间选择',
         'url': '/timepicker'
+      },
+      {
+        'text': '提示信息',
+        'url': '/toast'
       }
     ]
   }

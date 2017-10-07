@@ -5,10 +5,7 @@
       padding-bottom: 4px;
     }
     .au-upload-button-icon {
-      position: relative;
-      // top: 1px;
       margin-right: 4px;
-      font-size: 16px;
     }
     .au-upload-button-text {
       position: relative;
@@ -156,8 +153,8 @@
       :multiple="multiple"
       :disabled="disabled"
       @change="loadFiles($event)"/>
-    <au-button type="primary" class="au-upload-button au-plain" v-show="showUploadButton" :disabled="disabled" @click="uploadButtonClickHandler">
-      <au-icon class="au-upload-button-icon" type="ion-ios-upload-outline" />
+    <au-button :type="buttonType" :size="buttonSize" :plain="buttonPlain" class="au-upload-button au-plain" v-show="showUploadButton" :disabled="disabled" @click="uploadButtonClickHandler">
+      <au-icon class="au-upload-button-icon" type="upload" />
       <span class="au-upload-button-text">{{ buttonText }}</span>
     </au-button>
     <ul class="au-upload-file-list" :class="{'au-upload-file-inline-list': listType === 'inline' }" v-show="showFileList">

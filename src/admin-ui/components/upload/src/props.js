@@ -4,6 +4,14 @@ export default {
     buttonText: {
       default: '上传文件'
     },
+    // button props
+    buttonSize: String,
+    buttonType: {
+      default: 'primary'
+    },
+    buttonPlain: Boolean,
+    disabled: Boolean,
+
     showUploadButton: {
       default: true
     },
@@ -14,9 +22,6 @@ export default {
     listType: {
       type: String,
       default: 'block'
-    },
-    disabled: {
-      default: false
     },
     canRemove: {
       default: true

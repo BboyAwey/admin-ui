@@ -24,6 +24,7 @@ import Cascading from './components/cascading'
 import Datepicker from './components/datepicker'
 import Timepicker from './components/timepicker'
 import Toast from './components/toast'
+import Modal from './components/modal'
 
 // add all comps into an array
 const components = [
@@ -45,7 +46,8 @@ const components = [
   Cascading,
   Datepicker,
   Timepicker,
-  Toast
+  Toast,
+  Modal
 ]
 
 // export comps one by one
@@ -68,7 +70,8 @@ export {
   Cascading,
   Datepicker,
   Timepicker,
-  Toast
+  Toast,
+  Modal
 }
 
 // export all comps as an object
@@ -91,7 +94,8 @@ const adminUi = {
   Cascading,
   Datepicker,
   Timepicker,
-  Toast
+  Toast,
+  Modal
 }
 
 adminUi.install = function (Vue, options = {}) {

@@ -94,6 +94,11 @@ export default new Router({
       path: '/toast',
       name: 'toast',
       component: (resolve) => require(['../examples/toast.vue'], resolve)
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      component: (resolve) => require(['../examples/modal.vue'], resolve)
     }
   ]
 })

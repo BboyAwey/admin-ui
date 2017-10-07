@@ -98,6 +98,10 @@ export default [
       {
         'text': '提示信息',
         'url': '/toast'
+      },
+      {
+        'text': '模态框',
+        'url': '/modal'
       }
     ]
   }

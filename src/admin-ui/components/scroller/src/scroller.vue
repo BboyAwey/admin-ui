@@ -115,7 +115,6 @@
     },
     watch: {
       scrollTop (v) {
-        console.log(v)
         if (this.contentTop !== v * -1) this.setContentTop(v)
       },
       contentTop (v) {

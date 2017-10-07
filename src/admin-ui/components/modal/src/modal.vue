@@ -42,7 +42,7 @@
     padding-top: 12px;
     text-align: right;
     // height: 44px;
-    overflow: hidden;
+    // overflow: hidden;
   }
   .au-modal-button:not(:last-child) {
     margin-right: 8px;
@@ -107,7 +107,7 @@
         type: String
       },
       buttons: {
-        type: [Object, Array]
+        type: Array
       },
       width: {
         type: [String, Number]
@@ -141,7 +141,7 @@
       buttonList () {
         let buttons = this.buttons
         let buttonList = []
-        if (buttons instanceof Array) { // if array, multipal buttons
+        if (buttons instanceof Array) {
           buttons.forEach(button => {
             if (typeof button === 'string') {
               if (this.builtInButtons[button]) buttonList.push(this.builtInButtons[button])
@@ -149,8 +149,6 @@
               buttonList.push(button)
             }
           })
-        } else { // if object，single button
-          buttonList.push(buttons)
         }
         return buttonList
       },

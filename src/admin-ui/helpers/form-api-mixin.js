@@ -40,6 +40,7 @@ export default {
       this.$emit('focus', this.localValue, e)
     },
     blur (e) {
+      if (this.validateOnBlur) this.validate()
       this.$emit('blur', this.localValue, e)
     }
   }

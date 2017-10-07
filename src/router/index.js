@@ -99,6 +99,11 @@ export default new Router({
       path: '/modal',
       name: 'modal',
       component: (resolve) => require(['../examples/modal.vue'], resolve)
+    },
+    {
+      path: '/message-box',
+      name: 'message-box',
+      component: (resolve) => require(['../examples/message-box.vue'], resolve)
     }
   ]
 })

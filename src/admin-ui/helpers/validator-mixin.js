@@ -14,11 +14,13 @@ export default {
     //   warning: '',
     //   async: false
     // }]
-    warnings: Array
+    warnings: Array,
+    validateOnBlur: Boolean
   },
   watch: {
     value: {
       handler: function () {
+        if (this.validateOnBlur) return
         if (this.validators && this.validators.length) {
           if (this.throttlling) {
             if (this.clock) {

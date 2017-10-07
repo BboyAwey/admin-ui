@@ -1,6 +1,6 @@
 <style lang="scss">
   .au-scroller {
-    position: relative;
+    // position: relative;
     overflow: hidden;
   }
   .au-scroller-content {
@@ -71,6 +71,7 @@
   export default {
     name: 'au-scroller',
     mounted () {
+      this.setPositionCss()
       this.calcCoreHeight(
         getElementSize(this.$refs.monitor).height,
         getElementSize(this.$refs.content).height
@@ -123,6 +124,12 @@
       }
     },
     methods: {
+      setPositionCss () {
+        let pos = window.getComputedStyle(this.$refs.monitor).position
+        if (!pos || pos === 'static' || pos === 'inherit') {
+          this.$refs.monitor.style.position = 'relative'
+        }
+      },
       handleScroll (direction) {
         this.setContentTop(this.contentTop - direction * this.step)
       },

@@ -7,14 +7,6 @@
   .au-input {
     display: inline-block;
     width: 198px;
-    .au-form-label {
-      margin-bottom: 4px;
-      font-size: $normal;
-    }
-    .au-input-warning {
-      margin-top: 4px;
-      font-size: $small;
-    }
     .au-input-container {
       position: relative;
       width: 100%;
@@ -163,6 +155,7 @@
         type="number"
         v-if="type === 'number'"
         :class="{
+          [`au-size-${size}`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
@@ -194,6 +187,7 @@
         type="password"
         v-if="type === 'password'"
         :class="{
+          [`au-size-${size}`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
@@ -259,7 +253,7 @@
   export default {
     name: 'au-input',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: [AuIcon, AuScroller],
+    components: { AuIcon, AuScroller },
     data () {
       return {
         // is the throttlling on

@@ -102,6 +102,10 @@ export default [
       {
         'text': '模态框',
         'url': '/modal'
+      },
+      {
+        'text': '消息框',
+        'url': '/message-box'
       }
     ]
   }

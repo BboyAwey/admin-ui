@@ -25,6 +25,7 @@ import Datepicker from './components/datepicker'
 import Timepicker from './components/timepicker'
 import Toast from './components/toast'
 import Modal from './components/modal'
+import MessageBox from './components/message-box'
 
 // add all comps into an array
 const components = [
@@ -47,6 +48,7 @@ const components = [
   Datepicker,
   Timepicker,
   Toast,
+  MessageBox,
   Modal
 ]
 
@@ -71,7 +73,8 @@ export {
   Datepicker,
   Timepicker,
   Toast,
-  Modal
+  Modal,
+  MessageBox
 }
 
 // export all comps as an object
@@ -95,18 +98,19 @@ const adminUi = {
   Datepicker,
   Timepicker,
   Toast,
-  Modal
+  Modal,
+  MessageBox
 }
 
 adminUi.install = function (Vue, options = {}) {
   // install all the comps
-  components.map(component => {
+  components.forEach(component => {
     Vue.component(component.name, component)
   })
-  // Vue.prototype.$messageBox = AdminMessageBox
-  // Vue.prototype.$alert = AdminMessageBox.alert
-  // Vue.prototype.$confirm = AdminMessageBox.confirm
-  // Vue.prototype.$prompt = AdminMessageBox.prompt
+  Vue.prototype.$messageBox = MessageBox
+  Vue.prototype.$alert = MessageBox.alert
+  Vue.prototype.$confirm = MessageBox.confirm
+  Vue.prototype.$prompt = MessageBox.prompt
   Vue.prototype.$toast = Toast
 }
 

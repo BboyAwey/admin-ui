@@ -76,6 +76,10 @@ export default [
         'url': '/checkbox'
       },
       {
+        'text': '开关',
+        'url': '/switch'
+      },
+      {
         'text': '单选框',
         'url': '/radio'
       },

@@ -21,7 +21,7 @@
         <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
       </div>
       <div slot="content">
-        <au-scroller style="height: 100%;">
+        <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll">
           <router-view></router-view>
         </au-scroller>
       </div>
@@ -36,12 +36,20 @@
     name: 'app',
     data () {
       return {
-        menu
+        menu,
+        scrollTop: 0
       }
     },
     methods: {
       go (item) {
-        if (item.url) this.$router.push(item.url)
+        if (item.url) {
+          this.$router.push(item.url)
+          this.scrollTop = 0
+          console.log(this.scrollTop)
+        }
+      },
+      handleScroll (v) {
+        this.scrollTop = v
       }
     }
   }

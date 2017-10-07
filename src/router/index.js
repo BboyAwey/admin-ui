@@ -66,6 +66,11 @@ export default new Router({
       component: (resolve) => require(['../examples/checkbox.vue'], resolve)
     },
     {
+      path: '/switch',
+      name: 'switch',
+      component: (resolve) => require(['../examples/switch.vue'], resolve)
+    },
+    {
       path: '/radio',
       name: 'radio',
       component: (resolve) => require(['../examples/radio.vue'], resolve)

@@ -18,6 +18,7 @@ import Panel from './components/panel'
 import Upload from './components/upload'
 import Input from './components/input'
 import Checkbox from './components/checkbox'
+import Switch from './components/switch'
 import Radio from './components/radio'
 import Select from './components/select'
 import Cascading from './components/cascading'
@@ -42,6 +43,7 @@ const components = [
   Upload,
   Input,
   Checkbox,
+  Switch,
   Radio,
   Select,
   Cascading,
@@ -67,6 +69,7 @@ export {
   Upload,
   Input,
   Checkbox,
+  Switch,
   Radio,
   Select,
   Cascading,
@@ -92,6 +95,7 @@ const adminUi = {
   Upload,
   Input,
   Checkbox,
+  Switch,
   Radio,
   Select,
   Cascading,

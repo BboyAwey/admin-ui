@@ -121,15 +121,12 @@ function MessageBox (config) {
       }
     })]
   }
-  if (type === 'prompt') instances.modal.height = 198
+  if (type === 'prompt') instances.modal.height = 200
   else instances.modal.height = 144
 
   // get a content instance
   let contentInstance = instances[type]
-  if (reset) {
-    contentInstance.value = ''
-    contentInstance.warnings = null
-  }
+  if (reset) contentInstance.$refs.core.reset()
   // set content instance props
   Object.assign(contentInstance, {message, validators, placeholder})
   // put the content into modal and show them on document

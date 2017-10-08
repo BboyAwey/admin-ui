@@ -104,8 +104,8 @@
     .au-previewer-disabled:hover:before {
       opacity: .1;
     }
-    .au-previewer-disabled:hover:after,
-    .au-previewer-disabled:hover:after {
+    .au-previewer-disabled:after,
+    .au-previewer-disabled:after {
       opacity: .2;
     }
   }
@@ -137,14 +137,18 @@
       <span
         class="au-previewer-prev au-theme-before-background-color--base-0 au-theme-after-border-color--base-12"
         @click.stop="prev"
-        v-show="allow('prev')"
+        :style="{
+          cursor: allow('prev') ? 'pointer' : 'not-allowed'
+        }"
         :class="{'au-previewer-disabled au-theme-': !allow('prev')}"></span>
       <i class="au-previewer-va-helper"></i>
       <img v-for="(img, i) in images" :src="img.src" v-show="i == localCurrent" :alt="img.alt" :key="i">
       <span
         class="au-previewer-next au-theme-before-background-color--base-0 au-theme-after-border-color--base-12"
         @click.stop="next"
-        v-show="allow('next')"
+        :style="{
+          cursor: allow('next') ? 'pointer' : 'not-allowed'
+        }"
         :class="{'au-previewer-disabled au-theme-': !allow('next')}"></span>
     </div>
   </div>

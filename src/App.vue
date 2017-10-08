@@ -46,7 +46,6 @@
         if (item.url) {
           this.$router.push(item.url)
           this.scrollTop = 0
-          console.log(this.scrollTop)
         }
       },
       handleScroll (v) {

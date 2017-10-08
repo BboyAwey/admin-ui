@@ -42,6 +42,10 @@ export default {
     blur (e) {
       if (this.validateOnBlur) this.validate()
       this.$emit('blur', this.localValue, e)
+    },
+    reset () {
+      this.localValue = ''
+      this.localWarnings = this.warnings || {}
     }
   }
 }

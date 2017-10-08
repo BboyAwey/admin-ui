@@ -66,9 +66,11 @@
     }
   }
   .au-select-multiple {
+    line-height: inherit;
     li {
       float: left;
       margin-right: 12px;
+      line-height: inherit;
     }
     &:after {
       content: '';

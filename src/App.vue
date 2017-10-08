@@ -3,10 +3,10 @@
     height: 100%;
     .banner {
       font-size: 30px;
-      padding: 20px;
+      padding: 10px 20px;
     }
     .menu {
-      width: 200px;
+      width: 210px;
     }
   }
 </style>
@@ -15,7 +15,8 @@
   <div id="app">
     <au-frame>
       <div slot="header">
-        <h3 class="banner">Admin UI 2</h3>
+        <!-- <h3 class="banner">Admin UI 2</h3> -->
+        <h3 class="banner"><img src="./assets/logo.png" /></h3>
       </div>
       <div slot="sidebar">
         <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>

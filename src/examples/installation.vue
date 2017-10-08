@@ -31,7 +31,7 @@
 </template>
 <script>
   export default {
-    name: 'intro'
+    name: 'installtion'
   }
 </script>
 

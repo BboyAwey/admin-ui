@@ -21,6 +21,11 @@ export default new Router({
       component: (resolve) => require(['../examples/installation.vue'], resolve)
     },
     {
+      path: '/theme',
+      name: 'theme',
+      component: (resolve) => require(['../examples/theme.vue'], resolve)
+    },
+    {
       path: '/icon',
       name: 'icon',
       component: (resolve) => require(['../examples/icon.vue'], resolve)

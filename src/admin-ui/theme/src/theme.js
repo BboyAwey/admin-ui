@@ -122,6 +122,12 @@ export default function (theme) {
     } else {
       throw new Error('Admin UI@theme-system@ theme.colors should be an object')
     }
+    if (theme.shadows && typeof theme.shadows === 'object') {
+      Object.assign(finalTheme.shadows, theme.shadows)
+    } else {
+      throw new Error('Admin UI@theme-system@ theme.shadows should be an object')
+    }
+    if (theme.borderRadius !== undefined) finalTheme.borderRadius = theme.borderRadius
   }
 
   let { colors, shadows, borderRadius } = finalTheme

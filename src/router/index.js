@@ -36,6 +36,11 @@ export default new Router({
       component: (resolve) => require(['../examples/button.vue'], resolve)
     },
     {
+      path: '/collapse',
+      name: 'collapse',
+      component: (resolve) => require(['../examples/collapse.vue'], resolve)
+    },
+    {
       path: '/scroller',
       name: 'scroller',
       component: (resolve) => require(['../examples/scroller.vue'], resolve)

@@ -1,6 +1,3 @@
-<style lang="scss" scoped>
-  // @import '../style/common';
-</style>
 <template>
   <div class="page">
     <au-panel class="section" title="组件描述">
@@ -169,8 +166,6 @@
 </template>
 <script>
   export default {
-    name: 'examples'
+    name: 'button-examples'
   }
 </script>
-
-

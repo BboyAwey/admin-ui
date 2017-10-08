@@ -16,7 +16,13 @@ export function getElementSize (el, isFragment) {
   // clone the el
   let copy = el.cloneNode(true)
   // ste some style to minimize the influence to the document
-  copy.setAttribute('style', 'visibility:hidden !important; display:block !important; position:absolute !important; top: -9999 !important; left: -9999 !important;')
+  // if (isFragment) copy.setAttribute('style', 'visibility:hidden !important; display:block !important;')
+  // else copy.setAttribute('style', 'visibility:hidden !important;')
+  copy.style.visibility = 'hidden'
+  copy.style.display = 'block'
+  copy.style.position = 'absolute'
+  copy.style.top = '-99999px'
+  copy.style.left = '-99999px'
 
   let res = null
   // insert it to document

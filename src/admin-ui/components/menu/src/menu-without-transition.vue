@@ -120,6 +120,7 @@
   }
   .au-menu-popover-content {
     padding: 10px 0;
+    max-height: 320px;
   }
 </style>
 <template>
@@ -146,7 +147,7 @@
             ref="popover"
             :disabled="!localCollapse"
             :trigger="hasChildren(item) ? 'click' : 'hover'"
-            :placement="hasChildren(item) ? 'right top' : 'right middle'"
+            :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
             :plain="hasChildren(item)"
             :fix="hasChildren(item) ? 0 : '-2px'">
             <au-popover
@@ -184,7 +185,7 @@
             <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
               {{ item.text }}
             </div>
-            <div v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-font-color--base-3">
+            <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-font-color--base-3">
               <au-menu
                 :items="item.children"
                 :collapsable="false"
@@ -193,7 +194,7 @@
                 :is-top-level="false"
                 :all="isTopLevel ? localItems : all"
                 @select="handlePopSelect"></au-menu>
-            </div>
+            </au-scroller>
           </au-popover>
           <au-menu
             v-if="hasChildren(item)"

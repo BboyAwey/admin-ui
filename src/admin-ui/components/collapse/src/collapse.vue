@@ -44,10 +44,7 @@
       }
     },
     props: {
-      collapse: {
-        type: Boolean,
-        defalut: false
-      },
+      collapse: Boolean,
       horizontal: Boolean,
       min: String,
       max: String,
@@ -80,14 +77,12 @@
       },
       getContentSize () {
         let el = this.$refs.el
-        let computedStyle = getComputedStyle(el)
-        let container = document.createElement(el.name)
-        container.innerHTML = el.innerHTML
-        let contentSize = getElementSize(container, true)
-        return {
-          width: contentSize.width + parseInt(computedStyle.paddingLeft) + parseInt(computedStyle.paddingRight),
-          height: contentSize.height + parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom)
-        }
+        let copy = el.cloneNode(true)
+        copy.style.height = 'auto'
+        el.parentNode.insertBefore(copy, el)
+        let size = getElementSize(copy)
+        el.parentNode.removeChild(copy)
+        return size
       }
     }
   }

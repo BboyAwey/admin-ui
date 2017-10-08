@@ -1,6 +1,3 @@
-<style lang="scss" scoped>
-  @import "../style/common";
-</style>
 <template>
   <div class="page">
     <au-panel class="section">

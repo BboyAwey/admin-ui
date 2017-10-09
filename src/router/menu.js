@@ -62,6 +62,10 @@ export default [
       {
         'text': '图片预览器',
         'url': '/previewer'
+      },
+      {
+        'text': '树',
+        'url': '/tree'
       }
     ]
   }

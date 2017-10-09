@@ -14,6 +14,7 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+.history/
 
 # documentation build files
 documentation/node_modules/

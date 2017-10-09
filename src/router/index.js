@@ -49,6 +49,11 @@ export default new Router({
       path: '/previewer',
       name: 'previewer',
       component: (resolve) => require(['../examples/previewer.vue'], resolve)
+    },
+    {
+      path: '/tree',
+      name: 'tree',
+      component: (resolve) => require(['../examples/tree.vue'], resolve)
     }
   ]
 })

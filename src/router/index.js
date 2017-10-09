@@ -16,6 +16,16 @@ export default new Router({
       component: (resolve) => require(['../examples/intro.vue'], resolve)
     },
     {
+      path: '/installation',
+      name: 'installation',
+      component: (resolve) => require(['../examples/installation.vue'], resolve)
+    },
+    {
+      path: '/theme',
+      name: 'theme',
+      component: (resolve) => require(['../examples/theme.vue'], resolve)
+    },
+    {
       path: '/icon',
       name: 'icon',
       component: (resolve) => require(['../examples/icon.vue'], resolve)
@@ -24,6 +34,11 @@ export default new Router({
       path: '/button',
       name: 'button',
       component: (resolve) => require(['../examples/button.vue'], resolve)
+    },
+    {
+      path: '/collapse',
+      name: 'collapse',
+      component: (resolve) => require(['../examples/collapse.vue'], resolve)
     },
     {
       path: '/scroller',
@@ -54,6 +69,66 @@ export default new Router({
       path: '/tree',
       name: 'tree',
       component: (resolve) => require(['../examples/tree.vue'], resolve)
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: (resolve) => require(['../examples/upload.vue'], resolve)
+    },
+    {
+      path: '/input',
+      name: 'input',
+      component: (resolve) => require(['../examples/input.vue'], resolve)
+    },
+    {
+      path: '/checkbox',
+      name: 'checkbox',
+      component: (resolve) => require(['../examples/checkbox.vue'], resolve)
+    },
+    {
+      path: '/switch',
+      name: 'switch',
+      component: (resolve) => require(['../examples/switch.vue'], resolve)
+    },
+    {
+      path: '/radio',
+      name: 'radio',
+      component: (resolve) => require(['../examples/radio.vue'], resolve)
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: (resolve) => require(['../examples/select.vue'], resolve)
+    },
+    {
+      path: '/cascading',
+      name: 'cascading',
+      component: (resolve) => require(['../examples/cascading.vue'], resolve)
+    },
+    {
+      path: '/datepicker',
+      name: 'datepicker',
+      component: (resolve) => require(['../examples/datepicker.vue'], resolve)
+    },
+    {
+      path: '/timepicker',
+      name: 'timepicker',
+      component: (resolve) => require(['../examples/timepicker.vue'], resolve)
+    },
+    {
+      path: '/toast',
+      name: 'toast',
+      component: (resolve) => require(['../examples/toast.vue'], resolve)
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      component: (resolve) => require(['../examples/modal.vue'], resolve)
+    },
+    {
+      path: '/message-box',
+      name: 'message-box',
+      component: (resolve) => require(['../examples/message-box.vue'], resolve)
     }
   ]
 })

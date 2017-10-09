@@ -1,6 +1,3 @@
-<style lang="scss" scoped>
-  @import '../style/common';
-</style>
 <template>
   <div class="page">
     <au-panel class="section" title="组件描述">
@@ -10,9 +7,9 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-button type="default">按钮</au-button>
-        <au-button type="primary">按钮</au-button>
-        <au-button type="danger">按钮</au-button>
-        <au-button type="warning">按钮</au-button>
+        <au-button type="primary" size="mini">按钮</au-button>
+        <au-button type="danger" size="small">按钮</au-button>
+        <au-button type="warning" size="large">按钮</au-button>
         <au-button type="info">按钮</au-button>
         <au-button type="primary" :plain="true">按钮</au-button>
       </div>
@@ -169,8 +166,6 @@
 </template>
 <script>
   export default {
-    name: 'examples'
+    name: 'button-examples'
   }
 </script>
-
-

@@ -16,8 +16,7 @@
     name: 'au-icon',
     props: {
       type: {
-        type: String,
-        default: 'home'
+        type: String
       },
       size: {
         type: String

@@ -60,12 +60,60 @@ export default [
         'url': '/panel'
       },
       {
-        'text': '图片预览器',
+        'text': '图片预览',
         'url': '/previewer'
       },
       {
         'text': '树',
         'url': '/tree'
+      },
+      {
+        'text': '文件上传',
+        'url': '/upload'
+      },
+      {
+        'text': '文本输入框',
+        'url': '/input'
+      },
+      {
+        'text': '多选框',
+        'url': '/checkbox'
+      },
+      {
+        'text': '开关',
+        'url': '/switch'
+      },
+      {
+        'text': '单选框',
+        'url': '/radio'
+      },
+      {
+        'text': '下拉选择',
+        'url': '/select'
+      },
+      {
+        'text': '级联下拉',
+        'url': '/cascading'
+      },
+      {
+        'text': '日期选择',
+        'url': '/datepicker'
+      },
+      {
+        'text': '时间选择',
+        'url': '/timepicker'
+      },
+      {
+        'text': '提示信息',
+        'url': '/toast'
+      },
+      {
+        'text': '模态框',
+        'url': '/modal'
+      },
+      {
+        'text': '消息框',
+        'url': '/message-box'
       }
     ]
   }

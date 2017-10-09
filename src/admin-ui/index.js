@@ -16,6 +16,18 @@ import Grid from './components/grid'
 import Table from './components/table'
 import Panel from './components/panel'
 import Tree from './components/tree'
+import Upload from './components/upload'
+import Input from './components/input'
+import Checkbox from './components/checkbox'
+import Switch from './components/switch'
+import Radio from './components/radio'
+import Select from './components/select'
+import Cascading from './components/cascading'
+import Datepicker from './components/datepicker'
+import Timepicker from './components/timepicker'
+import Toast from './components/toast'
+import Modal from './components/modal'
+import MessageBox from './components/message-box'
 
 // add all comps into an array
 const components = [
@@ -29,7 +41,19 @@ const components = [
   Grid,
   Table,
   Panel,
-  Tree
+  Tree,
+  Upload,
+  Input,
+  Checkbox,
+  Switch,
+  Radio,
+  Select,
+  Cascading,
+  Datepicker,
+  Timepicker,
+  Toast,
+  MessageBox,
+  Modal
 ]
 
 // export comps one by one
@@ -44,7 +68,19 @@ export {
   Grid,
   Table,
   Panel,
-  Tree
+  Tree,
+  Upload,
+  Input,
+  Checkbox,
+  Switch,
+  Radio,
+  Select,
+  Cascading,
+  Datepicker,
+  Timepicker,
+  Toast,
+  Modal,
+  MessageBox
 }
 
 // export all comps as an object
@@ -59,19 +95,31 @@ const adminUi = {
   Grid,
   Table,
   Panel,
-  Tree
+  Tree,
+  Upload,
+  Input,
+  Checkbox,
+  Switch,
+  Radio,
+  Select,
+  Cascading,
+  Datepicker,
+  Timepicker,
+  Toast,
+  Modal,
+  MessageBox
 }
 
 adminUi.install = function (Vue, options = {}) {
   // install all the comps
-  components.map(component => {
+  components.forEach(component => {
     Vue.component(component.name, component)
   })
-  // Vue.prototype.$messageBox = AdminMessageBox
-  // Vue.prototype.$alert = AdminMessageBox.alert
-  // Vue.prototype.$confirm = AdminMessageBox.confirm
-  // Vue.prototype.$prompt = AdminMessageBox.prompt
-  // Vue.prototype.$toast = AdminToast
+  Vue.prototype.$messageBox = MessageBox
+  Vue.prototype.$alert = MessageBox.alert
+  Vue.prototype.$confirm = MessageBox.confirm
+  Vue.prototype.$prompt = MessageBox.prompt
+  Vue.prototype.$toast = Toast
 }
 
 // add direvtives installing function

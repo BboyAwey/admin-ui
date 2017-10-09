@@ -27,6 +27,9 @@
       position: relative;
       float: left;
       height: 100%;
+      & > div {
+        height: 100%;
+      }
       // min-width: 200px;
       // width: 15%;
       // padding: 16px 0;
@@ -50,7 +53,7 @@
       // float: left;
       position: relative;
       height: 100%;
-      // overflow: auto;
+      overflow-x: auto;
     }
     .au-page-content.not-full {
       .au-page-footer {
@@ -61,6 +64,10 @@
     }
     .au-page-content-main {
       // padding: 16px;
+      height: 100%;
+      & > div {
+        height: 100%;
+      }
     }
     .au-page-footer {
       width: 100%;
@@ -77,17 +84,17 @@
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <au-scroller class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
+      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
         <slot name="sidebar"></slot>
-      </au-scroller>
-      <au-scroller class="au-page-content" ref="content">
+      </div>
+      <div class="au-page-content" ref="content">
         <div class="au-page-content-main" ref="contentMain">
           <slot name="content"></slot>
         </div>
         <div class="au-page-footer" ref="footer" v-show="footerShow">
           <slot name="footer"></slot>
         </div>
-      </au-scroller>
+      </div>
     </div>
   </div>
 </template>
@@ -140,12 +147,12 @@
         // resize the content part width to full the screen
         // if the content is not high enough
         if (this.footerShow && contentMainSize.height + footerSize.height < pageMainheight) {
-          if (this.$refs.content.$el.className.indexOf('not-full') === -1) {
-            this.$refs.content.$el.setAttribute('class', this.$refs.content.$el.className + ' not-full')
+          if (this.$refs.content.className.indexOf('not-full') === -1) {
+            this.$refs.content.setAttribute('class', this.$refs.content.className + ' not-full')
           }
         } else {
-          if (this.$refs.content.$el.className.indexOf('not-full') !== -1) {
-            this.$refs.content.$el.setAttribute('class', this.$refs.content.$el.className.replace('not-full', ''))
+          if (this.$refs.content.className.indexOf('not-full') !== -1) {
+            this.$refs.content.setAttribute('class', this.$refs.content.className.replace('not-full', ''))
           }
         }
       }

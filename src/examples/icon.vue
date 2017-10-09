@@ -1,5 +1,4 @@
 <style lang="scss" scoped>
-  @import '../style/common';
   .icon-item {
     margin-right: 12px;
   }
@@ -133,6 +132,6 @@
 </template>
 <script>
   export default {
-    name: 'examples'
+    name: 'icon-examples'
   }
 </script>

@@ -1,10 +1,3 @@
-// Author: Awey
-// email: chenwei@rongcapital.cn
-// github: https://github.com/BboyAwey
-// blog: http://www.jianshu.com/u/3c8fe1455914
-
-// Modifier:
-
 // enhanced form components common api
 export default {
   data () {
@@ -16,8 +9,9 @@ export default {
     label: {
       type: String
     },
-    small: {
-      type: Boolean
+    size: {
+      type: String,
+      default: 'normal'
     },
     value: {
       // type: String,
@@ -35,16 +29,6 @@ export default {
       }
     }
   },
-  computed: {
-    classes () {
-      let classes = ''
-      if (this.hasLocalWarnings || this.warnings) classes += 'admin-form-warning '
-      if (this.small) classes += 'admin-form-small '
-      if (this.iconClass) classes += this.iconPosition === 'right' ? 'admin-form-icon-right ' : 'admin-form-icon '
-      if (this.disabled) classes += 'admin-form-disabled'
-      return classes
-    }
-  },
   methods: {
     input (e) {
       this.$emit('input', this.localValue, e)
@@ -56,7 +40,12 @@ export default {
       this.$emit('focus', this.localValue, e)
     },
     blur (e) {
+      if (this.validateOnBlur) this.validate()
       this.$emit('blur', this.localValue, e)
+    },
+    reset () {
+      this.localValue = ''
+      this.localWarnings = this.warnings || {}
     }
   }
 }

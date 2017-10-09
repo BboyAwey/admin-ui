@@ -1,6 +1,6 @@
 <style lang="scss">
   .au-scroller {
-    position: relative;
+    // position: relative;
     overflow: hidden;
   }
   .au-scroller-content {
@@ -43,22 +43,23 @@
 </style>
 <template>
   <div class="au-scroller"
-    @mouseover="handleMouseover"
-    @mouseout="handleMouseout"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
+    @mousemove="handleScrollerMousemove"
     ref="monitor">
     <div class="au-scroller-content" ref="content" :style="{ top: contentTop + 'px' }" :class="{ 'au-no-select': onDrag }">
       <slot></slot>
     </div>
     <div class="au-scroller-bar-container"
-      @mouseover="handleBarMouseover"
-      @mouseout="handleBarMouseout"
+      @mouseenter="handleBarMouseenter"
+      @mouseleave="handleBarMouseleave"
       v-show="needScroll"
       ref="barContainer">
       <div class="au-scroller-bar au-theme-background-color--base-1" ref="bar" @click="handleBarClick"></div>
       <div
         class="au-scroller-bar-core au-theme-background-color--base-1"
         ref="core"
-        :style="{ top: scrollTop + 'px', height: coreHeight + 'px' }"
+        :style="{ top: scrollCoreTop + 'px', height: coreHeight + 'px' }"
         @mousedown="handleCoreMousedown"
         @mouseup="handleCoreMouseUp"></div>
     </div>
@@ -70,13 +71,20 @@
   export default {
     name: 'au-scroller',
     mounted () {
+      this.setPositionCss()
       this.calcCoreHeight(
         getElementSize(this.$refs.monitor).height,
         getElementSize(this.$refs.content).height
       )
+      let firstScroll = true
       mousewheel('add', this.$refs.monitor, (e) => {
+        if (firstScroll) {
+          this.handleMouseenter()
+          firstScroll = false
+        }
         if (!this.needScroll) return
         let direction = e.deltaY || e.detail // chrome,edge / firefox
+        if (!direction) return
         this.handleScroll((direction < 0 ? -direction : direction) / direction)
         if (this.scrollEnd) return
         else e.stopPropagation()
@@ -86,11 +94,17 @@
     destroyed () {
       window.removeEventListener('resize', this.handlerResize)
     },
+    props: {
+      scrollTop: {
+        type: [Number, String],
+        default: 0
+      }
+    },
     data () {
       return {
         step: 100,
-        contentTop: 0,
-        scrollTop: 0,
+        contentTop: this.scrollTop,
+        scrollCoreTop: 0,
         coreHeight: 0,
         diff: 0,
         onDrag: false,
@@ -100,11 +114,23 @@
       }
     },
     watch: {
+      scrollTop (v) {
+        if (this.contentTop !== v * -1) this.setContentTop(v)
+      },
       contentTop (v) {
-        this.$emit('scroll', v * -1)
+        this.$emit('scroll', v * -1 || 0)
+      },
+      needScroll (v) {
+        if (!v) this.contentTop = 0
       }
     },
     methods: {
+      setPositionCss () {
+        let pos = window.getComputedStyle(this.$refs.monitor).position
+        if (!pos || pos === 'static' || pos === 'inherit') {
+          this.$refs.monitor.style.position = 'relative'
+        }
+      },
       handleScroll (direction) {
         this.setContentTop(this.contentTop - direction * this.step)
       },
@@ -122,10 +148,10 @@
 
         // sync scrollbar
         let scrollTopMax = getElementSize(this.$refs.bar).height - getElementSize(this.$refs.core).height
-        let scrollTop = contentTop * monitorHeight / contentHeight * -1
-        this.scrollTop = scrollTop <= 0 ? 0 : (scrollTop >= scrollTopMax ? scrollTopMax : scrollTop)
+        let scrollCoreTop = contentTop * monitorHeight / contentHeight * -1
+        this.scrollCoreTop = scrollCoreTop <= 0 ? 0 : (scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop)
         // fix
-        if (this.contentTop <= contentTopMin) this.scrollTop = scrollTopMax
+        if (this.contentTop <= contentTopMin) this.scrollCoreTop = scrollTopMax
       },
       getMonitorHeight () {
         let {paddingTop, paddingBottom, borderTopWidth, borderBottomWidth} = window.getComputedStyle(this.$refs.monitor)
@@ -140,34 +166,39 @@
           this.contentTop = 0
         } else {
           this.needScroll = true
-          this.coreHeight = monitor * monitor / content
+          let barHeight = getElementSize(this.$refs.barContainer).height
+          this.coreHeight = monitor * barHeight / content
         }
       },
-      setBarPos (monitor) {
+      setBarHeight (monitor) {
         this.$refs.barContainer.style.height = monitor - 20 + 'px'
       },
-      handleMouseover () {
+      handleMouseenter () {
         this.$refs.bar.style.opacity = '.3'
         this.$refs.core.style.opacity = '.5'
         let monitorHeight = getElementSize(this.$refs.monitor).height
+        this.setBarHeight(monitorHeight)
         this.calcCoreHeight(
           monitorHeight,
-          getElementSize(this.$refs.content).height
+          getElementSize(this.$refs.content).height,
+          getElementSize(this.$refs.bar).height
         )
-        this.setBarPos(monitorHeight)
       },
-      handleMouseout () {
+      handleMouseleave () {
         if (!this.onDrag) {
           this.$refs.bar.style.opacity = '0'
           this.$refs.core.style.opacity = '0'
         }
       },
-      handleBarMouseover () {
+      handleScrollerMousemove () {
+        this.needScroll = getElementSize(this.$refs.monitor).height < getElementSize(this.$refs.content).height
+      },
+      handleBarMouseenter () {
         this.onOver = true
         this.$refs.bar.style.width = '12px'
         this.$refs.core.style.width = '12px'
       },
-      handleBarMouseout () {
+      handleBarMouseleave () {
         this.onOver = false
         if (!this.onDrag) {
           this.$refs.bar.style.width = '6px'
@@ -184,7 +215,7 @@
       },
       handleMousemove (e) {
         e.preventDefault()
-        this.setScrollTop(e.pageY - this.diff - this.$refs.bar.getBoundingClientRect().top)
+        this.setScrollCoreTop(e.pageY - this.diff - this.$refs.bar.getBoundingClientRect().top)
       },
       handleCoreMouseUp () {
         this.onDrag = false
@@ -202,9 +233,9 @@
         let barY = this.$refs.bar.getBoundingClientRect().top
         let coreHeight = this.coreHeight
 
-        this.setScrollTop(mouseY - barY - coreHeight / 2)
+        this.setScrollCoreTop(mouseY - barY - coreHeight / 2)
       },
-      setScrollTop (v) {
+      setScrollCoreTop (v) {
         if (!this.needScroll) return
         let barHeight = getElementSize(this.$refs.bar).height
         let coreHeight = getElementSize(this.$refs.core).height
@@ -214,19 +245,19 @@
         let scrollTopMax = barHeight - coreHeight
         let contentTopMax = monitorHeight - contentHeight
 
-        let scrollTop = v
-        scrollTop = scrollTop <= 0 ? 0 : (scrollTop >= scrollTopMax ? scrollTopMax : scrollTop)
+        let scrollCoreTop = v
+        scrollCoreTop = scrollCoreTop <= 0 ? 0 : (scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop)
 
-        this.scrollEnd = scrollTop <= 0 || scrollTop >= scrollTopMax
+        this.scrollEnd = scrollCoreTop <= 0 || scrollCoreTop >= scrollTopMax
 
-        let contentTop = scrollTop * contentHeight / barHeight * -1
+        let contentTop = scrollCoreTop * contentHeight / barHeight * -1
         contentTop = contentTop >= 0 ? 0 : (contentTop <= contentTopMax ? contentTopMax : contentTop)
 
-        this.scrollTop = scrollTop
-        this.contentTop = scrollTop >= scrollTopMax ? contentTopMax : contentTop
+        this.scrollCoreTop = scrollCoreTop
+        this.contentTop = scrollCoreTop >= scrollTopMax ? contentTopMax : contentTop
       },
       handlerResize () {
-        this.setScrollTop(this.scrollTop)
+        this.setScrollCoreTop(this.scrollCoreTop)
       }
     }
   }

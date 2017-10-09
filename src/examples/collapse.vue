@@ -128,6 +128,7 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
+        <au-button @click="collapse = !collapse">&#123;&#123;collapse ? "展开" : "收起" &#125;&#125;</au-button>
         <au-collapse class="collapse-examples au-theme-border-color--base-8" :collapse="collapse">
           <p class="paragraph collapse-paragraph">Laborum adipisicing do in dolore dolor consectetur adipisicing. Aute anim quis amet exercitation dolore. Laboris veniam occaecat eiusmod anim non qui. Laborum ipsum reprehenderit sint sint elit labore laborum ullamco.</p>
         </au-collapse>

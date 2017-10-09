@@ -122,7 +122,13 @@
         </tbody>
       </au-table>
     </au-panel>
+    <au-panel class="section" title="Slots">
+      <au-icon type="minus"></au-icon>
+    </au-panel>
     <au-panel class="section" title="Events">
+      <au-icon type="minus"></au-icon>
+    </au-panel>
+    <au-panel class="section" title="Methods">
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="使用示例">

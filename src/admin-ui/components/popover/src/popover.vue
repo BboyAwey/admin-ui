@@ -3,9 +3,10 @@
   @import "../../../style/fade";
   .au-popover {
     position: absolute;
-    top: 0; // TODO: set to huge
-    left: 0; // TODO: set to huge
+    // top: -99999;
+    // left: -99999;
     z-index: $z-level-3;
+    line-height: inherit;
     // min-height: 30px;
     // opacity: .95;
   }
@@ -188,7 +189,7 @@
     destroyed () {
       window.removeEventListener('resize', this.calPos)
       this.hide(true)
-      if (this.observe) this.observer.disconnect()
+      // if (this.observe) this.observer.disconnect()
     },
     watch: {
       trigger () {

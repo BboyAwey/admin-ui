@@ -1,29 +1,15 @@
 <style lang="scss" scoped>
-  .icon-item {
-    margin-right: 12px;
-  }
+
 </style>
 <template>
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        Admin UI 2中的图标组件，是基于著名的
-        <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome</a>
-        ，我们将其内置到了Admin UI 2中
+        一个全功能的菜单组件
       </p>
       <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
-        Admin UI 1中的图标组件是基于
-        <a class="au-theme-font-color--info-3" href="http://ionicons.com/" target="_blank">Ionicons</a>
-        ，但由于其图标数量较少，这一版本中我们替换了它
+        示例请参考左侧菜单
       </cite>
-      <!-- 组件示例 -->
-      <div class="component-example">
-        <au-icon class="icon-item au-theme-font-color--primary-3" type="home" size="48px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--success-3" type="heart" size="44px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--danger-3" type="globe" size="46px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--warning-3" type="user" size="46px"></au-icon>
-      </div>
-      <!-- 组件示例 -->
     </au-panel>
     <au-panel class="section" title="Props">
       <au-table>
@@ -39,52 +25,64 @@
         </thead>
         <tbody>
           <tr>
-            <td>type</td>
+            <td>items</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
-              <au-icon type="times"></au-icon>
-            </td>
-            <td>String</td>
-            <td>false</td>
-            <td>
-              <a class="au-theme-font-color--info-3" href="http://fontawesome.io/icons/" target="_blank">Font Awesome Icons</a>
+              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
-              图标的类型
+              Array<br>
+              -Object
+             </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">text: String，菜单项要显示的文字</li>
+                <li class="au-theme-border-color--base-8">url: String，菜单项的地址</li>
+                <li class="au-theme-border-color--base-8">icon: String，菜单项的图标，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link></li>
+                <li class="au-theme-border-color--base-8">collapse: Boolean，该项是否收起(如果有子项)</li>
+                <li class="au-theme-border-color--base-8">children: Array-Object，菜单项的子项，其内容与items一致</li>
+              </ol>
+            </td>
+            <td>
+              菜单项配置
             </td>
           </tr>
           <tr>
-            <td>size</td>
+            <td>collapsable</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>String</td>
-            <td><au-icon type="minus"></au-icon></td>
+            <td>Boolean</td>
+            <td>true</td>
             <td>
-              <!-- <ol class="option-list">
+              <ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
                 <li class="au-theme-border-color--base-8">false</li>
-              </ol> -->
-              合法的css长度值
+              </ol>
             </td>
             <td>
-              图标尺寸，也可直接在组件上使用class或style的font-size属性控制而不使用此字段
+              菜单栏是否可以被收起
             </td>
           </tr>
           <tr>
-            <td>color</td>
+            <td>collapse</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>String</td>
-            <td><au-icon type="minus"></au-icon></td>
+            <td>Boolean</td>
+            <td>false</td>
             <td>
-              合法的css颜色值
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
             </td>
             <td>
-              图标颜色，也可直接在组件上使用class或style的color属性控制而不使用此字段
+              菜单栏是否收起<br>
+              只在collapsable为true时有效
             </td>
           </tr>
         </tbody>
@@ -110,7 +108,8 @@
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="Events">
-      <!-- <au-table>
+      <!-- TODO: -->
+      <au-table>
         <thead>
           <tr>
             <th>名称</th>
@@ -132,8 +131,8 @@
             </td>
           </tr>
         </tbody>
-      </au-table> -->
-      <au-icon type="minus"></au-icon>
+      </au-table>
+      <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">
       <!-- <au-table>

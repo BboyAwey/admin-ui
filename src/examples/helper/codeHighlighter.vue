@@ -47,6 +47,11 @@
         type: String
       }
     },
+    watch: {
+      content () {
+        this.highlight()
+      }
+    },
     methods: {
       addLineNumbers () {
         let codeBlock = this.$refs.codeBlock

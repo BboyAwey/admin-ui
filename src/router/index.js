@@ -46,6 +46,11 @@ export default new Router({
       component: (resolve) => require(['../examples/scroller.vue'], resolve)
     },
     {
+      path: '/menu',
+      name: 'menu',
+      component: (resolve) => require(['../examples/menu.vue'], resolve)
+    },
+    {
       path: '/popover',
       name: 'popover',
       component: (resolve) => require(['../examples/popover.vue'], resolve)

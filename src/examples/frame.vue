@@ -76,9 +76,10 @@
           }
         </style>
         <template>
-          <div id="app">
+          <div id="app" class="au-theme-background-color--base-10">
             <au-frame>
               <div slot="header">
+                <!-- <h3 class="banner">Admin UI 2</h3> -->
                 <h3 class="banner"><img src="./assets/logo.png" /></h3>
               </div>
               <div slot="sidebar">

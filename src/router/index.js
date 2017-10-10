@@ -71,6 +71,11 @@ export default new Router({
       component: (resolve) => require(['../examples/table.vue'], resolve)
     },
     {
+      path: '/panel',
+      name: 'panel',
+      component: (resolve) => require(['../examples/panel.vue'], resolve)
+    },
+    {
       path: '/previewer',
       name: 'previewer',
       component: (resolve) => require(['../examples/previewer.vue'], resolve)

@@ -1,9 +1,8 @@
 <style lang="scss">
   @import "../../../style/vars";
   .au-panel {
-    // border: 1px solid $grayBrighten15;
-    // background-color: #fff;
-    // box-shadow: $shadowLevel3;
+    border-width: 1px;
+    border-style: solid;
     .au-panel-title {
       border-bottom-width: 1px;
       border-bottom-style: solid;
@@ -25,6 +24,7 @@
     class="
       au-panel
       au-theme-background-color--base-12
+      au-theme-border-color--base-8
       au-theme-font-color--base-3
       au-theme-radius
       au-theme-shadow--level-1">

@@ -47,6 +47,7 @@
     .checkbox-warp-div{
       position: relative;
       z-index: 99;
+      margin-bottom: 5px;
       &.close-tree +.admin-tree-sub-warp{
         display: none;
       }
@@ -153,8 +154,8 @@
           {
             class: {
               'admin-tree-warp': isTop,
-              'admin-tree-sub-warp': !isTop,
-              'list-inline': !isTop && this.displayInline(data)
+              'admin-tree-sub-warp': !isTop
+              // 'list-inline': !isTop && this.displayInline(data)
             }
           },
           this.createTreeDom(c, data)

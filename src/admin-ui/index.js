@@ -15,6 +15,7 @@ import Popover from './components/popover'
 import Grid from './components/grid'
 import Table from './components/table'
 import Panel from './components/panel'
+import Previewer from './components/previewer'
 import Upload from './components/upload'
 import Input from './components/input'
 import Checkbox from './components/checkbox'
@@ -41,6 +42,7 @@ const components = [
   Grid,
   Table,
   Panel,
+  Previewer,
   Upload,
   Input,
   Checkbox,
@@ -68,6 +70,7 @@ export {
   Grid,
   Table,
   Panel,
+  Previewer,
   Upload,
   Input,
   Checkbox,
@@ -95,6 +98,7 @@ const adminUi = {
   Grid,
   Table,
   Panel,
+  Previewer,
   Upload,
   Input,
   Checkbox,

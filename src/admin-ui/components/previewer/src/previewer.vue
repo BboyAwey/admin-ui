@@ -213,7 +213,6 @@
       },
       localCurrent (v) {
         this.$emit('toggle', this.images[this.localCurrent])
-        this.$emit('toggle', this.images[this.localCurrent])
       }
     },
     methods: {

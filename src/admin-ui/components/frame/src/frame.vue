@@ -79,12 +79,12 @@
   }
 </style>
 <template>
-  <div class="au-frame au-theme-background-color--base-10" ref="container">
+  <div class="au-frame" ref="container">
     <div class="au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-2" ref="header">
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar" :style="{ width: sidebarWidth }">
+      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2" ref="sidebar">
         <slot name="sidebar"></slot>
       </div>
       <div class="au-page-content" ref="content">
@@ -122,14 +122,6 @@
     data () {
       return {
         footerShow: true
-      }
-    },
-    props: {
-      sidebarWidth: String
-    },
-    watch: {
-      sidebarWidth () {
-        this.resize()
       }
     },
     methods: {

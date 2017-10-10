@@ -36,19 +36,19 @@ export default [
         'url': '/popover'
       },
       {
-        'text': '菜单',
-        'url': '/menu'
-      },
-      {
         'text': '滚动条',
         'url': '/scroller'
+      },
+      {
+        'text': '菜单',
+        'url': '/menu'
       },
       {
         'text': '框架',
         'url': '/frame'
       },
       {
-        'text': '网格',
+        'text': '栅格',
         'url': '/grid'
       },
       {

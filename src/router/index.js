@@ -46,6 +46,16 @@ export default new Router({
       component: (resolve) => require(['../examples/scroller.vue'], resolve)
     },
     {
+      path: '/menu',
+      name: 'menu',
+      component: (resolve) => require(['../examples/menu.vue'], resolve)
+    },
+    {
+      path: '/frame',
+      name: 'frame',
+      component: (resolve) => require(['../examples/frame.vue'], resolve)
+    },
+    {
       path: '/popover',
       name: 'popover',
       component: (resolve) => require(['../examples/popover.vue'], resolve)
@@ -59,6 +69,11 @@ export default new Router({
       path: '/table',
       name: 'table',
       component: (resolve) => require(['../examples/table.vue'], resolve)
+    },
+    {
+      path: '/panel',
+      name: 'panel',
+      component: (resolve) => require(['../examples/panel.vue'], resolve)
     },
     {
       path: '/previewer',

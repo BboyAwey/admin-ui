@@ -110,6 +110,10 @@ export default [
       {
         'text': '消息框',
         'url': '/message-box'
+      },
+      {
+        'text': '分页器',
+        'url': '/paginator'
       }
     ]
   }

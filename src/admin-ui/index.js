@@ -27,6 +27,7 @@ import Timepicker from './components/timepicker'
 import Toast from './components/toast'
 import Modal from './components/modal'
 import MessageBox from './components/message-box'
+import Paginator from './components/paginator'
 
 // add all comps into an array
 const components = [
@@ -51,7 +52,8 @@ const components = [
   Timepicker,
   Toast,
   MessageBox,
-  Modal
+  Modal,
+  Paginator
 ]
 
 // export comps one by one
@@ -77,7 +79,8 @@ export {
   Timepicker,
   Toast,
   Modal,
-  MessageBox
+  MessageBox,
+  Paginator
 }
 
 // export all comps as an object
@@ -103,7 +106,8 @@ const adminUi = {
   Timepicker,
   Toast,
   Modal,
-  MessageBox
+  MessageBox,
+  Paginator
 }
 
 adminUi.install = function (Vue, options = {}) {

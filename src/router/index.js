@@ -124,6 +124,11 @@ export default new Router({
       path: '/message-box',
       name: 'message-box',
       component: (resolve) => require(['../examples/message-box.vue'], resolve)
+    },
+    {
+      path: '/paginator',
+      name: 'paginator',
+      component: (resolve) => require(['../examples/paginator.vue'], resolve)
     }
   ]
 })

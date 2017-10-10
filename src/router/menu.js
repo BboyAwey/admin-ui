@@ -48,7 +48,7 @@ export default [
         'url': '/frame'
       },
       {
-        'text': '网格',
+        'text': '栅格',
         'url': '/grid'
       },
       {

@@ -138,7 +138,7 @@
         transform: localCollapse ? '' : 'rotate(180deg)'
       }"></au-icon>
     </div>
-    <au-scroller style="height: 100%;">
+    <au-scroller style="height: 100%;" :scroll-top="scrollTop" @scroll="v　=>　scrollTop = v">
       <ul>
         <li
           v-for="(item, i) in localItems"
@@ -224,7 +224,8 @@
         localItems: [],
         localCollapse: this.collapse,
         currentItem: {},
-        originWidth: ''
+        originWidth: '',
+        scrollTop: 0
       }
     },
     props: {
@@ -265,10 +266,11 @@
         if (v) {
           this.originWidth = this.$refs.self.style.width
           this.$refs.self.style.width = '60px'
+          this.scrollTop = 0
         } else {
           this.$refs.self.style.width = this.originWidth
         }
-        this.$emit('collapse', v)
+        this.$emit('toggle', v)
       }
     },
     methods: {

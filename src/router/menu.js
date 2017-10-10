@@ -112,7 +112,7 @@ export default [
         'url': '/message-box'
       },
       {
-        'text': '分页器',
+        'text': '分页',
         'url': '/paginator'
       }
     ]

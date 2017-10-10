@@ -2,7 +2,7 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        按钮组件，不同颜色的按钮，还有空心按钮
+        分页组件
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
@@ -32,7 +32,7 @@
             <td>number</td>
             <td>0</td>
             <td>
-              
+
             </td>
             <td>
               总条数
@@ -47,7 +47,7 @@
             <td>number</td>
             <td>10</td>
             <td>
-              
+
             </td>
             <td>
               每页条数
@@ -72,6 +72,9 @@
         </tbody>
       </au-table>
     </au-panel>
+    <au-panel class="section" title="Slots">
+      <au-icon type="minus"></au-icon>
+    </au-panel>
     <au-panel class="section" title="Events">
       <au-table>
         <thead>
@@ -93,8 +96,10 @@
           </tr>
         </tbody>
       </au-table>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
       <!-- <au-icon type="minus"></au-icon> -->
+    </au-panel>
+    <au-panel class="section" title="Methods">
+      <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>

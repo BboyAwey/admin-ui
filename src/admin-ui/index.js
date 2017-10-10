@@ -143,6 +143,8 @@ adminUi.theme = function (theme) {
 }
 // gen default theme
 adminUi.theme()
+// set font family for html and body
+document.body.style.fontFamily = '"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif'
 // gen directive
 adminUi.direvtive(Vue)
 export default adminUi

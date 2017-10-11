@@ -269,7 +269,7 @@
       },
       placeholder: {
         type: String,
-        default: '请输入'
+        default: ''
       },
       associations: Array,
       icon: String,

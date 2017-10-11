@@ -1,74 +1,377 @@
-<style lang="scss" scoped>
-
-</style>
 <template>
   <div class="page">
-    <au-panel>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" size="mini"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" size="small"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" size="large"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" :disabled="true"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" icon-position="right"></au-input>
-      <au-input v-model="value" placeholder="oh no" label="shit" icon="home" :associations="associations" :validators="validators"></au-input>
-      <au-input type="textarea" v-model="value" placeholder="oh no" label="shit"></au-input>
+    <au-panel class="section" title="组件描述">
+      <p class="paragraph">
+        文本输入框组件
+      </p>
+      <!-- 组件示例 -->
+      <div class="component-example">
+        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators"></au-input>
+      </div>
+      <!-- 组件示例 -->
+    </au-panel>
+    <au-panel class="section" title="Props">
+      <au-table>
+        <thead>
+          <tr>
+            <th>字段</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>默认</th>
+            <th>可选</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>label</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              输入框前的提示文字
+            </td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>
+              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              输入框的值
+            </td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>text</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">text</li>
+                <li class="au-theme-border-color--base-8">password</li>
+                <li class="au-theme-border-color--base-8">number</li>
+                <li class="au-theme-border-color--base-8">textarea</li>
+              </ol>
+            </td>
+            <td>
+              输入框类型
+            </td>
+          </tr>
+          <tr>
+            <td>associations</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Array</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              需要显示的关联项<br>
+              仅当type不是textarea时生效
+            </td>
+          </tr>
+          <tr>
+            <td>placeholder</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>''</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              输入框占位字符
+            </td>
+          </tr>
+          <tr>
+            <td>icon</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link></td>
+            <td>
+              输入框图标
+            </td>
+          </tr>
+          <tr>
+            <td>icon-position</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>left</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">left</li>
+                <li class="au-theme-border-color--base-8">right</li>
+              </ol>
+            </td>
+            <td>
+              输入框图标位置
+            </td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>normal</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">large</li>
+                <li class="au-theme-border-color--base-8">normal</li>
+                <li class="au-theme-border-color--base-8">small</li>
+                <li class="au-theme-border-color--base-8">mini</li>
+              </ol>
+            </td>
+            <td>
+              输入框尺寸（高度）<br>
+              如需调节输入框宽度，请直接使用style进行控制
+            </td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>禁用</td>
+          </tr>
+          <tr>
+            <td>warnings</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Array<br>
+              -String
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              需要显示的警告信息<br>
+              如果给定了需要显示的警告信息，则组件将不执行validators中提供的验证器，而只是简单显示给定的警告<br>
+              可以通过传入空数组 [] 来让组件只显示警告样式而不显示警告信息<br>
+              同样，即使是空数组，同时传入的自定义验证器也会被忽略<br>
+              只有传入undefined或者null时，组件才会认为没有警告信息
+            </td>
+          </tr>
+          <tr>
+            <td>validators</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Array<br>
+              -Object
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">validator: Function，接受一个表示当前值的参数value</li>
+                <li class="au-theme-border-color--base-8">warning: String，当验证失败时需要显示的警告信息</li>
+                <li class="au-theme-border-color--base-8">async: Boolean，是否为异步验证，默认为false</li>
+              </ol>
+            </td>
+            <td>
+              验证器配置<br>
+              同步验证时，验证器函数只需要返回Booean类型的验证结果即可<br>
+              异步验证时，需要额外配置async为true<br>
+              同时，验证器函数需要返回一个promise，并在resolve函数中传递Boolean类型的验证结果给验证器<br>
+              既有同步验证，又有异步验证时，验证器首先执行同步验证<br>
+              只有通过了全部的同步验证时，才会执行异步验证
+            </td>
+          </tr>
+          <tr>
+            <td>validate-on-blur</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Boolean
+            </td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              当配置了验证器后，是否在blur事件中验证<br>
+              默认是在change事件中验证
+            </td>
+          </tr>
+        </tbody>
+      </au-table>
+    </au-panel>
+    <au-panel class="section" title="Slots">
+      <au-icon type="minus"></au-icon>
+    </au-panel>
+    <au-panel class="section" title="Events">
+      <au-table>
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@input</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">value</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>
+              输入事件<br>
+              参数value表示当前值<br>
+              参数event表示事件对象
+            </td>
+          </tr>
+          <tr>
+            <td>@change</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">value</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>
+              值改变事件<br>
+              参数value表示当前值<br>
+              参数event表示事件对象
+            </td>
+          </tr>
+          <tr>
+            <td>@focus</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">value</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>
+              聚焦事件<br>
+              参数value表示当前值<br>
+              参数event表示事件对象
+            </td>
+          </tr>
+          <tr>
+            <td>@blur</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">value</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>
+              失焦事件<br>
+              参数value表示当前值<br>
+              参数event表示事件对象
+            </td>
+          </tr>
+        </tbody>
+      </au-table>
+      <!-- <au-icon type="minus"></au-icon> -->
+    </au-panel>
+    <au-panel class="section" title="Methods">
+      <au-table>
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>validate()</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              在给定了验证器的情况下执行验证<br>
+              返回值为一个表示验证结果的Boolean值
+            </td>
+          </tr>
+        </tbody>
+      </au-table>
+    </au-panel>
+    <au-panel class="section" title="使用示例">
+      <h4 class="title-1">基础用例</h4>
+      <code-h lang="html" content='
+        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators"></au-input>
+      '></code-h>
+      <code-h lang="js">
+        export default {
+          data () {
+            return {
+              value: '',
+              validators: [
+                {
+                  validator (v) {
+                    return v === '我爱你'
+                  },
+                  warning: '快说你爱我！'
+                }
+              ]
+            }
+          }
+        }
+      </code-h>
     </au-panel>
   </div>
 </template>
 <script>
-export default {
-  name: 'input-examples',
-  data () {
-    return {
-      value: '',
-      associations: [
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc',
-        'aaa',
-        'bbb',
-        'ccc'
-      ],
-      warnings: [
-        'oh shit',
-        'damn',
-        'ok'
-      ],
-      validators: [
-        {
-          validator (v) {
-            return v === 'aaa'
-          },
-          warning: 'oh you should write aaa'
-        },
-        {
-          validator (v) {
-            return v !== ''
-          },
-          warning: 'oh you should write sth'
-        }
-      ]
+  export default {
+    name: 'input-examples',
+    data () {
+      return {
+        value: '',
+        validators: [
+          {
+            validator (v) {
+              return v === '我爱你'
+            },
+            warning: '快说你爱我！'
+          }
+        ]
+      }
     }
   }
-}
 </script>
 
 

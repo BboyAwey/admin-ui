@@ -132,7 +132,7 @@ export default {
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
-            console.log(body.url)
+            // console.log(body.url)
             vm.modifyLocalFileList(relIndex, 'url', body.url)
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)

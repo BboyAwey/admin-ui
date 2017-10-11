@@ -29,7 +29,7 @@
               <!--<au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>number</td>
+            <td>Number</td>
             <td>0</td>
             <td>
 
@@ -44,7 +44,7 @@
                <!--<au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>number</td>
+            <td>Number</td>
             <td>10</td>
             <td>
 
@@ -59,15 +59,19 @@
                <!--<au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>number</td>
+            <td>Number</td>
             <td>1</td>
             <td>
               <!--<ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
                 <li class="au-theme-border-color--base-8">false</li>
               </ol>-->
+              <au-icon type="minus"></au-icon>
             </td>
-            <td>当前页</td>
+            <td>
+              当前页<br>
+              可以配合@toggle事件使用进行同步
+            </td>
           </tr>
         </tbody>
       </au-table>
@@ -89,10 +93,13 @@
             <td>@toggle</td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">event</li>
+                <li class="au-theme-border-color--base-8">current</li>
               </ol>
             </td>
-            <td>page切换</td>
+            <td>
+              当用户切换分页时触发<br>
+              参数current表示当前页的index
+            </td>
           </tr>
         </tbody>
       </au-table>
@@ -104,15 +111,13 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-paginator :total="1000" :size="20" :current="1" @toggle="togglePage"></au-paginator>
+        <au-paginator :total="1000" :size="20" :current="1" @toggle="toggle"></au-paginator>
       '></code-h>
       <code-h lang="js">
-        import AuPaginator from 'admin-ui'
         export default {
-          components: { AuPaginator },
           methods: {
-            togglePage (page) {
-              console.log(page)
+            toggle (current) {
+              console.log(current)
             }
           }
         }

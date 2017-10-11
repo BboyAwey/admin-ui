@@ -13,6 +13,7 @@ export default {
     disabled: Boolean,
 
     showUploadButton: {
+      type: Boolean,
       default: true
     },
     showFileList: {
@@ -24,23 +25,28 @@ export default {
       default: 'block'
     },
     canRemove: {
+      type: Boolean,
       default: true
     },
     beforeRemove: Function,
     canDownload: {
+      type: Boolean,
       default: true
     },
     beforeDownload: Function,
     canDescribe: {
+      type: Boolean,
       default: true
     },
     beforeDescribe: Function,
     descriptionPlaceholder: String,
     canPreview: {
+      type: Boolean,
       default: true
     },
     beforePreview: Function,
     autoUpload: {
+      type: Boolean,
       default: true
     },
     value: {
@@ -51,6 +57,7 @@ export default {
     // file input props
     name: String,
     multiple: {
+      type: Boolean,
       default: true
     },
     accept: String,
@@ -59,6 +66,7 @@ export default {
     method: String,
     data: Object,
     withCredentials: {
+      type: Boolean,
       default: false
     },
     headers: Object,

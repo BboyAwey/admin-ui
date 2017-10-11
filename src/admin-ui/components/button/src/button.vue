@@ -45,6 +45,7 @@
   .au-button.plain {
     border-width: 1px;
     border-style: solid;
+    line-height: 30px;
   }
 </style>
 <template>

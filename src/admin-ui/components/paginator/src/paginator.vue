@@ -1,6 +1,6 @@
 <style lang="scss">
   @import '../../../style/vars';
-  .admin-paginator {
+  .au-paginator {
     display: inline-block;
     user-select: none;
     & > ul:after {
@@ -28,7 +28,7 @@
       border-top: none;
       // border-right: 1px solid /*$grayBrighten15*/;
       border-right-width: 1px;
-      border-right-style: solid; 
+      border-right-style: solid;
     }
     & > ul > .active{
       // background-color: $primary;
@@ -59,7 +59,7 @@
   }
 </style>
 <template lang="html">
-  <div class="admin-paginator">
+  <div class="au-paginator">
     <ul>
      <li :class="{disabled: curPage <= 1,
                   'au-theme-border-color--base-8': true,
@@ -94,7 +94,7 @@
                   'au-theme-font-color--primary-3-important': curPage == 1}" attr="ion-more-1" v-if="_pageCount() > 10 " @click="page(1)">1</li>
      <li :class="{'au-theme-border-color--base-8': true,
                   'au-theme-font-color--base-3': true}" attr="ion-more-left" class="ellipsis" v-show="_offset()>1 && _pageCount() > 10"><au-icon type='ellipsis-h'></au-icon></li>
-     <li :class="{active: curPage == _cPage(index), 
+     <li :class="{active: curPage == _cPage(index),
                   'au-theme-border-color--base-8': true,
                   'au-theme-font-color--base-3': true,
                   'au-theme-hover-background-color--base-10': curPage != _cPage(index),
@@ -121,16 +121,6 @@
   </div>
 </template>
 <script>
-  // Author: Bearhotel
-  // email: lilijing@rongcapital.cn
-  // github:
-  // blog:
-
-  // Modifier: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
   export default {
     name: 'au-paginator',
     props: {

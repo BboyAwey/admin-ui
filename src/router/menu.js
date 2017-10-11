@@ -116,7 +116,7 @@ export default [
         'url': '/paginator'
       },
       {
-        'text': 'tabs',
+        'text': '标签页',
         'url': '/tabs'
       }
     ]

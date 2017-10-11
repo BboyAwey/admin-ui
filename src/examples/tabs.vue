@@ -6,13 +6,10 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <div style="width:100%;padding:30px;">
-          <au-tabs :tabs="tabs" :current="activeTabName" style="height:400px;">
-            <!--name required and is tabName-->
-            <div name="baseInfo">基本信息</div>
-            <div name="externalresource">列表信息</div>
-          </au-tabs>
-        </div>
+        <au-tabs :tabs="tabs" :current="current">
+          <div name="baseInfo">基本信息</div>
+          <div name="externalResource">列表信息</div>
+        </au-tabs>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -39,37 +36,35 @@
             <ol>
               <li> Array </li>
               <li> -Object </li>
-              <li> --String </li>
-              <li> --Strin </li>
             </ol>
           </td>
-          <td>[]</td>
           <td>
-            ——
-
+            <au-icon type="minus"></au-icon>
           </td>
           <td>
-            标签内容 Object name：标签name text：标签显示名称 比如： [{ name: '...', text: '...' }]
-
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">name: String, 标签名称，用于匹配默认slots中内容的name</li>
+              <li class="au-theme-border-color--base-8">text: String, 标签显示的文字</li>
+              </ol>
+          </td>
+          <td>
+            标签配置
           </td>
         </tr>
         <tr>
-          <td>currentTabName</td>
+          <td>current</td>
           <td>
             <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
             <!--<au-icon type="times"></au-icon>-->
           </td>
           <td>String</td>
           <td>
-
           </td>
           <td>
-            ——
-
+            <au-icon type="minus"></au-icon>
           </td>
           <td>
-            表示当前选中的标签Id
-
+            表示当前选中的标签的name
           </td>
         </tr>
         </tbody>
@@ -87,7 +82,11 @@
         <tr>
           <td>默认slot</td>
           <td>
-            组件通过默认slot的name属性作为标识，来显示对应的内容
+            slot中的所有子集元素都需要添加name属性作为切换的依据<br>
+            它跟tabs的name属性一一对应<br>
+            如果每个content中的内容模板是相同的，则可以不给定slot中的容器元素的name<br>
+            如果没有找到相应的tab容器，它不会切换底部的内容<br>
+            这样你就可以只使用一个内容模板，在点击tab时仅仅是切换其中的数据而不是整个模板了
           </td>
         </tr>
         </tbody>
@@ -104,21 +103,21 @@
         </thead>
         <tbody>
         <tr>
-          <td>@admin-tabs-toggle</td>
+          <td>@toggle</td>
           <td>
             <ol class="option-list">
+              <li class="au-theme-border-color--base-8">current</li>
               <li class="au-theme-border-color--base-8">event</li>
             </ol>
           </td>
-          <td>当tabs切换的时候触发该事件，事件处理函数接受两个参数，tabName和event，tabName表示当前切换到的tab的name属性，event表示当前点击事件的事件对象，但是如果是由外部修改currentTabName的值触发的切换，则event为undefined
-
+          <td>
+            当用户切换标签的时候触发该事件<br>
+            current表示当前切换到的tab的name属性，event表示当前点击事件的事件对象<br>
+            但是如果是由外部修改currentTabName的值触发的切换，则event为undefined
           </td>
         </tr>
         </tbody>
       </au-table>
-      <cite
-        class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span
-        class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">
@@ -127,38 +126,30 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-      <div style="width:700px;padding:30px;" >
-      <au-tabs :tabs="tabsData" :current="activeTabNameData" style="height:400px;" >
-         <!--name required and is tabName-->
-        <div name="baseInfo" >基本信息</div> <div name="externalresource">列表信息</div> </au-tabs>
-      </div>
+        <au-tabs :tabs="tabs" :current="current">
+          <div name="baseInfo" >基本信息</div>
+          <div name="externalresource">列表信息</div>
+        </au-tabs>
       '>
       </code-h>
       <code-h lang="js">
-
-        import adTabs from '../admin-ui/components/tabs'
         export default{
-           data(){
-             return {
-               activeTabName:'baseInfo',
-               tabs:[
-                       {
-                           name:'baseInfo',
-                           text:'基本信息'
-                       },
-                       {
-                           name:'externalresource',
-                           text:'列表信息'
-                       }
-                   ]
-             };
-           },
-           components: {
-                 adTabs
-           }
+          data(){
+            return {
+              current:'baseInfo',
+              tabs:[
+                {
+                  name:'baseInfo',
+                  text:'基本信息'
+                },
+                {
+                  name:'externalResource',
+                  text:'列表信息'
+                }
+              ]
+            };
+          }
         }
-
-
       </code-h>
     </au-panel>
   </div>
@@ -168,14 +159,14 @@
     name: 'tabs-examples',
     data () {
       return {
-        activeTabName: '',
+        current: 'baseInfo',
         tabs: [
           {
             name: 'baseInfo',
             text: '基本信息'
           },
           {
-            name: 'externalresource',
+            name: 'externalResource',
             text: '列表信息'
           }
         ]

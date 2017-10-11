@@ -85,7 +85,8 @@ export {
   Toast,
   Modal,
   MessageBox,
-  Paginator
+  Paginator,
+  Tabs
 }
 
 // export all comps as an object

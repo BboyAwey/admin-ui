@@ -75,7 +75,7 @@
             <td>
               <au-icon type="minus"></au-icon>
             </td>
-            <td>当前显示的图片<span class="code au-theme-radius au-theme-background-color--warning-5">index</span> <br>从0开始</td>
+            <td>当前显示的图片index<br>从0开始</td>
           </tr>
         </tbody>
       </au-table>

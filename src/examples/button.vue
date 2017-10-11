@@ -57,10 +57,11 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td><au-icon type="minus"></au-icon></td>
+            <td>normal</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">large</li>
+                <li class="au-theme-border-color--base-8">normal</li>
                 <li class="au-theme-border-color--base-8">small</li>
                 <li class="au-theme-border-color--base-8">mini</li>
               </ol>
@@ -157,9 +158,7 @@
         <au-button type="primary" @click="handleClick"></au-button>
       '></code-h>
       <code-h lang="js">
-        import AuButton from 'admin-ui'
         export default {
-          components: { AuButton },
           methods: {
             handleClick (event) {
               console.log(event)

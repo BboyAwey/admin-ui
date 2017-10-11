@@ -29,6 +29,7 @@ import Toast from './components/toast'
 import Modal from './components/modal'
 import MessageBox from './components/message-box'
 import Paginator from './components/paginator'
+import Tabs from './components/tabs'
 
 // add all comps into an array
 const components = [
@@ -55,7 +56,8 @@ const components = [
   Toast,
   MessageBox,
   Modal,
-  Paginator
+  Paginator,
+  Tabs
 ]
 
 // export comps one by one

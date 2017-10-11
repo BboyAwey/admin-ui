@@ -114,6 +114,10 @@ export default [
       {
         'text': '分页',
         'url': '/paginator'
+      },
+      {
+        'text': 'tabs',
+        'url': '/tabs'
       }
     ]
   }

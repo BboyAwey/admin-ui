@@ -144,6 +144,11 @@ export default new Router({
       path: '/paginator',
       name: 'paginator',
       component: (resolve) => require(['../examples/paginator.vue'], resolve)
+    },
+    {
+      path: '/tabs',
+      name: 'tabs',
+      component: (resolve) => require(['../examples/tabs.vue'], resolve)
     }
   ]
 })

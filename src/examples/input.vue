@@ -327,6 +327,13 @@
               返回值为一个表示验证结果的Boolean值
             </td>
           </tr>
+          <tr>
+            <td>clear()</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>清除值和警告</td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

@@ -14,26 +14,25 @@
 </style>
 <template>
   <div class="au-cascading">
-    <div class="au-form-label" :class="{
-      'au-theme-font-color--base-3': !hasWarnings,
-      'au-theme-font-color--danger-3': hasWarnings
-    }" :style="{
+    <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }">{{ label }}</div>
-    <div class="au-cascading-core-container"><au-select
-      class="au-cascading-core"
-      :warnings=" hasWarnings ? [] : null"
-      :size="size"
-      v-for="(levelArr, index) in cascadingData"
-      :key="index"
-      :options="filterOptions(levelArr, index)"
-      v-model="selectedOptions[index]"
-      @select="select"
-      @change="change"
-      @focus="focus"
-      @blur="blur"
-      :disabled="disabled"
-      ref="au-select"></au-select></div>
+    <div class="au-cascading-core-container">
+      <au-select
+        class="au-cascading-core"
+        :warnings=" hasWarnings ? [] : null"
+        :size="size"
+        v-for="(levelArr, index) in cascadingData"
+        :key="index"
+        :options="filterOptions(levelArr, index)"
+        v-model="selectedOptions[index]"
+        :placeholder="placeholder instanceof Array ? placeholder[index] : placeholder"
+        @select="select"
+        @change="change"
+        @focus="focus"
+        @blur="blur"
+        :disabled="disabled"
+        ref="au-select"></au-select></div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="i">{{ warning }}</div>
     <div class="au-from-warning au-theme-font-color--danger-3" v-for="(warning, i) in localWarnings" :key="i">{{ warning }}</div>
   </div>
@@ -60,6 +59,9 @@
       options: {
         type: Array,
         required: true
+      },
+      placeholder: {
+        type: [Array, String]
       }
     },
     computed: {
@@ -112,7 +114,7 @@
         let cascadingData = this.calcCascadingData(this.options)
         let bottomNodes = cascadingData[cascadingData.length - 1]
         let bottomNode = null
-        // find the last node
+
         for (let i = 0; i < bottomNodes.length; i++) {
           if (bottomNodes[i].value === bottomNodeValue) {
             bottomNode = bottomNodes[i]

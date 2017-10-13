@@ -84,9 +84,7 @@
 </style>
 <template>
   <div class="au-select au-theme-font-color--base-3">
-    <div class="au-form-label" :class="{
-      'au-theme-font-color--danger-3': hasWarnings
-    }" :style="{
+    <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }" @click="labelClick" v-if="label" @click.stop="()=>{}">{{ label }}</div>
     <div :class="`au-select-core-container au-size-${size}`" ref="coreContainer">
@@ -102,8 +100,8 @@
           'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
           'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-shadow--primary': !disabled && active,
-          'au-theme-font-color--danger-3': hasWarnings
+          'au-theme-shadow--primary': !disabled && active && !hasWarnings,
+          'au-theme-shadow--danger': hasWarnings,
         }" :style="{
           cursor: disabled ? 'not-allowed' : 'default'
         }">

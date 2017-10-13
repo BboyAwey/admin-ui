@@ -70,12 +70,8 @@
 <template>
   <div class="au-input">
     <div
-      class="au-form-label"
+      class="au-form-label au-theme-font-color--base-3"
       v-if="label"
-      :class="{
-        'au-theme-font-color--base-3': !hasWarnings,
-        'au-theme-font-color--danger-3': hasWarnings
-      }"
       @click.stop="labelClick()">{{ label }}</div>
     <textarea
       v-if="type==='textarea'"
@@ -87,8 +83,7 @@
         'au-theme-border-color--danger-3': hasWarnings,
         'au-theme-focus-shadow--primary': !hasWarnings,
         'au-theme-focus-shadow--danger': hasWarnings,
-        'au-theme-font-color--base-3': !hasWarnings,
-        'au-theme-font-color--danger-3': hasWarnings,
+        'au-theme-font-color--base-3': true,
         'au-theme-disabled-background-color--base-8': disabled
       }"
       :style="{ minWidth, maxWidth, minHeight, maxHeight }"
@@ -128,8 +123,7 @@
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
-          'au-theme-font-color--base-3': !hasWarnings,
-          'au-theme-font-color--danger-3': hasWarnings,
+          'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
         :style="{
@@ -162,8 +156,7 @@
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
-          'au-theme-font-color--base-3': !hasWarnings,
-          'au-theme-font-color--danger-3': hasWarnings,
+          'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
         :style="{
@@ -194,8 +187,7 @@
           'au-theme-border-color--danger-3': hasWarnings,
           'au-theme-focus-shadow--primary': !hasWarnings,
           'au-theme-focus-shadow--danger': hasWarnings,
-          'au-theme-font-color--base-3': !hasWarnings,
-          'au-theme-font-color--danger-3': hasWarnings,
+          'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
         :style="{

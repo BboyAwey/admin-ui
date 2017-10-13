@@ -40,11 +40,11 @@
 </template>
 <script>
   import FormApiMixin from '../../../helpers/form-api-mixin'
-  import ValidatorMixin from '../../../helpers/validator-mixin'
+  // import ValidatorMixin from '../../../helpers/validator-mixin'
   import { getElementSize } from '../../../helpers/dom'
   export default {
     name: 'au-switch',
-    mixins: [FormApiMixin, ValidatorMixin],
+    mixins: [FormApiMixin],
     mounted () {
       this.getBg()
       this.getLeft()

@@ -44,8 +44,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">String</li>
-                <li class="au-theme-border-color--base-8">Number</li>
+                <li class="au-theme-border-color--base-8">Any</li>
                 <li class="au-theme-border-color--base-8">Array</li>
               </ol>
             </td>
@@ -53,7 +52,8 @@
             <td><au-icon type="minus"></au-icon></td>
             <td>
               值<br>
-              当multiple为true时，value为Array类型
+              当multiple为true时，value为Array类型<br>
+              当multiple为false时，value为任意类型<br>
             </td>
           </tr>
           <tr>
@@ -71,7 +71,7 @@
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">text: String，选项显示的文字</li>
-                <li class="au-theme-border-color--base-8">value: String/Number，选项的值</li>
+                <li class="au-theme-border-color--base-8">value: Any，选项的值，可以是任意类型</li>
               </ol>
             </td>
             <td>
@@ -308,6 +308,13 @@
               在给定了验证器的情况下执行验证<br>
               返回值为一个表示验证结果的Boolean值
             </td>
+          </tr>
+          <tr>
+            <td>reset()</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>清除值和警告</td>
           </tr>
         </tbody>
       </au-table>

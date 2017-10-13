@@ -38,11 +38,7 @@
 </style>
 <template>
   <div class="au-radio">
-    <div class="au-form-label" v-if="label"
-      :class="{
-        'au-theme-font-color--danger-3': hasWarnings,
-        'au-theme-font-color--base-3': !hasWarnings,
-      }">{{ label }}</div>
+    <div class="au-form-label" v-if="label">{{ label }}</div>
     <div class="au-radio-container au-radio-container-multiple" v-for="(radio, i) in radios" :key="i"
       @mouseenter="handleMouseEnter(i)"
       @mouseleave="handleMouseLeave(i)"
@@ -66,11 +62,7 @@
             'au-theme-background-color--base-6': disabled
           }"></span>
       </span>
-      <span class="au-radio-text"
-      :class="{
-        'au-theme-font-color--danger-3': hasWarnings,
-        'au-theme-font-color--base-3': !hasWarnings
-      }">{{ radio.text }}</span>
+      <span class="au-radio-text">{{ radio.text }}</span>
     </div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>

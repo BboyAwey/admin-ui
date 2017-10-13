@@ -37,11 +37,7 @@
 </style>
 <template>
   <div class="au-checkbox">
-    <div class="au-form-label" v-if="label"
-      :class="{
-        'au-theme-font-color--danger-3': hasWarnings,
-        'au-theme-font-color--base-3': !hasWarnings,
-      }">{{ label }}</div>
+    <div class="au-form-label au-theme-font-color--base-3" v-if="label">{{ label }}</div>
     <div class="au-checkbox-container" v-if="!multiple"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -68,10 +64,7 @@
           'au-theme-font-color--base-6': disabled
         }"></au-icon>
       </span>
-      <span class="au-checkbox-text"
-       :class="{
-         'au-theme-font-color--danger-3': hasWarnings
-       }">{{ text }}</span>
+      <span class="au-checkbox-text">{{ text }}</span>
     </div>
     <div class="au-checkbox-container au-checkbox-container-multiple" v-for="(checkbox, i) in localCheckboxes" :key="i"
       @mouseenter="handleMouseEnter(i)"
@@ -99,10 +92,7 @@
             'au-theme-font-color--base-6-important': disabled
           }"></au-icon>
       </span>
-      <span class="au-checkbox-text"
-      :class="{
-        'au-theme-font-color--danger-3': hasWarnings
-      }">{{ checkbox.text }}</span>
+      <span class="au-checkbox-text">{{ checkbox.text }}</span>
     </div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
     <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>

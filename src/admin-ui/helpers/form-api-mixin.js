@@ -43,8 +43,16 @@ export default {
       if (this.validateOnBlur) this.validate()
       this.$emit('blur', this.localValue, e)
     },
-    reset () {
-      this.localValue = ''
+    clear () {
+      if (typeof this.localValue === 'string') {
+        this.localValue = ''
+      } else if (typeof this.localValue === 'number') {
+        this.localValue = ''
+      } else if (this.localValue instanceof Array) {
+        this.localValue = []
+      } else if (this.localValue instanceof Object) {
+        this.localValue = {}
+      }
       this.localWarnings = this.warnings || {}
     }
   }

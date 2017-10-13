@@ -126,7 +126,7 @@ function MessageBox (config) {
 
   // get a content instance
   let contentInstance = instances[type]
-  if (reset) contentInstance.$refs.core.reset()
+  if (reset) contentInstance.$refs.core.clear()
   // set content instance props
   Object.assign(contentInstance, {message, validators, placeholder})
   // put the content into modal and show them on document

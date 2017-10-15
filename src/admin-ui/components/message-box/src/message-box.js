@@ -122,7 +122,7 @@ function MessageBox (config) {
     })]
   }
   if (type === 'prompt') instances.modal.height = 200
-  else instances.modal.height = 144
+  else instances.modal.height = 14
 
   // get a content instance
   let contentInstance = instances[type]

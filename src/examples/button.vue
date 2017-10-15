@@ -12,6 +12,10 @@
         <au-button type="warning" size="large">按钮</au-button>
         <au-button type="info">按钮</au-button>
         <au-button type="primary" :plain="true">按钮</au-button>
+        <au-button type="default" :plain="true">按钮</au-button>
+        <au-button type="info" :plain="true">按钮</au-button>
+        <au-button type="danger" :plain="true">按钮</au-button>
+        <au-button type="warning" :plain="true">按钮</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -47,7 +51,8 @@
               </ol>
             </td>
             <td>
-              按钮类型
+              按钮类型<br>
+              当plain为true时，default与primary效果一样
             </td>
           </tr>
           <tr>

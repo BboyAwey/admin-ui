@@ -109,10 +109,7 @@
 </style>
 <template>
   <div class="au-datepicker">
-    <div class="au-form-label" :class="{
-      'au-theme-font-color--base-3': disabled || !hasWarnings,
-      'au-theme-font-color--danger-3': hasWarnings
-    }" :style="{
+    <div class="au-form-label au-theme-cont-color--base-3" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }" v-if="label" @click="labelClick">{{ label }}</div>
     <div class="au-datepicker-container">
@@ -247,6 +244,7 @@
       },
       inputValue (v) {
         let res = this.format(v)
+        this.localValue = res
         if (this.popup) this.render(res)
       },
       popup (v) {
@@ -401,8 +399,11 @@
           if (res !== this.inputValue) {
             this.inputValue = res
             this.lastInputValue = res
-            this.$emit('input', value, e) // input first to ensure changes of father comp
-            this.$emit('change', value, e)
+            this.$emit('input', res, e) // input first to ensure changes of father comp
+            this.$emit('change', res, e)
+          } else {
+            this.$emit('input', res, e) // input first to ensure changes of father comp
+            this.$emit('change', res, e)
           }
         } else {
           this.inputValue = this.lastInputValue

@@ -100,7 +100,7 @@ export default [
         'url': '/timepicker'
       },
       {
-        'text': '提示信息',
+        'text': '提示消息',
         'url': '/toast'
       },
       {

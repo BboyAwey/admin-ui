@@ -57,7 +57,7 @@
     class="au-modal-container au-theme-before-background-color--base-0"
     v-show="localDisplay"
     ref="modal"
-    @click="maskClick">
+    @click="hide">
     <div class="au-modal au-theme-radius au-theme-background-color--base-12" @click.stop="() => {}" :style="modalStyle">
       <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title">{{ title }}</h4>
       <div class="au-modal-content" ref="content">
@@ -73,7 +73,6 @@
           :size="button.size"
           :plain="button.plain"
           :disabled="button.disabled"
-          :style="{ 'background-color': button.bgColor }"
           @click="operate(button.handler)">{{ button.text }}</au-button>
       </div>
     </div>
@@ -100,8 +99,7 @@
     },
     props: {
       display: {
-        type: Boolean,
-        require: true
+        type: Boolean
       },
       title: {
         type: String
@@ -164,13 +162,16 @@
         return {
           width: width.indexOf('%') === -1 ? width.indexOf('px') ? width : parseInt(width) + 'px' : width,
           height: parseInt(height) + 'px',
-          marginTop: (parseInt(height) / 2 * -1) - 100 + 'px'
+          marginTop: (parseInt(height) / 2 * -1) + 'px'
         }
       }
     },
     methods: {
-      maskClick () {
+      hide () {
         this.localDisplay = false
+      },
+      show () {
+        this.localDisplay = true
       },
       operate (handler) {
         handler.call(this.$parent)
@@ -187,7 +188,7 @@
       },
       escHandler (e) {
         if (e.keyCode === 27) {
-          this.localDisplay = false
+          this.hide()
         }
       }
     }

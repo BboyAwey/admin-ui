@@ -1,0 +1,19 @@
+{
+  "name": "admin-ui",
+  "version": "2.0.0",
+  "description": "The realization of background-management-system-like UI design specifications. This is ths version 2 of Admin UI",
+  "author": "Awey <chenwei1@rongcapital.cn>",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.dataengine.com:awey/admin-ui-publish.git"
+  },
+  "homepage": "http://10.200.10.60:3000/#/installation",
+  "keywords": [
+    "admin",
+    "ui",
+    "vue",
+    "components"
+  ],
+  "license": "MIT"
+}

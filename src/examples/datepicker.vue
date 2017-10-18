@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators"></au-datepicker>
+        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-10-6" end="2017-11-3"></au-datepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -96,6 +96,36 @@
               </ol>
             </td>
             <td>禁用</td>
+          </tr>
+          <tr>
+            <td>start</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              有效日期的开始日期（包含）<br>
+              设置后该日期之后的日期才可被选中<br>
+              格式必须为YYYY-M(M)-D(D)
+            </td>
+          </tr>
+          <tr>
+            <td>end</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              有效日期的结束日期（不包含）<br>
+              设置后该日期之前的日期才可被选中<br>
+              格式必须为YYYY-M(M)-D(D)
+            </td>
           </tr>
           <tr>
             <td>warnings</td>

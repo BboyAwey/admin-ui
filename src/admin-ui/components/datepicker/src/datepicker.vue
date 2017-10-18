@@ -185,11 +185,14 @@
                 v-for="(date, j) in row"
                 :key="j">
                 <span :class="{
-                  'au-theme-hover-border-color--primary-3': !isSelected(date),
+                  'au-theme-hover-border-color--primary-3': isValid(date) && !isSelected(date),
                   'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
                   'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
-                  'au-theme-font-color--base-6': renderedDateObj.month !== date.month,
-                  'au-theme-font-color--primary-3': isToday(date)&&!isSelected(date),
+                  'au-theme-font-color--base-6': isValid(date) && renderedDateObj.month !== date.month,
+                  'au-theme-font-color--base-8': !isValid(date),
+                  'au-theme-font-color--primary-3': isToday(date) && !isSelected(date) && isValid(date),
+                }" :style="{
+                  cursor: isValid(date) ? '' : 'not-allowed'
                 }" @click="selectDate(date)">{{ isToday(date) ? '今天' : date.date }}</span>
               </td>
             </tr>
@@ -210,6 +213,13 @@
     name: 'au-datepicker',
     mixins: [ValidatorMixin, FormApiMixin],
     components: { AuInput, AuIcon },
+    mounted () {
+      if (this.start && this.end) {
+        if (!this.startMustEarlierThanEnd()) {
+          throw new Error('Admin UI@au-datepicker@start must earlier than end')
+        }
+      }
+    },
     data () {
       return {
         dateObj: {},
@@ -225,6 +235,18 @@
       placeholder: {
         type: String,
         default: '请选择日期'
+      },
+      start: {
+        type: String,
+        validator (v) {
+          return /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+        }
+      },
+      end: {
+        type: String,
+        validator (v) {
+          return /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+        }
       }
     },
     computed: {
@@ -432,6 +454,7 @@
         return true
       },
       selectDate (dateObj) {
+        if (!this.isValid(dateObj)) return
         this.changeInputValue(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
         let timer = setTimeout(() => {
           this.popup = false
@@ -468,6 +491,32 @@
       },
       popupBlur (e) {
         if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
+      },
+      isValid (date) {
+        let d = (new Date(date.year, date.month, date.date)).getTime()
+        let res = true
+        if (this.start) {
+          let start = this.start.split('-').map(e => {
+            return e.trim()
+          })
+          if (d < (new Date(...start).getTime())) res = false
+        }
+        if (this.end) {
+          let end = this.end.split('-').map(e => {
+            return e.trim()
+          })
+          if (d >= (new Date(...end).getTime())) res = false
+        }
+        return res
+      },
+      startMustEarlierThanEnd () {
+        let s = this.start.split('-').map(e => {
+          return e.trim()
+        })
+        let e = this.end.split('-').map(e => {
+          return e.trim()
+        })
+        return (new Date(...s).getTime() <= (new Date(...e).getTime()))
       }
     }
   }

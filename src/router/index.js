@@ -149,6 +149,11 @@ export default new Router({
       path: '/tabs',
       name: 'tabs',
       component: (resolve) => require(['../examples/tabs.vue'], resolve)
+    },
+    {
+      path: '/loading',
+      name: 'loading',
+      component: (resolve) => require(['../examples/loading.vue'], resolve)
     }
   ]
 })

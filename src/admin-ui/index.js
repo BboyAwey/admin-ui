@@ -30,6 +30,7 @@ import Modal from './components/modal'
 import MessageBox from './components/message-box'
 import Paginator from './components/paginator'
 import Tabs from './components/tabs'
+import Loading from './components/loading'
 
 // add all comps into an array
 const components = [
@@ -57,7 +58,8 @@ const components = [
   MessageBox,
   Modal,
   Paginator,
-  Tabs
+  Tabs,
+  Loading
 ]
 
 // export comps one by one
@@ -86,7 +88,8 @@ export {
   Modal,
   MessageBox,
   Paginator,
-  Tabs
+  Tabs,
+  Loading
 }
 
 // export all comps as an object
@@ -114,7 +117,9 @@ const adminUi = {
   Toast,
   Modal,
   MessageBox,
-  Paginator
+  Paginator,
+  Tabs,
+  Loading
 }
 
 adminUi.install = function (Vue, options = {}) {
@@ -127,6 +132,7 @@ adminUi.install = function (Vue, options = {}) {
   Vue.prototype.$confirm = MessageBox.confirm
   Vue.prototype.$prompt = MessageBox.prompt
   Vue.prototype.$toast = Toast
+  Vue.prototype.$loading = Loading
 }
 
 // add direvtives installing function

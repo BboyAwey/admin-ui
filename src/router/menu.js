@@ -118,6 +118,10 @@ export default [
       {
         'text': '标签页',
         'url': '/tabs'
+      },
+      {
+        'text': '加载动画',
+        'url': '/loading'
       }
     ]
   }

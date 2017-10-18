@@ -6,16 +6,9 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="default">按钮</au-button>
-        <au-button type="primary" size="mini">按钮</au-button>
-        <au-button type="danger" size="small">按钮</au-button>
-        <au-button type="warning" size="large">按钮</au-button>
-        <au-button type="info">按钮</au-button>
-        <au-button type="primary" :plain="true">按钮</au-button>
-        <au-button type="default" :plain="true">按钮</au-button>
-        <au-button type="info" :plain="true">按钮</au-button>
-        <au-button type="danger" :plain="true">按钮</au-button>
-        <au-button type="warning" :plain="true">按钮</au-button>
+        <au-button type="primary" @click="loading = !loading">按钮</au-button>
+        <au-button type="primary" :disabled="true">按钮</au-button>
+        <au-button type="primary" :loading="loading">按钮</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -160,13 +153,15 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="primary" @click="handleClick"></au-button>
+        <au-button type="primary" @click="loading = !loading">按钮</au-button>
+        <au-button type="primary" :disabled="true">按钮</au-button>
+        <au-button type="primary" :loading="loading">按钮</au-button>
       '></code-h>
       <code-h lang="js">
         export default {
-          methods: {
-            handleClick (event) {
-              console.log(event)
+          data () {
+            return {
+              loading: true
             }
           }
         }
@@ -176,6 +171,11 @@
 </template>
 <script>
   export default {
-    name: 'button-examples'
+    name: 'button-examples',
+    data () {
+      return {
+        loading: true
+      }
+    }
   }
 </script>

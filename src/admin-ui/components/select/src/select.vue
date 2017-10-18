@@ -157,13 +157,12 @@
   import FormApiMixin from '../../../helpers/form-api-mixin'
   import { getElementSize } from '../../../helpers/dom'
   import AuIcon from '../../icon'
-  import AuInput from '../../input'
   import AuScroller from '../../scroller'
 
   export default {
     name: 'au-select',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: {AuIcon, AuInput, AuScroller},
+    components: {AuIcon, AuScroller},
     created () {
       this.localValueToSelectedOptions()
     },

@@ -49,12 +49,12 @@ table {
 input, textarea {
   box-sizing: border-box;
 }
-// code font family
+/* // code font family */
 code, code *{
   font-family: 'Consolas';
 }
 
-// firefox button vertical align not center bug fixed
+/* // firefox button vertical align not center bug fixed */
 button::-moz-focus-inner {
 	padding: 0;
 	border: none;

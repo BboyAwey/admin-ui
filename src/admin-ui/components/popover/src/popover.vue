@@ -232,7 +232,9 @@
         this.$refs.target.removeEventListener('mouseleave', this.handleMouseout)
       },
       handleClick () {
-        this.display ? this.hide() : this.show()
+        if (this.trigger === 'click') {
+          this.display ? this.hide() : this.show()
+        }
       },
       handleBlur () { // pop blur
         if (this.trigger === 'click') this.hide()
@@ -241,7 +243,7 @@
         this.show()
       },
       handleMouseout () {
-        this.hide()
+        if (this.trigger !== 'click') this.hide()
       },
       show () {
         if (this.disabled) return

@@ -1,6 +1,6 @@
 <style lang="scss">
   @import "../../../style/vars";
-  @import "../../../style/fade";
+  // @import "../../../style/fade";
   .au-popover {
     position: absolute;
     // top: -99999;
@@ -107,39 +107,36 @@
   }
 </style>
 <template>
-  <transition name="au-fade">
-    <div
-      class="au-popover au-theme-radius"
-      :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
-      :tabindex="_uid"
-      @blur="handleBlur($event)"
-      ref="pop"
-      v-show="display">
-      <span ref="target" class="au-popover-target-container">
-        <slot name="target"></slot>
-      </span>
-      <div ref="content" :class="{
-        'au-popover-content': true,
-        'au-theme-radius': true,
-        'au-theme-background-color--base-2': !plain,
-        'au-theme-font-color--base-12': !plain,
-        'au-theme-background-color--base-12': plain,
-        'au-theme-border-color--base-8': plain,
-        'au-theme-font-color--base-3': plain
-      }">
-        <slot name="content"></slot>
-      </div>
-      <span
-        v-show="triangle"
-        :class="{
-          'au-popover-triangle': true,
-          [localPlacement.split(/\s+/).join('-')]: true,
-          'au-theme-background-color--base-2': !plain,
-          'au-theme-background-color--base-12': plain,
-          'au-popover-plain-triangle au-theme-border-color--base-8': plain
-        }"></span>
+  <div
+    class="au-popover au-theme-radius"
+    :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+    :tabindex="_uid"
+    @blur="handleBlur($event)"
+    ref="pop">
+    <span ref="target" class="au-popover-target-container">
+      <slot name="target"></slot>
+    </span>
+    <div ref="content" :class="{
+      'au-popover-content': true,
+      'au-theme-radius': true,
+      'au-theme-background-color--base-2': !plain,
+      'au-theme-font-color--base-12': !plain,
+      'au-theme-background-color--base-12': plain,
+      'au-theme-border-color--base-8': plain,
+      'au-theme-font-color--base-3': plain
+    }">
+      <slot name="content"></slot>
     </div>
-  </transition>
+    <span
+      v-show="triangle"
+      :class="{
+        'au-popover-triangle': true,
+        [localPlacement.split(/\s+/).join('-')]: true,
+        'au-theme-background-color--base-2': !plain,
+        'au-theme-background-color--base-12': plain,
+        'au-popover-plain-triangle au-theme-border-color--base-8': plain
+      }"></span>
+  </div>
 </template>
 <script>
   import { getElementSize, getElementPagePos } from '../../../helpers/dom'
@@ -175,7 +172,6 @@
       this.addEvents()
       this.calPos() // TODO:
       window.addEventListener('resize', this.calPos)
-
       // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       // if (MutationObserver) {
       //   this.observer = new MutationObserver((mutations) => {
@@ -201,7 +197,7 @@
         else this.$emit('hide')
       },
       disabled (v) {
-        this.reconstruct()
+        // this.reconstruct()
       },
       placement (v) {
         this.calPos()
@@ -214,8 +210,11 @@
         let pop = this.$refs.pop
 
         pop.setAttribute('id', 'au-popover-' + this._uid)
-        if (target.parentNode === pop) pop.parentNode.insertBefore(target, pop)
-        if (pop.parentNode !== document.body) document.body.appendChild(pop)
+        if (target.parentNode === pop) {
+          pop.parentNode.insertBefore(target, pop)
+          pop.parentNode.removeChild(pop)
+        }
+        // if (pop.parentNode !== document.body) document.body.appendChild(pop)
       },
       addEvents () {
         if (this.trigger === 'click') {
@@ -236,7 +235,7 @@
         this.display ? this.hide() : this.show()
       },
       handleBlur () { // pop blur
-        this.hide()
+        if (this.trigger === 'click') this.hide()
       },
       handleMouseover () {
         this.show()
@@ -248,27 +247,18 @@
         if (this.disabled) return
         this.calPos()
         // this.originPopSize = {
-        //   width: window.getComputedStyle(this.$refs.pop).width,
+          //   width: window.getComputedStyle(this.$refs.pop).width,
         //   height: window.getComputedStyle(this.$refs.pop).height
         // }
+        if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
+        this.$refs.pop.focus()
         this.display = true
-        this.$nextTick(() => {
-          this.$refs.pop.focus()
-        })
+        // setInterval(this.calPos.bind(this), 500)
       },
       hide (destroy) {
-        // if (this.disabled) return
-        // this.calPos()
-        if (!destroy) {
-          this.display = false
-          let fix = () => {
-            // this.fixSize(this.originPopSize)
-            this.$refs.pop.removeEventListener('transitionend', fix)
-          }
-          this.$refs.pop.addEventListener('transitionend', fix)
-        } else {
-          document.querySelector(`#au-popover-${this._uid}`).style.display = 'none'
-        }
+        if (this.$refs.pop.parentNode) this.$refs.pop.parentNode.removeChild(this.$refs.pop)
+        this.display = false
+        // clearInterval(this.calPos.bind(this))
       },
       calPos () {
         let targetElm = this.$slots.target[0].elm

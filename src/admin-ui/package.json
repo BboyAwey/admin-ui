@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "The realization of background-management-system-like UI design specifications. This is ths version 2 of Admin UI",
   "author": "Awey <chenwei1@rongcapital.cn>",
-  "main": "./index.js",
+  "main": "./dist/admin-ui.js",
   "repository": {
     "type": "git",
     "url": "git@gitlab.dataengine.com:awey/admin-ui-publish.git"

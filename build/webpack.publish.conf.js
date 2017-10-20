@@ -61,7 +61,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: config.publish.productionSourceMap ? '#source-map' : false,
   entry: {
-    adminUi: './src/admin-ui/index.js'
+    adminUi: './src/admin-ui/src/index.js'
   },
   output: {
     path: config.publish.assetsRoot + (isMin ? '/min-temp' : ''),

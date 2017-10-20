@@ -22,7 +22,7 @@ module.exports = {
   },
   publish: {
     env: require('./publish.env'),
-    assetsRoot: path.resolve(__dirname, '../publish'),
+    assetsRoot: path.resolve(__dirname, '../src/admin-ui/dist'),
     assetsSubDirectory: '',
     assetsPublicPath: '',
     productionSourceMap: false,

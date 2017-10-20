@@ -28,7 +28,7 @@
 </template>
 <script>
   export default {
-    name: 'installtion'
+    name: 'installtion-examples'
   }
 </script>
 

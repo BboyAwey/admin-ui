@@ -184,7 +184,7 @@
     },
     destroyed () {
       window.removeEventListener('resize', this.calPos)
-      this.hide(true)
+      // this.hide(true)
       // if (this.observe) this.observer.disconnect()
     },
     watch: {
@@ -257,7 +257,7 @@
         this.display = true
         // setInterval(this.calPos.bind(this), 500)
       },
-      hide (destroy) {
+      hide () {
         if (this.$refs.pop.parentNode) this.$refs.pop.parentNode.removeChild(this.$refs.pop)
         this.display = false
         // clearInterval(this.calPos.bind(this))

@@ -4,8 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import codeH from './examples/helper/codeHighlighter.vue'
 import router from './router'
-import adminUi from 'admin-ui'
-import 'admin-ui/style.css'
+import adminUi from './admin-ui/src'
 import './style/_common.scss'
 
 // adminUi2.theme()

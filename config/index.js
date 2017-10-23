@@ -22,7 +22,8 @@ module.exports = {
   },
   publish: {
     env: require('./publish.env'),
-    assetsRoot: path.resolve(__dirname, '../src/admin-ui/dist'),
+    distRoot: path.resolve(__dirname, '../src/admin-ui/dist'),
+    minRoot: path.resolve(__dirname, '../src/admin-ui/min'),
     assetsSubDirectory: '',
     assetsPublicPath: '',
     productionSourceMap: false,

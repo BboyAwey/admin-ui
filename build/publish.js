@@ -1,7 +1,7 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'publish'
-// let isMin = process.argv[2]
+let isMin = process.argv[2]
 
 var ora = require('ora')
 var rm = require('rimraf')
@@ -48,6 +48,5 @@ webpack(webpackConfig, function (err, stats) {
     process.exit(1)
   }
 
-  // console.log(chalk.cyan('  Build ' + (isMin ? 'mini' : '') + ' complete.\n'))
-  console.log(chalk.cyan('  Build complete.\n'))
+  console.log(chalk.cyan('  Build ' + (isMin ? 'min' : '') + ' complete.\n'))
 })

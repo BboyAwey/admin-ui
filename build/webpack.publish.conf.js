@@ -6,7 +6,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var vueLoaderConfig = require('./vue-loader.conf')
 
@@ -56,7 +56,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.publish.productionSourceMap,
-      extract: false
+      extract: true
     })
   },
   devtool: config.publish.productionSourceMap ? '#source-map' : false,
@@ -64,9 +64,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     adminUi: './src/admin-ui/src/index.js'
   },
   output: {
-    // path: config.publish.assetsRoot + (isMin ? '/min-temp' : ''),
-    // filename: 'index' + (isMin ? '.min' : '') + '.js',
-    path: config.publish.assetsRoot,
+    path: config.publish[!isMin ? 'distRoot' : 'minRoot'],
     filename: 'index.js',
     publicPath: process.env.NODE_ENV === 'publish'
       ? config.publish.assetsPublicPath
@@ -89,23 +87,22 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     // extract css into its own file
-    // new ExtractTextPlugin({
-    //   filename: utils.assetsPath('style.css')
-    // }),
+    new ExtractTextPlugin({
+      filename: utils.assetsPath('style.css')
+    }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    // new OptimizeCSSPlugin({
-    //   cssProcessorOptions: {
-    //     safe: true
-    //   }
-    // }),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
   ]
 })
 
-// if (isMin) {
-if (true) {
+if (isMin) {
   webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false

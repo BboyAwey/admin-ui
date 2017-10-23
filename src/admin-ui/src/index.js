@@ -144,11 +144,11 @@ adminUi.direvtive = function (Vue) {
 
 // add theme generator function
 adminUi.theme = function (theme) {
-  let styleTag = window.document.querySelector('style#admin-ui-theme') || window.document.createElement('style')
+  let styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style')
 
   styleTag.id = 'admin-ui-theme'
   styleTag.innerHTML = ThemeGenerator(theme)
-  window.document.querySelector('head').appendChild(styleTag)
+  document.body.appendChild(styleTag)
 }
 // gen default theme
 adminUi.theme()

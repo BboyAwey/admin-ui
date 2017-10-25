@@ -82,7 +82,8 @@
             </td>
             <td>
               菜单栏是否收起<br>
-              只在collapsable为true时有效
+              只在collapsable为true时有效<br>
+              可以配合@toggle事件使用来主动控制折叠展开
             </td>
           </tr>
         </tbody>
@@ -108,7 +109,6 @@
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="Events">
-      <!-- TODO: -->
       <au-table>
         <thead>
           <tr>
@@ -119,15 +119,27 @@
         </thead>
         <tbody>
           <tr>
-            <td>event1</td>
+            <td>@toggle</td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">arg1</li>
-                <li class="au-theme-border-color--base-8">arg2</li>
+                <li class="au-theme-border-color--base-8">isCollapse</li>
               </ol>
             </td>
             <td>
-              该事件及参数的详细说明
+              当用户向左收起菜单时触发<br>
+              参数isCollapse表示是否向左折叠
+            </td>
+          </tr>
+          <tr>
+            <td>@select</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">item</li>
+              </ol>
+            </td>
+            <td>
+              当用户点击菜单项时时触发<br>
+              参数item是一个表示菜单项的对象
             </td>
           </tr>
         </tbody>
@@ -156,19 +168,61 @@
               该方法及参数的详细说明
             </td>
           </tr>
-        </tbody>
+        </tbody>,
       </au-table> -->
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
-      <code-h lang="html" content="
-        <au-icon type='check'></au-icon>
-      "></code-h>
+      <code-h lang="html" content='
+        <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
+      '></code-h>
       <code-h lang="js">
-        import AuIcon from 'admin-ui'
         export default {
-          components: { AuIcon }
+          name: 'app',
+          data () {
+            return {
+              menu: [
+                {
+                  'text': '介绍',
+                  'url': '/intro',
+                  'icon': 'info-circle'
+                },
+                {
+                  'text': '安装',
+                  'url': '/installation',
+                  'icon': 'cog'
+                },
+                {
+                  'text': '主题',
+                  'url': '/theme',
+                  'icon': 'th-large'
+                },
+                {
+                  'text': '组件',
+                  'icon': 'cube',
+                  'collapse': false,
+                  'children': [
+                    {
+                      'text': '图标',
+                      'url': '/icon'
+                    },
+                    {
+                      'text': '按钮',
+                      'url': '/button'
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          methods: {
+            go (item) {
+              if (item.url) {
+                this.$router.push(item.url)
+              }
+            }
+          }
         }
       </code-h>
     </au-panel>
@@ -176,6 +230,6 @@
 </template>
 <script>
   export default {
-    name: 'icon-examples'
+    name: 'menu-examples'
   }
 </script>

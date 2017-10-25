@@ -17,7 +17,7 @@
 </template>
 <script>
   export default {
-    name: 'intro'
+    name: 'intro-examples'
   }
 </script>
 

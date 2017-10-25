@@ -6,12 +6,9 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="default">按钮</au-button>
-        <au-button type="primary" size="mini">按钮</au-button>
-        <au-button type="danger" size="small">按钮</au-button>
-        <au-button type="warning" size="large">按钮</au-button>
-        <au-button type="info">按钮</au-button>
-        <au-button type="primary" :plain="true">按钮</au-button>
+        <au-button type="primary" @click="loading = !loading">按钮</au-button>
+        <au-button type="primary" :disabled="true">按钮</au-button>
+        <au-button type="primary" :loading="loading">按钮</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -47,7 +44,8 @@
               </ol>
             </td>
             <td>
-              按钮类型
+              按钮类型<br>
+              当plain为true时，default与primary效果一样
             </td>
           </tr>
           <tr>
@@ -57,10 +55,11 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td><au-icon type="minus"></au-icon></td>
+            <td>normal</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">large</li>
+                <li class="au-theme-border-color--base-8">normal</li>
                 <li class="au-theme-border-color--base-8">small</li>
                 <li class="au-theme-border-color--base-8">mini</li>
               </ol>
@@ -154,15 +153,15 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="primary" @click="handleClick"></au-button>
+        <au-button type="primary" @click="loading = !loading">按钮</au-button>
+        <au-button type="primary" :disabled="true">按钮</au-button>
+        <au-button type="primary" :loading="loading">按钮</au-button>
       '></code-h>
       <code-h lang="js">
-        import AuButton from 'admin-ui'
         export default {
-          components: { AuButton },
-          methods: {
-            handleClick (event) {
-              console.log(event)
+          data () {
+            return {
+              loading: true
             }
           }
         }
@@ -172,6 +171,11 @@
 </template>
 <script>
   export default {
-    name: 'button-examples'
+    name: 'button-examples',
+    data () {
+      return {
+        loading: true
+      }
+    }
   }
 </script>

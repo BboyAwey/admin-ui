@@ -24,6 +24,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'admin-ui': process.env.NODE_ENV === 'production' ? 'admin-ui/min' : 'admin-ui/dist'
     },
     symlinks: false
   },

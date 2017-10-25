@@ -123,7 +123,22 @@
       </au-table>
     </au-panel>
     <au-panel class="section" title="Slots">
-      <au-icon type="minus"></au-icon>
+      <au-table>
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>默认slot</td>
+            <td>
+              内容
+            </td>
+          </tr>
+        </tbody>
+      </au-table>
     </au-panel>
     <au-panel class="section" title="Events">
       <au-icon type="minus"></au-icon>

@@ -48,7 +48,7 @@ export default [
         'url': '/frame'
       },
       {
-        'text': '网格',
+        'text': '栅格',
         'url': '/grid'
       },
       {
@@ -104,7 +104,7 @@ export default [
         'url': '/timepicker'
       },
       {
-        'text': '提示信息',
+        'text': '提示消息',
         'url': '/toast'
       },
       {
@@ -114,6 +114,18 @@ export default [
       {
         'text': '消息框',
         'url': '/message-box'
+      },
+      {
+        'text': '分页',
+        'url': '/paginator'
+      },
+      {
+        'text': '标签页',
+        'url': '/tabs'
+      },
+      {
+        'text': '加载动画',
+        'url': '/loading'
       }
     ]
   }

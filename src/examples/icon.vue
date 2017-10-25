@@ -163,9 +163,9 @@
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
-      <code-h lang="html" content="
-        <au-icon type='check'></au-icon>
-      "></code-h>
+      <code-h lang="html" content='
+        <au-icon type="check"></au-icon>
+      '></code-h>
       <code-h lang="js">
         import AuIcon from 'admin-ui'
         export default {

@@ -1,4 +1,7 @@
 <style lang="scss">
+  .code-h {
+    font-family: 'Consolas';
+  }
   .code-h .number {
     user-select: none;
     -moz-user-select: none;

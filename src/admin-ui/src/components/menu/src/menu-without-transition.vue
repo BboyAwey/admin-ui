@@ -151,6 +151,7 @@
             :plain="hasChildren(item)"
             :fix="hasChildren(item) ? 0 : '-2px'">
             <au-popover
+              ref="tipPopover"
               slot="target"
               :disabled="!localCollapse"
               :trigger="'hover'"
@@ -165,7 +166,7 @@
                   'au-theme-font-color--base-7': !item.url && !decoration(item) && !localCollapse,
                 }"
                 :style="{ paddingLeft: calcPaddingLeft(item)  }"
-                @click="select(item)">
+                @click="select(item, i)">
                 <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
                 <span class="menu-text">{{ item.text }}</span>
                 <au-icon class="menu-fold-icon
@@ -274,10 +275,11 @@
       }
     },
     methods: {
-      select (item) {
+      select (item, i) {
         this.currentItem = item
         this.activate()
         this.toggleCollapse(item)
+        if (this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide()
         this.$emit('select', item)
       },
       deactivate () {
@@ -394,7 +396,7 @@
         function hidePop (children) {
           children.forEach(child => {
             if (hasClass(child.$el, 'au-popover')) {
-              child.hide()
+              if (child.display) child.hide()
             }
             if (child.$children && child.$children.length) {
               hidePop(child.$children)
@@ -406,5 +408,4 @@
       }
     }
   }
-  // TODO: popover显示子集菜单，被注释部分代码为已经实现的部分代码
 </script>

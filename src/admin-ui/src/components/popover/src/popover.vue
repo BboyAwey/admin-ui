@@ -237,13 +237,13 @@
         }
       },
       handleBlur () { // pop blur
-        if (this.trigger === 'click') this.hide()
+        if (this.trigger === 'click' && this.display) this.hide()
       },
       handleMouseover () {
         this.show()
       },
       handleMouseout () {
-        if (this.trigger !== 'click') this.hide()
+        if (this.trigger !== 'click' && this.display) this.hide()
       },
       show () {
         if (this.disabled) return
@@ -258,7 +258,9 @@
         // setInterval(this.calPos.bind(this), 500)
       },
       hide () {
-        if (this.$refs.pop.parentNode) this.$refs.pop.parentNode.removeChild(this.$refs.pop)
+        try {
+          this.$refs.pop.parentNode.removeChild(this.$refs.pop)
+        } catch (e) {}
         this.display = false
         // clearInterval(this.calPos.bind(this))
       },

@@ -124,8 +124,13 @@
         container.style.flexWrap = 'wrap'
       },
       getNumber () {
-        this.getCellNumber()
-        this.getOffsetNumber()
+        let size = this.$el.getBoundingClientRect()
+        for (let key in size) {
+          if (size[key] !== 0) {
+            this.getCellNumber()
+            this.getOffsetNumber()
+          } else return
+        }
       },
       getCellNumber () {
         let containerWidth = getElementSize(this.$el.parentNode).width

@@ -117,6 +117,7 @@
       },
       close () {
         this.$el.parentNode.removeChild(this.$el)
+        this.$destroy()
       }
     }
   }

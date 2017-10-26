@@ -22,7 +22,6 @@
             </p>
           </div>
         </au-popover>
-        <au-button @click="show" type="success">click show the prev popover</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>

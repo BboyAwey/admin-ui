@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import template from './loading.vue'
 
-let instance = new (Vue.extend(template))()
-
 export default (config) => {
+  let instance = new (Vue.extend(template))()
   let {
     target = document.element.body,
     text

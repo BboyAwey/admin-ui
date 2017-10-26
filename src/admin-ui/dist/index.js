@@ -7282,6 +7282,7 @@ MessageBox.prompt = function (config) {
     },
     close: function close() {
       this.$el.parentNode.removeChild(this.$el);
+      this.$destroy();
     }
   }
 });
@@ -15566,9 +15567,8 @@ if (false) {
 
 
 
-var instance = new (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_1__loading_vue__["a" /* default */]))();
-
 /* harmony default export */ __webpack_exports__["a"] = (function (config) {
+  var instance = new (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_1__loading_vue__["a" /* default */]))();
   var _config$target = config.target,
       target = _config$target === undefined ? document.element.body : _config$target,
       text = config.text;

@@ -27,7 +27,7 @@
 
 <script>
   // import { hasClass, getElementSize } from '../../../helpers/dom'
-  import { getElementSize } from '../../../helpers/dom'
+  import { getElementSize, getWindowSize } from '../../../helpers/dom'
 
   function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
 
@@ -124,13 +124,8 @@
         container.style.flexWrap = 'wrap'
       },
       getNumber () {
-        let size = this.$el.getBoundingClientRect()
-        for (let key in size) {
-          if (size[key] !== 0) {
-            this.getCellNumber()
-            this.getOffsetNumber()
-          } else return
-        }
+        this.getCellNumber()
+        this.getOffsetNumber()
       },
       getCellNumber () {
         let containerWidth = getElementSize(this.$el.parentNode).width
@@ -153,13 +148,14 @@
         }
       },
       getOffsetNumber () {
-        let containerWidth = getElementSize(this.$el.parentNode).width
+        // let containerWidth = getElementSize(this.$el.parentNode).width
+        let windowWidth = getWindowSize().width
 
-        if (this.offsetLg && containerWidth >= this.breakPoint.lg) {
+        if (this.offsetLg && windowWidth >= this.breakPoint.lg) {
           this.offsetNumber = this.offsetLg
-        } else if (this.offsetMd && containerWidth >= this.breakPoint.md) {
+        } else if (this.offsetMd && windowWidth >= this.breakPoint.md) {
           this.offsetNumber = this.offsetMd
-        } else if (this.offsetSm && containerWidth >= this.breakPoint.sm) {
+        } else if (this.offsetSm && windowWidth >= this.breakPoint.sm) {
           this.offsetNumber = this.offsetSm
         } else if (this.offsetXs) {
           this.offsetNumber = this.offsetXs

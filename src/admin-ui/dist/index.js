@@ -394,6 +394,7 @@ module.exports = function (index, length) {
 //
 
 // import { hasClass, getElementSize } from '../../../helpers/dom'
+// import { getElementSize, getWindowSize } from '../../../helpers/dom'
 
 
 function validateWidth(v) {
@@ -498,15 +499,16 @@ function validateWidth(v) {
       this.getOffsetNumber();
     },
     getCellNumber: function getCellNumber() {
-      var containerWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$el.parentNode).width;
+      // let containerWidth = getElementSize(this.$el.parentNode).width
+      var windowWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["b" /* getWindowSize */])().width;
 
-      if (this.widthLg && containerWidth >= this.breakPoint.lg) {
+      if (this.widthLg && windowWidth >= this.breakPoint.lg) {
         this.cellNumber = this.widthLg;
         this.offsetNumber = this.offsetLg;
-      } else if (this.widthMd && containerWidth >= this.breakPoint.md) {
+      } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
         this.cellNumber = this.widthMd;
         this.offsetNumber = this.offsetMd;
-      } else if (this.widthSm && containerWidth >= this.breakPoint.sm) {
+      } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
         this.cellNumber = this.widthSm;
         this.offsetNumber = this.offsetSm;
       } else if (this.widthXs) {

@@ -8562,12 +8562,12 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "au-cascading"
-  }, [_c('div', {
+  }, [(_vm.label) ? _c('div', {
     staticClass: "au-form-label",
     style: ({
       cursor: _vm.disabled ? 'not-allowed' : 'default'
     })
-  }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "au-cascading-core-container"
   }, _vm._l((_vm.cascadingData), function(levelArr, index) {
     return _c('au-select', {

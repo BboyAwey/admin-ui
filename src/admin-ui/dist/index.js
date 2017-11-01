@@ -8575,6 +8575,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       ref: "au-select",
       refInFor: true,
       staticClass: "au-cascading-core",
+      style: ({
+        width: _vm.singleWidth,
+        minWidth: _vm.singleMinWidth,
+        maxWidth: _vm.singleMaxWidth
+      }),
       attrs: {
         "warnings": _vm.hasWarnings ? [] : null,
         "size": _vm.size,
@@ -14799,6 +14804,11 @@ if (false) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -14825,7 +14835,10 @@ if (false) {
     },
     placeholder: {
       type: [Array, String]
-    }
+    },
+    singleWidth: String,
+    singleMaxWidth: String,
+    singleMinWidth: String
   },
   computed: {
     cascadingData: function cascadingData() {
@@ -14861,7 +14874,7 @@ if (false) {
     localValue: function localValue(v) {
       this.input(); // input first to ensure changes of father comp
       // this.change()
-      this.$emit('change', v, this.selectedOptions);
+      this.$emit('change', v, this.selectedOptions, this.selectedData);
     }
   },
   methods: {

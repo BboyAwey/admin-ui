@@ -121,6 +121,51 @@
             </td>
           </tr>
           <tr>
+            <td>singleWidth</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css px宽度值
+            </td>
+            <td>
+              单个下拉框的宽度
+            </td>
+          </tr>
+          <tr>
+            <td>singleMinWidth</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css px宽度值
+            </td>
+            <td>
+              单个下拉框的最小宽度
+            </td>
+          </tr>
+          <tr>
+            <td>singleMaxWidth</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css px宽度值
+            </td>
+            <td>
+              单个下拉框的最大宽度
+            </td>
+          </tr>
+          <tr>
             <td>disabled</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
@@ -239,36 +284,15 @@
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">value</li>
+                <li class="au-theme-border-color--base-8">all</li>
               </ol>
             </td>
             <td>
               值改变事件<br>
-              参数value表示当前值
+              参数value表示当前值<br>
+              参数all表示当前选中的所有选项的数组
             </td>
           </tr>
-          <tr>
-            <td>@focus</td>
-            <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">value</li>
-              </ol>
-            </td>
-            <td>
-              聚焦事件<br>
-              参数value表示当前值
-            </td>
-          </tr>
-          <tr>
-            <td>@blur</td>
-            <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">value</li>
-              </ol>
-            </td>
-            <td>
-              失焦事件<br>
-              参数value表示当前值
-            </td>
           </tr>
         </tbody>
       </au-table>

@@ -20,6 +20,11 @@
     <div class="au-cascading-core-container">
       <au-select
         class="au-cascading-core"
+        :style="{
+          width: singleWidth,
+          minWidth: singleMinWidth,
+          maxWidth: singleMaxWidth
+        }"
         :warnings=" hasWarnings ? [] : null"
         :size="size"
         v-for="(levelArr, index) in cascadingData"
@@ -61,7 +66,10 @@
       },
       placeholder: {
         type: [Array, String]
-      }
+      },
+      singleWidth: String,
+      singleMaxWidth: String,
+      singleMinWidth: String
     },
     computed: {
       cascadingData () {
@@ -96,7 +104,7 @@
       localValue (v) {
         this.input() // input first to ensure changes of father comp
         // this.change()
-        this.$emit('change', v, this.selectedOptions)
+        this.$emit('change', v, this.selectedOptions, this.selectedData)
       }
     },
     methods: {

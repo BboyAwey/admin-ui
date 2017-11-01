@@ -85,8 +85,8 @@
     },
     watch: {
       localValue (v) {
-        this.$emit('input', this.localValue)
-        this.$emit('change', this.localValue)
+        this.input()
+        this.change()
       }
     },
     methods: {

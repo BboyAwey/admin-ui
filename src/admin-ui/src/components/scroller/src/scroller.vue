@@ -1,7 +1,7 @@
 <style lang="scss">
   .au-scroller {
     // position: relative;
-    overflow: hidden;
+    overflow-y: hidden;
   }
   .au-scroller-content {
     position: relative;
@@ -18,7 +18,7 @@
   }
   .au-scroller-bar-container {
     top: 10px;
-    right: 10px;
+    right: 5px;
     width: 12px;
     height: 100%;
   }

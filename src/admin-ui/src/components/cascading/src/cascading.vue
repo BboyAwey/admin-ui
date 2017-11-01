@@ -28,7 +28,6 @@
         v-model="selectedOptions[index]"
         :placeholder="placeholder instanceof Array ? placeholder[index] : placeholder"
         @select="select"
-        @change="change"
         @focus="focus"
         @blur="blur"
         :disabled="disabled"
@@ -67,6 +66,21 @@
     computed: {
       cascadingData () {
         return this.calcCascadingData(this.options)
+      },
+      selectedData () {
+        let cascadingData = this.cascadingData
+        let res = []
+        this.selectedOptions.forEach((e, i) => {
+          if (cascadingData[i] instanceof Array) {
+            for (let j = 0; j < cascadingData[i].length; j++) {
+              if (cascadingData[i][j].value === e) {
+                res.push(cascadingData[i][j])
+                break
+              }
+            }
+          }
+        })
+        return res
       }
     },
     watch: {
@@ -81,7 +95,8 @@
       },
       localValue (v) {
         this.input() // input first to ensure changes of father comp
-        this.change()
+        // this.change()
+        this.$emit('change', v, this.selectedOptions)
       }
     },
     methods: {

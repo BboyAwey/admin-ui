@@ -577,7 +577,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>@input</td>
             <td>
               <ol class="option-list">
@@ -588,7 +588,7 @@
               用户选择文件后触发<br>
               参数files表示当前用户选中的所有文件
             </td>
-          </tr>
+          </tr> -->
           <tr>
             <td>@change</td>
             <td>
@@ -603,7 +603,7 @@
           </tr>
         </tbody>
       </au-table>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-5">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-5">@change</span>事件</cite>
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-5">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-5">@change</span>事件</cite> -->
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">

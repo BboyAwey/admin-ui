@@ -8584,7 +8584,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       on: {
         "select": _vm.select,
-        "change": _vm.change,
         "focus": _vm.focus,
         "blur": _vm.blur
       },
@@ -9737,8 +9736,8 @@ module.exports = function (key) {
 
   watch: {
     localValue: function localValue(v) {
-      this.$emit('input', this.localValue);
-      this.$emit('change', this.localValue);
+      this.input();
+      this.change();
     }
   },
   methods: {
@@ -14800,7 +14799,6 @@ if (false) {
 //
 //
 //
-//
 
 
 
@@ -14832,6 +14830,21 @@ if (false) {
   computed: {
     cascadingData: function cascadingData() {
       return this.calcCascadingData(this.options);
+    },
+    selectedData: function selectedData() {
+      var cascadingData = this.cascadingData;
+      var res = [];
+      this.selectedOptions.forEach(function (e, i) {
+        if (cascadingData[i] instanceof Array) {
+          for (var j = 0; j < cascadingData[i].length; j++) {
+            if (cascadingData[i][j].value === e) {
+              res.push(cascadingData[i][j]);
+              break;
+            }
+          }
+        }
+      });
+      return res;
     }
   },
   watch: {
@@ -14847,7 +14860,8 @@ if (false) {
     },
     localValue: function localValue(v) {
       this.input(); // input first to ensure changes of father comp
-      this.change();
+      // this.change()
+      this.$emit('change', v, this.selectedOptions);
     }
   },
   methods: {

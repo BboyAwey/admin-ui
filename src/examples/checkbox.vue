@@ -167,7 +167,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>@input</td>
             <td>
               <ol class="option-list">
@@ -180,19 +180,17 @@
               参数value表示当前值<br>
               参数event表示事件对象
             </td>
-          </tr>
+          </tr> -->
           <tr>
             <td>@change</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">value</li>
-                <li class="au-theme-border-color--base-8">event</li>
               </ol>
             </td>
             <td>
               值改变事件<br>
-              参数value表示当前值<br>
-              参数event表示事件对象
+              参数value表示当前值
             </td>
           </tr>
         </tbody>

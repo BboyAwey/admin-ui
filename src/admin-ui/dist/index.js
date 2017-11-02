@@ -3484,9 +3484,12 @@ module.exports = function (exec) {
         firstScroll = false;
       }
       if (!_this.needScroll) return;
-      var direction = e.deltaY || e.detail; // chrome,edge / firefox
+      // let direction = e.deltaY || e.detail // chrome,edge / firefox
+      var direction = e.deltaY ? e.deltaY : e.detail * 10; // chrome,edge / firefox
       if (!direction) return;
-      _this.handleScroll((direction < 0 ? -direction : direction) / direction);
+      console.log(direction);
+      // this.handleScroll((direction < 0 ? -direction : direction) / direction)
+      _this.handleScroll(direction);
       if (_this.scrollEnd) return;else e.stopPropagation();
     });
     window.addEventListener('resize', this.handlerResize);
@@ -3503,7 +3506,7 @@ module.exports = function (exec) {
   },
   data: function data() {
     return {
-      step: 100,
+      step: 1,
       contentTop: this.scrollTop,
       scrollCoreTop: 0,
       coreHeight: 0,

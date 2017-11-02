@@ -83,9 +83,12 @@
           firstScroll = false
         }
         if (!this.needScroll) return
-        let direction = e.deltaY || e.detail // chrome,edge / firefox
+        // let direction = e.deltaY || e.detail // chrome,edge / firefox
+        let direction = e.deltaY ? e.deltaY : (e.detail * 10) // chrome,edge / firefox
         if (!direction) return
-        this.handleScroll((direction < 0 ? -direction : direction) / direction)
+        console.log(direction)
+        // this.handleScroll((direction < 0 ? -direction : direction) / direction)
+        this.handleScroll(direction)
         if (this.scrollEnd) return
         else e.stopPropagation()
       })
@@ -102,7 +105,7 @@
     },
     data () {
       return {
-        step: 100,
+        step: 1,
         contentTop: this.scrollTop,
         scrollCoreTop: 0,
         coreHeight: 0,

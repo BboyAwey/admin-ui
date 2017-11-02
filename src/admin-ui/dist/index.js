@@ -3511,7 +3511,8 @@ module.exports = function (exec) {
       onDrag: false,
       onOver: false,
       scrollEnd: false,
-      needScroll: false
+      needScroll: false,
+      clock: null
     };
   },
 
@@ -3539,6 +3540,8 @@ module.exports = function (exec) {
     setContentTop: function setContentTop(v) {
       var monitorHeight = this.getMonitorHeight();
       var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
+      this.needScroll = monitorHeight < contentHeight;
+      if (!this.needScroll) return;
       var contentTopMin = monitorHeight - contentHeight;
       var contentTop = v;
 
@@ -3591,7 +3594,17 @@ module.exports = function (exec) {
       }
     },
     handleScrollerMousemove: function handleScrollerMousemove() {
-      this.needScroll = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height < __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
+      // this.needScroll = getElementSize(this.$refs.monitor).height < getElementSize(this.$refs.content).height
+      // let vm = this
+      // console.log('move')
+      // if (vm.clock) return
+      // else {
+      //   vm.clock = setTimeout(function () {
+      //     vm.needScroll = getElementSize(vm.$refs.monitor).height < getElementSize(vm.$refs.content).height
+      //     clearTimeout(vm.clock)
+      //     vm.clock = null
+      //   }, 500)
+      // }
     },
     handleBarMouseenter: function handleBarMouseenter() {
       this.onOver = true;
@@ -3606,6 +3619,8 @@ module.exports = function (exec) {
       }
     },
     handleCoreMousedown: function handleCoreMousedown(e) {
+      e.preventDefault();
+      e.stopPropagation();
       this.onDrag = true;
       this.diff = e.pageY - this.$refs.core.getBoundingClientRect().top;
       window.addEventListener('mousemove', this.handleMousemove);
@@ -3615,9 +3630,12 @@ module.exports = function (exec) {
     },
     handleMousemove: function handleMousemove(e) {
       e.preventDefault();
+      e.stopPropagation();
       this.setScrollCoreTop(e.pageY - this.diff - this.$refs.bar.getBoundingClientRect().top);
     },
-    handleCoreMouseUp: function handleCoreMouseUp() {
+    handleCoreMouseUp: function handleCoreMouseUp(e) {
+      e.preventDefault();
+      e.stopPropagation();
       this.onDrag = false;
       window.removeEventListener('mousemove', this.handleMousemove);
       window.removeEventListener('mouseup', this.handleCoreMouseUp);
@@ -3636,11 +3654,13 @@ module.exports = function (exec) {
       this.setScrollCoreTop(mouseY - barY - coreHeight / 2);
     },
     setScrollCoreTop: function setScrollCoreTop(v) {
-      if (!this.needScroll) return;
-      var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
-      var coreHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
       var monitorHeight = this.getMonitorHeight();
       var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
+      this.needScroll = monitorHeight < contentHeight;
+      if (!this.needScroll) return;
+
+      var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
+      var coreHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
 
       var scrollTopMax = barHeight - coreHeight;
       var contentTopMax = monitorHeight - contentHeight;

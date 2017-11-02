@@ -3487,7 +3487,6 @@ module.exports = function (exec) {
       // let direction = e.deltaY || e.detail // chrome,edge / firefox
       var direction = e.deltaY ? e.deltaY : e.detail * 10; // chrome,edge / firefox
       if (!direction) return;
-      console.log(direction);
       // this.handleScroll((direction < 0 ? -direction : direction) / direction)
       _this.handleScroll(direction);
       if (_this.scrollEnd) return;else e.stopPropagation();

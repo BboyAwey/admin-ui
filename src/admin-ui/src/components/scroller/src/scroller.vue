@@ -86,7 +86,6 @@
         // let direction = e.deltaY || e.detail // chrome,edge / firefox
         let direction = e.deltaY ? e.deltaY : (e.detail * 10) // chrome,edge / firefox
         if (!direction) return
-        console.log(direction)
         // this.handleScroll((direction < 0 ? -direction : direction) / direction)
         this.handleScroll(direction)
         if (this.scrollEnd) return

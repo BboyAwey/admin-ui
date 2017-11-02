@@ -48,7 +48,7 @@
         // 项目入口文件
         import Vue from 'vue'
         import AdminUi from 'admin-ui'
-        import from 'admin-ui/style.css'
+        import 'admin-ui/style.css'
         Vue.use(AdminUi)
       </code-h>
     </au-panel>

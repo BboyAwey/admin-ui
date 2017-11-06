@@ -1,5 +1,6 @@
 <style lang="scss">
   @import '../../../style/vars';
+  @import '../../../style/label';
   .au-upload {
     .au-upload-button {
       padding-bottom: 4px;
@@ -88,20 +89,34 @@
     }
     .au-upload-file-description {
       display: inline-block;
+      max-width: 75%;
       outline: none;
       line-height: $normal * 2;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: $normal;
     }
     .au-upload-file-operation-icon {
       display: none;
       cursor: pointer;
     }
     .au-upload-file-desc-icon {
+      position: relative;
+      top: -8px;
       margin-left: 10px;
+    }
+    .au-upload-desc-icon-editing {
+      top: 0;
     }
     .au-upload-file-edit-icon-container {
       position: absolute;
       top: 8px;
       right: 8px;
+    }
+    .au-upload-desc-core {
+      width: 75%;
+      margin-bottom: 6px;
     }
     .au-upload-file-edit-icon {
       float: right;
@@ -133,7 +148,13 @@
       margin-right: 8px;
     }
     .au-upload-progress-bar {
-      margin-top: -10px;
+      margin-top: 4px;
+    }
+    .au-upload-file-description {
+      max-width: 170px;
+    }
+    .au-upload-desc-core {
+      width: 142px;
     }
   }
   .au-upload-file-inline-list:after {
@@ -144,6 +165,9 @@
 </style>
 <template>
   <div class="au-upload">
+    <div
+      class="au-form-label au-theme-font-color--base-3"
+      v-if="label" v-show="showUploadButton">{{ label }}</div>
     <input
       type="file"
       class="au-upload-inner"
@@ -197,29 +221,43 @@
           v-show="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
         <p class="au-upload-file-info au-theme-font-color--base-3" :class="{'au-upload-no-desc': !canDescribe}">
           <span class="au-upload-file-name au-theme-font-color--primary-3">{{ file.name }}</span><br>
-          <span
-            class="au-upload-file-description au-upload-description-placeholder"
-            v-show="canDescribe && !editingStatus[index] && !((value[index] ? value[index].description : '') || file.description)">
-            {{ descriptionPlaceholder || '填写文件描述' }}
-          </span>
           <span class="au-upload-file-description"
-            :contenteditable="editingStatus[index]"
-            v-show="canDescribe"
-            ref="desc">
-            {{ (value[index] ? value[index].description : '') || file.description }}
+            :class="{
+              'au-theme-font-color--base-7': !value[index] && !file.description || (value[index] && !value[index].description),
+              'au-upload-inline-desc': listType === 'inline'
+            }"
+            v-show="canDescribe && !editingStatus[index]">
+            {{ (value[index] ? value[index].description : file.description) || '填写文件描述' }}
           </span>
+          <au-input
+            class="au-upload-desc-core"
+            size="small"
+            v-show="canDescribe && editingStatus[index]"
+            ref="desc"
+            v-model="file.description"></au-input>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="
+              au-upload-file-operation-icon
+              au-upload-file-desc-icon
+              au-theme-background-color--base-12
+              au-theme-font-color--base-6
+              au-theme-hover-font-color--base-3"
             type="pencil"
             v-show="canDescribe && !editingStatus[index]"
             @click.native="intoDescEditingMode(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="
+              au-upload-file-operation-icon
+              au-upload-file-desc-icon
+              au-upload-desc-icon-editing
+              au-theme-background-color--base-12
+              au-theme-font-color--base-6
+              au-theme-hover-font-color--base-3"
             type="check"
             v-show="canDescribe && editingStatus[index]"
             @click.native="checkDescEditingMode(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon  au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
             type="times"
             v-show="canDescribe && editingStatus[index]"
             @click.native="cancelDescEditingMode(index)"/>
@@ -276,7 +314,8 @@
         files: [],
         localFileList: this.getValuePreviewInfo(this.value),
         editingStatus: [],
-        lastDescription: '',
+        descriptions: [],
+        lastDescriptions: [],
         fileReader: new window.FileReader(),
         images: [],
         previewerShow: false,

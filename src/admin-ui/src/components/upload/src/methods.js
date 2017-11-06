@@ -7,20 +7,20 @@ export default {
     },
     intoDescEditingMode (i) {
       this.$set(this.editingStatus, i, true)
-      this.lastDescription = this.$refs.desc[i].innerText
+      this.lastDescriptions[i] = this.$refs.desc[i].localValue
       this.$nextTick(() => {
-        this.$refs.desc[i].focus()
+        this.$refs.desc[i].$refs.core.focus()
       })
     },
     cancelDescEditingMode (i) {
-      this.$refs.desc[i].innerText = this.lastDescription
-      this.lastDescription = ''
+      this.$refs.desc[i].localValue = this.lastDescriptions[i]
+      this.lastDescriptions[i] = ''
       this.$set(this.editingStatus, i, false)
     },
     checkDescEditingMode (i) {
       if (this.autoUpload) {
         if (typeof this.beforeDescribe === 'function') {
-          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].innerText, i], (data) => {
+          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].localValue, i], (data) => {
             // modify success
             this.changeDescription(i)
           }, err => {
@@ -37,16 +37,16 @@ export default {
       }
     },
     changeDescription (i) {
-      let temp = this.$refs.desc[i].innerText
-      this.$refs.desc[i].innerText = ''
-      this.modifyLocalFileList(i, 'description', temp)
-      this.$refs.desc[i].innerText = temp.trim()
-      this.lastDescription = ''
+      // let temp = this.$refs.desc[i].localValue
+      // this.$refs.desc[i].innerText = ''
+      this.modifyLocalFileList(i, 'description', this.$refs.desc[i].localValue)
+      // this.$refs.desc[i].innerText = temp.trim()
+      this.lastDescriptions[i] = ''
       this.$set(this.editingStatus, i, false)
     },
     fallbackDescription (i) {
-      this.$refs.desc[i].innerText = this.lastDescription
-      this.lastDescription = ''
+      this.$refs.desc[i].localValue = this.lastDescriptions[i]
+      this.lastDescriptions[i] = ''
       this.$set(this.editingStatus, i, false)
     },
     loadFiles (evt) {

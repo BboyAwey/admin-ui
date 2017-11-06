@@ -450,9 +450,9 @@ function validateWidth(v) {
     };
   },
   mounted: function mounted() {
-    if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
-      throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid');
-    }
+    // if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
+    //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
+    // }
     this.setContainer();
     this.getNumber();
     window.addEventListener('resize', this.getNumber);
@@ -486,6 +486,18 @@ function validateWidth(v) {
     },
     widthXs: function widthXs() {
       this.getNumber();
+    },
+    offsetLg: function offsetLg() {
+      this.getNumber();
+    },
+    offsetMd: function offsetMd() {
+      this.getNumber();
+    },
+    offsetSm: function offsetSm() {
+      this.getNumber();
+    },
+    offsetXs: function offsetXs() {
+      this.getNumber();
     }
   },
   methods: {
@@ -504,19 +516,19 @@ function validateWidth(v) {
 
       if (this.widthLg && windowWidth >= this.breakPoint.lg) {
         this.cellNumber = this.widthLg;
-        this.offsetNumber = this.offsetLg;
+        // this.offsetNumber = this.offsetLg
       } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
         this.cellNumber = this.widthMd;
-        this.offsetNumber = this.offsetMd;
+        // this.offsetNumber = this.offsetMd
       } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
         this.cellNumber = this.widthSm;
-        this.offsetNumber = this.offsetSm;
+        // this.offsetNumber = this.offsetSm
       } else if (this.widthXs) {
         this.cellNumber = this.widthXs;
-        this.offsetNumber = this.offsetXs;
+        // this.offsetNumber = this.offsetXs
       } else {
         this.cellNumber = 12;
-        this.offsetNumber = 0;
+        // this.offsetNumber = 0
       }
     },
     getOffsetNumber: function getOffsetNumber() {
@@ -1536,6 +1548,7 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
     // ui props
+    label: String,
     buttonText: {
       default: '上传文件'
     },
@@ -4514,7 +4527,15 @@ var this$1 = this;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "au-upload"
-  }, [_c('input', {
+  }, [(_vm.label) ? _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showUploadButton),
+      expression: "showUploadButton"
+    }],
+    staticClass: "au-form-label au-theme-font-color--base-3"
+  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('input', {
     ref: "core",
     staticClass: "au-upload-inner",
     attrs: {
@@ -4627,31 +4648,42 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
       directives: [{
         name: "show",
         rawName: "v-show",
-        value: (_vm.canDescribe && !_vm.editingStatus[index] && !((_vm.value[index] ? _vm.value[index].description : '') || file.description)),
-        expression: "canDescribe && !editingStatus[index] && !((value[index] ? value[index].description : '') || file.description)"
+        value: (_vm.canDescribe && !_vm.editingStatus[index]),
+        expression: "canDescribe && !editingStatus[index]"
       }],
-      staticClass: "au-upload-file-description au-upload-description-placeholder"
-    }, [_vm._v("\n          " + _vm._s(_vm.descriptionPlaceholder || '填写文件描述') + "\n        ")]), _vm._v(" "), _c('span', {
+      staticClass: "au-upload-file-description",
+      class: {
+        'au-theme-font-color--base-7': !_vm.value[index] && !file.description || (_vm.value[index] && !_vm.value[index].description),
+          'au-upload-inline-desc': _vm.listType === 'inline'
+      }
+    }, [_vm._v("\n          " + _vm._s((_vm.value[index] ? _vm.value[index].description : file.description) || '填写文件描述') + "\n        ")]), _vm._v(" "), _c('au-input', {
       directives: [{
         name: "show",
         rawName: "v-show",
-        value: (_vm.canDescribe),
-        expression: "canDescribe"
+        value: (_vm.canDescribe && _vm.editingStatus[index]),
+        expression: "canDescribe && editingStatus[index]"
       }],
       ref: "desc",
       refInFor: true,
-      staticClass: "au-upload-file-description",
+      staticClass: "au-upload-desc-core",
       attrs: {
-        "contenteditable": _vm.editingStatus[index]
+        "size": "small"
+      },
+      model: {
+        value: (file.description),
+        callback: function($$v) {
+          file.description = $$v
+        },
+        expression: "file.description"
       }
-    }, [_vm._v("\n          " + _vm._s((_vm.value[index] ? _vm.value[index].description : '') || file.description) + "\n        ")]), _vm._v(" "), _c('au-icon', {
+    }), _vm._v(" "), _c('au-icon', {
       directives: [{
         name: "show",
         rawName: "v-show",
         value: (_vm.canDescribe && !_vm.editingStatus[index]),
         expression: "canDescribe && !editingStatus[index]"
       }],
-      staticClass: "au-upload-file-operation-icon au-upload-file-desc-icon au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3",
+      staticClass: "\n            au-upload-file-operation-icon\n            au-upload-file-desc-icon\n            au-theme-background-color--base-12\n            au-theme-font-color--base-6\n            au-theme-hover-font-color--base-3",
       attrs: {
         "type": "pencil"
       },
@@ -4667,7 +4699,7 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
         value: (_vm.canDescribe && _vm.editingStatus[index]),
         expression: "canDescribe && editingStatus[index]"
       }],
-      staticClass: "au-upload-file-operation-icon au-upload-file-desc-icon au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3",
+      staticClass: "\n            au-upload-file-operation-icon\n            au-upload-file-desc-icon\n            au-upload-desc-icon-editing\n            au-theme-background-color--base-12\n            au-theme-font-color--base-6\n            au-theme-hover-font-color--base-3",
       attrs: {
         "type": "check"
       },
@@ -4683,7 +4715,7 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
         value: (_vm.canDescribe && _vm.editingStatus[index]),
         expression: "canDescribe && editingStatus[index]"
       }],
-      staticClass: "au-upload-file-operation-icon au-upload-file-desc-icon  au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3",
+      staticClass: "au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3",
       attrs: {
         "type": "times"
       },
@@ -6512,6 +6544,14 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6543,10 +6583,12 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
     associations: Array,
     icon: String,
     iconPosition: String,
-    minWidth: String,
-    maxWidth: String,
-    minHeight: String,
-    maxHeight: String
+    textareaWidth: String,
+    textareaHeight: String,
+    textareaMinWidth: String,
+    textareaMaxWidth: String,
+    textareaMinHeight: String,
+    textareaMaxHeight: String
   },
   watch: {
     associations: function associations(v) {
@@ -9992,6 +10034,18 @@ module.exports = function (done, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-panel',
@@ -10456,14 +10510,14 @@ if (false) {(function () {
       var _this = this;
 
       this.$set(this.editingStatus, i, true);
-      this.lastDescription = this.$refs.desc[i].innerText;
+      this.lastDescriptions[i] = this.$refs.desc[i].localValue;
       this.$nextTick(function () {
-        _this.$refs.desc[i].focus();
+        _this.$refs.desc[i].$refs.core.focus();
       });
     },
     cancelDescEditingMode: function cancelDescEditingMode(i) {
-      this.$refs.desc[i].innerText = this.lastDescription;
-      this.lastDescription = '';
+      this.$refs.desc[i].localValue = this.lastDescriptions[i];
+      this.lastDescriptions[i] = '';
       this.$set(this.editingStatus, i, false);
     },
     checkDescEditingMode: function checkDescEditingMode(i) {
@@ -10471,7 +10525,7 @@ if (false) {(function () {
 
       if (this.autoUpload) {
         if (typeof this.beforeDescribe === 'function') {
-          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].innerText, i], function (data) {
+          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].localValue, i], function (data) {
             // modify success
             _this2.changeDescription(i);
           }, function (err) {
@@ -10488,16 +10542,16 @@ if (false) {(function () {
       }
     },
     changeDescription: function changeDescription(i) {
-      var temp = this.$refs.desc[i].innerText;
-      this.$refs.desc[i].innerText = '';
-      this.modifyLocalFileList(i, 'description', temp);
-      this.$refs.desc[i].innerText = temp.trim();
-      this.lastDescription = '';
+      // let temp = this.$refs.desc[i].localValue
+      // this.$refs.desc[i].innerText = ''
+      this.modifyLocalFileList(i, 'description', this.$refs.desc[i].localValue);
+      // this.$refs.desc[i].innerText = temp.trim()
+      this.lastDescriptions[i] = '';
       this.$set(this.editingStatus, i, false);
     },
     fallbackDescription: function fallbackDescription(i) {
-      this.$refs.desc[i].innerText = this.lastDescription;
-      this.lastDescription = '';
+      this.$refs.desc[i].localValue = this.lastDescriptions[i];
+      this.lastDescriptions[i] = '';
       this.$set(this.editingStatus, i, false);
     },
     loadFiles: function loadFiles(evt) {
@@ -11052,7 +11106,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "\n    au-panel\n    au-theme-background-color--base-12\n    au-theme-border-color--base-8\n    au-theme-font-color--base-3\n    au-theme-radius\n    au-theme-shadow--level-1"
   }, [(_vm.title) ? _c('h3', {
     staticClass: "\n      au-panel-title\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3"
-  }, [_vm._v("\n      " + _vm._s(_vm.title) + "\n  ")]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_c('span', [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('span', [_vm._t("title-right")], 2)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "au-panel-content"
   }, [_vm._t("default")], 2)])
 }
@@ -11765,6 +11819,14 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__ = __webpack_require__("gU9b");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -13516,10 +13578,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         'au-theme-disabled-background-color--base-8': _vm.disabled
     },
     style: ({
-      minWidth: _vm.minWidth,
-      maxWidth: _vm.maxWidth,
-      minHeight: _vm.minHeight,
-      maxHeight: _vm.maxHeight
+      width: _vm.textareaWidth,
+      height: _vm.textareaHeight,
+      minWidth: _vm.textareaMinWidth,
+      maxWidth: _vm.textareaMaxWidth,
+      minHeight: _vm.textareaMinHeight,
+      maxHeight: _vm.textareaMaxHeight,
     }),
     attrs: {
       "disabled": _vm.disabled,
@@ -14536,6 +14600,44 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14552,7 +14654,8 @@ if (false) {(function () {
       files: [],
       localFileList: this.getValuePreviewInfo(this.value),
       editingStatus: [],
-      lastDescription: '',
+      descriptions: [],
+      lastDescriptions: [],
       fileReader: new window.FileReader(),
       images: [],
       previewerShow: false,
@@ -15445,8 +15548,12 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "au-switch"
+  }, [(_vm.label) ? _c('div', {
+    staticClass: "au-form-label au-theme-font-color--base-3"
+  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     ref: "switch",
-    staticClass: "au-switch",
+    staticClass: "au-switch-container",
     class: ( _obj = {}, _obj[(" au-theme-background-color--" + _vm.bg)] = true, _obj ),
     style: ({
       cursor: _vm.disabled ? 'not-allowed' : 'pointer'
@@ -15468,7 +15575,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     style: ({
       left: _vm.left
     })
-  })])
+  })])])
   var _obj;
 }
 var staticRenderFns = []

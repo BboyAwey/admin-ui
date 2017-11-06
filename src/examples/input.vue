@@ -148,6 +148,102 @@
             </td>
           </tr>
           <tr>
+            <td>textarea-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的设置宽度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
+            <td>textarea-min-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的最小宽度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
+            <td>textarea-max-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的最大宽度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
+            <td>textarea-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的高度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
+            <td>textarea-min-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的最小高度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
+            <td>textarea-max-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              设置textarea的最大高度<br>
+              仅在type为textarea时有效
+            </td>
+          </tr>
+          <tr>
             <td>disabled</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->

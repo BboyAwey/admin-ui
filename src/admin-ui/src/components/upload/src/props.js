@@ -1,6 +1,7 @@
 export default {
   props: {
     // ui props
+    label: String,
     buttonText: {
       default: '上传文件'
     },

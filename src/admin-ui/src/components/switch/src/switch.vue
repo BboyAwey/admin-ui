@@ -4,6 +4,9 @@
   @import '../../../style/warnings';
   .au-switch {
     display: inline-block;
+  }
+  .au-switch-container {
+    display: inline-block;
     position: relative;
     width: 40px;
     height: 20px;
@@ -28,14 +31,19 @@
   }
 </style>
 <template>
-  <div class="au-switch" :class="{
-    [` au-theme-background-color--${bg}`]: true
-  }" :style="{ cursor: disabled ? 'not-allowed' : 'pointer'}" @click="handleClick" ref="switch">
-    <div class="au-switch-disabled-cover au-theme-background-color--base-12" :style="{opacity: disabled && localValue ? '.5' : '0'}"></div>
-    <div class="au-switch-core" :style="{left}" :class="{
-     'au-theme-background-color--base-12': !disabled,
-     'au-theme-background-color--base-9': disabled
-    }"></div>
+  <div class="au-switch">
+    <div
+      class="au-form-label au-theme-font-color--base-3"
+      v-if="label">{{ label }}</div>
+    <div class="au-switch-container" :class="{
+      [` au-theme-background-color--${bg}`]: true
+    }" :style="{ cursor: disabled ? 'not-allowed' : 'pointer'}" @click="handleClick" ref="switch">
+      <div class="au-switch-disabled-cover au-theme-background-color--base-12" :style="{opacity: disabled && localValue ? '.5' : '0'}"></div>
+      <div class="au-switch-core" :style="{left}" :class="{
+      'au-theme-background-color--base-12': !disabled,
+      'au-theme-background-color--base-9': disabled
+      }"></div>
+    </div>
   </div>
 </template>
 <script>

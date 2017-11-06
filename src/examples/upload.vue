@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-upload v-model="files" action="http://localhost:3480/upload"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" action="http://localhost:3480/upload"></au-upload>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -218,6 +218,22 @@
             </td>
             <td>
               是否显示上传按钮
+            </td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              上传按钮前的提示文字<br>
+              仅在show-upload-button为true时有效
             </td>
           </tr>
           <tr>

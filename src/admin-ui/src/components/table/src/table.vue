@@ -71,7 +71,7 @@
 </template>
 
 <script>
-  import { addClass } from '../../../helpers/dom'
+  import { addClass, removeClass } from '../../../helpers/dom'
 
   export default {
     name: 'au-table',
@@ -80,15 +80,15 @@
       bordered: Boolean
     },
     mounted () {
-      this.addStyle()
+      this.handleAllStyle()
     },
     watch: {
       striped () {
-        this.addStyle()
+        this.handleStripe()
       }
     },
     methods: {
-      addStyle () {
+      handleAllStyle () {
         let table = this.$refs.table
 
         let thead = table.querySelectorAll('thead')
@@ -156,6 +156,36 @@
         }
         if (tbody.length && tfoot.length) {
           addClass(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important')
+        }
+      },
+      handleStripe () {
+        let table = this.$refs.table
+        let tbody = table.querySelectorAll('tbody')
+        let allTr = table.querySelectorAll('tr')
+
+        if (tbody.length) {
+          for (let i = 0; i < tbody.length; i++) {
+            let trs = tbody[i].querySelectorAll('tr')
+            if (this.striped) {
+              for (let i = 0; i < trs.length; i++) {
+                if (i % 2 === 0) addClass(trs[i], 'au-theme-background-color--base-11')
+              }
+            } else {
+              for (let i = 0; i < trs.length; i++) {
+                if (i % 2 === 0) removeClass(trs[i], 'au-theme-background-color--base-11')
+              }
+            }
+          }
+        } else {
+          if (this.striped) {
+            for (let i = 0; i < allTr.length; i++) {
+              if (i % 2 === 0) addClass(allTr[i], 'au-theme-background-color--base-11')
+            }
+          } else {
+            for (let i = 0; i < allTr.length; i++) {
+              if (i % 2 === 0) removeClass(allTr[i], 'au-theme-background-color--base-11')
+            }
+          }
         }
       }
     }

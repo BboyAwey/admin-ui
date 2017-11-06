@@ -1905,13 +1905,13 @@ if (false) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getElementSize;
-/* harmony export (immutable) */ __webpack_exports__["e"] = getElementPagePos;
+/* harmony export (immutable) */ __webpack_exports__["f"] = getElementPagePos;
 /* harmony export (immutable) */ __webpack_exports__["b"] = getWindowSize;
 /* unused harmony export isFirefox */
 /* harmony export (immutable) */ __webpack_exports__["c"] = mousewheel;
 /* harmony export (immutable) */ __webpack_exports__["d"] = addClass;
-/* unused harmony export removeClass */
-/* harmony export (immutable) */ __webpack_exports__["f"] = hasClass;
+/* harmony export (immutable) */ __webpack_exports__["e"] = removeClass;
+/* harmony export (immutable) */ __webpack_exports__["g"] = hasClass;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__("AP3u");
 
 
@@ -2337,7 +2337,7 @@ module.exports = function (iter, ITERATOR) {
       // this.$refs.pop.style.height = popElmSize.height + 'px'
 
       var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.target);
-      var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["e" /* getElementPagePos */])(this.$refs.target);
+      var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["f" /* getElementPagePos */])(this.$refs.target);
       var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content);
 
       // fix the size bug witch caused by the wordwrap
@@ -4316,16 +4316,16 @@ module.exports = function (it) {
     bordered: Boolean
   },
   mounted: function mounted() {
-    this.addStyle();
+    this.handleAllStyle();
   },
 
   watch: {
     striped: function striped() {
-      this.addStyle();
+      this.handleStripe();
     }
   },
   methods: {
-    addStyle: function addStyle() {
+    handleAllStyle: function handleAllStyle() {
       var table = this.$refs.table;
 
       var thead = table.querySelectorAll('thead');
@@ -4393,6 +4393,36 @@ module.exports = function (it) {
       }
       if (tbody.length && tfoot.length) {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+      }
+    },
+    handleStripe: function handleStripe() {
+      var table = this.$refs.table;
+      var tbody = table.querySelectorAll('tbody');
+      var allTr = table.querySelectorAll('tr');
+
+      if (tbody.length) {
+        for (var i = 0; i < tbody.length; i++) {
+          var trs = tbody[i].querySelectorAll('tr');
+          if (this.striped) {
+            for (var _i12 = 0; _i12 < trs.length; _i12++) {
+              if (_i12 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i12], 'au-theme-background-color--base-11');
+            }
+          } else {
+            for (var _i13 = 0; _i13 < trs.length; _i13++) {
+              if (_i13 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i13], 'au-theme-background-color--base-11');
+            }
+          }
+        }
+      } else {
+        if (this.striped) {
+          for (var _i14 = 0; _i14 < allTr.length; _i14++) {
+            if (_i14 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i14], 'au-theme-background-color--base-11');
+          }
+        } else {
+          for (var _i15 = 0; _i15 < allTr.length; _i15++) {
+            if (_i15 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i15], 'au-theme-background-color--base-11');
+          }
+        }
       }
     }
   }
@@ -5229,7 +5259,7 @@ if (false) {
     handlePopSelect: function handlePopSelect(item) {
       function hidePop(children) {
         children.forEach(function (child) {
-          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_dom__["f" /* hasClass */])(child.$el, 'au-popover')) {
+          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_dom__["g" /* hasClass */])(child.$el, 'au-popover')) {
             if (child.display) child.hide();
           }
           if (child.$children && child.$children.length) {

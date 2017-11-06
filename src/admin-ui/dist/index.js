@@ -4316,73 +4316,84 @@ module.exports = function (it) {
     bordered: Boolean
   },
   mounted: function mounted() {
-    var table = this.$refs.table;
+    this.addStyle();
+  },
 
-    var thead = table.querySelectorAll('thead');
-    var tbody = table.querySelectorAll('tbody');
-    var tfoot = table.querySelectorAll('tfoot');
-
-    // console.log(thead)
-    var allTr = table.querySelectorAll('tr');
-    var allTd = table.querySelectorAll('td');
-    var allTh = table.querySelectorAll('th');
-    // let allTd = table.querySelectorAll('td')
-
-    // let theadTr = thead.querySelectorAll('tr')
-    // let tbodyTr = tbody.querySelectorAll('tr')
-    // let tfootTr = tfoot.querySelectorAll('tr')
-    for (var i = 0; i < allTr.length; i++) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[i], 'au-theme-border-color--base-8');
+  watch: {
+    striped: function striped() {
+      this.addStyle();
     }
-    for (var _i = 0; _i < allTh.length; _i++) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTh[_i], 'au-theme-font-color--base-3');
-    }
-    for (var _i2 = 0; _i2 < allTd.length; _i2++) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTd[_i2], 'au-theme-font-color--base-3 au-theme-border-color--base-8');
-    }
+  },
+  methods: {
+    addStyle: function addStyle() {
+      var table = this.$refs.table;
 
-    for (var _i3 = 0; _i3 < tfoot.length; _i3++) {
-      var tds = tfoot[_i3].querySelectorAll('td');
-      for (var _i4 = 0; _i4 < tds.length; _i4++) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tds[_i4], 'au-theme-font-color--base-6');
+      var thead = table.querySelectorAll('thead');
+      var tbody = table.querySelectorAll('tbody');
+      var tfoot = table.querySelectorAll('tfoot');
+
+      // console.log(thead)
+      var allTr = table.querySelectorAll('tr');
+      var allTd = table.querySelectorAll('td');
+      var allTh = table.querySelectorAll('th');
+      // let allTd = table.querySelectorAll('td')
+
+      // let theadTr = thead.querySelectorAll('tr')
+      // let tbodyTr = tbody.querySelectorAll('tr')
+      // let tfootTr = tfoot.querySelectorAll('tr')
+      for (var i = 0; i < allTr.length; i++) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[i], 'au-theme-border-color--base-8');
       }
-    }
-
-    for (var _i5 = 0; _i5 < thead.length; _i5++) {
-      var ths = thead[_i5].querySelectorAll('th');
-      for (var _i6 = 0; _i6 < ths.length; _i6++) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(ths[_i6], 'au-theme-font-color--base-6 au-theme-border-color--base-8');
+      for (var _i = 0; _i < allTh.length; _i++) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTh[_i], 'au-theme-font-color--base-3');
       }
-    }
+      for (var _i2 = 0; _i2 < allTd.length; _i2++) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTd[_i2], 'au-theme-font-color--base-3 au-theme-border-color--base-8');
+      }
 
-    if (tbody.length) {
-      for (var _i7 = 0; _i7 < tbody.length; _i7++) {
-        var trs = tbody[_i7].querySelectorAll('tr');
-        for (var _i8 = 0; _i8 < trs.length; _i8++) {
-          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i8], 'au-theme-hover-background-color--base-10');
+      for (var _i3 = 0; _i3 < tfoot.length; _i3++) {
+        var tds = tfoot[_i3].querySelectorAll('td');
+        for (var _i4 = 0; _i4 < tds.length; _i4++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tds[_i4], 'au-theme-font-color--base-6');
+        }
+      }
+
+      for (var _i5 = 0; _i5 < thead.length; _i5++) {
+        var ths = thead[_i5].querySelectorAll('th');
+        for (var _i6 = 0; _i6 < ths.length; _i6++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(ths[_i6], 'au-theme-font-color--base-6 au-theme-border-color--base-8');
+        }
+      }
+
+      if (tbody.length) {
+        for (var _i7 = 0; _i7 < tbody.length; _i7++) {
+          var trs = tbody[_i7].querySelectorAll('tr');
+          for (var _i8 = 0; _i8 < trs.length; _i8++) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i8], 'au-theme-hover-background-color--base-10');
+          }
+          if (this.striped) {
+            for (var _i9 = 0; _i9 < trs.length; _i9++) {
+              if (_i9 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i9], 'au-theme-background-color--base-11');
+            }
+          }
+        }
+      } else {
+        for (var _i10 = 0; _i10 < allTr.length; _i10++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i10], 'au-theme-hover-background-color--base-10');
         }
         if (this.striped) {
-          for (var _i9 = 0; _i9 < trs.length; _i9++) {
-            if (_i9 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i9], 'au-theme-background-color--base-11');
+          for (var _i11 = 0; _i11 < allTr.length; _i11++) {
+            if (_i11 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i11], 'au-theme-background-color--base-11');
           }
         }
       }
-    } else {
-      for (var _i10 = 0; _i10 < allTr.length; _i10++) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i10], 'au-theme-hover-background-color--base-10');
-      }
-      if (this.striped) {
-        for (var _i11 = 0; _i11 < allTr.length; _i11++) {
-          if (_i11 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i11], 'au-theme-background-color--base-11');
-        }
-      }
-    }
 
-    if (thead.length) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(thead[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
-    }
-    if (tbody.length && tfoot.length) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+      if (thead.length) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(thead[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+      }
+      if (tbody.length && tfoot.length) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+      }
     }
   }
 });

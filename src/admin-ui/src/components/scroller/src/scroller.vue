@@ -82,7 +82,7 @@
           this.handleMouseenter()
           firstScroll = false
         }
-        if (!this.needScroll) return
+        // if (!this.needScroll) return
         // let direction = e.deltaY || e.detail // chrome,edge / firefox
         let direction = e.deltaY ? e.deltaY : (e.detail * 10) // chrome,edge / firefox
         if (!direction) return

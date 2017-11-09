@@ -72,10 +72,10 @@
     name: 'au-scroller',
     mounted () {
       this.setPositionCss()
-      this.calcCoreHeight(
-        getElementSize(this.$refs.monitor).height,
-        getElementSize(this.$refs.content).height
-      )
+      // this.calcCoreHeight(
+      //   getElementSize(this.$refs.monitor).height,
+      //   getElementSize(this.$refs.content).height
+      // )
       let firstScroll = true
       mousewheel('add', this.$refs.monitor, (e) => {
         if (firstScroll) {
@@ -137,11 +137,19 @@
       handleScroll (direction) {
         this.setContentTop(this.contentTop - direction * this.step)
       },
-      setContentTop (v) {
+      detectIfNeedScroll () {
         let monitorHeight = this.getMonitorHeight()
         let contentHeight = getElementSize(this.$refs.content).height
         this.needScroll = monitorHeight < contentHeight
-        if (!this.needScroll) return
+        return {
+          needScroll: this.needScroll,
+          monitorHeight,
+          contentHeight
+        }
+      },
+      setContentTop (v) {
+        let { needScroll, monitorHeight, contentHeight } = this.detectIfNeedScroll()
+        if (!needScroll) return
         let contentTopMin = monitorHeight - contentHeight
         let contentTop = v
 
@@ -256,10 +264,8 @@
         this.setScrollCoreTop(mouseY - barY - coreHeight / 2)
       },
       setScrollCoreTop (v) {
-        let monitorHeight = this.getMonitorHeight()
-        let contentHeight = getElementSize(this.$refs.content).height
-        this.needScroll = monitorHeight < contentHeight
-        if (!this.needScroll) return
+        let { needScroll, monitorHeight, contentHeight } = this.detectIfNeedScroll()
+        if (!needScroll) return
 
         let barHeight = getElementSize(this.$refs.bar).height
         let coreHeight = getElementSize(this.$refs.core).height

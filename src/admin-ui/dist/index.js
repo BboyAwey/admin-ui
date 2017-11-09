@@ -2538,8 +2538,8 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("9h1I")('Set
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_font_awesome_css_font_awesome_min_css__ = __webpack_require__("KM+g");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_font_awesome_css_font_awesome_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_font_awesome_css_font_awesome_min_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_font_awesome_style_css__ = __webpack_require__("wzUM");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_font_awesome_style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_font_awesome_style_css__);
 //
 //
 //
@@ -3489,7 +3489,10 @@ module.exports = function (exec) {
     var _this = this;
 
     this.setPositionCss();
-    this.calcCoreHeight(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height);
+    // this.calcCoreHeight(
+    //   getElementSize(this.$refs.monitor).height,
+    //   getElementSize(this.$refs.content).height
+    // )
     var firstScroll = true;
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["c" /* mousewheel */])('add', this.$refs.monitor, function (e) {
       if (firstScroll) {
@@ -3552,11 +3555,23 @@ module.exports = function (exec) {
     handleScroll: function handleScroll(direction) {
       this.setContentTop(this.contentTop - direction * this.step);
     },
-    setContentTop: function setContentTop(v) {
+    detectIfNeedScroll: function detectIfNeedScroll() {
       var monitorHeight = this.getMonitorHeight();
       var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
       this.needScroll = monitorHeight < contentHeight;
-      if (!this.needScroll) return;
+      return {
+        needScroll: this.needScroll,
+        monitorHeight: monitorHeight,
+        contentHeight: contentHeight
+      };
+    },
+    setContentTop: function setContentTop(v) {
+      var _detectIfNeedScroll = this.detectIfNeedScroll(),
+          needScroll = _detectIfNeedScroll.needScroll,
+          monitorHeight = _detectIfNeedScroll.monitorHeight,
+          contentHeight = _detectIfNeedScroll.contentHeight;
+
+      if (!needScroll) return;
       var contentTopMin = monitorHeight - contentHeight;
       var contentTop = v;
 
@@ -3669,10 +3684,12 @@ module.exports = function (exec) {
       this.setScrollCoreTop(mouseY - barY - coreHeight / 2);
     },
     setScrollCoreTop: function setScrollCoreTop(v) {
-      var monitorHeight = this.getMonitorHeight();
-      var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
-      this.needScroll = monitorHeight < contentHeight;
-      if (!this.needScroll) return;
+      var _detectIfNeedScroll2 = this.detectIfNeedScroll(),
+          needScroll = _detectIfNeedScroll2.needScroll,
+          monitorHeight = _detectIfNeedScroll2.monitorHeight,
+          contentHeight = _detectIfNeedScroll2.contentHeight;
+
+      if (!needScroll) return;
 
       var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
       var coreHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
@@ -4856,6 +4873,73 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scroller__ = __webpack_require__("ovkV");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils__ = __webpack_require__("AP3u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_dom__ = __webpack_require__("8CCO");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6921,13 +7005,6 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__("xVc6") }
 
 /***/ }),
 
-/***/ "KM+g":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "KtIY":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7426,7 +7503,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "type": "angle-double-right"
     }
-  })], 1) : _vm._e(), _vm._v(" "), _c('au-scroller', {
+  })], 1) : _vm._e(), _vm._v(" "), (_vm.isTopLevel) ? _c('au-scroller', {
     staticStyle: {
       "height": "100%"
     },
@@ -7541,7 +7618,112 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "select": _vm.handlePopSelect
       }
     }) : _vm._e()], 1)
-  }))])], 1)
+  }))]) : _vm._e(), _vm._v(" "), (!_vm.isTopLevel) ? _c('ul', _vm._l((_vm.localItems), function(item, i) {
+    return _c('li', {
+      key: i
+    }, [_c('au-popover', {
+      ref: "popover",
+      refInFor: true,
+      attrs: {
+        "disabled": !_vm.localCollapse,
+        "trigger": _vm.hasChildren(item) ? 'click' : 'hover',
+        "placement": _vm.hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle',
+        "plain": _vm.hasChildren(item),
+        "fix": _vm.hasChildren(item) ? 0 : '-2px'
+      }
+    }, [_c('au-popover', {
+      ref: "tipPopover",
+      refInFor: true,
+      attrs: {
+        "disabled": !_vm.localCollapse,
+        "trigger": 'hover',
+        "placement": 'right middle',
+        "fix": '-2px'
+      },
+      slot: "target"
+    }, [_c('div', {
+      staticClass: "menu",
+      class: {
+        'au-theme-hover-background-color--base-10': !_vm.decoration(item),
+          'au-theme-hover-font-color--primary-3': !_vm.decoration(item) && item.url,
+          'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': _vm.decoration(item),
+          'au-theme-font-color--base-7': !item.url && !_vm.decoration(item) && !_vm.localCollapse,
+      },
+      style: ({
+        paddingLeft: _vm.calcPaddingLeft(item)
+      }),
+      on: {
+        "click": function($event) {
+          _vm.select(item, i)
+        }
+      },
+      slot: "target"
+    }, [(item.icon) ? _c('au-icon', {
+      staticClass: "menu-icon",
+      attrs: {
+        "type": item.icon
+      }
+    }) : _vm._e(), _vm._v(" "), _c('span', {
+      staticClass: "menu-text"
+    }, [_vm._v(_vm._s(item.text))]), _vm._v(" "), (_vm.hasChildren(item)) ? _c('au-icon', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (!_vm.localCollapse),
+        expression: "!localCollapse"
+      }],
+      staticClass: "menu-fold-icon\n              au-theme-font-color--base-3\n              au-theme-hover-font-color--primary-3",
+      style: ({
+        transform: ("rotate(" + (item.collapse ? '-90' : '0') + "deg)"),
+        left: item.collapse ? '14px' : ''
+      }),
+      attrs: {
+        "type": "angle-down"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.toggleCollapse(item)
+        }
+      }
+    }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+      staticClass: "au-menu-pop-content",
+      slot: "content"
+    }, [_vm._v("\n            " + _vm._s(item.text) + "\n          ")])]), _vm._v(" "), (!_vm.hasChildren(item)) ? _c('div', {
+      staticClass: "au-menu-pop-content",
+      slot: "content"
+    }, [_vm._v("\n          " + _vm._s(item.text) + "\n        ")]) : _vm._e(), _vm._v(" "), (_vm.hasChildren(item)) ? _c('au-scroller', {
+      staticClass: "au-menu-popover-content au-theme-font-color--base-3",
+      slot: "content"
+    }, [_c('au-menu', {
+      attrs: {
+        "items": item.children,
+        "collapsable": false,
+        "is-popover": true,
+        "popover-ins": _vm.$refs.popover,
+        "is-top-level": false,
+        "all": _vm.isTopLevel ? _vm.localItems : _vm.all
+      },
+      on: {
+        "select": _vm.handlePopSelect
+      }
+    })], 1) : _vm._e()], 1), _vm._v(" "), (_vm.hasChildren(item)) ? _c('au-menu', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (!_vm.localCollapse && !item.collapse),
+        expression: "!localCollapse && !item.collapse"
+      }],
+      attrs: {
+        "items": item.children,
+        "is-top-level": false,
+        "all": _vm.isTopLevel ? _vm.localItems : _vm.all
+      },
+      on: {
+        "select": _vm.handlePopSelect
+      }
+    }) : _vm._e()], 1)
+  })) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15506,6 +15688,13 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__("Eif7"), __esModule: true };
+
+/***/ }),
+
+/***/ "wzUM":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

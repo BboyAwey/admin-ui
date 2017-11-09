@@ -11,7 +11,7 @@
     }"></i>
 </template>
 <script>
-  import '../../../style/font-awesome/css/font-awesome.min.css'
+  import '../../../style/font-awesome/style.css'
   export default {
     name: 'au-icon',
     props: {

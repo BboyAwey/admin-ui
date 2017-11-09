@@ -138,7 +138,7 @@
         transform: localCollapse ? '' : 'rotate(180deg)'
       }"></au-icon>
     </div>
-    <au-scroller style="height: 100%;" :scroll-top="scrollTop" @scroll="v　=>　scrollTop = v">
+    <au-scroller v-if="isTopLevel" style="height: 100%;" :scroll-top="scrollTop" @scroll="v　=>　scrollTop = v">
       <ul>
         <li
           v-for="(item, i) in localItems"
@@ -207,6 +207,73 @@
         </li>
       </ul>
     </au-scroller>
+    <ul v-if="!isTopLevel">
+      <li
+        v-for="(item, i) in localItems"
+        :key="i">
+        <au-popover
+          ref="popover"
+          :disabled="!localCollapse"
+          :trigger="hasChildren(item) ? 'click' : 'hover'"
+          :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
+          :plain="hasChildren(item)"
+          :fix="hasChildren(item) ? 0 : '-2px'">
+          <au-popover
+            ref="tipPopover"
+            slot="target"
+            :disabled="!localCollapse"
+            :trigger="'hover'"
+            :placement="'right middle'"
+            :fix="'-2px'">
+            <div class="menu"
+              slot="target"
+              :class="{
+                'au-theme-hover-background-color--base-10' : !decoration(item),
+                'au-theme-hover-font-color--primary-3': !decoration(item) && item.url,
+                'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': decoration(item),
+                'au-theme-font-color--base-7': !item.url && !decoration(item) && !localCollapse,
+              }"
+              :style="{ paddingLeft: calcPaddingLeft(item)  }"
+              @click="select(item, i)">
+              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+              <span class="menu-text">{{ item.text }}</span>
+              <au-icon class="menu-fold-icon
+                au-theme-font-color--base-3
+                au-theme-hover-font-color--primary-3"
+                type="angle-down"
+                v-if="hasChildren(item)"
+                v-show="!localCollapse"
+                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, left: item.collapse ? '14px' : ''}"
+                @click.native.stop="toggleCollapse(item)"></au-icon>
+            </div>
+            <div slot="content" class="au-menu-pop-content">
+              {{ item.text }}
+            </div>
+          </au-popover>
+
+          <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
+            {{ item.text }}
+          </div>
+          <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-font-color--base-3">
+            <au-menu
+              :items="item.children"
+              :collapsable="false"
+              :is-popover="true"
+              :popover-ins="$refs.popover"
+              :is-top-level="false"
+              :all="isTopLevel ? localItems : all"
+              @select="handlePopSelect"></au-menu>
+          </au-scroller>
+        </au-popover>
+        <au-menu
+          v-if="hasChildren(item)"
+          v-show="!localCollapse && !item.collapse"
+          :items="item.children"
+          :is-top-level="false"
+          :all="isTopLevel ? localItems : all"
+          @select="handlePopSelect"></au-menu>
+      </li>
+    </ul>
   </div>
 </template>
 <script>

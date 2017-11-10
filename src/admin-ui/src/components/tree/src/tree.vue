@@ -5,6 +5,9 @@
       line-height: 26px;
       position: relative;
     }
+    .sub-toggle {
+      display: none;
+    }
     input.admin-checkbox {
       display: none;
     }
@@ -35,53 +38,51 @@
       border-radius: 2px;
       outline: none;
     }
-    input.admin-checkbox:checked + .tree-part-checked {
-      background-color: rgba(#0e9ee2, .5) !important;
+    input.admin-checkbox:checked + .tree-part-checked.admin-checkbox-sub:before {
+      border-left: none;
+      top: 3px;
+      left: 4px;
+      border-bottom: 2px solid #fff;
+      transform-origin: 50% 50%;
+      transform: rotate(0);
     }
     .tree-menu-open {
       font-size: 10px;
       color: #d2d4d9;
-      margin-left: 10px;
+      margin-right: 10px;
       cursor: pointer;
+      position: absolute;
+      top: 7px;
+      left: 10px;
     }
     .checkbox-warp-div{
       position: relative;
       z-index: 99;
-      margin-bottom: 5px;
+      padding: 2px 0 3px 30px;
+      cursor: pointer;
       &.close-tree +.admin-tree-sub-warp{
         display: none;
+      }
+      &:hover {
+        background-color: #f4f4f4;
       }
     }
     .no-checkedbox-label {
       position: relative;
       z-index: 10;
+      padding-left: 20px;
+      display: block;
+      line-height: 21px;
+      margin-bottom: 5px;
+      &.close-tree +.admin-tree-sub-warp{
+        display: none;
+      }
     }
   }
   .admin-tree-sub-warp {
     padding-left: 25px;
     position: relative;
-    &::before {
-      content: '';
-      position: absolute;
-      top: -7px;
-      left: 7px;
-      height: 100%;
-      border-left: solid #d2d4d9 1px;
-      z-index: 1
-    }
-    li::before {
-      content: '';
-      position: absolute;
-      top: 11px;
-      left: -18px;
-      height: 100%;
-      width: 18px;
-      border-top: solid #d2d4d9 1px;
-      z-index: 1
-    }
-    li:last-child:before {
-      background-color: #fff;
-    }
+
     &.list-inline {
       &>li {
         margin-right: 18px;
@@ -104,7 +105,6 @@
   // Author: yuhaijun
   // email: yuhaijun@rongcapital.cn
   import { deepClone, getDataType } from '../../../helpers/utils'
-  import { addClass, removeClass } from '../../../helpers/dom'
   export default {
     name: 'au-tree',
     created () {
@@ -154,11 +154,12 @@
           {
             class: {
               'admin-tree-warp': isTop,
-              'admin-tree-sub-warp': !isTop
+              'admin-tree-sub-warp': !isTop,
+              'sub-toggle': !isTop && !data.showChildren
               // 'list-inline': !isTop && this.displayInline(data)
             }
           },
-          this.createTreeDom(c, data)
+          this.createTreeDom(c, isTop ? data : data.children)
       )
       },
       createTreeDom (c, data) {
@@ -166,7 +167,7 @@
           return c(
             'li',
             {},
-            [this.createChildren(c, item), item.children && item.children.length ? this.createTree(c, item.children, false) : null]
+            [this.createChildren(c, item), item.children && item.children.length ? this.createTree(c, item, false) : null]
             )
         }, this)
       },
@@ -178,51 +179,31 @@
               class: {
                 'checkbox-warp-div': true,
                 'close-tree': !this.showChildren
+              },
+              on: {
+                click: () => {
+                  this.toggleClass(item.index)
+                }
               }
             },
-            [c(
-              'label',
-              [c(
-                'input',
-                {
-                  attrs: {
-                    type: 'checkbox',
-                    'data-type': item.checkedType
-                  },
-                  domProps: {
-                    checked: item.checked,
-                    value: item.index.join('-')
-                  },
-                  class: {
-                    'admin-checkbox': true
-                  },
-                  on: {
-                    change: this.treeCheckedChange
-                  }
-                }
-              ), c(
-                'span',
-                {
-                  class: {
-                    'admin-checkbox-sub': true,
-                    'admin-tree-checkbox': true,
-                    'tree-part-checked': item.checked && item.checkedType === 'part'
-                  }
-                }
-              ), c('span', item.label)]
-            ), item.children && item.children.length ? c(
-              'i',
-              {
+            [item.children && item.children.length ? c(
+              'i', {
                 class: {
                   'tree-menu-open': true,
                   'fa': true,
-                  'fa-chevron-down': this.showChildren,
-                  'fa-chevron-right': !this.showChildren
+                  'fa-chevron-down': item.showChildren,
+                  'fa-chevron-right': !item.showChildren
+                }}) : null, c(
+              'au-checkbox', {
+                props: {
+                  text: item.label,
+                  value: item.checked
                 },
-                on: {
-                  click: this.toggleClass
+                nativeOn: {
+                  'click': () => { this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType) }
                 }
-              }) : null]
+              }
+            )]
           )
         } else {
           return c(
@@ -230,11 +211,18 @@
             {
               class: {
                 'no-checkedbox-label': true
-              },
-              domProps: {
-                innerHTML: item.label
               }
-            }
+            },
+            [
+              item.children && item.children.length ? c(
+              'i', {
+                class: {
+                  'tree-menu-open': true,
+                  'fa': true,
+                  'fa-chevron-down': this.showChildren,
+                  'fa-chevron-right': !this.showChildren
+                }}) : null, item.label
+            ]
           )
         }
       },
@@ -244,18 +232,10 @@
         })
         return !b
       },
-      toggleClass (evt) {
-        var t = evt.target
-        var target = t.parentNode
-        if (target.className.indexOf('close-tree') > -1) {
-          removeClass(target, 'close-tree')
-          removeClass(t, 'fa-chevron-right')
-          addClass(t, 'fa-chevron-down')
-        } else {
-          addClass(target, 'close-tree')
-          removeClass(t, 'fa-chevron-down')
-          addClass(t, 'fa-chevron-right')
-        }
+      toggleClass (index) {
+        var obj = this.getNodesByIndex(index, this.computedTreeData)
+        this.$set(obj, 'showChildren', !obj.showChildren)
+        this.$emit('node-click', this.parseData(this.getNodesByIndex(index, this.computedTreeData)), this.parseData(this.computedTreeData))
       },
       parseData (data) {
         var newData = deepClone(data)
@@ -264,6 +244,7 @@
         } else {
           delete newData.index
           delete newData.checkedType
+          delete newData.showChildren
           if (newData.children && newData.children.length) {
             this.deletePropery(newData.children)
           }
@@ -279,13 +260,11 @@
           }
         }, this)
       },
-      treeCheckedChange (evt) {
-        var target = evt.target
-        var value = target.value
-        var type = target.dataset.type
-        var checked = !target.checked && type === 'part' ? true : target.checked
+      treeCheckedChange (v, value, type) {
+        console.log(v, value, type)
+        var checked = !v && type === 'part' ? true : v
         this.setCheckedTypeByNodes(value.split('-'), checked, this.computedTreeData)
-        this.$emit('tree-change', this.parseData(this.getNodesByIndex(value.split('-'), this.computedTreeData)), this.parseData(this.computedTreeData))
+        this.$emit('check-change', this.parseData(this.getNodesByIndex(value.split('-'), this.computedTreeData)), this.parseData(this.computedTreeData))
       },
       setPos (arr, pIndex) {
         arr.forEach((item, i) => {
@@ -295,6 +274,7 @@
             this.$set(item, 'index', [i])
           }
           if (item.children && item.children.length) {
+            this.$set(item, 'showChildren', this.showChildren)
             item.children.forEach((itemD, j) => {
               if (!pIndex) {
                 this.$set(itemD, 'index', [i, j])
@@ -302,6 +282,7 @@
                 this.$set(itemD, 'index', item.index.concat([j]))
               }
               if (itemD.children && itemD.children.length) {
+                this.$set(itemD, 'showChildren', this.showChildren)
                 this.setPos(itemD.children, itemD.index)
               }
             }, this)

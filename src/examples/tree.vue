@@ -10,7 +10,7 @@
       <!-- 组件示例 -->
       <div @click="clickMe">点我看看</div>
       <div class="component-example">
-        <au-tree :tree-data="treeData" @tree-change="treeChange"></au-tree>
+        <au-tree :tree-data="treeData" :show-checkbox="true" @node-click="nodeClick" @check-change="treeChange"></au-tree>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -172,6 +172,10 @@
     },
     methods: {
       treeChange (item, items) {
+        console.dir(item)
+        console.dir(items)
+      },
+      nodeClick (item, items) {
         console.dir(item)
         console.dir(items)
       },

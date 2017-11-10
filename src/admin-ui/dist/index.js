@@ -2552,6 +2552,7 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("9h1I")('Set
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -6140,7 +6141,7 @@ module.exports = function (Constructor, NAME, next) {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "au-tabs-wrapper"
+    staticClass: "au-tabs"
   }, [_c('div', {
     directives: [{
       name: "show",
@@ -6149,28 +6150,62 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       expression: "tabs && tabs.length"
     }],
     staticClass: "au-tabs-nav au-theme-border-color--base-8"
-  }, [_c('ul', _vm._l((_vm.tabs), function(entry, index) {
+  }, [_c('ul', _vm._l((_vm.tabs), function(tab, index) {
     return _c('li', {
       key: index,
       class: {
-        'au-theme-font-color--base-7': entry.name !== _vm.localCurrent,
-          'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': entry.name == _vm.localCurrent
+        'au-theme-font-color--base-7': tab.name !== _vm.localCurrent,
+          'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': tab.name == _vm.localCurrent
       },
       attrs: {
-        "name": ['tab-' + entry.name]
+        "name": ['tab-' + tab.name]
       },
       on: {
         "click": function($event) {
-          _vm.toggleTabs(entry.name, $event)
+          _vm.toggleTabs(tab.name, $event)
         }
       }
     }, [_c('a', {
       attrs: {
         "href": "javascript:void(0);",
-        "title": entry.text
+        "title": tab.text
       }
-    }, [_vm._v(_vm._s(entry.text))])])
-  }))]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(tab.text))]), _vm._v(" "), _c('au-icon', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (_vm.canRemove),
+        expression: "canRemove"
+      }],
+      staticClass: "au-tabs-delete-btn au-theme-font-color--danger-3",
+      attrs: {
+        "type": "times"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.$emit('remove', index, tab)
+        }
+      }
+    })], 1)
+  })), _vm._v(" "), _c('au-icon', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.canCreate),
+      expression: "canCreate"
+    }],
+    staticClass: "au-tabs-create-btn au-theme-font-color--success-3",
+    attrs: {
+      "type": "plus"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.$emit('create')
+      }
+    }
+  })], 1), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -8937,6 +8972,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }),
     attrs: {
       "aria-hidden": "true"
+    },
+    on: {
+      "click": function($event) {
+        _vm.$emit('click')
+      }
     }
   })
 }
@@ -10609,6 +10649,9 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
+//
+//
 //
 //
 //
@@ -10632,8 +10675,11 @@ if (false) {(function () {
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-tabs',
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */] },
   data: function data() {
     return {
       localCurrent: this.current
@@ -10647,7 +10693,9 @@ if (false) {(function () {
         return [];
       }
     },
-    current: [String, Number]
+    current: [String, Number],
+    canRemove: Boolean,
+    canCreate: Boolean
   },
   watch: {
     current: function current(v) {

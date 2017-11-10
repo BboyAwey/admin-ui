@@ -5,6 +5,7 @@
   <i class="au-icon"
     :class="'fa fa-' + type"
     aria-hidden="true"
+    @click="$emit('click')"
     :style="{
       fontSize: size,
       color

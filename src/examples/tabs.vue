@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-tabs :tabs="tabs" :current="current">
+        <au-tabs :tabs="tabs" :current="current" canCreate canRemove @remove="remove" @create="create">
           <div name="baseInfo">基本信息</div>
           <div name="externalResource">列表信息</div>
         </au-tabs>
@@ -45,7 +45,7 @@
             <ol class="option-list">
               <li class="au-theme-border-color--base-8">name: String, 标签名称，用于匹配默认slots中内容的name</li>
               <li class="au-theme-border-color--base-8">text: String, 标签显示的文字</li>
-              </ol>
+            </ol>
           </td>
           <td>
             标签配置
@@ -65,6 +65,44 @@
           </td>
           <td>
             表示当前选中的标签的name
+          </td>
+        </tr>
+        <tr>
+          <td>can-remove</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>Boolean</td>
+          <td>
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">true</li>
+              <li class="au-theme-border-color--base-8">false</li>
+            </ol>
+          </td>
+          <td>
+            显示删除按钮
+          </td>
+        </tr>
+        <tr>
+          <td>can-create</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>Boolean</td>
+          <td>
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">true</li>
+              <li class="au-theme-border-color--base-8">false</li>
+            </ol>
+          </td>
+          <td>
+            显示新增按钮
           </td>
         </tr>
         </tbody>
@@ -116,6 +154,30 @@
             但是如果是由外部修改currentTabName的值触发的切换，则event为undefined
           </td>
         </tr>
+        <tr>
+          <td>@remove</td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">index</li>
+              <li class="au-theme-border-color--base-8">tab</li>
+            </ol>
+          </td>
+          <td>
+            当用户点击标签的删除图标的时候触发该事件<br>
+            index表示需要删除的tab的索引，tab表示需要删除的tab本身<br>
+            仅在can-remove为true时才有效
+          </td>
+        </tr>
+        <tr>
+          <td>@create</td>
+          <td>
+            <au-icon type="minus"></au-icon>
+          </td>
+          <td>
+            当用户点击新增图标的时候触发该事件<br>
+            仅在can-create为true时才有效
+          </td>
+        </tr>
         </tbody>
       </au-table>
       <!-- <au-icon type="minus"></au-icon> -->
@@ -126,28 +188,37 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-tabs :tabs="tabs" :current="current">
-          <div name="baseInfo" >基本信息</div>
-          <div name="externalresource">列表信息</div>
+        <au-tabs :tabs="tabs" :current="current" canCreate canRemove @remove="remove" @create="create">
+          <div name="baseInfo">基本信息</div>
+          <div name="externalResource">列表信息</div>
         </au-tabs>
       '>
       </code-h>
       <code-h lang="js">
-        export default{
-          data(){
+        export default {
+          name: 'tabs-examples',
+          data () {
             return {
-              current:'baseInfo',
-              tabs:[
+              current: 'baseInfo',
+              tabs: [
                 {
-                  name:'baseInfo',
-                  text:'基本信息'
+                  name: 'baseInfo',
+                  text: '基本信息'
                 },
                 {
-                  name:'externalResource',
-                  text:'列表信息'
+                  name: 'externalResource',
+                  text: '列表信息'
                 }
               ]
-            };
+            }
+          },
+          methods: {
+            remove (index, tab) {
+              console.log(index, tab)
+            },
+            create () {
+              console.log('create')
+            }
           }
         }
       </code-h>
@@ -168,8 +239,72 @@
           {
             name: 'externalResource',
             text: '列表信息'
+          },
+          {
+            name: 'baseInfo2',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource2',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo3',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource3',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo4',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource4',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource5',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource5',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource6',
+            text: '列表信息'
+          },
+          {
+            name: 'baseInfo6',
+            text: '基本信息'
+          },
+          {
+            name: 'externalResource7',
+            text: '列表信息'
           }
         ]
+      }
+    },
+    methods: {
+      remove (index, tab) {
+        console.log(index, tab)
+      },
+      create () {
+        console.log('create')
       }
     }
   }

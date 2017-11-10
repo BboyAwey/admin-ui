@@ -1,19 +1,21 @@
 <template>
-  <div class="au-tabs-wrapper">
+  <div class="au-tabs">
     <div class="au-tabs-nav au-theme-border-color--base-8" v-show="tabs && tabs.length">
       <ul>
         <li
-          v-for="(entry, index) in tabs"
+          v-for="(tab, index) in tabs"
           :key="index"
           :class="{
-            'au-theme-font-color--base-7': entry.name !== localCurrent,
-            'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': entry.name == localCurrent
+            'au-theme-font-color--base-7': tab.name !== localCurrent,
+            'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': tab.name == localCurrent
           }"
-          :name="['tab-'+entry.name]"
-          @click="toggleTabs(entry.name, $event)">
-          <a href="javascript:void(0);" :title="entry.text">{{entry.text}}</a>
+          :name="['tab-'+tab.name]"
+          @click="toggleTabs(tab.name, $event)">
+          <a href="javascript:void(0);" :title="tab.text">{{ tab.text }}</a>
+          <au-icon v-show="canRemove" @click.native.stop="$emit('remove', index, tab)" class="au-tabs-delete-btn au-theme-font-color--danger-3" type="times"></au-icon>
         </li>
       </ul>
+      <au-icon v-show="canCreate" @click.native.stop="$emit('create')" class="au-tabs-create-btn au-theme-font-color--success-3" type="plus"></au-icon>
     </div>
     <div  class="au-tabs-container" v-show="tabs && tabs.length">
       <slot class="au-tabs-content"></slot>
@@ -21,8 +23,11 @@
   </div>
 </template>
 <script>
+  import AuIcon from '../../icon'
+
   export default {
     name: 'au-tabs',
+    components: { AuIcon },
     data () {
       return {
         localCurrent: this.current
@@ -35,7 +40,9 @@
           return []
         }
       },
-      current: [String, Number]
+      current: [String, Number],
+      canRemove: Boolean,
+      canCreate: Boolean
     },
     watch: {
       current (v) {
@@ -70,15 +77,15 @@
 </script>
 <style lang="scss">
   @import '../../../style/vars';
-  .au-tabs-wrapper {
-    position: relative;
-    padding-top: 36px;
-    width: 100%;
-    height: 100%;
-    display: block;
+  .au-tabs {
+    // position: relative;
+    // padding-top: 36px;
+    // width: 100%;
+    // height: 100%;
+    // display: block;
   }
   .au-tabs-nav {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -95,13 +102,14 @@
       clear: both;
     }
     li {
+      position: relative;
       float: left;
       height: 35px;
       line-height: 35px;
       text-align: center;
       padding: 0 24px;
       cursor: pointer;
-      min-width: 88px;
+      // min-width: 88px;
       overflow: hidden;
       max-width: 156px;
       text-overflow: ellipsis;
@@ -110,6 +118,9 @@
         text-decoration: none;
         font-size: $normal;
       }
+    }
+    li:hover > .au-tabs-delete-btn {
+      display: inline-block;
     }
   }
   li.au-tabs-active {
@@ -124,5 +135,19 @@
     .au-tabs-content:first-child {
       display: block;
     }
+  }
+  .au-tabs-create-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 8px;
+    cursor: pointer;
+    font-size: $normal;
+  }
+  .au-tabs-delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    font-size: $normal;
+    display: none;
   }
 </style>

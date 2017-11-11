@@ -2,12 +2,22 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        多选框组件
+        多选框组件，还提供了部分选中的样式
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-checkbox v-model="value" label="Please check if u'd like to be a bboy"></au-checkbox><br>
-        <au-checkbox v-model="values" label="Please check what kinds of dances do u love" :checkboxes="checkboxes" :validators="validators"></au-checkbox><br>
+        <au-checkbox
+          v-model="allChecked"
+          label="Please check witch kind of dance would you like"
+          text="All above"
+          @change="checkAll"
+          :indeterminate="indeterminate"></au-checkbox><br><br>
+        <au-checkbox
+          v-model="kinds"
+          label="Please check what kinds of dances do u love"
+          :checkboxes="checkboxes"
+          :validators="validators"
+          @change="kindsCheck"></au-checkbox><br>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -228,56 +238,74 @@
       </au-table>
     </au-panel>
     <au-panel class="section" title="使用示例">
-      <h4 class="title-1">基础用例</h4>
+      <h4 class="title-1">基础用例--部分选中</h4>
       <code-h lang="html" content='
-        <au-checkbox v-model="value" label="Please check if u would like to be a bboy"></au-checkbox><br>
-        <au-checkbox v-model="values" label="Please check what kinds of dances do u love" :checkboxes="checkboxes" :validators="validators"></au-checkbox><br>
+        <au-checkbox
+          v-model="allChecked"
+          label="Please check witch kind of dance would you like"
+          text="All above"
+          @change="checkAll"
+          :indeterminate="indeterminate"></au-checkbox><br><br>
+        <au-checkbox
+          v-model="kinds"
+          label="Please check what kinds of dances do u love"
+          :checkboxes="checkboxes"
+          :validators="validators"
+          @change="kindsCheck"></au-checkbox><br>
       '></code-h>
       <code-h lang="js">
         export default {
-        data () {
-          return {
-            value: true,
-            text: 'Yes!',
-            values: [],
-            checkboxes: [
-              {
-                text: 'Breaking',
-                value: 'b'
-              },
-              {
-                text: 'Jazz',
-                value: 'j'
-              },
-              {
-                text: 'Popppin',
-                value: 'p'
-              },
-              {
-                text: 'Locking',
-                value: 'l'
-              }
-            ]
-          }
-        },
-        computed: {
-          validators () {
-            let vm = this
-            return [
-              {
-                validator (v) {
-                  if (vm.value) {
-                    return v.includes('b')
-                  } else {
-                    return true
-                  }
+          data () {
+            return {
+              allChecked: false,
+              indeterminate: false,
+              kinds: [],
+              checkboxes: [
+                {
+                  text: 'Breaking',
+                  value: 'b'
                 },
-                warning: 'If bboy then bboy forever'
+                {
+                  text: 'Jazz',
+                  value: 'j'
+                },
+                {
+                  text: 'Popppin',
+                  value: 'p'
+                },
+                {
+                  text: 'Locking',
+                  value: 'l'
+                }
+              ]
+            }
+          },
+          computed: {
+            validators () {
+              let vm = this
+              return [
+                {
+                  validator (v) {
+                    return vm.kinds ? v.includes('b') : true
+                  },
+                  warning: 'Bboy forever'
+                }
+              ]
+            }
+          },
+          methods: {
+            kindsCheck (v) {
+              if (!this.allChecked || !v.length) {
+                this.allChecked = v.length === this.checkboxes.length
               }
-            ]
+              this.indeterminate = v.length > 0 && v.length < this.checkboxes.length
+            },
+            checkAll (v) {
+              this.indeterminate = false
+              this.kinds = v ? this.checkboxes.map(e => e.value) : []
+            }
           }
         }
-      }
       </code-h>
     </au-panel>
   </div>
@@ -287,9 +315,9 @@
     name: 'checkbox-examples',
     data () {
       return {
-        value: true,
-        text: 'Yes!',
-        values: [],
+        allChecked: false,
+        indeterminate: false,
+        kinds: [],
         checkboxes: [
           {
             text: 'Breaking',
@@ -316,15 +344,23 @@
         return [
           {
             validator (v) {
-              if (vm.value) {
-                return v.includes('b')
-              } else {
-                return true
-              }
+              return vm.kinds ? v.includes('b') : true
             },
-            warning: 'If bboy then bboy forever'
+            warning: 'Bboy forever'
           }
         ]
+      }
+    },
+    methods: {
+      kindsCheck (v) {
+        if (!this.allChecked || !v.length) {
+          this.allChecked = v.length === this.checkboxes.length
+        }
+        this.indeterminate = v.length > 0 && v.length < this.checkboxes.length
+      },
+      checkAll (v) {
+        this.indeterminate = false
+        this.kinds = v ? this.checkboxes.map(e => e.value) : []
       }
     }
   }

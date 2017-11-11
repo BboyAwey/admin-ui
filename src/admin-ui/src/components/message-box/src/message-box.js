@@ -101,9 +101,11 @@ function MessageBox (config) {
   instances.modal.config = config
   if (type === 'alert') {
     instances.modal.buttons = [getConfirmButton(instances.modal, config)]
+    instances.modal.onEnter = instances.modal.buttons[0].text
   }
   if (type === 'confirm') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), getConfirmButton(instances.modal, config)]
+    instances.modal.onEnter = instances.modal.buttons[1].text
   }
   if (type === 'prompt') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), Object.assign({}, getConfirmButton(instances.modal, config), {
@@ -119,6 +121,7 @@ function MessageBox (config) {
         })
       }
     })]
+    instances.modal.onEnter = instances.modal.buttons[1].text
     instances.modal.height = 200
   } else instances.modal.height = 14
 
@@ -136,12 +139,12 @@ function MessageBox (config) {
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance)
   instances.modal.display = true
-  // auto focus
-  if (contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-    contentInstance.$refs.core.$refs.core.focus()
-  }
   instances.modal.$mount()
   document.body.appendChild(instances.modal.$el)
+  // auto focus
+  // if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+  //   Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
+  // }
 }
 MessageBox.alert = function (config) {
   MessageBox(Object.assign(config, {

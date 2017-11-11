@@ -7,7 +7,7 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-button type="info" @click="modalDisplay = true">点我弹出模态框</au-button>
-        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons">
+        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons" onEnter="确认">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
         </au-modal>
       </div>
@@ -79,6 +79,21 @@
             </td>
             <td>
               按钮配置
+            </td>
+          </tr>
+          <tr>
+            <td>on-enter</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              在buttons中指定的按钮的text
+            </td>
+            <td>
+              指定在用户按下Enter键时希望按下的按钮
             </td>
           </tr>
           <tr>

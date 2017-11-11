@@ -13,7 +13,6 @@
     }
     .au-radio-core {
       position: relative;
-      top: 3px;
       display: inline-block;
       width: 16px;
       height: 16px;
@@ -21,6 +20,7 @@
       border-style: solid;
       border-radius: 100%;
       outline: none;
+      vertical-align: middle;
     }
     .au-radio-dot {
       display: inline-block;
@@ -33,6 +33,7 @@
     }
     .au-radio-text {
       margin-left: 4px;
+      vertical-align: middle;
     }
   }
 </style>

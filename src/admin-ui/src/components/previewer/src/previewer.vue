@@ -204,8 +204,10 @@
         if (v) {
           document.body.appendChild(this.$refs.previewer)
           this.$emit('show', this.images[this.localCurrent])
+          window.addEventListener('keyup', this.escHandler)
         } else {
           this.$emit('hide', this.images[this.localCurrent])
+          window.removeEventListener('keyup', this.escHandler)
         }
       },
       current (v) {
@@ -233,6 +235,10 @@
       allow (direc) {
         if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0
         else return this.images && this.images.length && this.localCurrent < this.images.length - 1
+      },
+      escHandler (e) {
+        if (e.keyCode !== 27) return
+        this.close()
       }
     }
   }

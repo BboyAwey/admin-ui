@@ -1790,15 +1790,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('span', {
     staticClass: "au-checkbox-core au-theme-radius",
     class: {
-      'au-theme-border-color--base-8': !_vm.hasWarnings && !_vm.hover && !_vm.localValue,
+      'au-theme-border-color--base-8': !_vm.hasWarnings && !_vm.hover && !_vm.localValue && !_vm.localIndeterminate,
         'au-theme-border-color--primary-3': !_vm.hasWarnings && _vm.hover && !_vm.localValue && !_vm.disabled,
         'au-theme-border-color--danger-3': _vm.hasWarnings && !_vm.localValue && !_vm.disabled,
-        'au-theme-background-color--primary-3': !_vm.hasWarnings && _vm.localValue && !_vm.disabled,
-        'au-theme-background-color--danger-3': _vm.hasWarnings && _vm.localValue && !_vm.disabled,
+        'au-theme-background-color--primary-3': !_vm.hasWarnings && (_vm.localValue || _vm.localIndeterminate) && !_vm.disabled,
+        'au-theme-background-color--danger-3': _vm.hasWarnings && (_vm.localValue || _vm.localIndeterminate) && !_vm.disabled,
         'au-theme-background-color--base-9': _vm.disabled
     },
     style: ({
-      border: _vm.localValue && !_vm.disabled ? 'none' : ''
+      border: (_vm.localValue && !_vm.disabled) || _vm.localIndeterminate ? 'none' : ''
     }),
     attrs: {
       "tabindex": "0"
@@ -1807,18 +1807,33 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.localValue),
-      expression: "localValue"
+      value: (_vm.localValue && !_vm.localIndeterminate),
+      expression: "localValue && !localIndeterminate"
     }],
-    staticClass: "au-checkbox-hook",
+    staticClass: "au-checkbox-icon",
     class: {
-      'au-checkbox-hook-disabled': _vm.disabled,
+      'au-checkbox-icon-disabled': _vm.disabled,
       'au-theme-font-color--base-12': !_vm.disabled,
       'au-theme-font-color--base-6': _vm.disabled
     },
     attrs: {
-      "type": "check",
-      "size": "12px"
+      "type": "check"
+    }
+  }), _vm._v(" "), _c('au-icon', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.localIndeterminate),
+      expression: "localIndeterminate"
+    }],
+    staticClass: "au-checkbox-icon au-checkbox-icon-minus",
+    class: {
+      'au-checkbox-icon-disabled': _vm.disabled,
+      'au-theme-font-color--base-12': !_vm.disabled,
+      'au-theme-font-color--base-6': _vm.disabled
+    },
+    attrs: {
+      "type": "minus"
     }
   })], 1), _vm._v(" "), _c('span', {
     staticClass: "au-checkbox-text"
@@ -1863,14 +1878,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         value: (checkbox.checked),
         expression: "checkbox.checked"
       }],
-      staticClass: "au-checkbox-hook au-theme-font-color--base-12",
+      staticClass: "au-checkbox-icon au-theme-font-color--base-12",
       class: {
-        'au-checkbox-hook-disabled': _vm.disabled,
+        'au-checkbox-icon-disabled': _vm.disabled,
         'au-theme-font-color--base-6-important': _vm.disabled
       },
       attrs: {
-        "type": "check",
-        "size": "12px"
+        "type": "check"
       }
     })], 1), _vm._v(" "), _c('span', {
       staticClass: "au-checkbox-text"
@@ -3179,6 +3193,7 @@ function getDataType(o) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__button__ = __webpack_require__("Wz8r");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
 
 //
 //
@@ -3260,13 +3275,23 @@ function getDataType(o) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-modal',
-  components: { AuButton: __WEBPACK_IMPORTED_MODULE_2__button__["a" /* default */] },
+  components: { AuButton: __WEBPACK_IMPORTED_MODULE_2__button__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */] },
   mounted: function mounted() {
     // document.body.appendChild(this.$refs.modal)
     this.calModalContentStyle();
@@ -3303,7 +3328,8 @@ function getDataType(o) {
         }
         return true;
       }
-    }
+    },
+    onEnter: String
   },
   watch: {
     display: function display(v) {
@@ -3311,8 +3337,10 @@ function getDataType(o) {
       if (v) {
         this.calModalContentStyle();
         window.addEventListener('keyup', this.escHandler);
+        if (this.onEnter) window.addEventListener('keyup', this.enterHandler);
       } else {
         window.removeEventListener('keyup', this.escHandler);
+        if (this.onEnter) window.removeEventListener('keyup', this.enterHandler);
       }
     },
     localDisplay: function localDisplay(v) {
@@ -3360,8 +3388,16 @@ function getDataType(o) {
     show: function show() {
       this.localDisplay = true;
     },
-    operate: function operate(handler) {
-      handler.call(this.$parent);
+    operate: function operate(button) {
+      var vm = this;
+      button.handler.call(this.$parent, {
+        start: function start() {
+          vm.$set(button, 'loading', true);
+        },
+        stop: function stop() {
+          vm.$set(button, 'loading', false);
+        }
+      });
     },
     calModalContentStyle: function calModalContentStyle() {
       var height = this.height,
@@ -3376,9 +3412,16 @@ function getDataType(o) {
       this.$refs.content.style.height = parseInt(height) - 64 - operationHeight - (title ? 31 : 0) + 'px';
     },
     escHandler: function escHandler(e) {
-      if (e.keyCode === 27) {
-        this.hide();
-      }
+      if (e.keyCode !== 27) return;
+      this.hide();
+    },
+    enterHandler: function enterHandler(e) {
+      var _this2 = this;
+
+      if (e.keyCode !== 13) return;
+      this.buttonList.forEach(function (button) {
+        if (button.text === _this2.onEnter) _this2.operate(button);
+      });
     }
   }
 });
@@ -6177,35 +6220,55 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         value: (_vm.canRemove),
         expression: "canRemove"
       }],
-      staticClass: "au-tabs-delete-btn au-theme-font-color--danger-3",
+      staticClass: "au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3",
       attrs: {
         "type": "times"
       },
       nativeOn: {
         "click": function($event) {
           $event.stopPropagation();
-          _vm.$emit('remove', index, tab)
+          _vm.remove(index, tab)
+        }
+      }
+    }), _vm._v(" "), _c('au-icon', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (_vm.canRename),
+        expression: "canRename"
+      }],
+      staticClass: "au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3",
+      attrs: {
+        "type": "pencil"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.rename(index, tab)
         }
       }
     })], 1)
-  })), _vm._v(" "), _c('au-icon', {
+  })), _vm._v(" "), _c('au-button', {
+    staticClass: "au-tabs-btn au-tabs-create-btn",
+    attrs: {
+      "type": "success",
+      "size": "mini"
+    },
+    on: {
+      "click": _vm.create
+    }
+  }, [_c('au-icon', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (_vm.canCreate),
       expression: "canCreate"
     }],
-    staticClass: "au-tabs-create-btn au-theme-font-color--success-3",
+    staticClass: "au-theme-font-color--base-12",
     attrs: {
       "type": "plus"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.$emit('create')
-      }
     }
-  })], 1), _vm._v(" "), _c('div', {
+  })], 1)], 1), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -6753,6 +6816,10 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
   watch: {
     associations: function associations(v) {
       // this.associationsShow = true
+    },
+    localValue: function localValue(v) {
+      this.input();
+      this.change();
     }
   },
   methods: {
@@ -6773,7 +6840,7 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v;
-      this.input();
+      // this.input()
       // this.$refs.core.focus()
       this.associationsShow = false;
     },
@@ -6906,6 +6973,18 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6927,14 +7006,16 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
       default: function _default() {
         return [];
       }
-    }
+    },
+    indeterminate: Boolean
   },
   data: function data() {
     return {
       hover: false,
       localValue: this.value,
       localCheckboxes: this.getLocalCbsFromCbs(),
-      localValues: this.value
+      // localValues: this.value,
+      localIndeterminate: this.indeterminate
     };
   },
 
@@ -6944,15 +7025,16 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
     }
   },
   watch: {
-    localValue: function localValue() {
+    localValue: function localValue(v) {
+      this.localIndeterminate = false;
       this.input();
       this.change();
     },
-    localValues: function localValues() {
-      this.$emit('input', this.localValues);
-      this.$emit('change', this.localValues);
-    },
 
+    // localValues () {
+    //   this.$emit('input', this.localValues)
+    //   this.$emit('change', this.localValues)
+    // },
     checkboxes: {
       deep: true,
       handler: function handler() {
@@ -6964,6 +7046,9 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
       handler: function handler(v) {
         this.localCheckboxes = this.getLocalCbsFromCbs();
       }
+    },
+    indeterminate: function indeterminate(v) {
+      this.localIndeterminate = v;
     }
   },
   methods: {
@@ -6985,7 +7070,7 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
       if (this.disabled) return;
       if (this.multiple) {
         this.$set(this.localCheckboxes[index], 'checked', !this.localCheckboxes[index].checked);
-        this.localValues = this.getValuesFromLcbs();
+        this.localValue = this.getValuesFromLcbs();
       } else {
         this.localValue = !this.localValue;
       }
@@ -7273,9 +7358,10 @@ var instances = {
 });
 
 // refresh el innnerHTML
-function refreshContent(el, content) {
+function refreshContent(el, contentInstance) {
   el.innerHTML = '';
-  el.appendChild(content);
+  contentInstance.$mount();
+  el.appendChild(contentInstance.$el);
 }
 
 function getCancelButton(instance, config, value) {
@@ -7298,7 +7384,7 @@ function getCancelButton(instance, config, value) {
   };
 }
 
-function getConfirmButton(instance, config, value) {
+function getConfirmButton(instance, config) {
   return {
     text: '确定',
     type: 'primary',
@@ -7306,11 +7392,7 @@ function getConfirmButton(instance, config, value) {
     plain: config.buttonPlain,
     handler: function handler() {
       if (config.confirm) {
-        // Vue.nextTick(() => {
-        //   config.confirm(value)
-        //   instance.display = false
-        // })
-        config.confirm(value);
+        config.confirm();
         instance.display = false;
       } else {
         instance.display = false;
@@ -7335,39 +7417,52 @@ function MessageBox(config) {
   instances.modal.config = config;
   if (type === 'alert') {
     instances.modal.buttons = [getConfirmButton(instances.modal, config)];
+    instances.modal.onEnter = instances.modal.buttons[0].text;
   }
   if (type === 'confirm') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), getConfirmButton(instances.modal, config)];
+    instances.modal.onEnter = instances.modal.buttons[1].text;
   }
   if (type === 'prompt') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, getConfirmButton(instances.modal, config), {
-      handler: function handler() {
+      handler: function handler(loading) {
         var config = instances.modal.config;
+        loading.start();
         instances[config.type].validate().then(function (res) {
+          loading.stop();
           if (res) {
-            if (config.confirm) config.confirm();
+            if (config.confirm) config.confirm(instances[config.type].value);
             instances.modal.display = false;
           }
         });
       }
     })];
-  }
-  if (type === 'prompt') instances.modal.height = 200;else instances.modal.height = 14;
+    instances.modal.onEnter = instances.modal.buttons[1].text;
+    instances.modal.height = 200;
+  } else instances.modal.height = 14;
 
   // get a content instance
   var contentInstance = instances[type];
-  if (reset) contentInstance.$refs.core.clear();
+  if (reset || reset === '') {
+    contentInstance.$refs.core.clear();
+    if (reset !== true && reset !== '') {
+      contentInstance.value = reset;
+      contentInstance.$refs.core.localValue = reset;
+    }
+  }
   // set content instance props
   __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(contentInstance, { message: message, validators: validators, placeholder: placeholder });
   // put the content into modal and show them on document
-  refreshContent(instances.modal.$refs.content, contentInstance.$el);
+  refreshContent(instances.modal.$refs.content, contentInstance);
   instances.modal.display = true;
-  // auto focus
-  if (contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-    contentInstance.$refs.core.$refs.core.focus();
-  }
   instances.modal.$mount();
   document.body.appendChild(instances.modal.$el);
+  // auto focus
+  if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+    __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
+      return contentInstance.$refs.core.$refs.core.focus();
+    });
+  }
 }
 MessageBox.alert = function (config) {
   MessageBox(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(config, {
@@ -8797,7 +8892,7 @@ if (false) {(function () {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "au-confirm"
+    staticClass: "au-confirm au-theme-font-color--base-3"
   }, [_vm._v(_vm._s(_vm.message))])
 }
 var staticRenderFns = []
@@ -9730,7 +9825,7 @@ module.exports = __webpack_require__("1H6C");
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "au-prompt"
+    staticClass: "au-prompt au-theme-font-color--base-3"
   }, [_c('div', {
     staticClass: "au-prompt-message"
   }, [_vm._v(_vm._s(_vm.message))]), _vm._v(" "), _c('div', {
@@ -9980,6 +10075,7 @@ module.exports = function (key) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__ = __webpack_require__("gU9b");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__ = __webpack_require__("TN9u");
+//
 //
 //
 //
@@ -10650,6 +10746,8 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__button__ = __webpack_require__("Wz8r");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_box__ = __webpack_require__("bAYR");
 //
 //
 //
@@ -10674,12 +10772,17 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-tabs',
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */] },
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */], AuButton: __WEBPACK_IMPORTED_MODULE_1__button__["a" /* default */] },
   data: function data() {
     return {
       localCurrent: this.current
@@ -10695,7 +10798,32 @@ if (false) {(function () {
     },
     current: [String, Number],
     canRemove: Boolean,
-    canCreate: Boolean
+    canRename: Boolean,
+    canCreate: Boolean,
+    removeMessage: {
+      type: String,
+      default: '确定要删除吗？'
+    },
+    renameMessage: {
+      type: String,
+      default: '请输入新名称：'
+    },
+    renameValidators: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    createMessage: {
+      type: String,
+      default: '请输入新名称：'
+    },
+    createValidators: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
   },
   watch: {
     current: function current(v) {
@@ -10718,6 +10846,39 @@ if (false) {(function () {
         }
         activeEl[0].style.display = 'block';
       }
+    },
+    remove: function remove(index, tab) {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_2__message_box__["a" /* default */].confirm({
+        'message': vm.removeMessage,
+        confirm: function confirm() {
+          vm.$emit('remove', index, tab);
+        }
+      });
+    },
+    create: function create() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_2__message_box__["a" /* default */].prompt({
+        'message': vm.createMessage,
+        reset: true,
+        confirm: function confirm(v) {
+          vm.$emit('create', v);
+        },
+
+        validators: vm.createValidators
+      });
+    },
+    rename: function rename(index, tab) {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_2__message_box__["a" /* default */].prompt({
+        'message': vm.renameMessage,
+        reset: tab.text,
+        confirm: function confirm(v) {
+          vm.$emit('rename', v, index, tab);
+        },
+
+        validators: vm.renameValidators
+      });
     }
   },
   mounted: function mounted() {
@@ -11503,15 +11664,24 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "type": button.type,
         "size": button.size,
         "plain": button.plain,
-        "disabled": button.disabled
+        "disabled": button.disabled,
+        "loading": button.loading
       },
       on: {
         "click": function($event) {
-          _vm.operate(button.handler)
+          _vm.operate(button)
         }
       }
     }, [_vm._v(_vm._s(button.text))])
-  }))])])
+  })), _vm._v(" "), _c('au-icon', {
+    staticClass: "au-modal-close-icon au-theme-hover-font-color--primary-3",
+    attrs: {
+      "type": "times"
+    },
+    on: {
+      "click": _vm.hide
+    }
+  })], 1)])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14513,8 +14683,10 @@ module.exports = function normalizeComponent (
       if (v) {
         document.body.appendChild(this.$refs.previewer);
         this.$emit('show', this.images[this.localCurrent]);
+        window.addEventListener('keyup', this.escHandler);
       } else {
         this.$emit('hide', this.images[this.localCurrent]);
+        window.removeEventListener('keyup', this.escHandler);
       }
     },
     current: function current(v) {
@@ -14541,6 +14713,10 @@ module.exports = function normalizeComponent (
     },
     allow: function allow(direc) {
       if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0;else return this.images && this.images.length && this.localCurrent < this.images.length - 1;
+    },
+    escHandler: function escHandler(e) {
+      if (e.keyCode !== 27) return;
+      this.close();
     }
   }
 });
@@ -15929,7 +16105,7 @@ if (false) {(function () {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "au-alert"
+    staticClass: "au-alert au-theme-font-color--base-3"
   }, [_vm._v(_vm._s(_vm.message))])
 }
 var staticRenderFns = []
@@ -16103,7 +16279,6 @@ module.exports = function (it) {
 
   props: {
     message: String,
-    required: '',
     trigger: Boolean,
     validators: Array,
     placeholder: String

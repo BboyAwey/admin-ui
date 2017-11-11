@@ -51,6 +51,13 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
+  .au-modal-close-icon {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    font-size: $large;
+    cursor: pointer;
+  }
 </style>
 <template>
   <div
@@ -76,16 +83,18 @@
           :loading="button.loading"
           @click="operate(button)">{{ button.text }}</au-button>
       </div>
+      <au-icon type="times" @click="hide" class="au-modal-close-icon au-theme-hover-font-color--primary-3"></au-icon>
     </div>
   </div>
 </template>
 <script>
   import { getElementSize } from '../../../helpers/dom'
   import AuButton from '../../button'
+  import AuIcon from '../../icon'
 
   export default {
     name: 'au-modal',
-    components: { AuButton },
+    components: { AuButton, AuIcon },
     mounted () {
       // document.body.appendChild(this.$refs.modal)
       this.calModalContentStyle()
@@ -120,7 +129,8 @@
           }
           return true
         }
-      }
+      },
+      onEnter: String
     },
     watch: {
       display (v) {
@@ -128,8 +138,10 @@
         if (v) {
           this.calModalContentStyle()
           window.addEventListener('keyup', this.escHandler)
+          if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
         } else {
           window.removeEventListener('keyup', this.escHandler)
+          if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
         }
       },
       localDisplay (v) {
@@ -196,9 +208,14 @@
         this.$refs.content.style.height = parseInt(height) - 64 - operationHeight - (title ? 31 : 0) + 'px'
       },
       escHandler (e) {
-        if (e.keyCode === 27) {
-          this.hide()
-        }
+        if (e.keyCode !== 27) return
+        this.hide()
+      },
+      enterHandler (e) {
+        if (e.keyCode !== 13) return
+        this.buttonList.forEach(button => {
+          if (button.text === this.onEnter) this.operate(button)
+        })
       }
     }
   }

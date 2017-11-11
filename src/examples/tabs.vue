@@ -265,10 +265,13 @@
         <tr>
           <td>@create</td>
           <td>
-            <au-icon type="minus"></au-icon>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">text</li>
+            </ol>
           </td>
           <td>
             当用户确认新增tab的时候触发该事件<br>
+            text表示新的tab名称<br>
             仅在can-create为true时才有效
           </td>
         </tr>

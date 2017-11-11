@@ -7458,11 +7458,9 @@ function MessageBox(config) {
   instances.modal.$mount();
   document.body.appendChild(instances.modal.$el);
   // auto focus
-  if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-    __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
-      return contentInstance.$refs.core.$refs.core.focus();
-    });
-  }
+  // if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+  //   Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
+  // }
 }
 MessageBox.alert = function (config) {
   MessageBox(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(config, {

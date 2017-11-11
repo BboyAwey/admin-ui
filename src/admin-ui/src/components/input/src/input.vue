@@ -284,6 +284,10 @@
     watch: {
       associations (v) {
         // this.associationsShow = true
+      },
+      localValue (v) {
+        this.input()
+        this.change()
       }
     },
     methods: {
@@ -298,7 +302,7 @@
       },
       selectAssociation (v) {
         this.localValue = v
-        this.input()
+        // this.input()
         // this.$refs.core.focus()
         this.associationsShow = false
       },

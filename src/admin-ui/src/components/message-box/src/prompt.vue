@@ -19,7 +19,7 @@
   }
 </style>
 <template>
-  <div class="au-prompt">
+  <div class="au-prompt au-theme-font-color--base-3">
     <div class="au-prompt-message">{{ message }}</div>
     <div class="au-prompt-core-container">
       <au-input class="au-prompt-core" v-model="value" :placeholder="placeholder" :validators="validators" validate-on-blur ref="core"></au-input>
@@ -39,7 +39,6 @@
     },
     props: {
       message: String,
-      required: '',
       trigger: Boolean,
       validators: Array,
       placeholder: String

@@ -12,10 +12,13 @@
           :name="['tab-'+tab.name]"
           @click="toggleTabs(tab.name, $event)">
           <a href="javascript:void(0);" :title="tab.text">{{ tab.text }}</a>
-          <au-icon v-show="canRemove" @click.native.stop="$emit('remove', index, tab)" class="au-tabs-delete-btn au-theme-font-color--danger-3" type="times"></au-icon>
+          <au-icon v-show="canRemove" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
+          <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
         </li>
       </ul>
-      <au-icon v-show="canCreate" @click.native.stop="$emit('create')" class="au-tabs-create-btn au-theme-font-color--success-3" type="plus"></au-icon>
+      <au-button type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
+        <au-icon v-show="canCreate" class="au-theme-font-color--base-12" type="plus"></au-icon>
+      </au-button>
     </div>
     <div  class="au-tabs-container" v-show="tabs && tabs.length">
       <slot class="au-tabs-content"></slot>
@@ -24,10 +27,12 @@
 </template>
 <script>
   import AuIcon from '../../icon'
+  import AuButton from '../../button'
+  import MessageBox from '../../message-box'
 
   export default {
     name: 'au-tabs',
-    components: { AuIcon },
+    components: { AuIcon, AuButton },
     data () {
       return {
         localCurrent: this.current
@@ -42,7 +47,28 @@
       },
       current: [String, Number],
       canRemove: Boolean,
-      canCreate: Boolean
+      canRename: Boolean,
+      canCreate: Boolean,
+      removeMessage: {
+        type: String,
+        default: '确定要删除吗？'
+      },
+      renameMessage: {
+        type: String,
+        default: '请输入新名称：'
+      },
+      renameValidators: {
+        type: Array,
+        default () { return [] }
+      },
+      createMessage: {
+        type: String,
+        default: '请输入新名称：'
+      },
+      createValidators: {
+        type: Array,
+        default () { return [] }
+      }
     },
     watch: {
       current (v) {
@@ -65,6 +91,37 @@
           }
           activeEl[0].style.display = 'block'
         }
+      },
+      remove (index, tab) {
+        let vm = this
+        MessageBox.confirm({
+          'message': vm.removeMessage,
+          confirm () {
+            vm.$emit('remove', index, tab)
+          }
+        })
+      },
+      create () {
+        let vm = this
+        MessageBox.prompt({
+          'message': vm.createMessage,
+          reset: true,
+          confirm (v) {
+            vm.$emit('create', v)
+          },
+          validators: vm.createValidators
+        })
+      },
+      rename (index, tab) {
+        let vm = this
+        MessageBox.prompt({
+          'message': vm.renameMessage,
+          reset: tab.text,
+          confirm (v) {
+            vm.$emit('rename', v, index, tab)
+          },
+          validators: vm.renameValidators
+        })
       }
     },
     mounted () {
@@ -119,7 +176,8 @@
         font-size: $normal;
       }
     }
-    li:hover > .au-tabs-delete-btn {
+    li:hover > .au-tabs-delete-btn,
+    li:hover > .au-tabs-rename-btn {
       display: inline-block;
     }
   }
@@ -136,18 +194,27 @@
       display: block;
     }
   }
-  .au-tabs-create-btn {
+  button.au-tabs-btn {
     position: absolute;
-    right: 15px;
-    bottom: 8px;
-    cursor: pointer;
+  }
+  .au-tabs-btn {
+    position: absolute;
     font-size: $normal;
+    cursor: pointer;
+  }
+  .au-tabs-create-btn {
+    right: 19px;
+    bottom: 6px;
   }
   .au-tabs-delete-btn {
-    position: absolute;
     right: 10px;
-    top: 0px;
-    font-size: $normal;
+    top: 5px;
     display: none;
+  }
+  .au-tabs-rename-btn {
+    left: 10px;
+    top: 12px;
+    display: none;
+    font-size: $small
   }
 </style>

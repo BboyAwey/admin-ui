@@ -73,7 +73,8 @@
           :size="button.size"
           :plain="button.plain"
           :disabled="button.disabled"
-          @click="operate(button.handler)">{{ button.text }}</au-button>
+          :loading="button.loading"
+          @click="operate(button)">{{ button.text }}</au-button>
       </div>
     </div>
   </div>
@@ -173,8 +174,16 @@
       show () {
         this.localDisplay = true
       },
-      operate (handler) {
-        handler.call(this.$parent)
+      operate (button) {
+        let vm = this
+        button.handler.call(this.$parent, {
+          start () {
+            vm.$set(button, 'loading', true)
+          },
+          stop () {
+            vm.$set(button, 'loading', false)
+          }
+        })
       },
       calModalContentStyle () {
         let { height, title } = this

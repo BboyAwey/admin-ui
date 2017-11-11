@@ -6,7 +6,16 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-tabs :tabs="tabs" :current="current" canCreate canRemove @remove="remove" @create="create">
+        <au-tabs :tabs="tabs"
+          :current="current"
+          can-create
+          can-remove
+          can-rename
+          :rename-validators="validators"
+          :create-validators="validators"
+          @remove="remove"
+          @create="create"
+          @rename="rename">
           <div name="baseInfo">基本信息</div>
           <div name="externalResource">列表信息</div>
         </au-tabs>
@@ -75,6 +84,7 @@
           </td>
           <td>Boolean</td>
           <td>
+            false
           </td>
           <td>
             <ol class="option-list">
@@ -83,7 +93,50 @@
             </ol>
           </td>
           <td>
-            显示删除按钮
+            tab是否可被删除
+          </td>
+        </tr>
+        <tr>
+          <td>can-rename</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>Boolean</td>
+          <td>
+            false
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">true</li>
+              <li class="au-theme-border-color--base-8">false</li>
+            </ol>
+          </td>
+          <td>
+            tab是否可被重命名
+          </td>
+        </tr>
+        <tr>
+          <td>rename-validators</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>
+            Array<br>
+              -Object
+          </td>
+          <td>
+            <au-icon type="minus"></au-icon>
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+            </ol>
+          </td>
+          <td>
+            重命名tab时的验证器
           </td>
         </tr>
         <tr>
@@ -94,6 +147,7 @@
           </td>
           <td>Boolean</td>
           <td>
+            false
           </td>
           <td>
             <ol class="option-list">
@@ -102,7 +156,30 @@
             </ol>
           </td>
           <td>
-            显示新增按钮
+            是否可新增tab
+          </td>
+        </tr>
+        <tr>
+          <td>create-validators</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>
+            Array<br>
+              -Object
+          </td>
+          <td>
+            <au-icon type="minus"></au-icon>
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+            </ol>
+          </td>
+          <td>
+            新增tab时的验证器
           </td>
         </tr>
         </tbody>
@@ -163,9 +240,26 @@
             </ol>
           </td>
           <td>
-            当用户点击标签的删除图标的时候触发该事件<br>
+            当用户确认删除tab的时候触发该事件<br>
             index表示需要删除的tab的索引，tab表示需要删除的tab本身<br>
             仅在can-remove为true时才有效
+          </td>
+        </tr>
+        <tr>
+          <td>@rename</td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">newText</li>
+              <li class="au-theme-border-color--base-8">index</li>
+              <li class="au-theme-border-color--base-8">tab</li>
+            </ol>
+          </td>
+          <td>
+            当用户点击标签的删除图标的时候触发该事件<br>
+            newText表示新的tab名称<br>
+            index表示需要删除的tab的索引<br>
+            tab表示需要删除的tab本身<br>
+            仅在can-rename为true时才有效
           </td>
         </tr>
         <tr>
@@ -174,7 +268,7 @@
             <au-icon type="minus"></au-icon>
           </td>
           <td>
-            当用户点击新增图标的时候触发该事件<br>
+            当用户确认新增tab的时候触发该事件<br>
             仅在can-create为true时才有效
           </td>
         </tr>
@@ -188,7 +282,13 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-tabs :tabs="tabs" :current="current" canCreate canRemove @remove="remove" @create="create">
+        <au-tabs :tabs="tabs"
+          :current="current"
+          can-create
+          can-remove
+          can-rename
+          @remove="remove"
+          @create="create">
           <div name="baseInfo">基本信息</div>
           <div name="externalResource">列表信息</div>
         </au-tabs>
@@ -239,72 +339,43 @@
           {
             name: 'externalResource',
             text: '列表信息'
+          }
+        ],
+        tabCounter: 0,
+        validators: [
+          {
+            validator (v) {
+              return v !== '' && !/^\s+$/g.test(v)
+            },
+            warning: '必须输入新名称'
           },
           {
-            name: 'baseInfo2',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource2',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo3',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource3',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo4',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource4',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource5',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource5',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource6',
-            text: '列表信息'
-          },
-          {
-            name: 'baseInfo6',
-            text: '基本信息'
-          },
-          {
-            name: 'externalResource7',
-            text: '列表信息'
+            validator (v) {
+              return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                  if (v.indexOf('有间客栈') !== -1) resolve(true)
+                  else resolve(false)
+                }, 2000)
+              })
+            },
+            warning: '请在输入中包含“有间客栈”',
+            async: true
           }
         ]
       }
     },
     methods: {
       remove (index, tab) {
-        console.log(index, tab)
+        this.tabs.splice(index, 1)
       },
-      create () {
-        console.log('create')
+      create (text) {
+        this.tabs.push({
+          text,
+          name: 'tab' + this.tabCounter++
+        })
+      },
+      rename (newText, index, tab) {
+        this.$set(this.tabs[index], 'text', newText)
       }
     }
   }

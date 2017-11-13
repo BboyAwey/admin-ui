@@ -96,11 +96,14 @@
   </button>
 </template>
 <script>
+  import { rgbToHex } from '../../../helpers/utils'
+
   export default {
     name: 'au-button',
     mounted () {
       this.insertLoadingSvgStyle()
       this.setPos()
+      this.loadingStroke = rgbToHex(getComputedStyle(this.$el).backgroundColor)
     },
     data () {
       return {

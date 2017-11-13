@@ -200,7 +200,10 @@
                   value: item.checked
                 },
                 nativeOn: {
-                  'click': () => { this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType) }
+                  'click': () => {
+                    this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType)
+                    event.stopPropagation()
+                  }
                 }
               }
             )]

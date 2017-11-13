@@ -16,8 +16,8 @@
           <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
         </li>
       </ul>
-      <au-button type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
-        <au-icon v-show="canCreate" class="au-theme-font-color--base-12" type="plus"></au-icon>
+      <au-button v-show="canCreate" type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
+        <au-icon class="au-theme-font-color--base-12" type="plus"></au-icon>
       </au-button>
     </div>
     <div  class="au-tabs-container" v-show="tabs && tabs.length">

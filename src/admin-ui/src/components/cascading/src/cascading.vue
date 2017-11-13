@@ -16,7 +16,7 @@
   <div class="au-cascading">
     <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
-    }">{{ label }}</div>
+    }" v-if="label">{{ label }}</div>
     <div class="au-cascading-core-container">
       <au-select
         class="au-cascading-core"

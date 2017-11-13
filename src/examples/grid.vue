@@ -17,17 +17,20 @@
       <p class="paragraph">
         一个与著名的<a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Bootstrap</a>中的栅格系统设计理念一致的栅格组件。<br>
         它将父元素的宽度均等划分为12份，通过设置每个栅格占其中几份宽度来进行布局。<br>
-        更准确地讲，是通过设置每个栅格在<span class="emphasize au-theme-font-color--success-3">不同的父元素宽度下</span>占父元素宽度的十二分之几来进行<span class="emphasize au-theme-font-color--success-3"span>响应式布局</span>。<br>
+        更准确地讲，是通过设置每个栅格在<span class="emphasize au-theme-font-color--success-3">不同的屏幕宽度下</span>占父元素宽度的十二分之几来进行<span class="emphasize au-theme-font-color--success-3"span>响应式布局</span>。<br>
       </p>
       <!-- 组件示例 -->
       <div class="component-example au-theme-border-color--base-8">
         <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
         <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
         <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
       </div>

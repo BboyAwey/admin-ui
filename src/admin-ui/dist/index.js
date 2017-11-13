@@ -394,6 +394,7 @@ module.exports = function (index, length) {
 //
 
 // import { hasClass, getElementSize } from '../../../helpers/dom'
+// import { getElementSize, getWindowSize } from '../../../helpers/dom'
 
 
 function validateWidth(v) {
@@ -494,24 +495,20 @@ function validateWidth(v) {
       container.style.flexWrap = 'wrap';
     },
     getNumber: function getNumber() {
-      var size = this.$el.getBoundingClientRect();
-      for (var key in size) {
-        if (size[key] !== 0) {
-          this.getCellNumber();
-          this.getOffsetNumber();
-        } else return;
-      }
+      this.getCellNumber();
+      this.getOffsetNumber();
     },
     getCellNumber: function getCellNumber() {
-      var containerWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$el.parentNode).width;
+      // let containerWidth = getElementSize(this.$el.parentNode).width
+      var windowWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["b" /* getWindowSize */])().width;
 
-      if (this.widthLg && containerWidth >= this.breakPoint.lg) {
+      if (this.widthLg && windowWidth >= this.breakPoint.lg) {
         this.cellNumber = this.widthLg;
         this.offsetNumber = this.offsetLg;
-      } else if (this.widthMd && containerWidth >= this.breakPoint.md) {
+      } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
         this.cellNumber = this.widthMd;
         this.offsetNumber = this.offsetMd;
-      } else if (this.widthSm && containerWidth >= this.breakPoint.sm) {
+      } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
         this.cellNumber = this.widthSm;
         this.offsetNumber = this.offsetSm;
       } else if (this.widthXs) {
@@ -523,13 +520,14 @@ function validateWidth(v) {
       }
     },
     getOffsetNumber: function getOffsetNumber() {
-      var containerWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$el.parentNode).width;
+      // let containerWidth = getElementSize(this.$el.parentNode).width
+      var windowWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["b" /* getWindowSize */])().width;
 
-      if (this.offsetLg && containerWidth >= this.breakPoint.lg) {
+      if (this.offsetLg && windowWidth >= this.breakPoint.lg) {
         this.offsetNumber = this.offsetLg;
-      } else if (this.offsetMd && containerWidth >= this.breakPoint.md) {
+      } else if (this.offsetMd && windowWidth >= this.breakPoint.md) {
         this.offsetNumber = this.offsetMd;
-      } else if (this.offsetSm && containerWidth >= this.breakPoint.sm) {
+      } else if (this.offsetSm && windowWidth >= this.breakPoint.sm) {
         this.offsetNumber = this.offsetSm;
       } else if (this.offsetXs) {
         this.offsetNumber = this.offsetXs;
@@ -1974,10 +1972,18 @@ function getElementPagePos(el) {
 }
 
 function getWindowSize() {
-  return {
-    width: window.innerWidth,
-    height: window.innerHeight
-  };
+  // 获取窗口宽度
+  if (window.innerWidth) {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+  } else if (document.body.clientWidth) {
+    return {
+      width: document.body.clientWidth,
+      height: document.body.clientHeight
+    };
+  }
 }
 
 var isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -8556,12 +8562,12 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "au-cascading"
-  }, [_c('div', {
+  }, [(_vm.label) ? _c('div', {
     staticClass: "au-form-label",
     style: ({
       cursor: _vm.disabled ? 'not-allowed' : 'default'
     })
-  }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "au-cascading-core-container"
   }, _vm._l((_vm.cascadingData), function(levelArr, index) {
     return _c('au-select', {

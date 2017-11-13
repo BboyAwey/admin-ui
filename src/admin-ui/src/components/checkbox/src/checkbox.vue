@@ -13,25 +13,31 @@
     }
     .au-checkbox-core {
       position: relative;
-      top: 3px;
       display: inline-block;
       width: 16px;
       height: 16px;
       border-width: 1px;
       border-style: solid;
       outline: none;
+      vertical-align: middle;
     }
-    .au-checkbox-hook {
+    .au-checkbox-icon {
       position: absolute;
       top: 2px;
       left: 2px;
+      font-size: $small;
     }
-    .au-checkbox-hook-disabled {
+    .au-checkbox-icon-minus {
+      top: 3px;
+      left: 3px;
+    }
+    .au-checkbox-icon-disabled {
       top: 1px;
       left: 1px;
     }
     .au-checkbox-text {
       margin-left: 4px;
+      vertical-align: middle;
     }
   }
 </style>
@@ -47,19 +53,25 @@
       }">
       <span class="au-checkbox-core au-theme-radius" tabindex="0"
       :class="{
-        'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue,
+        'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
         'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
         'au-theme-border-color--danger-3': hasWarnings && !localValue &&!disabled,
-        'au-theme-background-color--primary-3': !hasWarnings && localValue && !disabled,
-        'au-theme-background-color--danger-3': hasWarnings && localValue && !disabled,
+        'au-theme-background-color--primary-3': !hasWarnings && (localValue || localIndeterminate) && !disabled,
+        'au-theme-background-color--danger-3': hasWarnings && (localValue || localIndeterminate) && !disabled,
         'au-theme-background-color--base-9': disabled
       }"
       :style="{
-        border: localValue && !disabled ? 'none' : ''
+        border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
       }">
-        <au-icon v-show="localValue" type="check" size="12px" class="au-checkbox-hook"
+        <au-icon v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
         :class="{
-          'au-checkbox-hook-disabled': disabled,
+          'au-checkbox-icon-disabled': disabled,
+          'au-theme-font-color--base-12': !disabled,
+          'au-theme-font-color--base-6': disabled
+        }"></au-icon>
+        <au-icon v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
+        :class="{
+          'au-checkbox-icon-disabled': disabled,
           'au-theme-font-color--base-12': !disabled,
           'au-theme-font-color--base-6': disabled
         }"></au-icon>
@@ -85,10 +97,10 @@
       :style="{
         border: checkbox.checked && !disabled ? 'none' : ''
       }">
-        <au-icon v-show="checkbox.checked" type="check" size="12px"
-          class="au-checkbox-hook au-theme-font-color--base-12"
+        <au-icon v-show="checkbox.checked" type="check"
+          class="au-checkbox-icon au-theme-font-color--base-12"
           :class="{
-            'au-checkbox-hook-disabled': disabled,
+            'au-checkbox-icon-disabled': disabled,
             'au-theme-font-color--base-6-important': disabled
           }"></au-icon>
       </span>
@@ -119,14 +131,16 @@
         default () {
           return []
         }
-      }
+      },
+      indeterminate: Boolean
     },
     data () {
       return {
         hover: false,
         localValue: this.value,
         localCheckboxes: this.getLocalCbsFromCbs(),
-        localValues: this.value
+        // localValues: this.value,
+        localIndeterminate: this.indeterminate
       }
     },
     computed: {
@@ -135,14 +149,15 @@
       }
     },
     watch: {
-      localValue () {
+      localValue (v) {
+        this.localIndeterminate = false
         this.input()
         this.change()
       },
-      localValues () {
-        this.$emit('input', this.localValues)
-        this.$emit('change', this.localValues)
-      },
+      // localValues () {
+      //   this.$emit('input', this.localValues)
+      //   this.$emit('change', this.localValues)
+      // },
       checkboxes: {
         deep: true,
         handler () {
@@ -154,6 +169,9 @@
         handler (v) {
           this.localCheckboxes = this.getLocalCbsFromCbs()
         }
+      },
+      indeterminate (v) {
+        this.localIndeterminate = v
       }
     },
     methods: {
@@ -175,7 +193,7 @@
         if (this.disabled) return
         if (this.multiple) {
           this.$set(this.localCheckboxes[index], 'checked', !this.localCheckboxes[index].checked)
-          this.localValues = this.getValuesFromLcbs()
+          this.localValue = this.getValuesFromLcbs()
         } else {
           this.localValue = !this.localValue
         }

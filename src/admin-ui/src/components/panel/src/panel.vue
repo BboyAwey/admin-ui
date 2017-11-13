@@ -13,6 +13,17 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      & > span:first-child {
+        float: left
+      }
+      & > span:last-child {
+        float: right
+      }
+    }
+    .au-panel-title:after {
+      content: "";
+      display: block;
+      clear: both;
     }
     .au-panel-content {
       padding: 24px;
@@ -33,7 +44,8 @@
         au-panel-title
         au-theme-border-color--base-8
         au-theme-font-color--base-3">
-        {{ title }}
+        <span>{{ title }}</span>
+        <span><slot name="title-right"></slot></span>
     </h3>
     <div class="au-panel-content">
       <slot></slot>

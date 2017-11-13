@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-upload v-model="files" action="http://localhost:3480/upload"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" action="http://localhost:3480/upload"></au-upload>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -218,6 +218,22 @@
             </td>
             <td>
               是否显示上传按钮
+            </td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              上传按钮前的提示文字<br>
+              仅在show-upload-button为true时有效
             </td>
           </tr>
           <tr>
@@ -577,7 +593,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>@input</td>
             <td>
               <ol class="option-list">
@@ -588,7 +604,7 @@
               用户选择文件后触发<br>
               参数files表示当前用户选中的所有文件
             </td>
-          </tr>
+          </tr> -->
           <tr>
             <td>@change</td>
             <td>
@@ -603,7 +619,7 @@
           </tr>
         </tbody>
       </au-table>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-5">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-5">@change</span>事件</cite>
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-5">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-5">@change</span>事件</cite> -->
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">

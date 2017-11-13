@@ -1,19 +1,24 @@
 <template>
-  <div class="au-tabs-wrapper">
+  <div class="au-tabs">
     <div class="au-tabs-nav au-theme-border-color--base-8" v-show="tabs && tabs.length">
       <ul>
         <li
-          v-for="(entry, index) in tabs"
+          v-for="(tab, index) in tabs"
           :key="index"
           :class="{
-            'au-theme-font-color--base-7': entry.name !== localCurrent,
-            'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': entry.name == localCurrent
+            'au-theme-font-color--base-7': tab.name !== localCurrent,
+            'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': tab.name == localCurrent
           }"
-          :name="['tab-'+entry.name]"
-          @click="toggleTabs(entry.name, $event)">
-          <a href="javascript:void(0);" :title="entry.text">{{entry.text}}</a>
+          :name="['tab-'+tab.name]"
+          @click="toggleTabs(tab.name, $event)">
+          <a href="javascript:void(0);" :title="tab.text">{{ tab.text }}</a>
+          <au-icon v-show="canRemove" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
+          <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
         </li>
       </ul>
+      <au-button type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
+        <au-icon v-show="canCreate" class="au-theme-font-color--base-12" type="plus"></au-icon>
+      </au-button>
     </div>
     <div  class="au-tabs-container" v-show="tabs && tabs.length">
       <slot class="au-tabs-content"></slot>
@@ -21,8 +26,13 @@
   </div>
 </template>
 <script>
+  import AuIcon from '../../icon'
+  import AuButton from '../../button'
+  import MessageBox from '../../message-box'
+
   export default {
     name: 'au-tabs',
+    components: { AuIcon, AuButton },
     data () {
       return {
         localCurrent: this.current
@@ -35,7 +45,30 @@
           return []
         }
       },
-      current: [String, Number]
+      current: [String, Number],
+      canRemove: Boolean,
+      canRename: Boolean,
+      canCreate: Boolean,
+      removeMessage: {
+        type: String,
+        default: '确定要删除吗？'
+      },
+      renameMessage: {
+        type: String,
+        default: '请输入新名称：'
+      },
+      renameValidators: {
+        type: Array,
+        default () { return [] }
+      },
+      createMessage: {
+        type: String,
+        default: '请输入新名称：'
+      },
+      createValidators: {
+        type: Array,
+        default () { return [] }
+      }
     },
     watch: {
       current (v) {
@@ -58,6 +91,37 @@
           }
           activeEl[0].style.display = 'block'
         }
+      },
+      remove (index, tab) {
+        let vm = this
+        MessageBox.confirm({
+          'message': vm.removeMessage,
+          confirm () {
+            vm.$emit('remove', index, tab)
+          }
+        })
+      },
+      create () {
+        let vm = this
+        MessageBox.prompt({
+          'message': vm.createMessage,
+          reset: true,
+          confirm (v) {
+            vm.$emit('create', v)
+          },
+          validators: vm.createValidators
+        })
+      },
+      rename (index, tab) {
+        let vm = this
+        MessageBox.prompt({
+          'message': vm.renameMessage,
+          reset: tab.text,
+          confirm (v) {
+            vm.$emit('rename', v, index, tab)
+          },
+          validators: vm.renameValidators
+        })
       }
     },
     mounted () {
@@ -70,15 +134,15 @@
 </script>
 <style lang="scss">
   @import '../../../style/vars';
-  .au-tabs-wrapper {
-    position: relative;
-    padding-top: 36px;
-    width: 100%;
-    height: 100%;
-    display: block;
+  .au-tabs {
+    // position: relative;
+    // padding-top: 36px;
+    // width: 100%;
+    // height: 100%;
+    // display: block;
   }
   .au-tabs-nav {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -95,13 +159,14 @@
       clear: both;
     }
     li {
+      position: relative;
       float: left;
       height: 35px;
       line-height: 35px;
       text-align: center;
       padding: 0 24px;
       cursor: pointer;
-      min-width: 88px;
+      // min-width: 88px;
       overflow: hidden;
       max-width: 156px;
       text-overflow: ellipsis;
@@ -110,6 +175,10 @@
         text-decoration: none;
         font-size: $normal;
       }
+    }
+    li:hover > .au-tabs-delete-btn,
+    li:hover > .au-tabs-rename-btn {
+      display: inline-block;
     }
   }
   li.au-tabs-active {
@@ -124,5 +193,28 @@
     .au-tabs-content:first-child {
       display: block;
     }
+  }
+  button.au-tabs-btn {
+    position: absolute;
+  }
+  .au-tabs-btn {
+    position: absolute;
+    font-size: $normal;
+    cursor: pointer;
+  }
+  .au-tabs-create-btn {
+    right: 19px;
+    bottom: 6px;
+  }
+  .au-tabs-delete-btn {
+    right: 10px;
+    top: 5px;
+    display: none;
+  }
+  .au-tabs-rename-btn {
+    left: 10px;
+    top: 12px;
+    display: none;
+    font-size: $small
   }
 </style>

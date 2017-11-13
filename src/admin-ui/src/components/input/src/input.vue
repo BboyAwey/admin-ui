@@ -36,7 +36,8 @@
     }
     textarea.au-input-core {
       line-height: $normal * 1.5;
-      height: auto;
+      width: 320px;
+      height: 100px;
     }
   }
   .au-input-associations-scroller {
@@ -86,7 +87,14 @@
         'au-theme-font-color--base-3': true,
         'au-theme-disabled-background-color--base-8': disabled
       }"
-      :style="{ minWidth, maxWidth, minHeight, maxHeight }"
+      :style="{
+        width: textareaWidth,
+        height: textareaHeight,
+        minWidth: textareaMinWidth,
+        maxWidth: textareaMaxWidth,
+        minHeight: textareaMinHeight,
+        maxHeight: textareaMaxHeight,
+      }"
       v-model="localValue"
       :disabled="disabled"
       :placeholder="placeholder"
@@ -266,14 +274,20 @@
       associations: Array,
       icon: String,
       iconPosition: String,
-      minWidth: String,
-      maxWidth: String,
-      minHeight: String,
-      maxHeight: String
+      textareaWidth: String,
+      textareaHeight: String,
+      textareaMinWidth: String,
+      textareaMaxWidth: String,
+      textareaMinHeight: String,
+      textareaMaxHeight: String
     },
     watch: {
       associations (v) {
         // this.associationsShow = true
+      },
+      localValue (v) {
+        this.input()
+        this.change()
       }
     },
     methods: {
@@ -288,7 +302,7 @@
       },
       selectAssociation (v) {
         this.localValue = v
-        this.input()
+        // this.input()
         // this.$refs.core.focus()
         this.associationsShow = false
       },

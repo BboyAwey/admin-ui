@@ -6,8 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="info" @click="modalDisplay = true">按钮</au-button>
-        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons">
+        <au-button type="info" @click="modalDisplay = true">点我弹出模态框</au-button>
+        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons" onEnter="确认">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
         </au-modal>
       </div>
@@ -74,10 +74,27 @@
                 <li class="au-theme-border-color--base-8">size: String，按钮尺寸，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
                 <li class="au-theme-border-color--base-8">plain: Boolean，空心按钮，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
                 <li class="au-theme-border-color--base-8">disabled: Boolean，禁用按钮，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
-                <li class="au-theme-border-color--base-8">handler: Function，点击按钮时的处理函数</li>
+                <li class="au-theme-border-color--base-8">handler: Function，点击按钮时的处理函数，接受一个loading对象作为参数，该对象有两个方法start()和stop()，用于开启和停止按钮loading</li>
               </ol>
             </td>
-            <td>按钮</td>
+            <td>
+              按钮配置
+            </td>
+          </tr>
+          <tr>
+            <td>on-enter</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              在buttons中指定的按钮的text
+            </td>
+            <td>
+              指定在用户按下Enter键时希望按下的按钮
+            </td>
           </tr>
           <tr>
             <td>width</td>

@@ -6,9 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-switch v-model="value" color="danger"></au-switch>
-        <au-switch v-model="value" color="success"></au-switch>
-        <span class="at-theme-font-color--base-3" style="font-size: 12px; display: inline-block; position: relative; top: -5px; left: 5px;">{{ value ? '开' : '关' }}</span>
+        <au-switch v-model="value" color="success" :label="value ? '开' : '关'"></au-switch>
+        <au-switch v-model="shadowValue" color="danger" :label="shadowValue ? '开' : '关'"></au-switch>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -25,6 +24,19 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>label</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              开关前的提示文字
+            </td>
+          </tr>
           <tr>
             <td>value</td>
             <td>
@@ -90,7 +102,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>@input</td>
             <td>
               <ol class="option-list">
@@ -103,19 +115,17 @@
               参数value表示当前值<br>
               参数event表示事件对象
             </td>
-          </tr>
+          </tr> -->
           <tr>
             <td>@change</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">value</li>
-                <li class="au-theme-border-color--base-8">event</li>
               </ol>
             </td>
             <td>
               值改变事件<br>
-              参数value表示当前值<br>
-              参数event表示事件对象
+              参数value表示当前值
             </td>
           </tr>
         </tbody>
@@ -128,15 +138,25 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-switch v-model="value" color="danger"></au-switch>
-        <au-switch v-model="value" color="success"></au-switch>
-        <span class="at-theme-font-color--base-3" style="font-size: 12px; display: inline-block; position: relative; top: -5px; left: 5px;">&#123;&#123; value ? "开" : "关" &#125;&#125;</span>
+        <au-switch v-model="value" color="success" :label="value ? &#x27;开&#x27; : &#x27;关&#x27;"></au-switch>
+        <au-switch v-model="shadowValue" color="danger" :label="shadowValue ? &#x27;开&#x27; : &#x27;关&#x27;"></au-switch>
       '></code-h>
       <code-h lang="js">
         export default {
+          name: 'switch-examples',
           data () {
             return {
               value: true
+            }
+          },
+          computed: {
+            shadowValue: {
+              get: function () {
+                return !this.value
+              },
+              set: function (v) {
+                this.value = !v
+              }
             }
           }
         }
@@ -150,6 +170,16 @@
     data () {
       return {
         value: true
+      }
+    },
+    computed: {
+      shadowValue: {
+        get: function () {
+          return !this.value
+        },
+        set: function (v) {
+          this.value = !v
+        }
       }
     }
   }

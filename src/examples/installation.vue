@@ -5,8 +5,11 @@
         推荐的安装方式是使用npm或cnpm进行安装：
       </p>
       <code-h lang="shell">
-        cnpm install git+ssh://git@gitlab.dataengine.com:awey/admin-ui-2-publish.git --save
+        cnpm install git+ssh://git@gogs.in.dataengine.com:Admin-UI/admin-ui-2-publish.git --save
       </code-h>
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+        由于使用的是公司的私有代码库，请确保你的机器有权访问这个git地址。
+      </cite>
     </au-panel>
     <au-panel class="section" title="全量加载">
       <p class="paragraph">
@@ -45,7 +48,7 @@
         // 项目入口文件
         import Vue from 'vue'
         import AdminUi from 'admin-ui'
-        import from 'admin-ui/style.css'
+        import 'admin-ui/style.css'
         Vue.use(AdminUi)
       </code-h>
     </au-panel>

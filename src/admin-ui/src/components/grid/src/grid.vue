@@ -81,9 +81,9 @@
       }
     },
     mounted () {
-      if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
-        throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
-      }
+      // if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
+      //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
+      // }
       this.setContainer()
       this.getNumber()
       window.addEventListener('resize', this.getNumber)
@@ -116,6 +116,18 @@
       },
       widthXs () {
         this.getNumber()
+      },
+      offsetLg () {
+        this.getNumber()
+      },
+      offsetMd () {
+        this.getNumber()
+      },
+      offsetSm () {
+        this.getNumber()
+      },
+      offsetXs () {
+        this.getNumber()
       }
     },
     methods: {
@@ -134,19 +146,19 @@
 
         if (this.widthLg && windowWidth >= this.breakPoint.lg) {
           this.cellNumber = this.widthLg
-          this.offsetNumber = this.offsetLg
+          // this.offsetNumber = this.offsetLg
         } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
           this.cellNumber = this.widthMd
-          this.offsetNumber = this.offsetMd
+          // this.offsetNumber = this.offsetMd
         } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
           this.cellNumber = this.widthSm
-          this.offsetNumber = this.offsetSm
+          // this.offsetNumber = this.offsetSm
         } else if (this.widthXs) {
           this.cellNumber = this.widthXs
-          this.offsetNumber = this.offsetXs
+          // this.offsetNumber = this.offsetXs
         } else {
           this.cellNumber = 12
-          this.offsetNumber = 0
+          // this.offsetNumber = 0
         }
       },
       getOffsetNumber () {

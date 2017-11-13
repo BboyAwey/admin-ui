@@ -110,7 +110,7 @@
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="Events">
-      <!-- <au-table>
+      <au-table>
         <thead>
           <tr>
             <th>名称</th>
@@ -120,20 +120,17 @@
         </thead>
         <tbody>
           <tr>
-            <td>event1</td>
+            <td>click</td>
             <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">arg1</li>
-                <li class="au-theme-border-color--base-8">arg2</li>
-              </ol>
+              <au-icon type="minus"></au-icon>
             </td>
             <td>
-              该事件及参数的详细说明
+              点击事件
             </td>
           </tr>
         </tbody>
-      </au-table> -->
-      <au-icon type="minus"></au-icon>
+        <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
+      </au-table>
     </au-panel>
     <au-panel class="section" title="Methods">
       <!-- <au-table>

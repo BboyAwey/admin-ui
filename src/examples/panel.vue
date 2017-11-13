@@ -10,6 +10,9 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-panel title="Panel" style="width: 500px;">
+          <div slot="title-right">
+            <au-icon type="bars"></au-icon>
+          </div>
           <p class="au-theme-font-color--base-3">
             Minim anim minim consectetur non veniam sint tempor ea irure aliqua reprehenderit. Adipisicing est ut elit elit. Et cillum anim aute do sunt exercitation anim excepteur incididunt.
           </p>
@@ -59,6 +62,13 @@
             <td>默认slot</td>
             <td>
               面板内容
+            </td>
+          </tr>
+          <tr>
+            <td>title-right</td>
+            <td>
+              标题右侧的内容<br>
+              可以放置一些icon之类的
             </td>
           </tr>
         </tbody>
@@ -121,6 +131,9 @@
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
         <au-panel title="Panel" style="width: 500px;">
+          <div slot="title-right">
+            <au-icon type="bars"></au-icon>
+          </div>
           <p class="au-theme-font-color--base-3">
             Minim anim minim consectetur non veniam sint tempor ea irure aliqua reprehenderit. Adipisicing est ut elit elit. Et cillum anim aute do sunt exercitation anim excepteur incididunt.
           </p>

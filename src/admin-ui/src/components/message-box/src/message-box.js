@@ -48,9 +48,10 @@ instances.modal.$on('hide', () => {
 })
 
 // refresh el innnerHTML
-function refreshContent (el, content) {
+function refreshContent (el, contentInstance) {
   el.innerHTML = ''
-  el.appendChild(content)
+  contentInstance.$mount()
+  el.appendChild(contentInstance.$el)
 }
 
 function getCancelButton (instance, config, value) {
@@ -73,7 +74,7 @@ function getCancelButton (instance, config, value) {
   }
 }
 
-function getConfirmButton (instance, config, value) {
+function getConfirmButton (instance, config) {
   return {
     text: '确定',
     type: 'primary',
@@ -81,11 +82,7 @@ function getConfirmButton (instance, config, value) {
     plain: config.buttonPlain,
     handler () {
       if (config.confirm) {
-        // Vue.nextTick(() => {
-        //   config.confirm(value)
-        //   instance.display = false
-        // })
-        config.confirm(value)
+        config.confirm()
         instance.display = false
       } else {
         instance.display = false
@@ -104,40 +101,50 @@ function MessageBox (config) {
   instances.modal.config = config
   if (type === 'alert') {
     instances.modal.buttons = [getConfirmButton(instances.modal, config)]
+    instances.modal.onEnter = instances.modal.buttons[0].text
   }
   if (type === 'confirm') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), getConfirmButton(instances.modal, config)]
+    instances.modal.onEnter = instances.modal.buttons[1].text
   }
   if (type === 'prompt') {
     instances.modal.buttons = [getCancelButton(instances.modal, config), Object.assign({}, getConfirmButton(instances.modal, config), {
-      handler () {
+      handler (loading) {
         let config = instances.modal.config
+        loading.start()
         instances[config.type].validate().then(res => {
+          loading.stop()
           if (res) {
-            if (config.confirm) config.confirm()
+            if (config.confirm) config.confirm(instances[config.type].value)
             instances.modal.display = false
           }
         })
       }
     })]
-  }
-  if (type === 'prompt') instances.modal.height = 200
-  else instances.modal.height = 14
+    instances.modal.onEnter = instances.modal.buttons[1].text
+    instances.modal.height = 200
+  } else instances.modal.height = 14
 
   // get a content instance
   let contentInstance = instances[type]
-  if (reset) contentInstance.$refs.core.clear()
+  if (reset || reset === '') {
+    contentInstance.$refs.core.clear()
+    if (reset !== true && reset !== '') {
+      contentInstance.value = reset
+      contentInstance.$refs.core.localValue = reset
+    }
+  }
   // set content instance props
   Object.assign(contentInstance, {message, validators, placeholder})
   // put the content into modal and show them on document
-  refreshContent(instances.modal.$refs.content, contentInstance.$el)
+  refreshContent(instances.modal.$refs.content, contentInstance)
   instances.modal.display = true
-  // auto focus
-  if (contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-    contentInstance.$refs.core.$refs.core.focus()
-  }
   instances.modal.$mount()
   document.body.appendChild(instances.modal.$el)
+  // auto focus
+  // if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+  //   Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
+  // }
 }
 MessageBox.alert = function (config) {
   MessageBox(Object.assign(config, {

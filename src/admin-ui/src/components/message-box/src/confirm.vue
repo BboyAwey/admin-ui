@@ -1,5 +1,5 @@
 <template>
-  <div class="au-confirm">{{ message }}</div>
+  <div class="au-confirm au-theme-font-color--base-3">{{ message }}</div>
 </template>
 <script>
   export default {

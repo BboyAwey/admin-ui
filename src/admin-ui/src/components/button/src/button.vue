@@ -103,7 +103,10 @@
     mounted () {
       this.insertLoadingSvgStyle()
       this.setPos()
-      this.loadingStroke = rgbToHex(getComputedStyle(this.$el).backgroundColor)
+      try {
+        // 高阶组件时有可能还未渲染到页面
+        this.loadingStroke = rgbToHex(getComputedStyle(this.$el).backgroundColor)
+      } catch (e) {}
     },
     data () {
       return {

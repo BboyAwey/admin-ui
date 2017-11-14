@@ -7593,7 +7593,10 @@ MessageBox.prompt = function (config) {
 
   methods: {
     setColor: function setColor() {
-      this.stroke = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_utils__["b" /* rgbToHex */])(getComputedStyle(this.$el).color);
+      // 兼容高阶组件
+      try {
+        this.stroke = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_utils__["b" /* rgbToHex */])(getComputedStyle(this.$el).color);
+      } catch (e) {}
     },
     setTop: function setTop(elHeight) {
       var containerHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.coreContainer).height;
@@ -8629,7 +8632,10 @@ module.exports = function (name) {
   mounted: function mounted() {
     this.insertLoadingSvgStyle();
     this.setPos();
-    this.loadingStroke = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["b" /* rgbToHex */])(getComputedStyle(this.$el).backgroundColor);
+    try {
+      // 高阶组件时有可能还未渲染到页面
+      this.loadingStroke = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["b" /* rgbToHex */])(getComputedStyle(this.$el).backgroundColor);
+    } catch (e) {}
   },
   data: function data() {
     return {

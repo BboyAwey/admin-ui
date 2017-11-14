@@ -101,7 +101,10 @@
     },
     methods: {
       setColor () {
-        this.stroke = rgbToHex(getComputedStyle(this.$el).color)
+        // 兼容高阶组件
+        try {
+          this.stroke = rgbToHex(getComputedStyle(this.$el).color)
+        } catch (e) {}
       },
       setTop (elHeight) {
         let containerHeight = getElementSize(this.$refs.coreContainer).height

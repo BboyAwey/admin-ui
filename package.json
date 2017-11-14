@@ -1,6 +1,6 @@
 {
   "name": "admin-ui-2",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "The realization of background-management-system-like UI design specifications. This is ths version 2 of Admin UI",
   "author": "Awey <chenwei1@rongcapital.cn>",
   "private": true,

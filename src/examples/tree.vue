@@ -8,9 +8,8 @@
         树组件
       </p>
       <!-- 组件示例 -->
-      <div @click="clickMe">点我看看</div>
       <div class="component-example">
-        <au-tree :tree-data="treeData" :show-checkbox="true" @node-click="nodeClick" @check-change="treeChange"></au-tree>
+        <au-tree :tree-data="treeData" :show-children="true" :show-checkbox="true" @node-click="nodeClick" @check-change="treeChange" @node-expand="nodeExpand" @node-collapse="nodeCollapse"></au-tree>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -28,94 +27,57 @@
         </thead>
         <tbody>
           <tr>
-            <td>type</td>
+            <td>treeData</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
-              <au-icon type="times"></au-icon>
+              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <!-- <au-icon type="times"></au-icon> -->
             </td>
-            <td>String</td>
-            <td>primary</td>
+            <td>Array</td>
+            <td>[]</td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">default</li>
-                <li class="au-theme-border-color--base-8">primary</li>
-                <li class="au-theme-border-color--base-8">danger</li>
-                <li class="au-theme-border-color--base-8">warning</li>
-                <li class="au-theme-border-color--base-8">info</li>
-                <li class="au-theme-border-color--base-8">success</li>
+                <li class="au-theme-border-color--base-8">label: String, 树节点显示的文字</li>
+                <li class="au-theme-border-color--base-8">checked: Boolean 树节点的选中状态,默认为true</li>
+                <li class="au-theme-border-color--base-8">children: Array 子节点</li>
               </ol>
             </td>
             <td>
-              按钮类型
+              树数据
             </td>
           </tr>
           <tr>
-            <td>size</td>
-            <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
-              <au-icon type="times"></au-icon>
-            </td>
-            <td>String</td>
-            <td><au-icon type="minus"></au-icon></td>
-            <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">large</li>
-                <li class="au-theme-border-color--base-8">small</li>
-                <li class="au-theme-border-color--base-8">mini</li>
-              </ol>
-            </td>
-            <td>
-              按钮尺寸
-            </td>
-          </tr>
-          <tr>
-            <td>plain</td>
+            <td>showCheckbox</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
-            <td>false</td>
+            <td>true</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
                 <li class="au-theme-border-color--base-8">false</li>
               </ol>
             </td>
-            <td>空心按钮</td>
+            <td>
+              是否显示checkbox，默认带checkbox
+            </td>
           </tr>
           <tr>
-            <td>disabled</td>
+            <td>showChildren</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
-            <td>false</td>
+            <td>true</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
                 <li class="au-theme-border-color--base-8">false</li>
               </ol>
             </td>
-            <td>禁用</td>
-          </tr>
-          <tr>
-            <td>native-type</td>
-            <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
-              <au-icon type="times"></au-icon>
-            </td>
-            <td>String</td>
-            <td>false</td>
-            <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">button</li>
-                <li class="au-theme-border-color--base-8">submit</li>
-                <li class="au-theme-border-color--base-8">reset</li>
-              </ol>
-            </td>
-            <td>原生类型</td>
+            <td>是否展开子节点，默认展开</td>
           </tr>
         </tbody>
       </au-table>
@@ -131,31 +93,95 @@
         </thead>
         <tbody>
           <tr>
-            <td>@click</td>
+            <td>@node-click</td>
             <td>
               <ol class="option-list">
+                <li class="au-theme-border-color--base-8">item 点击的节点数据</li>
+                <li class="au-theme-border-color--base-8">items 整个树的树据</li>
                 <li class="au-theme-border-color--base-8">event</li>
               </ol>
             </td>
-            <td>点击事件</td>
+            <td>点击节点事件</td>
+          </tr>
+          <tr>
+            <td>@check-change</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">item 点击的节点数据</li>
+                <li class="au-theme-border-color--base-8">items 整个树的树据</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>节点checkbox 选中事件</td>
+          </tr>
+          <tr>
+            <td>@check-expand</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">item 点击的节点数据</li>
+                <li class="au-theme-border-color--base-8">items 整个树的树据</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>节点展开事件</td>
+          </tr>
+           <tr>
+            <td>@check-collapse</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">item 点击的节点数据</li>
+                <li class="au-theme-border-color--base-8">items 整个树的树据</li>
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>节点收起事件</td>
           </tr>
         </tbody>
       </au-table>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite> -->
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="primary" @click="handleClick"></au-button>
+       <au-tree :tree-data="treeData" :show-children="true" :show-checkbox="true" @node-click="nodeClick" @check-change="treeChange"></au-tree>
       '></code-h>
       <code-h lang="js">
-        import AuButton from 'admin-ui'
         export default {
-          components: { AuButton },
+          data () {
+            return {
+              treeData: [
+                {
+                  label: '行为分析',
+                  checked: true,
+                  children: [
+                    {
+                      label: '时间',
+                      checked: true
+                    },
+                    {
+                      label: '操作类型',
+                      checked: true
+                    }
+                  ]
+                },
+                {
+                  label: '路径分析',
+                  checked: true
+                }
+              ]
+            }
+          },
           methods: {
-            handleClick (event) {
-              console.log(event)
+            treeChange (item, items, e) {
+              console.dir(item)
+              console.dir(items)
+              console.dir(e)
+            },
+            nodeClick (item, items, e) {
+              console.dir(item)
+              console.dir(items)
+              console.dir(e)
             }
           }
         }
@@ -167,21 +193,7 @@
   export default {
     data () {
       return {
-        treeData: []
-      }
-    },
-    methods: {
-      treeChange (item, items) {
-        console.dir(item)
-        console.dir(items)
-      },
-      nodeClick (item, items) {
-        console.dir(item)
-        console.dir(items)
-      },
-      clickMe () {
-        var that = this
-        var data = [
+        treeData: [
           {
             label: '行为分析',
             checked: true,
@@ -221,9 +233,28 @@
             checked: true
           }
         ]
-        setTimeout(() => {
-          that.treeData = data
-        }, 0)
+      }
+    },
+    methods: {
+      treeChange (item, items, e) {
+        console.dir(item)
+        console.dir(items)
+        console.dir(e)
+      },
+      nodeClick (item, items, e) {
+        console.dir(item)
+        console.dir(items)
+        console.dir(e)
+      },
+      nodeExpand (item, items, e) {
+        console.dir(item)
+        console.dir(items)
+        console.dir(e)
+      },
+      nodeCollapse (item, items, e) {
+        console.dir(item)
+        console.dir(items)
+        console.dir(e)
       }
     }
   }

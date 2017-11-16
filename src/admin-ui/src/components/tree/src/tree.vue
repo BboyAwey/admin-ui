@@ -8,47 +8,8 @@
     .sub-toggle {
       display: none;
     }
-    input.admin-checkbox {
-      display: none;
-    }
-    input.admin-checkbox:checked + .admin-checkbox-sub {
-      position: relative;
-      border: none;
-      background-color: #0e9ee2;
-    }
-    input.admin-checkbox:checked + .admin-checkbox-sub:before {
-      content: '';
-      position: absolute;
-      top: 4px;
-      left: 3px;
-      display: inline-block;
-      width: 8px;
-      height: 4px;
-      border-left: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-      transform-origin: 50% 50%;
-      transform: rotate(-45deg);
-    }
-    input.admin-checkbox + .admin-checkbox-sub {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-bottom: - 2px;
-      border: 1px solid #d2d4d9;
-      border-radius: 2px;
-      outline: none;
-    }
-    input.admin-checkbox:checked + .tree-part-checked.admin-checkbox-sub:before {
-      border-left: none;
-      top: 3px;
-      left: 4px;
-      border-bottom: 2px solid #fff;
-      transform-origin: 50% 50%;
-      transform: rotate(0);
-    }
     .tree-menu-open {
       font-size: 10px;
-      color: #d2d4d9;
       margin-right: 10px;
       cursor: pointer;
       position: absolute;
@@ -63,17 +24,15 @@
       &.close-tree +.admin-tree-sub-warp{
         display: none;
       }
-      &:hover {
-        background-color: #f4f4f4;
-      }
     }
     .no-checkedbox-label {
       position: relative;
       z-index: 10;
-      padding-left: 20px;
+      padding-left: 30px;
       display: block;
       line-height: 21px;
       margin-bottom: 5px;
+      cursor: pointer;
       &.close-tree +.admin-tree-sub-warp{
         display: none;
       }
@@ -82,20 +41,6 @@
   .admin-tree-sub-warp {
     padding-left: 25px;
     position: relative;
-
-    &.list-inline {
-      &>li {
-        margin-right: 18px;
-        display: inline-block;
-        &:not(:first-child)::before {
-          background-color: #fff;
-          border: none;
-        }
-        &:first-child::before {
-          background-color: #fff;
-        }
-      }
-    }
   }
   .admin-tree-checkbox {
     margin-right: 5px;
@@ -110,7 +55,7 @@
     created () {
       this.copyData = deepClone(this.treeData)
       this.setPos(this.copyData)
-      this.setCheckedType(this.copyData)
+      this.showCheckbox && this.setCheckedType(this.copyData)
       this.computedTreeData = deepClone(this.copyData)
     },
     render (creatDom) {
@@ -128,7 +73,7 @@
         handler (v) {
           this.copyData = deepClone(this.treeData)
           this.setPos(this.copyData)
-          this.setCheckedType(this.copyData)
+          this.showCheckbox && this.setCheckedType(this.copyData)
           this.computedTreeData = deepClone(this.copyData)
         }
       }
@@ -178,11 +123,11 @@
             {
               class: {
                 'checkbox-warp-div': true,
-                'close-tree': !this.showChildren
+                'au-theme-hover-background-color--base-11': true
               },
               on: {
-                click: () => {
-                  this.toggleClass(item.index)
+                click: (e) => {
+                  this.toggleClass(item.index, e)
                 }
               }
             },
@@ -190,6 +135,7 @@
               'i', {
                 class: {
                   'tree-menu-open': true,
+                  'au-theme-font-color--base-7': true,
                   'fa': true,
                   'fa-chevron-down': item.showChildren,
                   'fa-chevron-right': !item.showChildren
@@ -197,11 +143,12 @@
               'au-checkbox', {
                 props: {
                   text: item.label,
-                  value: item.checked
+                  value: item.checked,
+                  indeterminate: item.checkedType === 'part'
                 },
                 nativeOn: {
-                  'click': () => {
-                    this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType)
+                  'click': (e) => {
+                    this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType, e)
                     event.stopPropagation()
                   }
                 }
@@ -213,7 +160,13 @@
             'span',
             {
               class: {
-                'no-checkedbox-label': true
+                'no-checkedbox-label': true,
+                'au-theme-hover-background-color--base-11': true
+              },
+              on: {
+                click: (e) => {
+                  this.toggleClass(item.index, e)
+                }
               }
             },
             [
@@ -221,9 +174,10 @@
               'i', {
                 class: {
                   'tree-menu-open': true,
+                  'au-theme-font-color--base-7': true,
                   'fa': true,
-                  'fa-chevron-down': this.showChildren,
-                  'fa-chevron-right': !this.showChildren
+                  'fa-chevron-down': item.showChildren,
+                  'fa-chevron-right': !item.showChildren
                 }}) : null, item.label
             ]
           )
@@ -235,10 +189,15 @@
         })
         return !b
       },
-      toggleClass (index) {
+      toggleClass (index, e) {
         var obj = this.getNodesByIndex(index, this.computedTreeData)
         this.$set(obj, 'showChildren', !obj.showChildren)
-        this.$emit('node-click', this.parseData(this.getNodesByIndex(index, this.computedTreeData)), this.parseData(this.computedTreeData))
+        this.$emit('node-click', this.parseData(this.getNodesByIndex(index, this.computedTreeData)), this.parseData(this.computedTreeData), e)
+        if (obj.showChildren) {
+          this.$emit('node-expand', this.parseData(this.getNodesByIndex(index, this.computedTreeData)), this.parseData(this.computedTreeData), e)
+        } else {
+          this.$emit('node-collapse', this.parseData(this.getNodesByIndex(index, this.computedTreeData)), this.parseData(this.computedTreeData), e)
+        }
       },
       parseData (data) {
         var newData = deepClone(data)
@@ -258,16 +217,17 @@
         data.forEach((item) => {
           delete item.index
           delete item.checkedType
+          delete item.showChildren
           if (item.children && item.children.length) {
             this.deletePropery(item.children)
           }
         }, this)
       },
-      treeCheckedChange (v, value, type) {
+      treeCheckedChange (v, value, type, e) {
         console.log(v, value, type)
         var checked = !v && type === 'part' ? true : v
         this.setCheckedTypeByNodes(value.split('-'), checked, this.computedTreeData)
-        this.$emit('check-change', this.parseData(this.getNodesByIndex(value.split('-'), this.computedTreeData)), this.parseData(this.computedTreeData))
+        this.$emit('check-change', this.parseData(this.getNodesByIndex(value.split('-'), this.computedTreeData)), this.parseData(this.computedTreeData), e)
       },
       setPos (arr, pIndex) {
         arr.forEach((item, i) => {
@@ -295,6 +255,7 @@
       // 设置全选半选状态
       setCheckedType (arr) {
         arr.forEach((item) => {
+          !item.hasOwnProperty('checked') && this.$set(item, 'checked', true)
           if (item.checked) {
             if (item.children && item.children.length) {
               this.setCheckedType(item.children)

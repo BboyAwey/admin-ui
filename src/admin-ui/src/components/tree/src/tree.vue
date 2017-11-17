@@ -149,7 +149,7 @@
                 nativeOn: {
                   'click': (e) => {
                     this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType, e)
-                    event.stopPropagation()
+                    e.stopPropagation()
                   }
                 }
               }

@@ -4396,6 +4396,9 @@ module.exports = function (it) {
   mounted: function mounted() {
     this.handleAllStyle();
   },
+  updated: function updated() {
+    this.handleAllStyle();
+  },
 
   watch: {
     striped: function striped() {
@@ -10436,7 +10439,7 @@ addToUnscopables('entries');
           nativeOn: {
             'click': function click(e) {
               _this2.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType, e);
-              event.stopPropagation();
+              e.stopPropagation();
             }
           }
         })]);

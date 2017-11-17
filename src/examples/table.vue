@@ -20,29 +20,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Cube</td>
-              <td>2016-12-14</td>
-              <td>已发布</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Stream</td>
-              <td>2017-03-15</td>
-              <td>开发中</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Web2Data</td>
-              <td>2017-05-20</td>
-              <td>开发中</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Admin System</td>
-              <td>2017-05-30</td>
-              <td>开发中</td>
+            <tr v-for="(item, index) in list" :key="index">
+              <td>{{ index }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.status }}</td>
             </tr>
           </tbody>
           <tfoot>
@@ -51,6 +33,7 @@
             </tr>
           </tfoot>
         </au-table>
+        <au-button @click="add">插入</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -183,6 +166,41 @@
 </template>
 <script>
   export default {
-    name: 'table-examples'
+    name: 'table-examples',
+    data () {
+      return {
+        list: [
+          {
+            name: 'Cube',
+            date: '2016-12-14',
+            status: '已发布'
+          },
+          {
+            name: 'Cube',
+            date: '2016-12-14',
+            status: '已发布'
+          },
+          {
+            name: 'Cube',
+            date: '2016-12-14',
+            status: '已发布'
+          },
+          {
+            name: 'Cube',
+            date: '2016-12-14',
+            status: '已发布'
+          }
+        ]
+      }
+    },
+    methods: {
+      add () {
+        this.list.push({
+          name: 'Cube',
+          date: '2016-12-14',
+          status: '已发布'
+        })
+      }
+    }
   }
 </script>

@@ -82,6 +82,9 @@
     mounted () {
       this.handleAllStyle()
     },
+    updated () {
+      this.handleAllStyle()
+    },
     watch: {
       striped () {
         this.handleStripe()

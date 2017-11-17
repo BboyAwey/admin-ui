@@ -23,7 +23,7 @@
         import Vue from 'vue'
         // 全量加载
         import AdminUi from 'admin-ui/dist' // 开发阶段
-        import from 'admin-ui/dist/style.css'
+        import 'admin-ui/dist/style.css'
         // import AdminUi from 'admin-ui/min' // 上线阶段
         // import from 'admin-ui/min/style.css'
         Vue.use(AdminUi)

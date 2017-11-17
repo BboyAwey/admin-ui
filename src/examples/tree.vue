@@ -32,7 +32,10 @@
               <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
-            <td>Array</td>
+            <td>
+              Array <br>
+                -Object
+            </td>
             <td>[]</td>
             <td>
               <ol class="option-list">
@@ -115,7 +118,7 @@
             <td>节点checkbox 选中事件</td>
           </tr>
           <tr>
-            <td>@check-expand</td>
+            <td>@node-expand</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">item 点击的节点数据</li>
@@ -126,7 +129,7 @@
             <td>节点展开事件</td>
           </tr>
            <tr>
-            <td>@check-collapse</td>
+            <td>@node-collapse</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">item 点击的节点数据</li>

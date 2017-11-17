@@ -51,6 +51,26 @@
             <td>消息内容</td>
           </tr>
           <tr>
+            <td>duration</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">String</li>
+                <li class="au-theme-border-color--base-8">Number</li>
+              </ol>
+            </td>
+            <td>
+              2000
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>消息显示时间</td>
+          </tr>
+          <tr>
             <td>icon</td>
             <td>
               <au-icon type="times"></au-icon>

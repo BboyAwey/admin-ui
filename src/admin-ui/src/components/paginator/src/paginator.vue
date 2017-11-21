@@ -121,6 +121,9 @@
   </div>
 </template>
 <script>
+  /*
+    author: lilijing@rongcapital.cn
+  */
   export default {
     name: 'au-paginator',
     props: {

@@ -1,1 +1,1 @@
-export { default } from './src/paginator.vue'
+export { default } from './src/paginator.new.vue'

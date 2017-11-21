@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-paginator :total="10000000" :size="20" :current="1" @toggle="togglePage"></au-paginator>
+        <au-paginator :total="1000000000000000" :size="10" :current="1" @toggle="togglePage"></au-paginator>
       </div>
       <!-- 组件示例 -->
     </au-panel>

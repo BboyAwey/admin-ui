@@ -2028,9 +2028,11 @@ function getOriginClasses(el) {
   return originClasses;
 }
 function addClass(el, className) {
-  var originClasses = getOriginClasses(el);
-  originClasses.push(className);
-  el.className = originClasses.join(' ');
+  if (el.claeeName.indexOf(className) !== -1) {
+    var originClasses = getOriginClasses(el);
+    originClasses.push(className);
+    el.className = originClasses.join(' ');
+  }
 }
 
 function removeClass(el, className) {

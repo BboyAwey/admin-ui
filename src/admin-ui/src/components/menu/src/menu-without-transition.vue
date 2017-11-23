@@ -52,18 +52,26 @@
       width: 4px;
       // background-color: $primary;
     }
-    .collapse-handle {
+    .collapse-handle-top,
+    .collapse-handle-bottom {
       position: absolute;
-      top: 0;
       left: 0;
       width: 100%;
       height: 40px;
       padding: 0 22px;
       line-height: 40px;
-      border-bottom: 1px solid;
+      // border-bottom: 1px solid;
       text-align: right;
       font-size: $large;
       cursor: pointer;
+    }
+    .collapse-handle-top {
+      top: 0;
+      border-bottom: 1px solid;
+    }
+    .collapse-handle-bottom {
+      bottom: 0;
+      border-top: 1px solid;
     }
     .collapse-handle-icon {
       // transition: transform .2s ease-out;
@@ -72,8 +80,11 @@
   .au-menu.top-level {
     padding: 10px 0;
   }
-  .au-menu.collapsable {
+  .au-menu.collapsable-top {
     padding-top: 40px;
+  }
+  .au-menu.collapsable-bottom {
+    padding-bottom: 40px;
   }
   .au-menu.collapse {
     width: 60px;
@@ -127,13 +138,14 @@
   <div class="au-menu au-theme-font-color--base-3"
     :class="{
       'top-level au-theme-background-color--base-12': isTopLevel,
-      'collapsable': collapsable && isTopLevel,
+      'collapsable-top': collapsable && isTopLevel && collapseHandlebarPosition !='bottom',
+      'collapsable-bottom': collapsable && isTopLevel && collapseHandlebarPosition =='bottom',
       'collapse': localCollapse
     }" ref="self">
     <div
-      class="collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3"
+      class="collapse-handle-top au-theme-border-color--base-8-important au-theme-font-color--base-3"
       @click="toggle"
-      v-if="collapsable && isTopLevel">
+      v-if="collapsable && isTopLevel && collapseHandlebarPosition != 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
         transform: localCollapse ? '' : 'rotate(180deg)'
       }"></au-icon>
@@ -274,6 +286,14 @@
           @select="handlePopSelect"></au-menu>
       </li>
     </ul>
+    <div
+      class="collapse-handle-bottom au-theme-border-color--base-8-important au-theme-font-color--base-3"
+      @click="toggle"
+      v-if="collapsable && isTopLevel && collapseHandlebarPosition === 'bottom'">
+      <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
+        transform: localCollapse ? '' : 'rotate(180deg)'
+      }"></au-icon>
+    </div>
   </div>
 </template>
 <script>
@@ -309,7 +329,11 @@
         type: Boolean,
         default: true
       },
-      isPopover: Boolean
+      isPopover: Boolean,
+      collapseHandlebarPosition: {
+        type: String,
+        default: 'top'
+      }
     },
     mounted () {
       if (this.isTopLevel) {

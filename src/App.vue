@@ -19,7 +19,7 @@
         <h3 class="banner"><img src="./assets/logo.png" /></h3>
       </div>
       <div slot="sidebar">
-        <au-menu :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
+        <au-menu collapse-handlebar-position="bottom" :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
       </div>
       <div slot="content">
         <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll">

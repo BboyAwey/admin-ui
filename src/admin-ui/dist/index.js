@@ -5297,6 +5297,26 @@ if (false) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5331,7 +5351,11 @@ if (false) {
       type: Boolean,
       default: true
     },
-    isPopover: Boolean
+    isPopover: Boolean,
+    collapseHandlebarPosition: {
+      type: String,
+      default: 'top'
+    }
   },
   mounted: function mounted() {
     if (this.isTopLevel) {
@@ -7718,11 +7742,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "au-menu au-theme-font-color--base-3",
     class: {
       'top-level au-theme-background-color--base-12': _vm.isTopLevel,
-      'collapsable': _vm.collapsable && _vm.isTopLevel,
+      'collapsable-top': _vm.collapsable && _vm.isTopLevel && _vm.collapseHandlebarPosition != 'bottom',
+        'collapsable-bottom': _vm.collapsable && _vm.isTopLevel && _vm.collapseHandlebarPosition == 'bottom',
         'collapse': _vm.localCollapse
     }
-  }, [(_vm.collapsable && _vm.isTopLevel) ? _c('div', {
-    staticClass: "collapse-handle au-theme-border-color--base-8-important au-theme-font-color--base-3",
+  }, [(_vm.collapsable && _vm.isTopLevel && _vm.collapseHandlebarPosition != 'bottom') ? _c('div', {
+    staticClass: "collapse-handle-top au-theme-border-color--base-8-important au-theme-font-color--base-3",
     on: {
       "click": _vm.toggle
     }
@@ -7954,7 +7979,20 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "select": _vm.handlePopSelect
       }
     }) : _vm._e()], 1)
-  })) : _vm._e()], 1)
+  })) : _vm._e(), _vm._v(" "), (_vm.collapsable && _vm.isTopLevel && _vm.collapseHandlebarPosition === 'bottom') ? _c('div', {
+    staticClass: "collapse-handle-bottom au-theme-border-color--base-8-important au-theme-font-color--base-3",
+    on: {
+      "click": _vm.toggle
+    }
+  }, [_c('au-icon', {
+    staticClass: "collapse-handle-icon",
+    style: ({
+      transform: _vm.localCollapse ? '' : 'rotate(180deg)'
+    }),
+    attrs: {
+      "type": "angle-double-right"
+    }
+  })], 1) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

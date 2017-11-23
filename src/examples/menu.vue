@@ -86,6 +86,25 @@
               可以配合@toggle事件使用来主动控制折叠展开
             </td>
           </tr>
+          <tr>
+            <td>collapse-handlebar-position</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>top</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">top</li>
+                <li class="au-theme-border-color--base-8">bottom</li>
+              </ol>
+            </td>
+            <td>
+              “展开-收起”操作栏的位置<br>
+              只在collapsable为true时有效<br>
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

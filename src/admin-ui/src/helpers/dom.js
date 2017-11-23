@@ -99,7 +99,7 @@ function getOriginClasses (el) {
   return originClasses
 }
 export function addClass (el, className) {
-  if (el.className.indexOf(className) !== -1) {
+  if (el.className.indexOf(className) === -1) {
     let originClasses = getOriginClasses(el)
     originClasses.push(className)
     el.className = originClasses.join(' ')

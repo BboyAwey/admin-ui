@@ -2028,7 +2028,7 @@ function getOriginClasses(el) {
   return originClasses;
 }
 function addClass(el, className) {
-  if (el.className.indexOf(className) !== -1) {
+  if (el.className.indexOf(className) === -1) {
     var originClasses = getOriginClasses(el);
     originClasses.push(className);
     el.className = originClasses.join(' ');
@@ -4559,24 +4559,31 @@ module.exports = function (it) {
       if (tbody.length) {
         for (var i = 0; i < tbody.length; i++) {
           var trs = tbody[i].querySelectorAll('tr');
+          // clean classes
+          for (var _i12 = 0; _i12 < trs.length; _i12++) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i12], 'au-theme-background-color--base-11');
+          }
           if (this.striped) {
-            for (var _i12 = 0; _i12 < trs.length; _i12++) {
-              if (_i12 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i12], 'au-theme-background-color--base-11');
+            for (var _i13 = 0; _i13 < trs.length; _i13++) {
+              if (_i13 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i13], 'au-theme-background-color--base-11');
             }
           } else {
-            for (var _i13 = 0; _i13 < trs.length; _i13++) {
-              if (_i13 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i13], 'au-theme-background-color--base-11');
+            for (var _i14 = 0; _i14 < trs.length; _i14++) {
+              if (_i14 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i14], 'au-theme-background-color--base-11');
             }
           }
         }
       } else {
+        for (var _i15 = 0; _i15 < allTr.length; _i15++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i15], 'au-theme-background-color--base-11');
+        }
         if (this.striped) {
-          for (var _i14 = 0; _i14 < allTr.length; _i14++) {
-            if (_i14 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i14], 'au-theme-background-color--base-11');
+          for (var _i16 = 0; _i16 < allTr.length; _i16++) {
+            if (_i16 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i16], 'au-theme-background-color--base-11');
           }
         } else {
-          for (var _i15 = 0; _i15 < allTr.length; _i15++) {
-            if (_i15 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i15], 'au-theme-background-color--base-11');
+          for (var _i17 = 0; _i17 < allTr.length; _i17++) {
+            if (_i17 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i17], 'au-theme-background-color--base-11');
           }
         }
       }

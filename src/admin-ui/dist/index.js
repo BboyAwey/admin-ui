@@ -2576,10 +2576,16 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("9h1I")('Set
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-icon',
+  mounted: function mounted() {
+    this.setUnifiedWidth();
+  },
+
   props: {
     type: {
       type: String
@@ -2589,6 +2595,16 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("9h1I")('Set
     },
     color: {
       type: String
+    }
+  },
+  watch: {
+    size: function size(v) {
+      this.$nextTick(this.setUnifiedWidth);
+    }
+  },
+  methods: {
+    setUnifiedWidth: function setUnifiedWidth() {
+      this.$el.style.width = window.getComputedStyle(this.$el).fontSize;
     }
   }
 });
@@ -5019,6 +5035,7 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scroller__ = __webpack_require__("ovkV");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils__ = __webpack_require__("AP3u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_dom__ = __webpack_require__("8CCO");
+//
 //
 //
 //

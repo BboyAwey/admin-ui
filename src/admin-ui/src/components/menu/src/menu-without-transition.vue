@@ -115,6 +115,7 @@
   }
   .au-menu-pop-content {
     padding: 12px;
+    font-size: $normal;
   }
 
   .au-menu-children-triangle,

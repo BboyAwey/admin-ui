@@ -2028,7 +2028,7 @@ function getOriginClasses(el) {
   return originClasses;
 }
 function addClass(el, className) {
-  if (el.claeeName.indexOf(className) !== -1) {
+  if (el.className.indexOf(className) !== -1) {
     var originClasses = getOriginClasses(el);
     originClasses.push(className);
     el.className = originClasses.join(' ');

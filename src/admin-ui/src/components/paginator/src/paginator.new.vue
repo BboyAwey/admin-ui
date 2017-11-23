@@ -118,7 +118,7 @@
     },
     computed: {
       pageCount () {
-        return this.total / this.size
+        return this.total < this.size ? 1 : this.total / this.size
       },
       nums () {
         if (this.pageCount < 10) {

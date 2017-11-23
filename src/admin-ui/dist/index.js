@@ -16208,7 +16208,7 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
   },
   computed: {
     pageCount: function pageCount() {
-      return this.total / this.size;
+      return this.total < this.size ? 1 : this.total / this.size;
     },
     nums: function nums() {
       if (this.pageCount < 10) {

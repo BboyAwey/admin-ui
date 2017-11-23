@@ -97,6 +97,9 @@
   export default {
     name: 'au-paginator',
     components: { AuIcon },
+    mounted () {
+      if (this.pageCount <= this.localCurrent) this.localCurrent = this.pageCount
+    },
     data () {
       return {
         localCurrent: this.current
@@ -118,12 +121,12 @@
     },
     computed: {
       pageCount () {
-        return this.total < this.size ? 1 : this.total / this.size
+        return this.total <= this.size ? 1 : this.total / this.size
       },
       nums () {
         if (this.pageCount < 10) {
           let res = []
-          for (let i = 1; i < this.pageCount; i++) {
+          for (let i = 1; i <= this.pageCount; i++) {
             res.push(i)
           }
           return res
@@ -184,6 +187,9 @@
       },
       localCurrent (v) {
         this.$emit('toggle', v)
+      },
+      pageCount (v) {
+        if (v < this.localCurrent) this.localCurrent = v
       }
     },
     methods: {

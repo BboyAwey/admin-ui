@@ -16186,6 +16186,9 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-paginator',
   components: { AuIcon: __WEBPACK_IMPORTED_MODULE_1__icon__["a" /* default */] },
+  mounted: function mounted() {
+    if (this.pageCount <= this.localCurrent) this.localCurrent = this.pageCount;
+  },
   data: function data() {
     return {
       localCurrent: this.current
@@ -16208,12 +16211,12 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
   },
   computed: {
     pageCount: function pageCount() {
-      return this.total < this.size ? 1 : this.total / this.size;
+      return this.total <= this.size ? 1 : this.total / this.size;
     },
     nums: function nums() {
       if (this.pageCount < 10) {
         var res = [];
-        for (var i = 1; i < this.pageCount; i++) {
+        for (var i = 1; i <= this.pageCount; i++) {
           res.push(i);
         }
         return res;
@@ -16262,6 +16265,9 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
     },
     localCurrent: function localCurrent(v) {
       this.$emit('toggle', v);
+    },
+    pageCount: function pageCount(v) {
+      if (v < this.localCurrent) this.localCurrent = v;
     }
   },
   methods: {

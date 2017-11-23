@@ -2604,7 +2604,7 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("9h1I")('Set
   },
   methods: {
     setUnifiedWidth: function setUnifiedWidth() {
-      this.$el.style.width = window.getComputedStyle(this.$el).fontSize;
+      this.$el.style.width = parseInt(window.getComputedStyle(this.$el).fontSize) + 4 + 'px';
     }
   }
 });

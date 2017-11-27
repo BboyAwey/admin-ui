@@ -7,6 +7,7 @@ import Directives from './directives'
 // import all comps
 import Button from './components/button'
 import Menu from './components/menu'
+import Breadcrumb from './components/breadcrumb'
 import Icon from './components/icon'
 import Collapse from './components/collapse'
 import Frame from './components/frame'
@@ -37,6 +38,7 @@ import Loading from './components/loading'
 const components = [
   Button,
   Menu,
+  Breadcrumb,
   Icon,
   Collapse,
   Frame,
@@ -68,6 +70,7 @@ const components = [
 export {
   Button,
   Menu,
+  Breadcrumb,
   Icon,
   Collapse,
   Frame,
@@ -99,6 +102,7 @@ export {
 const adminUi = {
   Button,
   Menu,
+  Breadcrumb,
   Icon,
   Collapse,
   Frame,

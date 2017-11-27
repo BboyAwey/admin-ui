@@ -314,7 +314,8 @@
         localCollapse: this.collapse,
         currentItem: {},
         originWidth: '',
-        scrollTop: 0
+        scrollTop: 0,
+        urlMap: {}
       }
     },
     props: {
@@ -334,13 +335,22 @@
       collapseHandlebarPosition: {
         type: String,
         default: 'top'
+      },
+      reactivateOnHashchange: {
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
       if (this.isTopLevel) {
         this.localItems = this.setInfo(this.items)
         this.activate(this.currentItem)
+
+        window.addEventListener('hashchange', this.handleHashchange)
       } else this.localItems = this.items
+    },
+    destroyed () {
+      window.removeEventListener('hashchange', this.handleHashchange)
     },
     watch: {
       items: {
@@ -371,8 +381,8 @@
         this.currentItem = item
         this.activate()
         this.toggleCollapse(item)
-        if (this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide()
-        this.$emit('select', item)
+        if (i !== undefined && this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide()
+        if (i !== undefined) this.$emit('select', item)
       },
       deactivate () {
         let allItems = this.isTopLevel ? this.localItems : this.all
@@ -400,6 +410,18 @@
           }
         }
       },
+      reactivate (url) {
+        if (url === this.currentItem.url) return
+        if (url && this.urlMap[url]) {
+          this.select(this.urlMap[url])
+        }
+      },
+      handleHashchange (e) {
+        if (this.reactivateOnHashchange) {
+          this.localItems = this.setInfo(this.items)
+          this.activate(this.currentItem)
+        }
+      },
       decoration (item) {
         if (this.localCollapse) {
           return item.active || item.childrenActive
@@ -419,9 +441,10 @@
             let res = [].concat(parentIndex)
             res.push(i)
             item.indexes = res
+            if (item.url) this.urlMap[item.url] = item
             item.children = this.setInfo(item.children, item.indexes)
 
-            if (this.isCurrent(item.url)) {
+            if (this.isCurrent(item)) {
               this.currentItem = item
             }
           })
@@ -467,16 +490,23 @@
         }
         return res + 'px'
       },
-      isCurrent (url) {
-        let href = location.href
-        let pos = href.indexOf(url)
-        if (pos !== -1) {
-          let rest = href.slice(href.indexOf(url) + url.length)
-          return rest.indexOf('/') === -1 ||
-            (/^\/\?/g.test(rest) && rest.substring(2).indexOf('/') === -1) ||
-            (/\/$/g.test(rest))
+      isCurrent (item) {
+        let { url, isRouteName } = item
+        if (isRouteName) {
+          let pathName = this.$route ? this.$route.name : ''
+          if (!pathName) return false
+          return pathName === item.url + ''
+        } else {
+          let href = location.href
+          let pos = href.indexOf(url)
+          if (pos !== -1) {
+            let rest = href.slice(href.indexOf(url) + url.length)
+            return rest.indexOf('/') === -1 ||
+              (/^\/\?/g.test(rest) && rest.substring(2).indexOf('/') === -1) ||
+              (/\/$/g.test(rest))
+          }
+          return false
         }
-        return false
       },
       toggle () {
         this.localCollapse = !this.localCollapse

@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "2.0.13",
+  "version": "2.1.0",
   "description": "The realization of background-management-system-like UI design specifications. This is ths version 2 of Admin UI",
   "author": "Awey <chenwei1@rongcapital.cn>",
   "main": "./dist/admin-ui.js",

@@ -44,6 +44,10 @@ export default [
         'url': '/menu'
       },
       {
+        'text': '面包屑',
+        'url': '/breadcrumb'
+      },
+      {
         'text': '框架',
         'url': '/frame'
       },

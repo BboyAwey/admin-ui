@@ -51,6 +51,11 @@ export default new Router({
       component: (resolve) => require(['../examples/menu.vue'], resolve)
     },
     {
+      path: '/breadcrumb',
+      name: 'breadcrumb',
+      component: (resolve) => require(['../examples/breadcrumb.vue'], resolve)
+    },
+    {
       path: '/frame',
       name: 'frame',
       component: (resolve) => require(['../examples/frame.vue'], resolve)

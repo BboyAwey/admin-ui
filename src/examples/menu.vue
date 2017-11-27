@@ -39,6 +39,7 @@
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">text: String，菜单项要显示的文字</li>
                 <li class="au-theme-border-color--base-8">url: String，菜单项的地址</li>
+                <li class="au-theme-border-color--base-8">isRouteName: Boolean，菜单项地址是否是vue router的route name</li>
                 <li class="au-theme-border-color--base-8">icon: String，菜单项的图标，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link></li>
                 <li class="au-theme-border-color--base-8">collapse: Boolean，该项是否收起(如果有子项)</li>
                 <li class="au-theme-border-color--base-8">children: Array-Object，菜单项的子项，其内容与items一致</li>

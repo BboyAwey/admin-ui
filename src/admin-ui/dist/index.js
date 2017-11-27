@@ -1770,7 +1770,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       key: index,
       staticClass: "au-breadcrumb-item"
     }, [(index) ? _c('span', {
-      staticClass: "au-breadcrumb-separator au-theme-font-color--base-7"
+      staticClass: "au-breadcrumb-separator au-theme-font-color--base-7",
+      class: _vm.separatorClass
     }, [_vm._v(_vm._s(_vm.separator))]) : _vm._e(), _vm._v(" "), _c('span', {
       staticClass: "au-breadcrumb-text",
       class: {
@@ -16337,7 +16338,8 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
 
   props: {
     crumbs: {
-      type: Array
+      type: Array,
+      required: true
       // default () {
       //   return [
       //     {
@@ -16356,14 +16358,14 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
   watch: {
     crumbs: {
       deep: true,
-      handle: function handle(v) {
-        this.localCrumbs = v;
+      handler: function handler(v) {
+        this.localCrumbs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* deepClone */])(v);
       }
     }
   },
   methods: {
     handleCrumbClick: function handleCrumbClick(crumb, index) {
-      if (crumb && index < this.localCrumbs.length - 1) {
+      if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
         this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index);
         this.$emit('select', crumb);
       }

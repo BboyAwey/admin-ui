@@ -17,7 +17,7 @@
 <template>
   <ul class="au-breadcrumb au-theme-font-color--base-3">
     <li class="au-breadcrumb-item" v-for="(crumb, index) in localCrumbs" :key="index">
-      <span class="au-breadcrumb-separator au-theme-font-color--base-7" v-if="index">{{ separator }}</span>
+      <span class="au-breadcrumb-separator au-theme-font-color--base-7" v-if="index" :class="separatorClass">{{ separator }}</span>
       <span
         class="au-breadcrumb-text"
         :class="{
@@ -45,7 +45,8 @@
     },
     props: {
       crumbs: {
-        type: Array
+        type: Array,
+        required: true
         // default () {
         //   return [
         //     {
@@ -64,14 +65,14 @@
     watch: {
       crumbs: {
         deep: true,
-        handle (v) {
-          this.localCrumbs = v
+        handler (v) {
+          this.localCrumbs = deepClone(v)
         }
       }
     },
     methods: {
       handleCrumbClick (crumb, index) {
-        if (crumb && index < this.localCrumbs.length - 1) {
+        if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
           this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
           this.$emit('select', crumb)
         }

@@ -2275,10 +2275,17 @@ module.exports = function (iter, ITERATOR) {
       default: 'top center'
     },
     disabled: Boolean,
-    fix: {
+    x: [String, Number],
+    y: [String, Number],
+    xFix: {
       type: [String, Number],
       default: '0px'
-    }
+    },
+    yFix: {
+      type: [String, Number],
+      default: '0px'
+    },
+    hideOnblur: Boolean
   },
   data: function data() {
     return {
@@ -2358,7 +2365,7 @@ module.exports = function (iter, ITERATOR) {
     },
     handleBlur: function handleBlur() {
       // pop blur
-      if (this.trigger === 'click' && this.display) this.hide();
+      if (this.trigger === 'click' && this.display && this.hideOnblur) this.hide();
     },
     handleMouseover: function handleMouseover() {
       this.show();
@@ -2396,6 +2403,20 @@ module.exports = function (iter, ITERATOR) {
       // this.$refs.pop.style.width = popElmSize.width + 'px'
       // this.$refs.pop.style.height = popElmSize.height + 'px'
 
+      var keys = this.placement.split(/\s+/);
+      var xes = new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default.a(['top', 'bottom', 'left', 'right']);
+      var ys = new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default.a(['left', 'center', 'right', 'top', 'middle', 'bottom']);
+      if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
+        keys = ['top', 'center'];
+      }
+      this.localPlacement = keys.join(' ');
+
+      if (this.x && this.y) {
+        this.$refs.pop.style.left = this.x;
+        this.$refs.pop.style.top = this.y;
+        return;
+      }
+
       var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.target);
       var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["f" /* getElementPagePos */])(this.$refs.target);
       var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content);
@@ -2408,34 +2429,26 @@ module.exports = function (iter, ITERATOR) {
 
       var vertical = {
         x: {
-          left: targetPos.left + parseInt(this.fix),
-          center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.fix),
-          right: targetPos.left + targetSize.width - popSize.width + parseInt(this.fix)
+          left: targetPos.left + parseInt(this.xFix),
+          center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
+          right: targetPos.left + targetSize.width - popSize.width + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top - popSize.height - offset,
-          bottom: targetPos.top + targetSize.height + offset + 10 // do not kown why should add 10 but it works
+          top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
+          bottom: targetPos.top + targetSize.height + offset + 10 + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
       var horizontal = {
         x: {
-          left: targetPos.left - offset - popSize.width,
-          right: targetPos.left + targetSize.width + offset
+          left: targetPos.left - offset - popSize.width + parseInt(this.xFix),
+          right: targetPos.left + targetSize.width + offset + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top + parseInt(this.fix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.fix), // do not kown why should add 2 but it works
-          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.fix) // do not kown why should add 10 but it works
+          top: targetPos.top + parseInt(this.yFix),
+          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
+          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
-
-      var keys = this.placement.split(/\s+/);
-      var xes = new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default.a(['top', 'bottom', 'left', 'right']);
-      var ys = new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default.a(['left', 'center', 'right', 'top', 'middle', 'bottom']);
-      if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
-        keys = ['top', 'center'];
-      }
-      this.localPlacement = keys.join(' ');
 
       var res = {};
       if (keys[0] === 'top' || keys[0] === 'bottom') {
@@ -2449,8 +2462,8 @@ module.exports = function (iter, ITERATOR) {
           y: horizontal.y[keys[1]]
         };
       }
-      this.$refs.pop.style.left = res.x + 'px';
-      this.$refs.pop.style.top = res.y + 'px';
+      this.$refs.pop.style.left = this.x || res.x + 'px';
+      this.$refs.pop.style.top = this.y || res.y + 'px';
     },
     fixSize: function fixSize(origin) {
       this.$refs.pop.style.width = origin.width;
@@ -2925,14 +2938,7 @@ module.exports = function (NAME) {
 //
 //
 //
-
-// Author: Awey
-// email: chenwei@rongcapital.cn
-// github: https://github.com/BboyAwey
-// blog: http://www.jianshu.com/u/3c8fe1455914
-
-// Modifier: lianghao
-// email: lianghao@rongcapital.cn
+//
 
 
 

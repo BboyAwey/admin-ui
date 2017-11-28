@@ -133,10 +133,42 @@
             <td>禁用</td>
           </tr>
           <tr>
-            <td>fix</td>
+            <td>x</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
-              <au-icon type="minus"></au-icon>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>false</td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              气泡相对于页面的水平位置 <br>
+              使用该接口后气泡水平位置不再自动定位
+            </td>
+          </tr>
+          <tr>
+            <td>y</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>false</td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              气泡相对于页面的垂直位置 <br>
+              使用该接口后气泡垂直位置不再自动定位
+            </td>
+          </tr>
+          <tr>
+            <td>xFix</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
             <td>false</td>
@@ -145,8 +177,42 @@
             </td>
             <td>
               有时可能出现提示框定位不准的情况<br>
-              当消息框与目标元素垂直排列时，fix为水平方向的位置调整<br>
-              当消息框与目标元素水平排列时，fix为垂直方向的位置调整<br>
+              可以通过使用该接口手动修正
+            </td>
+          </tr>
+          <tr>
+            <td>yFix</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>false</td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              有时可能出现提示框定位不准的情况<br>
+              可以通过使用该接口手动修正
+            </td>
+          </tr>
+          <tr>
+            <td>hideOnblur</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否失焦时隐藏气泡<br>
+              仅trigger为click有效
             </td>
           </tr>
         </tbody>

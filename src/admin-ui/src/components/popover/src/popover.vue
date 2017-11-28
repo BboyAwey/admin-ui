@@ -16,7 +16,7 @@
   .au-popover-triangle {
     position: absolute;
     left: 8px;
-    bottom: -5px;
+    bottom: -4px;
     z-index: -1;
     display: inline-block;
     width: 14px;
@@ -155,10 +155,17 @@
         default: 'top center'
       },
       disabled: Boolean,
-      fix: {
+      x: [String, Number],
+      y: [String, Number],
+      xFix: {
         type: [String, Number],
         default: '0px'
-      }
+      },
+      yFix: {
+        type: [String, Number],
+        default: '0px'
+      },
+      hideOnblur: Boolean
     },
     data () {
       return {
@@ -237,7 +244,7 @@
         }
       },
       handleBlur () { // pop blur
-        if (this.trigger === 'click' && this.display) this.hide()
+        if (this.trigger === 'click' && this.display && this.hideOnblur) this.hide()
       },
       handleMouseover () {
         this.show()
@@ -275,6 +282,20 @@
         // this.$refs.pop.style.width = popElmSize.width + 'px'
         // this.$refs.pop.style.height = popElmSize.height + 'px'
 
+        let keys = this.placement.split(/\s+/)
+        let xes = new Set(['top', 'bottom', 'left', 'right'])
+        let ys = new Set(['left', 'center', 'right', 'top', 'middle', 'bottom'])
+        if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
+          keys = ['top', 'center']
+        }
+        this.localPlacement = keys.join(' ')
+
+        if (this.x && this.y) {
+          this.$refs.pop.style.left = this.x
+          this.$refs.pop.style.top = this.y
+          return
+        }
+
         let targetSize = getElementSize(this.$refs.target)
         let targetPos = getElementPagePos(this.$refs.target)
         let popSize = getElementSize(this.$refs.content)
@@ -287,34 +308,26 @@
 
         let vertical = {
           x: {
-            left: targetPos.left + parseInt(this.fix),
-            center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.fix),
-            right: targetPos.left + targetSize.width - popSize.width + parseInt(this.fix)
+            left: targetPos.left + parseInt(this.xFix),
+            center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
+            right: targetPos.left + targetSize.width - popSize.width + parseInt(this.xFix)
           },
           y: {
-            top: targetPos.top - popSize.height - offset,
-            bottom: targetPos.top + targetSize.height + offset + 10 // do not kown why should add 10 but it works
+            top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
+            bottom: targetPos.top + targetSize.height + offset + 10 + parseInt(this.yFix) // do not kown why should add 10 but it works
           }
         }
         let horizontal = {
           x: {
-            left: targetPos.left - offset - popSize.width,
-            right: targetPos.left + targetSize.width + offset
+            left: targetPos.left - offset - popSize.width + parseInt(this.xFix),
+            right: targetPos.left + targetSize.width + offset + parseInt(this.xFix)
           },
           y: {
-            top: targetPos.top + parseInt(this.fix),
-            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.fix), // do not kown why should add 2 but it works
-            bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.fix)// do not kown why should add 10 but it works
+            top: targetPos.top + parseInt(this.yFix),
+            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
+            bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix)// do not kown why should add 10 but it works
           }
         }
-
-        let keys = this.placement.split(/\s+/)
-        let xes = new Set(['top', 'bottom', 'left', 'right'])
-        let ys = new Set(['left', 'center', 'right', 'top', 'middle', 'bottom'])
-        if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
-          keys = ['top', 'center']
-        }
-        this.localPlacement = keys.join(' ')
 
         let res = {}
         if (keys[0] === 'top' || keys[0] === 'bottom') {
@@ -328,8 +341,8 @@
             y: horizontal.y[keys[1]]
           }
         }
-        this.$refs.pop.style.left = res.x + 'px'
-        this.$refs.pop.style.top = res.y + 'px'
+        this.$refs.pop.style.left = this.x || res.x + 'px'
+        this.$refs.pop.style.top = this.y || res.y + 'px'
       },
       fixSize (origin) {
         this.$refs.pop.style.width = origin.width

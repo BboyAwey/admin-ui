@@ -8,6 +8,7 @@
     position: relative;
     width: auto;
     display: inline-block;
+    text-align: left;
   }
   .au-select-core-container {
     position: relative;
@@ -46,7 +47,7 @@
     border-width: 1px;
     border-style: solid;
     padding: 4px 0;
-    min-width: 84px;
+    // min-width: 84px;
     width: 100%;
     max-height: 237px;
   }
@@ -145,14 +146,6 @@
   </div>
 </template>
 <script>
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
-
-  // Modifier: lianghao
-  // email: lianghao@rongcapital.cn
-
   import ValidatorMixin from '../../../helpers/validator-mixin'
   import FormApiMixin from '../../../helpers/form-api-mixin'
   import { getElementSize } from '../../../helpers/dom'

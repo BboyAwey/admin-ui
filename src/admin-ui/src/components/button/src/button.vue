@@ -45,7 +45,7 @@
   .au-button.plain {
     border-width: 1px;
     border-style: solid;
-    line-height: 30px;
+    // line-height: 30px;
   }
   .au-button-loading-mask:before,
   .au-button-loading-mask {
@@ -181,7 +181,7 @@
           }
         }
 
-        res.push('au-size-' + this.size)
+        res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''))
 
         return res.join(' ')
       }

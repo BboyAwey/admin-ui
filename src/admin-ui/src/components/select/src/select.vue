@@ -95,7 +95,7 @@
         tabindex="0"
         @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
         :class="{
-          [`au-size-${size}`]: true,
+          [`au-size-${size}-bordered`]: true,
           'au-theme-background-color--base-12': !disabled,
           'au-theme-background-color--base-9': disabled,
           'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),

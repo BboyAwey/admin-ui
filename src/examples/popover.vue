@@ -247,7 +247,33 @@
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Events">
-      <au-icon type="minus"></au-icon>
+      <au-table>
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@show</td>
+            <td>
+              <au-icon type="minus"/>
+            </td>
+            <td>当气泡弹出时触发</td>
+          </tr>
+          <tr>
+            <td>@hide</td>
+            <td>
+              <au-icon type="minus"/>
+            </td>
+            <td>当气泡隐藏时触发</td>
+          </tr>
+        </tbody>
+      </au-table>
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite> -->
+      <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">
       <au-table>
@@ -274,7 +300,8 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              隐藏提示框
+              隐藏提示框<br>
+              当祖先组件销毁之前，你有可能需要在beforeDestroy钩子中调用hide方法来手动隐藏气泡
             </td>
           </tr>
         </tbody>

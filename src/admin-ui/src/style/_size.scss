@@ -16,3 +16,19 @@
   height: $size-large;
   line-height: $size-large;
 }
+.au-size-mini-bordered {
+  height: $size-mini;
+  line-height: $size-mini - 2px;
+}
+.au-size-small-bordered {
+  height: $size-small;
+  line-height: $size-small - 2px;
+}
+.au-size-normal-bordered {
+  height: $size-normal;
+  line-height: $size-normal - 2px;
+}
+.au-size-large-bordered {
+  height: $size-large;
+  line-height: $size-large - 2px;
+}

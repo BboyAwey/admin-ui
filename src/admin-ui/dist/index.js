@@ -8925,7 +8925,7 @@ module.exports = function (name) {
         }
       }
 
-      res.push('au-size-' + this.size);
+      res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''));
 
       return res.join(' ');
     }
@@ -13613,7 +13613,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-border-color--danger-3': _vm.hasWarnings,
       'au-theme-shadow--primary': !_vm.disabled && _vm.active && !_vm.hasWarnings,
       'au-theme-shadow--danger': _vm.hasWarnings,
-    }, _obj[("au-size-" + _vm.size)] = true, _obj ),
+    }, _obj[("au-size-" + _vm.size + "-bordered")] = true, _obj ),
     style: ({
       cursor: _vm.disabled ? 'not-allowed' : 'default'
     }),
@@ -14435,7 +14435,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-focus-shadow--danger': _vm.hasWarnings,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
-    }, _obj[("au-size-" + _vm.size)] = true, _obj ),
+    }, _obj[("au-size-" + _vm.size + "-bordered")] = true, _obj ),
     style: ({
       'padding-left': _vm.icon && (!_vm.iconPosition || _vm.iconPosition === 'left') ? '30px' : '12px',
       'padding-right': _vm.icon && _vm.iconPosition === 'right' ? '30px' : '12px'
@@ -14496,7 +14496,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-focus-shadow--danger': _vm.hasWarnings,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
-    }, _obj$1[("au-size-" + _vm.size)] = true, _obj$1 ),
+    }, _obj$1[("au-size-" + _vm.size + "-bordered")] = true, _obj$1 ),
     style: ({
       'padding-left': _vm.icon && (!_vm.iconPosition || _vm.iconPosition === 'left') ? '30px' : '12px',
       'padding-right': _vm.icon && _vm.iconPosition === 'right' ? '30px' : '12px'
@@ -14557,7 +14557,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-focus-shadow--danger': _vm.hasWarnings,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
-    }, _obj$2[("au-size-" + _vm.size)] = true, _obj$2 ),
+    }, _obj$2[("au-size-" + _vm.size + "-bordered")] = true, _obj$2 ),
     style: ({
       'padding-left': _vm.icon && (!_vm.iconPosition || _vm.iconPosition === 'left') ? '30px' : '12px',
       'padding-right': _vm.icon && _vm.iconPosition === 'right' ? '30px' : '12px'

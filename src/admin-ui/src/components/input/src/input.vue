@@ -124,7 +124,7 @@
       <input
         class="au-input-core"
         :class="{
-          [`au-size-${size}`]: true,
+          [`au-size-${size}-bordered`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
@@ -157,7 +157,7 @@
         type="number"
         v-if="type === 'number'"
         :class="{
-          [`au-size-${size}`]: true,
+          [`au-size-${size}-bordered`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
@@ -188,7 +188,7 @@
         type="password"
         v-if="type === 'password'"
         :class="{
-          [`au-size-${size}`]: true,
+          [`au-size-${size}-bordered`]: true,
           'au-theme-radius au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,

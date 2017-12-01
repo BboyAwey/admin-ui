@@ -44,6 +44,7 @@
         au-panel-title
         au-theme-border-color--base-8
         au-theme-font-color--base-3">
+        <au-icon v-if="icon" :type="icon"></au-icon>
         <span>{{ title }}</span>
         <span><slot name="title-right"></slot></span>
     </h3>
@@ -56,7 +57,8 @@
   export default {
     name: 'au-panel',
     props: {
-      title: String
+      title: String,
+      icon: String
     }
   }
 </script>

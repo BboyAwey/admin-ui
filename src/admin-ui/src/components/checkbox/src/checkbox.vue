@@ -24,12 +24,12 @@
     .au-checkbox-icon {
       position: absolute;
       top: 2px;
-      left: 2px;
+      left: 0;
       font-size: $small;
     }
     .au-checkbox-icon-minus {
       top: 3px;
-      left: 3px;
+      left: 0;
     }
     .au-checkbox-icon-disabled {
       top: 1px;

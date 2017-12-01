@@ -9,7 +9,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-panel title="Panel" style="width: 500px;">
+        <au-panel title="Panel" icon="home" style="width: 500px;">
           <div slot="title-right">
             <au-icon type="bars"></au-icon>
           </div>

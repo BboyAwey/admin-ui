@@ -9,7 +9,6 @@
   @for $i from 1 through 12 {
     .au-grid-cell-#{$i} {
       flex: 0 0 $i/12*100%;
-      width: $i/12*100%;
     }
   }
   // simple offset rule

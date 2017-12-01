@@ -46,6 +46,21 @@
               面板的标题
             </td>
           </tr>
+          <tr>
+            <td>icon</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              详情参考<router-link class="au-theme-font-color--info-3">icon</router-link>组件
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              面板标题左侧的图标
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

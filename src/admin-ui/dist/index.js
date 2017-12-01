@@ -392,6 +392,7 @@ module.exports = function (index, length) {
 //
 //
 //
+//
 
 // import { hasClass, getElementSize } from '../../../helpers/dom'
 // import { getElementSize, getWindowSize } from '../../../helpers/dom'
@@ -10908,11 +10909,13 @@ module.exports = function (done, value) {
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-panel',
   props: {
-    title: String
+    title: String,
+    icon: String
   }
 });
 
@@ -12041,7 +12044,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "\n    au-panel\n    au-theme-background-color--base-12\n    au-theme-border-color--base-8\n    au-theme-font-color--base-3\n    au-theme-radius\n    au-theme-shadow--level-1"
   }, [(_vm.title) ? _c('h3', {
     staticClass: "\n      au-panel-title\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3"
-  }, [_c('span', [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('span', [_vm._t("title-right")], 2)]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [(_vm.icon) ? _c('au-icon', {
+    attrs: {
+      "type": _vm.icon
+    }
+  }) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('span', [_vm._t("title-right")], 2)], 1) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "au-panel-content"
   }, [_vm._t("default")], 2)])
 }

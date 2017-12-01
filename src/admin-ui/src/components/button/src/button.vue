@@ -148,7 +148,7 @@
             res = [
               `plain`,
               `au-theme-background-color--base-12`,
-              `au-theme-border-color--base-5`,
+              `au-theme-border-color--base-8`,
               `au-theme-hover-border-color--primary-4`,
               `au-theme-active-border-color--primary-2-important`,
               `au-theme-font-color--base-3`,
@@ -159,7 +159,7 @@
             res = [
               `plain`,
               `au-theme-background-color--base-12`,
-              `au-theme-border-color--base-5`,
+              `au-theme-border-color--base-8`,
               !this.disabled ? `au-theme-hover-border-color--${this.type}-4` : '',
               !this.disabled ? `au-theme-active-border-color--${this.type}-2-important` : '',
               `au-theme-font-color--base-3`,

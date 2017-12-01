@@ -8914,9 +8914,9 @@ module.exports = function (name) {
       var res = [];
       if (this.plain) {
         if (this.isDefault) {
-          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-5', 'au-theme-hover-border-color--primary-4', 'au-theme-active-border-color--primary-2-important', 'au-theme-font-color--base-3', 'au-theme-hover-font-color--primary-4', 'au-theme-active-font-color--primary-2-important'];
+          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-8', 'au-theme-hover-border-color--primary-4', 'au-theme-active-border-color--primary-2-important', 'au-theme-font-color--base-3', 'au-theme-hover-font-color--primary-4', 'au-theme-active-font-color--primary-2-important'];
         } else {
-          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-5', !this.disabled ? 'au-theme-hover-border-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-border-color--' + this.type + '-2-important' : '', 'au-theme-font-color--base-3', !this.disabled ? 'au-theme-hover-font-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-font-color--' + this.type + '-2-important' : ''];
+          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-8', !this.disabled ? 'au-theme-hover-border-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-border-color--' + this.type + '-2-important' : '', 'au-theme-font-color--base-3', !this.disabled ? 'au-theme-hover-font-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-font-color--' + this.type + '-2-important' : ''];
         }
       } else {
         if (this.isDefault) {

@@ -2334,6 +2334,12 @@ module.exports = function (iter, ITERATOR) {
     reconstruct: function reconstruct() {
       // if (this.disabled) return
       var target = this.$refs.target;
+      var targetSlotContent = this.$slots.target[0].elm;
+      target.style.margin = window.getComputedStyle(targetSlotContent).margin;
+      this.$nextTick(function () {
+        targetSlotContent.style.margin = 0;
+      });
+
       var pop = this.$refs.pop;
 
       pop.setAttribute('id', 'au-popover-' + this._uid);

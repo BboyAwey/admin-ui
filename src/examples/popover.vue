@@ -15,7 +15,7 @@
           </div>
         </au-popover>
         <au-popover placement="right middle" trigger="click" :plain="true">
-          <au-button slot="target" type="primary">B:(right top, click)</au-button>
+          <au-button slot="target" type="primary" style="margin: 10px 0 0 10px">B:(right top, click)</au-button>
           <div slot="content">
             <p style="font-size: 14px; padding: 10px;">
               Hi Popover! Hi Popover!

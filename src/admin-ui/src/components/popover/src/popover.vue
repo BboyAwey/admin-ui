@@ -214,6 +214,12 @@
       reconstruct () {
         // if (this.disabled) return
         let target = this.$refs.target
+        let targetSlotContent = this.$slots.target[0].elm
+        target.style.margin = window.getComputedStyle(targetSlotContent).margin
+        this.$nextTick(() => {
+          targetSlotContent.style.margin = 0
+        })
+
         let pop = this.$refs.pop
 
         pop.setAttribute('id', 'au-popover-' + this._uid)

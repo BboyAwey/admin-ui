@@ -3689,6 +3689,12 @@ module.exports = function (exec) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3713,8 +3719,10 @@ module.exports = function (exec) {
       var direction = e.deltaY ? e.deltaY : e.detail * 10; // chrome,edge / firefox
       if (!direction) return;
       // this.handleScroll((direction < 0 ? -direction : direction) / direction)
+      var prev = _this.contentTop;
       _this.handleScroll(direction);
-      if (_this.scrollEnd) return;else e.stopPropagation();
+      var next = _this.contentTop;
+      if (prev !== next) e.stopPropagation();
     });
     window.addEventListener('resize', this.handlerResize);
   },
@@ -3737,7 +3745,6 @@ module.exports = function (exec) {
       diff: 0,
       onDrag: false,
       onOver: false,
-      scrollEnd: false,
       needScroll: false,
       clock: null
     };
@@ -3784,10 +3791,7 @@ module.exports = function (exec) {
       var contentTopMin = monitorHeight - contentHeight;
       var contentTop = v;
 
-      this.scrollEnd = contentTop >= 0 || contentTop <= contentTopMin;
-
       contentTop = contentTop >= 0 ? 0 : contentTop <= contentTopMin ? contentTopMin : contentTop;
-
       this.contentTop = contentTop;
 
       // sync scrollbar
@@ -3908,8 +3912,6 @@ module.exports = function (exec) {
 
       var scrollCoreTop = v;
       scrollCoreTop = scrollCoreTop <= 0 ? 0 : scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop;
-
-      this.scrollEnd = scrollCoreTop <= 0 || scrollCoreTop >= scrollTopMax;
 
       var contentTop = scrollCoreTop * contentHeight / barHeight * -1;
       contentTop = contentTop >= 0 ? 0 : contentTop <= contentTopMax ? contentTopMax : contentTop;

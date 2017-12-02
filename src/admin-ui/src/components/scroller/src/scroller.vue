@@ -6,9 +6,15 @@
   .au-scroller-content {
     position: relative;
     width: 100%;
+    min-height: 100%;
     top: 0;
     left: 0;
     transition: top .3s ease-out;
+  }
+  .au-scroller-content:after {
+    content: "";
+    display: block;
+    clear: both;
   }
   .au-scroller-bar-container,
   .au-scroller-bar,
@@ -87,9 +93,10 @@
         let direction = e.deltaY ? e.deltaY : (e.detail * 10) // chrome,edge / firefox
         if (!direction) return
         // this.handleScroll((direction < 0 ? -direction : direction) / direction)
+        let prev = this.contentTop
         this.handleScroll(direction)
-        if (this.scrollEnd) return
-        else e.stopPropagation()
+        let next = this.contentTop
+        if (prev !== next) e.stopPropagation()
       })
       window.addEventListener('resize', this.handlerResize)
     },
@@ -111,7 +118,6 @@
         diff: 0,
         onDrag: false,
         onOver: false,
-        scrollEnd: false,
         needScroll: false,
         clock: null
       }
@@ -153,10 +159,7 @@
         let contentTopMin = monitorHeight - contentHeight
         let contentTop = v
 
-        this.scrollEnd = contentTop >= 0 || contentTop <= contentTopMin
-
         contentTop = contentTop >= 0 ? 0 : (contentTop <= contentTopMin ? contentTopMin : contentTop)
-
         this.contentTop = contentTop
 
         // sync scrollbar
@@ -275,8 +278,6 @@
 
         let scrollCoreTop = v
         scrollCoreTop = scrollCoreTop <= 0 ? 0 : (scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop)
-
-        this.scrollEnd = scrollCoreTop <= 0 || scrollCoreTop >= scrollTopMax
 
         let contentTop = scrollCoreTop * contentHeight / barHeight * -1
         contentTop = contentTop >= 0 ? 0 : (contentTop <= contentTopMax ? contentTopMax : contentTop)

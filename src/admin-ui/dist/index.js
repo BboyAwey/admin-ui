@@ -392,6 +392,8 @@ module.exports = function (index, length) {
 //
 //
 //
+//
+//
 
 // import { hasClass, getElementSize } from '../../../helpers/dom'
 // import { getElementSize, getWindowSize } from '../../../helpers/dom'

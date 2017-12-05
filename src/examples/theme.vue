@@ -253,6 +253,29 @@
         "></div>
       `'></code-h>
     </au-panel>
+    <au-panel class="section">
+      <h4 class="title-1">自定义主题类名</h4>
+      <p class="paragraph">
+        <span class="code au-theme-radius au-theme-background-color--warning-5">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-5">options</span>参数中，在<span class="code au-theme-radius au-theme-background-color--warning-5">colors</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">shadows</span>中可以自定义主题类名。Admin UI的默认主题中提供了5中彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-color</span>类作为颜色类，则可以像下面这样定义：
+      </p>
+      <code-h lang="js">
+        adminUi.theme({
+          'colors': {
+            'my-color': '#ff6633'
+          }
+        })
+      </code-h>
+      <p class="paragraph">
+        然后你可以按照前文的规则来使用这个自定义的主题类：
+      </p>
+      <code-h lang="html" :content='`
+        <div class="
+          au-theme-bakcground-color--my-color
+          au-theme-border-color--my-color
+          au-theme-font-color--my-color
+        "></div>
+      `'></code-h>
+    </au-panel>
   </div>
 </template>
 <script>

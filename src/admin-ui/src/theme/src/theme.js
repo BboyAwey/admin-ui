@@ -117,17 +117,26 @@ export default function (theme) {
   let finalTheme = deepClone(light)
   if (theme === 'dark') finalTheme = deepClone(dark)
   else if (typeof theme === 'object') {
-    if (theme.colors && typeof theme.colors === 'object') {
-      Object.assign(finalTheme.colors, theme.colors)
-    } else {
-      throw new Error('Admin UI@theme-system@ theme.colors should be an object')
+    // merge colors
+    if (theme.colors) {
+      if (typeof theme.colors === 'object') {
+        Object.assign(finalTheme.colors, theme.colors)
+      } else {
+        throw new Error('Admin UI@theme-system@ theme.colors should be an object')
+      }
     }
-    if (theme.shadows && typeof theme.shadows === 'object') {
-      Object.assign(finalTheme.shadows, theme.shadows)
-    } else {
-      throw new Error('Admin UI@theme-system@ theme.shadows should be an object')
+
+    // merge shadows
+    if (theme.shadows) {
+      if (typeof theme.shadows === 'object') {
+        Object.assign(finalTheme.shadows, theme.shadows)
+      } else {
+        throw new Error('Admin UI@theme-system@ theme.shadows should be an object')
+      }
     }
-    if (theme.borderRadius !== undefined) finalTheme.borderRadius = theme.borderRadius
+
+    // merge border radius
+    finalTheme.borderRadius = theme.borderRadius || finalTheme.borderRadius
   }
 
   let { colors, shadows, borderRadius } = finalTheme

@@ -257,17 +257,26 @@ var genRadiusStyle = function genRadiusStyle(borderRadius) {
 /* harmony default export */ __webpack_exports__["a"] = (function (theme) {
   var finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_3__light__["a" /* default */]);
   if (theme === 'dark') finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_4__dark__["a" /* default */]);else if ((typeof theme === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme)) === 'object') {
-    if (theme.colors && __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.colors) === 'object') {
-      __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.colors, theme.colors);
-    } else {
-      throw new Error('Admin UI@theme-system@ theme.colors should be an object');
+    // merge colors
+    if (theme.colors) {
+      if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.colors) === 'object') {
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.colors, theme.colors);
+      } else {
+        throw new Error('Admin UI@theme-system@ theme.colors should be an object');
+      }
     }
-    if (theme.shadows && __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.shadows) === 'object') {
-      __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.shadows, theme.shadows);
-    } else {
-      throw new Error('Admin UI@theme-system@ theme.shadows should be an object');
+
+    // merge shadows
+    if (theme.shadows) {
+      if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.shadows) === 'object') {
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.shadows, theme.shadows);
+      } else {
+        throw new Error('Admin UI@theme-system@ theme.shadows should be an object');
+      }
     }
-    if (theme.borderRadius !== undefined) finalTheme.borderRadius = theme.borderRadius;
+
+    // merge border radius
+    finalTheme.borderRadius = theme.borderRadius || finalTheme.borderRadius;
   }
 
   var _finalTheme = finalTheme,

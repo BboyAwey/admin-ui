@@ -14402,8 +14402,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-border-color--base-8': !_vm.active && !_vm.hasWarnings,
         'au-theme-border-color--primary-3': _vm.active && !_vm.hasWarnings,
         'au-theme-border-color--danger-3': _vm.hasWarnings,
-        'au-theme-focus-shadow--primary': !_vm.hasWarnings,
-        'au-theme-focus-shadow--danger': _vm.hasWarnings,
+        'au-theme-focus-shadow--primary': _vm.active && !_vm.hasWarnings,
+        'au-theme-focus-shadow--danger': _vm.active && _vm.hasWarnings,
         'au-theme-font-color--base-3': true,
         'au-theme-disabled-background-color--base-8': _vm.disabled
     },

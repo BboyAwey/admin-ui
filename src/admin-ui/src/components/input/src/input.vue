@@ -82,8 +82,8 @@
         'au-theme-border-color--base-8': !active && !hasWarnings,
         'au-theme-border-color--primary-3': active && !hasWarnings,
         'au-theme-border-color--danger-3': hasWarnings,
-        'au-theme-focus-shadow--primary': !hasWarnings,
-        'au-theme-focus-shadow--danger': hasWarnings,
+        'au-theme-focus-shadow--primary': active && !hasWarnings,
+        'au-theme-focus-shadow--danger': active && hasWarnings,
         'au-theme-font-color--base-3': true,
         'au-theme-disabled-background-color--base-8': disabled
       }"

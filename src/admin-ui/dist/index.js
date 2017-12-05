@@ -16524,15 +16524,15 @@ module.exports = !$assign || __webpack_require__("zyKz")(function () {
 
   props: {
     total: {
-      type: [Number, String],
+      type: Number,
       default: 0
     },
     current: {
-      type: [Number, String],
+      type: Number,
       default: 1
     },
     size: {
-      type: [Number, String],
+      type: Number,
       default: 10
     }
   },

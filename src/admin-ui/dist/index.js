@@ -457,7 +457,9 @@ function validateWidth(v) {
         md: 970,
         sm: 750
       },
-      observer: null
+      observer: null,
+      observerCount: 0,
+      observerClock: null
     };
   },
   mounted: function mounted() {
@@ -469,14 +471,31 @@ function validateWidth(v) {
     window.addEventListener('resize', this.getNumber);
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
     if (MutationObserver) {
-      this.observer = new MutationObserver(function (mutations) {
+      var config = {
+        attributes: true,
+        childList: false,
+        subtree: false,
+        characterData: false,
+        attributeOldValue: false,
+        characterDataOldValue: false,
+        attributeFilter: ['style']
+      };
+      var vm = this;
+      vm.observer = new MutationObserver(function (mutations) {
+        var hasDisplayChange = false;
         mutations.forEach(function (m) {
           if (m.attributeName === 'style' && m.target.style.display !== 'none') {
-            m.target.style.display = 'flex';
+            hasDisplayChange = true;
           }
         });
+        if (hasDisplayChange) {
+          vm.observer.disconnect(); // need pause observe to prevent infinity loop
+          vm.$el.parentNode.style.display = 'flex';
+          this.$nextTick(function () {
+            return vm.observer.observe(vm.$el.parentNode, config);
+          }); // and after render the observing should continue
+        }
       });
-      var config = { attributes: true, childList: false, subtree: false };
       this.observer.observe(this.$el.parentNode, config);
     }
   },

@@ -79,7 +79,9 @@
           md: 970,
           sm: 750
         },
-        observer: null
+        observer: null,
+        observerCount: 0,
+        observerClock: null
       }
     },
     mounted () {
@@ -91,14 +93,29 @@
       window.addEventListener('resize', this.getNumber)
       let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       if (MutationObserver) {
-        this.observer = new MutationObserver((mutations) => {
+        let config = {
+          attributes: true,
+          childList: false,
+          subtree: false,
+          characterData: false,
+          attributeOldValue: false,
+          characterDataOldValue: false,
+          attributeFilter: ['style']
+        }
+        let vm = this
+        vm.observer = new MutationObserver(function (mutations) {
+          let hasDisplayChange = false
           mutations.forEach(m => {
             if (m.attributeName === 'style' && m.target.style.display !== 'none') {
-              m.target.style.display = 'flex'
+              hasDisplayChange = true
             }
           })
+          if (hasDisplayChange) {
+            vm.observer.disconnect() // need pause observe to prevent infinity loop
+            vm.$el.parentNode.style.display = 'flex'
+            this.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
+          }
         })
-        let config = { attributes: true, childList: false, subtree: false }
         this.observer.observe(this.$el.parentNode, config)
       }
     },

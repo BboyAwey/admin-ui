@@ -58,6 +58,30 @@
               可以配合@scroll事件使用来动态控制滚动
             </td>
           </tr>
+          <tr>
+            <td>stop-propagation</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Boolean
+            </td>
+            <td>
+              false
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">String</li>
+                <li class="au-theme-border-color--base-8">Number</li>
+              </ol>
+            </td>
+            <td>
+              正常情况下如果滚动条已经到顶或到底，如果继续滚动，则滚动事件会向上冒泡<br>
+              这主要是为了实现滚动条的嵌套<br>
+              但在有些情况下，你可能不希望滚动条冒泡，则可以使用该字段来让滚动条总是不冒泡
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

@@ -79,7 +79,7 @@
   }
 </style>
 <template>
-  <div class="au-frame" ref="container">
+  <div class="au-frame au-theme-font-color--base-3" ref="container">
     <div class="au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-2" ref="header">
       <slot name="header"></slot>
     </div>

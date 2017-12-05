@@ -13,7 +13,7 @@
   }
 </style>
 <template>
-  <div class="au-cascading">
+  <div class="au-cascading au-theme-font-color--base-3">
     <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }" v-if="label">{{ label }}</div>

@@ -96,7 +96,7 @@
         let prev = this.contentTop
         this.handleScroll(direction)
         let next = this.contentTop
-        if (prev !== next) e.stopPropagation()
+        if (this.stopPropagation || prev !== next) e.stopPropagation()
       })
       window.addEventListener('resize', this.handlerResize)
     },
@@ -107,7 +107,8 @@
       scrollTop: {
         type: [Number, String],
         default: 0
-      }
+      },
+      stopPropagation: Boolean
     },
     data () {
       return {

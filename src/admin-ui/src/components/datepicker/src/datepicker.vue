@@ -108,8 +108,8 @@
   }
 </style>
 <template>
-  <div class="au-datepicker">
-    <div class="au-form-label au-theme-cont-color--base-3" :style="{
+  <div class="au-datepicker au-theme-font-color--base-3">
+    <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }" v-if="label" @click="labelClick">{{ label }}</div>
     <div class="au-datepicker-container">

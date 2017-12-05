@@ -48,7 +48,7 @@
         <span>{{ title }}</span>
         <span><slot name="title-right"></slot></span>
     </h3>
-    <div class="au-panel-content">
+    <div class="au-panel-content au-theme-font-color--base-3">
       <slot></slot>
     </div>
   </div>

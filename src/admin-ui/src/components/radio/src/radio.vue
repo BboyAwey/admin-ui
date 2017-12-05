@@ -39,7 +39,7 @@
 </style>
 <template>
   <div class="au-radio">
-    <div class="au-form-label" v-if="label">{{ label }}</div>
+    <div class="au-form-label au-theme-font-color--base-3" v-if="label">{{ label }}</div>
     <div class="au-radio-container au-radio-container-multiple" v-for="(radio, i) in radios" :key="i"
       @mouseenter="handleMouseEnter(i)"
       @mouseleave="handleMouseLeave(i)"

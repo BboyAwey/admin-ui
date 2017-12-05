@@ -58,17 +58,22 @@
     font-size: $large;
     cursor: pointer;
   }
+  .au-modal-content-scroller {
+    height: 100%;
+  }
 </style>
 <template>
   <div
-    class="au-modal-container au-theme-before-background-color--base-0"
+    class="au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3"
     v-show="localDisplay"
     ref="modal"
     @click="hide">
     <div class="au-modal au-theme-radius au-theme-background-color--base-12" @click.stop="() => {}" :style="modalStyle">
       <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title">{{ title }}</h4>
       <div class="au-modal-content" ref="content">
-        <slot></slot>
+        <au-scroller class="au-modal-content-scroller" stop-propagation>
+          <slot></slot>
+        </au-scroller>
       </div>
       <div class="au-modal-dec-line au-theme-border-color--base-8" ref="decline"></div>
       <div class="au-modal-operations" v-show="buttonList.length" ref="operations">
@@ -91,10 +96,11 @@
   import { getElementSize } from '../../../helpers/dom'
   import AuButton from '../../button'
   import AuIcon from '../../icon'
+  import AuScroller from '../../scroller'
 
   export default {
     name: 'au-modal',
-    components: { AuButton, AuIcon },
+    components: { AuButton, AuIcon, AuScroller },
     mounted () {
       // document.body.appendChild(this.$refs.modal)
       this.calModalContentStyle()

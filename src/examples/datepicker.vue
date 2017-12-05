@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-10-6" end="2017-11-3"></au-datepicker>
+        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-12-1" end="2018-1-1"></au-datepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -96,6 +96,22 @@
               </ol>
             </td>
             <td>禁用</td>
+          </tr>
+          <tr>
+            <td>readonly</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>只读</td>
           </tr>
           <tr>
             <td>start</td>

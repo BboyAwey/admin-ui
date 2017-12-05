@@ -17,9 +17,8 @@ export default {
       // type: String,
       required: true
     },
-    disabled: {
-      type: Boolean
-    }
+    disabled: Boolean,
+    readonly: Boolean
   },
   watch: {
     value: {

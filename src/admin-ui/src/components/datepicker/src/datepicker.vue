@@ -123,6 +123,7 @@
         @blur="coreBlur"
         :size="size"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
         ref="core"/>
       <div
@@ -247,7 +248,8 @@
         validator (v) {
           return /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
         }
-      }
+      },
+      readonly: Boolean
     },
     computed: {
       calcedWarnings () {
@@ -484,6 +486,7 @@
         if (!this.disabled) this.$refs.core.$refs.core.focus()
       },
       coreFocus () {
+        if (this.readonly) return
         this.popup = true
       },
       coreBlur (v, e) {

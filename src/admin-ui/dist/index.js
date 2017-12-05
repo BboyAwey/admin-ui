@@ -7042,6 +7042,10 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -7112,6 +7116,7 @@ adminUi.direvtive(__WEBPACK_IMPORTED_MODULE_0_vue___default.a);
       this.associationsShow = false;
     },
     coreFocus: function coreFocus(e) {
+      if (this.readonly) return;
       this.focus(e);
       this.active = true;
       if (this.associations && this.associations instanceof Array) {
@@ -8471,6 +8476,7 @@ module.exports = function (name) {
 //
 //
 //
+//
 
 
 
@@ -8519,7 +8525,8 @@ module.exports = function (name) {
         return (/^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
         );
       }
-    }
+    },
+    readonly: Boolean
   },
   computed: {
     calcedWarnings: function calcedWarnings() {
@@ -8754,6 +8761,7 @@ module.exports = function (name) {
       if (!this.disabled) this.$refs.core.$refs.core.focus();
     },
     coreFocus: function coreFocus() {
+      if (this.readonly) return;
       this.popup = true;
     },
     coreBlur: function coreBlur(v, e) {
@@ -11082,6 +11090,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "icon": "calendar",
       "size": _vm.size,
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     on: {
@@ -12441,9 +12450,8 @@ if (false) {
       // type: String,
       required: true
     },
-    disabled: {
-      type: Boolean
-    }
+    disabled: Boolean,
+    readonly: Boolean
   },
   watch: {
     value: {
@@ -13991,6 +13999,7 @@ module.exports = function (C, x) {
 //
 //
 //
+//
 
 
 
@@ -14043,7 +14052,8 @@ var MSRANGE = 1888;
     placeholder: {
       type: String,
       default: '请选择时间'
-    }
+    },
+    readonly: Boolean
   },
   watch: {
     popup: function popup(v) {
@@ -14187,6 +14197,7 @@ var MSRANGE = 1888;
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
     },
     coreFocus: function coreFocus() {
+      if (this.readonly) return;
       this.popup = true;
     },
     coreBlur: function coreBlur(v, e) {
@@ -14406,6 +14417,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }),
     attrs: {
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     domProps: {
@@ -14470,8 +14482,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-border-color--base-8': !_vm.active && !_vm.hasWarnings,
       'au-theme-border-color--primary-3': _vm.active && !_vm.hasWarnings,
       'au-theme-border-color--danger-3': _vm.hasWarnings,
-      'au-theme-focus-shadow--primary': !_vm.hasWarnings,
-      'au-theme-focus-shadow--danger': _vm.hasWarnings,
+      'au-theme-focus-shadow--primary': !_vm.hasWarnings && _vm.active,
+      'au-theme-focus-shadow--danger': _vm.hasWarnings && _vm.active,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
     }, _obj[("au-size-" + _vm.size + "-bordered")] = true, _obj ),
@@ -14482,6 +14494,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "type": "text",
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     domProps: {
@@ -14531,8 +14544,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-border-color--base-8': !_vm.active && !_vm.hasWarnings,
       'au-theme-border-color--primary-3': _vm.active && !_vm.hasWarnings,
       'au-theme-border-color--danger-3': _vm.hasWarnings,
-      'au-theme-focus-shadow--primary': !_vm.hasWarnings,
-      'au-theme-focus-shadow--danger': _vm.hasWarnings,
+      'au-theme-focus-shadow--primary': !_vm.hasWarnings && _vm.active,
+      'au-theme-focus-shadow--danger': _vm.hasWarnings && _vm.active,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
     }, _obj$1[("au-size-" + _vm.size + "-bordered")] = true, _obj$1 ),
@@ -14543,6 +14556,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "type": "number",
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     domProps: {
@@ -14592,8 +14606,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       'au-theme-border-color--base-8': !_vm.active && !_vm.hasWarnings,
       'au-theme-border-color--primary-3': _vm.active && !_vm.hasWarnings,
       'au-theme-border-color--danger-3': _vm.hasWarnings,
-      'au-theme-focus-shadow--primary': !_vm.hasWarnings,
-      'au-theme-focus-shadow--danger': _vm.hasWarnings,
+      'au-theme-focus-shadow--primary': !_vm.hasWarnings && _vm.active,
+      'au-theme-focus-shadow--danger': _vm.hasWarnings && _vm.active,
       'au-theme-font-color--base-3': true,
       'au-theme-disabled-background-color--base-9': _vm.disabled
     }, _obj$2[("au-size-" + _vm.size + "-bordered")] = true, _obj$2 ),
@@ -14604,6 +14618,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "type": "password",
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     domProps: {
@@ -15938,6 +15953,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "warnings": _vm.calcedWarnings,
       "size": _vm.size,
       "disabled": _vm.disabled,
+      "readonly": _vm.readonly,
       "placeholder": _vm.placeholder
     },
     on: {

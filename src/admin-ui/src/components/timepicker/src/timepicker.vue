@@ -95,6 +95,7 @@
         :warnings="calcedWarnings"
         :size="size"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
         @focus="coreFocus"
         @blur="coreBlur"
@@ -194,7 +195,8 @@
       placeholder: {
         type: String,
         default: '请选择时间'
-      }
+      },
+      readonly: Boolean
     },
     watch: {
       popup (v) {
@@ -346,6 +348,7 @@
         if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
       },
       coreFocus () {
+        if (this.readonly) return
         this.popup = true
       },
       coreBlur (v, e) {

@@ -97,6 +97,7 @@
       }"
       v-model="localValue"
       :disabled="disabled"
+      :readonly="readonly"
       :placeholder="placeholder"
       @input="input($event)"
       @change="change($event)"
@@ -129,8 +130,8 @@
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-shadow--primary': !hasWarnings,
-          'au-theme-focus-shadow--danger': hasWarnings,
+          'au-theme-focus-shadow--primary': !hasWarnings && active,
+          'au-theme-focus-shadow--danger': hasWarnings && active,
           'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
@@ -142,6 +143,7 @@
         v-if="type === 'text'"
         v-model="localValue"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
         @click.stop="click($event)"
         @input="input($event)"
@@ -162,8 +164,8 @@
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-shadow--primary': !hasWarnings,
-          'au-theme-focus-shadow--danger': hasWarnings,
+          'au-theme-focus-shadow--primary': !hasWarnings && active,
+          'au-theme-focus-shadow--danger': hasWarnings && active,
           'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
@@ -173,6 +175,7 @@
         }"
         v-model="localValue"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
         @click.stop="click($event)"
         @input="input($event)"
@@ -193,8 +196,8 @@
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-shadow--primary': !hasWarnings,
-          'au-theme-focus-shadow--danger': hasWarnings,
+          'au-theme-focus-shadow--primary': !hasWarnings && active,
+          'au-theme-focus-shadow--danger': hasWarnings && active,
           'au-theme-font-color--base-3': true,
           'au-theme-disabled-background-color--base-9': disabled
         }"
@@ -204,6 +207,7 @@
         }"
         v-model="localValue"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
         @click.stop="click($event)"
         @input="input($event)"
@@ -307,6 +311,7 @@
         this.associationsShow = false
       },
       coreFocus (e) {
+        if (this.readonly) return
         this.focus(e)
         this.active = true
         if (this.associations && this.associations instanceof Array) {

@@ -113,10 +113,10 @@
           if (hasDisplayChange) {
             vm.observer.disconnect() // need pause observe to prevent infinity loop
             vm.$el.parentNode.style.display = 'flex'
-            this.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
+            vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
           }
         })
-        this.observer.observe(this.$el.parentNode, config)
+        vm.observer.observe(vm.$el.parentNode, config)
       }
     },
     destroyed () {

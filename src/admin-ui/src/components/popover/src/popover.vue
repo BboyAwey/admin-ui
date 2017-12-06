@@ -215,7 +215,13 @@
         // if (this.disabled) return
         let target = this.$refs.target
         let targetSlotContent = this.$slots.target[0].elm
-        target.style.margin = window.getComputedStyle(targetSlotContent).margin
+
+        // seperate margin side by side because firefox cannot read margin correctly
+        target.style.marginTop = window.getComputedStyle(targetSlotContent).marginTop
+        target.style.marginBottom = window.getComputedStyle(targetSlotContent).marginBottom
+        target.style.marginRight = window.getComputedStyle(targetSlotContent).marginRight
+        target.style.marginLeft = window.getComputedStyle(targetSlotContent).marginLeft
+
         this.$nextTick(() => {
           targetSlotContent.style.margin = 0
         })

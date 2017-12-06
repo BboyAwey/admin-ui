@@ -6,7 +6,7 @@
     display: inline-block;
     font-size: $normal;
     .au-radio-container {
-      display: inline-block;
+      display: inline;
     }
     .au-radio-container-multiple:not(:last-child) {
       margin-right: 24px;

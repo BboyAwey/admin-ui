@@ -6,7 +6,7 @@
     display: inline-block;
     font-size: $normal;
     .au-checkbox-container {
-      display: inline-block;
+      display: inline;
     }
     .au-checkbox-container-multiple:not(:last-child) {
       margin-right: 24px;

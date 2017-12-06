@@ -33,7 +33,7 @@
     }
     .au-checkbox-icon-disabled {
       top: 1px;
-      left: 1px;
+      left: -1px;
     }
     .au-checkbox-text {
       margin-left: 4px;
@@ -53,7 +53,7 @@
       }">
       <span class="au-checkbox-core au-theme-radius" tabindex="0"
       :class="{
-        'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
+        'au-theme-border-color--base-8': (!hasWarnings && !hover && !localValue && !localIndeterminate) || disabled,
         'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
         'au-theme-border-color--danger-3': hasWarnings && !localValue &&!disabled,
         'au-theme-background-color--primary-3': !hasWarnings && (localValue || localIndeterminate) && !disabled,

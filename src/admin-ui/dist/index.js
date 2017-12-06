@@ -10840,10 +10840,11 @@ var render = function() {
                   staticClass: "au-checkbox-core au-theme-radius",
                   class: {
                     "au-theme-border-color--base-8":
-                      !_vm.hasWarnings &&
-                      !_vm.hover &&
-                      !_vm.localValue &&
-                      !_vm.localIndeterminate,
+                      (!_vm.hasWarnings &&
+                        !_vm.hover &&
+                        !_vm.localValue &&
+                        !_vm.localIndeterminate) ||
+                      _vm.disabled,
                     "au-theme-border-color--primary-3":
                       !_vm.hasWarnings &&
                       _vm.hover &&

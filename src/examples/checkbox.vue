@@ -13,6 +13,12 @@
           @change="checkAll"
           :indeterminate="indeterminate"></au-checkbox><br><br>
         <au-checkbox
+          value="true"
+          label="Please check witch kind of dance would you like"
+          text="All above"
+          :disabled="allChecked"
+          :indeterminate="indeterminate"></au-checkbox><br><br>
+        <au-checkbox
           v-model="kinds"
           label="Please check what kinds of dances do u love"
           :checkboxes="checkboxes"
@@ -63,7 +69,7 @@
             <td>
               值<br>
               当传递Checkboxes时（单个多选框），value为Array类型<br>
-              当不递Checkboxes时（多个多选款），value为任意类型
+              当不传递Checkboxes时（多个多选款），value为任意类型
             </td>
           </tr>
           <tr>
@@ -97,6 +103,22 @@
             <td>
               选项配置
             </td>
+          </tr>
+          <tr>
+            <td>indeterminate</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>模糊（部分选中）状态<br>这里只是样式，只在不传递Checkboxes（单个多选框）时有效</td>
           </tr>
           <tr>
             <td>disabled</td>

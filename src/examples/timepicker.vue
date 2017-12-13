@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-timepicker label="选一个时间吧" v-model="time" :validators="validators" readonly></au-timepicker>
+        <au-timepicker label="选一个时间吧" v-model="time" :validators="validators"></au-timepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>

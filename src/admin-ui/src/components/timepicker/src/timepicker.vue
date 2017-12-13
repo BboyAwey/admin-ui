@@ -269,6 +269,7 @@
         this.second = this.formatNum(timeArr[2])
       },
       listScroll (e, type) {
+        e.stopPropagation()
         let direction = e.deltaY || e.detail // chrome,edge / firefox
         if (!direction) return
         let speedy = SPEED * ((direction < 0 ? -direction : direction) / direction)

@@ -10485,6 +10485,7 @@ var MSRANGE = 1888;
       this.second = this.formatNum(timeArr[2]);
     },
     listScroll: function listScroll(e, type) {
+      e.stopPropagation();
       var direction = e.deltaY || e.detail; // chrome,edge / firefox
       if (!direction) return;
       var speedy = SPEED * ((direction < 0 ? -direction : direction) / direction);

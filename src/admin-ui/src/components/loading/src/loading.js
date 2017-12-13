@@ -5,9 +5,12 @@ export default (config) => {
   let instance = new (Vue.extend(template))()
   let {
     target = document.element.body,
-    text
+    text,
+    color = 'primary'
   } = config
-
+  function colorValidator (v) {
+    return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 || console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
+  }
   let {
     position,
     width,
@@ -32,10 +35,12 @@ export default (config) => {
 
   instance.text = text
   instance.size = size
+  instance.color = colorValidator(color) ? color : 'primary'
+
   instance.$mount(document.createElement('div'))
 
   target.appendChild(instance.$el)
-  instance.setColor()
+  // instance.setColor()
   instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth))
 
   return instance

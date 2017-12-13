@@ -88,7 +88,7 @@
           animation: '1.33333s linear 0s normal none infinite running Rotate',
           top: loadingSvgTop
         }">
-        <circle ref="core" fill="none" :stroke="loadingStroke" stroke-width="5" stroke-linecap="round" cx="25" cy="25" r="20" style="
+        <circle ref="core" fill="none" :stroke="stroke" stroke-width="5" stroke-linecap="round" cx="25" cy="25" r="20" style="
         transform-origin: center center 0px;
         animation: 1s ease 0s normal none infinite running CircularBarDash;"></circle>
       </svg>
@@ -96,22 +96,17 @@
   </button>
 </template>
 <script>
-  import { rgbToHex } from '../../../helpers/utils'
+  import { namespace } from '../../../helpers/utils'
 
   export default {
     name: 'au-button',
     mounted () {
       this.insertLoadingSvgStyle()
       this.setPos()
-      try {
-        // 高阶组件时有可能还未渲染到页面
-        this.loadingStroke = rgbToHex(getComputedStyle(this.$el).backgroundColor)
-      } catch (e) {}
     },
     data () {
       return {
         loadingSize: 12,
-        loadingStroke: '#1c86e2',
         loadingSvgTop: '0px'
       }
     },
@@ -184,6 +179,9 @@
         res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''))
 
         return res.join(' ')
+      },
+      stroke () {
+        return namespace.get('theme').colors[this.type + '-3'] || namespace.get('theme').colors['primary-3']
       }
     },
     methods: {

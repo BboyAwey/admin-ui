@@ -17,7 +17,7 @@ export let namespace = {
   get: function (key) {
     return window.adminUiNameSpace[key]
   },
-  delete: function (key) {
+  remove: function (key) {
     return delete window.adminUiNameSpace[key]
   }
 }

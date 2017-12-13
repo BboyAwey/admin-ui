@@ -68,6 +68,28 @@
             </td>
             <td>提示文字</td>
           </tr>
+          <tr>
+            <td>color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              primary
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">default</li>
+                <li class="au-theme-border-color--base-8">primary</li>
+                <li class="au-theme-border-color--base-8">danger</li>
+                <li class="au-theme-border-color--base-8">warning</li>
+                <li class="au-theme-border-color--base-8">info</li>
+                <li class="au-theme-border-color--base-8">success</li>
+              </ol>
+            </td>
+            <td>颜色类型</td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>
@@ -117,7 +139,8 @@
         if (!this.loading) {
           this.loading = this.$loading({
             target: this.$refs.target,
-            text: '拼命加载中'
+            text: '拼命加载中',
+            color: 'danger'
           })
         } else {
           this.loading.close()

@@ -1,4 +1,4 @@
-import { deepClone } from '../../helpers/utils'
+import { deepClone, namespace } from '../../helpers/utils'
 import light from './light'
 import dark from './dark'
 
@@ -154,5 +154,9 @@ export default function (theme) {
   // generate border-radius
   res += genRadiusStyle(borderRadius)
   // console.log(res)
+
+  // save theme to namespace
+  namespace.set('theme', finalTheme)
+
   return res
 }

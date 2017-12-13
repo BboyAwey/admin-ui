@@ -37,7 +37,7 @@
 </style>
 <template>
   <div class="au-loading" :class="{
-    'au-theme-font-color--primary-3': true,
+    [`au-theme-font-color--${color}-3`]: true,
     'au-theme-before-background-color--base-12': true
   }">
     <div class="au-loading-core-container" ref="coreContainer">
@@ -57,7 +57,7 @@
 </template>
 <script>
   import { getElementSize } from '../../../helpers/dom'
-  import { rgbToHex } from '../../../helpers/utils'
+  import { namespace } from '../../../helpers/utils'
 
   export default {
     name: 'au-loading',
@@ -92,20 +92,18 @@
     },
     props: {
       size: Number,
-      text: String
+      text: String,
+      color: {
+        type: String,
+        default: 'primary'
+      }
     },
-    data () {
-      return {
-        stroke: '#4197ff'
+    computed: {
+      stroke () {
+        return namespace.get('theme').colors[this.color + '-3']
       }
     },
     methods: {
-      setColor () {
-        // 兼容高阶组件
-        try {
-          this.stroke = rgbToHex(getComputedStyle(this.$el).color)
-        } catch (e) {}
-      },
       setTop (elHeight) {
         let containerHeight = getElementSize(this.$refs.coreContainer).height
         if (containerHeight > elHeight) this.$refs.coreContainer.style.height = elHeight + 'px'

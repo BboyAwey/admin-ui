@@ -79,11 +79,8 @@
   }
 </style>
 <template>
-  <div class="au-timepicker">
-    <div class="au-form-label" :class="{
-      'au-theme-font-color--base-3': !hasWarnings || disabled,
-      'au-theme-font-color--danger-3': hasWarnings,
-    }" :style="{
+  <div class="au-timepicker au-theme-font-color--base-3">
+    <div class="au-form-label" :style="{
       cursor: disabled ? 'not-allowed' : 'default'
     }" @click="labelClick" v-show="label">{{ label }}</div>
     <div class="au-timepicker-container">

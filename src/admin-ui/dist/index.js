@@ -238,7 +238,7 @@ var genRadiusStyle = function genRadiusStyle(borderRadius) {
       if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.colors) === 'object') {
         __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.colors, theme.colors);
       } else {
-        throw new Error('Admin UI@theme-system@ theme.colors should be an object');
+        console.error('Admin UI@theme-system@ theme.colors should be an object');
       }
     }
 
@@ -247,7 +247,7 @@ var genRadiusStyle = function genRadiusStyle(borderRadius) {
       if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.shadows) === 'object') {
         __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.shadows, theme.shadows);
       } else {
-        throw new Error('Admin UI@theme-system@ theme.shadows should be an object');
+        console.error('Admin UI@theme-system@ theme.shadows should be an object');
       }
     }
 
@@ -298,186 +298,186 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "au-timepicker" }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.label,
-            expression: "label"
-          }
-        ],
-        staticClass: "au-form-label",
-        class: {
-          "au-theme-font-color--base-3": !_vm.hasWarnings || _vm.disabled,
-          "au-theme-font-color--danger-3": _vm.hasWarnings
-        },
-        style: {
-          cursor: _vm.disabled ? "not-allowed" : "default"
-        },
-        on: { click: _vm.labelClick }
-      },
-      [_vm._v(_vm._s(_vm.label))]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "au-timepicker-container" },
-      [
-        _c("au-input", {
-          ref: "core",
-          staticClass: "au-timepicker-core",
-          attrs: {
-            icon: "clock-o",
-            warnings: _vm.calcedWarnings,
-            size: _vm.size,
-            disabled: _vm.disabled,
-            readonly: _vm.readonly,
-            placeholder: _vm.placeholder
+  return _c(
+    "div",
+    { staticClass: "au-timepicker au-theme-font-color--base-3" },
+    [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.label,
+              expression: "label"
+            }
+          ],
+          staticClass: "au-form-label",
+          style: {
+            cursor: _vm.disabled ? "not-allowed" : "default"
           },
-          on: { input: _vm.input, focus: _vm.coreFocus, blur: _vm.coreBlur },
-          model: {
-            value: _vm.inputTime,
-            callback: function($$v) {
-              _vm.inputTime = $$v
+          on: { click: _vm.labelClick }
+        },
+        [_vm._v(_vm._s(_vm.label))]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "au-timepicker-container" },
+        [
+          _c("au-input", {
+            ref: "core",
+            staticClass: "au-timepicker-core",
+            attrs: {
+              icon: "clock-o",
+              warnings: _vm.calcedWarnings,
+              size: _vm.size,
+              disabled: _vm.disabled,
+              readonly: _vm.readonly,
+              placeholder: _vm.placeholder
             },
-            expression: "inputTime"
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.popup,
-                expression: "popup"
-              }
-            ],
-            ref: "popup",
-            staticClass: "au-timepicker-popup",
-            class:
-              "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-background-color--base-12\n      au-sizegap-" +
-              _vm.size +
-              "\n    ",
-            attrs: { tabindex: "0" },
-            on: { blur: _vm.popupBlur }
-          },
-          [
-            _c(
-              "ul",
-              {
-                ref: "hours",
-                staticClass:
-                  "au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8",
-                class: { "au-timepicker-no-seconds": !_vm.seconds },
-                style: { top: _vm.hoursOffset + "px" },
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                  }
-                }
+            on: { input: _vm.input, focus: _vm.coreFocus, blur: _vm.coreBlur },
+            model: {
+              value: _vm.inputTime,
+              callback: function($$v) {
+                _vm.inputTime = $$v
               },
-              _vm._l(24, function(num) {
-                return _c(
-                  "li",
-                  {
-                    key: num,
-                    class: {
-                      "au-theme-font-color--primary-3": num - 1 == _vm.hour
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.selectTime(num - 1, "hour")
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
-                )
-              })
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              {
-                ref: "minutes",
-                staticClass:
-                  "au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8",
-                class: { "au-timepicker-no-seconds": !_vm.seconds },
-                style: { top: _vm.minutesOffset + "px" },
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                  }
+              expression: "inputTime"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.popup,
+                  expression: "popup"
                 }
-              },
-              _vm._l(60, function(num) {
-                return _c(
-                  "li",
-                  {
-                    key: num,
-                    class: {
-                      "au-theme-font-color--primary-3": num - 1 == _vm.minute
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.selectTime(num - 1, "minute")
-                      }
+              ],
+              ref: "popup",
+              staticClass: "au-timepicker-popup",
+              class:
+                "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-background-color--base-12\n      au-sizegap-" +
+                _vm.size +
+                "\n    ",
+              attrs: { tabindex: "0" },
+              on: { blur: _vm.popupBlur }
+            },
+            [
+              _c(
+                "ul",
+                {
+                  ref: "hours",
+                  staticClass:
+                    "au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8",
+                  class: { "au-timepicker-no-seconds": !_vm.seconds },
+                  style: { top: _vm.hoursOffset + "px" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
                     }
-                  },
-                  [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
-                )
-              })
-            ),
-            _vm._v(" "),
-            _vm.seconds
-              ? _c(
-                  "ul",
-                  {
-                    ref: "seconds",
-                    staticClass:
-                      "au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8",
-                    style: { top: _vm.secondsOffset + "px" },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                      }
-                    }
-                  },
-                  _vm._l(60, function(num) {
-                    return _c(
-                      "li",
-                      {
-                        key: num,
-                        class: {
-                          "au-theme-font-color--primary-3":
-                            num - 1 == _vm.second
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.stopPropagation()
-                            _vm.selectTime(num - 1, "second")
-                          }
-                        }
+                  }
+                },
+                _vm._l(24, function(num) {
+                  return _c(
+                    "li",
+                    {
+                      key: num,
+                      class: {
+                        "au-theme-font-color--primary-3": num - 1 == _vm.hour
                       },
-                      [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
-                    )
-                  })
-                )
-              : _vm._e()
-          ]
-        )
-      ],
-      1
-    )
-  ])
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.selectTime(num - 1, "hour")
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
+                  )
+                })
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
+                {
+                  ref: "minutes",
+                  staticClass:
+                    "au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8",
+                  class: { "au-timepicker-no-seconds": !_vm.seconds },
+                  style: { top: _vm.minutesOffset + "px" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                    }
+                  }
+                },
+                _vm._l(60, function(num) {
+                  return _c(
+                    "li",
+                    {
+                      key: num,
+                      class: {
+                        "au-theme-font-color--primary-3": num - 1 == _vm.minute
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.selectTime(num - 1, "minute")
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
+                  )
+                })
+              ),
+              _vm._v(" "),
+              _vm.seconds
+                ? _c(
+                    "ul",
+                    {
+                      ref: "seconds",
+                      staticClass:
+                        "au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8",
+                      style: { top: _vm.secondsOffset + "px" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                        }
+                      }
+                    },
+                    _vm._l(60, function(num) {
+                      return _c(
+                        "li",
+                        {
+                          key: num,
+                          class: {
+                            "au-theme-font-color--primary-3":
+                              num - 1 == _vm.second
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              _vm.selectTime(num - 1, "second")
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
+                      )
+                    })
+                  )
+                : _vm._e()
+            ]
+          )
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10361,9 +10361,6 @@ module.exports = Object.getPrototypeOf || function (O) {
 //
 //
 //
-//
-//
-//
 
 
 
@@ -17380,22 +17377,22 @@ module.exports = function (exec, skipClosing) {
           case 'mini':
             // 20
             this.loadingSize = '16px';
-            this.loadingSvgTop = '2px';
+            this.loadingSvgTop = '1px';
             break;
           case 'small':
             // 26
             this.loadingSize = '18px';
-            this.loadingSvgTop = '4px';
+            this.loadingSvgTop = '3px';
             break;
           case 'normal':
             // 32
             this.loadingSize = '20px';
-            this.loadingSvgTop = '6px';
+            this.loadingSvgTop = '5px';
             break;
           case 'large':
             // 38
             this.loadingSize = '22px';
-            this.loadingSvgTop = '8px';
+            this.loadingSvgTop = '7px';
             break;
         }
       }

@@ -122,7 +122,7 @@ export default function (theme) {
       if (typeof theme.colors === 'object') {
         Object.assign(finalTheme.colors, theme.colors)
       } else {
-        throw new Error('Admin UI@theme-system@ theme.colors should be an object')
+        console.error('Admin UI@theme-system@ theme.colors should be an object')
       }
     }
 
@@ -131,7 +131,7 @@ export default function (theme) {
       if (typeof theme.shadows === 'object') {
         Object.assign(finalTheme.shadows, theme.shadows)
       } else {
-        throw new Error('Admin UI@theme-system@ theme.shadows should be an object')
+        console.error('Admin UI@theme-system@ theme.shadows should be an object')
       }
     }
 

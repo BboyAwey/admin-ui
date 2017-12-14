@@ -222,19 +222,19 @@
           switch (this.size) {
             case 'mini': // 20
               this.loadingSize = '16px'
-              this.loadingSvgTop = '2px'
+              this.loadingSvgTop = '1px'
               break
             case 'small': // 26
               this.loadingSize = '18px'
-              this.loadingSvgTop = '4px'
+              this.loadingSvgTop = '3px'
               break
             case 'normal': // 32
               this.loadingSize = '20px'
-              this.loadingSvgTop = '6px'
+              this.loadingSvgTop = '5px'
               break
             case 'large': // 38
               this.loadingSize = '22px'
-              this.loadingSvgTop = '8px'
+              this.loadingSvgTop = '7px'
               break
           }
         }

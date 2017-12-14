@@ -138,7 +138,7 @@
       toggle () {
         if (!this.loading) {
           this.loading = this.$loading({
-            target: this.$refs.target,
+            // target: this.$refs.target,
             text: '拼命加载中',
             color: 'danger'
           })

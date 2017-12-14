@@ -87,7 +87,7 @@
             </td>
           </tr>
           <tr>
-            <td>icon-class</td>
+            <td>iconClass</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -103,7 +103,7 @@
             <td>图标样式类</td>
           </tr>
           <tr>
-            <td>toast-class</td>
+            <td>toastClass</td>
             <td><au-icon type="times"></au-icon></td>
             <td>String</td>
             <td><au-icon type="minus"></au-icon></td>

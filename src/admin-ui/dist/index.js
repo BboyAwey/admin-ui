@@ -18298,10 +18298,12 @@ module.exports = {};
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (function (config) {
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   var instance = new (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_1__loading_vue__["a" /* default */]))();
   var _config$target = config.target,
-      target = _config$target === undefined ? document.element.body : _config$target,
+      target = _config$target === undefined ? document.body : _config$target,
       text = config.text,
       _config$color = config.color,
       color = _config$color === undefined ? 'primary' : _config$color;

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import template from './loading.vue'
 
-export default (config) => {
+export default (config = {}) => {
   let instance = new (Vue.extend(template))()
   let {
-    target = document.element.body,
+    target = document.body,
     text,
     color = 'primary'
   } = config

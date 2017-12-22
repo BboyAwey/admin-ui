@@ -6,6 +6,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: $z-level-2;
   }
   .au-loading:before {
     content: '';

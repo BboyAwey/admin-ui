@@ -20,7 +20,7 @@
   }
   .au-timepicker-popup {
     position: absolute;
-    z-index: 9990;
+    z-index: $z-level-1;
     top: 34px;
     left: 0;
     width: 198px;
@@ -101,6 +101,7 @@
         au-theme-border-color--base-8
         au-theme-font-color--base-3
         au-theme-background-color--base-12
+        au-theme-shadow--level-3
         au-sizegap-${size}
       `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
         <ul

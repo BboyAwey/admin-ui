@@ -42,7 +42,7 @@
     font-size: $large;
   }
   .au-select-option-scroller {
-    z-index: 9990;
+    z-index: $z-level-1;
     position: absolute;
     border-width: 1px;
     border-style: solid;

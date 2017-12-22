@@ -5,7 +5,7 @@
     position: absolute;
     // top: -99999;
     // left: -99999;
-    z-index: $z-level-3;
+    z-index: $z-level-1;
     line-height: inherit;
     // min-height: 30px;
     // opacity: .95;

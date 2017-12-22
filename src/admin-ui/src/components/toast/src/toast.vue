@@ -2,7 +2,7 @@
   @import "../../../style/vars";
   .au-toast {
     position: fixed;
-    z-index: 99999;
+    z-index: $z-level-3;
     top: 0;
     left: 0;
     max-width: 80%;

@@ -16,6 +16,6 @@ $size-normal: 32px;
 $size-large: 38px;
 
 // z-index
-$z-level-1: 997;
-$z-level-2: 998;
-$z-level-3: 999;
+$z-level-1: 9999; // popover,datepicker,timepicker,select,input
+$z-level-2: 99999; // modal,previewer,loading
+$z-level-3: 999999; // toast

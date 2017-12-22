@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: $z-level-2;
     width: 100%;
     height: 100%;
   }

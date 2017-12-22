@@ -23,7 +23,7 @@
     left: 0;
     top: 34px;
     width: 276px;
-    z-index: 9990;
+    z-index: $z-level-1;
     font-size: $small;
     user-select: none;
     outline: none;

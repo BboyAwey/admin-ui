@@ -361,7 +361,7 @@ var render = function() {
               ref: "popup",
               staticClass: "au-timepicker-popup",
               class:
-                "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-background-color--base-12\n      au-sizegap-" +
+                "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-background-color--base-12\n      au-theme-shadow--level-3\n      au-sizegap-" +
                 _vm.size +
                 "\n    ",
               attrs: { tabindex: "0" },
@@ -10361,6 +10361,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 //
 //
 //
+//
 
 
 
@@ -16178,6 +16179,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_dom__ = __webpack_require__("8CCO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_utils__ = __webpack_require__("AP3u");
+//
 //
 //
 //

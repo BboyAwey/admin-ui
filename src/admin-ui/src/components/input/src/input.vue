@@ -42,7 +42,7 @@
   }
   .au-input-associations-scroller {
     position: absolute;
-    z-index: 9990;
+    z-index: $z-level-1;
     // top: 36px;
     min-width: 84px;
     width: 100%;

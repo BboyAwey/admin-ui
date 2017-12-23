@@ -7849,12 +7849,22 @@ var render = function() {
             },
             [
               _vm.icon
-                ? _c("au-icon", { attrs: { type: _vm.icon } })
+                ? _c("au-icon", {
+                    staticClass: "au-panel-title-icon",
+                    attrs: { type: _vm.icon }
+                  })
                 : _vm._e(),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.title))]),
+              _c("span", { staticClass: "au-panel-title-text" }, [
+                _vm._v(_vm._s(_vm.title))
+              ]),
               _vm._v(" "),
-              _c("span", [_vm._t("title-right")], 2)
+              _c(
+                "span",
+                { staticClass: "au-panel-title-right" },
+                [_vm._t("title-right")],
+                2
+              )
             ],
             1
           )
@@ -8100,6 +8110,14 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //

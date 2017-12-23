@@ -13,12 +13,20 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      & > span:first-child {
-        float: left
-      }
-      & > span:last-child {
-        float: right
-      }
+    }
+    .au-panel-title-icon {
+      position: relative;
+      bottom: -1px;
+      vertical-align: middle;
+      float: left;
+    }
+    .au-panel-title-text {
+      vertical-align: middle;
+      float: left;
+    }
+    .au-panel-title-right {
+      vertical-align: middle;
+      float: right;
     }
     .au-panel-title:after {
       content: "";
@@ -44,9 +52,9 @@
         au-panel-title
         au-theme-border-color--base-8
         au-theme-font-color--base-3">
-        <au-icon v-if="icon" :type="icon"></au-icon>
-        <span>{{ title }}</span>
-        <span><slot name="title-right"></slot></span>
+        <au-icon class="au-panel-title-icon" v-if="icon" :type="icon"></au-icon>
+        <span class="au-panel-title-text">{{ title }}</span>
+        <span class="au-panel-title-right"><slot name="title-right"></slot></span>
     </h3>
     <div class="au-panel-content au-theme-font-color--base-3">
       <slot></slot>

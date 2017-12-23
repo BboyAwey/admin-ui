@@ -54,7 +54,7 @@
             </td>
             <td>String</td>
             <td>
-              详情参考<router-link class="au-theme-font-color--info-3">icon</router-link>组件
+              详情参考<router-link class="au-theme-font-color--info-3" :to="{name: 'icon'}">icon</router-link>组件
             </td>
             <td><au-icon type="minus"></au-icon></td>
             <td>

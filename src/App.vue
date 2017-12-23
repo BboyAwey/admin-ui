@@ -44,7 +44,9 @@
     methods: {
       go (item) {
         if (item.url) {
-          this.$router.push(item.url)
+          this.$router.push({
+            path: item.url
+          })
           this.scrollTop = 0
         }
       },

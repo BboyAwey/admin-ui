@@ -133,7 +133,7 @@ const adminUi = {
 adminUi.install = function (Vue, options = {}) {
   // install all the comps
   components.forEach(component => {
-    Vue.component(component.name, component)
+    if (component.name) Vue.component(component.name, component)
   })
   Vue.prototype.$messageBox = MessageBox
   Vue.prototype.$alert = MessageBox.alert

@@ -6674,7 +6674,7 @@ adminUi.install = function (Vue) {
 
   // install all the comps
   components.forEach(function (component) {
-    Vue.component(component.name, component);
+    if (component.name) Vue.component(component.name, component);
   });
   Vue.prototype.$messageBox = __WEBPACK_IMPORTED_MODULE_28__components_message_box__["a" /* default */];
   Vue.prototype.$alert = __WEBPACK_IMPORTED_MODULE_28__components_message_box__["a" /* default */].alert;

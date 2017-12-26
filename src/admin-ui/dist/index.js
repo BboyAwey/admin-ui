@@ -16261,6 +16261,11 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-loading',
+  data: function data() {
+    return {
+      closed: false
+    };
+  },
   mounted: function mounted() {
     var style = document.createElement('style');
     style.innerHTML = '\n      /* &lt;![CDATA[ */\n        @keyframes Rotate { 100% { transform: rotate(360deg); } }\n\n        @keyframes CircularBarDash {\n          0% {\n          stroke-dasharray: 1, 200;\n          stroke-dashoffset: 0;\n        }\n        50% {\n          stroke-dasharray: 89, 200;\n          stroke-dashoffset: -35;\n        }\n        100% {\n          stroke-dasharray: 89, 200;\n          stroke-dashoffset: -124;\n        }\n        }\n      /* ]]&gt; */\n    ';
@@ -16270,6 +16275,9 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
       styles[i].parentNode.removeChild(styles[i]);
     }
     this.$refs.svg.insertBefore(style, this.$refs.core);
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.close();
   },
 
   props: {
@@ -16292,8 +16300,10 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
       this.$refs.coreContainer.style.top = (elHeight - __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.coreContainer).height) / 2 + 'px';
     },
     close: function close() {
-      this.$el.parentNode.removeChild(this.$el);
-      this.$destroy();
+      if (!this.closed) {
+        this.$el.parentNode.removeChild(this.$el);
+        this.closed = true;
+      }
     }
   }
 });

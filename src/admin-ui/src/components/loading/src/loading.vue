@@ -62,6 +62,11 @@
 
   export default {
     name: 'au-loading',
+    data () {
+      return {
+        closed: false
+      }
+    },
     mounted () {
       let style = document.createElement('style')
       style.innerHTML = `
@@ -91,6 +96,9 @@
       }
       this.$refs.svg.insertBefore(style, this.$refs.core)
     },
+    beforeDestroy () {
+      this.close()
+    },
     props: {
       size: Number,
       text: String,
@@ -111,8 +119,10 @@
         this.$refs.coreContainer.style.top = (elHeight - getElementSize(this.$refs.coreContainer).height) / 2 + 'px'
       },
       close () {
-        this.$el.parentNode.removeChild(this.$el)
-        this.$destroy()
+        if (!this.closed) {
+          this.$el.parentNode.removeChild(this.$el)
+          this.closed = true
+        }
       }
     }
   }

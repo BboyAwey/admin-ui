@@ -3450,7 +3450,7 @@ module.exports = function (it) {
 /* harmony export (immutable) */ __webpack_exports__["c"] = mousewheel;
 /* harmony export (immutable) */ __webpack_exports__["d"] = addClass;
 /* harmony export (immutable) */ __webpack_exports__["e"] = removeClass;
-/* harmony export (immutable) */ __webpack_exports__["g"] = hasClass;
+/* unused harmony export hasClass */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__("AP3u");
 
 
@@ -7765,12 +7765,7 @@ var render = function() {
       }
     },
     [
-      _c(
-        "span",
-        { ref: "target", staticClass: "au-popover-target-container" },
-        [_vm._t("target")],
-        2
-      ),
+      _vm._t("target"),
       _vm._v(" "),
       _c(
         "div",
@@ -7808,7 +7803,8 @@ var render = function() {
         (_obj[_vm.localPlacement.split(/\s+/).join("-")] = true),
         _obj)
       })
-    ]
+    ],
+    2
   )
   var _obj
 }
@@ -8489,11 +8485,11 @@ var render = function() {
                           attrs: {
                             disabled: !_vm.localCollapse,
                             trigger: _vm.hasChildren(item) ? "click" : "hover",
+                            "hide-on-blur": true,
                             placement: _vm.hasChildren(item)
                               ? i < 5 ? "right top" : "right bottom"
                               : "right middle",
-                            plain: _vm.hasChildren(item),
-                            fix: _vm.hasChildren(item) ? 0 : "-2px"
+                            plain: _vm.hasChildren(item)
                           }
                         },
                         [
@@ -8506,8 +8502,7 @@ var render = function() {
                                 slot: "target",
                                 disabled: !_vm.localCollapse,
                                 trigger: "hover",
-                                placement: "right middle",
-                                fix: "-2px"
+                                placement: "right middle"
                               },
                               slot: "target"
                             },
@@ -8695,11 +8690,11 @@ var render = function() {
                       attrs: {
                         disabled: !_vm.localCollapse,
                         trigger: _vm.hasChildren(item) ? "click" : "hover",
+                        "hide-on-blur": true,
                         placement: _vm.hasChildren(item)
                           ? i < 5 ? "right top" : "right bottom"
                           : "right middle",
-                        plain: _vm.hasChildren(item),
-                        fix: _vm.hasChildren(item) ? 0 : "-2px"
+                        plain: _vm.hasChildren(item)
                       }
                     },
                     [
@@ -8712,8 +8707,7 @@ var render = function() {
                             slot: "target",
                             disabled: !_vm.localCollapse,
                             trigger: "hover",
-                            placement: "right middle",
-                            fix: "-2px"
+                            placement: "right middle"
                           },
                           slot: "target"
                         },
@@ -9067,7 +9061,7 @@ if (false) {
   },
   computed: {
     pageCount: function pageCount() {
-      return this.total <= this.size ? 1 : this.total / this.size;
+      return this.total <= this.size ? 1 : Math.ceil(this.total / this.size);
     },
     nums: function nums() {
       if (this.pageCount < 10) {
@@ -11573,6 +11567,7 @@ module.exports = function (done, value) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set__ = __webpack_require__("lHA8");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_utils__ = __webpack_require__("AP3u");
 
 //
 //
@@ -11705,15 +11700,7 @@ module.exports = function (done, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -11741,7 +11728,7 @@ module.exports = function (done, value) {
       type: [String, Number],
       default: '0px'
     },
-    hideOnblur: Boolean
+    hideOnBlur: Boolean
   },
   data: function data() {
     return {
@@ -11787,24 +11774,25 @@ module.exports = function (done, value) {
     }
   },
   methods: {
+    getTarget: function getTarget() {
+      var target = this.$slots.target[0].elm;
+      var id = target.getAttribute('data-au-popover');
+      if (id) {
+        // nested popover
+        target = __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].get('au-popover-' + id).$slots.target[0].elm;
+      }
+      return target;
+    },
     reconstruct: function reconstruct() {
       // if (this.disabled) return
-      var target = this.$refs.target;
-      var targetSlotContent = this.$slots.target[0].elm;
-
-      // seperate margin side by side because firefox cannot read margin correctly
-      target.style.marginTop = window.getComputedStyle(targetSlotContent).marginTop;
-      target.style.marginBottom = window.getComputedStyle(targetSlotContent).marginBottom;
-      target.style.marginRight = window.getComputedStyle(targetSlotContent).marginRight;
-      target.style.marginLeft = window.getComputedStyle(targetSlotContent).marginLeft;
-
-      this.$nextTick(function () {
-        targetSlotContent.style.margin = 0;
-      });
-
+      var target = this.getTarget();
       var pop = this.$refs.pop;
+      var id = 'au-popover-' + this._uid;
 
-      pop.setAttribute('id', 'au-popover-' + this._uid);
+      // register popover on root
+      pop.setAttribute('data-au-popover', id);
+      __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].set('au-popover-' + id, this);
+
       if (target.parentNode === pop) {
         pop.parentNode.insertBefore(target, pop);
         pop.parentNode.removeChild(pop);
@@ -11812,19 +11800,21 @@ module.exports = function (done, value) {
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
     addEvents: function addEvents() {
+      var target = this.getTarget();
       if (this.trigger === 'click') {
-        this.$refs.target.addEventListener('click', this.handleClick);
+        target.addEventListener('click', this.handleClick);
         // this.$refs.pop.addEventListener('blur', this.handleBlur)
       } else {
-        this.$refs.target.addEventListener('mouseenter', this.handleMouseover);
-        this.$refs.target.addEventListener('mouseleave', this.handleMouseout);
+        target.addEventListener('mouseenter', this.handleMouseover);
+        target.addEventListener('mouseleave', this.handleMouseout);
       }
     },
     removeEvents: function removeEvents() {
-      this.$refs.target.removeEventListener('click', this.handleClick);
+      var target = this.getTarget();
+      target.removeEventListener('click', this.handleClick);
       // this.$refs.pop.removeEventListener('blur', this.handleBlur)
-      this.$refs.target.removeEventListener('mouseenter', this.handleMouseover);
-      this.$refs.target.removeEventListener('mouseleave', this.handleMouseout);
+      target.removeEventListener('mouseenter', this.handleMouseover);
+      target.removeEventListener('mouseleave', this.handleMouseout);
     },
     handleClick: function handleClick() {
       if (this.trigger === 'click') {
@@ -11833,7 +11823,7 @@ module.exports = function (done, value) {
     },
     handleBlur: function handleBlur() {
       // pop blur
-      if (this.trigger === 'click' && this.display && this.hideOnblur) this.hide();
+      if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide();
     },
     handleMouseover: function handleMouseover() {
       this.show();
@@ -11861,11 +11851,10 @@ module.exports = function (done, value) {
       // clearInterval(this.calPos.bind(this))
     },
     calPos: function calPos() {
-      var targetElm = this.$slots.target[0].elm;
-      if (!targetElm) return;
-
-      var targetElmDisplay = window.getComputedStyle(targetElm).display;
-      if (targetElmDisplay !== 'none') this.$refs.target.style.display = targetElmDisplay;
+      var pop = this.$refs.pop;
+      var target = this.getTarget();
+      var content = this.$refs.content;
+      if (!target) return;
 
       // let popElmSize = getElementSize(this.$slots.content[0].elm)
       // this.$refs.pop.style.width = popElmSize.width + 'px'
@@ -11880,21 +11869,20 @@ module.exports = function (done, value) {
       this.localPlacement = keys.join(' ');
 
       if (this.x && this.y) {
-        this.$refs.pop.style.left = this.x;
-        this.$refs.pop.style.top = this.y;
+        pop.style.left = this.x;
+        pop.style.top = this.y;
         return;
       }
 
-      var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.target);
-      var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["f" /* getElementPagePos */])(this.$refs.target);
-      var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content);
+      var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(target);
+      var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["f" /* getElementPagePos */])(target);
+      var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(content);
 
       // fix the size bug witch caused by the wordwrap
       // this.$refs.pop.style.width = popSize.width + 'px'
       // this.$refs.pop.style.height = popSize.height + 'px'
 
       var offset = 10;
-
       var vertical = {
         x: {
           left: targetPos.left + parseInt(this.xFix),
@@ -11913,11 +11901,10 @@ module.exports = function (done, value) {
         },
         y: {
           top: targetPos.top + parseInt(this.yFix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
+          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
           bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
-
       var res = {};
       if (keys[0] === 'top' || keys[0] === 'bottom') {
         res = {
@@ -11930,8 +11917,8 @@ module.exports = function (done, value) {
           y: horizontal.y[keys[1]]
         };
       }
-      this.$refs.pop.style.left = this.x || res.x + 'px';
-      this.$refs.pop.style.top = this.y || res.y + 'px';
+      pop.style.left = this.x || res.x + 'px';
+      pop.style.top = this.y || res.y + 'px';
     },
     fixSize: function fixSize(origin) {
       this.$refs.pop.style.width = origin.width;
@@ -17774,9 +17761,6 @@ module.exports = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__popover__ = __webpack_require__("LV4O");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scroller__ = __webpack_require__("ovkV");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils__ = __webpack_require__("AP3u");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_dom__ = __webpack_require__("8CCO");
-//
-//
 //
 //
 //
@@ -18079,7 +18063,7 @@ module.exports = {};
 
 
 
-
+// import { hasClass } from '../../../helpers/dom'
 // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -18160,6 +18144,7 @@ module.exports = {};
       this.currentItem = item;
       this.activate();
       this.toggleCollapse(item);
+      // console.log(this.$refs.tipPopover)
       if (i !== undefined && this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide();
       if (i !== undefined) this.$emit('select', item);
     },
@@ -18300,17 +18285,6 @@ module.exports = {};
       return !!(item.children && item.children.length);
     },
     handlePopSelect: function handlePopSelect(item) {
-      function hidePop(children) {
-        children.forEach(function (child) {
-          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_dom__["g" /* hasClass */])(child.$el, 'au-popover')) {
-            if (child.display) child.hide();
-          }
-          if (child.$children && child.$children.length) {
-            hidePop(child.$children);
-          }
-        });
-      }
-      hidePop(this.$root.$children);
       this.$emit('select', item);
     }
   }

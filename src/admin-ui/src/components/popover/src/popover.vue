@@ -100,11 +100,6 @@
     border-width: 1px;
     border-style: solid;
   }
-
-  .au-popover-target-container {
-    // display: inline-block;
-    // border: 1px solid red;
-  }
 </style>
 <template>
   <div
@@ -113,9 +108,7 @@
     :tabindex="_uid"
     @blur="handleBlur($event)"
     ref="pop">
-    <span ref="target" class="au-popover-target-container">
-      <slot name="target"></slot>
-    </span>
+    <slot name="target"></slot>
     <div ref="content" :class="{
       'au-popover-content': true,
       'au-theme-radius': true,
@@ -123,8 +116,7 @@
       'au-theme-font-color--base-12': !plain,
       'au-theme-background-color--base-12': plain,
       'au-theme-border-color--base-8': plain,
-      'au-theme-font-color--base-3': plain
-    }">
+      'au-theme-font-color--base-3': plain}">
       <slot name="content"></slot>
     </div>
     <span
@@ -134,12 +126,12 @@
         [localPlacement.split(/\s+/).join('-')]: true,
         'au-theme-background-color--base-2': !plain,
         'au-theme-background-color--base-12': plain,
-        'au-popover-plain-triangle au-theme-border-color--base-8': plain
-      }"></span>
+        'au-popover-plain-triangle au-theme-border-color--base-8': plain}"></span>
   </div>
 </template>
 <script>
   import { getElementSize, getElementPagePos } from '../../../helpers/dom'
+  import { namespace } from '../../../helpers/utils'
 
   export default {
     name: 'au-popover',
@@ -165,7 +157,7 @@
         type: [String, Number],
         default: '0px'
       },
-      hideOnblur: Boolean
+      hideOnBlur: Boolean
     },
     data () {
       return {
@@ -211,24 +203,24 @@
       }
     },
     methods: {
+      getTarget () {
+        let target = this.$slots.target[0].elm
+        let id = target.getAttribute('data-au-popover')
+        if (id) { // nested popover
+          target = namespace.get('au-popover-' + id).$slots.target[0].elm
+        }
+        return target
+      },
       reconstruct () {
         // if (this.disabled) return
-        let target = this.$refs.target
-        let targetSlotContent = this.$slots.target[0].elm
-
-        // seperate margin side by side because firefox cannot read margin correctly
-        target.style.marginTop = window.getComputedStyle(targetSlotContent).marginTop
-        target.style.marginBottom = window.getComputedStyle(targetSlotContent).marginBottom
-        target.style.marginRight = window.getComputedStyle(targetSlotContent).marginRight
-        target.style.marginLeft = window.getComputedStyle(targetSlotContent).marginLeft
-
-        this.$nextTick(() => {
-          targetSlotContent.style.margin = 0
-        })
-
+        let target = this.getTarget()
         let pop = this.$refs.pop
+        let id = 'au-popover-' + this._uid
 
-        pop.setAttribute('id', 'au-popover-' + this._uid)
+        // register popover on root
+        pop.setAttribute('data-au-popover', id)
+        namespace.set('au-popover-' + id, this)
+
         if (target.parentNode === pop) {
           pop.parentNode.insertBefore(target, pop)
           pop.parentNode.removeChild(pop)
@@ -236,19 +228,21 @@
         // if (pop.parentNode !== document.body) document.body.appendChild(pop)
       },
       addEvents () {
+        let target = this.getTarget()
         if (this.trigger === 'click') {
-          this.$refs.target.addEventListener('click', this.handleClick)
+          target.addEventListener('click', this.handleClick)
           // this.$refs.pop.addEventListener('blur', this.handleBlur)
         } else {
-          this.$refs.target.addEventListener('mouseenter', this.handleMouseover)
-          this.$refs.target.addEventListener('mouseleave', this.handleMouseout)
+          target.addEventListener('mouseenter', this.handleMouseover)
+          target.addEventListener('mouseleave', this.handleMouseout)
         }
       },
       removeEvents () {
-        this.$refs.target.removeEventListener('click', this.handleClick)
+        let target = this.getTarget()
+        target.removeEventListener('click', this.handleClick)
         // this.$refs.pop.removeEventListener('blur', this.handleBlur)
-        this.$refs.target.removeEventListener('mouseenter', this.handleMouseover)
-        this.$refs.target.removeEventListener('mouseleave', this.handleMouseout)
+        target.removeEventListener('mouseenter', this.handleMouseover)
+        target.removeEventListener('mouseleave', this.handleMouseout)
       },
       handleClick () {
         if (this.trigger === 'click') {
@@ -256,7 +250,7 @@
         }
       },
       handleBlur () { // pop blur
-        if (this.trigger === 'click' && this.display && this.hideOnblur) this.hide()
+        if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
       },
       handleMouseover () {
         this.show()
@@ -284,11 +278,10 @@
         // clearInterval(this.calPos.bind(this))
       },
       calPos () {
-        let targetElm = this.$slots.target[0].elm
-        if (!targetElm) return
-
-        let targetElmDisplay = window.getComputedStyle(targetElm).display
-        if (targetElmDisplay !== 'none') this.$refs.target.style.display = targetElmDisplay
+        let pop = this.$refs.pop
+        let target = this.getTarget()
+        let content = this.$refs.content
+        if (!target) return
 
         // let popElmSize = getElementSize(this.$slots.content[0].elm)
         // this.$refs.pop.style.width = popElmSize.width + 'px'
@@ -303,21 +296,20 @@
         this.localPlacement = keys.join(' ')
 
         if (this.x && this.y) {
-          this.$refs.pop.style.left = this.x
-          this.$refs.pop.style.top = this.y
+          pop.style.left = this.x
+          pop.style.top = this.y
           return
         }
 
-        let targetSize = getElementSize(this.$refs.target)
-        let targetPos = getElementPagePos(this.$refs.target)
-        let popSize = getElementSize(this.$refs.content)
+        let targetSize = getElementSize(target)
+        let targetPos = getElementPagePos(target)
+        let popSize = getElementSize(content)
 
         // fix the size bug witch caused by the wordwrap
         // this.$refs.pop.style.width = popSize.width + 'px'
         // this.$refs.pop.style.height = popSize.height + 'px'
 
         let offset = 10
-
         let vertical = {
           x: {
             left: targetPos.left + parseInt(this.xFix),
@@ -336,11 +328,10 @@
           },
           y: {
             top: targetPos.top + parseInt(this.yFix),
-            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
+            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
             bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix)// do not kown why should add 10 but it works
           }
         }
-
         let res = {}
         if (keys[0] === 'top' || keys[0] === 'bottom') {
           res = {
@@ -353,8 +344,8 @@
             y: horizontal.y[keys[1]]
           }
         }
-        this.$refs.pop.style.left = this.x || res.x + 'px'
-        this.$refs.pop.style.top = this.y || res.y + 'px'
+        pop.style.left = this.x || res.x + 'px'
+        pop.style.top = this.y || res.y + 'px'
       },
       fixSize (origin) {
         this.$refs.pop.style.width = origin.width

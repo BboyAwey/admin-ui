@@ -87,7 +87,7 @@
     padding-bottom: 40px;
   }
   .au-menu.collapse {
-    width: 60px;
+    width: 60px !important;
     .menu {
       // height: 60px;
       padding: 0;
@@ -160,16 +160,15 @@
             ref="popover"
             :disabled="!localCollapse"
             :trigger="hasChildren(item) ? 'click' : 'hover'"
+            :hide-on-blur="true"
             :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
-            :plain="hasChildren(item)"
-            :fix="hasChildren(item) ? 0 : '-2px'">
+            :plain="hasChildren(item)">
             <au-popover
               ref="tipPopover"
               slot="target"
               :disabled="!localCollapse"
               :trigger="'hover'"
-              :placement="'right middle'"
-              :fix="'-2px'">
+              :placement="'right middle'">
               <div class="menu"
                 slot="target"
                 :class="{
@@ -228,16 +227,15 @@
           ref="popover"
           :disabled="!localCollapse"
           :trigger="hasChildren(item) ? 'click' : 'hover'"
+          :hide-on-blur="true"
           :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
-          :plain="hasChildren(item)"
-          :fix="hasChildren(item) ? 0 : '-2px'">
+          :plain="hasChildren(item)">
           <au-popover
             ref="tipPopover"
             slot="target"
             :disabled="!localCollapse"
             :trigger="'hover'"
-            :placement="'right middle'"
-            :fix="'-2px'">
+            :placement="'right middle'">
             <div class="menu"
               slot="target"
               :class="{
@@ -302,7 +300,7 @@
   import AuPopover from '../../popover'
   import AuScroller from '../../scroller'
   import { deepClone } from '../../../helpers/utils'
-  import { hasClass } from '../../../helpers/dom'
+  // import { hasClass } from '../../../helpers/dom'
   // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
   export default {
@@ -381,6 +379,7 @@
         this.currentItem = item
         this.activate()
         this.toggleCollapse(item)
+        // console.log(this.$refs.tipPopover)
         if (i !== undefined && this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide()
         if (i !== undefined) this.$emit('select', item)
       },
@@ -515,17 +514,6 @@
         return !!(item.children && item.children.length)
       },
       handlePopSelect (item) {
-        function hidePop (children) {
-          children.forEach(child => {
-            if (hasClass(child.$el, 'au-popover')) {
-              if (child.display) child.hide()
-            }
-            if (child.$children && child.$children.length) {
-              hidePop(child.$children)
-            }
-          })
-        }
-        hidePop(this.$root.$children)
         this.$emit('select', item)
       }
     }

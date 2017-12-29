@@ -222,7 +222,7 @@
       <au-table>
         <thead>
           <tr>
-            <th>名称</th
+            <th>名称</th>
             <th>说明</th>
           </tr>
         </thead>

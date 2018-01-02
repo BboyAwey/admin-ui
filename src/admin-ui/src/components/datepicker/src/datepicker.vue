@@ -240,13 +240,15 @@
       start: {
         type: String,
         validator (v) {
-          return /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+          let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+          if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-mm-dd')
         }
       },
       end: {
         type: String,
         validator (v) {
-          return /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+          let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+          if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-mm-dd')
         }
       },
       readonly: Boolean

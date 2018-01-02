@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-timepicker label="选一个时间吧" v-model="time" :validators="validators"></au-timepicker>
+        <au-timepicker label="选一个时间吧" v-model="time" :validators="validators" start="09:00:00" end="17:59:59"></au-timepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -112,6 +112,36 @@
               </ol>
             </td>
             <td>只读</td>
+          </tr>
+          <tr>
+            <td>start</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              有效时间的开始时间（包含）<br>
+              设置后该日期时间之后的时间才可被选中<br>
+              格式必须为hh-mm-ss
+            </td>
+          </tr>
+          <tr>
+            <td>end</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              有效时间的结束时间（包含）<br>
+              设置后该日期时间之前的时间才可被选中<br>
+              格式必须为hh-mm-ss
+            </td>
           </tr>
           <tr>
             <td>warnings</td>

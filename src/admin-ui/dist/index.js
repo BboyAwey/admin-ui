@@ -375,25 +375,32 @@ var render = function() {
                   staticClass:
                     "au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8",
                   class: { "au-timepicker-no-seconds": !_vm.seconds },
-                  style: { top: _vm.hoursOffset + "px" },
+                  style: {
+                    top: _vm.hoursOffset + "px"
+                  },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
                     }
                   }
                 },
-                _vm._l(24, function(num) {
+                _vm._l(24, function(num, index) {
                   return _c(
                     "li",
                     {
-                      key: num,
+                      key: index,
                       class: {
-                        "au-theme-font-color--primary-3": num - 1 == _vm.hour
+                        "au-theme-font-color--primary-3":
+                          _vm.isValid(num, "h") && num - 1 == _vm.hour,
+                        "au-theme-font-color--base-7": !_vm.isValid(num, "h")
+                      },
+                      style: {
+                        cursor: _vm.isValid(num, "h") ? "" : "not-allowed"
                       },
                       on: {
                         click: function($event) {
                           $event.stopPropagation()
-                          _vm.selectTime(num - 1, "hour")
+                          _vm.selectTime(num, "hour")
                         }
                       }
                     },
@@ -422,12 +429,17 @@ var render = function() {
                     {
                       key: num,
                       class: {
-                        "au-theme-font-color--primary-3": num - 1 == _vm.minute
+                        "au-theme-font-color--primary-3":
+                          _vm.isValid(num, "m") && num - 1 == _vm.minute,
+                        "au-theme-font-color--base-7": !_vm.isValid(num, "m")
+                      },
+                      style: {
+                        cursor: _vm.isValid(num, "m") ? "" : "not-allowed"
                       },
                       on: {
                         click: function($event) {
                           $event.stopPropagation()
-                          _vm.selectTime(num - 1, "minute")
+                          _vm.selectTime(num, "minute")
                         }
                       }
                     },
@@ -457,12 +469,19 @@ var render = function() {
                           key: num,
                           class: {
                             "au-theme-font-color--primary-3":
-                              num - 1 == _vm.second
+                              _vm.isValid(num, "s") && num - 1 == _vm.second,
+                            "au-theme-font-color--base-7": !_vm.isValid(
+                              num,
+                              "s"
+                            )
+                          },
+                          style: {
+                            cursor: _vm.isValid(num, "s") ? "" : "not-allowed"
                           },
                           on: {
                             click: function($event) {
                               $event.stopPropagation()
-                              _vm.selectTime(num - 1, "second")
+                              _vm.selectTime(num, "second")
                             }
                           }
                         },
@@ -10543,6 +10562,11 @@ module.exports = Object.getPrototypeOf || function (O) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -10596,6 +10620,22 @@ var MSRANGE = 1888;
       type: String,
       default: '请选择时间'
     },
+    start: {
+      type: String,
+      validator: function validator(v) {
+        var res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v);
+        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss');
+        return res;
+      }
+    },
+    end: {
+      type: String,
+      validator: function validator(v) {
+        var res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v);
+        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss');
+        return res;
+      }
+    },
     readonly: Boolean
   },
   watch: {
@@ -10643,6 +10683,57 @@ var MSRANGE = 1888;
         res.push(this.localWarnings[key]);
       }
       return res.length ? res : null;
+    },
+    validTime: function validTime() {
+      var res = {
+        start: {
+          h: 0,
+          m: 0,
+          s: 0
+        },
+        end: {
+          h: 23,
+          m: 59,
+          s: 59
+        }
+      };
+      var start = this.start ? this.start.split(':') : '';
+      var end = this.end ? this.end.split(':') : '';
+      if (start) {
+        res.start.h = Number(start[0]);
+        if (Number(this.hour) < res.start.h) {
+          res.start.m = '';
+          res.start.s = '';
+        }
+        if (Number(this.hour) > res.start.h) {
+          res.start.m = 0;
+          res.start.s = 0;
+        }
+        if (Number(this.hour) === res.start.h) {
+          res.start.m = Number(start[1]);
+          if (Number(this.minute) < res.start.m) res.start.s = '';
+          if (Number(this.minute) > res.start.m) res.start.s = 0;
+          if (Number(this.minute) === res.start.m) res.start.s = start[2] ? start[2] : 0;
+        }
+      }
+      if (end) {
+        res.end.h = Number(end[0]);
+        if (Number(this.hour) > res.end.h) {
+          res.end.m = '';
+          res.end.s = '';
+        }
+        if (Number(this.hour) < res.end.h) {
+          res.end.m = 59;
+          res.end.s = 59;
+        }
+        if (Number(this.hour) === res.end.h) {
+          res.end.m = Number(end[1]);
+          if (Number(this.minute) > res.end.m) res.end.s = '';
+          if (Number(this.minute) < res.end.m) res.end.s = 59;
+          if (Number(this.minute) === res.end.m) res.end.s = end[2] ? end[2] : 59;
+        }
+      }
+      return res;
     }
   },
   methods: {
@@ -10651,7 +10742,8 @@ var MSRANGE = 1888;
     },
     selectTime: function selectTime(num, type) {
       // hour, minute, second
-      this[type] = this.formatNum(num);
+      if (!this.isValid(num, type[0])) return;
+      this[type] = this.formatNum(num - 1);
       this.setTime();
     },
     setTime: function setTime() {
@@ -10659,9 +10751,9 @@ var MSRANGE = 1888;
       this.inputTime = this.time;
     },
     setSeparateTime: function setSeparateTime(timeArr) {
-      this.hour = this.formatNum(timeArr[0]);
-      this.minute = this.formatNum(timeArr[1]);
-      this.second = this.formatNum(timeArr[2]);
+      this.hour = timeArr[0] ? this.formatNum(timeArr[0]) : '';
+      this.minute = timeArr[1] ? this.formatNum(timeArr[1]) : '';
+      this.second = timeArr[2] ? this.formatNum(timeArr[2]) : '';
     },
     listScroll: function listScroll(e, type) {
       e.stopPropagation();
@@ -10746,6 +10838,13 @@ var MSRANGE = 1888;
     },
     coreBlur: function coreBlur(v, e) {
       if (e.relatedTarget !== this.$refs.popup) this.popup = false;
+    },
+    isValid: function isValid(value, type) {
+      value = value - 1;
+      if (this.validTime.end[type] === '' || this.validTime.start[type] === '') {
+        return false;
+      }
+      return Number(value) <= this.validTime.end[type] && Number(value) >= this.validTime.start[type];
     }
   }
 });
@@ -13274,15 +13373,15 @@ exports.RETURN = RETURN;
     start: {
       type: String,
       validator: function validator(v) {
-        return (/^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-        );
+        var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
+        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-mm-dd');
       }
     },
     end: {
       type: String,
       validator: function validator(v) {
-        return (/^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-        );
+        var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
+        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-mm-dd');
       }
     },
     readonly: Boolean

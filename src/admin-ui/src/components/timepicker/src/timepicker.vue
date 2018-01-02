@@ -41,12 +41,6 @@
       line-height: 32px;
       text-align: center;
       user-select: none;
-    }
-    & > .selected {
-      // color: $primary;
-    }
-    & > li:hover {
-      // background-color: rgba($primary, .1);
       cursor: pointer;
     }
   }
@@ -109,13 +103,18 @@
           :class="{'au-timepicker-no-seconds': !seconds}"
           ref="hours"
           @click.stop
-          :style="{ top: hoursOffset + 'px' }">
+          :style="{
+            top: hoursOffset + 'px'
+          }">
           <li
-            v-for="num in 24"
-            :key="num"
-            @click.stop="selectTime(num - 1, 'hour')"
+            v-for="(num, index) in 24"
+            :key="index"
+            @click.stop="selectTime(num, 'hour')"
             :class="{
-              'au-theme-font-color--primary-3': num - 1 == hour
+              'au-theme-font-color--primary-3': isValid(num, 'h') && num - 1 == hour,
+              'au-theme-font-color--base-7': !isValid(num, 'h'),
+            }" :style="{
+              cursor: isValid(num, 'h') ? '' : 'not-allowed'
             }">{{ formatNum(num - 1) }}</li>
         </ul>
         <ul
@@ -127,9 +126,12 @@
           <li
             v-for="num in 60"
             :key="num"
-            @click.stop="selectTime(num - 1, 'minute')"
+            @click.stop="selectTime(num, 'minute')"
             :class="{
-              'au-theme-font-color--primary-3': num - 1 == minute
+              'au-theme-font-color--primary-3': isValid(num, 'm') && num - 1 == minute,
+              'au-theme-font-color--base-7': !isValid(num, 'm')
+            }" :style="{
+              cursor: isValid(num, 'm') ? '' : 'not-allowed'
             }">{{ formatNum(num - 1) }}</li>
         </ul>
         <ul
@@ -141,9 +143,12 @@
           <li
             v-for="num in 60"
             :key="num"
-            @click.stop="selectTime(num - 1, 'second')"
+            @click.stop="selectTime(num, 'second')"
             :class="{
-              'au-theme-font-color--primary-3': num - 1 == second
+              'au-theme-font-color--primary-3': isValid(num, 's') && num - 1 == second,
+              'au-theme-font-color--base-7': !isValid(num, 's')
+            }" :style="{
+              cursor: isValid(num, 's') ? '' : 'not-allowed'
             }">{{ formatNum(num - 1) }}</li>
         </ul>
       </div>
@@ -194,6 +199,22 @@
         type: String,
         default: '请选择时间'
       },
+      start: {
+        type: String,
+        validator (v) {
+          let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+          if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
+          return res
+        }
+      },
+      end: {
+        type: String,
+        validator (v) {
+          let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+          if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
+          return res
+        }
+      },
       readonly: Boolean
     },
     watch: {
@@ -243,6 +264,57 @@
           res.push(this.localWarnings[key])
         }
         return res.length ? res : null
+      },
+      validTime () {
+        let res = {
+          start: {
+            h: 0,
+            m: 0,
+            s: 0
+          },
+          end: {
+            h: 23,
+            m: 59,
+            s: 59
+          }
+        }
+        let start = this.start ? this.start.split(':') : ''
+        let end = this.end ? this.end.split(':') : ''
+        if (start) {
+          res.start.h = Number(start[0])
+          if (Number(this.hour) < res.start.h) {
+            res.start.m = ''
+            res.start.s = ''
+          }
+          if (Number(this.hour) > res.start.h) {
+            res.start.m = 0
+            res.start.s = 0
+          }
+          if (Number(this.hour) === res.start.h) {
+            res.start.m = Number(start[1])
+            if (Number(this.minute) < res.start.m) res.start.s = ''
+            if (Number(this.minute) > res.start.m) res.start.s = 0
+            if (Number(this.minute) === res.start.m) res.start.s = start[2] ? start[2] : 0
+          }
+        }
+        if (end) {
+          res.end.h = Number(end[0])
+          if (Number(this.hour) > res.end.h) {
+            res.end.m = ''
+            res.end.s = ''
+          }
+          if (Number(this.hour) < res.end.h) {
+            res.end.m = 59
+            res.end.s = 59
+          }
+          if (Number(this.hour) === res.end.h) {
+            res.end.m = Number(end[1])
+            if (Number(this.minute) > res.end.m) res.end.s = ''
+            if (Number(this.minute) < res.end.m) res.end.s = 59
+            if (Number(this.minute) === res.end.m) res.end.s = end[2] ? end[2] : 59
+          }
+        }
+        return res
       }
     },
     methods: {
@@ -251,7 +323,8 @@
       },
       selectTime (num, type) {
         // hour, minute, second
-        this[type] = this.formatNum(num)
+        if (!this.isValid(num, type[0])) return
+        this[type] = this.formatNum(num - 1)
         this.setTime()
       },
       setTime () {
@@ -262,9 +335,9 @@
         this.inputTime = this.time
       },
       setSeparateTime (timeArr) {
-        this.hour = this.formatNum(timeArr[0])
-        this.minute = this.formatNum(timeArr[1])
-        this.second = this.formatNum(timeArr[2])
+        this.hour = timeArr[0] ? this.formatNum(timeArr[0]) : ''
+        this.minute = timeArr[1] ? this.formatNum(timeArr[1]) : ''
+        this.second = timeArr[2] ? this.formatNum(timeArr[2]) : ''
       },
       listScroll (e, type) {
         e.stopPropagation()
@@ -352,6 +425,13 @@
       },
       coreBlur (v, e) {
         if (e.relatedTarget !== this.$refs.popup) this.popup = false
+      },
+      isValid (value, type) {
+        value = value - 1
+        if (this.validTime.end[type] === '' || this.validTime.start[type] === '') {
+          return false
+        }
+        return Number(value) <= this.validTime.end[type] && Number(value) >= this.validTime.start[type]
       }
     }
   }

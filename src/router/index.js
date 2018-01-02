@@ -164,6 +164,11 @@ export default new Router({
       path: '/loading',
       name: 'loading',
       component: (resolve) => require(['../examples/loading.vue'], resolve)
+    },
+    {
+      path: '/tag',
+      name: 'tag',
+      component: (resolve) => require(['../examples/tag.vue'], resolve)
     }
   ]
 })

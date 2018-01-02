@@ -87,6 +87,26 @@
               图标颜色，也可直接在组件上使用class或style的color属性控制而不使用此字段
             </td>
           </tr>
+          <tr>
+            <td>unify-size</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否统一图标尺寸<br>
+              图表库中可能存在图标宽度不一致的情况，有时候需要纵向对齐时会有麻烦<br>
+              将本接口设置为true会将图标宽度设置为一致，纵向居中对齐
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

@@ -130,6 +130,10 @@ export default [
       {
         'text': '加载动画',
         'url': '/loading'
+      },
+      {
+        'text': '标签',
+        'url': '/tag'
       }
     ]
   }

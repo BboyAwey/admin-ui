@@ -149,7 +149,7 @@
       v-if="collapsable && isTopLevel && collapseHandlebarPosition != 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
         transform: localCollapse ? '' : 'rotate(180deg)'
-      }"></au-icon>
+      }" unify-size/>
     </div>
     <au-scroller v-if="isTopLevel" style="height: 100%;" :scroll-top="scrollTop" @scroll="v　=>　scrollTop = v">
       <ul>
@@ -179,7 +179,7 @@
                 }"
                 :style="{ paddingLeft: calcPaddingLeft(item)  }"
                 @click="select(item, i)">
-                <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+                <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
                 <span class="menu-text">{{ item.text }}</span>
                 <au-icon class="menu-fold-icon
                   au-theme-font-color--base-3
@@ -188,7 +188,7 @@
                   v-if="hasChildren(item)"
                   v-show="!localCollapse"
                   :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, left: item.collapse ? '14px' : ''}"
-                  @click.native.stop="toggleCollapse(item)"></au-icon>
+                  @click.native.stop="toggleCollapse(item)" unify-size/>
               </div>
               <div slot="content" class="au-menu-pop-content">
                 {{ item.text }}
@@ -246,7 +246,7 @@
               }"
               :style="{ paddingLeft: calcPaddingLeft(item)  }"
               @click="select(item, i)">
-              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon"></au-icon>
+              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
               <span class="menu-text">{{ item.text }}</span>
               <au-icon class="menu-fold-icon
                 au-theme-font-color--base-3
@@ -255,7 +255,7 @@
                 v-if="hasChildren(item)"
                 v-show="!localCollapse"
                 :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, left: item.collapse ? '14px' : ''}"
-                @click.native.stop="toggleCollapse(item)"></au-icon>
+                @click.native.stop="toggleCollapse(item)" unify-size/>
             </div>
             <div slot="content" class="au-menu-pop-content">
               {{ item.text }}
@@ -291,7 +291,7 @@
       v-if="collapsable && isTopLevel && collapseHandlebarPosition === 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
         transform: localCollapse ? '' : 'rotate(180deg)'
-      }"></au-icon>
+      }" unify-size/>
     </div>
   </div>
 </template>

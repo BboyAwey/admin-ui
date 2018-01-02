@@ -33,6 +33,7 @@ import MessageBox from './components/message-box'
 import Paginator from './components/paginator'
 import Tabs from './components/tabs'
 import Loading from './components/loading'
+import Tag from './components/tag'
 
 // add all comps into an array
 const components = [
@@ -63,7 +64,8 @@ const components = [
   Modal,
   Paginator,
   Tabs,
-  Loading
+  Loading,
+  Tag
 ]
 
 // export comps one by one
@@ -95,7 +97,8 @@ export {
   MessageBox,
   Paginator,
   Tabs,
-  Loading
+  Loading,
+  Tag
 }
 
 // export all comps as an object
@@ -127,7 +130,8 @@ const adminUi = {
   MessageBox,
   Paginator,
   Tabs,
-  Loading
+  Loading,
+  Tag
 }
 
 adminUi.install = function (Vue, options = {}) {

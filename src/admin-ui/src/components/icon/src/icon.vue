@@ -18,7 +18,7 @@
   export default {
     name: 'au-icon',
     mounted () {
-      this.setUnifiedWidth()
+      if (this.unifySize) this.setUnifiedWidth()
     },
     props: {
       type: {
@@ -29,11 +29,15 @@
       },
       color: {
         type: String
-      }
+      },
+      unifySize: Boolean
     },
     watch: {
       size (v) {
-        this.$nextTick(this.setUnifiedWidth)
+        if (this.unifySize) this.$nextTick(this.setUnifiedWidth)
+      },
+      unifySize (v) {
+        if (v) this.$nextTick(this.setUnifiedWidth)
       }
     },
     methods: {

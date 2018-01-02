@@ -217,7 +217,7 @@
     mounted () {
       if (this.start && this.end) {
         if (!this.startMustEarlierThanEnd()) {
-          throw new Error('Admin UI@au-datepicker@start must earlier than end')
+          throw new Error('Admin UI@au-datepicker@start must earlier or equal than end')
         }
       }
     },
@@ -241,7 +241,7 @@
         type: String,
         validator (v) {
           let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-          if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
           return res
         }
       },
@@ -249,7 +249,7 @@
         type: String,
         validator (v) {
           let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-          if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d')
+          if (!res) console.error('Admin UI@au-datepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d')
           return res
         }
       },
@@ -512,7 +512,7 @@
           let end = this.end.split('-').map(e => {
             return e.trim()
           })
-          if (d >= (new Date(...end).getTime())) res = false
+          if (d > (new Date(...end).getTime())) res = false
         }
         return res
       },

@@ -13349,7 +13349,7 @@ exports.RETURN = RETURN;
   mounted: function mounted() {
     if (this.start && this.end) {
       if (!this.startMustEarlierThanEnd()) {
-        throw new Error('Admin UI@au-datepicker@start must earlier than end');
+        throw new Error('Admin UI@au-datepicker@start must earlier or equal than end');
       }
     }
   },
@@ -13374,7 +13374,7 @@ exports.RETURN = RETURN;
       type: String,
       validator: function validator(v) {
         var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
+        if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
         return res;
       }
     },
@@ -13382,7 +13382,7 @@ exports.RETURN = RETURN;
       type: String,
       validator: function validator(v) {
         var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d');
+        if (!res) console.error('Admin UI@au-datepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d');
         return res;
       }
     },
@@ -13643,7 +13643,7 @@ exports.RETURN = RETURN;
         var end = this.end.split('-').map(function (e) {
           return e.trim();
         });
-        if (d >= new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
+        if (d > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
       }
       return res;
     },

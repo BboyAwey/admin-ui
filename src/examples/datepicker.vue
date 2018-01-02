@@ -138,7 +138,7 @@
             <td><au-icon type="minus"></au-icon></td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              有效日期的结束日期（不包含）<br>
+              有效日期的结束日期（包含）<br>
               设置后该日期之前的日期才可被选中<br>
               格式必须为YYYY-M(M)-D(D)
             </td>

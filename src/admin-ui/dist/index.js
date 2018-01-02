@@ -13374,14 +13374,16 @@ exports.RETURN = RETURN;
       type: String,
       validator: function validator(v) {
         var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-mm-dd');
+        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
+        return res;
       }
     },
     end: {
       type: String,
       validator: function validator(v) {
         var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-mm-dd');
+        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d');
+        return res;
       }
     },
     readonly: Boolean

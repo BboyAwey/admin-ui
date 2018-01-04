@@ -15,9 +15,13 @@
           :create-validators="validators"
           @remove="remove"
           @create="create"
+          @toggle="c => current = c"
           @rename="rename">
-          <div name="baseInfo">基本信息</div>
-          <div name="externalResource">列表信息</div>
+          <div
+            v-for="(tab, i) in tabs"
+            :name="tab.name" :key="i">
+            {{ tab.text }}
+          </div>
         </au-tabs>
       </div>
       <!-- 组件示例 -->
@@ -290,10 +294,17 @@
           can-create
           can-remove
           can-rename
+          :rename-validators="validators"
+          :create-validators="validators"
           @remove="remove"
-          @create="create">
-          <div name="baseInfo">基本信息</div>
-          <div name="externalResource">列表信息</div>
+          @create="create"
+          @toggle="c => current = c"
+          @rename="rename">
+          <div
+            v-for="(tab, i) in tabs"
+            :name="tab.name" :key="i">
+            &#x7B;&#x7B; tab.text &#x7D;&#x7D;
+          </div>
         </au-tabs>
       '>
       </code-h>
@@ -312,15 +323,43 @@
                   name: 'externalResource',
                   text: '列表信息'
                 }
+              ],
+              tabCounter: 0,
+              validators: [
+                {
+                  validator (v) {
+                    return v !== '' && !/^\s+$/g.test(v)
+                  },
+                  warning: '必须输入新名称'
+                },
+                {
+                  validator (v) {
+                    return new Promise((resolve, reject) => {
+                      setTimeout(function () {
+                        if (v.indexOf('有间客栈') !== -1) resolve(true)
+                        else resolve(false)
+                      }, 2000)
+                    })
+                  },
+                  warning: '请在输入中包含“有间客栈”',
+                  async: true
+                }
               ]
             }
           },
           methods: {
             remove (index, tab) {
-              console.log(index, tab)
+              this.tabs.splice(index, 1)
+              if (this.current === tab.name) this.current = this.tabs[0].name
             },
-            create () {
-              console.log('create')
+            create (text) {
+              this.tabs.push({
+                text,
+                name: 'tab' + this.tabCounter++
+              })
+            },
+            rename (newText, index, tab) {
+              this.$set(this.tabs[index], 'text', newText)
             }
           }
         }
@@ -370,6 +409,7 @@
     methods: {
       remove (index, tab) {
         this.tabs.splice(index, 1)
+        if (this.current === tab.name) this.current = this.tabs[0].name
       },
       create (text) {
         this.tabs.push({

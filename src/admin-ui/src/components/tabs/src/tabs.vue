@@ -12,7 +12,7 @@
           :name="['tab-'+tab.name]"
           @click="toggleTabs(tab.name, $event)">
           <a href="javascript:void(0);" :title="tab.text">{{ tab.text }}</a>
-          <au-icon v-show="canRemove" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
+          <au-icon v-show="canRemove && tabs.length > 1" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
           <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
         </li>
       </ul>
@@ -20,8 +20,8 @@
         <au-icon class="au-theme-font-color--base-12" type="plus"></au-icon>
       </au-button>
     </div>
-    <div  class="au-tabs-container" v-show="tabs && tabs.length">
-      <slot class="au-tabs-content"></slot>
+    <div class="au-tabs-container" v-show="tabs && tabs.length" ref="contents">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -72,9 +72,9 @@
     },
     watch: {
       current (v) {
-        if (this.localCurrent !== this.current) {
-          this.localCurrent = this.current
-          this.toggleTabs(this.current)
+        if (this.localCurrent !== v) {
+          this.localCurrent = v
+          this.toggleTabs(v)
         }
       }
     },
@@ -83,8 +83,12 @@
         if (e && e.target.parentNode.className === 'au-tabs-active') return false
         this.localCurrent = name
         this.$emit('toggle', name, e)
-        var cons = this.$el.querySelectorAll('.au-tabs-container>*')
-        var activeEl = this.$el.querySelectorAll(`* [name="${name}"]`)
+        this.toggleContents(name)
+      },
+      toggleContents () {
+        let name = this.localCurrent
+        var cons = this.$refs.contents.querySelectorAll('*')
+        var activeEl = this.$refs.contents.querySelectorAll(`*[name="${name}"]`)
         if (activeEl && activeEl.length) {
           for (var i = 0, len = cons.length; i < len; i++) {
             cons[i].style.display = 'none'
@@ -98,6 +102,7 @@
           'message': vm.removeMessage,
           confirm () {
             vm.$emit('remove', index, tab)
+            vm.toggleContents()
           }
         })
       },
@@ -122,12 +127,6 @@
           },
           validators: vm.renameValidators
         })
-      }
-    },
-    mounted () {
-      var els = this.$el.querySelectorAll('.au-tabs-container > *')
-      for (var i = 0, len = els.length; i < len; i++) {
-        els[i].classList.add('au-tabs-content')
       }
     }
   }
@@ -187,10 +186,10 @@
   }
   .au-tabs-container {
     display: block;
-    .au-tabs-content {
+    & > * {
       display: none;
     }
-    .au-tabs-content:first-child {
+    & > *:first-child {
       display: block;
     }
   }

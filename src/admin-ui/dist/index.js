@@ -2542,8 +2542,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.canRemove,
-                      expression: "canRemove"
+                      value: _vm.canRemove && _vm.tabs.length > 1,
+                      expression: "canRemove && tabs.length > 1"
                     }
                   ],
                   staticClass:
@@ -2620,6 +2620,7 @@ var render = function() {
             expression: "tabs && tabs.length"
           }
         ],
+        ref: "contents",
         staticClass: "au-tabs-container"
       },
       [_vm._t("default")],
@@ -9820,6 +9821,9 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
 //
 //
 //
+//
+//
+//
 
 
 
@@ -11172,7 +11176,7 @@ var render = function() {
                       "au-theme-font-color--base-12": !_vm.disabled,
                       "au-theme-font-color--base-6": _vm.disabled
                     },
-                    attrs: { type: "check" }
+                    attrs: { "unify-size": "", type: "check" }
                   }),
                   _vm._v(" "),
                   _c("au-icon", {
@@ -11190,7 +11194,7 @@ var render = function() {
                       "au-theme-font-color--base-12": !_vm.disabled,
                       "au-theme-font-color--base-6": _vm.disabled
                     },
-                    attrs: { type: "minus" }
+                    attrs: { "unify-size": "", type: "minus" }
                   })
                 ],
                 1
@@ -11265,7 +11269,7 @@ var render = function() {
                     "au-checkbox-icon-disabled": _vm.disabled,
                     "au-theme-font-color--base-6-important": _vm.disabled
                   },
-                  attrs: { type: "check" }
+                  attrs: { "unify-size": "", type: "check" }
                 })
               ],
               1
@@ -16092,9 +16096,9 @@ if (false) {(function () {
   },
   watch: {
     current: function current(v) {
-      if (this.localCurrent !== this.current) {
-        this.localCurrent = this.current;
-        this.toggleTabs(this.current);
+      if (this.localCurrent !== v) {
+        this.localCurrent = v;
+        this.toggleTabs(v);
       }
     }
   },
@@ -16103,8 +16107,12 @@ if (false) {(function () {
       if (e && e.target.parentNode.className === 'au-tabs-active') return false;
       this.localCurrent = name;
       this.$emit('toggle', name, e);
-      var cons = this.$el.querySelectorAll('.au-tabs-container>*');
-      var activeEl = this.$el.querySelectorAll('* [name="' + name + '"]');
+      this.toggleContents(name);
+    },
+    toggleContents: function toggleContents() {
+      var name = this.localCurrent;
+      var cons = this.$refs.contents.querySelectorAll('*');
+      var activeEl = this.$refs.contents.querySelectorAll('*[name="' + name + '"]');
       if (activeEl && activeEl.length) {
         for (var i = 0, len = cons.length; i < len; i++) {
           cons[i].style.display = 'none';
@@ -16118,6 +16126,7 @@ if (false) {(function () {
         'message': vm.removeMessage,
         confirm: function confirm() {
           vm.$emit('remove', index, tab);
+          vm.toggleContents();
         }
       });
     },
@@ -16144,12 +16153,6 @@ if (false) {(function () {
 
         validators: vm.renameValidators
       });
-    }
-  },
-  mounted: function mounted() {
-    var els = this.$el.querySelectorAll('.au-tabs-container > *');
-    for (var i = 0, len = els.length; i < len; i++) {
-      els[i].classList.add('au-tabs-content');
     }
   }
 });
@@ -18679,7 +18682,7 @@ module.exports = {};
     target.style.position = 'relative';
   }
   var size = Math.min(parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth), parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
-  size = size > 50 ? 50 : size;
+  if (size) size = size > 50 ? 50 : size;
 
   instance.text = text;
   instance.size = size;

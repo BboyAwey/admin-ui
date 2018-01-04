@@ -32,7 +32,7 @@ export default (config = {}) => {
     parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth),
     parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth)
   )
-  size = size > 50 ? 50 : size
+  if (size) size = size > 50 ? 50 : size
 
   instance.text = text
   instance.size = size

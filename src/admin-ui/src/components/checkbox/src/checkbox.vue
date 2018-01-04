@@ -31,9 +31,12 @@
       top: 3px;
       left: 0;
     }
-    .au-checkbox-icon-disabled {
+    .au-checkbox-icon-disabled:not(.au-checkbox-icon-minus) {
       top: 1px;
       left: -1px;
+    }
+    .au-checkbox-icon-minus.au-checkbox-icon-disabled {
+
     }
     .au-checkbox-text {
       margin-left: 4px;
@@ -63,13 +66,13 @@
       :style="{
         border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
       }">
-        <au-icon v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
+        <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
         :class="{
           'au-checkbox-icon-disabled': disabled,
           'au-theme-font-color--base-12': !disabled,
           'au-theme-font-color--base-6': disabled
         }"></au-icon>
-        <au-icon v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
+        <au-icon unify-size v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
         :class="{
           'au-checkbox-icon-disabled': disabled,
           'au-theme-font-color--base-12': !disabled,
@@ -97,7 +100,7 @@
       :style="{
         border: checkbox.checked && !disabled ? 'none' : ''
       }">
-        <au-icon v-show="checkbox.checked" type="check"
+        <au-icon unify-size v-show="checkbox.checked" type="check"
           class="au-checkbox-icon au-theme-font-color--base-12"
           :class="{
             'au-checkbox-icon-disabled': disabled,

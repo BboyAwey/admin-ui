@@ -83,7 +83,7 @@
         if (e && e.target.parentNode.className === 'au-tabs-active') return false
         this.localCurrent = name
         this.$emit('toggle', name, e)
-        this.toggleContents(name)
+        this.$nextTick(() => this.toggleContents(name))
       },
       toggleContents () {
         let name = this.localCurrent

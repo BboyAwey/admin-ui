@@ -16104,10 +16104,14 @@ if (false) {(function () {
   },
   methods: {
     toggleTabs: function toggleTabs(name, e) {
+      var _this = this;
+
       if (e && e.target.parentNode.className === 'au-tabs-active') return false;
       this.localCurrent = name;
       this.$emit('toggle', name, e);
-      this.toggleContents(name);
+      this.$nextTick(function () {
+        return _this.toggleContents(name);
+      });
     },
     toggleContents: function toggleContents() {
       var name = this.localCurrent;

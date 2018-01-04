@@ -16516,7 +16516,8 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
   name: 'au-loading',
   data: function data() {
     return {
-      closed: false
+      closed: false,
+      el: null
     };
   },
   mounted: function mounted() {
@@ -16554,7 +16555,8 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
     },
     close: function close() {
       if (!this.closed) {
-        this.$el.parentNode.removeChild(this.$el);
+        var el = this.el ? this.el : this.$el;
+        el.parentNode.removeChild(el);
         this.closed = true;
       }
     }
@@ -18694,6 +18696,7 @@ module.exports = {};
     el.style.left = '0px';
     el.style.right = '0px';
     el.appendChild(instance.$el);
+    instance.el = el;
   } else el = instance.$el;
   target.appendChild(el);
   // instance.setColor()

@@ -64,7 +64,8 @@
     name: 'au-loading',
     data () {
       return {
-        closed: false
+        closed: false,
+        el: null
       }
     },
     mounted () {
@@ -120,7 +121,8 @@
       },
       close () {
         if (!this.closed) {
-          this.$el.parentNode.removeChild(this.$el)
+          let el = this.el ? this.el : this.$el
+          el.parentNode.removeChild(el)
           this.closed = true
         }
       }

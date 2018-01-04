@@ -161,8 +161,7 @@
           this.loading = this.$loading({
             target: this.$refs.target,
             text: '拼命加载中',
-            color: 'danger',
-            tag: 'p'
+            color: 'danger'
           })
         } else {
           this.loading.close()

@@ -6,7 +6,8 @@ export default (config = {}) => {
   let {
     target = document.body,
     text,
-    color = 'primary'
+    color = 'primary',
+    tag
   } = config
   function colorValidator (v) {
     return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 || console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
@@ -39,7 +40,17 @@ export default (config = {}) => {
 
   instance.$mount(document.createElement('div'))
 
-  target.appendChild(instance.$el)
+  let el = null
+  if (tag) {
+    el = document.createElement(tag)
+    el.style.position = 'absolute'
+    el.style.top = '0px'
+    el.style.bottom = '0px'
+    el.style.left = '0px'
+    el.style.right = '0px'
+    el.appendChild(instance.$el)
+  } else el = instance.$el
+  target.appendChild(el)
   // instance.setColor()
   instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth))
 

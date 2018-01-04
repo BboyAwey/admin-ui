@@ -90,6 +90,25 @@
             </td>
             <td>颜色类型</td>
           </tr>
+          <tr>
+            <td>tag</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              div
+            </td>
+            <td>
+              合法的HTML标签名
+            </td>
+            <td>
+              组件最外层的标签类型<br>
+              当希望在ul、ol等不能放置div的元素中添加loading效果时需要指定标签名<br>
+              table元素是个例外，你只能在其外部再包一层父级元素比如div然后将其指定为target
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>
@@ -113,7 +132,9 @@
               if (!this.loading) {
                 this.loading = this.$loading({
                   target: this.$refs.target,
-                  text: '拼命加载中'
+                  text: '拼命加载中',
+                  color: 'danger',
+                  tag: 'p'
                 })
               } else {
                 this.loading.close()
@@ -140,7 +161,8 @@
           this.loading = this.$loading({
             target: this.$refs.target,
             text: '拼命加载中',
-            color: 'danger'
+            color: 'danger',
+            tag: 'p'
           })
         } else {
           this.loading.close()

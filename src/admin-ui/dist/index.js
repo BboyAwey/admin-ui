@@ -12187,10 +12187,6 @@ module.exports = function (done, value) {
       }
       pop.style.left = this.x || res.x + 'px';
       pop.style.top = this.y || res.y + 'px';
-    },
-    fixSize: function fixSize(origin) {
-      this.$refs.pop.style.width = origin.width;
-      this.$refs.pop.style.height = origin.height;
     }
   }
 });
@@ -18661,7 +18657,8 @@ module.exports = {};
       target = _config$target === undefined ? document.body : _config$target,
       text = config.text,
       _config$color = config.color,
-      color = _config$color === undefined ? 'primary' : _config$color;
+      color = _config$color === undefined ? 'primary' : _config$color,
+      tag = config.tag;
 
   function colorValidator(v) {
     return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 || console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning');
@@ -18688,7 +18685,17 @@ module.exports = {};
 
   instance.$mount(document.createElement('div'));
 
-  target.appendChild(instance.$el);
+  var el = null;
+  if (tag) {
+    el = document.createElement(tag);
+    el.style.position = 'absolute';
+    el.style.top = '0px';
+    el.style.bottom = '0px';
+    el.style.left = '0px';
+    el.style.right = '0px';
+    el.appendChild(instance.$el);
+  } else el = instance.$el;
+  target.appendChild(el);
   // instance.setColor()
   instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
 

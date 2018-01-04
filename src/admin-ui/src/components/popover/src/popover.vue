@@ -346,10 +346,6 @@
         }
         pop.style.left = this.x || res.x + 'px'
         pop.style.top = this.y || res.y + 'px'
-      },
-      fixSize (origin) {
-        this.$refs.pop.style.width = origin.width
-        this.$refs.pop.style.height = origin.height
       }
     }
   }

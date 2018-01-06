@@ -249,7 +249,8 @@
           this.display ? this.hide() : this.show()
         }
       },
-      handleBlur () { // pop blur
+      handleBlur (e) { // pop blur
+        console.log(e)
         if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
       },
       handleMouseover () {

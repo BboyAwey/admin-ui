@@ -16117,7 +16117,6 @@ if (false) {(function () {
       var name = this.localCurrent;
       var cons = this.$el.querySelectorAll('.au-tabs-container>*');
       var activeEl = this.$el.querySelectorAll('.au-tabs-container>*[name="' + name + '"]');
-      console.log(name, activeEl);
       if (activeEl && activeEl.length) {
         for (var i = 0, len = cons.length; i < len; i++) {
           cons[i].style.display = 'none';

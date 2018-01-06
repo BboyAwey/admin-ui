@@ -90,13 +90,24 @@
       },
       toggleContents () {
         let name = this.localCurrent
-        var cons = this.$el.querySelectorAll('.au-tabs-container>*')
-        var activeEl = this.$el.querySelectorAll(`.au-tabs-container>*[name="${name}"]`)
-        if (activeEl && activeEl.length) {
+        let _cons = this.$el.querySelectorAll('.au-tabs-container>*')
+        let _activeEl = this.$el.querySelectorAll(`.au-tabs-container>*[name="${name}"]`)
+        let cons = []
+        let activeEl = null
+        for (let con of _cons) {
+          if (con.parentNode === this.$refs.contents) cons.push(con)
+        }
+        for (let el of _activeEl) {
+          if (el.parentNode === this.$refs.contents) {
+            activeEl = el
+            break
+          }
+        }
+        if (activeEl) {
           for (var i = 0, len = cons.length; i < len; i++) {
             cons[i].style.display = 'none'
           }
-          activeEl[0].style.display = 'block'
+          activeEl.style.display = 'block'
         }
       },
       remove (index, tab) {

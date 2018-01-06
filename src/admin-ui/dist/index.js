@@ -7377,6 +7377,7 @@ if (false) {
   },
   mounted: function mounted() {
     this.handleAllStyle();
+    this.handleStripe();
   },
   updated: function updated() {
     this.handleAllStyle();
@@ -7430,7 +7431,7 @@ if (false) {
 
       if (tbody.length) {
         for (var _i7 = 0; _i7 < tbody.length; _i7++) {
-          var trs = tbody[_i7].querySelectorAll('tr');
+          var trs = table.querySelectorAll('tbody > tr');
           for (var _i8 = 0; _i8 < trs.length; _i8++) {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i8], 'au-theme-hover-background-color--base-10');
           }
@@ -7442,7 +7443,7 @@ if (false) {
         }
       } else {
         for (var _i10 = 0; _i10 < allTr.length; _i10++) {
-          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i10], 'au-theme-hover-background-color--base-10');
+          if (allTr[_i10].parentNode === table) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i10], 'au-theme-hover-background-color--base-10');
         }
         if (this.striped) {
           for (var _i11 = 0; _i11 < allTr.length; _i11++) {
@@ -7452,45 +7453,46 @@ if (false) {
       }
 
       if (thead.length) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(thead[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+        for (var _i12 = 0; _i12 < thead.length; _i12++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(thead[_i12].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+        }
       }
       if (tbody.length && tfoot.length) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tbody[thead.length - 1].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+        for (var _i13 = 0; _i13 < tbody.length; _i13++) {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(tbody[_i13].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important');
+        }
       }
     },
     handleStripe: function handleStripe() {
       var table = this.$refs.table;
       var tbody = table.querySelectorAll('tbody');
-      var allTr = table.querySelectorAll('tr');
-
       if (tbody.length) {
         for (var i = 0; i < tbody.length; i++) {
-          var trs = tbody[i].querySelectorAll('tr');
+          var trs = table.querySelectorAll('tbody > tr');
           // clean classes
-          for (var _i12 = 0; _i12 < trs.length; _i12++) {
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i12], 'au-theme-background-color--base-11');
+          for (var _i14 = 0; _i14 < trs.length; _i14++) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i14], 'au-theme-background-color--base-11');
           }
           if (this.striped) {
-            for (var _i13 = 0; _i13 < trs.length; _i13++) {
-              if (_i13 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i13], 'au-theme-background-color--base-11');
+            for (var _i15 = 0; _i15 < trs.length; _i15++) {
+              if (_i15 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(trs[_i15], 'au-theme-background-color--base-11');
             }
           } else {
-            for (var _i14 = 0; _i14 < trs.length; _i14++) {
-              if (_i14 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i14], 'au-theme-background-color--base-11');
+            for (var _i16 = 0; _i16 < trs.length; _i16++) {
+              if (_i16 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(trs[_i16], 'au-theme-background-color--base-11');
             }
           }
         }
       } else {
-        for (var _i15 = 0; _i15 < allTr.length; _i15++) {
-          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i15], 'au-theme-background-color--base-11');
-        }
-        if (this.striped) {
-          for (var _i16 = 0; _i16 < allTr.length; _i16++) {
-            if (_i16 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i16], 'au-theme-background-color--base-11');
-          }
-        } else {
-          for (var _i17 = 0; _i17 < allTr.length; _i17++) {
-            if (_i17 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i17], 'au-theme-background-color--base-11');
+        var allTr = table.querySelectorAll('tr');
+        for (var _i17 = 0; _i17 < allTr.length; _i17++) {
+          if (allTr[_i17].parentNode === table) {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i17], 'au-theme-background-color--base-11');
+            if (this.striped) {
+              if (_i17 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["d" /* addClass */])(allTr[_i17], 'au-theme-background-color--base-11');
+            } else {
+              if (_i17 % 2 === 0) __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["e" /* removeClass */])(allTr[_i17], 'au-theme-background-color--base-11');
+            }
           }
         }
       }
@@ -12093,8 +12095,9 @@ module.exports = function (done, value) {
         this.display ? this.hide() : this.show();
       }
     },
-    handleBlur: function handleBlur() {
+    handleBlur: function handleBlur(e) {
       // pop blur
+      console.log(e);
       if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide();
     },
     handleMouseover: function handleMouseover() {
@@ -16102,6 +16105,10 @@ if (false) {(function () {
       }
     }
   },
+  mounted: function mounted() {
+    if (this.localCurrent) this.toggleTabs(this.localCurrent);
+  },
+
   methods: {
     toggleTabs: function toggleTabs(name, e) {
       var _this = this;

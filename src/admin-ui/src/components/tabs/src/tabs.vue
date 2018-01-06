@@ -78,6 +78,9 @@
         }
       }
     },
+    mounted () {
+      if (this.localCurrent) this.toggleTabs(this.localCurrent)
+    },
     methods: {
       toggleTabs (name, e) {
         if (e && e.target.parentNode.className === 'au-tabs-active') return false

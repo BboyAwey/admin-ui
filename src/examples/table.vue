@@ -26,6 +26,33 @@
               <td>{{ item.date }}</td>
               <td>{{ item.status }}</td>
             </tr>
+            <tr>
+              <td colspan="4">
+                <au-table :bordered="true" :striped="true" style="width: 500px;">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>项目</th>
+                      <th>发布时间</th>
+                      <th>状态</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in list" :key="index">
+                      <td>{{ index }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.date }}</td>
+                      <td>{{ item.status }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">当前显示10行，共100行</td>
+                    </tr>
+                  </tfoot>
+                </au-table>
+              </td>
+            </tr>
           </tbody>
           <tfoot>
             <tr>

@@ -79,7 +79,7 @@
       }
     },
     mounted () {
-      if (this.localCurrent) this.toggleTabs(this.localCurrent)
+      if (this.localCurrent) this.toggleContents()
     },
     methods: {
       toggleTabs (name, e) {

@@ -373,7 +373,7 @@
     name: 'tabs-examples',
     data () {
       return {
-        current: 'baseInfo',
+        current: 'externalResource',
         tabs: [
           {
             name: 'baseInfo',

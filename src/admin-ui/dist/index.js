@@ -16106,7 +16106,7 @@ if (false) {(function () {
     }
   },
   mounted: function mounted() {
-    if (this.localCurrent) this.toggleTabs(this.localCurrent);
+    if (this.localCurrent) this.toggleContents();
   },
 
   methods: {

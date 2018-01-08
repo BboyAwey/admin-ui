@@ -43,7 +43,7 @@
   }">
     <div class="au-loading-core-container" ref="coreContainer">
       <svg ref="svg" viewBox="0 0 50 50" class="au-loading-svg"
-        :width="size" :height="size"
+        :width="size || 0" :height="size || 0"
         :style="{
           animation: '1.33333s linear 0s normal none infinite running Rotate',
           marginLeft: size / 2 * -1 + 'px'

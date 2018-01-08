@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-12-1" end="2018-1-1"></au-datepicker>
+        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-12-1" end="2018-5-1"></au-datepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -304,9 +304,9 @@
               validators: [
                 {
                   validator (v) {
-                    return v === '2017-10-14'
+                    return v === '2018-01-05'
                   },
-                  warning: '请选择2017年10月14日'
+                  warning: '请选择2018年01月05日'
                 }
               ]
             }
@@ -325,9 +325,9 @@
         validators: [
           {
             validator (v) {
-              return v === '2017-10-14'
+              return v === '2018-01-05'
             },
-            warning: '请选择2017年10月14日'
+            warning: '请选择2018年01月05日'
           }
         ]
       }

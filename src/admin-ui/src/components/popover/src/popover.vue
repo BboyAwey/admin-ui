@@ -250,7 +250,6 @@
         }
       },
       handleBlur (e) { // pop blur
-        console.log(e)
         if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
       },
       handleMouseover () {

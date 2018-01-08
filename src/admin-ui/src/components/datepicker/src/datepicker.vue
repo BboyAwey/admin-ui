@@ -113,10 +113,13 @@
       cursor: disabled ? 'not-allowed' : 'default'
     }" v-if="label" @click="labelClick">{{ label }}</div>
     <div class="au-datepicker-container">
+      <!-- <au-input
+        class="au-datepicker-input"
+        v-model="inputValue"
+        @change="changeInputValue(inputValue, $event)" -->
       <au-input
         class="au-datepicker-input"
         v-model="inputValue"
-        @change="changeInputValue(inputValue, $event)"
         :warnings="calcedWarnings"
         icon="calendar"
         @focus="coreFocus"
@@ -210,17 +213,26 @@
   import AuInput from '../../input'
   import AuIcon from '../../icon'
 
+  // function startMustEarlierThanEnd (start, rnd) {
+  //   if (start && end) {
+  //     let s = start.split('-').map(e => {
+  //       return e.trim()
+  //     })
+  //     let e = end.split('-').map(e => {
+  //       return e.trim()
+  //     })
+  //     let res = (new Date(...s).getTime() <= (new Date(...e).getTime()))
+  //     if (!res) {
+  //       console.error('Admin UI@au-datepicker@start must earlier or equal than end')
+  //     }
+  //     return res
+  //   }
+  // }
+
   export default {
     name: 'au-datepicker',
     mixins: [ValidatorMixin, FormApiMixin],
     components: { AuInput, AuIcon },
-    mounted () {
-      if (this.start && this.end) {
-        if (!this.startMustEarlierThanEnd()) {
-          throw new Error('Admin UI@au-datepicker@start must earlier or equal than end')
-        }
-      }
-    },
     data () {
       return {
         dateObj: {},
@@ -240,17 +252,21 @@
       start: {
         type: String,
         validator (v) {
-          let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-          return res
+          if (v) {
+            let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+            if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+            return res
+          } else return true
         }
       },
       end: {
         type: String,
         validator (v) {
-          let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-          if (!res) console.error('Admin UI@au-datepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d')
-          return res
+          if (v) {
+            let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+            if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+            return res
+          } else return true
         }
       },
       readonly: Boolean
@@ -272,7 +288,7 @@
       },
       inputValue (v) {
         let res = this.format(v)
-        this.localValue = res
+        // this.localValue = res
         if (this.popup) this.render(res)
       },
       popup (v) {
@@ -495,6 +511,8 @@
       },
       coreBlur (v, e) {
         if (e.relatedTarget !== this.$refs.popup) this.popup = false
+        this.changeInputValue(v, e)
+        if (this.popup) this.render(this.format(v))
       },
       popupBlur (e) {
         if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
@@ -515,15 +533,6 @@
           if (d > (new Date(...end).getTime())) res = false
         }
         return res
-      },
-      startMustEarlierThanEnd () {
-        let s = this.start.split('-').map(e => {
-          return e.trim()
-        })
-        let e = this.end.split('-').map(e => {
-          return e.trim()
-        })
-        return (new Date(...s).getTime() <= (new Date(...e).getTime()))
       }
     }
   }

@@ -1735,13 +1735,7 @@ var render = function() {
               readonly: _vm.readonly,
               placeholder: _vm.placeholder
             },
-            on: {
-              change: function($event) {
-                _vm.changeInputValue(_vm.inputValue, $event)
-              },
-              focus: _vm.coreFocus,
-              blur: _vm.coreBlur
-            },
+            on: { focus: _vm.coreFocus, blur: _vm.coreBlur },
             model: {
               value: _vm.inputValue,
               callback: function($$v) {
@@ -5623,7 +5617,11 @@ var render = function() {
                   "1.33333s linear 0s normal none infinite running Rotate",
                 marginLeft: _vm.size / 2 * -1 + "px"
               },
-              attrs: { viewBox: "0 0 50 50", width: _vm.size, height: _vm.size }
+              attrs: {
+                viewBox: "0 0 50 50",
+                width: _vm.size || 0,
+                height: _vm.size || 0
+              }
             },
             [
               _c("circle", {
@@ -12097,7 +12095,6 @@ module.exports = function (done, value) {
     },
     handleBlur: function handleBlur(e) {
       // pop blur
-      console.log(e);
       if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide();
     },
     handleMouseover: function handleMouseover() {
@@ -13338,24 +13335,36 @@ exports.RETURN = RETURN;
 //
 //
 //
+//
+//
+//
 
 
 
 
 
 
+
+// function startMustEarlierThanEnd (start, rnd) {
+//   if (start && end) {
+//     let s = start.split('-').map(e => {
+//       return e.trim()
+//     })
+//     let e = end.split('-').map(e => {
+//       return e.trim()
+//     })
+//     let res = (new Date(...s).getTime() <= (new Date(...e).getTime()))
+//     if (!res) {
+//       console.error('Admin UI@au-datepicker@start must earlier or equal than end')
+//     }
+//     return res
+//   }
+// }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-datepicker',
   mixins: [__WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__helpers_form_api_mixin__["a" /* default */]],
   components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_6__icon__["a" /* default */] },
-  mounted: function mounted() {
-    if (this.start && this.end) {
-      if (!this.startMustEarlierThanEnd()) {
-        throw new Error('Admin UI@au-datepicker@start must earlier or equal than end');
-      }
-    }
-  },
   data: function data() {
     return {
       dateObj: {},
@@ -13376,17 +13385,21 @@ exports.RETURN = RETURN;
     start: {
       type: String,
       validator: function validator(v) {
-        var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
-        return res;
+        if (v) {
+          var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
+          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
+          return res;
+        } else return true;
       }
     },
     end: {
       type: String,
       validator: function validator(v) {
-        var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-        if (!res) console.error('Admin UI@au-datepicker@ end should be formated like yyyy-mm-dd or yyyy-m-d');
-        return res;
+        if (v) {
+          var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
+          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
+          return res;
+        } else return true;
       }
     },
     readonly: Boolean
@@ -13408,7 +13421,7 @@ exports.RETURN = RETURN;
     },
     inputValue: function inputValue(v) {
       var res = this.format(v);
-      this.localValue = res;
+      // this.localValue = res
       if (this.popup) this.render(res);
     },
     popup: function popup(v) {
@@ -13629,6 +13642,8 @@ exports.RETURN = RETURN;
     },
     coreBlur: function coreBlur(v, e) {
       if (e.relatedTarget !== this.$refs.popup) this.popup = false;
+      this.changeInputValue(v, e);
+      if (this.popup) this.render(this.format(v));
     },
     popupBlur: function popupBlur(e) {
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
@@ -13649,15 +13664,6 @@ exports.RETURN = RETURN;
         if (d > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
       }
       return res;
-    },
-    startMustEarlierThanEnd: function startMustEarlierThanEnd() {
-      var s = this.start.split('-').map(function (e) {
-        return e.trim();
-      });
-      var e = this.end.split('-').map(function (e) {
-        return e.trim();
-      });
-      return new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(s))))().getTime() <= new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(e))))().getTime();
     }
   }
 });

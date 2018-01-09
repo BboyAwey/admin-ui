@@ -163,7 +163,8 @@
       return {
         display: false,
         originPopSize: {},
-        localPlacement: ''
+        localPlacement: '',
+        rootIndex: 0
       }
     },
     mounted () {
@@ -268,6 +269,9 @@
         if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
         this.$refs.pop.focus()
         this.display = true
+        if (!this.$root._auPopovers) this.$root._auPopovers = {}
+        this.$root._auPopovers[this._uid] = this
+        this.rootIndex = this.$root._auPopovers.length - 1
         // setInterval(this.calPos.bind(this), 500)
       },
       hide () {
@@ -275,6 +279,7 @@
           this.$refs.pop.parentNode.removeChild(this.$refs.pop)
         } catch (e) {}
         this.display = false
+        delete this.$root._auPopovers[this._uid]
         // clearInterval(this.calPos.bind(this))
       },
       calPos () {

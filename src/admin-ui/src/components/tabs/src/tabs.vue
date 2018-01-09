@@ -55,7 +55,7 @@
       canCreate: Boolean,
       creatingModal: {
         type: Boolean,
-        defautl: true
+        default: true
       },
       removeMessage: String,
       renameMessage: String,

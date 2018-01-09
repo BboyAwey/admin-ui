@@ -108,7 +108,8 @@
         type: [Number, String],
         default: 0
       },
-      stopPropagation: Boolean
+      stopPropagation: Boolean,
+      hidePopovers: Boolean
     },
     data () {
       return {
@@ -128,6 +129,8 @@
         if (this.contentTop !== v * -1) this.setContentTop(v)
       },
       contentTop (v) {
+        if (!this.$root._auPopovers) this.$root._auPopovers = {}
+        if (this.hidePopovers) Object.values(this.$root._auPopovers).forEach(pop => pop.hide())
         this.$emit('scroll', v * -1 || 0)
       },
       needScroll (v) {

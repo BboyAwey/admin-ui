@@ -166,6 +166,27 @@
           </td>
         </tr>
         <tr>
+          <td>creating-modal</td>
+          <td>
+            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <au-icon type="times"></au-icon>
+          </td>
+          <td>Boolean</td>
+          <td>
+            true
+          </td>
+          <td>
+            <ol class="option-list">
+              <li class="au-theme-border-color--base-8">true</li>
+              <li class="au-theme-border-color--base-8">false</li>
+            </ol>
+          </td>
+          <td>
+            新增tab时是否弹出输入名称的弹窗<br>
+            仅在can-create为true时有效
+          </td>
+        </tr>
+        <tr>
           <td>create-validators</td>
           <td>
             <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->

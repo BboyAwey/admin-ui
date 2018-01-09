@@ -4912,6 +4912,22 @@ function validateWidth(v) {
 
 /***/ }),
 
+/***/ "C84k":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/tc39/proposal-object-values-entries
+var $export = __webpack_require__("Wdy1");
+var $values = __webpack_require__("uQcH")(false);
+
+$export($export.S, 'Object', {
+  values: function values(it) {
+    return $values(it);
+  }
+});
+
+
+/***/ }),
+
 /***/ "CcJC":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12039,7 +12055,8 @@ module.exports = function (done, value) {
     return {
       display: false,
       originPopSize: {},
-      localPlacement: ''
+      localPlacement: '',
+      rootIndex: 0
     };
   },
   mounted: function mounted() {
@@ -12146,6 +12163,9 @@ module.exports = function (done, value) {
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop);
       this.$refs.pop.focus();
       this.display = true;
+      if (!this.$root._auPopovers) this.$root._auPopovers = {};
+      this.$root._auPopovers[this._uid] = this;
+      this.rootIndex = this.$root._auPopovers.length - 1;
       // setInterval(this.calPos.bind(this), 500)
     },
     hide: function hide() {
@@ -12153,6 +12173,7 @@ module.exports = function (done, value) {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop);
       } catch (e) {}
       this.display = false;
+      delete this.$root._auPopovers[this._uid];
       // clearInterval(this.calPos.bind(this))
     },
     calPos: function calPos() {
@@ -14494,6 +14515,13 @@ if (false) {
 
 /***/ }),
 
+/***/ "gRE1":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
+
+/***/ }),
+
 /***/ "gT7/":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14937,7 +14965,10 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__ = __webpack_require__("gRE1");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
+
 //
 //
 //
@@ -15025,7 +15056,7 @@ if (false) {
     //   getElementSize(this.$refs.content).height
     // )
     var firstScroll = true;
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["c" /* mousewheel */])('add', this.$refs.monitor, function (e) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["c" /* mousewheel */])('add', this.$refs.monitor, function (e) {
       if (firstScroll) {
         _this.handleMouseenter();
         firstScroll = false;
@@ -15051,7 +15082,8 @@ if (false) {
       type: [Number, String],
       default: 0
     },
-    stopPropagation: Boolean
+    stopPropagation: Boolean,
+    hidePopovers: Boolean
   },
   data: function data() {
     return {
@@ -15072,6 +15104,10 @@ if (false) {
       if (this.contentTop !== v * -1) this.setContentTop(v);
     },
     contentTop: function contentTop(v) {
+      if (!this.$root._auPopovers) this.$root._auPopovers = {};
+      if (this.hidePopovers) __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default()(this.$root._auPopovers).forEach(function (pop) {
+        return pop.hide();
+      });
       this.$emit('scroll', v * -1 || 0);
     },
     needScroll: function needScroll(v) {
@@ -15090,7 +15126,7 @@ if (false) {
     },
     detectIfNeedScroll: function detectIfNeedScroll() {
       var monitorHeight = this.getMonitorHeight();
-      var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
+      var contentHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
       this.needScroll = monitorHeight < contentHeight;
       return {
         needScroll: this.needScroll,
@@ -15112,7 +15148,7 @@ if (false) {
       this.contentTop = contentTop;
 
       // sync scrollbar
-      var scrollTopMax = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height - __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
+      var scrollTopMax = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height - __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
       var scrollCoreTop = contentTop * monitorHeight / contentHeight * -1;
       this.scrollCoreTop = scrollCoreTop <= 0 ? 0 : scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop;
       // fix
@@ -15125,7 +15161,7 @@ if (false) {
           borderTopWidth = _window$getComputedSt.borderTopWidth,
           borderBottomWidth = _window$getComputedSt.borderBottomWidth;
 
-      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height - parseInt(paddingTop) - parseInt(paddingBottom) - parseInt(borderTopWidth) - parseInt(borderBottomWidth);
+      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height - parseInt(paddingTop) - parseInt(paddingBottom) - parseInt(borderTopWidth) - parseInt(borderBottomWidth);
     },
     calcCoreHeight: function calcCoreHeight(monitor, content) {
       if (content <= monitor) {
@@ -15133,7 +15169,7 @@ if (false) {
         this.contentTop = 0;
       } else {
         this.needScroll = true;
-        var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.barContainer).height;
+        var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.barContainer).height;
         this.coreHeight = monitor * barHeight / content;
       }
     },
@@ -15143,9 +15179,9 @@ if (false) {
     handleMouseenter: function handleMouseenter() {
       this.$refs.bar.style.opacity = '.3';
       this.$refs.core.style.opacity = '.5';
-      var monitorHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height;
+      var monitorHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height;
       this.setBarHeight(monitorHeight);
-      this.calcCoreHeight(monitorHeight, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height);
+      this.calcCoreHeight(monitorHeight, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height);
     },
     handleMouseleave: function handleMouseleave() {
       if (!this.onDrag) {
@@ -15221,8 +15257,8 @@ if (false) {
 
       if (!needScroll) return;
 
-      var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
-      var coreHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
+      var barHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
+      var coreHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
 
       var scrollTopMax = barHeight - coreHeight;
       var contentTopMax = monitorHeight - contentHeight;
@@ -16143,7 +16179,7 @@ if (false) {(function () {
     canCreate: Boolean,
     creatingModal: {
       type: Boolean,
-      defautl: true
+      default: true
     },
     removeMessage: String,
     renameMessage: String,
@@ -16290,6 +16326,15 @@ if (false) {(function () {
     }
   }
 });
+
+/***/ }),
+
+/***/ "mG69":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("C84k");
+module.exports = __webpack_require__("iANj").Object.values;
+
 
 /***/ }),
 
@@ -17639,6 +17684,29 @@ __webpack_require__("4dmN")(String, 'String', function (iterated) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "uQcH":
+/***/ (function(module, exports, __webpack_require__) {
+
+var getKeys = __webpack_require__("pEGt");
+var toIObject = __webpack_require__("ksFB");
+var isEnum = __webpack_require__("bSeU").f;
+module.exports = function (isEntries) {
+  return function (it) {
+    var O = toIObject(it);
+    var keys = getKeys(O);
+    var length = keys.length;
+    var i = 0;
+    var result = [];
+    var key;
+    while (length > i) if (isEnum.call(O, key = keys[i++])) {
+      result.push(isEntries ? [key, O[key]] : O[key]);
+    } return result;
+  };
+};
+
 
 /***/ }),
 

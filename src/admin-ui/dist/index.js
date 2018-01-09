@@ -1879,10 +1879,10 @@ var render = function() {
                                   "au-theme-font-color--base-3":
                                     !_vm.isToday(date) &&
                                     _vm.renderedDateObj.month === date.month,
-                                  "au-theme-font-color--base-6":
+                                  "au-theme-font-color--base-5":
                                     _vm.isValid(date) &&
                                     _vm.renderedDateObj.month !== date.month,
-                                  "au-theme-font-color--base-8": !_vm.isValid(
+                                  "au-theme-font-color--base-9": !_vm.isValid(
                                     date
                                   ),
                                   "au-theme-font-color--primary-3":
@@ -2507,100 +2507,99 @@ var render = function() {
       [
         _c(
           "ul",
-          _vm._l(_vm.tabs, function(tab, index) {
-            return _c(
+          [
+            _vm._l(_vm.tabs, function(tab, index) {
+              return _c(
+                "li",
+                {
+                  key: index,
+                  class: {
+                    "au-theme-hover-font-color--primary-3": true,
+                    "au-theme-font-color--base-7":
+                      tab.name !== _vm.localCurrent,
+                    "au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3":
+                      tab.name == _vm.localCurrent
+                  },
+                  attrs: { name: ["tab-" + tab.name] },
+                  on: {
+                    click: function($event) {
+                      _vm.toggleTabs(tab.name, $event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "a",
+                    { attrs: { href: "javascript:void(0);", title: tab.text } },
+                    [_vm._v(_vm._s(tab.text))]
+                  ),
+                  _vm._v(" "),
+                  _c("au-icon", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.canRemove && _vm.tabs.length > 1,
+                        expression: "canRemove && tabs.length > 1"
+                      }
+                    ],
+                    staticClass:
+                      "au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3",
+                    attrs: { type: "times" },
+                    nativeOn: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.remove(index, tab)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("au-icon", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.canRename,
+                        expression: "canRename"
+                      }
+                    ],
+                    staticClass:
+                      "au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3",
+                    attrs: { type: "pencil" },
+                    nativeOn: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.rename(index, tab)
+                      }
+                    }
+                  })
+                ],
+                1
+              )
+            }),
+            _vm._v(" "),
+            _c(
               "li",
               {
-                key: index,
-                class: {
-                  "au-theme-font-color--base-7": tab.name !== _vm.localCurrent,
-                  "au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3":
-                    tab.name == _vm.localCurrent
-                },
-                attrs: { name: ["tab-" + tab.name] },
-                on: {
-                  click: function($event) {
-                    _vm.toggleTabs(tab.name, $event)
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.canCreate,
+                    expression: "canCreate"
                   }
-                }
+                ],
+                staticClass:
+                  "au-theme-font-color--base-7 au-theme-hover-font-color--primary-3",
+                on: { click: _vm.create }
               },
-              [
-                _c(
-                  "a",
-                  { attrs: { href: "javascript:void(0);", title: tab.text } },
-                  [_vm._v(_vm._s(tab.text))]
-                ),
-                _vm._v(" "),
-                _c("au-icon", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.canRemove && _vm.tabs.length > 1,
-                      expression: "canRemove && tabs.length > 1"
-                    }
-                  ],
-                  staticClass:
-                    "au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3",
-                  attrs: { type: "times" },
-                  nativeOn: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      _vm.remove(index, tab)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("au-icon", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.canRename,
-                      expression: "canRename"
-                    }
-                  ],
-                  staticClass:
-                    "au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3",
-                  attrs: { type: "pencil" },
-                  nativeOn: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      _vm.rename(index, tab)
-                    }
-                  }
-                })
-              ],
+              [_c("au-icon", { attrs: { type: "plus" } })],
               1
             )
-          })
-        ),
-        _vm._v(" "),
-        _c(
-          "au-button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.canCreate,
-                expression: "canCreate"
-              }
-            ],
-            staticClass: "au-tabs-btn au-tabs-create-btn",
-            attrs: { type: "success", size: "mini" },
-            on: { click: _vm.create }
-          },
-          [
-            _c("au-icon", {
-              staticClass: "au-theme-font-color--base-12",
-              attrs: { type: "plus" }
-            })
           ],
-          1
+          2
         )
-      ],
-      1
+      ]
     ),
     _vm._v(" "),
     _c(
@@ -10409,11 +10408,14 @@ module.exports = Object.getPrototypeOf || function (O) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__ = __webpack_require__("gU9b");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__ = __webpack_require__("TN9u");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom__ = __webpack_require__("8CCO");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils__ = __webpack_require__("AP3u");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__input__ = __webpack_require__("vG5W");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__ = __webpack_require__("TN9u");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils__ = __webpack_require__("AP3u");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__input__ = __webpack_require__("vG5W");
+
 //
 //
 //
@@ -10584,18 +10586,18 @@ var MSRANGE = 1888;
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-timepicker',
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__["a" /* default */]],
-  components: { AuInput: __WEBPACK_IMPORTED_MODULE_4__input__["a" /* default */] },
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__["a" /* default */]],
+  components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */] },
   mounted: function mounted() {
     var _this = this;
 
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["c" /* mousewheel */])('add', this.$refs.hours, function (e) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers_dom__["c" /* mousewheel */])('add', this.$refs.hours, function (e) {
       _this.listScroll(e, 'hour');
     });
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["c" /* mousewheel */])('add', this.$refs.minutes, function (e) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers_dom__["c" /* mousewheel */])('add', this.$refs.minutes, function (e) {
       _this.listScroll(e, 'minute');
     });
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["c" /* mousewheel */])('add', this.$refs.seconds, function (e) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers_dom__["c" /* mousewheel */])('add', this.$refs.seconds, function (e) {
       _this.listScroll(e, 'second');
     });
 
@@ -10625,20 +10627,20 @@ var MSRANGE = 1888;
       default: '请选择时间'
     },
     start: {
-      type: String,
-      validator: function validator(v) {
-        var res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss');
-        return res;
-      }
+      type: String
+      // validator (v) {
+      //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+      //   if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
+      //   return res
+      // }
     },
     end: {
-      type: String,
-      validator: function validator(v) {
-        var res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v);
-        if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss');
-        return res;
-      }
+      type: String
+      // validator (v) {
+      //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+      //   if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
+      //   return res
+      // }
     },
     readonly: Boolean
   },
@@ -10649,7 +10651,7 @@ var MSRANGE = 1888;
         this.scrollTo([this.hour || this.formatNum(now.getHours()), this.minute || this.formatNum(now.getMinutes()), this.second || this.formatNum(now.getSeconds())]);
         this.$emit('focus', this.time);
       } else {
-        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers_utils__["c" /* isEmptyString */])(this.inputTime)) {
+        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_utils__["c" /* isEmptyString */])(this.inputTime)) {
           this.clear();
         } else {
           this.setTime();
@@ -10668,7 +10670,7 @@ var MSRANGE = 1888;
       this.$emit('change', v);
     },
     inputTime: function inputTime(v) {
-      if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers_utils__["c" /* isEmptyString */])(v)) {
+      if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_utils__["c" /* isEmptyString */])(v)) {
         // clear
         this.clear();
       }
@@ -10751,7 +10753,38 @@ var MSRANGE = 1888;
       this.setTime();
     },
     setTime: function setTime() {
-      this.time = this.formatNum(this.hour) + ':' + this.formatNum(this.minute) + (this.seconds ? ':' + this.formatNum(this.second ? this.second : 0) : '');
+      // handle start and end
+      function getTime(h, m) {
+        var s = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+        return new Date(2018, 1, 1, h, m, s).getTime();
+      }
+      var input = getTime(this.hour, this.minute, this.second);
+      var time = null;
+      var start = this.start ? this.formatTime(this.start) : '';
+      var end = this.end ? this.formatTime(this.end) : '';
+      if (start) {
+        if (input < getTime.apply(undefined, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(start))) {
+          time = start;
+        } else {
+          if (end) {
+            if (input > getTime.apply(undefined, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(end))) {
+              time = end;
+            }
+          }
+        }
+      } else {
+        if (end) {
+          if (input > getTime.apply(undefined, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(end))) {
+            time = end;
+          }
+        }
+      }
+      if (time) {
+        this.time = this.formatNum(time[0]) + ':' + this.formatNum(time[1]) + (this.seconds ? ':' + this.formatNum(time[2]) : '');
+      } else {
+        this.time = this.formatNum(this.hour) + ':' + this.formatNum(this.minute) + (this.seconds ? ':' + this.formatNum(this.second ? this.second : 0) : '');
+      }
       this.inputTime = this.time;
     },
     setSeparateTime: function setSeparateTime(timeArr) {
@@ -12024,9 +12057,9 @@ module.exports = function (done, value) {
     //   this.observer.observe(this.$refs.pop, config)
     // }
   },
-  destroyed: function destroyed() {
+  beforeDestroy: function beforeDestroy() {
     window.removeEventListener('resize', this.calPos);
-    // this.hide(true)
+    this.hide(true);
     // if (this.observe) this.observer.disconnect()
   },
 
@@ -13383,24 +13416,24 @@ exports.RETURN = RETURN;
       default: '请选择日期'
     },
     start: {
-      type: String,
-      validator: function validator(v) {
-        if (v) {
-          var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
-          return res;
-        } else return true;
-      }
+      type: String
+      // validator (v) {
+      //   if (v) {
+      //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+      //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+      //     return res
+      //   } else return true
+      // }
     },
     end: {
-      type: String,
-      validator: function validator(v) {
-        if (v) {
-          var res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v);
-          if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d');
-          return res;
-        } else return true;
-      }
+      type: String
+      // validator (v) {
+      //   if (v) {
+      //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+      //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+      //     return res
+      //   } else return true
+      // }
     },
     readonly: Boolean
   },
@@ -13534,20 +13567,20 @@ exports.RETURN = RETURN;
         } else {
           // if the symble "-" not exists, then reconstruct based on 4-2-2
           var nums = value.match(/\d/g);
-          var res = ['', '', ''];
+          var _res = ['', '', ''];
           // if no number exists return empty array
           if (!nums) return [];
           for (var i = 0; i < nums.length; i++) {
-            if (i < 4) res[0] += nums[i] ? nums[i] : '';else if (i < 6) res[1] += nums[i] ? nums[i] : '';else if (i < 8) res[2] += nums[i] ? nums[i] : '';
+            if (i < 4) _res[0] += nums[i] ? nums[i] : '';else if (i < 6) _res[1] += nums[i] ? nums[i] : '';else if (i < 8) _res[2] += nums[i] ? nums[i] : '';
           }
           for (var _i4 = 0; _i4 < 3; _i4++) {
-            if (!res[_i4]) res[_i4] = _i4 === 1 ? '01' : res[_i4];
+            if (!_res[_i4]) _res[_i4] = _i4 === 1 ? '01' : _res[_i4];
           }
-          return res;
+          return _res;
         }
       }
       // limit the date range and supplement the "0"
-      function limitYMD(ymdArr) {
+      function limitYMD(ymdArr, start, end) {
         if (!ymdArr.length) return '';
         if (!ymdArr[1]) ymdArr[1] = 1;
         if (!ymdArr[2]) ymdArr[2] = 1;
@@ -13564,7 +13597,30 @@ exports.RETURN = RETURN;
       }
 
       if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_utils__["c" /* isEmptyString */])(value)) return '';
-      return limitYMD(reConstruct(value));
+      var input = reConstruct(value);
+      var res = null;
+      if (this.start) {
+        var start = reConstruct(this.start);
+        if (new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(input))))().getTime() < new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(start))))().getTime()) {
+          res = start;
+        } else {
+          if (this.end) {
+            var end = reConstruct(this.end);
+            if (new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(input))))().getTime() > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) {
+              res = end;
+            } else res = input;
+          } else res = input;
+        }
+      } else {
+        if (this.end) {
+          var _end = reConstruct(this.end);
+          if (new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(input))))().getTime() > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(_end))))().getTime()) {
+            res = _end;
+          } else res = input;
+        } else res = input;
+      }
+
+      return limitYMD(res);
     },
     changeInputValue: function changeInputValue(value, e) {
       var res = this.format(value);
@@ -16056,6 +16112,10 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -16081,24 +16141,19 @@ if (false) {(function () {
     canRemove: Boolean,
     canRename: Boolean,
     canCreate: Boolean,
-    removeMessage: {
-      type: String,
-      default: '确定要删除吗？'
+    creatingModal: {
+      type: Boolean,
+      defautl: true
     },
-    renameMessage: {
-      type: String,
-      default: '请输入新名称：'
-    },
+    removeMessage: String,
+    renameMessage: String,
     renameValidators: {
       type: Array,
       default: function _default() {
         return [];
       }
     },
-    createMessage: {
-      type: String,
-      default: '请输入新名称：'
-    },
+    createMessage: String,
     createValidators: {
       type: Array,
       default: function _default() {
@@ -16198,7 +16253,7 @@ if (false) {(function () {
     remove: function remove(index, tab) {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_3__message_box__["a" /* default */].confirm({
-        'message': vm.removeMessage,
+        'message': vm.removeMessage || '\u786E\u5B9A\u8981\u5220\u9664\u6807\u7B7E \u201C' + tab.text + '\u201D \u5417\uFF1F',
         confirm: function confirm() {
           vm.$emit('remove', index, tab);
           vm.toggleContents();
@@ -16207,20 +16262,24 @@ if (false) {(function () {
     },
     create: function create() {
       var vm = this;
-      __WEBPACK_IMPORTED_MODULE_3__message_box__["a" /* default */].prompt({
-        'message': vm.createMessage,
-        reset: true,
-        confirm: function confirm(v) {
-          vm.$emit('create', v);
-        },
+      if (this.creatingModal) {
+        __WEBPACK_IMPORTED_MODULE_3__message_box__["a" /* default */].prompt({
+          'message': vm.createMessage || '\u8BF7\u8F93\u5165\u65B0\u6807\u7B7E\u7684\u540D\u79F0:',
+          reset: true,
+          confirm: function confirm(v) {
+            vm.$emit('create', v);
+          },
 
-        validators: vm.createValidators
-      });
+          validators: vm.createValidators
+        });
+      } else {
+        vm.$emit('create');
+      }
     },
     rename: function rename(index, tab) {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_3__message_box__["a" /* default */].prompt({
-        'message': vm.renameMessage,
+        'message': vm.renameMessage || '\u91CD\u547D\u540D\u6807\u7B7E \u201C' + tab.text + '\u201D \u4E3A:',
         reset: tab.text,
         confirm: function confirm(v) {
           vm.$emit('rename', v, index, tab);

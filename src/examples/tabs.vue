@@ -15,6 +15,7 @@
           :create-validators="validators"
           @remove="remove"
           @create="create"
+          :creating-modal="false"
           @toggle="c => current = c"
           @rename="rename">
           <div
@@ -414,8 +415,8 @@
       },
       create (text) {
         this.tabs.push({
-          text,
-          name: 'tab' + this.tabCounter++
+          name: 'tab' + this.tabCounter++,
+          text: text || 'tab' + this.tabCounter
         })
       },
       rename (newText, index, tab) {

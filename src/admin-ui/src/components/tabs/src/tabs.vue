@@ -6,6 +6,7 @@
           v-for="(tab, index) in tabs"
           :key="index"
           :class="{
+            'au-theme-hover-font-color--primary-3': true,
             'au-theme-font-color--base-7': tab.name !== localCurrent,
             'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': tab.name == localCurrent
           }"
@@ -15,10 +16,13 @@
           <au-icon v-show="canRemove && tabs.length > 1" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
           <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
         </li>
+        <li v-show="canCreate" class="au-theme-font-color--base-7 au-theme-hover-font-color--primary-3" @click="create">
+          <au-icon type="plus"></au-icon>
+        </li>
       </ul>
-      <au-button v-show="canCreate" type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
+      <!-- <au-button v-show="canCreate" type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
         <au-icon class="au-theme-font-color--base-12" type="plus"></au-icon>
-      </au-button>
+      </au-button> -->
     </div>
     <div class="au-tabs-container" v-show="tabs && tabs.length" ref="contents">
       <slot></slot>
@@ -49,22 +53,17 @@
       canRemove: Boolean,
       canRename: Boolean,
       canCreate: Boolean,
-      removeMessage: {
-        type: String,
-        default: '确定要删除吗？'
+      creatingModal: {
+        type: Boolean,
+        defautl: true
       },
-      renameMessage: {
-        type: String,
-        default: '请输入新名称：'
-      },
+      removeMessage: String,
+      renameMessage: String,
       renameValidators: {
         type: Array,
         default () { return [] }
       },
-      createMessage: {
-        type: String,
-        default: '请输入新名称：'
-      },
+      createMessage: String,
       createValidators: {
         type: Array,
         default () { return [] }
@@ -113,7 +112,7 @@
       remove (index, tab) {
         let vm = this
         MessageBox.confirm({
-          'message': vm.removeMessage,
+          'message': vm.removeMessage || `确定要删除标签 “${tab.text}” 吗？`,
           confirm () {
             vm.$emit('remove', index, tab)
             vm.toggleContents()
@@ -122,19 +121,23 @@
       },
       create () {
         let vm = this
-        MessageBox.prompt({
-          'message': vm.createMessage,
-          reset: true,
-          confirm (v) {
-            vm.$emit('create', v)
-          },
-          validators: vm.createValidators
-        })
+        if (this.creatingModal) {
+          MessageBox.prompt({
+            'message': vm.createMessage || `请输入新标签的名称:`,
+            reset: true,
+            confirm (v) {
+              vm.$emit('create', v)
+            },
+            validators: vm.createValidators
+          })
+        } else {
+          vm.$emit('create')
+        }
       },
       rename (index, tab) {
         let vm = this
         MessageBox.prompt({
-          'message': vm.renameMessage,
+          'message': vm.renameMessage || `重命名标签 “${tab.text}” 为:`,
           reset: tab.text,
           confirm (v) {
             vm.$emit('rename', v, index, tab)
@@ -188,6 +191,11 @@
         text-decoration: none;
         font-size: $normal;
       }
+    }
+    li:last-child {
+      padding: 0 12px;
+      font-size: $normal;
+      line-height: 36px;
     }
     li:hover > .au-tabs-delete-btn,
     li:hover > .au-tabs-rename-btn {

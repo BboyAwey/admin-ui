@@ -181,9 +181,9 @@
       //   this.observer.observe(this.$refs.pop, config)
       // }
     },
-    destroyed () {
+    beforeDestroy () {
       window.removeEventListener('resize', this.calPos)
-      // this.hide(true)
+      this.hide(true)
       // if (this.observe) this.observer.disconnect()
     },
     watch: {

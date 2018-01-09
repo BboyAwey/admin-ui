@@ -13,7 +13,7 @@
           @change="checkAll"
           :indeterminate="indeterminate"></au-checkbox><br><br>
         <au-checkbox
-          value="true"
+          :value="true"
           label="Please check witch kind of dance would you like"
           text="All above"
           :disabled="allChecked"

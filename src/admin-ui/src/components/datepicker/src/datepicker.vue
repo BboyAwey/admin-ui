@@ -192,8 +192,8 @@
                   'au-theme-hover-border-color--primary-3': isValid(date) && !isSelected(date),
                   'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
                   'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
-                  'au-theme-font-color--base-6': isValid(date) && renderedDateObj.month !== date.month,
-                  'au-theme-font-color--base-8': !isValid(date),
+                  'au-theme-font-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
+                  'au-theme-font-color--base-9': !isValid(date),
                   'au-theme-font-color--primary-3': isToday(date) && !isSelected(date) && isValid(date),
                 }" :style="{
                   cursor: isValid(date) ? '' : 'not-allowed'
@@ -250,24 +250,24 @@
         default: '请选择日期'
       },
       start: {
-        type: String,
-        validator (v) {
-          if (v) {
-            let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-            if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-            return res
-          } else return true
-        }
+        type: String
+        // validator (v) {
+        //   if (v) {
+        //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+        //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+        //     return res
+        //   } else return true
+        // }
       },
       end: {
-        type: String,
-        validator (v) {
-          if (v) {
-            let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-            if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-            return res
-          } else return true
-        }
+        type: String
+        // validator (v) {
+        //   if (v) {
+        //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
+        //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
+        //     return res
+        //   } else return true
+        // }
       },
       readonly: Boolean
     },
@@ -418,7 +418,7 @@
           }
         }
         // limit the date range and supplement the "0"
-        function limitYMD (ymdArr) {
+        function limitYMD (ymdArr, start, end) {
           if (!ymdArr.length) return ''
           if (!ymdArr[1]) ymdArr[1] = 1
           if (!ymdArr[2]) ymdArr[2] = 1
@@ -435,7 +435,30 @@
         }
 
         if (isEmptyString(value)) return ''
-        return limitYMD(reConstruct(value))
+        let input = reConstruct(value)
+        let res = null
+        if (this.start) {
+          let start = reConstruct(this.start)
+          if (new Date(...input).getTime() < new Date(...start).getTime()) {
+            res = start
+          } else {
+            if (this.end) {
+              let end = reConstruct(this.end)
+              if (new Date(...input).getTime() > new Date(...end).getTime()) {
+                res = end
+              } else res = input
+            } else res = input
+          }
+        } else {
+          if (this.end) {
+            let end = reConstruct(this.end)
+            if (new Date(...input).getTime() > new Date(...end).getTime()) {
+              res = end
+            } else res = input
+          } else res = input
+        }
+
+        return limitYMD(res)
       },
       changeInputValue (value, e) {
         let res = this.format(value)

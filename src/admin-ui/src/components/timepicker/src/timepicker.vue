@@ -200,20 +200,20 @@
         default: '请选择时间'
       },
       start: {
-        type: String,
-        validator (v) {
-          let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-          if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
-          return res
-        }
+        type: String
+        // validator (v) {
+        //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+        //   if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
+        //   return res
+        // }
       },
       end: {
-        type: String,
-        validator (v) {
-          let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-          if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
-          return res
-        }
+        type: String
+        // validator (v) {
+        //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
+        //   if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
+        //   return res
+        // }
       },
       readonly: Boolean
     },
@@ -328,10 +328,41 @@
         this.setTime()
       },
       setTime () {
-        this.time =
-          this.formatNum(this.hour) +
-          ':' + this.formatNum(this.minute) +
-          (this.seconds ? (':' + this.formatNum(this.second ? this.second : 0)) : '')
+        // handle start and end
+        function getTime (h, m, s = 0) {
+          return new Date(2018, 1, 1, h, m, s).getTime()
+        }
+        let input = getTime(this.hour, this.minute, this.second)
+        let time = null
+        let start = this.start ? this.formatTime(this.start) : ''
+        let end = this.end ? this.formatTime(this.end) : ''
+        if (start) {
+          if (input < getTime(...start)) {
+            time = start
+          } else {
+            if (end) {
+              if (input > getTime(...end)) {
+                time = end
+              }
+            }
+          }
+        } else {
+          if (end) {
+            if (input > getTime(...end)) {
+              time = end
+            }
+          }
+        }
+        if (time) {
+          this.time = this.formatNum(time[0]) +
+            ':' + this.formatNum(time[1]) +
+            (this.seconds ? (':' + this.formatNum(time[2])) : '')
+        } else {
+          this.time =
+            this.formatNum(this.hour) +
+            ':' + this.formatNum(this.minute) +
+            (this.seconds ? (':' + this.formatNum(this.second ? this.second : 0)) : '')
+        }
         this.inputTime = this.time
       },
       setSeparateTime (timeArr) {

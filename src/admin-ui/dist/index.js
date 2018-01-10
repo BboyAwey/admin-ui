@@ -7939,7 +7939,7 @@ var render = function() {
     "div",
     {
       ref: "pop",
-      staticClass: "au-popover au-theme-radius",
+      staticClass: "au-popover au-theme-radius au-theme-shadow--level-3",
       class: { "au-popover-plain au-theme-border-color--base-8": _vm.plain },
       attrs: { tabindex: _vm._uid },
       on: {

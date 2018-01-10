@@ -103,7 +103,7 @@
 </style>
 <template>
   <div
-    class="au-popover au-theme-radius"
+    class="au-popover au-theme-radius au-theme-shadow--level-3"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     @blur="handleBlur($event)"

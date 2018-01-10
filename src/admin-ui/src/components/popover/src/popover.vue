@@ -170,7 +170,7 @@
     mounted () {
       this.reconstruct()
       this.addEvents()
-      this.calPos() // TODO:
+      // this.calPos() // TODO:
       window.addEventListener('resize', this.calPos)
       // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       // if (MutationObserver) {

@@ -3602,16 +3602,20 @@ module.exports = function (it) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__("AP3u");
 
 
-function getElementSize(el, isFragment) {
-  function getSize(el) {
-    var computed = window.getComputedStyle(el);
-    var rect = el.getBoundingClientRect();
-    return {
-      width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
-      height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
-    };
-  }
+function getSize(el) {
+  // let computed = window.getComputedStyle(el)
+  // let rect = el.getBoundingClientRect()
+  // return {
+  //   width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
+  //   height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
+  // }
+  return {
+    width: el.offsetWidth || 0,
+    height: el.offsetHeight || 0
+  };
+}
 
+function getElementSize(el, isFragment) {
   var temp = getSize(el);
   if (temp.width || temp.height) return temp;
 
@@ -12062,7 +12066,7 @@ module.exports = function (done, value) {
   mounted: function mounted() {
     this.reconstruct();
     this.addEvents();
-    this.calPos(); // TODO:
+    // this.calPos() // TODO:
     window.addEventListener('resize', this.calPos);
     // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     // if (MutationObserver) {

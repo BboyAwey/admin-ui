@@ -1,15 +1,19 @@
 import { isEmptyString } from './utils'
 
-export function getElementSize (el, isFragment) {
-  function getSize (el) {
-    let computed = window.getComputedStyle(el)
-    let rect = el.getBoundingClientRect()
-    return {
-      width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
-      height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
-    }
+function getSize (el) {
+  // let computed = window.getComputedStyle(el)
+  // let rect = el.getBoundingClientRect()
+  // return {
+  //   width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
+  //   height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
+  // }
+  return {
+    width: el.offsetWidth || 0,
+    height: el.offsetHeight || 0
   }
+}
 
+export function getElementSize (el, isFragment) {
   let temp = getSize(el)
   if (temp.width || temp.height) return temp
 

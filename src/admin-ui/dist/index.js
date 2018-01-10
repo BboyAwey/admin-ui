@@ -12072,7 +12072,7 @@ module.exports = function (done, value) {
     this.reconstruct();
     this.addEvents();
     // this.calPos() // TODO:
-    window.addEventListener('resize', this.calPos);
+    window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('click', this.handleWindowClick, true);
     // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     // if (MutationObserver) {
@@ -12085,7 +12085,7 @@ module.exports = function (done, value) {
     // }
   },
   beforeDestroy: function beforeDestroy() {
-    window.removeEventListener('resize', this.calPos);
+    window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('click', this.handleWindowClick, true);
     this.hide();
     // if (this.observe) this.observer.disconnect()
@@ -12257,6 +12257,9 @@ module.exports = function (done, value) {
     },
     handleWindowClick: function handleWindowClick(e) {
       if (this.trigger === 'click' && this.display && this.hideOnBlur && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["g" /* isAncestor */])(e.target, this.$el) && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["g" /* isAncestor */])(e.target, this.getTarget())) this.hide();
+    },
+    handleWindowResize: function handleWindowResize() {
+      if (this.display) this.calPos();
     }
   }
 });

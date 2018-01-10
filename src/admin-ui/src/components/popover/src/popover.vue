@@ -175,7 +175,7 @@
       this.reconstruct()
       this.addEvents()
       // this.calPos() // TODO:
-      window.addEventListener('resize', this.calPos)
+      window.addEventListener('resize', this.handleWindowResize)
       window.addEventListener('click', this.handleWindowClick, true)
       // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       // if (MutationObserver) {
@@ -188,7 +188,7 @@
       // }
     },
     beforeDestroy () {
-      window.removeEventListener('resize', this.calPos)
+      window.removeEventListener('resize', this.handleWindowResize)
       window.removeEventListener('click', this.handleWindowClick, true)
       this.hide()
       // if (this.observe) this.observer.disconnect()
@@ -361,6 +361,9 @@
           this.display && this.hideOnBlur &&
           !isAncestor(e.target, this.$el) &&
           !isAncestor(e.target, this.getTarget())) this.hide()
+      },
+      handleWindowResize () {
+        if (this.display) this.calPos()
       }
     }
   }

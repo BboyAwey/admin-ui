@@ -124,3 +124,10 @@ export function removeClass (el, className) {
 export function hasClass (el, className) {
   return getOriginClasses(el).indexOf(className.trim()) !== -1
 }
+
+export function isAncestor (el, ancestor) {
+  let parent = el
+  if (parent === ancestor) return true
+  else if (el.parentNode) return isAncestor(el.parentNode, ancestor)
+  else return false
+}

@@ -102,11 +102,15 @@
   }
 </style>
 <template>
+  <!-- <div
+    class="au-popover au-theme-radius au-theme-shadow--level-3"
+    :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+    :tabindex="_uid"
+    @blur="handleBlur($event)" -->
   <div
     class="au-popover au-theme-radius au-theme-shadow--level-3"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
-    @blur="handleBlur($event)"
     ref="pop">
     <slot name="target"></slot>
     <div ref="content" :class="{
@@ -130,7 +134,7 @@
   </div>
 </template>
 <script>
-  import { getElementSize, getElementPagePos } from '../../../helpers/dom'
+  import { getElementSize, getElementPagePos, isAncestor } from '../../../helpers/dom'
   import { namespace } from '../../../helpers/utils'
 
   export default {
@@ -172,6 +176,7 @@
       this.addEvents()
       // this.calPos() // TODO:
       window.addEventListener('resize', this.calPos)
+      window.addEventListener('click', this.handleWindowClick, true)
       // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
       // if (MutationObserver) {
       //   this.observer = new MutationObserver((mutations) => {
@@ -184,7 +189,8 @@
     },
     beforeDestroy () {
       window.removeEventListener('resize', this.calPos)
-      this.hide(true)
+      window.removeEventListener('click', this.handleWindowClick, true)
+      this.hide()
       // if (this.observe) this.observer.disconnect()
     },
     watch: {
@@ -232,7 +238,6 @@
         let target = this.getTarget()
         if (this.trigger === 'click') {
           target.addEventListener('click', this.handleClick)
-          // this.$refs.pop.addEventListener('blur', this.handleBlur)
         } else {
           target.addEventListener('mouseenter', this.handleMouseover)
           target.addEventListener('mouseleave', this.handleMouseout)
@@ -241,7 +246,6 @@
       removeEvents () {
         let target = this.getTarget()
         target.removeEventListener('click', this.handleClick)
-        // this.$refs.pop.removeEventListener('blur', this.handleBlur)
         target.removeEventListener('mouseenter', this.handleMouseover)
         target.removeEventListener('mouseleave', this.handleMouseout)
       },
@@ -250,9 +254,9 @@
           this.display ? this.hide() : this.show()
         }
       },
-      handleBlur (e) { // pop blur
-        if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
-      },
+      // handleBlur (e) { // pop blur
+      //   if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
+      // },
       handleMouseover () {
         this.show()
       },
@@ -279,7 +283,7 @@
           this.$refs.pop.parentNode.removeChild(this.$refs.pop)
         } catch (e) {}
         this.display = false
-        delete this.$root._auPopovers[this._uid]
+        if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid]
         // clearInterval(this.calPos.bind(this))
       },
       calPos () {
@@ -351,6 +355,12 @@
         }
         pop.style.left = this.x || res.x + 'px'
         pop.style.top = this.y || res.y + 'px'
+      },
+      handleWindowClick (e) {
+        if (this.trigger === 'click' &&
+          this.display && this.hideOnBlur &&
+          !isAncestor(e.target, this.$el) &&
+          !isAncestor(e.target, this.getTarget())) this.hide()
       }
     }
   }

@@ -3599,6 +3599,7 @@ module.exports = function (it) {
 /* harmony export (immutable) */ __webpack_exports__["d"] = addClass;
 /* harmony export (immutable) */ __webpack_exports__["e"] = removeClass;
 /* unused harmony export hasClass */
+/* harmony export (immutable) */ __webpack_exports__["g"] = isAncestor;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__("AP3u");
 
 
@@ -3725,6 +3726,11 @@ function removeClass(el, className) {
 
 function hasClass(el, className) {
   return getOriginClasses(el).indexOf(className.trim()) !== -1;
+}
+
+function isAncestor(el, ancestor) {
+  var parent = el;
+  if (parent === ancestor) return true;else if (el.parentNode) return isAncestor(el.parentNode, ancestor);else return false;
 }
 
 /***/ }),
@@ -7945,12 +7951,7 @@ var render = function() {
       ref: "pop",
       staticClass: "au-popover au-theme-radius au-theme-shadow--level-3",
       class: { "au-popover-plain au-theme-border-color--base-8": _vm.plain },
-      attrs: { tabindex: _vm._uid },
-      on: {
-        blur: function($event) {
-          _vm.handleBlur($event)
-        }
-      }
+      attrs: { tabindex: _vm._uid }
     },
     [
       _vm._t("target"),
@@ -12025,6 +12026,10 @@ module.exports = function (done, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -12068,6 +12073,7 @@ module.exports = function (done, value) {
     this.addEvents();
     // this.calPos() // TODO:
     window.addEventListener('resize', this.calPos);
+    window.addEventListener('click', this.handleWindowClick, true);
     // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     // if (MutationObserver) {
     //   this.observer = new MutationObserver((mutations) => {
@@ -12080,7 +12086,8 @@ module.exports = function (done, value) {
   },
   beforeDestroy: function beforeDestroy() {
     window.removeEventListener('resize', this.calPos);
-    this.hide(true);
+    window.removeEventListener('click', this.handleWindowClick, true);
+    this.hide();
     // if (this.observe) this.observer.disconnect()
   },
 
@@ -12129,7 +12136,6 @@ module.exports = function (done, value) {
       var target = this.getTarget();
       if (this.trigger === 'click') {
         target.addEventListener('click', this.handleClick);
-        // this.$refs.pop.addEventListener('blur', this.handleBlur)
       } else {
         target.addEventListener('mouseenter', this.handleMouseover);
         target.addEventListener('mouseleave', this.handleMouseout);
@@ -12138,7 +12144,6 @@ module.exports = function (done, value) {
     removeEvents: function removeEvents() {
       var target = this.getTarget();
       target.removeEventListener('click', this.handleClick);
-      // this.$refs.pop.removeEventListener('blur', this.handleBlur)
       target.removeEventListener('mouseenter', this.handleMouseover);
       target.removeEventListener('mouseleave', this.handleMouseout);
     },
@@ -12147,10 +12152,10 @@ module.exports = function (done, value) {
         this.display ? this.hide() : this.show();
       }
     },
-    handleBlur: function handleBlur(e) {
-      // pop blur
-      if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide();
-    },
+
+    // handleBlur (e) { // pop blur
+    //   if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
+    // },
     handleMouseover: function handleMouseover() {
       this.show();
     },
@@ -12177,7 +12182,7 @@ module.exports = function (done, value) {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop);
       } catch (e) {}
       this.display = false;
-      delete this.$root._auPopovers[this._uid];
+      if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid];
       // clearInterval(this.calPos.bind(this))
     },
     calPos: function calPos() {
@@ -12249,6 +12254,9 @@ module.exports = function (done, value) {
       }
       pop.style.left = this.x || res.x + 'px';
       pop.style.top = this.y || res.y + 'px';
+    },
+    handleWindowClick: function handleWindowClick(e) {
+      if (this.trigger === 'click' && this.display && this.hideOnBlur && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["g" /* isAncestor */])(e.target, this.$el) && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["g" /* isAncestor */])(e.target, this.getTarget())) this.hide();
     }
   }
 });

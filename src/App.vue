@@ -22,7 +22,7 @@
         <au-menu collapse-handlebar-position="bottom" :items="menu" @select="go" class="menu" :collapsable="true" :collapse="false"></au-menu>
       </div>
       <div slot="content">
-        <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll">
+        <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll" hide-popovers>
           <router-view></router-view>
         </au-scroller>
       </div>

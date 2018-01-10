@@ -7,14 +7,14 @@
       <!-- 组件示例 -->
       <div class="component-example" style="position: relative;">
         <au-popover ref="myPopover">
-          <au-button slot="target" type="primary">A:(top center, hover)</au-button>
+          <au-button slot="target" type="primary" @click.stop>A:(top center, hover)</au-button>
           <div slot="content">
             <p style="font-size: 14px; padding: 10px;">
               Hi Popover! Hi Popover!
             </p>
           </div>
         </au-popover>
-        <au-popover placement="right middle" trigger="click" :plain="true" :hide-on-blur="false">
+        <au-popover placement="right middle" trigger="click" :plain="true" :hide-on-blur="true">
           <au-button slot="target" type="primary" style="">B:(right top, click)</au-button>
           <div slot="content">
             <p style="font-size: 14px; padding: 10px;">

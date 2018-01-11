@@ -31,8 +31,8 @@
       font-size: 18px;
     }
     .menu-fold-icon {
-      position: relative;
-      left: 12px;
+      position: absolute;
+      right: 12px;
       float: right;
       height: 40px;
       width: 40px;
@@ -187,7 +187,7 @@
                   type="angle-down"
                   v-if="hasChildren(item)"
                   v-show="!localCollapse"
-                  :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, left: item.collapse ? '14px' : ''}"
+                  :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '14px' : ''}"
                   @click.native.stop="toggleCollapse(item)" unify-size/>
               </div>
               <div slot="content" class="au-menu-pop-content">
@@ -254,7 +254,7 @@
                 type="angle-down"
                 v-if="hasChildren(item)"
                 v-show="!localCollapse"
-                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, left: item.collapse ? '14px' : ''}"
+                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '14px' : ''}"
                 @click.native.stop="toggleCollapse(item)" unify-size/>
             </div>
             <div slot="content" class="au-menu-pop-content">

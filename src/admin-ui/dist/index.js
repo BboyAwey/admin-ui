@@ -8757,7 +8757,7 @@ var render = function() {
                                             "rotate(" +
                                             (item.collapse ? "-90" : "0") +
                                             "deg)",
-                                          left: item.collapse ? "14px" : ""
+                                          right: item.collapse ? "14px" : ""
                                         },
                                         attrs: {
                                           type: "angle-down",
@@ -8963,7 +8963,7 @@ var render = function() {
                                         "rotate(" +
                                         (item.collapse ? "-90" : "0") +
                                         "deg)",
-                                      left: item.collapse ? "14px" : ""
+                                      right: item.collapse ? "14px" : ""
                                     },
                                     attrs: {
                                       type: "angle-down",

@@ -14,8 +14,6 @@ function getInstance (type) {
         res = namespace.get('adModalIntance')
       } else {
         res = new (Vue.extend(AuModalTemplate))({ el: document.createElement('div') })
-        res.width = 320
-        res.height = 164
         if (res.$refs.decline) res.$refs.decline.parentNode.removeChild(res.$refs.decline)
         namespace.set('adModalIntance', res)
       }
@@ -122,8 +120,7 @@ function MessageBox (config) {
       }
     })]
     instances.modal.onEnter = instances.modal.buttons[1].text
-    instances.modal.height = 200
-  } else instances.modal.height = 14
+  }
 
   // get a content instance
   let contentInstance = instances[type]
@@ -133,6 +130,9 @@ function MessageBox (config) {
       contentInstance.value = reset
       contentInstance.$refs.core.localValue = reset
     }
+    // instances.modal.$on('hide', () => { // we should reset on hide otherwise it will trigger validate when clear
+
+    // })
   }
   // set content instance props
   Object.assign(contentInstance, {message, validators, placeholder})
@@ -142,9 +142,9 @@ function MessageBox (config) {
   instances.modal.$mount()
   document.body.appendChild(instances.modal.$el)
   // auto focus
-  // if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-  //   Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
-  // }
+  if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+    Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
+  }
 }
 MessageBox.alert = function (config) {
   MessageBox(Object.assign(config, {

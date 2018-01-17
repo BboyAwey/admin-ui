@@ -108,10 +108,10 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td>'432px'</td>
+            <td><au-icon type="minus"></au-icon></td>
             <td>
               合法的css宽度值<br>
-              像素或百分比
+              不设置时自动计算
             </td>
             <td>宽度</td>
           </tr>
@@ -122,10 +122,10 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td>'298px'</td>
+            <td><au-icon type="minus"></au-icon></td>
             <td>
               合法的css高度值<br>
-              注意，仅能为像素
+              不设置时自动计算
             </td>
             <td>高度</td>
           </tr>

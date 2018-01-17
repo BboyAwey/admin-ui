@@ -138,19 +138,21 @@
               </ol>
             </td>
             <td>
-              false
+              true
             </td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">''</li>
                 <li class="au-theme-border-color--base-8">false</li>
-                <li class="au-theme-border-color--base-8">any string include empty string</li>
+                <li class="au-theme-border-color--base-8">any other string</li>
               </ol>
             </td>
             <td>
               每次显示消息框时输入框的初始值<br>
               为true或为空字符串时仅清空<br>
-              为t普通字符串时该字符串为初始值<br>
+              为false时不清空<br>
+              为普通字符串时以该字符串为初始值<br>
               仅当type为prompt时有效
             </td>
           </tr>

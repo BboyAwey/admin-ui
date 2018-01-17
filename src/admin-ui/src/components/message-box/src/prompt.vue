@@ -22,7 +22,7 @@
   <div class="au-prompt au-theme-font-color--base-3">
     <div class="au-prompt-message">{{ message }}</div>
     <div class="au-prompt-core-container">
-      <au-input class="au-prompt-core" v-model="value" :placeholder="placeholder" :validators="validators" validate-on-blur ref="core"></au-input>
+      <au-input class="au-prompt-core" v-model="value" :placeholder="placeholder" :validators="validators" ref="core"></au-input>
     </div>
   </div>
 </template>

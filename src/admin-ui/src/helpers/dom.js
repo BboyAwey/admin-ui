@@ -25,8 +25,8 @@ export function getElementSize (el, isFragment) {
   copy.style.visibility = 'hidden'
   copy.style.display = 'block'
   copy.style.position = 'absolute'
-  copy.style.top = '-99999px'
-  copy.style.left = '-99999px'
+  copy.style.top = '-9999999px'
+  copy.style.left = '-9999999px'
 
   let res = null
   // insert it to document

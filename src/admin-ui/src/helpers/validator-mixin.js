@@ -4,7 +4,8 @@ export default {
     return {
       localValue: this.value,
       localWarnings: {},
-      clock: null
+      clock: null,
+      clearing: false // vm is exec clearing at this moment if it is true
     }
   },
   props: {
@@ -20,9 +21,9 @@ export default {
   watch: {
     value: {
       handler: function () {
-        if (this.validateOnBlur) return
+        if (this.validateOnBlur || this.clearing) return
         if (this.validators && this.validators.length) {
-          if (this.throttlling) {
+          if (this.throttling) {
             if (this.clock) {
               clearTimeout(this.clock)
               this.clock = null
@@ -48,6 +49,9 @@ export default {
     },
     hasWarnings () {
       return this.hasLocalWarnings || this.warnings instanceof Array
+    },
+    throttling () { // if there has async validator we should enable throttling
+      return !!this.validators.filter(v => v.async).length
     }
   },
   methods: {
@@ -65,6 +69,7 @@ export default {
           syncStack.push(v)
         }
       })
+
       // handler warnings
       let handleWarnings = (res, i, warning) => {
         if (!res) {

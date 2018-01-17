@@ -43,6 +43,7 @@ export default {
       this.$emit('blur', this.localValue, e)
     },
     clear () {
+      this.clearing = true
       if (typeof this.localValue === 'string') {
         this.localValue = ''
       } else if (typeof this.localValue === 'number') {
@@ -53,6 +54,9 @@ export default {
         this.localValue = {}
       }
       this.localWarnings = this.warnings || {}
+      this.$nextTick(() => { // we should set clearing to false after value watch has triggered
+        this.clearing = false
+      })
     }
   }
 }

@@ -261,7 +261,7 @@
     data () {
       return {
         // is the throttlling on
-        throttlling: true,
+        // throttlling: true,
         associationsShow: false,
         active: false
       }

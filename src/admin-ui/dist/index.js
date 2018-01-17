@@ -1053,13 +1053,25 @@ module.exports = function (TO_STRING) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__("pFYg");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__button__ = __webpack_require__("Wz8r");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scroller__ = __webpack_require__("ovkV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__ = __webpack_require__("bOdI");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__("pFYg");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__button__ = __webpack_require__("Wz8r");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scroller__ = __webpack_require__("ovkV");
 
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1162,15 +1174,13 @@ module.exports = function (TO_STRING) {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-modal',
-  components: { AuButton: __WEBPACK_IMPORTED_MODULE_2__button__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */] },
+  components: { AuButton: __WEBPACK_IMPORTED_MODULE_3__button__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_4__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_5__scroller__["a" /* default */] },
   mounted: function mounted() {
-    // document.body.appendChild(this.$refs.modal)
-    this.calModalContentStyle();
+    window.addEventListener('resize', this.resizeHandler);
   },
-
-  // destroyed () {
-  //   // document.body.removeChild(this.$refs.modal)
-  // },
+  destroyed: function destroyed() {
+    window.removeEventListener('resize', this.resizeHandler);
+  },
   data: function data() {
     return {
       localDisplay: this.display
@@ -1206,6 +1216,7 @@ module.exports = function (TO_STRING) {
     display: function display(v) {
       this.localDisplay = v;
       if (v) {
+        this.calcModalStyle();
         this.calModalContentStyle();
         window.addEventListener('keyup', this.escHandler);
         if (this.onEnter) window.addEventListener('keyup', this.enterHandler);
@@ -1228,28 +1239,12 @@ module.exports = function (TO_STRING) {
         buttons.forEach(function (button) {
           if (typeof button === 'string') {
             if (_this.builtInButtons[button]) buttonList.push(_this.builtInButtons[button]);
-          } else if ((typeof button === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(button)) === 'object') {
+          } else if ((typeof button === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(button)) === 'object') {
             buttonList.push(button);
           }
         });
       }
       return buttonList;
-    },
-    modalStyle: function modalStyle() {
-      var width = this.width,
-          height = this.height;
-      // width can be form like 30% or 45px
-      // height can only be form like 45px
-
-      if (!height) height = 298;
-      height = height < 140 ? 140 : height;
-      // if not given width
-      if (!width) width = '';else width = width + '';
-      return {
-        width: width.indexOf('%') === -1 ? width.indexOf('px') ? width : parseInt(width) + 'px' : width,
-        height: parseInt(height) + 'px',
-        marginTop: parseInt(height) / 2 * -1 + 'px'
-      };
     }
   },
   methods: {
@@ -1270,17 +1265,47 @@ module.exports = function (TO_STRING) {
         }
       });
     },
-    calModalContentStyle: function calModalContentStyle() {
-      var height = this.height,
-          title = this.title;
+    calcModalStyle: function calcModalStyle() {
+      var _modalStyle;
 
-      height = height || 298;
-      height = height < 140 ? 140 : height;
-      var operationHeight = 0;
-      if (this.buttonList.length && this.$refs.operations) {
-        operationHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.operations, true).height;
+      // width and height has to be legal css value
+      var width = this.width,
+          height = this.height;
+
+      var maxWidth = null;
+      var maxHeight = null;
+      var winSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["b" /* getWindowSize */])();
+      // if not given height we should set a max height
+      if (!height) maxHeight = winSize.height - 80 + 'px';
+      // if not given width
+      if (!width) maxWidth = winSize.width - 200 + 'px';
+
+      var modalStyle = (_modalStyle = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_modalStyle, maxWidth ? 'max-width' : 'width', maxWidth || width), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_modalStyle, maxHeight ? 'max-height' : 'height', maxHeight || height), _modalStyle);
+
+      for (var key in modalStyle) {
+        this.$refs.modal.style[key] = modalStyle[key];
       }
-      this.$refs.content.style.height = parseInt(height) - 64 - operationHeight - (title ? 31 : 0) + 'px';
+    },
+    calModalContentStyle: function calModalContentStyle() {
+      // clear the prev result
+      if (!this.height) this.$refs.content.style.height = 'auto';
+
+      var operationHeight = 0;
+      var titleHeight = 0;
+      if (this.buttonList.length && this.$refs.operations) {
+        operationHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["a" /* getElementSize */])(this.$refs.operations).height;
+      }
+      if (this.title) {
+        titleHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["a" /* getElementSize */])(this.$refs.title).height;
+      }
+      var modalHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["a" /* getElementSize */])(this.$refs.modal).height;
+
+      // we need to minus the padding value of modal and opreation divs and the decline height
+      this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 24 - 40 - 1 + 'px';
+    },
+    resizeHandler: function resizeHandler() {
+      this.calcModalStyle();
+      this.calModalContentStyle();
     },
     escHandler: function escHandler(e) {
       if (e.keyCode !== 27) return;
@@ -2144,6 +2169,16 @@ module.exports = function (it, Constructor, name, forbiddenField) {
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
+
+
+/***/ }),
+
+/***/ "4ajQ":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__("Wdy1");
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !__webpack_require__("qs+f"), 'Object', { defineProperty: __webpack_require__("GCs6").f });
 
 
 /***/ }),
@@ -3628,8 +3663,8 @@ function getElementSize(el, isFragment) {
   copy.style.visibility = 'hidden';
   copy.style.display = 'block';
   copy.style.position = 'absolute';
-  copy.style.top = '-99999px';
-  copy.style.left = '-99999px';
+  copy.style.top = '-9999999px';
+  copy.style.left = '-9999999px';
 
   var res = null;
   // insert it to document
@@ -4922,6 +4957,13 @@ function validateWidth(v) {
 
 /***/ }),
 
+/***/ "C4MV":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__("rKx+"), __esModule: true };
+
+/***/ }),
+
 /***/ "C84k":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5712,111 +5754,114 @@ var render = function() {
           expression: "localDisplay"
         }
       ],
-      ref: "modal",
+      ref: "modalContainer",
       staticClass:
         "au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3",
       on: { click: _vm.hide }
     },
     [
-      _c(
-        "div",
-        {
-          staticClass:
-            "au-modal au-theme-radius au-theme-background-color--base-12",
-          style: _vm.modalStyle,
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-              ;(function() {})($event)
-            }
-          }
-        },
-        [
-          _c(
-            "h4",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.title,
-                  expression: "title"
-                }
-              ],
-              staticClass: "au-modal-title au-theme-border-color--base-8"
-            },
-            [_vm._v(_vm._s(_vm.title))]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { ref: "content", staticClass: "au-modal-content" },
-            [
-              _c(
-                "au-scroller",
-                {
-                  staticClass: "au-modal-content-scroller",
-                  attrs: { "stop-propagation": "" }
-                },
-                [_vm._t("default")],
-                2
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", {
-            ref: "decline",
-            staticClass: "au-modal-dec-line au-theme-border-color--base-8"
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.buttonList.length,
-                  expression: "buttonList.length"
-                }
-              ],
-              ref: "operations",
-              staticClass: "au-modal-operations"
-            },
-            _vm._l(_vm.buttonList, function(button, i) {
-              return _c(
-                "au-button",
-                {
-                  key: i,
-                  staticClass: "au-modal-button",
-                  attrs: {
-                    type: button.type,
-                    size: button.size,
-                    plain: button.plain,
-                    disabled: button.disabled,
-                    loading: button.loading
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.operate(button)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(button.text))]
-              )
-            })
-          ),
-          _vm._v(" "),
-          _c("au-icon", {
+      _c("div", { staticClass: "au-modal-cell" }, [
+        _c(
+          "div",
+          {
+            ref: "modal",
             staticClass:
-              "au-modal-close-icon au-theme-hover-font-color--primary-3",
-            attrs: { type: "times" },
-            on: { click: _vm.hide }
-          })
-        ],
-        1
-      )
+              "au-modal au-theme-radius au-theme-background-color--base-12",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                ;(function() {})($event)
+              }
+            }
+          },
+          [
+            _c(
+              "h4",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.title,
+                    expression: "title"
+                  }
+                ],
+                ref: "title",
+                staticClass: "au-modal-title au-theme-border-color--base-8"
+              },
+              [_vm._v(_vm._s(_vm.title))]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { ref: "content", staticClass: "au-modal-content" },
+              [
+                _c(
+                  "au-scroller",
+                  {
+                    staticClass: "au-modal-content-scroller",
+                    attrs: { "stop-propagation": "" }
+                  },
+                  [_vm._t("default")],
+                  2
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", {
+              ref: "decline",
+              staticClass: "au-modal-dec-line au-theme-border-color--base-8"
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.buttonList.length,
+                    expression: "buttonList.length"
+                  }
+                ],
+                ref: "operations",
+                staticClass: "au-modal-operations"
+              },
+              _vm._l(_vm.buttonList, function(button, i) {
+                return _c(
+                  "au-button",
+                  {
+                    key: i,
+                    staticClass: "au-modal-button",
+                    attrs: {
+                      type: button.type,
+                      size: button.size,
+                      plain: button.plain,
+                      disabled: button.disabled,
+                      loading: button.loading
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.operate(button)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(button.text))]
+                )
+              })
+            ),
+            _vm._v(" "),
+            _c("au-icon", {
+              staticClass:
+                "au-modal-close-icon au-theme-hover-font-color--primary-3",
+              attrs: { type: "times" },
+              on: { click: _vm.hide }
+            })
+          ],
+          1
+        )
+      ])
     ]
   )
 }
@@ -7764,8 +7809,6 @@ function getInstance(type) {
         res = __WEBPACK_IMPORTED_MODULE_6__helpers_utils__["b" /* namespace */].get('adModalIntance');
       } else {
         res = new (__WEBPACK_IMPORTED_MODULE_1_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_2__modal__["a" /* default */]))({ el: document.createElement('div') });
-        res.width = 320;
-        res.height = 164;
         if (res.$refs.decline) res.$refs.decline.parentNode.removeChild(res.$refs.decline);
         __WEBPACK_IMPORTED_MODULE_6__helpers_utils__["b" /* namespace */].set('adModalIntance', res);
       }
@@ -7874,8 +7917,7 @@ function MessageBox(config) {
       }
     })];
     instances.modal.onEnter = instances.modal.buttons[1].text;
-    instances.modal.height = 200;
-  } else instances.modal.height = 14;
+  }
 
   // get a content instance
   var contentInstance = instances[type];
@@ -7885,6 +7927,9 @@ function MessageBox(config) {
       contentInstance.value = reset;
       contentInstance.$refs.core.localValue = reset;
     }
+    // instances.modal.$on('hide', () => { // we should reset on hide otherwise it will trigger validate when clear
+
+    // })
   }
   // set content instance props
   __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(contentInstance, { message: message, validators: validators, placeholder: placeholder });
@@ -7894,9 +7939,11 @@ function MessageBox(config) {
   instances.modal.$mount();
   document.body.appendChild(instances.modal.$el);
   // auto focus
-  // if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
-  //   Vue.nextTick(() => contentInstance.$refs.core.$refs.core.focus())
-  // }
+  if (type === 'prompt' && contentInstance.$refs.core && contentInstance.$refs.core.$refs.core) {
+    __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
+      return contentInstance.$refs.core.$refs.core.focus();
+    });
+  }
 }
 MessageBox.alert = function (config) {
   MessageBox(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(config, {
@@ -9629,7 +9676,7 @@ module.exports = function (it) {
   data: function data() {
     return {
       // is the throttlling on
-      throttlling: true,
+      // throttlling: true,
       associationsShow: false,
       active: false
     };
@@ -10159,7 +10206,8 @@ if (false) {
     return {
       localValue: this.value,
       localWarnings: {},
-      clock: null
+      clock: null,
+      clearing: false // vm is exec clearing at this moment if it is true
     };
   },
 
@@ -10176,9 +10224,9 @@ if (false) {
   watch: {
     value: {
       handler: function handler() {
-        if (this.validateOnBlur) return;
+        if (this.validateOnBlur || this.clearing) return;
         if (this.validators && this.validators.length) {
-          if (this.throttlling) {
+          if (this.throttling) {
             if (this.clock) {
               clearTimeout(this.clock);
               this.clock = null;
@@ -10204,6 +10252,12 @@ if (false) {
     },
     hasWarnings: function hasWarnings() {
       return this.hasLocalWarnings || this.warnings instanceof Array;
+    },
+    throttling: function throttling() {
+      // if there has async validator we should enable throttling
+      return !!this.validators.filter(function (v) {
+        return v.async;
+      }).length;
     }
   },
   methods: {
@@ -10221,6 +10275,7 @@ if (false) {
           syncStack.push(v);
         }
       });
+
       // handler warnings
       var handleWarnings = function handleWarnings(res, i, warning) {
         if (!res) {
@@ -11809,6 +11864,37 @@ addToUnscopables('entries');
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_message_box__ = __webpack_require__("M1Dq");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_message_box__["a"]; });
 
+
+/***/ }),
+
+/***/ "bOdI":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _defineProperty = __webpack_require__("C4MV");
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (obj, key, value) {
+  if (key in obj) {
+    (0, _defineProperty2.default)(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
 
 /***/ }),
 
@@ -14960,6 +15046,9 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
       this.$emit('blur', this.localValue, e);
     },
     clear: function clear() {
+      var _this = this;
+
+      this.clearing = true;
       if (typeof this.localValue === 'string') {
         this.localValue = '';
       } else if (typeof this.localValue === 'number') {
@@ -14970,6 +15059,10 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
         this.localValue = {};
       }
       this.localWarnings = this.warnings || {};
+      this.$nextTick(function () {
+        // we should set clearing to false after value watch has triggered
+        _this.clearing = false;
+      });
     }
   }
 });
@@ -17376,6 +17469,18 @@ module.exports = __webpack_require__("qs+f") ? Object.defineProperties : functio
 
 /***/ }),
 
+/***/ "rKx+":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("4ajQ");
+var $Object = __webpack_require__("iANj").Object;
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
+};
+
+
+/***/ }),
+
 /***/ "rL/T":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18258,11 +18363,7 @@ var render = function() {
         _c("au-input", {
           ref: "core",
           staticClass: "au-prompt-core",
-          attrs: {
-            placeholder: _vm.placeholder,
-            validators: _vm.validators,
-            "validate-on-blur": ""
-          },
+          attrs: { placeholder: _vm.placeholder, validators: _vm.validators },
           model: {
             value: _vm.value,
             callback: function($$v) {

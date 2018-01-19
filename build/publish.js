@@ -19,22 +19,6 @@ webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err
 
-  // if (isMin) {
-  //   var fileName = "index.min.js";
-
-  //   var sourceFile = path.join(config.publish.assetsRoot, '/min-temp/', fileName)
-  //   var destPath = path.join(config.publish.assetsRoot, fileName)
-
-  //   var readStream = fs.createReadStream(sourceFile)
-  //   var writeStream = fs.createWriteStream(destPath)
-  //   readStream.pipe(writeStream)
-
-  //   rm(path.join(config.publish.assetsRoot, '/min-temp/'), err => {
-  //     if (err) throw err
-  //     console.log(chalk.cyan('  Mini file translate done.\n'))
-  //   })
-  // }
-
   process.stdout.write(stats.toString({
     colors: true,
     modules: false,

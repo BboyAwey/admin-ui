@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import './style/reset.css'
-import ThemeGenerator from './theme'
+import theme from './theme'
 
 import Directives from './directives'
 
@@ -155,13 +155,7 @@ adminUi.direvtive = function (Vue) {
 }
 
 // add theme generator function
-adminUi.theme = function (theme) {
-  let styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style')
-
-  styleTag.id = 'admin-ui-theme'
-  styleTag.innerHTML = ThemeGenerator(theme)
-  document.body.appendChild(styleTag)
-}
+adminUi.theme = theme
 // gen default theme
 adminUi.theme()
 // set font family for html and body

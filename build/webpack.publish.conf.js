@@ -12,7 +12,6 @@ var vueLoaderConfig = require('./vue-loader.conf')
 
 let args = process.argv.slice(2)
 let isMin = args.includes('min')
-let isComp = args.includes('comp')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -44,7 +43,7 @@ baseWebpackConfig.module.rules = [
     loader: 'url-loader',
     options: {
       limit: 10000,
-      name: utils.assetsPath((isComp ? '../../' : '') + 'fonts/[name].[ext]')
+      name: utils.assetsPath('fonts/[name].[ext]')
     }
   }
 ]

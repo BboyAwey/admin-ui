@@ -230,7 +230,7 @@ var genRadiusStyle = function genRadiusStyle(borderRadius) {
   return res;
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (function (theme) {
+function themeGenerator(theme) {
   var finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_3__light__["a" /* default */]);
   if (theme === 'dark') finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_4__dark__["a" /* default */]);else if ((typeof theme === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme)) === 'object') {
     // merge colors
@@ -279,6 +279,14 @@ var genRadiusStyle = function genRadiusStyle(borderRadius) {
   __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].set('theme', finalTheme);
 
   return res;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (function (theme) {
+  var styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style');
+
+  styleTag.id = 'admin-ui-theme';
+  styleTag.innerHTML = themeGenerator(theme);
+  document.body.appendChild(styleTag);
 });
 
 /***/ }),
@@ -6919,13 +6927,7 @@ adminUi.direvtive = function (Vue) {
 };
 
 // add theme generator function
-adminUi.theme = function (theme) {
-  var styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style');
-
-  styleTag.id = 'admin-ui-theme';
-  styleTag.innerHTML = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__theme__["a" /* default */])(theme);
-  document.body.appendChild(styleTag);
-};
+adminUi.theme = __WEBPACK_IMPORTED_MODULE_2__theme__["a" /* default */];
 // gen default theme
 adminUi.theme();
 // set font family for html and body

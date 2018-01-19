@@ -113,7 +113,7 @@ const genRadiusStyle = function (borderRadius) {
   return res
 }
 
-export default function (theme) {
+function themeGenerator (theme) {
   let finalTheme = deepClone(light)
   if (theme === 'dark') finalTheme = deepClone(dark)
   else if (typeof theme === 'object') {
@@ -159,4 +159,12 @@ export default function (theme) {
   namespace.set('theme', finalTheme)
 
   return res
+}
+
+export default function (theme) {
+  let styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style')
+
+  styleTag.id = 'admin-ui-theme'
+  styleTag.innerHTML = themeGenerator(theme)
+  document.body.appendChild(styleTag)
 }

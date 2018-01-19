@@ -4,10 +4,6 @@
   }
   .code-h .number {
     user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
     min-width: 25px;
     display: inline-block;
     text-align: right;
@@ -64,12 +60,15 @@
         lines.forEach((line, i) => { // 去空行
           if (line !== '' && !/^\s+$/g.test(line)) {
             // console.log(line)
-            let spaceCount = line.match(/^\s+/)[0].length
-            if (minimumSpace) minimumSpace = spaceCount > minimumSpace ? minimumSpace : spaceCount // 其余计算最小缩进
+            let space = line.match(/^\s*/)
+            let spaceCount = space ? line.match(/^\s*/)[0].length : 0
+            if (!spaceCount) minimumSpace = minimumSpace = spaceCount
+            else if (minimumSpace) minimumSpace = spaceCount > minimumSpace ? minimumSpace : spaceCount // 其余计算最小缩进
             else minimumSpace = spaceCount // 首行直接存入
             temp.push(line)
           }
         })
+        // console.log(lines, temp.length)
         temp = temp.map((line, i) => { // 添加数字
           let reg = new RegExp('^[\\s]{' + minimumSpace + '}', 'g') // 去除行首不必要的缩进
           return '<span class="number">' + (i + 1) + '</span>' + line.replace(reg, '') + '\n'
@@ -89,7 +88,7 @@
       highlight () {
         this.escapeHtml()
         hljs.highlightBlock(this.$refs.codeBlock, this.lang)
-        this.addLineNumbers()
+        // this.addLineNumbers()
       }
     }
 

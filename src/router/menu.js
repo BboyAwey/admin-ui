@@ -17,7 +17,7 @@ export default [
   {
     'text': '组件',
     'icon': 'cube',
-    'collapse': false,
+    'collapse': true,
     'children': [
       {
         'text': '图标',
@@ -136,5 +136,10 @@ export default [
         'url': '/tag'
       }
     ]
+  },
+  {
+    'text': '更新日志',
+    'url': '/change-log',
+    'icon': 'info-circle'
   }
 ]

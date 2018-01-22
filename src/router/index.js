@@ -21,6 +21,11 @@ export default new Router({
       component: (resolve) => require(['../examples/installation.vue'], resolve)
     },
     {
+      path: '/change-log',
+      name: 'change-log',
+      component: (resolve) => require(['../examples/change-log.vue'], resolve)
+    },
+    {
       path: '/theme',
       name: 'theme',
       component: (resolve) => require(['../examples/theme.vue'], resolve)

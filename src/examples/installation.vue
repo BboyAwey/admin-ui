@@ -17,34 +17,13 @@
       </p>
       <code-h lang="js">
         // 项目入口文件
-        // 确保你已经引入了Vue
+        import Vue from 'vue'
         // 全量加载
         import AdminUi from 'admin-ui/dist/index.js'
         import 'admin-ui/dist/style.css' // 样式需要单独引入
-      </code-h>
-      <!-- <p class="paragraph">
-        如果不希望手动更换引用位置，可以使用webpack的alias配置，通过动态判断当前环境来决定加载哪个版本：
-      </p>
-      <code-h lang="js">
-        // webkpack 配置文件
-        module.exports = {
-          // 省略其它配置
-          resolve: {
-            alias: {
-              'vue$': 'vue/dist/vue.esm.js',
-              '@': resolve('src'),
-              'admin-ui': process.env.NODE_ENV === 'production' ? 'admin-ui/min' : 'admin-ui/dist'
-            }
-          }
-        }
-      </code-h>
-      <code-h lang="js">
-        // 项目入口文件
-        import Vue from 'vue'
-        import AdminUi from 'admin-ui'
-        import 'admin-ui/style.css'
+
         Vue.use(AdminUi)
-      </code-h> -->
+      </code-h>
     </au-panel>
     <au-panel class="section" title="按需加载">
       <p class="paragraph">
@@ -67,6 +46,16 @@
       <p class="paragraph">
         我们没有将组件的样式单独分开有两个原因，首先组件们的样式集合起来体积并不大，压缩打包后控制在60KB以内（这其中绝大部分都是font-awesome的样式代码，组件的所有样式不超过5kb）；其次由于使用了font-awesome，如果每个组件单独引入自己的样式，依赖了font-awesome的组件们就会出现重复的样式。
       </p>
+      <p class="paragraph">
+        另外方法类组件如果是按需引入，可以直接使用，不需要注册为Vue组件
+      </p>
+      <code-h lang="js">
+        import Toast from 'admin-ui/dist/lib/toast'
+
+        Toast({
+          message: 'Hello World'
+        })
+      </code-h>
     </au-panel>
   </div>
 </template>

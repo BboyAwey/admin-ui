@@ -7,7 +7,7 @@ import router from './router'
 import adminUi from './admin-ui/src'
 import './style/_common.scss'
 
-// adminUi2.theme()
+// adminUi.theme('dark')
 Vue.use(adminUi)
 
 Vue.component('code-h', codeH)

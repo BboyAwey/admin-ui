@@ -174,6 +174,7 @@
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">font-color</li>
+                <li class="au-theme-border-color--base-8">placeholder-color</li>
                 <li class="au-theme-border-color--base-8">border-color</li>
                 <li class="au-theme-border-color--base-8">border-top-color</li>
                 <li class="au-theme-border-color--base-8">border-right-color</li>
@@ -186,10 +187,10 @@
                 <li class="au-theme-border-color--base-8">border-bottom-leftradius</li>
                 <li class="au-theme-border-color--base-8">border-bottom-right-radius</li>
                 <li class="au-theme-border-color--base-8">background-color</li>
-                <li class="au-theme-border-color--base-8">shadow</li>
+                <li class="au-theme-border-color--base-8">box-shadow</li>
               </ol>
             </td>
-            <td>如果主题是应用在当前元素的伪类上的，则可以在类名中连接伪类名。<br>注意，伪类名不可叠加使用，请发挥你的聪明才智。</td>
+            <td>可使用的属性名</td>
           </tr>
           <tr>
             <td>属性值</td>
@@ -206,6 +207,11 @@
                 <li class="au-theme-border-color--base-8">info-[1~5]</li>
                 <li class="au-theme-border-color--base-8">success-[1~5]</li>
                 <li class="au-theme-border-color--base-8">base-[0~12]</li>
+              </ol>
+              圆角类：
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">normal</li>
+                <li class="au-theme-border-color--base-8">large</li>
               </ol>
               阴影类：
               <ol class="option-list">
@@ -248,7 +254,7 @@
           au-theme-bakcground-color--base-12
           au-theme-border-color--primary-3
           au-theme-font-color--base-3
-          au-theme-shadow--level-1
+          au-theme-box-shadow--level-1
           au-theme-radius
         "></div>
       `'></code-h>
@@ -256,12 +262,18 @@
     <au-panel class="section">
       <h4 class="title-1">自定义主题类名</h4>
       <p class="paragraph">
-        <span class="code au-theme-radius au-theme-background-color--warning-5">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-5">options</span>参数中，在<span class="code au-theme-radius au-theme-background-color--warning-5">colors</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">shadows</span>中可以自定义主题类名。Admin UI的默认主题中提供了5中彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-color</span>类作为颜色类，则可以像下面这样定义：
+        <span class="code au-theme-radius au-theme-background-color--warning-5">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-5">options</span>参数中，可以使用自定义的主题类名。Admin UI的默认主题中提供了5种彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-color</span>类作为颜色类，一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-radius</span>作为圆角类，一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-shadow</span>作为阴影类，则可以像下面这样定义：
       </p>
       <code-h lang="js">
         adminUi.theme({
           'colors': {
             'my-color': '#ff6633'
+          },
+          'radiuses': {
+            'my-radius': '6px'
+          },
+          'shadows': {
+            'my-shadow': '0 0 6px rgba(60, 60, 60, .75)'
           }
         })
       </code-h>
@@ -270,9 +282,9 @@
       </p>
       <code-h lang="html" :content='`
         <div class="
-          au-theme-bakcground-color--my-color
-          au-theme-border-color--my-color
           au-theme-font-color--my-color
+          au-theme-box-shadow--my-shadow
+          au-theme-border-radius--my-radius
         "></div>
       `'></code-h>
     </au-panel>

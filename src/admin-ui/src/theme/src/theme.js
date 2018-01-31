@@ -21,7 +21,6 @@ const pseudos = [
   'disabled',
   'checked'
 ]
-const radius = 3
 
 const genColorStyle = function (scene, colorName, colorNumber) {
   let res = ''
@@ -74,42 +73,40 @@ const genColorStyle = function (scene, colorName, colorNumber) {
   }
   return res
 }
-const genShadowStyle = function (level, value) {
+const genShadowStyle = function (shadowName, shadowValue) {
   let res = ''
-  res += `.au-theme-shadow--${level}{box-shadow:${value}}`
-  res += `.au-theme-shadow--${level}-important{box-shadow:${value} !important}`
+  res += `.au-theme-box-shadow--${shadowName}{box-shadow:${shadowValue}}`
+  res += `.au-theme-box-shadow--${shadowName}-important{box-shadow:${shadowValue} !important}`
   pseudos.forEach(pseudo => {
-    res += `.au-theme-${pseudo}-shadow--${level}:${pseudo}{box-shadow:${value}}`
-    res += `.au-theme-${pseudo}-shadow--${level}-important:${pseudo}{box-shadow:${value} !important}`
+    res += `.au-theme-${pseudo}-box-shadow--${shadowName}:${pseudo}{box-shadow:${shadowValue}}`
+    res += `.au-theme-${pseudo}-box-shadow--${shadowName}-important:${pseudo}{box-shadow:${shadowValue} !important}`
   })
   return res
 }
-const genRadiusStyle = function (borderRadius) {
+const genRadiusStyle = function (radiosName, radius) {
   let res = ''
-  if (borderRadius) {
-    res += `.au-theme-radius{border-radius:${radius}px}`
-    res += `.au-theme-top-left-radius{border-top-left-radius:${radius}px}`
-    res += `.au-theme-top-right-radius{border-top-right-radius:${radius}px}`
-    res += `.au-theme-bottom-left-radius{border-bottom-left-radius:${radius}px}`
-    res += `.au-theme-bottom-right-radius{border-bottom-right-radius:${radius}px}`
-    res += `.au-theme-radius--important{border-radius:${radius}px !important}`
-    res += `.au-theme-top-left-radius--important{border-top-left-radius:${radius}px !important}`
-    res += `.au-theme-top-right-radius--important{border-top-right-radius:${radius}px !important}`
-    res += `.au-theme-bottom-left-radius--important{border-bottom-left-radius:${radius}px !important}`
-    res += `.au-theme-bottom-right-radius--important{border-bottom-right-radius:${radius}px !important}`
-    pseudos.forEach(pseudo => {
-      res += `.au-theme-${pseudo}-radius:${pseudo}{border-radius:${radius}px}`
-      res += `.au-theme-${pseudo}-radius-important:${pseudo}{border-radius:${radius}px !important}`
-      res += `.au-theme-${pseudo}-top-left-radius:${pseudo}{border-top-left-radius:${radius}pxj}`
-      res += `.au-theme-${pseudo}-top-left-radius--important:${pseudo}{border-top-left-radius:${radius}px !important}`
-      res += `.au-theme-${pseudo}-top-right-radius:${pseudo}{border-top-right-radius:${radius}px}`
-      res += `.au-theme-${pseudo}-top-right-radius--important:${pseudo}{border-top-right-radius:${radius}px !important}`
-      res += `.au-theme-${pseudo}-bottom-left-radius:${pseudo}{border-bottom-left-radius:${radius}px}`
-      res += `.au-theme-${pseudo}-bottom-left-radius--important:${pseudo}{border-bottom-left-radius:${radius}px !important}`
-      res += `.au-theme-${pseudo}-bottom-right-radius:${pseudo}{border-bottom-right-radius:${radius}px}`
-      res += `.au-theme-${pseudo}-bottom-right-radius--important:${pseudo}{border-bottom-right-radius:${radius}px !important}`
-    })
-  }
+  res += `.au-theme-border-radius--${radiosName}{border-radius:${radius}}`
+  res += `.au-theme-border-top-left-radius--${radiosName}{border-top-left-radius:${radius}}`
+  res += `.au-theme-border-top-right-radius--${radiosName}{border-top-right-radius:${radius}}`
+  res += `.au-theme-border-bottom-left-radius--${radiosName}{border-bottom-left-radius:${radius}}`
+  res += `.au-theme-border-bottom-right-radius--${radiosName}{border-bottom-right-radius:${radius}}`
+  res += `.au-theme-border-radius--${radiosName}-important{border-radius:${radius}px !important}`
+  res += `.au-theme-border-top-left-radius--${radiosName}-important{border-top-left-radius:${radius} !important}`
+  res += `.au-theme-border-top-right-radius--${radiosName}-important{border-top-right-radius:${radius} !important}`
+  res += `.au-theme-border-bottom-left-radius--${radiosName}-important{border-bottom-left-radius:${radius} !important}`
+  res += `.au-theme-border-bottom-right-radius--${radiosName}-important{border-bottom-right-radius:${radius} !important}`
+  pseudos.forEach(pseudo => {
+    res += `.au-theme-${pseudo}-border-radius--${radiosName}:${pseudo}{border-radius:${radius}px}`
+    res += `.au-theme-${pseudo}-border-radius--${radiosName}-important:${pseudo}{border-radius:${radius}px !important}`
+    res += `.au-theme-${pseudo}-border-top-left-radius--${radiosName}:${pseudo}{border-top-left-radius:${radius}pxj}`
+    res += `.au-theme-${pseudo}-border-top-left-radius--${radiosName}-important:${pseudo}{border-top-left-radius:${radius}px !important}`
+    res += `.au-theme-${pseudo}-border-top-right-radius--${radiosName}:${pseudo}{border-top-right-radius:${radius}px}`
+    res += `.au-theme-${pseudo}-border-top-right-radius--${radiosName}-important:${pseudo}{border-top-right-radius:${radius}px !important}`
+    res += `.au-theme-${pseudo}-border-bottom-left-radius--${radiosName}:${pseudo}{border-bottom-left-radius:${radius}px}`
+    res += `.au-theme-${pseudo}-border-bottom-left-radius--${radiosName}-important:${pseudo}{border-bottom-left-radius:${radius}px !important}`
+    res += `.au-theme-${pseudo}-border-bottom-right-radius--${radiosName}:${pseudo}{border-bottom-right-radius:${radius}px}`
+    res += `.au-theme-${pseudo}-border-bottom-right-radius--${radiosName}-important:${pseudo}{border-bottom-right-radius:${radius}px !important}`
+  })
   return res
 }
 
@@ -118,28 +115,18 @@ function themeGenerator (theme) {
   if (theme === 'dark') finalTheme = deepClone(dark)
   else if (typeof theme === 'object') {
     // merge colors
-    if (theme.colors) {
-      if (typeof theme.colors === 'object') {
-        Object.assign(finalTheme.colors, theme.colors)
-      } else {
-        console.error('Admin UI@theme-system@ theme.colors should be an object')
+    for (let name in theme) {
+      if (theme[name]) {
+        if (typeof theme[name] === 'object') {
+          Object.assign(finalTheme[name], theme[name])
+        } else {
+          console.error(`Admin UI@theme-system@ theme.${name} should be an object`)
+        }
       }
     }
-
-    // merge shadows
-    if (theme.shadows) {
-      if (typeof theme.shadows === 'object') {
-        Object.assign(finalTheme.shadows, theme.shadows)
-      } else {
-        console.error('Admin UI@theme-system@ theme.shadows should be an object')
-      }
-    }
-
-    // merge border radius
-    finalTheme.borderRadius = theme.borderRadius || finalTheme.borderRadius
   }
 
-  let { colors, shadows, borderRadius } = finalTheme
+  let { colors, shadows, radiuses } = finalTheme
   let res = ''
   scenes.forEach(scene => {
     // generate color
@@ -148,11 +135,14 @@ function themeGenerator (theme) {
     }
   })
   // generate shadow
-  for (let level in shadows) {
-    res += genShadowStyle(level, shadows[level])
+  for (let shadowName in shadows) {
+    res += genShadowStyle(shadowName, shadows[shadowName])
   }
   // generate border-radius
-  res += genRadiusStyle(borderRadius)
+  for (let radiusName in radiuses) {
+    res += genRadiusStyle(radiusName, radiuses[radiusName])
+    console.log(res)
+  }
   // console.log(res)
 
   // save theme to namespace

@@ -95,7 +95,7 @@
         au-theme-border-color--base-8
         au-theme-font-color--base-3
         au-theme-background-color--base-12
-        au-theme-shadow--level-3
+        au-theme-box-shadow--level-3
         au-sizegap-${size}
       `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
         <ul

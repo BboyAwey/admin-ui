@@ -5,7 +5,7 @@
     position: relative;
     // min-width: 88px;
     // height: $size-normal;
-    padding: 0 16px;
+    padding: 0 8px;
     border-width: 0;
     outline: none;
     font-size: $normal;
@@ -68,7 +68,7 @@
   <button
     class="
       au-button
-      au-theme-radius"
+      au-theme-border-radius--normal"
     :class="buttonClasses"
     :style="{
       cursor: loading ? 'wait' : ''
@@ -136,44 +136,27 @@
           'primary'
         ].indexOf(this.type) === -1
       },
+      canActivate () {
+        return !(this.disabled || this.loading)
+      },
       buttonClasses () {
         let res = []
         if (this.plain) {
-          if (this.isDefault) {
-            res = [
-              `plain`,
-              `au-theme-background-color--base-12`,
-              `au-theme-border-color--base-8`,
-              `au-theme-hover-border-color--primary-4`,
-              `au-theme-active-border-color--primary-2-important`,
-              `au-theme-font-color--base-3`,
-              `au-theme-hover-font-color--primary-4`,
-              `au-theme-active-font-color--primary-2-important`
-            ]
-          } else {
-            res = [
-              `plain`,
-              `au-theme-background-color--base-12`,
-              `au-theme-border-color--base-8`,
-              !this.disabled ? `au-theme-hover-border-color--${this.type}-4` : '',
-              !this.disabled ? `au-theme-active-border-color--${this.type}-2-important` : '',
-              `au-theme-font-color--base-3`,
-              !this.disabled ? `au-theme-hover-font-color--${this.type}-4` : '',
-              !this.disabled ? `au-theme-active-font-color--${this.type}-2-important` : ''
-            ]
-          }
+          res = [
+            `plain`,
+            `au-theme-background-color--base-12`,
+            `au-theme-border-color--base-8`,
+            this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+            this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-4-important` : '',
+            `au-theme-font-color--base-3`,
+            this.canActivate ? `au-theme-hover-font-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+            this.canActivate ? `au-theme-active-font-color--${this.isDefault ? 'primary' : this.type}-4-important` : ''
+          ]
         } else {
-          if (this.isDefault) {
-            res = [
-              `au-theme-background-color--base-5`,
-              `au-theme-font-color--base-12`
-            ]
-          } else {
-            res = [
-              `au-theme-background-color--${this.type}-3`,
-              `au-theme-font-color--base-12`
-            ]
-          }
+          res = [
+            `au-theme-background-color--${this.isDefault ? 'base-5' : this.type + '-3'}`,
+            `au-theme-font-color--base-12`
+          ]
         }
 
         res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''))

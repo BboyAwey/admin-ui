@@ -54,7 +54,7 @@
       :style="{
         cursor: disabled ? 'not-allowed' : 'default'
       }">
-      <span class="au-checkbox-core au-theme-radius" tabindex="0"
+      <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
       :class="{
         'au-theme-border-color--base-8': (!hasWarnings && !hover && !localValue && !localIndeterminate) || disabled,
         'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
@@ -88,7 +88,7 @@
         cursor: disabled ? 'not-allowed' : 'default'
       }"
       @click="handleClick(i)">
-      <span class="au-checkbox-core au-theme-radius" tabindex="0"
+      <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
       :class="{
         'au-theme-border-color--base-8': (!hasWarnings && !checkbox.hover && !checkbox.checked) || disabled,
         'au-theme-border-color--primary-3': !hasWarnings && checkbox.hover && !checkbox.checked,

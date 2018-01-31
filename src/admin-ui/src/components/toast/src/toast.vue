@@ -48,7 +48,7 @@
 </style>
 <template>
   <transition name="au-toast-fade">
-    <div class="au-toast au-theme-radius au-theme-before-radius au-theme-font-color--base-12 au-theme-before-background-color--base-0" :class="toastClass" :style="toastStyle" v-show="display">
+    <div class="au-toast au-theme-border-radius--normal au-theme-before-radius au-theme-font-color--base-12 au-theme-before-background-color--base-0" :class="toastClass" :style="toastStyle" v-show="display">
       <span :style="{paddingLeft: icon ? '48px' : ''}"><au-icon class="au-toast-icon" :class="iconClass" :type="icon"></au-icon>{{ message }}</span>
     </div>
   </transition>

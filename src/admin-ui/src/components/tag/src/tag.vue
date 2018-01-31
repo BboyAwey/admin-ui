@@ -23,7 +23,7 @@
   }
 </style>
 <template>
-  <div class="au-tag au-theme-radius" :class="{
+  <div class="au-tag au-theme-border-radius--normal" :class="{
     [`au-theme-font-color--${localType}-3`]: !active,
     [`au-theme-border-color--${localType}-3`]: !active,
     [`au-theme-font-color--base-12`]: active,

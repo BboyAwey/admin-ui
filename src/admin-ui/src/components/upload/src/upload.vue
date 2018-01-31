@@ -192,7 +192,7 @@
           au-theme-border-color--base-8
           au-theme-background-color--base-12
           au-theme-hover-background-color--base-11
-          au-theme-radius
+          au-theme-border-radius--normal
         ">
         <div
           class="

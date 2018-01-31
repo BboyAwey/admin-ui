@@ -103,19 +103,19 @@
 </style>
 <template>
   <!-- <div
-    class="au-popover au-theme-radius au-theme-shadow--level-3"
+    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-3"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     @blur="handleBlur($event)" -->
   <div
-    class="au-popover au-theme-radius au-theme-shadow--level-3"
+    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-3"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     ref="pop">
     <slot name="target"></slot>
     <div ref="content" :class="{
       'au-popover-content': true,
-      'au-theme-radius': true,
+      'au-theme-border-radius--normal': true,
       'au-theme-background-color--base-2': !plain,
       'au-theme-font-color--base-12': !plain,
       'au-theme-background-color--base-12': plain,

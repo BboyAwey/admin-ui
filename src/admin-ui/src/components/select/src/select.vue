@@ -90,7 +90,7 @@
     }" @click="labelClick" v-if="label" @click.stop="()=>{}">{{ label }}</div>
     <div :class="`au-select-core-container au-size-${size}`" ref="coreContainer">
       <div
-        class="au-select-core au-theme-radius"
+        class="au-select-core au-theme-border-radius--normal"
         ref="core"
         tabindex="0"
         @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
@@ -101,8 +101,8 @@
           'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
           'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-shadow--primary': !disabled && active && !hasWarnings,
-          'au-theme-shadow--danger': hasWarnings,
+          'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
+          'au-theme-box-shadow--danger': hasWarnings,
         }" :style="{
           cursor: disabled ? 'not-allowed' : 'default'
         }">
@@ -128,8 +128,8 @@
         au-select-option
         au-theme-background-color--base-12
         au-theme-border-color--base-8
-        au-theme-shadow--level-3
-        au-theme-radius`" v-show="optionDisplay">
+        au-theme-box-shadow--level-3
+        au-theme-border-radius--normal`" v-show="optionDisplay">
         <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
           <li
             v-for="(option, i) in options" :key="i"

@@ -76,7 +76,7 @@
     ref="modalContainer"
     @click="hide">
     <div class="au-modal-cell">
-      <div class="au-modal au-theme-radius au-theme-background-color--base-12" @click.stop="() => {}" ref="modal">
+      <div class="au-modal au-theme-border-radius--normal au-theme-background-color--base-12" @click.stop="() => {}" ref="modal">
         <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
           <au-scroller class="au-modal-content-scroller" stop-propagation>

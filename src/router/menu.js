@@ -17,7 +17,7 @@ export default [
   {
     'text': '组件',
     'icon': 'cube',
-    'collapse': true,
+    'collapse': false,
     'children': [
       {
         'text': '图标',

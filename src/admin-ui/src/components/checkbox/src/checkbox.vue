@@ -39,7 +39,7 @@
 
     }
     .au-checkbox-text {
-      margin-left: 4px;
+      margin-left: 3px;
       vertical-align: middle;
     }
   }
@@ -56,7 +56,8 @@
       }">
       <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
       :class="{
-        'au-theme-border-color--base-8': (!hasWarnings && !hover && !localValue && !localIndeterminate) || disabled,
+        'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
+        'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
         'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
         'au-theme-border-color--danger-3': hasWarnings && !localValue &&!disabled,
         'au-theme-background-color--primary-3': !hasWarnings && (localValue || localIndeterminate) && !disabled,
@@ -69,14 +70,12 @@
         <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
         :class="{
           'au-checkbox-icon-disabled': disabled,
-          'au-theme-font-color--base-12': !disabled,
-          'au-theme-font-color--base-6': disabled
+          'au-theme-font-color--base-12': true
         }"></au-icon>
         <au-icon unify-size v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
         :class="{
           'au-checkbox-icon-disabled': disabled,
-          'au-theme-font-color--base-12': !disabled,
-          'au-theme-font-color--base-6': disabled
+          'au-theme-font-color--base-12': true
         }"></au-icon>
       </span>
       <span class="au-checkbox-text">{{ text }}</span>
@@ -90,7 +89,8 @@
       @click="handleClick(i)">
       <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
       :class="{
-        'au-theme-border-color--base-8': (!hasWarnings && !checkbox.hover && !checkbox.checked) || disabled,
+        'au-theme-border-color--base-8': !hasWarnings && !checkbox.hover && !checkbox.checked,
+        'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
         'au-theme-border-color--primary-3': !hasWarnings && checkbox.hover && !checkbox.checked,
         'au-theme-border-color--danger-3': hasWarnings && !checkbox.checked && !disabled,
         'au-theme-background-color--primary-3': !hasWarnings && checkbox.checked && !disabled,
@@ -104,7 +104,7 @@
           class="au-checkbox-icon au-theme-font-color--base-12"
           :class="{
             'au-checkbox-icon-disabled': disabled,
-            'au-theme-font-color--base-6-important': disabled
+            'au-theme-font-color--base-12': disabled
           }"></au-icon>
       </span>
       <span class="au-checkbox-text">{{ checkbox.text }}</span>

@@ -48,11 +48,11 @@ export default {
     'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
     'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
     'level-3': '0 3px 6px rgba(60, 65, 71, .3)',
-    'primary': '0 0 3px rgba(25, 188, 157, .5)',
-    'info': '0 0 3px rgba(52, 152, 219, .5)',
-    'warning': '0 0 3px rgba(255, 180, 51, .5)',
-    'danger': '0 0 3px rgba(231, 76, 60, .5)',
-    'success': '0 0 3px rgba(92, 185, 92, .5)'
+    'primary': '0 0 4px rgba(25, 188, 157, .6)',
+    'info': '0 0 4px rgba(52, 152, 219, .6)',
+    'warning': '0 0 4px rgba(255, 180, 51, .6)',
+    'danger': '0 0 4px rgba(231, 76, 60, .6)',
+    'success': '0 0 4px rgba(92, 185, 92, .6)'
   },
   radiuses: {
     'normal': '2px',

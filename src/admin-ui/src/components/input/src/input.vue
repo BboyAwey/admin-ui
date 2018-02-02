@@ -6,7 +6,7 @@
   @import '../../../style/warnings';
   .au-input {
     display: inline-block;
-    width: 198px;
+    width: 260px;
     .au-input-container {
       position: relative;
       width: 100%;
@@ -22,7 +22,7 @@
       font-size: 16px;
     }
     .au-input-core {
-      width: 198px;
+      width: 260px;
       width: 100%;
       border-width: 1px;
       border-style: solid;
@@ -36,8 +36,9 @@
     }
     textarea.au-input-core {
       line-height: $normal * 1.5;
-      width: 320px;
+      width: 260px;
       height: 100px;
+      padding: 8px 12px;
     }
   }
   .au-input-associations-scroller {

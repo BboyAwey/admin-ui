@@ -32,7 +32,7 @@
       border-radius: 100%;
     }
     .au-radio-text {
-      margin-left: 4px;
+      margin-left: 3px;
       vertical-align: middle;
     }
   }
@@ -50,7 +50,7 @@
       <span class="au-radio-core" tabindex="0"
       :class="{
         'au-theme-border-color--base-8': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
-        'au-theme-background-color--base-9': disabled,
+        'au-theme-background-color--base-8': disabled && radio.value!== localValue,
         'au-theme-border-color--primary-3': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
         'au-theme-border-color--danger-3': hasWarnings && !disabled
       }">
@@ -60,7 +60,7 @@
             'au-radio-dot-disabled': disabled,
             'au-theme-background-color--primary-3': !disabled && !hasWarnings,
             'au-theme-background-color--danger-3': !disabled && hasWarnings,
-            'au-theme-background-color--base-6': disabled
+            'au-theme-background-color--base-10': disabled
           }"></span>
       </span>
       <span class="au-radio-text">{{ radio.text }}</span>

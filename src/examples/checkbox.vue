@@ -13,12 +13,6 @@
           @change="checkAll"
           :indeterminate="indeterminate"></au-checkbox><br><br>
         <au-checkbox
-          :value="true"
-          label="Please check witch kind of dance would you like"
-          text="All above"
-          :disabled="allChecked"
-          :indeterminate="indeterminate"></au-checkbox><br><br>
-        <au-checkbox
           v-model="kinds"
           label="Please check what kinds of dances do u love"
           :checkboxes="checkboxes"

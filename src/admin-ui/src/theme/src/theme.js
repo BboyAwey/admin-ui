@@ -141,9 +141,7 @@ function themeGenerator (theme) {
   // generate border-radius
   for (let radiusName in radiuses) {
     res += genRadiusStyle(radiusName, radiuses[radiusName])
-    console.log(res)
   }
-  // console.log(res)
 
   // save theme to namespace
   namespace.set('theme', finalTheme)

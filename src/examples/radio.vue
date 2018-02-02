@@ -6,7 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-radio v-model="values" label="Please check which kind of dances do u love" :radios="radios" :validators="validators"></au-radio>
+        <au-radio v-model="values" label="Please check which kind of dances do u love" :radios="radios" :validators="validators"></au-radio> <br><br>
+        <au-radio v-model="values" label="Please check which kind of dances do u love" :radios="radios" :validators="validators" disabled></au-radio>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -243,7 +244,7 @@
               validators: [
                 {
                   validator (v) {
-                    v === 'b'
+                    return v === 'b'
                   },
                   warning: 'If bboy then bboy forever'
                 }
@@ -282,7 +283,7 @@
         validators: [
           {
             validator (v) {
-              v === 'b'
+              return v === 'b'
             },
             warning: 'If bboy then bboy forever'
           }

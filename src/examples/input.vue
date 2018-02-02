@@ -6,7 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators"></au-input><br>
+        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators"></au-input><br><br>
+        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
       </div>
       <!-- 组件示例 -->
     </au-panel>

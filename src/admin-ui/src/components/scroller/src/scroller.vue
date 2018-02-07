@@ -24,7 +24,7 @@
   }
   .au-scroller-bar-container {
     top: 10px;
-    right: 5px;
+    right: 2px;
     width: 12px;
     height: 100%;
   }

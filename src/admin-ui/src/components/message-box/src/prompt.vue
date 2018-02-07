@@ -1,9 +1,11 @@
 <style lang="scss">
+  @import "../../../style/vars";
   .au-prompt {
     padding-bottom: 4px;
   }
   .au-prompt-message {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    font-size: $normal;
   }
   .au-prompt-core-container {
     padding: 0 2px;

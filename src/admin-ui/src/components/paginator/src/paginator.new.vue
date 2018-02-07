@@ -9,22 +9,30 @@
     }
     & > ul > li {
       float: left;
-      min-width: 40px;
+      min-width: 32px;
       height: 32px;
       padding: 0 5px;
-      border-top-width: 1px;
-      border-top-style: solid;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-      border-right-width: 1px;
-      border-right-style: solid;
+      border-width: 1px;
+      border-style: solid;
       line-height: 32px;
       text-align: center;
       font-size: 12px;
     }
     & > ul > .ellipsis{
-      border-bottom: none;
-      border-top: none;
+      // border-bottom: none;
+      // border-top: none;
+      // border: none;
+    }
+    .fast-ward {
+      display: none;
+    }
+    .ellipsis:hover {
+      .ellipsis-text {
+        display: none;
+      }
+      .fast-ward {
+        display: inline;
+      }
     }
     & > ul > .current{
       border: none;
@@ -32,60 +40,73 @@
     & > ul > .disabled{
       cursor: not-allowed;
     }
-    & > ul > li:not(.current):not(.disabled):not(.ellipsis):hover{
+    & > ul > li:not(.current):not(.disabled):hover{
       cursor: pointer;
     }
-    & > ul > li:first-child {
-      border-left-width: 1px;
-      border-left-style: solid;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
+    & > ul > li:not(:last-child) {
+      margin-right: 8px;
     }
-    & > ul > li:last-child {
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
-    }
+    // & > ul > li:first-child {
+    //   border-left-width: 1px;
+    //   border-left-style: solid;
+    //   border-top-left-radius: 3px;
+    //   border-bottom-left-radius: 3px;
+    // }
+    // & > ul > li:last-child {
+    //   border-top-right-radius: 3px;
+    //   border-bottom-right-radius: 3px;
+    // }
   }
 </style>
 <template>
   <div class="au-paginator">
     <ul>
-      <li class="au-theme-border-color--base-8 au-theme-font-color--base-3"
+      <li class="
+        au-theme-border-color--base-8
+        au-theme-font-color--base-3
+        au-theme-border-radius--large"
         :class="{
           'disabled': !canPrev,
           'au-theme-border-color--base-8': true,
           'au-theme-font-color--base-3': canPrev,
           'au-theme-font-color--base-6': !canPrev,
-          'au-theme-background-color--base-9': !canPrev,
-          'au-theme-hover-background-color--base-10': canPrev,
-          'au-theme-hover-font-color--primary-3': canPrev
+          'au-theme-background-color--base-10': !canPrev,
+          'au-theme-hover-font-color--primary-3': canPrev,
+          'au-theme-hover-border-color--primary-3': canPrev
         }" @click="prev">
         <au-icon type="angle-left" size="16px"></au-icon>
       </li>
       <li
-        v-for="num in nums"
+        v-for="(num, i) in nums"
         :key="num"
+        class="au-theme-border-radius--large"
         :class="{
           'current': num == localCurrent,
           'ellipsis': num == '···',
-          'au-theme-font-color--primary-3': num == localCurrent,
-          'au-theme-background-color--primary-5': num == localCurrent,
+          'au-theme-font-color--base-12': num == localCurrent,
+          'au-theme-background-color--primary-3': num == localCurrent,
           'au-theme-border-color--base-8': num != localCurrent,
           'au-theme-font-color--base-3': num != localCurrent,
           'au-theme-background-color--base-12': num != localCurrent,
-          'au-theme-hover-background-color--base-10': num != localCurrent && num != '···',
-          'au-theme-hover-font-color--primary-3': num != localCurrent && num != '···'
+          'au-theme-hover-border-color--primary-3': num != localCurrent,
+          'au-theme-hover-font-color--primary-3': num != localCurrent
         }"
-        @click="paginate(num)">{{ num }}</li>
-      <li class="au-theme-border-color--base-8 au-theme-font-color--base-3"
+        @click="paginate(num, i)">
+          <span class="ellipsis-text">{{ num }}</span>
+          <span class="fast-ward"><au-icon :type="i < nums.indexOf(localCurrent) ? 'angle-double-left' : 'angle-double-right'" /></span>
+        </li>
+      <li class="
+        au-theme-border-color--base-8
+        au-theme-font-color--base-3
+        au-theme-border-radius--large"
         :class="{
           'disabled': !canNext,
           'au-theme-border-color--base-8': true,
           'au-theme-font-color--base-3': canNext,
           'au-theme-font-color--base-6': !canNext,
-          'au-theme-background-color--base-9': !canNext,
-          'au-theme-hover-background-color--base-10': canNext,
-          'au-theme-hover-font-color--primary-3': canNext
+          'au-theme-background-color--base-10': !canNext,
+          'au-theme-hover-font-color--primary-3': canNext,
+          'au-theme-hover-border-color--primary-3': canNext
         }" @click="next">
         <au-icon type="angle-right" size="16px"></au-icon>
       </li>
@@ -193,8 +214,15 @@
       }
     },
     methods: {
-      paginate (num) {
+      paginate (num, i) {
         if (num !== '···') this.localCurrent = num
+        else if (i) {
+          if (i < this.nums.indexOf(this.localCurrent)) {
+            this.paginate(this.localCurrent - 5)
+          } else {
+            this.paginate(this.localCurrent + 5)
+          }
+        }
       },
       next () {
         if (this.canNext) this.localCurrent++

@@ -34,17 +34,18 @@
     padding: 20px;
   }
   .au-modal-title {
-    height: 30px;
+    // height: 30px;
     margin: 0;
-    padding-bottom: 12px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    // padding-bottom: 12px;
+    // border-bottom-width: 1px;
+    // border-bottom-style: solid;
     overflow: hidden;
     text-align: left;
+    font-weight: bold;
   }
   .au-modal-content {
     min-width: 320px;
-    margin: 12px 0;
+    margin: 12px 0 0 0;
     text-align: left;
   }
   .au-modal-operations {
@@ -55,8 +56,8 @@
     margin-right: 8px;
   }
   .au-modal-dec-line {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    // border-bottom-width: 1px;
+    // border-bottom-style: solid;
   }
   .au-modal-close-icon {
     position: absolute;
@@ -76,7 +77,7 @@
     ref="modalContainer"
     @click="hide">
     <div class="au-modal-cell">
-      <div class="au-modal au-theme-border-radius--normal au-theme-background-color--base-12" @click.stop="() => {}" ref="modal">
+      <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" @click.stop="() => {}" ref="modal">
         <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
           <au-scroller class="au-modal-content-scroller" stop-propagation>
@@ -135,14 +136,7 @@
         type: [String, Number]
       },
       height: {
-        type: [String, Number],
-        valodator (v) {
-          if (!/^\d+(px)*$/g.test(v)) {
-            console.warn('Admin UI@au-modal@ height can not be percentage because we need absolute height value to put it in middle of the window')
-            return false
-          }
-          return true
-        }
+        type: [String, Number]
       },
       onEnter: String
     },
@@ -232,7 +226,7 @@
         let modalHeight = getElementSize(this.$refs.modal).height
 
         // we need to minus the padding value of modal and opreation divs and the decline height
-        this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 24 - 40 - 1 + 'px'
+        this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
       },
       resizeHandler () {
         this.calcModalStyle()

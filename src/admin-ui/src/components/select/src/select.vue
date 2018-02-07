@@ -134,7 +134,8 @@
           <li
             v-for="(option, i) in options" :key="i"
             :class="{
-              'au-theme-background-color--primary-5': isSelected(option.value),
+              'au-theme-background-color--primary-3': isSelected(option.value),
+              'au-theme-font-color--base-12': isSelected(option.value),
               'au-theme-hover-background-color--base-10': !isSelected(option.value)
             }"
             @click.stop="select(option, $event)">{{ option.text }}</li>

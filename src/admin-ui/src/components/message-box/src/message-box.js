@@ -90,7 +90,7 @@ function getConfirmButton (instance, config) {
 }
 
 function MessageBox (config) {
-  let { type = 'alert', message, validators, reset, placeholder } = config
+  let { type = 'alert', title, message, validators, reset, placeholder } = config
   if (!type || ['alert', 'confirm', 'prompt'].indexOf(type) === -1) {
     console.warn('Admin UI@massage-box@ "type" is required and must be "alert","confirm" or "prompt"')
   }
@@ -138,6 +138,7 @@ function MessageBox (config) {
   Object.assign(contentInstance, {message, validators, placeholder})
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance)
+  instances.modal.title = title
   instances.modal.display = true
   instances.modal.$mount()
   document.body.appendChild(instances.modal.$el)

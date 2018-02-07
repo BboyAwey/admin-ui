@@ -180,7 +180,7 @@
       height: 35px;
       line-height: 35px;
       text-align: center;
-      padding: 0 24px;
+      padding: 0 16px;
       cursor: pointer;
       // min-width: 88px;
       overflow: hidden;
@@ -228,12 +228,12 @@
     bottom: 6px;
   }
   .au-tabs-delete-btn {
-    right: 10px;
+    right: 6px;
     top: 5px;
     display: none;
   }
   .au-tabs-rename-btn {
-    left: 10px;
+    left: 6px;
     top: 12px;
     display: none;
     font-size: $small

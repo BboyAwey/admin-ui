@@ -23,9 +23,9 @@
     </au-panel>
     <au-panel class="section" title="Methods">
       <p class="paragraph">
-        MessageBox组件本身就是一个方法<br>
-        如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox()</span>方法即可。<br>
-        如果是全局引入的Admin UI，对应于<span class="code au-theme-radius au-theme-background-color--warning-5">window.alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">window.confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">window.prompt()</span>三个方法，Admin UI会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">$confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">$prompt()</span三个方法（他们是前三者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
+        MessageBox组件本身就是一个方法。<br>
+        如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox()</span>方法或者调用MessageBox上附加的三个别名方法<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.prompt()</span>即可。<br>
+        如果是全局引入的Admin UI，Admin UI会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">$confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">$prompt()</span>三个别名方法（他们是前三者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
       </p>
       <au-table>
         <thead>
@@ -54,7 +54,22 @@
                 <li class="au-theme-border-color--base-8">prompt</li>
               </ol>
             </td>
-            <td>消息框类型<br>当使用方法别名时不需要该字段</td>
+            <td>消息框类型<br>当使用别名方法时不需要该字段</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>标题</td>
           </tr>
           <tr>
             <td>message</td>
@@ -171,6 +186,7 @@
           methods: {
             alert () {
               this.$alert({
+                title: 'Alert',
                 message: 'oh yes~',
                 confirm () {
                   console.log('confirm')
@@ -179,11 +195,13 @@
             },
             confirm () {
               this.$confirm({
+                title: 'Confirm',
                 message: 'you feel good?'
               })
             },
             prompt () {
               this.$prompt({
+                title: 'Prompt',
                 message: 'How\'d you feel?',
                 reset: true,
                 validators: [
@@ -211,6 +229,7 @@
     methods: {
       alert () {
         this.$alert({
+          title: 'Alert',
           message: 'oh yes~',
           confirm () {
             console.log('confirm')
@@ -219,11 +238,13 @@
       },
       confirm () {
         this.$confirm({
+          title: 'Confirm',
           message: 'you feel good?'
         })
       },
       prompt () {
         this.$prompt({
+          title: 'Prompt',
           message: 'How\'d you feel?',
           reset: true,
           validators: [

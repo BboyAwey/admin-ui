@@ -33,9 +33,9 @@
     .menu-fold-icon {
       position: absolute;
       right: 12px;
-      float: right;
-      height: 40px;
-      width: 40px;
+      // float: right;
+      // height: 40px;
+      // width: 40px;
       text-align: center;
       line-height: 40px;
       font-size: $large;
@@ -180,15 +180,15 @@
                 :style="{ paddingLeft: calcPaddingLeft(item)  }"
                 @click="select(item, i)">
                 <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
-                <span class="menu-text">{{ item.text }}</span>
+                <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
                 <au-icon class="menu-fold-icon
                   au-theme-font-color--base-3
                   au-theme-hover-font-color--primary-3"
                   type="angle-down"
                   v-if="hasChildren(item)"
                   v-show="!localCollapse"
-                  :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '14px' : ''}"
-                  @click.native.stop="toggleCollapse(item)" unify-size/>
+                  :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '12px' : ''}"
+                  @click.native.stop="toggleCollapse(item)"/>
               </div>
               <div slot="content" class="au-menu-pop-content">
                 {{ item.text }}
@@ -247,15 +247,15 @@
               :style="{ paddingLeft: calcPaddingLeft(item)  }"
               @click="select(item, i)">
               <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
-              <span class="menu-text">{{ item.text }}</span>
+              <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
               <au-icon class="menu-fold-icon
                 au-theme-font-color--base-3
                 au-theme-hover-font-color--primary-3"
                 type="angle-down"
                 v-if="hasChildren(item)"
                 v-show="!localCollapse"
-                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '14px' : ''}"
-                @click.native.stop="toggleCollapse(item)" unify-size/>
+                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '12px' : ''}"
+                @click.native.stop="toggleCollapse(item)"/>
             </div>
             <div slot="content" class="au-menu-pop-content">
               {{ item.text }}
@@ -514,6 +514,11 @@
         return !!(item.children && item.children.length)
       },
       handlePopSelect (item) {
+        // hide children container popover
+        if (this.isCurrent(item)) return
+        if (this.$refs.popover) {
+          this.$refs.popover.forEach(p => p.hide())
+        }
         this.$emit('select', item)
       }
     }

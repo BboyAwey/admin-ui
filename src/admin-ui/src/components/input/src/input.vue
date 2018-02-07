@@ -19,7 +19,7 @@
       height: 30px;
       margin-top: -15px;
       line-height: 30px;
-      font-size: 16px;
+      font-size: $medium;
     }
     .au-input-core {
       width: 260px;

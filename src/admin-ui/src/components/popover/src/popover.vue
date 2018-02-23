@@ -313,6 +313,36 @@
         let targetSize = getElementSize(target)
         let targetPos = getElementPagePos(target)
         let popSize = getElementSize(content)
+        let windowSize = {
+          width: document.body.clientWidth,
+          height: document.body.clientHeight
+        }
+
+        // handle screen overflow
+        let targetRect = target.getBoundingClientRect()
+        if (targetRect.top < popSize.height && keys[0] === 'top') keys[0] = 'bottom'
+        if (windowSize.height - targetRect.bottom < popSize.height && keys[0] === 'bottom') keys[0] = 'top'
+        if (targetRect.left < popSize.width && keys[0] === 'left') keys[0] = 'rigth'
+        if (windowSize.width - targetRect.right < popSize.width && keys[0] === 'right') keys[0] = 'left'
+
+        if (keys[0] === 'left' || keys[0] === 'right') {
+          if (keys[1] !== 'top') {
+            if (targetRect.top < (popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height)) keys[1] = 'top'
+          }
+          if (keys[1] !== 'bottom') {
+            if (windowSize.height - targetRect.bottom < (popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height)) keys[1] = 'bottom'
+          }
+        }
+        if (keys[0] === 'top' || keys[0] === 'bottom') {
+          if (keys[1] !== 'left') {
+            if (targetRect.left < (popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width)) keys[1] = 'left'
+          }
+          if (keys[1] !== 'right') {
+            if (windowSize.width - targetRect.right < (popSize.widht / (keys[1] === 'middle' ? 2 : 1) - targetSize.width)) keys[1] = 'right'
+          }
+        }
+
+        this.localPlacement = keys.join(' ')
 
         // fix the size bug witch caused by the wordwrap
         // this.$refs.pop.style.width = popSize.width + 'px'
@@ -337,8 +367,8 @@
           },
           y: {
             top: targetPos.top + parseInt(this.yFix),
-            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
-            bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix)// do not kown why should add 10 but it works
+            middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
+            bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
           }
         }
         let res = {}

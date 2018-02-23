@@ -108,6 +108,10 @@ export default [
         'url': '/timepicker'
       },
       {
+        'text': '日期时间范围选择',
+        'url': '/rangepicker'
+      },
+      {
         'text': '提示消息',
         'url': '/toast'
       },

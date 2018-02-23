@@ -7,11 +7,6 @@
     position: relative;
     width: 198px;
   }
-  .au-timepicker-label {
-    display: inline-block;
-    margin-bottom: 8px;
-    font-size: $normal;
-  }
   .au-timepicker-container {
     position: relative;
   }
@@ -39,6 +34,7 @@
     & > li {
       height: 32px;
       line-height: 32px;
+      font-size: $normal;
       text-align: center;
       user-select: none;
       cursor: pointer;
@@ -68,9 +64,9 @@
     }
   }
   /*hack input-icon*/
-  .active .au-input-icon {
-    // color: $primary;
-  }
+  // .active .au-input-icon {
+  //   color: $primary;
+  // }
 </style>
 <template>
   <div class="au-timepicker au-theme-font-color--base-3">

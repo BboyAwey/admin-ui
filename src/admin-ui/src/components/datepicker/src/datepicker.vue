@@ -31,10 +31,10 @@
       cursor: default;
     }
   }
-  .au-datepicker-dates-header {
-    // border-top-left-radius: 2px;
-    // border-top-right-radius: 2px;
-  }
+  // .au-datepicker-dates-header {
+  //   border-top-left-radius: 2px;
+  //   border-top-right-radius: 2px;
+  // }
   .au-datepicker-fastmoves {
     padding-top: 12px;
     font-size: $normal;

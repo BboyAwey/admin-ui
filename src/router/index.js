@@ -141,6 +141,11 @@ export default new Router({
       component: (resolve) => require(['../examples/timepicker.vue'], resolve)
     },
     {
+      path: '/rangepicker',
+      name: 'rangepicker',
+      component: (resolve) => require(['../examples/rangepicker.vue'], resolve)
+    },
+    {
       path: '/toast',
       name: 'toast',
       component: (resolve) => require(['../examples/toast.vue'], resolve)

@@ -27,6 +27,7 @@ import Select from './components/select'
 import Cascading from './components/cascading'
 import Datepicker from './components/datepicker'
 import Timepicker from './components/timepicker'
+import Rangepicker from './components/rangepicker'
 import Toast from './components/toast'
 import Modal from './components/modal'
 import MessageBox from './components/message-box'
@@ -59,6 +60,7 @@ const components = [
   Cascading,
   Datepicker,
   Timepicker,
+  Rangepicker,
   Toast,
   MessageBox,
   Modal,
@@ -92,6 +94,7 @@ export {
   Cascading,
   Datepicker,
   Timepicker,
+  Rangepicker,
   Toast,
   Modal,
   MessageBox,
@@ -125,6 +128,7 @@ const adminUi = {
   Cascading,
   Datepicker,
   Timepicker,
+  Rangepicker,
   Toast,
   Modal,
   MessageBox,

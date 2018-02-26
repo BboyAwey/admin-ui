@@ -323,9 +323,9 @@
         validators: [
           {
             validator (v) {
-              return v === '00:00:00'
+              return v === '01:00:00'
             },
-            warning: '请选择00:00:00'
+            warning: '请选择01:00:00'
           }
         ]
       }

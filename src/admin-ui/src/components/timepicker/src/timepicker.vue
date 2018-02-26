@@ -162,6 +162,11 @@
   const HOURSRANGE = 736
   const MSRANGE = 1888
 
+  function getNumberIncludeZero (number) {
+    if (number === '') return false
+    else return number || (Number(number) === 0 ? '0' : false)
+  }
+
   export default {
     name: 'au-timepicker',
     mixins: [FormApiMixin, ValidatorMixin],
@@ -218,9 +223,9 @@
         if (v) {
           let now = new Date()
           this.scrollTo([
-            this.hour || this.formatNum(now.getHours()),
-            this.minute || this.formatNum(now.getMinutes()),
-            this.second || this.formatNum(now.getSeconds())])
+            getNumberIncludeZero(this.hour) || this.formatNum(now.getHours()),
+            getNumberIncludeZero(this.minute) || this.formatNum(now.getMinutes()),
+            getNumberIncludeZero(this.second) || this.formatNum(now.getSeconds())])
           this.$emit('focus', this.time)
         } else {
           if (isEmptyString(this.inputTime)) {

@@ -59,11 +59,11 @@
       <au-button slot="target" plain :size="size" :disabled="disabled">
         {{ type !== 'time' ? localRange.startDate : '' }}
         {{ type !== 'date' ? localRange.startTime : '' }}
-        <span class="au-theme-font-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? '请选择开始时间' : '' }}</span>
+        <span class="au-theme-font-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? startPlaceholder : '' }}</span>
         至
         {{ type !== 'time' ? localRange.endDate : '' }}
         {{ type !== 'date' ? localRange.endTime : '' }}
-        <span class="au-theme-font-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? '请选择结束时间' : '' }}</span>
+        <span class="au-theme-font-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? endPlaceholder : '' }}</span>
       </au-button>
       <div class="au-rangepicker-pop"  slot="content" ref="popContent">
         <div class="au-rangepicker-absolute" v-show="absolute" ref="absolute">
@@ -72,38 +72,38 @@
             class="au-rangepicker-date"
             placeholder="开始日期"
             v-model="startDate"
-            :start="validRange.startDate"
-            :end="endDate ? endDate : null"/>
+            :start="valid.startDate.start"
+            :end="valid.startDate.end"/>
           <au-timepicker
             v-show="type !== 'date'"
             class="au-rangepicker-time"
             placeholder="开始时间"
             v-model="startTime"
-            :start="startDate === validRange.startDate ? validRange.startTime : null"
-            :end="startDate === endDate ? endTime : null"/>
+            :start="valid.startTime.start"
+            :end="valid.startTime.end"/>
           <span class="au-rangepicker-to">至</span>
           <au-datepicker
             v-show="type !== 'time'"
             class="au-rangepicker-date"
             placeholder="结束日期"
             v-model="endDate"
-            :end="validRange.endDate"
-            :start="startDate ? startDate : null"/>
+            :start="valid.endDate.start"
+            :end="valid.endDate.end"/>
           <au-timepicker
             v-show="type !== 'date'"
             class="au-rangepicker-time"
             placeholder="结束时间"
             v-model="endTime"
-            :end="endDate === validRange.endDate ? validRange.endTime : null"
-            :start="endDate === startDate ? startTime : null"/>
+            :start="valid.endTime.start"
+            :end="valid.endTime.end"/>
           <au-button type="default" @click="clear" plain>清空</au-button>
           <au-button type="default" @click="handleCancel">取消</au-button>
           <au-button type="primary" @click="handleConfirm" :disabled="!fullfill">确定</au-button>
         </div>
-        <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative">
+        <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative && filteredRelatives.length">
           <div
             class="au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8"
-            v-for="(item, i) in relatives" :key="i"
+            v-for="(item, i) in filteredRelatives" :key="i"
             :class="{
               'au-theme-hover-font-color--primary-3': !isCurrent(item),
               'au-theme-hover-border-color--primary-3': !isCurrent(item),
@@ -148,11 +148,13 @@ function resolveTimestamp (timestamp) {
 }
 
 function padDateStr (date) {
-  return date.split('-').map(e => padNum(e)).join('-')
+  if (date) return date.split('-').map(e => padNum(e)).join('-')
+  else return ''
 }
 
 function padTimeStr (time) {
-  return time.split(':').map(e => padNum(e)).join(':')
+  if (time) return time.split(':').map(e => padNum(e)).join(':')
+  else return ''
 }
 
 function resolveRange (range) {
@@ -185,6 +187,13 @@ function getTimeFromDateStr (dateStr) {
 
 function getMsFromTimeStr (timeStr) {
   return timeStr.split(':').reverse().reduce((t, c, i) => Math.pow(60, i) * c + t, 0) * 1000
+}
+
+function getTimeStrFromMs (ms) {
+  let h = Math.floor(ms / 1000 / 60 / 60)
+  let m = Math.floor(((ms / 1000 / 60 / 60) - h) * 60)
+  let s = Math.ceil((((ms / 1000 / 60 / 60) - h) * 60 - m) * 60)
+  return `${padNum(h)}:${padNum(m)}:${padNum(s)}`
 }
 
 function getSpanFromRange (range) {
@@ -228,6 +237,15 @@ export default {
     },
     start: String,
     end: String,
+    span: [Number, String],
+    startPlaceholder: {
+      type: String,
+      default: '请选择开始时间'
+    },
+    endPlaceholder: {
+      type: String,
+      default: '请选择结束时间'
+    },
     relative: {
       type: Boolean,
       default: true
@@ -235,7 +253,7 @@ export default {
     relatives: {
       type: Array,
       default () {
-        let hours = [
+        return [
           {
             text: '最近15分钟',
             span: 900000
@@ -259,9 +277,7 @@ export default {
           {
             text: '最近12小时',
             span: 43200000
-          }
-        ]
-        let days = [
+          },
           {
             text: '最近1天',
             span: 86400000
@@ -281,11 +297,15 @@ export default {
           {
             text: '最近1个月',
             span: 2592000000
+          },
+          {
+            text: '最近3个月',
+            span: 7776000000
+          },
+          {
+            text: '最近6个月',
+            span: 15552000000
           }
-        ]
-        return [
-          ...this.type !== 'date' ? hours : [],
-          ...this.type !== 'time' ? days : []
         ]
       }
     },
@@ -331,11 +351,96 @@ export default {
       let endTime = end.find(e => e.indexOf(':') !== -1)
 
       return {
-        startDate: startDate !== -1 ? startDate.split('-').map((e, i) => i > 0 ? padNum(e) : e).join('-') : null,
-        startTime: startTime !== -1 ? startTime.split(':').map((e, i) => padNum(e)).join(':') : null,
-        endDate: endDate !== -1 ? endDate.split('-').map((e, i) => i > 0 ? padNum(e) : e).join('-') : null,
-        endTime: endTime !== -1 ? endTime.split(':').map((e, i) => padNum(e)).join(':') : null
+        startDate: startDate ? startDate.split('-').map((e, i) => i > 0 ? padNum(e) : e).join('-') : null,
+        startTime: startTime ? startTime.split(':').map((e, i) => padNum(e)).join(':') : null,
+        endDate: endDate ? endDate.split('-').map((e, i) => i > 0 ? padNum(e) : e).join('-') : null,
+        endTime: endTime ? endTime.split(':').map((e, i) => padNum(e)).join(':') : null
       }
+    },
+    valid () {
+      let {
+        validRange,
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+        span,
+        type
+      } = this
+      span = Number(span)
+
+      let res = {
+        startDate: {
+          start: validRange.startDate,
+          end: endDate || validRange.endDate
+        },
+        startTime: {
+          start: startDate === validRange.startDate ? validRange.startTime : null,
+          end: startDate === endDate ? endTime : (startDate === validRange.endDate ? validRange.endTime : null)
+        },
+        endDate: {
+          start: startDate || validRange.startDate,
+          end: validRange.endDate
+        },
+        endTime: {
+          start: endDate === startDate ? startTime : (endDate === validRange.startDate ? validRange.startTime : null),
+          end: endDate === validRange.endDate ? validRange.endTime : null
+        }
+      }
+
+      if (type !== 'time' && span && endDate) {
+        startTime = startTime || '00:00:00'
+        endTime = endTime || '00:00:00'
+        let validStartMs = getTimeFromDateStr(validRange.startDate) + getMsFromTimeStr(startTime)
+        let endMs = getTimeFromDateStr(endDate) + getMsFromTimeStr(endTime)
+        if (span < endMs - validStartMs) {
+          let temp = resolveTimestamp(endMs - span)
+          res.startDate.start = `${temp.Y}-${temp.M}-${temp.D}`
+          if (startDate === res.startDate.start) {
+            res.startTime.start = `${temp.h}:${temp.m}:${temp.s}`
+          }
+        }
+      }
+
+      if (type !== 'time' && span && startDate) {
+        startTime = startTime || '00:00:00'
+        endTime = endTime || '00:00:00'
+        let validEndMs = getTimeFromDateStr(validRange.endDate) + getMsFromTimeStr(endTime)
+        let startMs = getTimeFromDateStr(startDate) + getMsFromTimeStr(startTime)
+        if (startMs + span < validEndMs) {
+          let temp = resolveTimestamp(startMs + span)
+          res.endDate.end = `${temp.Y}-${temp.M}-${temp.D}`
+          if (endDate === res.endDate.end) {
+            res.endTime.end = `${temp.h}:${temp.m}:${temp.s}`
+          }
+        }
+      }
+
+      if (span && type === 'time') {
+        if (endTime) {
+          let validStartMs = getMsFromTimeStr(validRange.startTime)
+          let endMs = getMsFromTimeStr(endTime)
+          if (span < endMs - validStartMs) {
+            res.startTime.start = getTimeStrFromMs(endMs - span)
+          }
+        }
+        if (startTime) {
+          let validEndMs = getMsFromTimeStr(validRange.endTime)
+          let startMs = getMsFromTimeStr(startTime)
+          if (startMs + span < validEndMs) {
+            res.endTime.end = getTimeStrFromMs(startMs + span)
+          }
+        }
+      }
+
+      return res
+    },
+    filteredRelatives () {
+      return this.relatives.filter(e => {
+        if (this.type === 'time') return e.span < 86400000 && (!this.span || e.span <= this.span)
+        else if (this.type === 'date') return e.span >= 86400000 && (!this.span || e.span <= this.span)
+        else return !this.span || e.span <= this.span
+      })
     }
   },
   watch: {
@@ -348,11 +453,25 @@ export default {
     range: {
       deep: true,
       handler (v) {
-        if (
-          v.startTime !== this.localRange.startTime ||
-          v.endTime !== this.localRange.endTime ||
-          v.startDate !== this.localRange.startDate ||
-          v.endDate !== this.localRange.endDate
+        if (this.type === 'time') {
+          if (
+            padTimeStr(v.startTime) !== this.localRange.startTime ||
+            padTimeStr(v.endTime) !== this.localRange.endTime
+          ) {
+            this.localRange = resolveRange(v)
+          }
+        } else if (this.type === 'date') {
+          if (
+            padDateStr(v.startDate) !== this.localRange.startDate ||
+            padDateStr(v.endDate) !== this.localRange.endDate
+          ) {
+            this.localRange = resolveRange(v)
+          }
+        } else if (
+          padTimeStr(v.startTime) !== this.localRange.startTime ||
+          padTimeStr(v.endTime) !== this.localRange.endTime ||
+          padDateStr(v.startDate) !== this.localRange.startDate ||
+          padDateStr(v.endDate) !== this.localRange.endDate
         ) {
           this.localRange = resolveRange(v)
         }
@@ -408,7 +527,7 @@ export default {
       return item.span === getSpanFromRange(this.localRange)
     },
     clear () {
-      this.localRange = {}
+      // this.localRange = {}
       this.startDate = ''
       this.startTime = ''
       this.endDate = ''

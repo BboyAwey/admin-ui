@@ -304,7 +304,10 @@
       monthDayCount (year) {
         // date count in each month
         return [
-          31, year % 4 === 0 ? 29 : 28, 31,
+          31,
+          ((year % 4 === 0) && (year % 100 !== 0)) ||
+          (year % 400 === 0)
+          ? 29 : 28, 31,
           30, 31, 30,
           31, 31, 30,
           31, 30, 31
@@ -425,7 +428,7 @@
           // the date count of this month
           let dayCount = monthDayCount(ymdArr[0])[ymdArr[1] - 1]
           // limit the date range
-          ymdArr[0] = Number(ymdArr[0]) < 1900 ? 1900 : (Number(ymdArr[0]) > 2200 ? 2200 : Number(ymdArr[0]))
+          ymdArr[0] = Number(ymdArr[0]) < 100 ? 100 : (Number(ymdArr[0]) > 9999 ? 9999 : Number(ymdArr[0]))
           ymdArr[1] = Number(ymdArr[1]) < 1 ? 1 : (Number(ymdArr[1]) > 12 ? 12 : Number(ymdArr[1]))
           ymdArr[2] = Number(ymdArr[2]) < 1 ? 1 : (Number(ymdArr[2]) > dayCount ? dayCount : Number(ymdArr[2]))
           // supplement "0"
@@ -512,7 +515,7 @@
         let direc = isForward ? 1 : -1
         if (isYear) {
           dateObj.year = dateObj.year + direc
-          dateObj.year = dateObj.year < 1900 ? 1900 : dateObj.year > 2200 ? 2200 : dateObj.year
+          dateObj.year = dateObj.year < 100 ? 100 : dateObj.year > 9999 ? 9999 : dateObj.year
         } else {
           dateObj.month = dateObj.month + direc
           if (dateObj.month < 1) {

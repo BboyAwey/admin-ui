@@ -9,9 +9,14 @@ export default {
     label: {
       type: String
     },
-    display: {
-      type: String,
-      default: 'block' // inline, block
+    labelWidth: String,
+    comments: {
+      type: Array,
+      default: () => []
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,

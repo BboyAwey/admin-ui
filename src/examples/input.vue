@@ -6,8 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators"></au-input><br><br>
-        <au-input label="表白吧" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
+        <au-input label="表白吧" label-width="150px" :comments="comments" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations"></au-input><br><br>
+        <au-input label="我是一个textarea" label-width="150px" :comments="comments" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -35,6 +35,53 @@
             <td><au-icon type="minus"></au-icon></td>
             <td>
               输入框前的提示文字
+            </td>
+          </tr>
+          <tr>
+            <td>label-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>合法的css宽度值，仅支持px单位</td>
+            <td>
+              输入框前的提示文字的宽度<br>
+              仅inline为true时有效
+            </td>
+          </tr>
+          <tr>
+            <td>comments</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Array<br>
+              -String
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              需要显示的解释信息<br>
+            </td>
+          </tr>
+          <tr>
+            <td>inline</td>
+            <td>
+              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否横向放置label
             </td>
           </tr>
           <tr>
@@ -149,7 +196,7 @@
             </td>
           </tr>
           <tr>
-            <td>textarea-width</td>
+            <td>width</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -160,12 +207,13 @@
               合法的css长度值
             </td>
             <td>
-              设置textarea的设置宽度<br>
-              仅在type为textarea时有效
+              输入框的宽度<br>
+              当inline为true时请使用px单位<br>
+              当inline为false时，可使用100%来让输入框占满父元素宽度
             </td>
           </tr>
           <tr>
-            <td>textarea-min-width</td>
+            <td>min-width</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -181,7 +229,7 @@
             </td>
           </tr>
           <tr>
-            <td>textarea-max-width</td>
+            <td>max-width</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -197,7 +245,7 @@
             </td>
           </tr>
           <tr>
-            <td>textarea-height</td>
+            <td>height</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -213,7 +261,7 @@
             </td>
           </tr>
           <tr>
-            <td>textarea-min-height</td>
+            <td>min-height</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -229,7 +277,7 @@
             </td>
           </tr>
           <tr>
-            <td>textarea-max-height</td>
+            <td>max-height</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -466,7 +514,7 @@
                   validator (v) {
                     return v === '我爱你'
                   },
-                  warning: '快说你爱我！'
+                  warning: '快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！'
                 }
               ]
             }
@@ -487,8 +535,17 @@
             validator (v) {
               return v === '我爱你'
             },
-            warning: '快说你爱我！'
+            warning: '快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！'
           }
+        ],
+        comments: [
+          '我是第一条提示',
+          '风骚的第二条提示'
+        ],
+        associations: [
+          '第1条关联',
+          '第2条关联',
+          '第3条关联'
         ]
       }
     }

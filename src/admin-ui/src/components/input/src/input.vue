@@ -4,12 +4,11 @@
   @import '../../../style/sizegap';
   @import '../../../style/label';
   @import '../../../style/warnings';
+  @import '../../../style/comments';
   .au-input {
     display: inline-block;
-    width: 260px;
-    .au-input-container {
+    .au-core-container {
       position: relative;
-      width: 100%;
       display: inline-block;
     }
     .au-input-icon {
@@ -22,29 +21,25 @@
       font-size: $medium;
     }
     .au-input-core {
-      width: 260px;
-      width: 100%;
       border-width: 1px;
       border-style: solid;
       padding: 0 12px;
       font-family: $fontFamily;
       font-size: $normal;
       outline: none;
+      vertical-align: middle;
     }
     .au-input-core:disabled {
       cursor: not-allowed;
     }
     textarea.au-input-core {
       line-height: $normal * 1.5;
-      width: 260px;
-      height: 100px;
       padding: 8px 12px;
     }
   }
   .au-input-associations-scroller {
     position: absolute;
     z-index: $z-level-1;
-    // top: 36px;
     min-width: 84px;
     width: 100%;
     max-height: 237px;
@@ -71,82 +66,39 @@
 </style>
 <template>
   <div class="au-input">
-    <div
-      class="au-form-label au-theme-font-color--base-3"
-      v-if="label"
-      @click.stop="labelClick()">{{ label }}</div>
-    <textarea
-      v-if="type==='textarea'"
-      class="au-input-core"
-      :class="{
-        'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
-        'au-theme-border-color--base-8': !active && !hasWarnings,
-        'au-theme-border-color--primary-3': active && !hasWarnings,
-        'au-theme-border-color--danger-3': hasWarnings,
-        'au-theme-focus-box-shadow--primary': active && !hasWarnings,
-        'au-theme-focus-box-shadow--danger': active && hasWarnings,
-        'au-theme-font-color--base-3': true,
-        'au-theme-disabled-background-color--base-8': disabled
-      }"
-      :style="{
-        width: textareaWidth,
-        height: textareaHeight,
-        minWidth: textareaMinWidth,
-        maxWidth: textareaMaxWidth,
-        minHeight: textareaMinHeight,
-        maxHeight: textareaMaxHeight,
-      }"
-      v-model="localValue"
-      :disabled="disabled"
-      :readonly="readonly"
-      :placeholder="placeholder"
-      @input="input($event)"
-      @change="change($event)"
-      @focus="coreFocus($event)"
-      @blur="coreBlur($event)"
-      @keyup="keyup($event)"
-      @keypress="keypress($event)"
-      @keydown="keydown($event)"
-      ref="core"></textarea>
-    <span class="au-input-container" v-else>
-      <au-icon
-        v-if="icon"
-        class="au-input-icon"
-        :type="icon"
-        :class="{
-          'au-theme-font-color--base-3': !active,
-          'au-theme-font-color--primary-3': active && !hasWarnings,
-          'au-theme-font-color--danger-3': hasWarnings,
-        }"
-        :style="{
-          'left': !iconPosition || iconPosition === 'left' ? '8px' : 'auto',
-          'right': iconPosition === 'right' ? '8px' : 'auto'
-        }"
-        @click="iconClick"></au-icon>
-      <input
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :warnings="warnings || localWarnings"
+      @labelClick="labelClick">
+      <textarea
+        v-if="type==='textarea'"
         class="au-input-core"
         :class="{
-          [`au-size-${size}-bordered`]: true,
           'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
           'au-theme-border-color--primary-3': active && !hasWarnings,
           'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-box-shadow--primary': !hasWarnings && active,
-          'au-theme-focus-box-shadow--danger': hasWarnings && active,
+          'au-theme-focus-box-shadow--primary': active && !hasWarnings,
+          'au-theme-focus-box-shadow--danger': active && hasWarnings,
           'au-theme-font-color--base-3': true,
-          'au-theme-disabled-background-color--base-9': disabled
+          'au-theme-disabled-background-color--base-8': disabled
         }"
         :style="{
-          'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
-          'padding-right': icon && iconPosition ==='right' ? '30px' : '12px'
+          width,
+          height,
+          minWidth,
+          maxWidth,
+          minHeight,
+          maxHeight,
         }"
-        type="text"
-        v-if="type === 'text'"
         v-model="localValue"
         :disabled="disabled"
         :readonly="readonly"
         :placeholder="placeholder"
-        @click.stop="click($event)"
         @input="input($event)"
         @change="change($event)"
         @focus="coreFocus($event)"
@@ -155,110 +107,168 @@
         @keypress="keypress($event)"
         @keydown="keydown($event)"
         ref="core">
-      <input
-        class="au-input-core"
-        type="number"
-        v-if="type === 'number'"
-        :class="{
-          [`au-size-${size}-bordered`]: true,
-          'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
-          'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--primary-3': active && !hasWarnings,
-          'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-box-shadow--primary': !hasWarnings && active,
-          'au-theme-focus-box-shadow--danger': hasWarnings && active,
-          'au-theme-font-color--base-3': true,
-          'au-theme-disabled-background-color--base-9': disabled
-        }"
+      </textarea>
+      <span
+        v-else
+        class="au-core-container"
         :style="{
-          'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
-          'padding-right': icon && iconPosition ==='right' ? '30px' : '12px'
-        }"
-        v-model="localValue"
-        :disabled="disabled"
-        :readonly="readonly"
-        :placeholder="placeholder"
-        @click.stop="click($event)"
-        @input="input($event)"
-        @change="change($event)"
-        @focus="coreFocus($event)"
-        @blur="coreBlur($event)"
-        @keyup="keyup($event)"
-        @keypress="keypress($event)"
-        @keydown="keydown($event)"
-        ref="core">
-      <input
-        class="au-input-core"
-        type="password"
-        v-if="type === 'password'"
-        :class="{
-          [`au-size-${size}-bordered`]: true,
-          'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
-          'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--primary-3': active && !hasWarnings,
-          'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-focus-box-shadow--primary': !hasWarnings && active,
-          'au-theme-focus-box-shadow--danger': hasWarnings && active,
-          'au-theme-font-color--base-3': true,
-          'au-theme-disabled-background-color--base-9': disabled
-        }"
-        :style="{
-          'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
-          'padding-right': icon && iconPosition ==='right' ? '30px' : '12px'
-        }"
-        v-model="localValue"
-        :disabled="disabled"
-        :readonly="readonly"
-        :placeholder="placeholder"
-        @click.stop="click($event)"
-        @input="input($event)"
-        @change="change($event)"
-        @focus="coreFocus($event)"
-        @blur="coreBlur($event)"
-        @keyup="keyup($event)"
-        @keypress="keypress($event)"
-        @keydown="keydown($event)"
-        ref="core">
-      <au-scroller class="au-input-associations-scroller"
-        v-show="type !== 'textarea' && associationsShow"
-        :class="`
-          au-theme-border-color--base-8
-          au-theme-box-shadow--level-3
-          au-theme-background-color--base-12
-          au-theme-border-radius--normal
-          au-sizegap-${size}
-        `">
-        <ul class="au-input-associations"
-          ref="associations"
-          tabindex="0"
-          @blur="associationsBlur">
-          <li
-            v-for="(association, index) in associations"
-            @click="selectAssociation(association)"
-            :class="{
-              'au-theme-font-color--base-3': true,
-              'au-theme-background-color--primary-5': association === localValue,
-              'au-theme-hover-background-color--base-10': association !== localValue
-            }"
-            :key="index">{{ association }}</li>
-        </ul>
-      </au-scroller>
-    </span>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
+          verticalAlign: inline ? 'top' : ''
+        }">
+        <au-icon
+          v-if="icon"
+          class="au-input-icon"
+          :type="icon"
+          :class="{
+            'au-theme-font-color--base-3': !active,
+            'au-theme-font-color--primary-3': active && !hasWarnings,
+            'au-theme-font-color--danger-3': hasWarnings,
+          }"
+          :style="{
+            'left': !iconPosition || iconPosition === 'left' ? '8px' : 'auto',
+            'right': iconPosition === 'right' ? '8px' : 'auto'
+          }"
+          @click="iconClick"></au-icon>
+        <input
+          class="au-input-core"
+          :class="{
+            [`au-size-${size}-bordered`]: true,
+            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-color--base-8': !active && !hasWarnings,
+            'au-theme-border-color--primary-3': active && !hasWarnings,
+            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-focus-box-shadow--primary': !hasWarnings && active,
+            'au-theme-focus-box-shadow--danger': hasWarnings && active,
+            'au-theme-font-color--base-3': true,
+            'au-theme-disabled-background-color--base-9': disabled
+          }"
+          :style="{
+            'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
+            'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
+            width
+          }"
+          type="text"
+          v-if="type === 'text'"
+          v-model="localValue"
+          :disabled="disabled"
+          :readonly="readonly"
+          :placeholder="placeholder"
+          @click.stop="click($event)"
+          @input="input($event)"
+          @change="change($event)"
+          @focus="coreFocus($event)"
+          @blur="coreBlur($event)"
+          @keyup="keyup($event)"
+          @keypress="keypress($event)"
+          @keydown="keydown($event)"
+          ref="core">
+        <input
+          class="au-input-core"
+          type="number"
+          v-if="type === 'number'"
+          :class="{
+            [`au-size-${size}-bordered`]: true,
+            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-color--base-8': !active && !hasWarnings,
+            'au-theme-border-color--primary-3': active && !hasWarnings,
+            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-focus-box-shadow--primary': !hasWarnings && active,
+            'au-theme-focus-box-shadow--danger': hasWarnings && active,
+            'au-theme-font-color--base-3': true,
+            'au-theme-disabled-background-color--base-9': disabled
+          }"
+          :style="{
+            'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
+            'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
+            width
+          }"
+          v-model="localValue"
+          :disabled="disabled"
+          :readonly="readonly"
+          :placeholder="placeholder"
+          @click.stop="click($event)"
+          @input="input($event)"
+          @change="change($event)"
+          @focus="coreFocus($event)"
+          @blur="coreBlur($event)"
+          @keyup="keyup($event)"
+          @keypress="keypress($event)"
+          @keydown="keydown($event)"
+          ref="core">
+        <input
+          class="au-input-core"
+          type="password"
+          v-if="type === 'password'"
+          :class="{
+            [`au-size-${size}-bordered`]: true,
+            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-color--base-8': !active && !hasWarnings,
+            'au-theme-border-color--primary-3': active && !hasWarnings,
+            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-focus-box-shadow--primary': !hasWarnings && active,
+            'au-theme-focus-box-shadow--danger': hasWarnings && active,
+            'au-theme-font-color--base-3': true,
+            'au-theme-disabled-background-color--base-9': disabled
+          }"
+          :style="{
+            'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
+            'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
+            width
+          }"
+          v-model="localValue"
+          :disabled="disabled"
+          :readonly="readonly"
+          :placeholder="placeholder"
+          @click.stop="click($event)"
+          @input="input($event)"
+          @change="change($event)"
+          @focus="coreFocus($event)"
+          @blur="coreBlur($event)"
+          @keyup="keyup($event)"
+          @keypress="keypress($event)"
+          @keydown="keydown($event)"
+          ref="core">
+        <au-scroller class="au-input-associations-scroller"
+          v-show="type !== 'textarea' && associationsShow"
+          :class="`
+            au-theme-border-color--base-8
+            au-theme-box-shadow--level-3
+            au-theme-background-color--base-12
+            au-theme-border-radius--normal
+            au-sizegap-${size}
+          `"
+          :style="{
+            width
+          }">
+          <ul class="au-input-associations"
+            ref="associations"
+            tabindex="0"
+            @blur="associationsBlur">
+            <li
+              v-for="(association, index) in associations"
+              @click="selectAssociation(association)"
+              :class="{
+                'au-theme-font-color--base-3': true,
+                'au-theme-background-color--primary-5': association === localValue,
+                'au-theme-hover-background-color--base-10': association !== localValue
+              }"
+              :key="index">{{ association }}</li>
+          </ul>
+        </au-scroller>
+      </span>
+    </form-item>
   </div>
-
 </template>
 <script>
   import ValidatorMixin from '../../../helpers/validator-mixin'
   import FormApiMixin from '../../../helpers/form-api-mixin'
+  import FormItem from '../../../helpers/form-item.vue'
   import AuIcon from '../../icon'
   import AuScroller from '../../scroller'
 
   export default {
     name: 'au-input',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: { AuIcon, AuScroller },
+    components: { AuIcon, AuScroller, FormItem },
     data () {
       return {
         // is the throttlling on
@@ -279,12 +289,15 @@
       associations: Array,
       icon: String,
       iconPosition: String,
-      textareaWidth: String,
-      textareaHeight: String,
-      textareaMinWidth: String,
-      textareaMaxWidth: String,
-      textareaMinHeight: String,
-      textareaMaxHeight: String
+      width: {
+        type: String,
+        default: '260px'
+      },
+      height: String,
+      minWidth: String,
+      maxWidth: String,
+      minHeight: String,
+      maxHeight: String
     },
     watch: {
       associations (v) {

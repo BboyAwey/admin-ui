@@ -5,11 +5,17 @@
   .au-checkbox {
     display: inline-block;
     font-size: $normal;
-    .au-checkbox-container {
-      display: inline;
+    .au-checkbox-container-inline {
+      display: inline-block;
     }
-    .au-checkbox-container-multiple:not(:last-child) {
+    .au-checkbox-container-block {
+      display: block;
+    }
+    .au-checkbox-container-inline:not(:last-child) {
       margin-right: 24px;
+    }
+    .au-checkbox-container-block:not(:last-child) {
+      margin-bottom: 8px;
     }
     .au-checkbox-core {
       position: relative;
@@ -35,9 +41,6 @@
       top: 1px;
       left: -1px;
     }
-    .au-checkbox-icon-minus.au-checkbox-icon-disabled {
-
-    }
     .au-checkbox-text {
       margin-left: 3px;
       vertical-align: middle;
@@ -46,71 +49,88 @@
 </style>
 <template>
   <div class="au-checkbox">
-    <div class="au-form-label au-theme-font-color--base-3" v-if="label">{{ label }}</div>
-    <div class="au-checkbox-container" v-if="!multiple"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      @click="handleClick"
+    <div
+      class="au-theme-font-color--base-3"
+      :class="`au-form-label${inline ? '-inline' : ''}`"
+      v-if="label"
+      @click.stop="labelClick()"
       :style="{
-        cursor: disabled ? 'not-allowed' : 'default'
-      }">
-      <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
-      :class="{
-        'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
-        'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
-        'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
-        'au-theme-border-color--danger-3': hasWarnings && !localValue &&!disabled,
-        'au-theme-background-color--primary-3': !hasWarnings && (localValue || localIndeterminate) && !disabled,
-        'au-theme-background-color--danger-3': hasWarnings && (localValue || localIndeterminate) && !disabled,
-        'au-theme-background-color--base-9': disabled
-      }"
+        width: inline ? labelWidth : ''
+      }">{{ label }}</div>
+    <div class="au-checkbox-main"
       :style="{
-        border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
+        display: inline ? 'inline-block' : 'block',
+        verticalAlign: inline ? 'top' : ''
       }">
-        <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
+      <div class="au-checkbox-container" v-if="!multiple"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+        @click="handleClick"
+        :style="{
+          cursor: disabled ? 'not-allowed' : 'default'
+        }">
+        <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
         :class="{
-          'au-checkbox-icon-disabled': disabled,
-          'au-theme-font-color--base-12': true
-        }"></au-icon>
-        <au-icon unify-size v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
-        :class="{
-          'au-checkbox-icon-disabled': disabled,
-          'au-theme-font-color--base-12': true
-        }"></au-icon>
-      </span>
-      <span class="au-checkbox-text">{{ text }}</span>
-    </div>
-    <div class="au-checkbox-container au-checkbox-container-multiple" v-for="(checkbox, i) in localCheckboxes" :key="i"
-      @mouseenter="handleMouseEnter(i)"
-      @mouseleave="handleMouseLeave(i)"
-      :style="{
-        cursor: disabled ? 'not-allowed' : 'default'
-      }"
-      @click="handleClick(i)">
-      <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
-      :class="{
-        'au-theme-border-color--base-8': !hasWarnings && !checkbox.hover && !checkbox.checked,
-        'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
-        'au-theme-border-color--primary-3': !hasWarnings && checkbox.hover && !checkbox.checked,
-        'au-theme-border-color--danger-3': hasWarnings && !checkbox.checked && !disabled,
-        'au-theme-background-color--primary-3': !hasWarnings && checkbox.checked && !disabled,
-        'au-theme-background-color--danger-3': hasWarnings && checkbox.checked && !disabled,
-        'au-theme-background-color--base-9': disabled
-      }"
-      :style="{
-        border: checkbox.checked && !disabled ? 'none' : ''
-      }">
-        <au-icon unify-size v-show="checkbox.checked" type="check"
-          class="au-checkbox-icon au-theme-font-color--base-12"
+          'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
+          'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
+          'au-theme-border-color--primary-3': !hasWarnings && hover && !localValue && !disabled,
+          'au-theme-border-color--danger-3': hasWarnings && !localValue &&!disabled,
+          'au-theme-background-color--primary-3': !hasWarnings && (localValue || localIndeterminate) && !disabled,
+          'au-theme-background-color--danger-3': hasWarnings && (localValue || localIndeterminate) && !disabled,
+          'au-theme-background-color--base-9': disabled
+        }"
+        :style="{
+          border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
+        }">
+          <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
           :class="{
             'au-checkbox-icon-disabled': disabled,
-            'au-theme-font-color--base-12': disabled
+            'au-theme-font-color--base-12': true
           }"></au-icon>
-      </span>
-      <span class="au-checkbox-text">{{ checkbox.text }}</span>
+          <au-icon unify-size v-show="localIndeterminate" type="minus" class="au-checkbox-icon au-checkbox-icon-minus"
+          :class="{
+            'au-checkbox-icon-disabled': disabled,
+            'au-theme-font-color--base-12': true
+          }"></au-icon>
+        </span>
+        <span class="au-checkbox-text">{{ text }}</span>
+      </div>
+      <div
+        class="au-checkbox-container"
+        :class="'au-checkbox-container' + (listType === 'block' ? '-block' : '-inline')"
+        v-for="(checkbox, i) in localCheckboxes" :key="i"
+        @mouseenter="handleMouseEnter(i)"
+        @mouseleave="handleMouseLeave(i)"
+        :style="{
+          cursor: disabled ? 'not-allowed' : 'default'
+        }"
+        @click="handleClick(i)">
+        <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
+        :class="{
+          'au-theme-border-color--base-8': !hasWarnings && !checkbox.hover && !checkbox.checked,
+          'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
+          'au-theme-border-color--primary-3': !hasWarnings && checkbox.hover && !checkbox.checked,
+          'au-theme-border-color--danger-3': hasWarnings && !checkbox.checked && !disabled,
+          'au-theme-background-color--primary-3': !hasWarnings && checkbox.checked && !disabled,
+          'au-theme-background-color--danger-3': hasWarnings && checkbox.checked && !disabled,
+          'au-theme-background-color--base-9': disabled
+        }"
+        :style="{
+          border: checkbox.checked && !disabled ? 'none' : ''
+        }">
+          <au-icon unify-size v-show="checkbox.checked" type="check"
+            class="au-checkbox-icon au-theme-font-color--base-12"
+            :class="{
+              'au-checkbox-icon-disabled': disabled,
+              'au-theme-font-color--base-12': disabled
+            }"></au-icon>
+        </span>
+        <span class="au-checkbox-text">{{ checkbox.text }}</span>
+      </div>
+      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
+      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
+      <div class="au-form-warning au-theme-font-color--base-7" v-for="(comment, index) in comments" :key="index">{{ comment }}</div>
     </div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>
   </div>
 </template>
 <script>
@@ -134,6 +154,10 @@
         default () {
           return []
         }
+      },
+      listType: {
+        type: String,
+        default: 'inline'
       },
       indeterminate: Boolean
     },

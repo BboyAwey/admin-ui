@@ -1,6 +1,5 @@
 <style lang="scss">
   @import '../../../style/vars';
-  @import '../../../style/label';
   .au-upload {
     .au-upload-button {
       padding-bottom: 4px;
@@ -166,9 +165,6 @@
 </style>
 <template>
   <div class="au-upload">
-    <div
-      class="au-form-label au-theme-font-color--base-3"
-      v-if="label" v-show="showUploadButton">{{ label }}</div>
     <input
       type="file"
       class="au-upload-inner"
@@ -178,10 +174,25 @@
       :multiple="multiple"
       :disabled="disabled"
       @change="loadFiles($event)"/>
-    <au-button :type="buttonType" :size="buttonSize" :plain="buttonPlain" class="au-upload-button au-plain" v-show="showUploadButton" :disabled="disabled" @click="uploadButtonClickHandler">
-      <au-icon class="au-upload-button-icon" type="upload" />
-      <span class="au-upload-button-text">{{ buttonText }}</span>
-    </au-button>
+    <form-item
+      :label="label"
+      :inline="inline"
+      :comments="comments"
+      :size="buttonSize"
+      middle
+      @labelClick="uploadButtonClickHandler">
+      <au-button
+        class="au-upload-button au-plain"
+        :type="buttonType"
+        :size="buttonSize"
+        :plain="buttonPlain"
+        v-show="showUploadButton"
+        :disabled="disabled"
+        @click="uploadButtonClickHandler">
+        <au-icon class="au-upload-button-icon" type="upload" />
+        <span class="au-upload-button-text">{{ buttonText }}</span>
+      </au-button>
+    </form-item>
     <ul class="au-upload-file-list" :class="{'au-upload-file-inline-list': listType === 'inline' }" v-show="showFileList">
       <li
         v-for="(file, index) in localFileList"
@@ -300,14 +311,15 @@
   </div>
 </template>
 <script>
-  import auIcon from '../../icon'
-  import auPreviewer from '../../previewer'
+  import AuIcon from '../../icon'
+  import AuPreviewer from '../../previewer'
   import methods from './methods'
   import props from './props'
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-upload',
-    components: { auIcon, auPreviewer },
+    components: { AuIcon, AuPreviewer, FormItem },
     mixins: [methods, props],
     data () {
       return {

@@ -5,7 +5,7 @@
 </style>
 <template>
   <i class="au-icon"
-    :class="'fa fa-' + type"
+    :class="custom || ('fa fa-' + type)"
     aria-hidden="true"
     @click="$emit('click')"
     :style="{
@@ -21,15 +21,10 @@
       if (this.unifySize) this.setUnifiedWidth()
     },
     props: {
-      type: {
-        type: String
-      },
-      size: {
-        type: String
-      },
-      color: {
-        type: String
-      },
+      type: String,
+      custom: String,
+      size: String,
+      color: String,
       unifySize: Boolean
     },
     watch: {

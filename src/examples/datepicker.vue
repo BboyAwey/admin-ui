@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators" start="2017-12-5" end="2018-5-16"></au-datepicker>
+        <au-datepicker label="选一个日子吧" v-model="date" :validators="validators"></au-datepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>

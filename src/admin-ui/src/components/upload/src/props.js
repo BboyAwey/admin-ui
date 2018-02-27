@@ -2,6 +2,8 @@ export default {
   props: {
     // ui props
     label: String,
+    inline: Boolean,
+    comments: Array,
     buttonText: {
       default: '上传文件'
     },

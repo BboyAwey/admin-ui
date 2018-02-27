@@ -1,6 +1,19 @@
 @import "./vars";
 .au-form-label {
+  display: block;
   margin-bottom: 8px;
   font-size: $normal;
   line-height: $normal;
+}
+.au-form-label-inline {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: $normal;
+  // line-height: $normal;
+  text-align: right;
+  // cursor: pointer;
+}
+.au-form-label-inline:after {
+  display: inline;
+  content: ":"
 }

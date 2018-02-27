@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-switch v-model="value" color="success" :label="value ? '开' : '关'"></au-switch>
+        <au-switch v-model="value" color="success" :label="value ? '开' : '关'"></au-switch><br/><br/>
         <au-switch v-model="shadowValue" color="danger" :label="shadowValue ? '开' : '关'"></au-switch>
       </div>
       <!-- 组件示例 -->

@@ -8,13 +8,13 @@
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
         Admin UI 2中的图标组件，是基于著名的
-        <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome</a>
-        ，我们将其内置到了Admin UI 2中
+        <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome 4</a>
+        ，我们将其内置到了Admin UI 2中。
       </p>
       <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
         Admin UI 1中的图标组件是基于
         <a class="au-theme-font-color--info-3" href="http://ionicons.com/" target="_blank">Ionicons</a>
-        ，但由于其图标数量较少，这一版本中我们替换了它
+        ，但由于其图标数量较少，这一版本中我们替换了它，如果你仍旧希望使用，可以手动引入到项目中，然后通过组件的"custom"接口来使用
       </cite>
       <!-- 组件示例 -->
       <div class="component-example">
@@ -45,12 +45,27 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td>false</td>
+            <td><au-icon type="minus"></au-icon></td>
             <td>
-              <a class="au-theme-font-color--info-3" href="http://fontawesome.io/icons/" target="_blank">Font Awesome Icons</a>
+              <a class="au-theme-font-color--info-3" href="https://fontawesome.com/icons?d=listing&m=free" target="_blank">Font Awesome Icons</a><br>
+              由于Font Awesome项目已经升级到5，其官网已经改版，建议优先参考：
+              <a class="au-theme-font-color--info-3" href="https://9iphp.com/fa-icons" target="_blank">第三方提供的Font Awesome Icons列表</a>
             </td>
             <td>
-              图标的类型
+              图标的类型（仅支持免费版的FontAwesome）
+            </td>
+          </tr>
+          <tr>
+            <td>custom</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              自定义图标的class-name（用于支持第三方CSS图标库）
             </td>
           </tr>
           <tr>

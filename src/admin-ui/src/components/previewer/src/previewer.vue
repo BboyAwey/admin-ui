@@ -170,7 +170,7 @@
     },
     data () {
       return {
-        localDisplay: this.display,
+        localDisplay: this.visible,
         localCurrent: this.isCurrentIllegal(this.current) ? this.current : 0
       }
     },
@@ -179,7 +179,7 @@
         type: Array,
         required: true
       },
-      display: {
+      visible: {
         required: true
       },
       current: {
@@ -197,7 +197,7 @@
       }
     },
     watch: {
-      display (v) {
+      visible (v) {
         this.localDisplay = v
       },
       localDisplay (v) {

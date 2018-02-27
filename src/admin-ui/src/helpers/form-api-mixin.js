@@ -9,6 +9,10 @@ export default {
     label: {
       type: String
     },
+    display: {
+      type: String,
+      default: 'block' // inline, block
+    },
     size: {
       type: String,
       default: 'normal'

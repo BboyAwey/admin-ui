@@ -6,8 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="info" @click="modalDisplay = true">点我弹出模态框</au-button>
-        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons" onEnter="确认">
+        <au-button type="info" @click="modalVisible = true">点我弹出模态框</au-button>
+        <au-modal :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons" onEnter="确认">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
@@ -32,7 +32,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>display</td>
+            <td>visible</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -179,8 +179,8 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="info" @click="modalDisplay = true">按钮</au-button>
-        <au-modal :display="modalDisplay" title="一个模态框" @hide="modalDisplay = false" :buttons="buttons">
+        <au-button type="info" @click="modalVisible = true">按钮</au-button>
+        <au-modal :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
         </au-modal>
       '></code-h>
@@ -189,13 +189,13 @@
           data () {
             let vm = this
             return {
-              modalDisplay: false,
+              modalVisible: false,
               buttons: [
                 {
                   text: '确认',
                   type: 'primary',
                   handler () {
-                    vm.modalDisplay = false
+                    vm.modalVisible = false
                   }
                 },
                 {
@@ -203,7 +203,7 @@
                   plain: true,
                   type: 'default',
                   handler () {
-                    vm.modalDisplay = false
+                    vm.modalVisible = false
                   }
                 }
               ]
@@ -220,13 +220,13 @@
     data () {
       let vm = this
       return {
-        modalDisplay: false,
+        modalVisible: false,
         buttons: [
           {
             text: '确认',
             type: 'primary',
             handler () {
-              vm.modalDisplay = false
+              vm.modalVisible = false
             }
           },
           {
@@ -234,7 +234,7 @@
             plain: true,
             type: 'default',
             handler () {
-              vm.modalDisplay = false
+              vm.modalVisible = false
             }
           }
         ]

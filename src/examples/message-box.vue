@@ -103,6 +103,21 @@
             </td>
           </tr>
           <tr>
+            <td>confirmText</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>确定按钮显示的文字</td>
+          </tr>
+          <tr>
             <td>cancel</td>
             <td>
               <au-icon type="times"></au-icon>
@@ -115,8 +130,23 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              当按下取消按钮时的回调函数
+              当按下取消按钮时的回调函数（type为alert时不支持）
             </td>
+          </tr>
+          <tr>
+            <td>cancelText</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>取消按钮显示的文字（type为alert时不支持）</td>
           </tr>
           <tr>
             <td>validators</td>
@@ -196,7 +226,9 @@
             confirm () {
               this.$confirm({
                 title: 'Confirm',
-                message: 'you feel good?'
+                message: 'you feel good?',
+                confirmText: 'Yes',
+                cancelText: 'No',
               })
             },
             prompt () {
@@ -239,7 +271,9 @@
       confirm () {
         this.$confirm({
           title: 'Confirm',
-          message: 'you feel good?'
+          message: 'you feel good?',
+          confirmText: 'Yes',
+          cancelText: 'No'
         })
       },
       prompt () {

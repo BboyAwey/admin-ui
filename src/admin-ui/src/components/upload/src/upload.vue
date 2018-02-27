@@ -55,6 +55,7 @@
     }
     .au-upload-preview-default-icon {
       position: relative;
+      line-height: inherit;
     }
     .au-upload-preview-default-icon:before {
       content: "";
@@ -293,9 +294,9 @@
     </ul>
     <au-previewer
       :images="images"
-      :display="previewerShow"
+      :visible="previewerVisible"
       :current="currentPreview"
-      @hide="() => { this.previewerShow = false }"/>
+      @hide="() => { this.previewerVisible = false }"/>
   </div>
 </template>
 <script>
@@ -318,7 +319,7 @@
         lastDescriptions: [],
         fileReader: new window.FileReader(),
         images: [],
-        previewerShow: false,
+        previewerVisible: false,
         currentPreview: 0,
         mouseenter: false
       }

@@ -119,11 +119,11 @@
     },
     data () {
       return {
-        localDisplay: this.display
+        localDisplay: this.visible
       }
     },
     props: {
-      display: {
+      visible: {
         type: Boolean
       },
       title: {
@@ -141,7 +141,7 @@
       onEnter: String
     },
     watch: {
-      display (v) {
+      visible (v) {
         this.localDisplay = v
         if (v) {
           this.calcModalStyle()

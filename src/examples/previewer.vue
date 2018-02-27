@@ -6,8 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="success" @click="display = true">看看风景</au-button>
-        <au-previewer :display="display" :images="images" @hide="display = false"></au-previewer>
+        <au-button type="success" @click="visible = true">看看风景</au-button>
+        <au-previewer :visible="visible" :images="images" @hide="visible = false"></au-previewer>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -46,7 +46,7 @@
             </td>
           </tr>
           <tr>
-            <td>display</td>
+            <td>visible</td>
             <td>
               <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
@@ -167,15 +167,15 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="success" @click="display = true">看看风景</au-button>
-        <au-previewer :display="display" :images="images" @hide="display = false"></au-previewer>
+        <au-button type="success" @click="visible = true">看看风景</au-button>
+        <au-previewer :visible="visible" :images="images" @hide="visible = false"></au-previewer>
       '></code-h>
       <code-h lang="js">
         export default {
           name: 'preview-examples',
           data () {
             return {
-              display: false,
+              visible: false,
               images: [
                 {
                   src: '/static/images/1.jpg',
@@ -206,7 +206,7 @@
     name: 'preview-examples',
     data () {
       return {
-        display: false,
+        visible: false,
         images: [
           {
             src: '/static/images/1.jpg',

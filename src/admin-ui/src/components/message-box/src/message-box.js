@@ -37,11 +37,11 @@ let instances = {
   confirm: getInstance('confirm'),
   prompt: getInstance('prompt')
 }
-// when modal close itself we shoud sync the display prop
+// when modal close itself we shoud sync the visible prop
 instances.modal.$on('hide', () => {
   if (instances.modal.$el.parentNode) {
     instances.modal.$el.parentNode.removeChild(instances.modal.$el)
-    instances.modal.display = false
+    instances.modal.visible = false
   }
 })
 
@@ -54,19 +54,19 @@ function refreshContent (el, contentInstance) {
 
 function getCancelButton (instance, config, value) {
   return {
-    text: '取消',
+    text: config.cancelText || '取消',
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler () {
       if (config.cancel) {
         // Vue.nextTick(() => {
         //   config.cancel(value)
-        //   instance.display = false
+        //   instance.visible = false
         // })
         config.cancel(value)
-        instance.display = false
+        instance.visible = false
       } else {
-        instance.display = false
+        instance.visible = false
       }
     }
   }
@@ -74,16 +74,16 @@ function getCancelButton (instance, config, value) {
 
 function getConfirmButton (instance, config) {
   return {
-    text: '确定',
+    text: config.confirmText || '确定',
     type: 'primary',
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler () {
       if (config.confirm) {
         config.confirm()
-        instance.display = false
+        instance.visible = false
       } else {
-        instance.display = false
+        instance.visible = false
       }
     }
   }
@@ -114,7 +114,7 @@ function MessageBox (config) {
           loading.stop()
           if (res) {
             if (config.confirm) config.confirm(instances[config.type].value)
-            instances.modal.display = false
+            instances.modal.visible = false
           }
         })
       }
@@ -139,7 +139,7 @@ function MessageBox (config) {
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance)
   instances.modal.title = title
-  instances.modal.display = true
+  instances.modal.visible = true
   instances.modal.$mount()
   document.body.appendChild(instances.modal.$el)
   // auto focus

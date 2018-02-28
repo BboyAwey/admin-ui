@@ -174,7 +174,7 @@
     mounted () {
       this.reconstruct()
       this.addEvents()
-      // this.calPos() // TODO:
+      // this.calPos()
       window.addEventListener('resize', this.handleWindowResize)
       window.addEventListener('click', this.handleWindowClick, true)
       // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
@@ -357,7 +357,7 @@
           },
           y: {
             top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
-            bottom: targetPos.top + targetSize.height + offset + 10 + parseInt(this.yFix) // do not kown why should add 10 but it works
+            bottom: targetPos.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
           }
         }
         let horizontal = {

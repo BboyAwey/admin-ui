@@ -32,7 +32,7 @@
         <li class="au-theme-border-color--base-8">previewer、modal组件display接口变更为visible</li>
       </ol>
 
-      <h3 class="title-2">##1Bug Fixed</h3>
+      <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
         <li class="au-theme-border-color--base-8">timepicker popover should scroll to 00:00:00 if the value is 00:00:00</li>
       </ol>

@@ -17,6 +17,9 @@
     .au-rangepicker-time {
       width: 99px;
     }
+    & > * {
+      vertical-align: middle;
+    }
     & > *:not(:last-child) {
       margin-right: 5px;
     }
@@ -47,79 +50,86 @@
 </style>
 <template>
   <div class="au-rangepicker">
-    <div class="au-form-label" :style="{
-      cursor: disabled ? 'not-allowed' : 'default'
-    }" v-show="label">{{ label }}</div>
-    <au-popover plain hide-on-blur
-      trigger="click"
-      :placement="placement"
-      ref="popover"
-      :disabled="disabled"
-      @show="handlePopup">
-      <au-button slot="target" plain :size="size" :disabled="disabled">
-        {{ type !== 'time' ? localRange.startDate : '' }}
-        {{ type !== 'date' ? localRange.startTime : '' }}
-        <span class="au-theme-font-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? startPlaceholder : '' }}</span>
-        至
-        {{ type !== 'time' ? localRange.endDate : '' }}
-        {{ type !== 'date' ? localRange.endTime : '' }}
-        <span class="au-theme-font-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? endPlaceholder : '' }}</span>
-      </au-button>
-      <div class="au-rangepicker-pop"  slot="content" ref="popContent">
-        <div class="au-rangepicker-absolute" v-show="absolute" ref="absolute">
-          <au-datepicker
-            v-show="type !== 'time'"
-            class="au-rangepicker-date"
-            placeholder="开始日期"
-            v-model="startDate"
-            :start="valid.startDate.start"
-            :end="valid.startDate.end"/>
-          <au-timepicker
-            v-show="type !== 'date'"
-            class="au-rangepicker-time"
-            placeholder="开始时间"
-            v-model="startTime"
-            :start="valid.startTime.start"
-            :end="valid.startTime.end"/>
-          <span class="au-rangepicker-to">至</span>
-          <au-datepicker
-            v-show="type !== 'time'"
-            class="au-rangepicker-date"
-            placeholder="结束日期"
-            v-model="endDate"
-            :start="valid.endDate.start"
-            :end="valid.endDate.end"/>
-          <au-timepicker
-            v-show="type !== 'date'"
-            class="au-rangepicker-time"
-            placeholder="结束时间"
-            v-model="endTime"
-            :start="valid.endTime.start"
-            :end="valid.endTime.end"/>
-          <au-button type="default" @click="clear" plain>清空</au-button>
-          <au-button type="default" @click="handleCancel">取消</au-button>
-          <au-button type="primary" @click="handleConfirm" :disabled="!fullfill">确定</au-button>
-        </div>
-        <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative && filteredRelatives.length">
-          <div
-            class="au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8"
-            v-for="(item, i) in filteredRelatives" :key="i"
-            :class="{
-              'au-theme-hover-font-color--primary-3': !isCurrent(item),
-              'au-theme-hover-border-color--primary-3': !isCurrent(item),
-              'au-theme-background-color--primary-3': isCurrent(item),
-              'au-theme-font-color--base-12': isCurrent(item)
-            }"
-            :style="{
-              border: isCurrent(item) ? 'none' : ''
-            }"
-            size="small"
-            @click="handleRelativeTagClick(item)">
-            {{ item.text }}
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="inline">
+      <au-popover plain hide-on-blur
+        trigger="click"
+        :placement="placement"
+        ref="popover"
+        :disabled="disabled"
+        @show="handlePopup">
+        <au-button slot="target" plain :size="size" :disabled="disabled">
+          {{ type !== 'time' ? localRange.startDate : '' }}
+          {{ type !== 'date' ? localRange.startTime : '' }}
+          <span class="au-theme-font-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? startPlaceholder : '' }}</span>
+          至
+          {{ type !== 'time' ? localRange.endDate : '' }}
+          {{ type !== 'date' ? localRange.endTime : '' }}
+          <span class="au-theme-font-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? endPlaceholder : '' }}</span>
+        </au-button>
+        <div class="au-rangepicker-pop"  slot="content" ref="popContent">
+          <div class="au-rangepicker-absolute" v-show="absolute" ref="absolute">
+            <au-datepicker
+              v-show="type !== 'time'"
+              class="au-rangepicker-date"
+              placeholder="开始日期"
+              v-model="startDate"
+              :start="valid.startDate.start"
+              :end="valid.startDate.end"/>
+            <au-timepicker
+              v-show="type !== 'date'"
+              class="au-rangepicker-time"
+              placeholder="开始时间"
+              width="99px"
+              v-model="startTime"
+              :start="valid.startTime.start"
+              :end="valid.startTime.end"/>
+            <span class="au-rangepicker-to">至</span>
+            <au-datepicker
+              v-show="type !== 'time'"
+              class="au-rangepicker-date"
+              placeholder="结束日期"
+              v-model="endDate"
+              :start="valid.endDate.start"
+              :end="valid.endDate.end"/>
+            <au-timepicker
+              v-show="type !== 'date'"
+              class="au-rangepicker-time"
+              placeholder="结束时间"
+              width="99px"
+              v-model="endTime"
+              :start="valid.endTime.start"
+              :end="valid.endTime.end"/>
+            <au-button type="default" @click="clear" plain>清空</au-button>
+            <au-button type="default" @click="handleCancel">取消</au-button>
+            <au-button type="primary" @click="handleConfirm" :disabled="!fullfill">确定</au-button>
+          </div>
+          <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative && filteredRelatives.length">
+            <div
+              class="au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8"
+              v-for="(item, i) in filteredRelatives" :key="i"
+              :class="{
+                'au-theme-hover-font-color--primary-3': !isCurrent(item),
+                'au-theme-hover-border-color--primary-3': !isCurrent(item),
+                'au-theme-background-color--primary-3': isCurrent(item),
+                'au-theme-font-color--base-12': isCurrent(item)
+              }"
+              :style="{
+                border: isCurrent(item) ? 'none' : ''
+              }"
+              size="small"
+              @click="handleRelativeTagClick(item)">
+              {{ item.text }}
+            </div>
           </div>
         </div>
-      </div>
-    </au-popover>
+      </au-popover>
+    </form-item>
   </div>
 </template>
 <script>
@@ -128,8 +138,12 @@ import Popover from '../../popover'
 import Datepicker from '../../datepicker'
 import Timepicker from '../../timepicker'
 import Tag from '../../tag'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+let formApiMixin = { props: FormApiMixin.props }
+formApiMixin.props.value = null
 // import { isEmptyString } from '../../../helpers/utils'
 import { getElementSize } from '../../../helpers/dom'
+import FormItem from '../../../helpers/form-item.vue'
 
 function padNum (num) {
   return Number(num) < 10 ? ('0' + Number(num)) : Number(num)
@@ -215,12 +229,14 @@ function getSpanFromRange (range) {
 
 export default {
   name: 'au-rangepicker',
+  mixins: [formApiMixin],
   components: {
     auButton: Button,
     auPopover: Popover,
     auDatepicker: Datepicker,
     auTimepicker: Timepicker,
-    auTag: Tag
+    auTag: Tag,
+    FormItem
   },
   model: {
     prop: 'range',
@@ -316,10 +332,7 @@ export default {
     placement: {
       type: String,
       default: 'bottom left'
-    },
-    label: String,
-    size: String,
-    disabled: Boolean
+    }
   },
   data () {
     return {

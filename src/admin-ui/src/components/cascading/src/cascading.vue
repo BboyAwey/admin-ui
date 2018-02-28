@@ -4,54 +4,65 @@
   @import "../../../style/warnings";
   .au-cascading {
     display: inline-block;
-  }
-  .au-cascading-core {
-    min-width: 60px;
-  }
-  .au-cascading-core:not(:last-child) {
-    margin-right: 12px;
+    .au-cascading-core-inline {
+      display: inline-block;
+    }
+    .au-cascading-core-block {
+      display: block;
+    }
+    .au-cascading-core-inline:not(:last-child) {
+      margin-right: 10px;
+    }
+    .au-cascading-core-block:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 </style>
 <template>
-  <div class="au-cascading au-theme-font-color--base-3">
-    <div class="au-form-label" :style="{
-      cursor: disabled ? 'not-allowed' : 'default'
-    }" v-if="label">{{ label }}</div>
-    <div class="au-cascading-core-container">
-      <au-select
-        class="au-cascading-core"
-        :style="{
-          width: singleWidth,
-          minWidth: singleMinWidth,
-          maxWidth: singleMaxWidth
-        }"
-        :warnings=" hasWarnings ? [] : null"
-        :size="size"
-        v-for="(levelArr, index) in cascadingData"
-        :key="index"
-        :options="filterOptions(levelArr, index)"
-        v-model="selectedOptions[index]"
-        :placeholder="placeholder instanceof Array ? placeholder[index] : placeholder"
-        @select="select"
-        @focus="focus"
-        @blur="blur"
-        :disabled="disabled"
-        ref="au-select"></au-select></div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="i">{{ warning }}</div>
-    <div class="au-from-warning au-theme-font-color--danger-3" v-for="(warning, i) in localWarnings" :key="i">{{ warning }}</div>
+  <div class="au-cascading au-theme-font-color--base-3" :style="{display: listType === 'block' && fullfillWidth ? 'block' : ''}">
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="listType === 'inline'"
+      :warnings="warnings || localWarnings">
+      <div>
+        <au-select
+          class="au-cascading-core"
+          :class="'au-cascading-core' + (listType === 'block' ? '-block' : '-inline')"
+          :size="size"
+          v-for="(levelArr, index) in cascadingData"
+          :key="index"
+          :options="filterOptions(levelArr, index)"
+          v-model="selectedOptions[index]"
+          :placeholder="placeholder instanceof Array ? placeholder[index] : placeholder"
+          @select="select"
+          @focus="focus"
+          @blur="blur"
+          :warning="hasWarnings"
+          :disabled="disabled"
+          :inline="false"
+          :fullfill-width="listType === 'block' && fullfillWidth"
+          :width="singleWidth"
+          :max-width="singleMaxWidth"
+          :min-width="singleMinWidth"
+          ref="au-select"/>
+      </div>
+    </form-item>
   </div>
 </template>
 <script>
   import FormApiMixin from '../../../helpers/form-api-mixin'
   import ValidatorMixin from '../../../helpers/validator-mixin'
   import auSelect from '../../select'
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-cascading',
     mixins: [FormApiMixin, ValidatorMixin],
-    components: {
-      auSelect
-    },
+    components: {auSelect, FormItem},
     data () {
       return {
         // ancestor chain, used to save selected value
@@ -67,6 +78,11 @@
       placeholder: {
         type: [Array, String]
       },
+      listType: {
+        type: String,
+        default: 'inline'
+      },
+      fullfillWidth: Boolean,
       singleWidth: String,
       singleMaxWidth: String,
       singleMinWidth: String

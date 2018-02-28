@@ -5,7 +5,6 @@
   .au-timepicker {
     display: inline-block;
     position: relative;
-    width: 198px;
   }
   .au-timepicker-container {
     position: relative;
@@ -69,86 +68,95 @@
   // }
 </style>
 <template>
-  <div class="au-timepicker au-theme-font-color--base-3">
-    <div class="au-form-label" :style="{
-      cursor: disabled ? 'not-allowed' : 'default'
-    }" @click="labelClick" v-show="label">{{ label }}</div>
-    <div class="au-timepicker-container">
-      <au-input
-        class="au-timepicker-core"
-        icon="clock-o"
-        v-model="inputTime"
-        @input="input"
-        :warnings="calcedWarnings"
-        :size="size"
-        :disabled="disabled"
-        :readonly="readonly"
-        :placeholder="placeholder"
-        @focus="coreFocus"
-        @blur="coreBlur"
-        ref="core"/>
-      <div class="au-timepicker-popup" :class="`
-        au-theme-border-color--base-8
-        au-theme-font-color--base-3
-        au-theme-background-color--base-12
-        au-theme-box-shadow--level-3
-        au-sizegap-${size}
-      `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
-        <ul
-          class="au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8"
-          :class="{'au-timepicker-no-seconds': !seconds}"
-          ref="hours"
-          @click.stop
-          :style="{
-            top: hoursOffset + 'px'
-          }">
-          <li
-            v-for="(num, index) in 24"
-            :key="index"
-            @click.stop="selectTime(num, 'hour')"
-            :class="{
-              'au-theme-font-color--primary-3': isValid(num, 'h') && num - 1 == hour,
-              'au-theme-font-color--base-7': !isValid(num, 'h'),
-            }" :style="{
-              cursor: isValid(num, 'h') ? '' : 'not-allowed'
-            }">{{ formatNum(num - 1) }}</li>
-        </ul>
-        <ul
-          class="au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8"
-          :class="{'au-timepicker-no-seconds': !seconds}"
-          ref="minutes"
-          @click.stop
-          :style="{ top: minutesOffset + 'px' }">
-          <li
-            v-for="num in 60"
-            :key="num"
-            @click.stop="selectTime(num, 'minute')"
-            :class="{
-              'au-theme-font-color--primary-3': isValid(num, 'm') && num - 1 == minute,
-              'au-theme-font-color--base-7': !isValid(num, 'm')
-            }" :style="{
-              cursor: isValid(num, 'm') ? '' : 'not-allowed'
-            }">{{ formatNum(num - 1) }}</li>
-        </ul>
-        <ul
-          v-if="seconds"
-          class="au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8"
-          ref="seconds"
-          @click.stop
-          :style="{ top: secondsOffset + 'px' }">
-          <li
-            v-for="num in 60"
-            :key="num"
-            @click.stop="selectTime(num, 'second')"
-            :class="{
-              'au-theme-font-color--primary-3': isValid(num, 's') && num - 1 == second,
-              'au-theme-font-color--base-7': !isValid(num, 's')
-            }" :style="{
-              cursor: isValid(num, 's') ? '' : 'not-allowed'
-            }">{{ formatNum(num - 1) }}</li>
-        </ul>
+  <div class="au-timepicker au-theme-font-color--base-3"  :style="{display: !inline && fullfillWidth ? 'block' : ''}">
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="inline"
+      :warnings="warnings || localWarnings">
+      <div class="au-timepicker-container">
+        <au-input
+          class="au-timepicker-core"
+          icon="clock-o"
+          v-model="inputTime"
+          @input="input"
+          :warning="hasWarnings"
+          :size="size"
+          :inline="false"
+          :fullfill-with="inline && fullfillWidth"
+          :width="width || '114px'"
+          :disabled="disabled"
+          :readonly="readonly"
+          :placeholder="placeholder"
+          @focus="coreFocus"
+          @blur="coreBlur"
+          ref="core"/>
+        <div class="au-timepicker-popup" :class="`
+          au-theme-border-color--base-8
+          au-theme-font-color--base-3
+          au-theme-background-color--base-12
+          au-theme-box-shadow--level-3
+          au-sizegap-${size}
+        `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
+          <ul
+            class="au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8"
+            :class="{'au-timepicker-no-seconds': !seconds}"
+            ref="hours"
+            @click.stop
+            :style="{
+              top: hoursOffset + 'px'
+            }">
+            <li
+              v-for="(num, index) in 24"
+              :key="index"
+              @click.stop="selectTime(num, 'hour')"
+              :class="{
+                'au-theme-font-color--primary-3': isValid(num, 'h') && num - 1 == hour,
+                'au-theme-font-color--base-7': !isValid(num, 'h'),
+              }" :style="{
+                cursor: isValid(num, 'h') ? '' : 'not-allowed'
+              }">{{ formatNum(num - 1) }}</li>
+          </ul>
+          <ul
+            class="au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8"
+            :class="{'au-timepicker-no-seconds': !seconds}"
+            ref="minutes"
+            @click.stop
+            :style="{ top: minutesOffset + 'px' }">
+            <li
+              v-for="num in 60"
+              :key="num"
+              @click.stop="selectTime(num, 'minute')"
+              :class="{
+                'au-theme-font-color--primary-3': isValid(num, 'm') && num - 1 == minute,
+                'au-theme-font-color--base-7': !isValid(num, 'm')
+              }" :style="{
+                cursor: isValid(num, 'm') ? '' : 'not-allowed'
+              }">{{ formatNum(num - 1) }}</li>
+          </ul>
+          <ul
+            v-if="seconds"
+            class="au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8"
+            ref="seconds"
+            @click.stop
+            :style="{ top: secondsOffset + 'px' }">
+            <li
+              v-for="num in 60"
+              :key="num"
+              @click.stop="selectTime(num, 'second')"
+              :class="{
+                'au-theme-font-color--primary-3': isValid(num, 's') && num - 1 == second,
+                'au-theme-font-color--base-7': !isValid(num, 's')
+              }" :style="{
+                cursor: isValid(num, 's') ? '' : 'not-allowed'
+              }">{{ formatNum(num - 1) }}</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </form-item>
   </div>
 </template>
 <script>
@@ -157,6 +165,7 @@
   import { mousewheel } from '../../../helpers/dom'
   import { isEmptyString } from '../../../helpers/utils'
   import AuInput from '../../input'
+  import FormItem from '../../../helpers/form-item.vue'
 
   const SPEED = 32
   const HOURSRANGE = 736
@@ -170,7 +179,7 @@
   export default {
     name: 'au-timepicker',
     mixins: [FormApiMixin, ValidatorMixin],
-    components: { AuInput },
+    components: { AuInput, FormItem },
     mounted () {
       mousewheel('add', this.$refs.hours, (e) => { this.listScroll(e, 'hour') })
       mousewheel('add', this.$refs.minutes, (e) => { this.listScroll(e, 'minute') })
@@ -200,23 +209,11 @@
         type: String,
         default: '请选择时间'
       },
-      start: {
-        type: String
-        // validator (v) {
-        //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-        //   if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
-        //   return res
-        // }
-      },
-      end: {
-        type: String
-        // validator (v) {
-        //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-        //   if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
-        //   return res
-        // }
-      },
-      readonly: Boolean
+      start: String,
+      end: String,
+      readonly: Boolean,
+      fullfillWidth: Boolean,
+      width: String
     },
     watch: {
       popup (v) {
@@ -258,14 +255,6 @@
       }
     },
     computed: {
-      calcedWarnings () {
-        if (this.warnings) return this.warnings
-        let res = []
-        for (let key in this.localWarnings) {
-          res.push(this.localWarnings[key])
-        }
-        return res.length ? res : null
-      },
       validTime () {
         let res = {
           start: {
@@ -444,9 +433,6 @@
           }) : false
         }
         this.setSeparateTime(res)
-      },
-      labelClick () {
-        if (!this.disabled) this.$refs.core.$refs.core.focus()
       },
       popupBlur (e) {
         if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false

@@ -5,11 +5,17 @@
   .au-radio {
     display: inline-block;
     font-size: $normal;
-    .au-radio-container {
-      display: inline;
+    .au-radio-container-inline {
+      display: inline-block;
     }
-    .au-radio-container-multiple:not(:last-child) {
+    .au-radio-container-block {
+      display: block;
+    }
+    .au-radio-container-inline:not(:last-child) {
       margin-right: 24px;
+    }
+    .au-radio-container-block:not(:last-child) {
+      margin-bottom: 8px;
     }
     .au-radio-core {
       position: relative;
@@ -39,45 +45,58 @@
 </style>
 <template>
   <div class="au-radio">
-    <div class="au-form-label au-theme-font-color--base-3" v-if="label">{{ label }}</div>
-    <div class="au-radio-container au-radio-container-multiple" v-for="(radio, i) in radios" :key="i"
-      @mouseenter="handleMouseEnter(i)"
-      @mouseleave="handleMouseLeave(i)"
-      :style="{
-        cursor: disabled ? 'not-allowed' : 'default'
-      }"
-      @click="handleClick(radio.value)">
-      <span class="au-radio-core" tabindex="0"
-      :class="{
-        'au-theme-border-color--base-8': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
-        'au-theme-background-color--base-8': disabled && radio.value!== localValue,
-        'au-theme-border-color--primary-3': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
-        'au-theme-border-color--danger-3': hasWarnings && !disabled
-      }">
-        <span v-show="radio.value === localValue"
-          class="au-radio-dot"
-          :class="{
-            'au-radio-dot-disabled': disabled,
-            'au-theme-background-color--primary-3': !disabled && !hasWarnings,
-            'au-theme-background-color--danger-3': !disabled && hasWarnings,
-            'au-theme-background-color--base-10': disabled
-          }"></span>
-      </span>
-      <span class="au-radio-text">{{ radio.text }}</span>
-    </div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in localWarnings" :key="i">{{ w }}</div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(w, i) in warnings" :key="i">{{ w }}</div>
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :warnings="warnings || localWarnings">
+      <div
+        :class="'au-radio-container' + (listType === 'block' ? '-block' : '-inline')"
+        v-for="(radio, i) in radios" :key="i"
+        @mouseenter="handleMouseEnter(i)"
+        @mouseleave="handleMouseLeave(i)"
+        :style="{
+          cursor: disabled ? 'not-allowed' : 'default'
+        }"
+        @click="handleClick(radio.value)">
+        <span class="au-radio-core" tabindex="0"
+        :class="{
+          'au-theme-border-color--base-8': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
+          'au-theme-background-color--base-8': disabled && radio.value!== localValue,
+          'au-theme-border-color--primary-3': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
+          'au-theme-border-color--danger-3': hasWarnings && !disabled
+        }">
+          <span v-show="radio.value === localValue"
+            class="au-radio-dot"
+            :class="{
+              'au-radio-dot-disabled': disabled,
+              'au-theme-background-color--primary-3': !disabled && !hasWarnings,
+              'au-theme-background-color--danger-3': !disabled && hasWarnings,
+              'au-theme-background-color--base-10': disabled
+            }"></span>
+        </span>
+        <span class="au-radio-text">{{ radio.text }}</span>
+      </div>
+    </form-item>
   </div>
 </template>
 <script>
   import FormApiMixin from '../../../helpers/form-api-mixin'
   import ValidatorMixin from '../../../helpers/validator-mixin'
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-radio',
     mixins: [FormApiMixin, ValidatorMixin],
+    components: { FormItem },
     props: {
-      radios: Array
+      radios: Array,
+      listType: {
+        type: String,
+        default: 'inline'
+      }
     },
     data () {
       return {

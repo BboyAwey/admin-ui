@@ -47,22 +47,6 @@
     border-style: solid;
     // line-height: 30px;
   }
-  .au-button-loading-mask:before,
-  .au-button-loading-mask {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .au-button-loading-svg {
-    position: relative;
-  }
-  .au-button-loading-mask:before {
-    content: "";
-    opacity: .5;
-  }
 </style>
 <template>
   <button
@@ -75,39 +59,24 @@
     }"
     :type="nativeType"
     :disabled="disabled || loading"
-    @click="handleClick">
+    @click="handleClick" ref="button">
     <span class="before-mask au-theme-background-color--base-12"></span>
     <slot></slot>
     <span class="after-mask au-theme-background-color--base-12"
       :class="{'au-theme-border-color--base-12': plain}"></span>
-    <span class="au-button-loading-mask au-theme-before-background-color--base-12" v-show="loading"
-      :class="{'au-theme-border-color--base-12': plain}">
-      <svg ref="svg" viewBox="0 0 50 50" class="au-button-loading-svg"
-        :width="loadingSize" :height="loadingSize"
-        :style="{
-          animation: '1.33333s linear 0s normal none infinite running Rotate',
-          top: loadingSvgTop
-        }">
-        <circle ref="core" fill="none" :stroke="stroke" stroke-width="5" stroke-linecap="round" cx="25" cy="25" r="20" style="
-        transform-origin: center center 0px;
-        animation: 1s ease 0s normal none infinite running CircularBarDash;"></circle>
-      </svg>
-    </span>
   </button>
 </template>
 <script>
-  import { namespace } from '../../../helpers/utils'
+  import Loading from '../../loading'
 
   export default {
     name: 'au-button',
     mounted () {
-      this.insertLoadingSvgStyle()
-      this.setPos()
+      this.load()
     },
     data () {
       return {
-        loadingSize: 12,
-        loadingSvgTop: '0px'
+        loadingIns: null
       }
     },
     props: {
@@ -123,7 +92,8 @@
     },
     watch: {
       loading () {
-        this.$nextTick(this.setPos)
+        // this.$nextTick(this.setPos)
+        this.load()
       }
     },
     computed: {
@@ -163,63 +133,32 @@
 
         return res.join(' ')
       },
-      stroke () {
-        return namespace.get('theme').colors[this.type + '-3'] || namespace.get('theme').colors['primary-3']
+      loadingSize () {
+        switch (this.size) {
+          case 'mini': // 20
+            return 16
+          case 'small': // 26
+            return 20
+          case 'normal': // 32
+            return 24
+          case 'large': // 38
+            return 28
+        }
       }
     },
     methods: {
       handleClick (e) {
         this.$emit('click', e)
       },
-      insertLoadingSvgStyle () {
-        let style = document.createElement('style')
-        style.innerHTML = `
-          /* &lt;![CDATA[ */
-            @keyframes Rotate { 100% { transform: rotate(360deg); } }
-
-            @keyframes CircularBarDash {
-              0% {
-              stroke-dasharray: 1, 200;
-              stroke-dashoffset: 0;
-            }
-            50% {
-              stroke-dasharray: 89, 200;
-              stroke-dashoffset: -35;
-            }
-            100% {
-              stroke-dasharray: 89, 200;
-              stroke-dashoffset: -124;
-            }
-            }
-          /* ]]&gt; */
-        `
-
-        let styles = this.$refs.svg.querySelectorAll('style')
-        for (let i = 0; i < styles.length; i++) {
-          styles[i].parentNode.removeChild(styles[i])
-        }
-        this.$refs.svg.insertBefore(style, this.$refs.core)
-      },
-      setPos () {
+      load () {
         if (this.loading) {
-          switch (this.size) {
-            case 'mini': // 20
-              this.loadingSize = '16px'
-              this.loadingSvgTop = '1px'
-              break
-            case 'small': // 26
-              this.loadingSize = '18px'
-              this.loadingSvgTop = '3px'
-              break
-            case 'normal': // 32
-              this.loadingSize = '20px'
-              this.loadingSvgTop = '5px'
-              break
-            case 'large': // 38
-              this.loadingSize = '22px'
-              this.loadingSvgTop = '7px'
-              break
-          }
+          this.loadingIns = Loading({
+            target: this.$refs.button,
+            color: this.type,
+            size: this.loadingSize
+          })
+        } else {
+          if (this.loadingIns) this.loadingIns.close()
         }
       }
     }

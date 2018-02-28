@@ -179,8 +179,7 @@
       :inline="inline"
       :comments="comments"
       :size="buttonSize"
-      middle
-      @labelClick="uploadButtonClickHandler">
+      middle="inline">
       <au-button
         class="au-upload-button au-plain"
         :type="buttonType"

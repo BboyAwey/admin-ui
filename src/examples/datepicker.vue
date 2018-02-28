@@ -37,6 +37,53 @@
             </td>
           </tr>
           <tr>
+            <td>label-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>合法的css宽度值，仅支持px单位</td>
+            <td>
+              提示文字的宽度<br>
+              仅inline为true时有效
+            </td>
+          </tr>
+          <tr>
+            <td>comments</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Array<br>
+              -String
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              需要显示的解释信息<br>
+            </td>
+          </tr>
+          <tr>
+            <td>inline</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否横向放置label
+            </td>
+          </tr>
+          <tr>
             <td>value</td>
             <td>
               <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
@@ -79,6 +126,42 @@
             </td>
             <td>
               输入框尺寸（高度）
+            </td>
+          </tr>
+          <tr>
+            <td>fullfill-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否占满父元素宽度<br>
+              仅在inline为false时有效
+            </td>
+          </tr>
+          <tr>
+            <td>width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css长度值
+            </td>
+            <td>
+              输入框的宽度<br>
+              当inline为true时请使用px单位<br>
+              当inline为false时，可设置100%并在组件上使用display: block来让组件占满父元素宽度
             </td>
           </tr>
           <tr>
@@ -144,6 +227,22 @@
             </td>
           </tr>
           <tr>
+            <td>warning</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>是否显示警告样式</td>
+          </tr>
+          <tr>
             <td>warnings</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
@@ -158,9 +257,7 @@
             <td>
               需要显示的警告信息<br>
               如果给定了需要显示的警告信息，则组件将不执行validators中提供的验证器，而只是简单显示给定的警告<br>
-              可以通过传入空数组 [] 来让组件只显示警告样式而不显示警告信息<br>
-              同样，即使是空数组，同时传入的自定义验证器也会被忽略<br>
-              只有传入undefined或者null时，组件才会认为没有警告信息
+              不管warning选项是true还是false，只要给定了警告信息就一定会显示警告样式<br>
             </td>
           </tr>
           <tr>
@@ -187,7 +284,8 @@
               异步验证时，需要额外配置async为true<br>
               同时，验证器函数需要返回一个promise，并在resolve函数中传递Boolean类型的验证结果给验证器<br>
               既有同步验证，又有异步验证时，验证器首先执行同步验证<br>
-              只有通过了全部的同步验证时，才会执行异步验证
+              只有通过了全部的同步验证时，才会执行异步验证<br>
+              不管warning选项是true还是false，只要验证未通过就一定会显示警告样式<br>
             </td>
           </tr>
         </tbody>
@@ -323,12 +421,12 @@
       return {
         date: '',
         validators: [
-          // {
-          //   validator (v) {
-          //     return v === '2018-01-05'
-          //   },
-          //   warning: '请选择2018年01月05日'
-          // }
+          {
+            validator (v) {
+              return v === '2018-02-15'
+            },
+            warning: '请选择2018年02月15日'
+          }
         ]
       }
     }

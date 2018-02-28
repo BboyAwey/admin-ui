@@ -5,7 +5,6 @@
   .au-datepicker {
     display: inline-block;
     position: relative;
-    width: 198px;
   }
   .au-datepicker-label-text {
     margin-bottom: 8px;
@@ -108,102 +107,107 @@
   }
 </style>
 <template>
-  <div class="au-datepicker au-theme-font-color--base-3">
-    <div class="au-form-label" :style="{
-      cursor: disabled ? 'not-allowed' : 'default'
-    }" v-if="label" @click="labelClick">{{ label }}</div>
-    <div class="au-datepicker-container">
-      <!-- <au-input
-        class="au-datepicker-input"
-        v-model="inputValue"
-        @change="changeInputValue(inputValue, $event)" -->
-      <au-input
-        class="au-datepicker-input"
-        v-model="inputValue"
-        :warnings="calcedWarnings"
-        icon="calendar"
-        @focus="coreFocus"
-        @blur="coreBlur"
-        :size="size"
-        :disabled="disabled"
-        :readonly="readonly"
-        :placeholder="placeholder"
-        ref="core"/>
-      <div
-        class="au-datepicker-popup-container au-theme-box-shadow--level-3"
-        :class="`au-sizegap-${size}`"
-        v-show="popup"
-        @blur="popupBlur"
-        tabindex="0"
-        ref="popup">
-        <div class="
-          au-datepicker-dates-header
-          au-theme-font-color--base-12
-          au-theme-top-left-radius
-          au-theme-top-right-radius
-          au-theme-background-color--primary-3">
-          <div class="au-datepicker-fastmoves">
-            <table>
+  <div class="au-datepicker au-theme-font-color--base-3" :style="{display: !inline && fullfillWidth ? 'block' : ''}">
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="inline"
+      :warnings="warnings || localWarnings">
+      <div class="au-datepicker-container">
+        <au-input
+          class="au-datepicker-input"
+          v-model="inputValue"
+          :warning="hasWarnings"
+          icon="calendar"
+          @focus="coreFocus"
+          @blur="coreBlur"
+          :width="width || '116px'"
+          :inline="false"
+          :fullfill-with="!inline && fullfillWidth"
+          :size="size"
+          :disabled="disabled"
+          :readonly="readonly"
+          :placeholder="placeholder"
+          ref="core"/>
+        <div
+          class="au-datepicker-popup-container au-theme-box-shadow--level-3"
+          :class="`au-sizegap-${size}`"
+          v-show="popup"
+          @blur="popupBlur"
+          tabindex="0"
+          ref="popup">
+          <div class="
+            au-datepicker-dates-header
+            au-theme-font-color--base-12
+            au-theme-top-left-radius
+            au-theme-top-right-radius
+            au-theme-background-color--primary-3">
+            <div class="au-datepicker-fastmoves">
+              <table>
+                <tr>
+                  <td>
+                    <span
+                      class="au-datepicker-fastmove simu2"
+                      @click="step(true)"><au-icon type="backward"></au-icon></span>
+                    <span
+                      class="au-datepicker-fastmove simu"
+                      @click="step(false)"><au-icon type="caret-left"></au-icon></span>
+                  </td>
+                  <td>
+                    {{ renderedDateObj.month }}月&nbsp;&nbsp;{{ renderedDateObj.year }}
+                  </td>
+                  <td>
+                    <span
+                      class="au-datepicker-fastmove simu"
+                      @click="step(false, true)"><au-icon type="caret-right"></au-icon></span>
+                    <span
+                      class="au-datepicker-fastmove simu2"
+                      @click="step(true, true)"><au-icon type="forward"></au-icon></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <table class="au-datepicker-week">
               <tr>
-                <td>
-                  <span
-                    class="au-datepicker-fastmove simu2"
-                    @click="step(true)"><au-icon type="backward"></au-icon></span>
-                  <span
-                    class="au-datepicker-fastmove simu"
-                    @click="step(false)"><au-icon type="caret-left"></au-icon></span>
-                </td>
-                <td>
-                  {{ renderedDateObj.month }}月&nbsp;&nbsp;{{ renderedDateObj.year }}
-                </td>
-                <td>
-                  <span
-                    class="au-datepicker-fastmove simu"
-                    @click="step(false, true)"><au-icon type="caret-right"></au-icon></span>
-                  <span
-                    class="au-datepicker-fastmove simu2"
-                    @click="step(true, true)"><au-icon type="forward"></au-icon></span>
+                <td>日</td>
+                <td>一</td>
+                <td>二</td>
+                <td>三</td>
+                <td>四</td>
+                <td>五</td>
+                <td>六</td>
+              </tr>
+            </table>
+          </div>
+          <div class="
+            au-datepicker-dates-body
+            au-theme-border-color--base-8
+            au-theme-background-color--base-12">
+            <table class="au-datepicker-dates-table">
+              <tr v-for="(row, i) in dates" :key="i">
+                <td
+                  v-for="(date, j) in row"
+                  :key="j">
+                  <span :class="{
+                    'au-theme-hover-border-color--primary-3': isValid(date) && !isSelected(date),
+                    'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
+                    'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
+                    'au-theme-font-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
+                    'au-theme-font-color--base-9': !isValid(date),
+                    'au-theme-font-color--primary-3': isToday(date) && !isSelected(date) && isValid(date),
+                  }" :style="{
+                    cursor: isValid(date) ? '' : 'not-allowed'
+                  }" @click="selectDate(date)">{{ isToday(date) ? '今天' : date.date }}</span>
                 </td>
               </tr>
             </table>
           </div>
-          <table class="au-datepicker-week">
-            <tr>
-              <td>日</td>
-              <td>一</td>
-              <td>二</td>
-              <td>三</td>
-              <td>四</td>
-              <td>五</td>
-              <td>六</td>
-            </tr>
-          </table>
-        </div>
-        <div class="
-          au-datepicker-dates-body
-          au-theme-border-color--base-8
-          au-theme-background-color--base-12">
-          <table class="au-datepicker-dates-table">
-            <tr v-for="(row, i) in dates" :key="i">
-              <td
-                v-for="(date, j) in row"
-                :key="j">
-                <span :class="{
-                  'au-theme-hover-border-color--primary-3': isValid(date) && !isSelected(date),
-                  'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
-                  'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
-                  'au-theme-font-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
-                  'au-theme-font-color--base-9': !isValid(date),
-                  'au-theme-font-color--primary-3': isToday(date) && !isSelected(date) && isValid(date),
-                }" :style="{
-                  cursor: isValid(date) ? '' : 'not-allowed'
-                }" @click="selectDate(date)">{{ isToday(date) ? '今天' : date.date }}</span>
-              </td>
-            </tr>
-          </table>
         </div>
       </div>
-    </div>
+    </form-item>
   </div>
 </template>
 <script>
@@ -212,27 +216,12 @@
   import { isEmptyString } from '../../../helpers/utils'
   import AuInput from '../../input'
   import AuIcon from '../../icon'
-
-  // function startMustEarlierThanEnd (start, rnd) {
-  //   if (start && end) {
-  //     let s = start.split('-').map(e => {
-  //       return e.trim()
-  //     })
-  //     let e = end.split('-').map(e => {
-  //       return e.trim()
-  //     })
-  //     let res = (new Date(...s).getTime() <= (new Date(...e).getTime()))
-  //     if (!res) {
-  //       console.error('Admin UI@au-datepicker@start must earlier or equal than end')
-  //     }
-  //     return res
-  //   }
-  // }
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-datepicker',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: { AuInput, AuIcon },
+    components: { AuInput, AuIcon, FormItem },
     data () {
       return {
         dateObj: {},
@@ -249,37 +238,11 @@
         type: String,
         default: '请选择日期'
       },
-      start: {
-        type: String
-        // validator (v) {
-        //   if (v) {
-        //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-        //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-        //     return res
-        //   } else return true
-        // }
-      },
-      end: {
-        type: String
-        // validator (v) {
-        //   if (v) {
-        //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-        //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-        //     return res
-        //   } else return true
-        // }
-      },
-      readonly: Boolean
-    },
-    computed: {
-      calcedWarnings () {
-        if (this.warnings) return this.warnings
-        let res = []
-        for (let key in this.localWarnings) {
-          res.push(this.localWarnings[key])
-        }
-        return res.length ? res : null
-      }
+      start: String,
+      end: String,
+      readonly: Boolean,
+      fullfillWidth: Boolean,
+      width: String
     },
     watch: {
       value (v) {
@@ -527,9 +490,6 @@
           }
         }
         this.render(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
-      },
-      labelClick () {
-        if (!this.disabled) this.$refs.core.$refs.core.focus()
       },
       coreFocus () {
         if (this.readonly) return

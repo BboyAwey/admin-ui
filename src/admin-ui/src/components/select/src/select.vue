@@ -56,6 +56,7 @@
     & > li {
       height: 28px;
       padding: 0 8px;
+      margin: 4px 0;
       line-height: 28px;
       font-size: $normal;
       word-break: keep-all;
@@ -63,15 +64,20 @@
       overflow: hidden;
       text-overflow: ellipsis;
       user-select: none;
-      cursor: default;
+      cursor: pointer;
     }
   }
   .au-select-multiple {
     line-height: inherit;
     li {
       float: left;
+      max-width: 100%;
       margin-right: 12px;
       line-height: inherit;
+      word-break: keep-all;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &:after {
       content: '';
@@ -84,66 +90,76 @@
   }
 </style>
 <template>
-  <div class="au-select au-theme-font-color--base-3">
-    <div class="au-form-label" :style="{
-      cursor: disabled ? 'not-allowed' : 'default'
-    }" @click="labelClick" v-if="label" @click.stop="()=>{}">{{ label }}</div>
-    <div :class="`au-select-core-container au-size-${size}`" ref="coreContainer">
+  <div class="au-select au-theme-font-color--base-3" :style="{display: fullfillWidth ? 'block' : ''}">
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="inline"
+      :warnings="warnings || localWarnings">
       <div
-        class="au-select-core au-theme-border-radius--normal"
-        ref="core"
-        tabindex="0"
-        @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
-        :class="{
-          [`au-size-${size}-bordered`]: true,
-          'au-theme-background-color--base-12': !disabled,
-          'au-theme-background-color--base-9': disabled,
-          'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
-          'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
-          'au-theme-border-color--danger-3': hasWarnings,
-          'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
-          'au-theme-box-shadow--danger': hasWarnings,
-        }" :style="{
-          cursor: disabled ? 'not-allowed' : 'default'
-        }">
-        <ul class="au-select-multiple" ref="selectMultiple">
-          <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</span></li>
-          <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
-          <li v-else v-for="(option, i) in selectedOptions" :key="i">
-            <span>{{ option.text }}</span>
-            <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
-              <au-icon type="times"></au-icon>
-            </span>
-          </li>
-        </ul>
-        <au-icon class="au-select-arrow" type="caret-down"
-        :class="{
-          'au-theme-font-color--primary-3': !disabled && active
-        }"></au-icon>
-      </div>
-      <au-scroller class="au-select-option-scroller"
-        ref="selectScroller"
-        :class="`
-        au-sizegap-${size}
-        au-select-option
-        au-theme-background-color--base-12
-        au-theme-border-color--base-8
-        au-theme-box-shadow--level-3
-        au-theme-border-radius--normal`" v-show="optionDisplay">
-        <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
-          <li
-            v-for="(option, i) in options" :key="i"
+        :class="`au-select-core-container au-size-${size}`"
+        ref="coreContainer"
+        :style="{width, maxWidth, minWidth}">
+        <div
+          class="au-select-core au-theme-border-radius--normal"
+          ref="core"
+          tabindex="0"
+          @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
+          :class="{
+            [`au-size-${size}-bordered`]: true,
+            'au-theme-background-color--base-12': !disabled,
+            'au-theme-background-color--base-9': disabled,
+            'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
+            'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
+            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
+            'au-theme-box-shadow--danger': hasWarnings
+          }"
+          :style="{
+            cursor: disabled ? 'not-allowed' : 'default'
+          }">
+          <ul class="au-select-multiple" ref="selectMultiple">
+            <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</li>
+            <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
+            <li v-else v-for="(option, i) in selectedOptions" :key="i">
+              <span>{{ option.text }}</span>
+              <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
+                <au-icon type="times"/>
+              </span>
+            </li>
+          </ul>
+          <au-icon
+            class="au-select-arrow"
+            type="caret-down"
             :class="{
-              'au-theme-background-color--primary-3': isSelected(option.value),
-              'au-theme-font-color--base-12': isSelected(option.value),
-              'au-theme-hover-background-color--base-10': !isSelected(option.value)
-            }"
-            @click.stop="select(option, $event)">{{ option.text }}</li>
-        </ul>
-      </au-scroller>
+              'au-theme-font-color--primary-3': !disabled && active
+            }"/>
+        </div>
+        <au-scroller class="au-select-option-scroller"
+          ref="selectScroller"
+          :class="`
+          au-sizegap-${size}
+          au-select-option
+          au-theme-background-color--base-12
+          au-theme-border-color--base-8
+          au-theme-box-shadow--level-3
+          au-theme-border-radius--normal`" v-show="optionDisplay">
+          <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
+            <li
+              v-for="(option, i) in options" :key="i"
+              :class="{
+                'au-theme-background-color--primary-3': isSelected(option.value),
+                'au-theme-font-color--base-12': isSelected(option.value),
+                'au-theme-hover-background-color--base-10': !isSelected(option.value)
+              }"
+              @click.stop="select(option, $event)">{{ option.text }}</li>
+          </ul>
+        </au-scroller>
     </div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="i">{{ warning }}</div>
-    <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in localWarnings" :key="i">{{ warning }}</div>
+    </form-item>
   </div>
 </template>
 <script>
@@ -152,11 +168,12 @@
   import { getElementSize } from '../../../helpers/dom'
   import AuIcon from '../../icon'
   import AuScroller from '../../scroller'
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-select',
     mixins: [ValidatorMixin, FormApiMixin],
-    components: {AuIcon, AuScroller},
+    components: {AuIcon, AuScroller, FormItem},
     created () {
       this.localValueToSelectedOptions()
     },
@@ -185,7 +202,11 @@
       multiple: {
         type: Boolean,
         default: false
-      }
+      },
+      fullfillWidth: Boolean,
+      width: String,
+      maxWidth: String,
+      minWidth: String
     },
     watch: {
       localValue () {
@@ -206,11 +227,6 @@
         this.selectedOptions.splice(index, 1)
         this.localValue.splice(index, 1)
         this.$nextTick(this.resize)
-      },
-      labelClick () {
-        if (this.disabled) return false
-        this.$refs.core.click()
-        this.$refs.core.focus()
       },
       coreClick () {
         if (this.disabled) return false

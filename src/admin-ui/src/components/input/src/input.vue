@@ -2,9 +2,6 @@
   @import '../../../style/vars';
   @import '../../../style/size';
   @import '../../../style/sizegap';
-  @import '../../../style/label';
-  @import '../../../style/warnings';
-  @import '../../../style/comments';
   .au-input {
     display: inline-block;
     .au-core-container {
@@ -65,15 +62,15 @@
   }
 </style>
 <template>
-  <div class="au-input">
+  <div class="au-input" :style="{display: fullfillWith ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
       :comments="comments"
       :size="size"
-      :warnings="warnings || localWarnings"
-      @labelClick="labelClick">
+      :middle="type !== 'textarea'"
+      :warnings="warnings || localWarnings">
       <textarea
         v-if="type==='textarea'"
         class="au-input-core"
@@ -88,10 +85,10 @@
           'au-theme-disabled-background-color--base-8': disabled
         }"
         :style="{
-          width,
+          width: !inline && fullfillWith ? '100%' : width,
           height,
-          minWidth,
-          maxWidth,
+          minWidth: !inline && fullfillWith ? '100%' : minWidth,
+          maxWidth: !inline && fullfillWith ? '100%' : maxWidth,
           minHeight,
           maxHeight,
         }"
@@ -112,7 +109,8 @@
         v-else
         class="au-core-container"
         :style="{
-          verticalAlign: inline ? 'top' : ''
+          verticalAlign: inline ? 'top' : '',
+          width: !inline && fullfillWith ? '100%' : width,
         }">
         <au-icon
           v-if="icon"
@@ -144,7 +142,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width
+            width: !inline && fullfillWith ? '100%' : width,
           }"
           type="text"
           v-if="type === 'text'"
@@ -179,7 +177,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width
+            width: !inline && fullfillWith ? '100%' : width,
           }"
           v-model="localValue"
           :disabled="disabled"
@@ -212,7 +210,6 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width
           }"
           v-model="localValue"
           :disabled="disabled"
@@ -235,10 +232,7 @@
             au-theme-background-color--base-12
             au-theme-border-radius--normal
             au-sizegap-${size}
-          `"
-          :style="{
-            width
-          }">
+          `">
           <ul class="au-input-associations"
             ref="associations"
             tabindex="0"
@@ -289,6 +283,7 @@
       associations: Array,
       icon: String,
       iconPosition: String,
+      fullfillWith: Boolean,
       width: {
         type: String,
         default: '260px'
@@ -314,9 +309,6 @@
       keydown (e) { this.$emit('keydown', e.target.value, e) },
       click (e) {
         this.$emit('click', e.target.value, e)
-      },
-      labelClick () {
-        this.$refs.core.focus()
       },
       selectAssociation (v) {
         this.localValue = v

@@ -64,6 +64,53 @@
             </td>
           </tr>
           <tr>
+            <td>label-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>合法的css宽度值，仅支持px单位</td>
+            <td>
+              提示文字的宽度<br>
+              仅inline为true时有效
+            </td>
+          </tr>
+          <tr>
+            <td>comments</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Array<br>
+              -String
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              需要显示的解释信息<br>
+            </td>
+          </tr>
+          <tr>
+            <td>inline</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否横向放置label
+            </td>
+          </tr>
+          <tr>
             <td>startPlaceholder</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->

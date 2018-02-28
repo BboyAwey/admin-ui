@@ -16,6 +16,7 @@ export default {
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -48,7 +49,8 @@ export default {
       return false
     },
     hasWarnings () {
-      return this.hasLocalWarnings || this.warnings instanceof Array
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || (this.warnings && this.warnings.length) || this.warning
     },
     throttling () { // if there has async validator we should enable throttling
       return !!this.validators.filter(v => v.async).length

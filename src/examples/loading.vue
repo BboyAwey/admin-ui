@@ -24,7 +24,7 @@
     </au-panel>
     <au-panel class="section" title="Methods">
       <p class="paragraph">
-        Loading组件本身就是一个方法，用于在元素上显示加载动画。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">Loading()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$loading()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
+        Loading组件是一个方法组件，用于在元素上显示加载动画。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">Loading()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$loading()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
       </p>
       <au-table>
         <thead>
@@ -51,7 +51,7 @@
             <td>
               <au-icon type="minus"></au-icon>
             </td>
-            <td>目标元素</td>
+            <td>目标元素，不指定则以body为目标元素</td>
           </tr>
           <tr>
             <td>message</td>
@@ -89,6 +89,39 @@
               </ol>
             </td>
             <td>颜色类型</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+
+            </td>
+            <td>
+              合法的CSS长度值，仅支持px单位
+            </td>
+            <td>动画尺寸，不设置则自动计算</td>
+          </tr>
+          <tr>
+            <td>mask</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>
+              true
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>是否显示半透明遮罩</td>
           </tr>
           <tr>
             <td>tag</td>
@@ -132,7 +165,7 @@
               if (!this.loading) {
                 this.loading = this.$loading({
                   target: this.$refs.target,
-                  text: '拼命加载中',
+                  message: '拼命加载中',
                   color: 'danger',
                   tag: 'p'
                 })
@@ -160,7 +193,7 @@
         if (!this.loading) {
           this.loading = this.$loading({
             target: this.$refs.target,
-            text: '拼命加载中',
+            message: '拼命加载中',
             color: 'danger'
           })
         } else {

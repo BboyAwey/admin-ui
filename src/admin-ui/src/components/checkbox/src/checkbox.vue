@@ -1,7 +1,5 @@
 <style lang="scss">
   @import '../../../style/vars';
-  @import '../../../style/label';
-  @import '../../../style/warnings';
   .au-checkbox {
     display: inline-block;
     font-size: $normal;
@@ -49,19 +47,13 @@
 </style>
 <template>
   <div class="au-checkbox">
-    <div
-      class="au-theme-font-color--base-3"
-      :class="`au-form-label${inline ? '-inline' : ''}`"
-      v-if="label"
-      @click.stop="labelClick()"
-      :style="{
-        width: inline ? labelWidth : ''
-      }">{{ label }}</div>
-    <div class="au-checkbox-main"
-      :style="{
-        display: inline ? 'inline-block' : 'block',
-        verticalAlign: inline ? 'top' : ''
-      }">
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :warnings="warnings || localWarnings">
       <div class="au-checkbox-container" v-if="!multiple"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
@@ -127,19 +119,18 @@
         </span>
         <span class="au-checkbox-text">{{ checkbox.text }}</span>
       </div>
-      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in warnings" :key="index">{{ warning }}</div>
-      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, index) in localWarnings" :key="index">{{ warning }}</div>
-      <div class="au-form-warning au-theme-font-color--base-7" v-for="(comment, index) in comments" :key="index">{{ comment }}</div>
-    </div>
+    </form-item>
   </div>
 </template>
 <script>
   import ValidatorMixin from '../../../helpers/validator-mixin'
   import FormApiMixin from '../../../helpers/form-api-mixin'
+  import FormItem from '../../../helpers/form-item.vue'
 
   export default {
     name: 'au-checkbox',
     mixins: [ValidatorMixin, FormApiMixin],
+    components: { FormItem },
     props: {
       // label value disabled from mixins
       text: {

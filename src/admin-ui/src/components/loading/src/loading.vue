@@ -8,8 +8,7 @@
     height: 100%;
     z-index: $z-level-2;
   }
-  .au-loading:before {
-    content: '';
+  .au-loading-mask {
     display: block;
     position: absolute;
     top: 0;
@@ -20,12 +19,17 @@
   }
   .au-loading-core-container {
     position: relative;
+    max-height: 100%;
+    text-align: left;
+    line-height: 0; // let container height just the same as svg height plus message height
+    overflow: hidden; // let container height just the same as svg height plus message height
   }
   .au-loading-svg {
+    display: inline-block;
     position: relative;
     left: 50%;
   }
-  .au-loading-text {
+  .au-loading-message {
     position: relative;
     margin: 0;
     padding: 0;
@@ -39,8 +43,8 @@
 <template>
   <div class="au-loading" :class="{
     [`au-theme-font-color--${color}-3`]: true,
-    'au-theme-before-background-color--base-12': true
   }">
+    <div class="au-loading-mask au-theme-background-color--base-12" v-show="mask"></div>
     <div class="au-loading-core-container" ref="coreContainer">
       <svg ref="svg" viewBox="0 0 50 50" class="au-loading-svg"
         :width="size || 0" :height="size || 0"
@@ -52,7 +56,7 @@
         transform-origin: center center 0px;
         animation: 1s ease 0s normal none infinite running CircularBarDash;"></circle>
       </svg>
-      <p class="au-loading-text" v-if="text">{{ text }}</p>
+      <p class="au-loading-message" v-show="message">{{ message }}</p>
     </div>
   </div>
 </template>
@@ -69,44 +73,19 @@
       }
     },
     mounted () {
-      let style = document.createElement('style')
-      style.innerHTML = `
-        /* &lt;![CDATA[ */
-          @keyframes Rotate { 100% { transform: rotate(360deg); } }
-
-          @keyframes CircularBarDash {
-            0% {
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-          }
-          50% {
-            stroke-dasharray: 89, 200;
-            stroke-dashoffset: -35;
-          }
-          100% {
-            stroke-dasharray: 89, 200;
-            stroke-dashoffset: -124;
-          }
-          }
-        /* ]]&gt; */
-      `
-
-      let styles = this.$refs.svg.querySelectorAll('style')
-      for (let i = 0; i < styles.length; i++) {
-        styles[i].parentNode.removeChild(styles[i])
-      }
-      this.$refs.svg.insertBefore(style, this.$refs.core)
+      this.insertSvgStyleTag()
     },
     beforeDestroy () {
       this.close()
     },
     props: {
       size: Number,
-      text: String,
+      message: String,
       color: {
         type: String,
         default: 'primary'
-      }
+      },
+      mask: Boolean
     },
     computed: {
       stroke () {
@@ -114,10 +93,37 @@
       }
     },
     methods: {
-      setTop (elHeight) {
-        let containerHeight = getElementSize(this.$refs.coreContainer).height
-        if (containerHeight > elHeight) this.$refs.coreContainer.style.height = elHeight + 'px'
+      setTop (elHeight) { // exec in loading.js
         this.$refs.coreContainer.style.top = (elHeight - getElementSize(this.$refs.coreContainer).height) / 2 + 'px'
+      },
+      insertSvgStyleTag () {
+        let style = document.createElement('style')
+        style.innerHTML = `
+          /* &lt;![CDATA[ */
+            @keyframes Rotate { 100% { transform: rotate(360deg); } }
+
+            @keyframes CircularBarDash {
+              0% {
+              stroke-dasharray: 1, 200;
+              stroke-dashoffset: 0;
+            }
+            50% {
+              stroke-dasharray: 89, 200;
+              stroke-dashoffset: -35;
+            }
+            100% {
+              stroke-dasharray: 89, 200;
+              stroke-dashoffset: -124;
+            }
+            }
+          /* ]]&gt; */
+        `
+
+        let styles = this.$refs.svg.querySelectorAll('style')
+        for (let i = 0; i < styles.length; i++) {
+          styles[i].parentNode.removeChild(styles[i])
+        }
+        this.$refs.svg.insertBefore(style, this.$refs.core)
       },
       close () {
         if (!this.closed) {

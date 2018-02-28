@@ -5,13 +5,16 @@ export default (config = {}) => {
   let instance = new (Vue.extend(template))()
   let {
     target = document.body,
-    text,
+    message,
     color = 'primary',
-    tag
+    tag,
+    size,
+    mask = true
   } = config
-  function colorValidator (v) {
-    return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 || console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
-  }
+  // function colorValidator (v) {
+  //   return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 ||
+  //     console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
+  // }
   let {
     position,
     width,
@@ -28,15 +31,20 @@ export default (config = {}) => {
   if (position === 'static') {
     target.style.position = 'relative'
   }
-  let size = Math.min(
-    parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth),
-    parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth)
-  )
-  if (size) size = size > 50 ? 50 : size
 
-  instance.text = text
+  if (!size) {
+    size = Math.min(
+      parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth),
+      parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth)
+    )
+    size = size > 50 ? 50 : size
+  }
+
+  instance.message = message
   instance.size = size
-  instance.color = colorValidator(color) ? color : 'primary'
+  instance.mask = mask
+  // instance.color = colorValidator(color) ? color : 'primary'
+  instance.color = color
 
   instance.$mount(document.createElement('div'))
 
@@ -49,7 +57,7 @@ export default (config = {}) => {
     el.style.left = '0px'
     el.style.right = '0px'
     el.appendChild(instance.$el)
-    instance.el = el
+    // instance.el = el
   } else el = instance.$el
   target.appendChild(el)
   // instance.setColor()

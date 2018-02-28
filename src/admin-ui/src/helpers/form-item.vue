@@ -4,7 +4,7 @@
   @import '../style/size';
   @import '../style/warnings';
   .au-form-item {
-    display: inline-block;
+    // display: inline-block;
     font-size: $normal;
   }
   .au-form-item-main-block {
@@ -24,7 +24,6 @@
         [`au-size-${size}`]: inline && middle
       }"
       v-if="label"
-      @click="$emit('labelClick')"
       :style="{
         width: inline ? labelWidth : ''
       }">{{ label }}</div>

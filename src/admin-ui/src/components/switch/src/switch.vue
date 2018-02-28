@@ -21,6 +21,7 @@
     height: 16px;
     border-radius: 100%;
     transition: all .1s ease-in-out;
+    overflow: hidden;
   }
   .au-switch-disabled-cover {
     position: absolute;
@@ -32,42 +33,65 @@
 </style>
 <template>
   <div class="au-switch">
-    <div
-      class="au-form-label au-theme-font-color--base-3"
-      v-if="label">{{ label }}</div>
-    <div class="au-switch-container" :class="{
-      [` au-theme-background-color--${bg}`]: true
-    }" :style="{ cursor: disabled ? 'not-allowed' : 'pointer'}" @click="handleClick" ref="switch">
-      <div class="au-switch-disabled-cover au-theme-background-color--base-12" :style="{opacity: disabled && localValue ? '.5' : '0'}"></div>
-      <div class="au-switch-core" :style="{left}" :class="{
-      'au-theme-background-color--base-12': !disabled,
-      'au-theme-background-color--base-9': disabled
-      }"></div>
-    </div>
+    <form-item
+      :label="label"
+      :labelWidth="labelWidth"
+      :inline="inline"
+      :comments="comments"
+      :size="size"
+      :middle="false"
+      :warnings="warnings || localWarnings">
+      <div
+        class="au-switch-container"
+        :class="{
+          [` au-theme-background-color--${bg}`]: true
+        }"
+        :style="{ cursor: readonly ? 'default' : (localDisabled ? 'not-allowed' : 'pointer')}"
+        @click="handleClick"
+        ref="switch">
+        <div
+          class="au-switch-disabled-cover au-theme-background-color--base-12"
+          :style="{opacity: localDisabled && localValue ? '.8' : '0'}"></div>
+        <div
+          class="au-switch-core"
+          :style="{left}"
+          :class="{
+            'au-theme-background-color--base-12': !localDisabled,
+            'au-theme-background-color--base-9': localDisabled
+          }" ref="core"></div>
+      </div>
+    </form-item>
   </div>
 </template>
 <script>
   import FormApiMixin from '../../../helpers/form-api-mixin'
-  // import ValidatorMixin from '../../../helpers/validator-mixin'
+  import ValidatorMixin from '../../../helpers/validator-mixin'
+  import FormItem from '../../../helpers/form-item.vue'
   import { getElementSize } from '../../../helpers/dom'
+  import Loading from '../../loading'
+
   export default {
     name: 'au-switch',
-    mixins: [FormApiMixin],
+    mixins: [FormApiMixin, ValidatorMixin],
+    components: { FormItem },
     mounted () {
       this.getBg()
       this.getLeft()
+      this.load()
     },
     data () {
       return {
         bg: 'base-8',
-        left: '2px'
+        left: '2px',
+        loadingIns: null
       }
     },
     props: {
       color: {
         type: String,
         default: 'success'
-      }
+      },
+      loading: Boolean
     },
     watch: {
       value () {
@@ -80,6 +104,14 @@
       },
       color () {
         this.getBg()
+      },
+      loading () {
+        this.load()
+      }
+    },
+    computed: {
+      localDisabled () {
+        return this.disabled || this.loading || this.readonly
       }
     },
     methods: {
@@ -93,8 +125,18 @@
         } else this.left = '2px'
       },
       handleClick () {
-        if (this.disabled) return
+        if (this.localDisabled) return
         this.localValue = !this.localValue
+      },
+      load () {
+        if (this.loading) {
+          this.loadingIns = Loading({
+            target: this.$refs.core,
+            color: this.color
+          })
+        } else {
+          if (this.loadingIns) this.loadingIns.close()
+        }
       }
     }
   }

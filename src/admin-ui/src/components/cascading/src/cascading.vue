@@ -19,7 +19,7 @@
   }
 </style>
 <template>
-  <div class="au-cascading au-theme-font-color--base-3" :style="{display: listType === 'block' && fullfillWidth ? 'block' : ''}">
+  <div class="au-cascading au-theme-font-color--base-3" :style="{display: listType === 'block' && fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -44,7 +44,7 @@
           :warning="hasWarnings"
           :disabled="disabled"
           :inline="false"
-          :fullfill-width="listType === 'block' && fullfillWidth"
+          :full-width="listType === 'block' && fullWidth"
           :width="singleWidth"
           :max-width="singleMaxWidth"
           :min-width="singleMinWidth"
@@ -82,7 +82,7 @@
         type: String,
         default: 'inline'
       },
-      fullfillWidth: Boolean,
+      fullWidth: Boolean,
       singleWidth: String,
       singleMaxWidth: String,
       singleMinWidth: String

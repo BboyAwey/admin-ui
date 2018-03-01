@@ -129,7 +129,7 @@
             </td>
           </tr>
           <tr>
-            <td>fullfill-width</td>
+            <td>full-width</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>

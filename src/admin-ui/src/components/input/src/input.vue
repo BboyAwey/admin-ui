@@ -62,7 +62,7 @@
   }
 </style>
 <template>
-  <div class="au-input" :style="{display: fullfillWith ? 'block' : ''}">
+  <div class="au-input" :style="{display: fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -85,10 +85,10 @@
           'au-theme-disabled-background-color--base-8': disabled
         }"
         :style="{
-          width: !inline && fullfillWith ? '100%' : width,
+          width: !inline && fullWidth ? '100%' : width,
           height,
-          minWidth: !inline && fullfillWith ? '100%' : minWidth,
-          maxWidth: !inline && fullfillWith ? '100%' : maxWidth,
+          minWidth: !inline && fullWidth ? '100%' : minWidth,
+          maxWidth: !inline && fullWidth ? '100%' : maxWidth,
           minHeight,
           maxHeight,
         }"
@@ -110,7 +110,7 @@
         class="au-core-container"
         :style="{
           verticalAlign: inline ? 'top' : '',
-          width: !inline && fullfillWith ? '100%' : width,
+          width: !inline && fullWidth ? '100%' : width,
         }">
         <au-icon
           v-if="icon"
@@ -142,7 +142,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width: !inline && fullfillWith ? '100%' : width,
+            width: !inline && fullWidth ? '100%' : width,
           }"
           type="text"
           v-if="type === 'text'"
@@ -177,7 +177,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width: !inline && fullfillWith ? '100%' : width,
+            width: !inline && fullWidth ? '100%' : width,
           }"
           v-model="localValue"
           :disabled="disabled"
@@ -283,7 +283,7 @@
       associations: Array,
       icon: String,
       iconPosition: String,
-      fullfillWith: Boolean,
+      fullWidth: Boolean,
       width: {
         type: String,
         default: '260px'

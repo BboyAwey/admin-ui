@@ -90,7 +90,7 @@
   }
 </style>
 <template>
-  <div class="au-select au-theme-font-color--base-3" :style="{display: fullfillWidth ? 'block' : ''}">
+  <div class="au-select au-theme-font-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -203,7 +203,7 @@
         type: Boolean,
         default: false
       },
-      fullfillWidth: Boolean,
+      fullWidth: Boolean,
       width: String,
       maxWidth: String,
       minWidth: String

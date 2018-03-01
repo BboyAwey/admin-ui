@@ -28,7 +28,7 @@
           ]"
           :inline="false"
           list-type="block"
-          fullfill-width
+          full-width
           :validators="validators"></au-cascading><br>
       </div>
       <!-- 组件示例 -->
@@ -182,7 +182,7 @@
             </td>
           </tr>
           <tr>
-            <td>fullfill-width</td>
+            <td>full-width</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>

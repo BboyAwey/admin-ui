@@ -41,8 +41,7 @@
       font-size: $large;
       // color: $grayDarken25;
     }
-    .active:before {
-      content: '';
+    .active-dec {
       display: inline-block;
       position: absolute;
       left: 0;
@@ -138,7 +137,7 @@
 <template>
   <div class="au-menu au-theme-font-color--base-3"
     :class="{
-      'top-level au-theme-background-color--base-12': isTopLevel,
+      [`top-level au-theme-background-color--${backgroundColor || 'base-12'}`]: isTopLevel,
       'collapsable-top': collapsable && isTopLevel && collapseHandlebarPosition !='bottom',
       'collapsable-bottom': collapsable && isTopLevel && collapseHandlebarPosition =='bottom',
       'collapse': localCollapse
@@ -172,13 +171,22 @@
               <div class="menu"
                 slot="target"
                 :class="{
-                  'au-theme-hover-background-color--base-10' : !decoration(item),
-                  'au-theme-hover-font-color--primary-3': !decoration(item) && item.url,
-                  'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': decoration(item),
-                  'au-theme-font-color--base-7': !item.url && !decoration(item) && !localCollapse,
+                  [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
+                  [`au-theme-font-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
+                  [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
+                  [`au-theme-hover-font-color--${itemHoverFontColor || 'primary-3'}`]: !isItemActive(item) && item.url,
+                  [`au-theme-font-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
+                  [`au-theme-font-color--${itemActiveFontColor || 'primary-3'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-5'}`]: isItemActive(item),
                 }"
-                :style="{ paddingLeft: calcPaddingLeft(item)  }"
+                :style="{
+                  paddingLeft: calcPaddingLeft(item)
+                }"
                 @click="select(item, i)">
+                <div
+                  v-show="isItemActive(item)"
+                  class="active-dec"
+                  :class="`au-theme-background-color--${itemActiveFontColor || 'primary-3'}`"
+                ></div>
                 <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
                 <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
                 <au-icon class="menu-fold-icon
@@ -206,7 +214,16 @@
                 :popover-ins="$refs.popover"
                 :is-top-level="false"
                 :all="isTopLevel ? localItems : all"
-                @select="handlePopSelect"></au-menu>
+                @select="handlePopSelect"
+                :background-color="backgroundColor"
+                :item-font-color="itemFontColor"
+                :item-background-color="itemBackgroundColor"
+                :item-unlink-font-color="itemUnlinkTextColor"
+                :item-hover-font-color="itemHoverFontColor"
+                :item-hover-background-color="itemHoverBackgroundColor"
+                :item-active-font-color="itemActiveFontColor"
+                :item-active-background-color="itemActiveBackgroundColor"
+                :collapse-handlebar-seprator-color="collapseHandlebarSepratorColor"/>
             </au-scroller>
           </au-popover>
           <au-menu
@@ -215,7 +232,16 @@
             :items="item.children"
             :is-top-level="false"
             :all="isTopLevel ? localItems : all"
-            @select="handlePopSelect"></au-menu>
+            @select="handlePopSelect"
+            :background-color="backgroundColor"
+            :item-font-color="itemFontColor"
+            :item-background-color="itemBackgroundColor"
+            :item-unlink-font-color="itemUnlinkTextColor"
+            :item-hover-font-color="itemHoverFontColor"
+            :item-hover-background-color="itemHoverBackgroundColor"
+            :item-active-font-color="itemActiveFontColor"
+            :item-active-background-color="itemActiveBackgroundColor"
+            :collapse-handlebar-seprator-color="collapseHandlebarSepratorColor"/>
         </li>
       </ul>
     </au-scroller>
@@ -239,13 +265,22 @@
             <div class="menu"
               slot="target"
               :class="{
-                'au-theme-hover-background-color--base-10' : !decoration(item),
-                'au-theme-hover-font-color--primary-3': !decoration(item) && item.url,
-                'active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3': decoration(item),
-                'au-theme-font-color--base-7': !item.url && !decoration(item) && !localCollapse,
+                [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
+                [`au-theme-font-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
+                [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
+                [`au-theme-hover-font-color--${itemHoverFontColor || 'primary-3'}`]: !isItemActive(item) && item.url,
+                [`au-theme-font-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
+                [`au-theme-font-color--${itemActiveFontColor || 'primary-3'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-5'}`]: isItemActive(item),
               }"
-              :style="{ paddingLeft: calcPaddingLeft(item)  }"
+              :style="{
+                paddingLeft: calcPaddingLeft(item)
+              }"
               @click="select(item, i)">
+              <div
+                v-show="isItemActive(item)"
+                class="active-dec"
+                :class="`au-theme-background-color--${itemActiveFontColor || 'primary-3'}`"
+              ></div>
               <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
               <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
               <au-icon class="menu-fold-icon
@@ -273,7 +308,16 @@
               :popover-ins="$refs.popover"
               :is-top-level="false"
               :all="isTopLevel ? localItems : all"
-              @select="handlePopSelect"></au-menu>
+              @select="handlePopSelect"
+              :background-color="backgroundColor"
+              :item-font-color="itemFontColor"
+              :item-background-color="itemBackgroundColor"
+              :item-unlink-font-color="itemUnlinkTextColor"
+              :item-hover-font-color="itemHoverFontColor"
+              :item-hover-background-color="itemHoverBackgroundColor"
+              :item-active-font-color="itemActiveFontColor"
+              :item-active-background-color="itemActiveBackgroundColor"
+              :collapse-handlebar-seprator-color="collapseHandlebarSepratorColor"/>
           </au-scroller>
         </au-popover>
         <au-menu
@@ -282,11 +326,24 @@
           :items="item.children"
           :is-top-level="false"
           :all="isTopLevel ? localItems : all"
-          @select="handlePopSelect"></au-menu>
+          @select="handlePopSelect"
+          :background-color="backgroundColor"
+          :item-font-color="itemFontColor"
+          :item-background-color="itemBackgroundColor"
+          :item-unlink-font-color="itemUnlinkTextColor"
+          :item-hover-font-color="itemHoverFontColor"
+          :item-hover-background-color="itemHoverBackgroundColor"
+          :item-active-font-color="itemActiveFontColor"
+          :item-active-background-color="itemActiveBackgroundColor"
+          :collapse-handlebar-seprator-color="collapseHandlebarSepratorColor"/>
       </li>
     </ul>
     <div
-      class="collapse-handle-bottom au-theme-border-color--base-8-important au-theme-font-color--base-3"
+      class="collapse-handle-bottom"
+      :class="{
+        [`au-theme-border-color--${collapseHandlebarSepratorColor || 'base-8'}-important`]: true,
+        [`au-theme-font-color--${itemFontColor || 'base-3'}`] : true
+      }"
       @click="toggle"
       v-if="collapsable && isTopLevel && collapseHandlebarPosition === 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
@@ -337,7 +394,16 @@
       reactivateOnHashchange: {
         type: Boolean,
         default: true
-      }
+      },
+      backgroundColor: String,
+      itemFontColor: String,
+      itemUnlinkTextColor: String,
+      itemBackgroundColor: String,
+      itemHoverFontColor: String,
+      itemHoverBackgroundColor: String,
+      itemActiveFontColor: String,
+      itemActiveBackgroundColor: String,
+      collapseHandlebarSepratorColor: String
     },
     mounted () {
       if (this.isTopLevel) {
@@ -421,7 +487,7 @@
           this.activate(this.currentItem)
         }
       },
-      decoration (item) {
+      isItemActive (item) {
         if (this.localCollapse) {
           return item.active || item.childrenActive
         } else {
@@ -520,6 +586,9 @@
           this.$refs.popover.forEach(p => p.hide())
         }
         this.$emit('select', item)
+      },
+      isColorNum (color) {
+        return /^#/.test(color)
       }
     }
   }

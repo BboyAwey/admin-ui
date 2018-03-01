@@ -68,7 +68,7 @@
   // }
 </style>
 <template>
-  <div class="au-timepicker au-theme-font-color--base-3"  :style="{display: !inline && fullfillWidth ? 'block' : ''}">
+  <div class="au-timepicker au-theme-font-color--base-3"  :style="{display: !inline && fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -86,7 +86,7 @@
           :warning="hasWarnings"
           :size="size"
           :inline="false"
-          :fullfill-with="inline && fullfillWidth"
+          :fullfill-with="inline && fullWidth"
           :width="width || '114px'"
           :disabled="disabled"
           :readonly="readonly"
@@ -212,7 +212,7 @@
       start: String,
       end: String,
       readonly: Boolean,
-      fullfillWidth: Boolean,
+      fullWidth: Boolean,
       width: String
     },
     watch: {

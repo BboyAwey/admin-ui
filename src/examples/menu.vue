@@ -106,6 +106,141 @@
               只在collapsable为true时有效<br>
             </td>
           </tr>
+          <tr>
+            <td>background-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link><router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              背景色
+            </td>
+          </tr>
+          <tr>
+            <td>item-font-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项文字颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-background-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项背景颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-unlink-font-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              无链接的菜单项文字颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-hover-font-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项鼠标悬浮时的文字颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-hover-background-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项鼠标悬浮时的背景颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-active-font-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项激活时的文字颜色
+            </td>
+          </tr>
+          <tr>
+            <td>item-active-background-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              菜单项激活时的背景颜色
+            </td>
+          </tr>
+          <tr>
+            <td>collapse-handlebar-seprator-color</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              仅支持主题系统中定义的颜色名称(包括自定义的颜色类名)，参见<router-link class="au-theme-font-color--info-3" :to="{path: '/theme'}" target="_blank">主题系统</router-link>
+            </td>
+            <td>
+              左右伸缩栏的分割线颜色
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

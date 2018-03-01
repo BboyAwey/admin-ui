@@ -24,7 +24,7 @@
         <li class="au-theme-border-color--base-8">loading组件新增size，mask接口用于自定义尺寸和是否显示遮罩</li>
         <li class="au-theme-border-color--base-8">switch新增loading接口显示加载状态</li>
         <li class="au-theme-border-color--base-8">表单组件新增warning（用于显示警告样式，warnings接口不再提供仅显示警告样式功能），labelWidth，comments</li>
-        <li class="au-theme-border-color--base-8">input,select,cascading,datepicker,timepicker新增fullfill-width接口更方便地进行宽度控制</li>
+        <li class="au-theme-border-color--base-8">input,select,cascading,datepicker,timepicker新增full-width接口更方便地进行宽度控制</li>
       </ol>
 
       <h3 class="title-1">## 特性变更</h3>

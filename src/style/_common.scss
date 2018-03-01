@@ -45,15 +45,17 @@
   li:before {
     content: '';
     display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 0px;
+    // position: absolute;
+    // top: 50%;
+    // left: 0px;
+    margin-right: 8px;
     margin-top: -3px;
     border-radius: 100%;
     width: 6px;
     height: 6px;
     border-width: 1px;
     border-style: solid;
+    vertical-align: baseline;
   }
 }
 .cite {

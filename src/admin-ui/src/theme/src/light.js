@@ -45,9 +45,9 @@ export default {
     'success-5': '#daffda' // TODO:
   },
   shadows: {
-    'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
-    'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
-    'level-3': '0 3px 6px rgba(60, 65, 71, .3)',
+    'level-1': '0 1px 4px rgba(0, 0, 0, .2)',
+    'level-2': '0 2px 5px rgba(0, 0, 0, .2)',
+    'level-3': '0 3px 6px rgba(0, 0, 0, .2)',
     'primary': '0 0 4px rgba(25, 188, 157, .6)',
     'info': '0 0 4px rgba(52, 152, 219, .6)',
     'warning': '0 0 4px rgba(255, 180, 51, .6)',

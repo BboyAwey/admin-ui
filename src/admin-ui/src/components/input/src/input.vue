@@ -228,7 +228,7 @@
           v-show="type !== 'textarea' && associationsShow"
           :class="`
             au-theme-border-color--base-8
-            au-theme-box-shadow--level-3
+            au-theme-box-shadow--level-2
             au-theme-background-color--base-12
             au-theme-border-radius--normal
             au-sizegap-${size}

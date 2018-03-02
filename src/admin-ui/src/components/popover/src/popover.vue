@@ -108,7 +108,7 @@
     :tabindex="_uid"
     @blur="handleBlur($event)" -->
   <div
-    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-3"
+    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-2"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     ref="pop">

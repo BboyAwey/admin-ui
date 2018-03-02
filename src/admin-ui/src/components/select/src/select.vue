@@ -145,7 +145,7 @@
           au-select-option
           au-theme-background-color--base-12
           au-theme-border-color--base-8
-          au-theme-box-shadow--level-3
+          au-theme-box-shadow--level-2
           au-theme-border-radius--normal`" v-show="optionDisplay">
           <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
             <li

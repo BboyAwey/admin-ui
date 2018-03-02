@@ -133,7 +133,7 @@
           :placeholder="placeholder"
           ref="core"/>
         <div
-          class="au-datepicker-popup-container au-theme-box-shadow--level-3"
+          class="au-datepicker-popup-container au-theme-box-shadow--level-2"
           :class="`au-sizegap-${size}`"
           v-show="popup"
           @blur="popupBlur"

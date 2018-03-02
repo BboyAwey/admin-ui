@@ -162,9 +162,13 @@
     methods: {
       toast () {
         this.$toast({
-          message: '一则提示消息',
-          icon: 'podcast',
-          iconClass: 'au-theme-font-color--warning-3'
+          message: '一则消息',
+          icon: '',
+          mood: 'success',
+          customClass: '',
+          closeable: true,
+          duration: 0,
+          center: true
         })
       }
     }

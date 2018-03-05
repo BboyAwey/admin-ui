@@ -123,7 +123,6 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 var scenes = ['font', 'border', 'background'];
 var pseudos = ['link', 'visited', 'hover', 'active', 'focus', 'first-child', 'last-child', 'before', 'after', 'enabled', 'disabled', 'checked'];
-var radius = 3;
 
 var genColorStyle = function genColorStyle(scene, colorName, colorNumber) {
   var res = '';
@@ -176,42 +175,40 @@ var genColorStyle = function genColorStyle(scene, colorName, colorNumber) {
   }
   return res;
 };
-var genShadowStyle = function genShadowStyle(level, value) {
+var genShadowStyle = function genShadowStyle(shadowName, shadowValue) {
   var res = '';
-  res += '.au-theme-shadow--' + level + '{box-shadow:' + value + '}';
-  res += '.au-theme-shadow--' + level + '-important{box-shadow:' + value + ' !important}';
+  res += '.au-theme-box-shadow--' + shadowName + '{box-shadow:' + shadowValue + '}';
+  res += '.au-theme-box-shadow--' + shadowName + '-important{box-shadow:' + shadowValue + ' !important}';
   pseudos.forEach(function (pseudo) {
-    res += '.au-theme-' + pseudo + '-shadow--' + level + ':' + pseudo + '{box-shadow:' + value + '}';
-    res += '.au-theme-' + pseudo + '-shadow--' + level + '-important:' + pseudo + '{box-shadow:' + value + ' !important}';
+    res += '.au-theme-' + pseudo + '-box-shadow--' + shadowName + ':' + pseudo + '{box-shadow:' + shadowValue + '}';
+    res += '.au-theme-' + pseudo + '-box-shadow--' + shadowName + '-important:' + pseudo + '{box-shadow:' + shadowValue + ' !important}';
   });
   return res;
 };
-var genRadiusStyle = function genRadiusStyle(borderRadius) {
+var genRadiusStyle = function genRadiusStyle(radiosName, radius) {
   var res = '';
-  if (borderRadius) {
-    res += '.au-theme-radius{border-radius:' + radius + 'px}';
-    res += '.au-theme-top-left-radius{border-top-left-radius:' + radius + 'px}';
-    res += '.au-theme-top-right-radius{border-top-right-radius:' + radius + 'px}';
-    res += '.au-theme-bottom-left-radius{border-bottom-left-radius:' + radius + 'px}';
-    res += '.au-theme-bottom-right-radius{border-bottom-right-radius:' + radius + 'px}';
-    res += '.au-theme-radius--important{border-radius:' + radius + 'px !important}';
-    res += '.au-theme-top-left-radius--important{border-top-left-radius:' + radius + 'px !important}';
-    res += '.au-theme-top-right-radius--important{border-top-right-radius:' + radius + 'px !important}';
-    res += '.au-theme-bottom-left-radius--important{border-bottom-left-radius:' + radius + 'px !important}';
-    res += '.au-theme-bottom-right-radius--important{border-bottom-right-radius:' + radius + 'px !important}';
-    pseudos.forEach(function (pseudo) {
-      res += '.au-theme-' + pseudo + '-radius:' + pseudo + '{border-radius:' + radius + 'px}';
-      res += '.au-theme-' + pseudo + '-radius-important:' + pseudo + '{border-radius:' + radius + 'px !important}';
-      res += '.au-theme-' + pseudo + '-top-left-radius:' + pseudo + '{border-top-left-radius:' + radius + 'pxj}';
-      res += '.au-theme-' + pseudo + '-top-left-radius--important:' + pseudo + '{border-top-left-radius:' + radius + 'px !important}';
-      res += '.au-theme-' + pseudo + '-top-right-radius:' + pseudo + '{border-top-right-radius:' + radius + 'px}';
-      res += '.au-theme-' + pseudo + '-top-right-radius--important:' + pseudo + '{border-top-right-radius:' + radius + 'px !important}';
-      res += '.au-theme-' + pseudo + '-bottom-left-radius:' + pseudo + '{border-bottom-left-radius:' + radius + 'px}';
-      res += '.au-theme-' + pseudo + '-bottom-left-radius--important:' + pseudo + '{border-bottom-left-radius:' + radius + 'px !important}';
-      res += '.au-theme-' + pseudo + '-bottom-right-radius:' + pseudo + '{border-bottom-right-radius:' + radius + 'px}';
-      res += '.au-theme-' + pseudo + '-bottom-right-radius--important:' + pseudo + '{border-bottom-right-radius:' + radius + 'px !important}';
-    });
-  }
+  res += '.au-theme-border-radius--' + radiosName + '{border-radius:' + radius + '}';
+  res += '.au-theme-border-top-left-radius--' + radiosName + '{border-top-left-radius:' + radius + '}';
+  res += '.au-theme-border-top-right-radius--' + radiosName + '{border-top-right-radius:' + radius + '}';
+  res += '.au-theme-border-bottom-left-radius--' + radiosName + '{border-bottom-left-radius:' + radius + '}';
+  res += '.au-theme-border-bottom-right-radius--' + radiosName + '{border-bottom-right-radius:' + radius + '}';
+  res += '.au-theme-border-radius--' + radiosName + '-important{border-radius:' + radius + 'px !important}';
+  res += '.au-theme-border-top-left-radius--' + radiosName + '-important{border-top-left-radius:' + radius + ' !important}';
+  res += '.au-theme-border-top-right-radius--' + radiosName + '-important{border-top-right-radius:' + radius + ' !important}';
+  res += '.au-theme-border-bottom-left-radius--' + radiosName + '-important{border-bottom-left-radius:' + radius + ' !important}';
+  res += '.au-theme-border-bottom-right-radius--' + radiosName + '-important{border-bottom-right-radius:' + radius + ' !important}';
+  pseudos.forEach(function (pseudo) {
+    res += '.au-theme-' + pseudo + '-border-radius--' + radiosName + ':' + pseudo + '{border-radius:' + radius + 'px}';
+    res += '.au-theme-' + pseudo + '-border-radius--' + radiosName + '-important:' + pseudo + '{border-radius:' + radius + 'px !important}';
+    res += '.au-theme-' + pseudo + '-border-top-left-radius--' + radiosName + ':' + pseudo + '{border-top-left-radius:' + radius + 'pxj}';
+    res += '.au-theme-' + pseudo + '-border-top-left-radius--' + radiosName + '-important:' + pseudo + '{border-top-left-radius:' + radius + 'px !important}';
+    res += '.au-theme-' + pseudo + '-border-top-right-radius--' + radiosName + ':' + pseudo + '{border-top-right-radius:' + radius + 'px}';
+    res += '.au-theme-' + pseudo + '-border-top-right-radius--' + radiosName + '-important:' + pseudo + '{border-top-right-radius:' + radius + 'px !important}';
+    res += '.au-theme-' + pseudo + '-border-bottom-left-radius--' + radiosName + ':' + pseudo + '{border-bottom-left-radius:' + radius + 'px}';
+    res += '.au-theme-' + pseudo + '-border-bottom-left-radius--' + radiosName + '-important:' + pseudo + '{border-bottom-left-radius:' + radius + 'px !important}';
+    res += '.au-theme-' + pseudo + '-border-bottom-right-radius--' + radiosName + ':' + pseudo + '{border-bottom-right-radius:' + radius + 'px}';
+    res += '.au-theme-' + pseudo + '-border-bottom-right-radius--' + radiosName + '-important:' + pseudo + '{border-bottom-right-radius:' + radius + 'px !important}';
+  });
   return res;
 };
 
@@ -219,31 +216,21 @@ function themeGenerator(theme) {
   var finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_3__light__["a" /* default */]);
   if (theme === 'dark') finalTheme = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_4__dark__["a" /* default */]);else if ((typeof theme === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme)) === 'object') {
     // merge colors
-    if (theme.colors) {
-      if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.colors) === 'object') {
-        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.colors, theme.colors);
-      } else {
-        console.error('Admin UI@theme-system@ theme.colors should be an object');
+    for (var name in theme) {
+      if (theme[name]) {
+        if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme[name]) === 'object') {
+          __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme[name], theme[name]);
+        } else {
+          console.error('Admin UI@theme-system@ theme.' + name + ' should be an object');
+        }
       }
     }
-
-    // merge shadows
-    if (theme.shadows) {
-      if (__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(theme.shadows) === 'object') {
-        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(finalTheme.shadows, theme.shadows);
-      } else {
-        console.error('Admin UI@theme-system@ theme.shadows should be an object');
-      }
-    }
-
-    // merge border radius
-    finalTheme.borderRadius = theme.borderRadius || finalTheme.borderRadius;
   }
 
   var _finalTheme = finalTheme,
       colors = _finalTheme.colors,
       shadows = _finalTheme.shadows,
-      borderRadius = _finalTheme.borderRadius;
+      radiuses = _finalTheme.radiuses;
 
   var res = '';
   scenes.forEach(function (scene) {
@@ -253,12 +240,13 @@ function themeGenerator(theme) {
     }
   });
   // generate shadow
-  for (var level in shadows) {
-    res += genShadowStyle(level, shadows[level]);
+  for (var shadowName in shadows) {
+    res += genShadowStyle(shadowName, shadows[shadowName]);
   }
   // generate border-radius
-  res += genRadiusStyle(borderRadius);
-  // console.log(res)
+  for (var radiusName in radiuses) {
+    res += genRadiusStyle(radiusName, radiuses[radiusName]);
+  }
 
   // save theme to namespace
   __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].set('theme', finalTheme);
@@ -664,60 +652,63 @@ module.exports = __webpack_require__("aLzV");
 /* harmony default export */ __webpack_exports__["a"] = ({
   colors: {
     'base-0': '#000',
-    'base-1': '#3c4147',
-    'base-2': '#575e66',
-    'base-3': '#757f8a ',
-    'base-4': '#8b97a3',
-    'base-5': '#a4b0bc',
-    'base-6': '#b4bdc8',
-    'base-7': '#cbd1d9',
-    'base-8': '#d8dde6',
-    'base-9': '#e6ecf2',
-    'base-10': '#eef5f9',
-    'base-11': '#f7fafb',
+    'base-1': '#303030',
+    'base-2': '#444144',
+    'base-3': '#625f64 ',
+    'base-4': '#666666',
+    'base-5': '#a09da0',
+    'base-6': '#bebbbf',
+    'base-7': '#9e9e9e',
+    'base-8': '#dcdcdc',
+    'base-9': '#cccccc',
+    'base-10': '#ededed',
+    'base-11': '#f7f7f7',
     'base-12': '#fff',
 
-    'primary-1': '#042039',
-    'primary-2': '#1c7dd2',
-    'primary-3': '#1c86e2',
-    'primary-4': '#1e8cee',
-    'primary-5': '#c7e5ff',
+    'primary-1': '#002b23', // TODO:
+    'primary-2': '#3fd5b8',
+    'primary-3': '#19bc9d',
+    'primary-4': '#169f85',
+    'primary-5': '#e5fffa', // TODO:
 
-    'info-1': '#062846',
-    'info-2': '#2391d7',
-    'info-3': '#32a2ea',
-    'info-4': '#37aefa',
-    'info-5': '#ceecff',
+    'info-1': '#00243c', // TODO:
+    'info-2': '#f0faf8',
+    'info-3': '#3498db',
+    'info-4': '#2d82ba',
+    'info-5': '#c2e7ff', // TODO:
 
-    'warning-1': '#322600',
-    'warning-2': '#eea806',
-    'warning-3': '#f5ae08',
-    'warning-4': '#fab612',
-    'warning-5': '#ffe9b2',
+    'warning-1': '#2d1c00', // TODO:
+    'warning-2': '#fec564',
+    'warning-3': '#ffb433',
+    'warning-4': '#e99b14',
+    'warning-5': '#ffeac5', // TODO:
 
-    'danger-1': '#400c10',
-    'danger-2': '#e03743',
-    'danger-3': '#ea3a46',
-    'danger-4': '#f53e50',
-    'danger-5': '#ffbcc2',
+    'danger-1': '#2f0400', // TODO:
+    'danger-2': '#f56354',
+    'danger-3': '#e74c3c',
+    'danger-4': '#c33a2c',
+    'danger-5': '#ffcbc6', // TODO:
 
-    'success-1': '#00301e',
-    'success-2': '#0cae6c',
-    'success-3': '#0cb470',
-    'success-4': '#0ebc74',
-    'success-5': '#ace6ce'
+    'success-1': '#002200', // TODO:
+    'success-2': '#7fcb7f',
+    'success-3': '#5cb95c',
+    'success-4': '#3da63d',
+    'success-5': '#daffda' // TODO:
   },
   shadows: {
-    'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
-    'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
-    'level-3': '0 3px 6px rgba(60, 65, 71, .3)',
-    'primary': '0 1px 3px rgba(28, 134, 226, .5)',
-    'info': '0 1px 3px rgba(50, 162, 234, .5)',
-    'warning': '0 1px 3px rgba(245, 174, 8, .5)',
-    'danger': '0 1px 3px rgba(234, 58, 70, .5)',
-    'success': '0 1px 3px rgba(12, 180, 112, .5)'
+    'level-1': '0 1px 4px rgba(0, 0, 0, .2)',
+    'level-2': '0 2px 5px rgba(0, 0, 0, .2)',
+    'level-3': '0 3px 6px rgba(0, 0, 0, .2)',
+    'primary': '0 0 4px rgba(25, 188, 157, .6)',
+    'info': '0 0 4px rgba(52, 152, 219, .6)',
+    'warning': '0 0 4px rgba(255, 180, 51, .6)',
+    'danger': '0 0 4px rgba(231, 76, 60, .6)',
+    'success': '0 0 4px rgba(92, 185, 92, .6)'
   },
-  borderRadius: true
+  radiuses: {
+    'normal': '2px',
+    'large': '5px'
+  }
 });
 
 /***/ }),

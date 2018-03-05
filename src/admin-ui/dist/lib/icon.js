@@ -88,7 +88,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -207,15 +207,10 @@ if (false) {(function () {
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {

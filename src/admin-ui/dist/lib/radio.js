@@ -104,6 +104,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+GuK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -611,6 +667,78 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "LKnP":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -871,6 +999,7 @@ module.exports = function (it) {
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -903,7 +1032,8 @@ module.exports = function (it) {
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -1191,109 +1321,95 @@ var render = function() {
     "div",
     { staticClass: "au-radio" },
     [
-      _vm.label
-        ? _c(
+      _c(
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        _vm._l(_vm.radios, function(radio, i) {
+          return _c(
             "div",
-            { staticClass: "au-form-label au-theme-font-color--base-3" },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.radios, function(radio, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-radio-container au-radio-container-multiple",
-            style: {
-              cursor: _vm.disabled ? "not-allowed" : "default"
-            },
-            on: {
-              mouseenter: function($event) {
-                _vm.handleMouseEnter(i)
+            {
+              key: i,
+              class:
+                "au-radio-container" +
+                (_vm.listType === "block" ? "-block" : "-inline"),
+              style: {
+                cursor: _vm.disabled ? "not-allowed" : "default"
               },
-              mouseleave: function($event) {
-                _vm.handleMouseLeave(i)
-              },
-              click: function($event) {
-                _vm.handleClick(radio.value)
-              }
-            }
-          },
-          [
-            _c(
-              "span",
-              {
-                staticClass: "au-radio-core",
-                class: {
-                  "au-theme-border-color--base-8":
-                    (!_vm.hasWarnings &&
-                      !_vm.hovers[i] &&
-                      radio.value !== _vm.localValue) ||
-                    _vm.disabled,
-                  "au-theme-background-color--base-9": _vm.disabled,
-                  "au-theme-border-color--primary-3":
-                    ((!_vm.hasWarnings && _vm.hovers[i]) ||
-                      radio.value === _vm.localValue) &&
-                    !_vm.disabled,
-                  "au-theme-border-color--danger-3":
-                    _vm.hasWarnings && !_vm.disabled
+              on: {
+                mouseenter: function($event) {
+                  _vm.handleMouseEnter(i)
                 },
-                attrs: { tabindex: "0" }
-              },
-              [
-                _c("span", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: radio.value === _vm.localValue,
-                      expression: "radio.value === localValue"
-                    }
-                  ],
-                  staticClass: "au-radio-dot",
+                mouseleave: function($event) {
+                  _vm.handleMouseLeave(i)
+                },
+                click: function($event) {
+                  _vm.handleClick(radio.value)
+                }
+              }
+            },
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "au-radio-core",
                   class: {
-                    "au-radio-dot-disabled": _vm.disabled,
-                    "au-theme-background-color--primary-3":
-                      !_vm.disabled && !_vm.hasWarnings,
-                    "au-theme-background-color--danger-3":
-                      !_vm.disabled && _vm.hasWarnings,
-                    "au-theme-background-color--base-6": _vm.disabled
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "au-radio-text" }, [
-              _vm._v(_vm._s(radio.text))
-            ])
-          ]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(w, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(w))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(w, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(w))]
-        )
-      })
+                    "au-theme-border-color--base-8":
+                      (!_vm.hasWarnings &&
+                        !_vm.hovers[i] &&
+                        radio.value !== _vm.localValue) ||
+                      _vm.disabled,
+                    "au-theme-background-color--base-8":
+                      _vm.disabled && radio.value !== _vm.localValue,
+                    "au-theme-border-color--primary-3":
+                      ((!_vm.hasWarnings && _vm.hovers[i]) ||
+                        radio.value === _vm.localValue) &&
+                      !_vm.disabled,
+                    "au-theme-border-color--danger-3":
+                      _vm.hasWarnings && !_vm.disabled
+                  },
+                  attrs: { tabindex: "0" }
+                },
+                [
+                  _c("span", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: radio.value === _vm.localValue,
+                        expression: "radio.value === localValue"
+                      }
+                    ],
+                    staticClass: "au-radio-dot",
+                    class: {
+                      "au-radio-dot-disabled": _vm.disabled,
+                      "au-theme-background-color--primary-3":
+                        !_vm.disabled && !_vm.hasWarnings,
+                      "au-theme-background-color--danger-3":
+                        !_vm.disabled && _vm.hasWarnings,
+                      "au-theme-background-color--base-10": _vm.disabled
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "au-radio-text" }, [
+                _vm._v(_vm._s(radio.text))
+              ])
+            ]
+          )
+        })
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -1497,6 +1613,7 @@ module.exports = function (fn, args, that) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__ = __webpack_require__("gU9b");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__ = __webpack_require__("TN9u");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__ = __webpack_require__("+FN5");
 //
 //
 //
@@ -1568,6 +1685,20 @@ module.exports = function (fn, args, that) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1575,8 +1706,13 @@ module.exports = function (fn, args, that) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-radio',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_form_api_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__["a" /* default */]],
+  components: { FormItem: __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__["a" /* default */] },
   props: {
-    radios: Array
+    radios: Array,
+    listType: {
+      type: String,
+      default: 'inline'
+    }
   },
   data: function data() {
     return {
@@ -1632,6 +1768,17 @@ module.exports = function (fn, args, that) {
   props: {
     label: {
       type: String
+    },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -2109,6 +2256,13 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
 
 /***/ }),
 
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nJ75":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2120,6 +2274,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 

@@ -647,13 +647,23 @@ var render = function() {
     "div",
     {
       staticClass: "au-loading",
-      class: ((_obj = {
-        "au-theme-before-background-color--base-12": true
-      }),
+      class: ((_obj = {}),
       (_obj["au-theme-font-color--" + _vm.color + "-3"] = true),
       _obj)
     },
     [
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.mask,
+            expression: "mask"
+          }
+        ],
+        staticClass: "au-loading-mask au-theme-background-color--base-12"
+      }),
+      _vm._v(" "),
       _c(
         "div",
         { ref: "coreContainer", staticClass: "au-loading-core-container" },
@@ -695,11 +705,21 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm.text
-            ? _c("p", { staticClass: "au-loading-text" }, [
-                _vm._v(_vm._s(_vm.text))
-              ])
-            : _vm._e()
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.message,
+                  expression: "message"
+                }
+              ],
+              staticClass: "au-loading-message"
+            },
+            [_vm._v(_vm._s(_vm.message))]
+          )
         ]
       )
     ]
@@ -1200,6 +1220,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1213,14 +1237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    var style = document.createElement('style');
-    style.innerHTML = '\n      /* &lt;![CDATA[ */\n        @keyframes Rotate { 100% { transform: rotate(360deg); } }\n\n        @keyframes CircularBarDash {\n          0% {\n          stroke-dasharray: 1, 200;\n          stroke-dashoffset: 0;\n        }\n        50% {\n          stroke-dasharray: 89, 200;\n          stroke-dashoffset: -35;\n        }\n        100% {\n          stroke-dasharray: 89, 200;\n          stroke-dashoffset: -124;\n        }\n        }\n      /* ]]&gt; */\n    ';
-
-    var styles = this.$refs.svg.querySelectorAll('style');
-    for (var i = 0; i < styles.length; i++) {
-      styles[i].parentNode.removeChild(styles[i]);
-    }
-    this.$refs.svg.insertBefore(style, this.$refs.core);
+    this.insertSvgStyleTag();
   },
   beforeDestroy: function beforeDestroy() {
     this.close();
@@ -1228,11 +1245,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   props: {
     size: Number,
-    text: String,
+    message: String,
     color: {
       type: String,
       default: 'primary'
-    }
+    },
+    mask: Boolean
   },
   computed: {
     stroke: function stroke() {
@@ -1241,9 +1259,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     setTop: function setTop(elHeight) {
-      var containerHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.coreContainer).height;
-      if (containerHeight > elHeight) this.$refs.coreContainer.style.height = elHeight + 'px';
+      // exec in loading.js
       this.$refs.coreContainer.style.top = (elHeight - __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["a" /* getElementSize */])(this.$refs.coreContainer).height) / 2 + 'px';
+    },
+    insertSvgStyleTag: function insertSvgStyleTag() {
+      var style = document.createElement('style');
+      style.innerHTML = '\n        /* &lt;![CDATA[ */\n          @keyframes Rotate { 100% { transform: rotate(360deg); } }\n\n          @keyframes CircularBarDash {\n            0% {\n            stroke-dasharray: 1, 200;\n            stroke-dashoffset: 0;\n          }\n          50% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -35;\n          }\n          100% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -124;\n          }\n          }\n        /* ]]&gt; */\n      ';
+
+      var styles = this.$refs.svg.querySelectorAll('style');
+      for (var i = 0; i < styles.length; i++) {
+        styles[i].parentNode.removeChild(styles[i]);
+      }
+      this.$refs.svg.insertBefore(style, this.$refs.core);
     },
     close: function close() {
       if (!this.closed) {
@@ -1357,14 +1384,17 @@ module.exports = function (it, key) {
   var instance = new (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_1__loading_vue__["a" /* default */]))();
   var _config$target = config.target,
       target = _config$target === undefined ? document.body : _config$target,
-      text = config.text,
+      message = config.message,
       _config$color = config.color,
       color = _config$color === undefined ? 'primary' : _config$color,
-      tag = config.tag;
-
-  function colorValidator(v) {
-    return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 || console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning');
-  }
+      tag = config.tag,
+      size = config.size,
+      _config$mask = config.mask,
+      mask = _config$mask === undefined ? true : _config$mask;
+  // function colorValidator (v) {
+  //   return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 ||
+  //     console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
+  // }
 
   var _getComputedStyle = getComputedStyle(target),
       position = _getComputedStyle.position,
@@ -1378,12 +1408,17 @@ module.exports = function (it, key) {
   if (position === 'static') {
     target.style.position = 'relative';
   }
-  var size = Math.min(parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth), parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
-  if (size) size = size > 50 ? 50 : size;
 
-  instance.text = text;
+  if (!size) {
+    size = Math.min(parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth), parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
+    size = size > 50 ? 50 : size;
+  }
+
+  instance.message = message;
   instance.size = size;
-  instance.color = colorValidator(color) ? color : 'primary';
+  instance.mask = mask;
+  // instance.color = colorValidator(color) ? color : 'primary'
+  instance.color = color;
 
   instance.$mount(document.createElement('div'));
 
@@ -1396,7 +1431,7 @@ module.exports = function (it, key) {
     el.style.left = '0px';
     el.style.right = '0px';
     el.appendChild(instance.$el);
-    instance.el = el;
+    // instance.el = el
   } else el = instance.$el;
   target.appendChild(el);
   // instance.setColor()

@@ -1190,7 +1190,8 @@ var render = function() {
     "div",
     {
       ref: "pop",
-      staticClass: "au-popover au-theme-radius au-theme-shadow--level-3",
+      staticClass:
+        "au-popover au-theme-border-radius--normal au-theme-box-shadow--level-2",
       class: { "au-popover-plain au-theme-border-color--base-8": _vm.plain },
       attrs: { tabindex: _vm._uid }
     },
@@ -1203,7 +1204,7 @@ var render = function() {
           ref: "content",
           class: {
             "au-popover-content": true,
-            "au-theme-radius": true,
+            "au-theme-border-radius--normal": true,
             "au-theme-background-color--base-2": !_vm.plain,
             "au-theme-font-color--base-12": !_vm.plain,
             "au-theme-background-color--base-12": _vm.plain,
@@ -1925,7 +1926,7 @@ module.exports = function (done, value) {
   mounted: function mounted() {
     this.reconstruct();
     this.addEvents();
-    // this.calPos() // TODO:
+    // this.calPos()
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('click', this.handleWindowClick, true);
     // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
@@ -2066,6 +2067,35 @@ module.exports = function (done, value) {
       var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(target);
       var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["b" /* getElementPagePos */])(target);
       var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(content);
+      var windowSize = {
+        width: document.body.clientWidth,
+        height: document.body.clientHeight
+
+        // handle screen overflow
+      };var targetRect = target.getBoundingClientRect();
+      if (targetRect.top < popSize.height && keys[0] === 'top') keys[0] = 'bottom';
+      if (windowSize.height - targetRect.bottom < popSize.height && keys[0] === 'bottom') keys[0] = 'top';
+      if (targetRect.left < popSize.width && keys[0] === 'left') keys[0] = 'rigth';
+      if (windowSize.width - targetRect.right < popSize.width && keys[0] === 'right') keys[0] = 'left';
+
+      if (keys[0] === 'left' || keys[0] === 'right') {
+        if (keys[1] !== 'top') {
+          if (targetRect.top < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'top';
+        }
+        if (keys[1] !== 'bottom') {
+          if (windowSize.height - targetRect.bottom < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'bottom';
+        }
+      }
+      if (keys[0] === 'top' || keys[0] === 'bottom') {
+        if (keys[1] !== 'left') {
+          if (targetRect.left < popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width) keys[1] = 'left';
+        }
+        if (keys[1] !== 'right') {
+          if (windowSize.width - targetRect.right < popSize.widht / (keys[1] === 'middle' ? 2 : 1) - targetSize.width) keys[1] = 'right';
+        }
+      }
+
+      this.localPlacement = keys.join(' ');
 
       // fix the size bug witch caused by the wordwrap
       // this.$refs.pop.style.width = popSize.width + 'px'
@@ -2080,7 +2110,7 @@ module.exports = function (done, value) {
         },
         y: {
           top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height + offset + 10 + parseInt(this.yFix) // do not kown why should add 10 but it works
+          bottom: targetPos.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
       var horizontal = {
@@ -2090,8 +2120,8 @@ module.exports = function (done, value) {
         },
         y: {
           top: targetPos.top + parseInt(this.yFix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
-          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 10 but it works
+          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
+          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
         }
       };
       var res = {};

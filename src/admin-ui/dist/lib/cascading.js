@@ -104,6 +104,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+GuK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -250,80 +306,68 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-cascading au-theme-font-color--base-3" },
+    {
+      staticClass: "au-cascading au-theme-font-color--base-3",
+      style: {
+        display: _vm.listType === "block" && _vm.fullWidth ? "block" : ""
+      }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label",
-              style: {
-                cursor: _vm.disabled ? "not-allowed" : "default"
-              }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "au-cascading-core-container" },
-        _vm._l(_vm.cascadingData, function(levelArr, index) {
-          return _c("au-select", {
-            key: index,
-            ref: "au-select",
-            refInFor: true,
-            staticClass: "au-cascading-core",
-            style: {
-              width: _vm.singleWidth,
-              minWidth: _vm.singleMinWidth,
-              maxWidth: _vm.singleMaxWidth
-            },
-            attrs: {
-              warnings: _vm.hasWarnings ? [] : null,
-              size: _vm.size,
-              options: _vm.filterOptions(levelArr, index),
-              placeholder:
-                _vm.placeholder instanceof Array
-                  ? _vm.placeholder[index]
-                  : _vm.placeholder,
-              disabled: _vm.disabled
-            },
-            on: { select: _vm.select, focus: _vm.focus, blur: _vm.blur },
-            model: {
-              value: _vm.selectedOptions[index],
-              callback: function($$v) {
-                _vm.$set(_vm.selectedOptions, index, $$v)
-              },
-              expression: "selectedOptions[index]"
-            }
-          })
-        })
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(warning, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(warning, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-from-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      })
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.listType === "inline",
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        [
+          _c(
+            "div",
+            _vm._l(_vm.cascadingData, function(levelArr, index) {
+              return _c("au-select", {
+                key: index,
+                ref: "au-select",
+                refInFor: true,
+                staticClass: "au-cascading-core",
+                class:
+                  "au-cascading-core" +
+                  (_vm.listType === "block" ? "-block" : "-inline"),
+                attrs: {
+                  size: _vm.size,
+                  options: _vm.filterOptions(levelArr, index),
+                  placeholder:
+                    _vm.placeholder instanceof Array
+                      ? _vm.placeholder[index]
+                      : _vm.placeholder,
+                  warning: _vm.hasWarnings,
+                  disabled: _vm.disabled,
+                  inline: false,
+                  "full-width": _vm.listType === "block" && _vm.fullWidth,
+                  width: _vm.singleWidth,
+                  "max-width": _vm.singleMaxWidth,
+                  "min-width": _vm.singleMinWidth
+                },
+                on: { select: _vm.select, focus: _vm.focus, blur: _vm.blur },
+                model: {
+                  value: _vm.selectedOptions[index],
+                  callback: function($$v) {
+                    _vm.$set(_vm.selectedOptions, index, $$v)
+                  },
+                  expression: "selectedOptions[index]"
+                }
+              })
+            })
+          )
+        ]
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -508,6 +552,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom__ = __webpack_require__("8CCO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scroller__ = __webpack_require__("ovkV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_form_item_vue__ = __webpack_require__("+FN5");
 //
 //
 //
@@ -655,6 +700,24 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -665,7 +728,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-select',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */]],
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */] },
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_5__helpers_form_item_vue__["a" /* default */] },
   created: function created() {
     this.localValueToSelectedOptions();
   },
@@ -695,7 +758,11 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
     multiple: {
       type: Boolean,
       default: false
-    }
+    },
+    fullWidth: Boolean,
+    width: String,
+    maxWidth: String,
+    minWidth: String
   },
   watch: {
     localValue: function localValue() {
@@ -717,11 +784,6 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
       this.selectedOptions.splice(index, 1);
       this.localValue.splice(index, 1);
       this.$nextTick(this.resize);
-    },
-    labelClick: function labelClick() {
-      if (this.disabled) return false;
-      this.$refs.core.click();
-      this.$refs.core.focus();
     },
     coreClick: function coreClick() {
       if (this.disabled) return false;
@@ -1256,208 +1318,197 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-select au-theme-font-color--base-3" },
+    {
+      staticClass: "au-select au-theme-font-color--base-3",
+      style: { display: _vm.fullWidth ? "block" : "" }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label",
-              style: {
-                cursor: _vm.disabled ? "not-allowed" : "default"
-              },
-              on: {
-                click: [
-                  _vm.labelClick,
-                  function($event) {
-                    $event.stopPropagation()
-                    ;(function() {})($event)
-                  }
-                ]
-              }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
       _c(
-        "div",
+        "form-item",
         {
-          ref: "coreContainer",
-          class: "au-select-core-container au-size-" + _vm.size
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.inline,
+            warnings: _vm.warnings || _vm.localWarnings
+          }
         },
         [
           _c(
             "div",
             {
-              ref: "core",
-              staticClass: "au-select-core au-theme-radius",
-              class: ((_obj = {
-                "au-theme-background-color--base-12": !_vm.disabled,
-                "au-theme-background-color--base-9": _vm.disabled,
-                "au-theme-border-color--base-8":
-                  _vm.disabled || (!_vm.hasWarnings && !_vm.active),
-                "au-theme-border-color--primary-3":
-                  !_vm.disabled && !_vm.hasWarnings && _vm.active,
-                "au-theme-border-color--danger-3": _vm.hasWarnings,
-                "au-theme-shadow--primary":
-                  !_vm.disabled && _vm.active && !_vm.hasWarnings,
-                "au-theme-shadow--danger": _vm.hasWarnings
-              }),
-              (_obj["au-size-" + _vm.size + "-bordered"] = true),
-              _obj),
+              ref: "coreContainer",
+              class: "au-select-core-container au-size-" + _vm.size,
               style: {
-                cursor: _vm.disabled ? "not-allowed" : "default"
-              },
-              attrs: { tabindex: "0" },
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.coreClick($event)
-                },
-                focus: _vm.coreFocus,
-                blur: _vm.coreBlur
+                width: _vm.width,
+                maxWidth: _vm.maxWidth,
+                minWidth: _vm.minWidth
               }
             },
             [
               _c(
-                "ul",
-                { ref: "selectMultiple", staticClass: "au-select-multiple" },
+                "div",
+                {
+                  ref: "core",
+                  staticClass: "au-select-core au-theme-border-radius--normal",
+                  class: ((_obj = {
+                    "au-theme-background-color--base-12": !_vm.disabled,
+                    "au-theme-background-color--base-9": _vm.disabled,
+                    "au-theme-border-color--base-8":
+                      _vm.disabled || (!_vm.hasWarnings && !_vm.active),
+                    "au-theme-border-color--primary-3":
+                      !_vm.disabled && !_vm.hasWarnings && _vm.active,
+                    "au-theme-border-color--danger-3": _vm.hasWarnings,
+                    "au-theme-box-shadow--primary":
+                      !_vm.disabled && _vm.active && !_vm.hasWarnings,
+                    "au-theme-box-shadow--danger": _vm.hasWarnings
+                  }),
+                  (_obj["au-size-" + _vm.size + "-bordered"] = true),
+                  _obj),
+                  style: {
+                    cursor: _vm.disabled ? "not-allowed" : "default"
+                  },
+                  attrs: { tabindex: "0" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      _vm.coreClick($event)
+                    },
+                    focus: _vm.coreFocus,
+                    blur: _vm.coreBlur
+                  }
+                },
                 [
                   _c(
-                    "li",
+                    "ul",
                     {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.selectedOptions.length,
-                          expression: "!selectedOptions.length"
-                        }
-                      ],
-                      staticClass:
-                        "au-select-placeholder au-theme-font-color--base-7"
+                      ref: "selectMultiple",
+                      staticClass: "au-select-multiple"
                     },
-                    [_vm._v(_vm._s(_vm.placeholder))]
+                    [
+                      _c(
+                        "li",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.selectedOptions.length,
+                              expression: "!selectedOptions.length"
+                            }
+                          ],
+                          staticClass:
+                            "au-select-placeholder au-theme-font-color--base-7"
+                        },
+                        [_vm._v(_vm._s(_vm.placeholder))]
+                      ),
+                      _vm._v(" "),
+                      !_vm.multiple && _vm.selectedOptions.length
+                        ? _c("li", [
+                            _vm._v(_vm._s(_vm.selectedOptions[0].text))
+                          ])
+                        : _vm._l(_vm.selectedOptions, function(option, i) {
+                            return _c("li", { key: i }, [
+                              _c("span", [_vm._v(_vm._s(option.text))]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "au-select-close-icon",
+                                  on: {
+                                    click: function($event) {
+                                      $event.stopPropagation()
+                                      _vm.deleteSelectedOption(i)
+                                    }
+                                  }
+                                },
+                                [_c("au-icon", { attrs: { type: "times" } })],
+                                1
+                              )
+                            ])
+                          })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
-                  !_vm.multiple && _vm.selectedOptions.length
-                    ? _c("li", [_vm._v(_vm._s(_vm.selectedOptions[0].text))])
-                    : _vm._l(_vm.selectedOptions, function(option, i) {
-                        return _c("li", { key: i }, [
-                          _c("span", [_vm._v(_vm._s(option.text))]),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "au-select-close-icon",
-                              on: {
-                                click: function($event) {
-                                  $event.stopPropagation()
-                                  _vm.deleteSelectedOption(i)
-                                }
-                              }
-                            },
-                            [_c("au-icon", { attrs: { type: "times" } })],
-                            1
-                          )
-                        ])
-                      })
+                  _c("au-icon", {
+                    staticClass: "au-select-arrow",
+                    class: {
+                      "au-theme-font-color--primary-3":
+                        !_vm.disabled && _vm.active
+                    },
+                    attrs: { type: "caret-down" }
+                  })
                 ],
-                2
+                1
               ),
               _vm._v(" "),
-              _c("au-icon", {
-                staticClass: "au-select-arrow",
-                class: {
-                  "au-theme-font-color--primary-3": !_vm.disabled && _vm.active
+              _c(
+                "au-scroller",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.optionDisplay,
+                      expression: "optionDisplay"
+                    }
+                  ],
+                  ref: "selectScroller",
+                  staticClass: "au-select-option-scroller",
+                  class:
+                    "\n        au-sizegap-" +
+                    _vm.size +
+                    "\n        au-select-option\n        au-theme-background-color--base-12\n        au-theme-border-color--base-8\n        au-theme-box-shadow--level-2\n        au-theme-border-radius--normal"
                 },
-                attrs: { type: "caret-down" }
-              })
+                [
+                  _c(
+                    "ul",
+                    {
+                      ref: "options",
+                      staticClass: "au-select-option",
+                      attrs: { tabindex: "0" },
+                      on: { blur: _vm.optionsBlur }
+                    },
+                    _vm._l(_vm.options, function(option, i) {
+                      return _c(
+                        "li",
+                        {
+                          key: i,
+                          class: {
+                            "au-theme-background-color--primary-3": _vm.isSelected(
+                              option.value
+                            ),
+                            "au-theme-font-color--base-12": _vm.isSelected(
+                              option.value
+                            ),
+                            "au-theme-hover-background-color--base-10": !_vm.isSelected(
+                              option.value
+                            )
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              _vm.select(option, $event)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(option.text))]
+                      )
+                    })
+                  )
+                ]
+              )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "au-scroller",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.optionDisplay,
-                  expression: "optionDisplay"
-                }
-              ],
-              ref: "selectScroller",
-              staticClass: "au-select-option-scroller",
-              class:
-                "\n      au-sizegap-" +
-                _vm.size +
-                "\n      au-select-option\n      au-theme-background-color--base-12\n      au-theme-border-color--base-8\n      au-theme-shadow--level-3\n      au-theme-radius"
-            },
-            [
-              _c(
-                "ul",
-                {
-                  ref: "options",
-                  staticClass: "au-select-option",
-                  attrs: { tabindex: "0" },
-                  on: { blur: _vm.optionsBlur }
-                },
-                _vm._l(_vm.options, function(option, i) {
-                  return _c(
-                    "li",
-                    {
-                      key: i,
-                      class: {
-                        "au-theme-background-color--primary-5": _vm.isSelected(
-                          option.value
-                        ),
-                        "au-theme-hover-background-color--base-10": !_vm.isSelected(
-                          option.value
-                        )
-                      },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.select(option, $event)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(option.text))]
-                  )
-                })
-              )
-            ]
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(warning, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(warning, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      })
+        ]
+      )
     ],
-    2
+    1
   )
   var _obj
 }
@@ -1679,6 +1730,78 @@ module.exports = function (Constructor, NAME, next) {
   setToStringTag(Constructor, NAME + ' Iterator');
 };
 
+
+/***/ }),
+
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
 
 /***/ }),
 
@@ -1949,7 +2072,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -2127,6 +2250,7 @@ exports.f = Object.getOwnPropertySymbols;
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -2159,7 +2283,8 @@ exports.f = Object.getOwnPropertySymbols;
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -2254,15 +2379,10 @@ exports.f = Object.getOwnPropertySymbols;
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -2827,6 +2947,17 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
   props: {
     label: {
       type: String
+    },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -3702,6 +3833,13 @@ module.exports = { "default": __webpack_require__("Zbun"), __esModule: true };
 
 /***/ }),
 
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nJ75":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3713,6 +3851,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 
@@ -3779,6 +3976,7 @@ module.exports = !__webpack_require__("zyKz")(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__ = __webpack_require__("TN9u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__select__ = __webpack_require__("Hul/");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_form_item_vue__ = __webpack_require__("+FN5");
 
 //
 //
@@ -3823,6 +4021,19 @@ module.exports = !__webpack_require__("zyKz")(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3831,9 +4042,7 @@ module.exports = !__webpack_require__("zyKz")(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-cascading',
   mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__["a" /* default */]],
-  components: {
-    auSelect: __WEBPACK_IMPORTED_MODULE_3__select__["a" /* default */]
-  },
+  components: { auSelect: __WEBPACK_IMPORTED_MODULE_3__select__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_4__helpers_form_item_vue__["a" /* default */] },
   data: function data() {
     return {
       // ancestor chain, used to save selected value
@@ -3850,6 +4059,11 @@ module.exports = !__webpack_require__("zyKz")(function () {
     placeholder: {
       type: [Array, String]
     },
+    listType: {
+      type: String,
+      default: 'inline'
+    },
+    fullWidth: Boolean,
     singleWidth: String,
     singleMaxWidth: String,
     singleMinWidth: String

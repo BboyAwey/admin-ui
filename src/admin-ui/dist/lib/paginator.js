@@ -619,7 +619,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -854,6 +854,27 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -944,8 +965,14 @@ if (false) {(function () {
     }
   },
   methods: {
-    paginate: function paginate(num) {
-      if (num !== '···') this.localCurrent = num;
+    paginate: function paginate(num, i) {
+      if (num !== '···') this.localCurrent = num;else if (i) {
+        if (i < this.nums.indexOf(this.localCurrent)) {
+          this.paginate(this.localCurrent - 5);
+        } else {
+          this.paginate(this.localCurrent + 5);
+        }
+      }
     },
     next: function next() {
       if (this.canNext) this.localCurrent++;
@@ -985,15 +1012,15 @@ var render = function() {
           "li",
           {
             staticClass:
-              "au-theme-border-color--base-8 au-theme-font-color--base-3",
+              "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-border-radius--large",
             class: {
               disabled: !_vm.canPrev,
               "au-theme-border-color--base-8": true,
               "au-theme-font-color--base-3": _vm.canPrev,
               "au-theme-font-color--base-6": !_vm.canPrev,
-              "au-theme-background-color--base-9": !_vm.canPrev,
-              "au-theme-hover-background-color--base-10": _vm.canPrev,
-              "au-theme-hover-font-color--primary-3": _vm.canPrev
+              "au-theme-background-color--base-10": !_vm.canPrev,
+              "au-theme-hover-font-color--primary-3": _vm.canPrev,
+              "au-theme-hover-border-color--primary-3": _vm.canPrev
             },
             on: { click: _vm.prev }
           },
@@ -1001,31 +1028,51 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._l(_vm.nums, function(num) {
+        _vm._l(_vm.nums, function(num, i) {
           return _c(
             "li",
             {
               key: num,
+              staticClass: "au-theme-border-radius--large",
               class: {
                 current: num == _vm.localCurrent,
                 ellipsis: num == "···",
-                "au-theme-font-color--primary-3": num == _vm.localCurrent,
-                "au-theme-background-color--primary-5": num == _vm.localCurrent,
+                "au-theme-font-color--base-12": num == _vm.localCurrent,
+                "au-theme-background-color--primary-3": num == _vm.localCurrent,
                 "au-theme-border-color--base-8": num != _vm.localCurrent,
                 "au-theme-font-color--base-3": num != _vm.localCurrent,
                 "au-theme-background-color--base-12": num != _vm.localCurrent,
-                "au-theme-hover-background-color--base-10":
-                  num != _vm.localCurrent && num != "···",
-                "au-theme-hover-font-color--primary-3":
-                  num != _vm.localCurrent && num != "···"
+                "au-theme-hover-border-color--primary-3":
+                  num != _vm.localCurrent,
+                "au-theme-hover-font-color--primary-3": num != _vm.localCurrent
               },
               on: {
                 click: function($event) {
-                  _vm.paginate(num)
+                  _vm.paginate(num, i)
                 }
               }
             },
-            [_vm._v(_vm._s(num))]
+            [
+              _c("span", { staticClass: "ellipsis-text" }, [
+                _vm._v(_vm._s(num))
+              ]),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "fast-ward" },
+                [
+                  _c("au-icon", {
+                    attrs: {
+                      type:
+                        i < _vm.nums.indexOf(_vm.localCurrent)
+                          ? "angle-double-left"
+                          : "angle-double-right"
+                    }
+                  })
+                ],
+                1
+              )
+            ]
           )
         }),
         _vm._v(" "),
@@ -1033,15 +1080,15 @@ var render = function() {
           "li",
           {
             staticClass:
-              "au-theme-border-color--base-8 au-theme-font-color--base-3",
+              "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-border-radius--large",
             class: {
               disabled: !_vm.canNext,
               "au-theme-border-color--base-8": true,
               "au-theme-font-color--base-3": _vm.canNext,
               "au-theme-font-color--base-6": !_vm.canNext,
-              "au-theme-background-color--base-9": !_vm.canNext,
-              "au-theme-hover-background-color--base-10": _vm.canNext,
-              "au-theme-hover-font-color--primary-3": _vm.canNext
+              "au-theme-background-color--base-10": !_vm.canNext,
+              "au-theme-hover-font-color--primary-3": _vm.canNext,
+              "au-theme-hover-border-color--primary-3": _vm.canNext
             },
             on: { click: _vm.next }
           },
@@ -1096,15 +1143,10 @@ if (false) {
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {

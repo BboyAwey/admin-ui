@@ -111,6 +111,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+GuK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -660,6 +716,7 @@ module.exports = function (TO_STRING) {
 //
 //
 //
+//
 
 
 
@@ -677,12 +734,12 @@ module.exports = function (TO_STRING) {
   },
   data: function data() {
     return {
-      localDisplay: this.display
+      localDisplay: this.visible
     };
   },
 
   props: {
-    display: {
+    visible: {
       type: Boolean
     },
     title: {
@@ -695,19 +752,12 @@ module.exports = function (TO_STRING) {
       type: [String, Number]
     },
     height: {
-      type: [String, Number],
-      valodator: function valodator(v) {
-        if (!/^\d+(px)*$/g.test(v)) {
-          console.warn('Admin UI@au-modal@ height can not be percentage because we need absolute height value to put it in middle of the window');
-          return false;
-        }
-        return true;
-      }
+      type: [String, Number]
     },
     onEnter: String
   },
   watch: {
-    display: function display(v) {
+    visible: function visible(v) {
       this.localDisplay = v;
       if (v) {
         this.calcModalStyle();
@@ -795,7 +845,7 @@ module.exports = function (TO_STRING) {
       var modalHeight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__helpers_dom__["b" /* getElementSize */])(this.$refs.modal).height;
 
       // we need to minus the padding value of modal and opreation divs and the decline height
-      this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 24 - 40 - 1 + 'px';
+      this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px';
     },
     resizeHandler: function resizeHandler() {
       this.calcModalStyle();
@@ -1100,6 +1150,62 @@ module.exports = { "default": __webpack_require__("tYO1"), __esModule: true };
 
 /***/ }),
 
+/***/ "60a6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_loading_vue__ = __webpack_require__("mqZf");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_647501ec_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_loading_vue__ = __webpack_require__("GEIZ");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("PFGj")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_loading_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_647501ec_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_loading_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\components\\loading\\src\\loading.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-647501ec", Component.options)
+  } else {
+    hotAPI.reload("data-v-647501ec", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "6NgB":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1310,447 +1416,447 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-input" },
+    {
+      staticClass: "au-input",
+      style: { display: _vm.fullWidth ? "block" : "" }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label au-theme-font-color--base-3",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.labelClick()
-                }
-              }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.type === "textarea"
-        ? _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.localValue,
-                expression: "localValue"
-              }
-            ],
-            ref: "core",
-            staticClass: "au-input-core",
-            class: {
-              "au-theme-radius au-theme-placeholder-color--base-7": true,
-              "au-theme-border-color--base-8": !_vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--primary-3":
-                _vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--danger-3": _vm.hasWarnings,
-              "au-theme-focus-shadow--primary": _vm.active && !_vm.hasWarnings,
-              "au-theme-focus-shadow--danger": _vm.active && _vm.hasWarnings,
-              "au-theme-font-color--base-3": true,
-              "au-theme-disabled-background-color--base-8": _vm.disabled
-            },
-            style: {
-              width: _vm.textareaWidth,
-              height: _vm.textareaHeight,
-              minWidth: _vm.textareaMinWidth,
-              maxWidth: _vm.textareaMaxWidth,
-              minHeight: _vm.textareaMinHeight,
-              maxHeight: _vm.textareaMaxHeight
-            },
-            attrs: {
-              disabled: _vm.disabled,
-              readonly: _vm.readonly,
-              placeholder: _vm.placeholder
-            },
-            domProps: { value: _vm.localValue },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.type !== "textarea",
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        [
+          _vm.type === "textarea"
+            ? _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.localValue,
+                    expression: "localValue"
                   }
-                  _vm.localValue = $event.target.value
+                ],
+                ref: "core",
+                staticClass: "au-input-core",
+                class: {
+                  "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                  "au-theme-border-color--base-8":
+                    !_vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--primary-3":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--danger-3": _vm.hasWarnings,
+                  "au-theme-focus-box-shadow--primary":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-focus-box-shadow--danger":
+                    _vm.active && _vm.hasWarnings,
+                  "au-theme-font-color--base-3": true,
+                  "au-theme-disabled-background-color--base-8": _vm.disabled
                 },
-                function($event) {
-                  _vm.input($event)
-                }
-              ],
-              change: function($event) {
-                _vm.change($event)
-              },
-              focus: function($event) {
-                _vm.coreFocus($event)
-              },
-              blur: function($event) {
-                _vm.coreBlur($event)
-              },
-              keyup: function($event) {
-                _vm.keyup($event)
-              },
-              keypress: function($event) {
-                _vm.keypress($event)
-              },
-              keydown: function($event) {
-                _vm.keydown($event)
-              }
-            }
-          })
-        : _c(
-            "span",
-            { staticClass: "au-input-container" },
-            [
-              _vm.icon
-                ? _c("au-icon", {
-                    staticClass: "au-input-icon",
-                    class: {
-                      "au-theme-font-color--base-3": !_vm.active,
-                      "au-theme-font-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-font-color--danger-3": _vm.hasWarnings
-                    },
-                    style: {
-                      left:
-                        !_vm.iconPosition || _vm.iconPosition === "left"
-                          ? "8px"
-                          : "auto",
-                      right: _vm.iconPosition === "right" ? "8px" : "auto"
-                    },
-                    attrs: { type: _vm.icon },
-                    on: { click: _vm.iconClick }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "text"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
+                style: {
+                  width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width,
+                  height: _vm.height,
+                  minWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.minWidth,
+                  maxWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.maxWidth,
+                  minHeight: _vm.minHeight,
+                  maxHeight: _vm.maxHeight
+                },
+                attrs: {
+                  disabled: _vm.disabled,
+                  readonly: _vm.readonly,
+                  placeholder: _vm.placeholder
+                },
+                domProps: { value: _vm.localValue },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
+                      _vm.localValue = $event.target.value
                     },
-                    attrs: {
-                      type: "text",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "number"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$1 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$1),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "number",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "password"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$2 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$2),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "password",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "au-scroller",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.type !== "textarea" && _vm.associationsShow,
-                      expression: "type !== 'textarea' && associationsShow"
+                    function($event) {
+                      _vm.input($event)
                     }
                   ],
-                  staticClass: "au-input-associations-scroller",
-                  class:
-                    "\n        au-theme-border-color--base-8\n        au-theme-shadow--level-3\n        au-theme-background-color--base-12\n        au-theme-radius\n        au-sizegap-" +
-                    _vm.size +
-                    "\n      "
+                  change: function($event) {
+                    _vm.change($event)
+                  },
+                  focus: function($event) {
+                    _vm.coreFocus($event)
+                  },
+                  blur: function($event) {
+                    _vm.coreBlur($event)
+                  },
+                  keyup: function($event) {
+                    _vm.keyup($event)
+                  },
+                  keypress: function($event) {
+                    _vm.keypress($event)
+                  },
+                  keydown: function($event) {
+                    _vm.keydown($event)
+                  }
+                }
+              })
+            : _c(
+                "span",
+                {
+                  staticClass: "au-core-container",
+                  style: {
+                    verticalAlign: _vm.inline ? "top" : "",
+                    width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                  }
                 },
                 [
-                  _c(
-                    "ul",
-                    {
-                      ref: "associations",
-                      staticClass: "au-input-associations",
-                      attrs: { tabindex: "0" },
-                      on: { blur: _vm.associationsBlur }
-                    },
-                    _vm._l(_vm.associations, function(association, index) {
-                      return _c(
-                        "li",
-                        {
-                          key: index,
-                          class: {
-                            "au-theme-font-color--base-3": true,
-                            "au-theme-background-color--primary-5":
-                              association === _vm.localValue,
-                            "au-theme-hover-background-color--base-10":
-                              association !== _vm.localValue
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.selectAssociation(association)
-                            }
-                          }
+                  _vm.icon
+                    ? _c("au-icon", {
+                        staticClass: "au-input-icon",
+                        class: {
+                          "au-theme-font-color--base-3": !_vm.active,
+                          "au-theme-font-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-font-color--danger-3": _vm.hasWarnings
                         },
-                        [_vm._v(_vm._s(association))]
+                        style: {
+                          left:
+                            !_vm.iconPosition || _vm.iconPosition === "left"
+                              ? "8px"
+                              : "auto",
+                          right: _vm.iconPosition === "right" ? "8px" : "auto"
+                        },
+                        attrs: { type: _vm.icon },
+                        on: { click: _vm.iconClick }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "text"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "number"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$1 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$1),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "number",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "password"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$2 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$2),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px"
+                        },
+                        attrs: {
+                          type: "password",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "au-scroller",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.type !== "textarea" && _vm.associationsShow,
+                          expression: "type !== 'textarea' && associationsShow"
+                        }
+                      ],
+                      staticClass: "au-input-associations-scroller",
+                      class:
+                        "\n          au-theme-border-color--base-8\n          au-theme-box-shadow--level-2\n          au-theme-background-color--base-12\n          au-theme-border-radius--normal\n          au-sizegap-" +
+                        _vm.size +
+                        "\n        "
+                    },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          ref: "associations",
+                          staticClass: "au-input-associations",
+                          attrs: { tabindex: "0" },
+                          on: { blur: _vm.associationsBlur }
+                        },
+                        _vm._l(_vm.associations, function(association, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              class: {
+                                "au-theme-font-color--base-3": true,
+                                "au-theme-background-color--primary-5":
+                                  association === _vm.localValue,
+                                "au-theme-hover-background-color--base-10":
+                                  association !== _vm.localValue
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.selectAssociation(association)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(association))]
+                          )
+                        })
                       )
-                    })
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          ),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      })
+        ]
+      )
     ],
-    2
+    1
   )
   var _obj
   var _obj$1
@@ -2218,7 +2324,8 @@ var render = function() {
   return _c(
     "button",
     {
-      staticClass: "\n    au-button\n    au-theme-radius",
+      ref: "button",
+      staticClass: "\n    au-button\n    au-theme-border-radius--normal",
       class: _vm.buttonClasses,
       style: {
         cursor: _vm.loading ? "wait" : ""
@@ -2236,62 +2343,7 @@ var render = function() {
       _c("span", {
         staticClass: "after-mask au-theme-background-color--base-12",
         class: { "au-theme-border-color--base-12": _vm.plain }
-      }),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.loading,
-              expression: "loading"
-            }
-          ],
-          staticClass:
-            "au-button-loading-mask au-theme-before-background-color--base-12",
-          class: { "au-theme-border-color--base-12": _vm.plain }
-        },
-        [
-          _c(
-            "svg",
-            {
-              ref: "svg",
-              staticClass: "au-button-loading-svg",
-              style: {
-                animation:
-                  "1.33333s linear 0s normal none infinite running Rotate",
-                top: _vm.loadingSvgTop
-              },
-              attrs: {
-                viewBox: "0 0 50 50",
-                width: _vm.loadingSize,
-                height: _vm.loadingSize
-              }
-            },
-            [
-              _c("circle", {
-                ref: "core",
-                staticStyle: {
-                  "transform-origin": "center center 0px",
-                  animation:
-                    "1s ease 0s normal none infinite running CircularBarDash"
-                },
-                attrs: {
-                  fill: "none",
-                  stroke: _vm.stroke,
-                  "stroke-width": "5",
-                  "stroke-linecap": "round",
-                  cx: "25",
-                  cy: "25",
-                  r: "20"
-                }
-              })
-            ]
-          )
-        ]
-      )
+      })
     ],
     2
   )
@@ -2429,6 +2481,110 @@ exports.f = __webpack_require__("qs+f") ? Object.defineProperty : function defin
 
 /***/ }),
 
+/***/ "GEIZ":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "au-loading",
+      class: ((_obj = {}),
+      (_obj["au-theme-font-color--" + _vm.color + "-3"] = true),
+      _obj)
+    },
+    [
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.mask,
+            expression: "mask"
+          }
+        ],
+        staticClass: "au-loading-mask au-theme-background-color--base-12"
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { ref: "coreContainer", staticClass: "au-loading-core-container" },
+        [
+          _c(
+            "svg",
+            {
+              ref: "svg",
+              staticClass: "au-loading-svg",
+              style: {
+                animation:
+                  "1.33333s linear 0s normal none infinite running Rotate",
+                marginLeft: _vm.size / 2 * -1 + "px"
+              },
+              attrs: {
+                viewBox: "0 0 50 50",
+                width: _vm.size || 0,
+                height: _vm.size || 0
+              }
+            },
+            [
+              _c("circle", {
+                ref: "core",
+                staticStyle: {
+                  "transform-origin": "center center 0px",
+                  animation:
+                    "1s ease 0s normal none infinite running CircularBarDash"
+                },
+                attrs: {
+                  fill: "none",
+                  stroke: _vm.stroke,
+                  "stroke-width": "5",
+                  "stroke-linecap": "round",
+                  cx: "25",
+                  cy: "25",
+                  r: "20"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.message,
+                  expression: "message"
+                }
+              ],
+              staticClass: "au-loading-message"
+            },
+            [_vm._v(_vm._s(_vm.message))]
+          )
+        ]
+      )
+    ]
+  )
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-647501ec", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "GNCv":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2460,7 +2616,7 @@ var render = function() {
           {
             ref: "modal",
             staticClass:
-              "au-modal au-theme-radius au-theme-background-color--base-12",
+              "au-modal au-theme-border-radius--large au-theme-background-color--base-12",
             on: {
               click: function($event) {
                 $event.stopPropagation()
@@ -2615,6 +2771,78 @@ module.exports = function (Constructor, NAME, next) {
   setToStringTag(Constructor, NAME + ' Iterator');
 };
 
+
+/***/ }),
+
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
 
 /***/ }),
 
@@ -2777,11 +3005,11 @@ var instances = {
   alert: getInstance('alert'),
   confirm: getInstance('confirm'),
   prompt: getInstance('prompt')
-  // when modal close itself we shoud sync the display prop
+  // when modal close itself we shoud sync the visible prop
 };instances.modal.$on('hide', function () {
   if (instances.modal.$el.parentNode) {
     instances.modal.$el.parentNode.removeChild(instances.modal.$el);
-    instances.modal.display = false;
+    instances.modal.visible = false;
   }
 });
 
@@ -2794,19 +3022,19 @@ function refreshContent(el, contentInstance) {
 
 function getCancelButton(instance, config, value) {
   return {
-    text: '取消',
+    text: config.cancelText || '取消',
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler: function handler() {
       if (config.cancel) {
         // Vue.nextTick(() => {
         //   config.cancel(value)
-        //   instance.display = false
+        //   instance.visible = false
         // })
         config.cancel(value);
-        instance.display = false;
+        instance.visible = false;
       } else {
-        instance.display = false;
+        instance.visible = false;
       }
     }
   };
@@ -2814,16 +3042,16 @@ function getCancelButton(instance, config, value) {
 
 function getConfirmButton(instance, config) {
   return {
-    text: '确定',
+    text: config.confirmText || '确定',
     type: 'primary',
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler: function handler() {
       if (config.confirm) {
         config.confirm();
-        instance.display = false;
+        instance.visible = false;
       } else {
-        instance.display = false;
+        instance.visible = false;
       }
     }
   };
@@ -2832,6 +3060,7 @@ function getConfirmButton(instance, config) {
 function MessageBox(config) {
   var _config$type = config.type,
       type = _config$type === undefined ? 'alert' : _config$type,
+      title = config.title,
       message = config.message,
       validators = config.validators,
       reset = config.reset,
@@ -2860,7 +3089,7 @@ function MessageBox(config) {
           loading.stop();
           if (res) {
             if (config.confirm) config.confirm(instances[config.type].value);
-            instances.modal.display = false;
+            instances.modal.visible = false;
           }
         });
       }
@@ -2884,7 +3113,8 @@ function MessageBox(config) {
   __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(contentInstance, { message: message, validators: validators, placeholder: placeholder });
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance);
-  instances.modal.display = true;
+  instances.modal.title = title;
+  instances.modal.visible = true;
   instances.modal.$mount();
   document.body.appendChild(instances.modal.$el);
   // auto focus
@@ -3031,7 +3261,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -3062,6 +3292,13 @@ if (false) {
 
 __webpack_require__("Ntt2")('observable');
 
+
+/***/ }),
+
+/***/ "PFGj":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -3245,8 +3482,9 @@ module.exports = function (it) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__ = __webpack_require__("TN9u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scroller__ = __webpack_require__("ovkV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__ = __webpack_require__("+FN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scroller__ = __webpack_require__("ovkV");
 //
 //
 //
@@ -3497,6 +3735,11 @@ module.exports = function (it) {
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -3506,7 +3749,7 @@ module.exports = function (it) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-input',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */]],
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_2__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_3__scroller__["a" /* default */] },
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__["a" /* default */] },
   data: function data() {
     return {
       // is the throttlling on
@@ -3528,12 +3771,16 @@ module.exports = function (it) {
     associations: Array,
     icon: String,
     iconPosition: String,
-    textareaWidth: String,
-    textareaHeight: String,
-    textareaMinWidth: String,
-    textareaMaxWidth: String,
-    textareaMinHeight: String,
-    textareaMaxHeight: String
+    fullWidth: Boolean,
+    width: {
+      type: String,
+      default: '260px'
+    },
+    height: String,
+    minWidth: String,
+    maxWidth: String,
+    minHeight: String,
+    maxHeight: String
   },
   watch: {
     associations: function associations(v) {
@@ -3556,9 +3803,6 @@ module.exports = function (it) {
     },
     click: function click(e) {
       this.$emit('click', e.target.value, e);
-    },
-    labelClick: function labelClick() {
-      this.$refs.core.focus();
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v;
@@ -3609,6 +3853,8 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__input__ = __webpack_require__("vG5W");
+//
+//
 //
 //
 //
@@ -3715,6 +3961,7 @@ exports.f = Object.getOwnPropertySymbols;
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -3747,7 +3994,8 @@ exports.f = Object.getOwnPropertySymbols;
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -3842,15 +4090,10 @@ exports.f = Object.getOwnPropertySymbols;
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -4685,6 +4928,17 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
     label: {
       type: String
     },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
+    },
     size: {
       type: String,
       default: 'normal'
@@ -5195,6 +5449,16 @@ var defined = __webpack_require__("+MZ2");
 module.exports = function (it) {
   return IObject(defined(it));
 };
+
+
+/***/ }),
+
+/***/ "l0us":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_loading__ = __webpack_require__("ynaO");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_loading__["a"]; });
 
 
 /***/ }),
@@ -5784,10 +6048,145 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
 
 /***/ }),
 
+/***/ "mqZf":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_utils__ = __webpack_require__("AP3u");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-loading',
+  data: function data() {
+    return {
+      closed: false,
+      el: null
+    };
+  },
+  mounted: function mounted() {
+    this.insertSvgStyleTag();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.close();
+  },
+
+  props: {
+    size: Number,
+    message: String,
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    mask: Boolean
+  },
+  computed: {
+    stroke: function stroke() {
+      return __WEBPACK_IMPORTED_MODULE_1__helpers_utils__["a" /* namespace */].get('theme').colors[this.color + '-3'];
+    }
+  },
+  methods: {
+    setTop: function setTop(elHeight) {
+      // exec in loading.js
+      this.$refs.coreContainer.style.top = (elHeight - __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["b" /* getElementSize */])(this.$refs.coreContainer).height) / 2 + 'px';
+    },
+    insertSvgStyleTag: function insertSvgStyleTag() {
+      var style = document.createElement('style');
+      style.innerHTML = '\n        /* &lt;![CDATA[ */\n          @keyframes Rotate { 100% { transform: rotate(360deg); } }\n\n          @keyframes CircularBarDash {\n            0% {\n            stroke-dasharray: 1, 200;\n            stroke-dashoffset: 0;\n          }\n          50% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -35;\n          }\n          100% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -124;\n          }\n          }\n        /* ]]&gt; */\n      ';
+
+      var styles = this.$refs.svg.querySelectorAll('style');
+      for (var i = 0; i < styles.length; i++) {
+        styles[i].parentNode.removeChild(styles[i]);
+      }
+      this.$refs.svg.insertBefore(style, this.$refs.core);
+    },
+    close: function close() {
+      if (!this.closed) {
+        var el = this.el ? this.el : this.$el;
+        el.parentNode.removeChild(el);
+        this.closed = true;
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "mvHQ":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__("Zbun"), __esModule: true };
+
+/***/ }),
+
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -5802,6 +6201,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 
@@ -6152,36 +6610,7 @@ module.exports = function (exec, skipClosing) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_utils__ = __webpack_require__("AP3u");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__loading__ = __webpack_require__("l0us");
 //
 //
 //
@@ -6256,13 +6685,11 @@ module.exports = function (exec, skipClosing) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-button',
   mounted: function mounted() {
-    this.insertLoadingSvgStyle();
-    this.setPos();
+    this.load();
   },
   data: function data() {
     return {
-      loadingSize: 12,
-      loadingSvgTop: '0px'
+      loadingIns: null
     };
   },
 
@@ -6279,75 +6706,59 @@ module.exports = function (exec, skipClosing) {
   },
   watch: {
     loading: function loading() {
-      this.$nextTick(this.setPos);
+      // this.$nextTick(this.setPos)
+      this.load();
     }
   },
   computed: {
     isDefault: function isDefault() {
       return ['success', 'danger', 'warning', 'info', 'primary'].indexOf(this.type) === -1;
     },
+    canActivate: function canActivate() {
+      return !(this.disabled || this.loading);
+    },
     buttonClasses: function buttonClasses() {
       var res = [];
       if (this.plain) {
-        if (this.isDefault) {
-          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-8', 'au-theme-hover-border-color--primary-4', 'au-theme-active-border-color--primary-2-important', 'au-theme-font-color--base-3', 'au-theme-hover-font-color--primary-4', 'au-theme-active-font-color--primary-2-important'];
-        } else {
-          res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-8', !this.disabled ? 'au-theme-hover-border-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-border-color--' + this.type + '-2-important' : '', 'au-theme-font-color--base-3', !this.disabled ? 'au-theme-hover-font-color--' + this.type + '-4' : '', !this.disabled ? 'au-theme-active-font-color--' + this.type + '-2-important' : ''];
-        }
+        res = ['plain', 'au-theme-background-color--base-12', 'au-theme-border-color--base-8', this.canActivate ? 'au-theme-hover-border-color--' + (this.isDefault ? 'primary' : this.type) + '-3' : '', this.canActivate ? 'au-theme-active-border-color--' + (this.isDefault ? 'primary' : this.type) + '-4-important' : '', 'au-theme-font-color--base-3', this.canActivate ? 'au-theme-hover-font-color--' + (this.isDefault ? 'primary' : this.type) + '-3' : '', this.canActivate ? 'au-theme-active-font-color--' + (this.isDefault ? 'primary' : this.type) + '-4-important' : ''];
       } else {
-        if (this.isDefault) {
-          res = ['au-theme-background-color--base-5', 'au-theme-font-color--base-12'];
-        } else {
-          res = ['au-theme-background-color--' + this.type + '-3', 'au-theme-font-color--base-12'];
-        }
+        res = ['au-theme-background-color--' + (this.isDefault ? 'base-5' : this.type + '-3'), 'au-theme-font-color--base-12'];
       }
 
       res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''));
 
       return res.join(' ');
     },
-    stroke: function stroke() {
-      return __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* namespace */].get('theme').colors[this.type + '-3'] || __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* namespace */].get('theme').colors['primary-3'];
+    loadingSize: function loadingSize() {
+      switch (this.size) {
+        case 'mini':
+          // 20
+          return 16;
+        case 'small':
+          // 26
+          return 20;
+        case 'normal':
+          // 32
+          return 24;
+        case 'large':
+          // 38
+          return 28;
+      }
     }
   },
   methods: {
     handleClick: function handleClick(e) {
       this.$emit('click', e);
     },
-    insertLoadingSvgStyle: function insertLoadingSvgStyle() {
-      var style = document.createElement('style');
-      style.innerHTML = '\n        /* &lt;![CDATA[ */\n          @keyframes Rotate { 100% { transform: rotate(360deg); } }\n\n          @keyframes CircularBarDash {\n            0% {\n            stroke-dasharray: 1, 200;\n            stroke-dashoffset: 0;\n          }\n          50% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -35;\n          }\n          100% {\n            stroke-dasharray: 89, 200;\n            stroke-dashoffset: -124;\n          }\n          }\n        /* ]]&gt; */\n      ';
-
-      var styles = this.$refs.svg.querySelectorAll('style');
-      for (var i = 0; i < styles.length; i++) {
-        styles[i].parentNode.removeChild(styles[i]);
-      }
-      this.$refs.svg.insertBefore(style, this.$refs.core);
-    },
-    setPos: function setPos() {
+    load: function load() {
       if (this.loading) {
-        switch (this.size) {
-          case 'mini':
-            // 20
-            this.loadingSize = '16px';
-            this.loadingSvgTop = '1px';
-            break;
-          case 'small':
-            // 26
-            this.loadingSize = '18px';
-            this.loadingSvgTop = '3px';
-            break;
-          case 'normal':
-            // 32
-            this.loadingSize = '20px';
-            this.loadingSvgTop = '5px';
-            break;
-          case 'large':
-            // 38
-            this.loadingSize = '22px';
-            this.loadingSvgTop = '7px';
-            break;
-        }
+        this.loadingIns = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__loading__["a" /* default */])({
+          target: this.$refs.button,
+          color: this.type,
+          size: this.loadingSize
+        });
+      } else {
+        if (this.loadingIns) this.loadingIns.close();
       }
     }
   }
@@ -6594,6 +7005,80 @@ if (false) {
 
 module.exports = {};
 
+
+/***/ }),
+
+/***/ "ynaO":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loading_vue__ = __webpack_require__("60a6");
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var instance = new (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend(__WEBPACK_IMPORTED_MODULE_1__loading_vue__["a" /* default */]))();
+  var _config$target = config.target,
+      target = _config$target === undefined ? document.body : _config$target,
+      message = config.message,
+      _config$color = config.color,
+      color = _config$color === undefined ? 'primary' : _config$color,
+      tag = config.tag,
+      size = config.size,
+      _config$mask = config.mask,
+      mask = _config$mask === undefined ? true : _config$mask;
+  // function colorValidator (v) {
+  //   return ['primary', 'danger', 'info', 'success', 'warning'].indexOf(v) !== -1 ||
+  //     console.warn('Admin UI@au-loading@color must be one of the type below: primary, danger, info, success, warning')
+  // }
+
+  var _getComputedStyle = getComputedStyle(target),
+      position = _getComputedStyle.position,
+      width = _getComputedStyle.width,
+      height = _getComputedStyle.height,
+      borderTopWidth = _getComputedStyle.borderTopWidth,
+      borderBottomWidth = _getComputedStyle.borderBottomWidth,
+      borderLeftWidth = _getComputedStyle.borderLeftWidth,
+      borderRightWidth = _getComputedStyle.borderRightWidth;
+
+  if (position === 'static') {
+    target.style.position = 'relative';
+  }
+
+  if (!size) {
+    size = Math.min(parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth), parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
+    size = size > 50 ? 50 : size;
+  }
+
+  instance.message = message;
+  instance.size = size;
+  instance.mask = mask;
+  // instance.color = colorValidator(color) ? color : 'primary'
+  instance.color = color;
+
+  instance.$mount(document.createElement('div'));
+
+  var el = null;
+  if (tag) {
+    el = document.createElement(tag);
+    el.style.position = 'absolute';
+    el.style.top = '0px';
+    el.style.bottom = '0px';
+    el.style.left = '0px';
+    el.style.right = '0px';
+    el.appendChild(instance.$el);
+    // instance.el = el
+  } else el = instance.$el;
+  target.appendChild(el);
+  // instance.setColor()
+  instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));
+
+  return instance;
+});
 
 /***/ }),
 

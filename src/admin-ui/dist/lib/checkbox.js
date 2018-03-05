@@ -104,6 +104,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+GuK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -629,6 +685,78 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "LKnP":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -869,6 +997,7 @@ module.exports = function (it) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__ = __webpack_require__("TN9u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__ = __webpack_require__("+FN5");
 //
 //
 //
@@ -984,6 +1113,16 @@ module.exports = function (it) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -991,6 +1130,7 @@ module.exports = function (it) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-checkbox',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */]],
+  components: { FormItem: __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__["a" /* default */] },
   props: {
     // label value disabled from mixins
     text: {
@@ -1005,6 +1145,10 @@ module.exports = function (it) {
       default: function _default() {
         return [];
       }
+    },
+    listType: {
+      type: String,
+      default: 'inline'
     },
     indeterminate: Boolean
   },
@@ -1130,6 +1274,7 @@ module.exports = function (it) {
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -1162,7 +1307,8 @@ module.exports = function (it) {
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -1450,211 +1596,205 @@ var render = function() {
     "div",
     { staticClass: "au-checkbox" },
     [
-      _vm.label
-        ? _c(
-            "div",
-            { staticClass: "au-form-label au-theme-font-color--base-3" },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.multiple
-        ? _c(
-            "div",
-            {
-              staticClass: "au-checkbox-container",
-              style: {
-                cursor: _vm.disabled ? "not-allowed" : "default"
-              },
-              on: {
-                mouseenter: _vm.handleMouseEnter,
-                mouseleave: _vm.handleMouseLeave,
-                click: _vm.handleClick
-              }
-            },
-            [
-              _c(
-                "span",
+      _c(
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        [
+          !_vm.multiple
+            ? _c(
+                "div",
                 {
-                  staticClass: "au-checkbox-core au-theme-radius",
-                  class: {
-                    "au-theme-border-color--base-8":
-                      (!_vm.hasWarnings &&
-                        !_vm.hover &&
-                        !_vm.localValue &&
-                        !_vm.localIndeterminate) ||
-                      _vm.disabled,
-                    "au-theme-border-color--primary-3":
-                      !_vm.hasWarnings &&
-                      _vm.hover &&
-                      !_vm.localValue &&
-                      !_vm.disabled,
-                    "au-theme-border-color--danger-3":
-                      _vm.hasWarnings && !_vm.localValue && !_vm.disabled,
-                    "au-theme-background-color--primary-3":
-                      !_vm.hasWarnings &&
-                      (_vm.localValue || _vm.localIndeterminate) &&
-                      !_vm.disabled,
-                    "au-theme-background-color--danger-3":
-                      _vm.hasWarnings &&
-                      (_vm.localValue || _vm.localIndeterminate) &&
-                      !_vm.disabled,
-                    "au-theme-background-color--base-9": _vm.disabled
-                  },
+                  staticClass: "au-checkbox-container",
                   style: {
-                    border:
-                      (_vm.localValue && !_vm.disabled) ||
-                      _vm.localIndeterminate
-                        ? "none"
-                        : ""
+                    cursor: _vm.disabled ? "not-allowed" : "default"
                   },
-                  attrs: { tabindex: "0" }
+                  on: {
+                    mouseenter: _vm.handleMouseEnter,
+                    mouseleave: _vm.handleMouseLeave,
+                    click: _vm.handleClick
+                  }
                 },
                 [
-                  _c("au-icon", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.localValue && !_vm.localIndeterminate,
-                        expression: "localValue && !localIndeterminate"
-                      }
-                    ],
-                    staticClass: "au-checkbox-icon",
-                    class: {
-                      "au-checkbox-icon-disabled": _vm.disabled,
-                      "au-theme-font-color--base-12": !_vm.disabled,
-                      "au-theme-font-color--base-6": _vm.disabled
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "au-checkbox-core au-theme-border-radius--normal",
+                      class: {
+                        "au-theme-border-color--base-8":
+                          !_vm.hasWarnings &&
+                          !_vm.hover &&
+                          !_vm.localValue &&
+                          !_vm.localIndeterminate,
+                        "au-theme-border-color--base-9":
+                          _vm.disabled &&
+                          (_vm.localValue || _vm.localIndeterminate),
+                        "au-theme-border-color--primary-3":
+                          !_vm.hasWarnings &&
+                          _vm.hover &&
+                          !_vm.localValue &&
+                          !_vm.disabled,
+                        "au-theme-border-color--danger-3":
+                          _vm.hasWarnings && !_vm.localValue && !_vm.disabled,
+                        "au-theme-background-color--primary-3":
+                          !_vm.hasWarnings &&
+                          (_vm.localValue || _vm.localIndeterminate) &&
+                          !_vm.disabled,
+                        "au-theme-background-color--danger-3":
+                          _vm.hasWarnings &&
+                          (_vm.localValue || _vm.localIndeterminate) &&
+                          !_vm.disabled,
+                        "au-theme-background-color--base-9": _vm.disabled
+                      },
+                      style: {
+                        border:
+                          (_vm.localValue && !_vm.disabled) ||
+                          _vm.localIndeterminate
+                            ? "none"
+                            : ""
+                      },
+                      attrs: { tabindex: "0" }
                     },
-                    attrs: { "unify-size": "", type: "check" }
-                  }),
+                    [
+                      _c("au-icon", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.localValue && !_vm.localIndeterminate,
+                            expression: "localValue && !localIndeterminate"
+                          }
+                        ],
+                        staticClass: "au-checkbox-icon",
+                        class: {
+                          "au-checkbox-icon-disabled": _vm.disabled,
+                          "au-theme-font-color--base-12": true
+                        },
+                        attrs: { "unify-size": "", type: "check" }
+                      }),
+                      _vm._v(" "),
+                      _c("au-icon", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.localIndeterminate,
+                            expression: "localIndeterminate"
+                          }
+                        ],
+                        staticClass: "au-checkbox-icon au-checkbox-icon-minus",
+                        class: {
+                          "au-checkbox-icon-disabled": _vm.disabled,
+                          "au-theme-font-color--base-12": true
+                        },
+                        attrs: { "unify-size": "", type: "minus" }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("au-icon", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.localIndeterminate,
-                        expression: "localIndeterminate"
-                      }
-                    ],
-                    staticClass: "au-checkbox-icon au-checkbox-icon-minus",
-                    class: {
-                      "au-checkbox-icon-disabled": _vm.disabled,
-                      "au-theme-font-color--base-12": !_vm.disabled,
-                      "au-theme-font-color--base-6": _vm.disabled
-                    },
-                    attrs: { "unify-size": "", type: "minus" }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "au-checkbox-text" }, [
-                _vm._v(_vm._s(_vm.text))
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.localCheckboxes, function(checkbox, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-checkbox-container au-checkbox-container-multiple",
-            style: {
-              cursor: _vm.disabled ? "not-allowed" : "default"
-            },
-            on: {
-              mouseenter: function($event) {
-                _vm.handleMouseEnter(i)
-              },
-              mouseleave: function($event) {
-                _vm.handleMouseLeave(i)
-              },
-              click: function($event) {
-                _vm.handleClick(i)
-              }
-            }
-          },
-          [
-            _c(
-              "span",
+                  _c("span", { staticClass: "au-checkbox-text" }, [
+                    _vm._v(_vm._s(_vm.text))
+                  ])
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.localCheckboxes, function(checkbox, i) {
+            return _c(
+              "div",
               {
-                staticClass: "au-checkbox-core au-theme-radius",
-                class: {
-                  "au-theme-border-color--base-8":
-                    (!_vm.hasWarnings &&
-                      !checkbox.hover &&
-                      !checkbox.checked) ||
-                    _vm.disabled,
-                  "au-theme-border-color--primary-3":
-                    !_vm.hasWarnings && checkbox.hover && !checkbox.checked,
-                  "au-theme-border-color--danger-3":
-                    _vm.hasWarnings && !checkbox.checked && !_vm.disabled,
-                  "au-theme-background-color--primary-3":
-                    !_vm.hasWarnings && checkbox.checked && !_vm.disabled,
-                  "au-theme-background-color--danger-3":
-                    _vm.hasWarnings && checkbox.checked && !_vm.disabled,
-                  "au-theme-background-color--base-9": _vm.disabled
-                },
+                key: i,
+                staticClass: "au-checkbox-container",
+                class:
+                  "au-checkbox-container" +
+                  (_vm.listType === "block" ? "-block" : "-inline"),
                 style: {
-                  border: checkbox.checked && !_vm.disabled ? "none" : ""
+                  cursor: _vm.disabled ? "not-allowed" : "default"
                 },
-                attrs: { tabindex: "0" }
+                on: {
+                  mouseenter: function($event) {
+                    _vm.handleMouseEnter(i)
+                  },
+                  mouseleave: function($event) {
+                    _vm.handleMouseLeave(i)
+                  },
+                  click: function($event) {
+                    _vm.handleClick(i)
+                  }
+                }
               },
               [
-                _c("au-icon", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: checkbox.checked,
-                      expression: "checkbox.checked"
-                    }
-                  ],
-                  staticClass: "au-checkbox-icon au-theme-font-color--base-12",
-                  class: {
-                    "au-checkbox-icon-disabled": _vm.disabled,
-                    "au-theme-font-color--base-6-important": _vm.disabled
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "au-checkbox-core au-theme-border-radius--normal",
+                    class: {
+                      "au-theme-border-color--base-8":
+                        !_vm.hasWarnings &&
+                        !checkbox.hover &&
+                        !checkbox.checked,
+                      "au-theme-border-color--base-9":
+                        _vm.disabled &&
+                        (_vm.localValue || _vm.localIndeterminate),
+                      "au-theme-border-color--primary-3":
+                        !_vm.hasWarnings && checkbox.hover && !checkbox.checked,
+                      "au-theme-border-color--danger-3":
+                        _vm.hasWarnings && !checkbox.checked && !_vm.disabled,
+                      "au-theme-background-color--primary-3":
+                        !_vm.hasWarnings && checkbox.checked && !_vm.disabled,
+                      "au-theme-background-color--danger-3":
+                        _vm.hasWarnings && checkbox.checked && !_vm.disabled,
+                      "au-theme-background-color--base-9": _vm.disabled
+                    },
+                    style: {
+                      border: checkbox.checked && !_vm.disabled ? "none" : ""
+                    },
+                    attrs: { tabindex: "0" }
                   },
-                  attrs: { "unify-size": "", type: "check" }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "au-checkbox-text" }, [
-              _vm._v(_vm._s(checkbox.text))
-            ])
-          ]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(w, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(w))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(w, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(w))]
-        )
-      })
+                  [
+                    _c("au-icon", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: checkbox.checked,
+                          expression: "checkbox.checked"
+                        }
+                      ],
+                      staticClass:
+                        "au-checkbox-icon au-theme-font-color--base-12",
+                      class: {
+                        "au-checkbox-icon-disabled": _vm.disabled,
+                        "au-theme-font-color--base-12": _vm.disabled
+                      },
+                      attrs: { "unify-size": "", type: "check" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "au-checkbox-text" }, [
+                  _vm._v(_vm._s(checkbox.text))
+                ])
+              ]
+            )
+          })
+        ],
+        2
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -1863,6 +2003,17 @@ module.exports = function (fn, args, that) {
   props: {
     label: {
       type: String
+    },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -2396,6 +2547,13 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("wWcv")(func
 
 /***/ }),
 
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nJ75":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2407,6 +2565,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 

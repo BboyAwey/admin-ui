@@ -1272,7 +1272,8 @@ var render = function() {
     "div",
     {
       ref: "pop",
-      staticClass: "au-popover au-theme-radius au-theme-shadow--level-3",
+      staticClass:
+        "au-popover au-theme-border-radius--normal au-theme-box-shadow--level-2",
       class: { "au-popover-plain au-theme-border-color--base-8": _vm.plain },
       attrs: { tabindex: _vm._uid }
     },
@@ -1285,7 +1286,7 @@ var render = function() {
           ref: "content",
           class: {
             "au-popover-content": true,
-            "au-theme-radius": true,
+            "au-theme-border-radius--normal": true,
             "au-theme-background-color--base-2": !_vm.plain,
             "au-theme-font-color--base-12": !_vm.plain,
             "au-theme-background-color--base-12": _vm.plain,
@@ -1422,7 +1423,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -1561,8 +1562,7 @@ var render = function() {
     {
       ref: "self",
       staticClass: "au-menu au-theme-font-color--base-3",
-      class: {
-        "top-level au-theme-background-color--base-12": _vm.isTopLevel,
+      class: ((_obj = {
         "collapsable-top":
           _vm.collapsable &&
           _vm.isTopLevel &&
@@ -1572,7 +1572,13 @@ var render = function() {
           _vm.isTopLevel &&
           _vm.collapseHandlebarPosition == "bottom",
         collapse: _vm.localCollapse
-      }
+      }),
+      (_obj[
+        "top-level au-theme-background-color--" +
+          (_vm.backgroundColor || "base-12")
+      ] =
+        _vm.isTopLevel),
+      _obj)
     },
     [
       _vm.collapsable &&
@@ -1652,20 +1658,44 @@ var render = function() {
                                 "div",
                                 {
                                   staticClass: "menu",
-                                  class: {
-                                    "au-theme-hover-background-color--base-10": !_vm.decoration(
-                                      item
-                                    ),
-                                    "au-theme-hover-font-color--primary-3":
-                                      !_vm.decoration(item) && item.url,
-                                    "active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3": _vm.decoration(
-                                      item
-                                    ),
-                                    "au-theme-font-color--base-7":
-                                      !item.url &&
-                                      !_vm.decoration(item) &&
-                                      !_vm.localCollapse
-                                  },
+                                  class: ((_obj = {}),
+                                  (_obj[
+                                    "au-theme-background-color--" +
+                                      _vm.itemBackgroundColor
+                                  ] =
+                                    !!_vm.itemBackgroundColor &&
+                                    !_vm.isItemActive(item)),
+                                  (_obj[
+                                    "au-theme-font-color--" + _vm.itemFontColor
+                                  ] =
+                                    !!_vm.itemFontColor &&
+                                    !_vm.isItemActive(item) &&
+                                    item.url),
+                                  (_obj[
+                                    "au-theme-hover-background-color--" +
+                                      (_vm.itemHoverBackgroundColor ||
+                                        "base-10")
+                                  ] = !_vm.isItemActive(item)),
+                                  (_obj[
+                                    "au-theme-hover-font-color--" +
+                                      (_vm.itemHoverFontColor || "primary-3")
+                                  ] =
+                                    !_vm.isItemActive(item) && item.url),
+                                  (_obj[
+                                    "au-theme-font-color--" +
+                                      (_vm.itemUnlinkTextColor || "base-7")
+                                  ] =
+                                    !item.url &&
+                                    !_vm.isItemActive(item) &&
+                                    !_vm.localCollapse),
+                                  (_obj[
+                                    "au-theme-font-color--" +
+                                      (_vm.itemActiveFontColor || "primary-3") +
+                                      " au-theme-background-color--" +
+                                      (_vm.itemActiveBackgroundColor ||
+                                        "primary-5")
+                                  ] = _vm.isItemActive(item)),
+                                  _obj),
                                   style: {
                                     paddingLeft: _vm.calcPaddingLeft(item)
                                   },
@@ -1678,6 +1708,21 @@ var render = function() {
                                   slot: "target"
                                 },
                                 [
+                                  _c("div", {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.isItemActive(item),
+                                        expression: "isItemActive(item)"
+                                      }
+                                    ],
+                                    staticClass: "active-dec",
+                                    class:
+                                      "au-theme-background-color--" +
+                                      (_vm.itemActiveFontColor || "primary-3")
+                                  }),
+                                  _vm._v(" "),
                                   item.icon
                                     ? _c("au-icon", {
                                         staticClass: "menu-icon",
@@ -1688,9 +1733,18 @@ var render = function() {
                                       })
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _c("span", { staticClass: "menu-text" }, [
-                                    _vm._v(_vm._s(item.text))
-                                  ]),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "menu-text",
+                                      style: {
+                                        marginRight: _vm.hasChildren(item)
+                                          ? "16px"
+                                          : ""
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(item.text))]
+                                  ),
                                   _vm._v(" "),
                                   _vm.hasChildren(item)
                                     ? _c("au-icon", {
@@ -1709,12 +1763,9 @@ var render = function() {
                                             "rotate(" +
                                             (item.collapse ? "-90" : "0") +
                                             "deg)",
-                                          right: item.collapse ? "14px" : ""
+                                          right: item.collapse ? "12px" : ""
                                         },
-                                        attrs: {
-                                          type: "angle-down",
-                                          "unify-size": ""
-                                        },
+                                        attrs: { type: "angle-down" },
                                         nativeOn: {
                                           click: function($event) {
                                             $event.stopPropagation()
@@ -1782,7 +1833,23 @@ var render = function() {
                                       "is-top-level": false,
                                       all: _vm.isTopLevel
                                         ? _vm.localItems
-                                        : _vm.all
+                                        : _vm.all,
+                                      "background-color": _vm.backgroundColor,
+                                      "item-font-color": _vm.itemFontColor,
+                                      "item-background-color":
+                                        _vm.itemBackgroundColor,
+                                      "item-unlink-font-color":
+                                        _vm.itemUnlinkTextColor,
+                                      "item-hover-font-color":
+                                        _vm.itemHoverFontColor,
+                                      "item-hover-background-color":
+                                        _vm.itemHoverBackgroundColor,
+                                      "item-active-font-color":
+                                        _vm.itemActiveFontColor,
+                                      "item-active-background-color":
+                                        _vm.itemActiveBackgroundColor,
+                                      "collapse-handlebar-seprator-color":
+                                        _vm.collapseHandlebarSepratorColor
                                     },
                                     on: { select: _vm.handlePopSelect }
                                   })
@@ -1807,7 +1874,19 @@ var render = function() {
                             attrs: {
                               items: item.children,
                               "is-top-level": false,
-                              all: _vm.isTopLevel ? _vm.localItems : _vm.all
+                              all: _vm.isTopLevel ? _vm.localItems : _vm.all,
+                              "background-color": _vm.backgroundColor,
+                              "item-font-color": _vm.itemFontColor,
+                              "item-background-color": _vm.itemBackgroundColor,
+                              "item-unlink-font-color": _vm.itemUnlinkTextColor,
+                              "item-hover-font-color": _vm.itemHoverFontColor,
+                              "item-hover-background-color":
+                                _vm.itemHoverBackgroundColor,
+                              "item-active-font-color": _vm.itemActiveFontColor,
+                              "item-active-background-color":
+                                _vm.itemActiveBackgroundColor,
+                              "collapse-handlebar-seprator-color":
+                                _vm.collapseHandlebarSepratorColor
                             },
                             on: { select: _vm.handlePopSelect }
                           })
@@ -1815,6 +1894,7 @@ var render = function() {
                     ],
                     1
                   )
+                  var _obj
                 })
               )
             ]
@@ -1863,21 +1943,45 @@ var render = function() {
                             "div",
                             {
                               staticClass: "menu",
-                              class: {
-                                "au-theme-hover-background-color--base-10": !_vm.decoration(
-                                  item
-                                ),
-                                "au-theme-hover-font-color--primary-3":
-                                  !_vm.decoration(item) && item.url,
-                                "active au-theme-font-color--primary-3 au-theme-background-color--primary-5 au-theme-before-background-color--primary-3": _vm.decoration(
-                                  item
-                                ),
-                                "au-theme-font-color--base-7":
-                                  !item.url &&
-                                  !_vm.decoration(item) &&
-                                  !_vm.localCollapse
+                              class: ((_obj = {}),
+                              (_obj[
+                                "au-theme-background-color--" +
+                                  _vm.itemBackgroundColor
+                              ] =
+                                !!_vm.itemBackgroundColor &&
+                                !_vm.isItemActive(item)),
+                              (_obj[
+                                "au-theme-font-color--" + _vm.itemFontColor
+                              ] =
+                                !!_vm.itemFontColor &&
+                                !_vm.isItemActive(item) &&
+                                item.url),
+                              (_obj[
+                                "au-theme-hover-background-color--" +
+                                  (_vm.itemHoverBackgroundColor || "base-10")
+                              ] = !_vm.isItemActive(item)),
+                              (_obj[
+                                "au-theme-hover-font-color--" +
+                                  (_vm.itemHoverFontColor || "primary-3")
+                              ] =
+                                !_vm.isItemActive(item) && item.url),
+                              (_obj[
+                                "au-theme-font-color--" +
+                                  (_vm.itemUnlinkTextColor || "base-7")
+                              ] =
+                                !item.url &&
+                                !_vm.isItemActive(item) &&
+                                !_vm.localCollapse),
+                              (_obj[
+                                "au-theme-font-color--" +
+                                  (_vm.itemActiveFontColor || "primary-3") +
+                                  " au-theme-background-color--" +
+                                  (_vm.itemActiveBackgroundColor || "primary-5")
+                              ] = _vm.isItemActive(item)),
+                              _obj),
+                              style: {
+                                paddingLeft: _vm.calcPaddingLeft(item)
                               },
-                              style: { paddingLeft: _vm.calcPaddingLeft(item) },
                               attrs: { slot: "target" },
                               on: {
                                 click: function($event) {
@@ -1887,6 +1991,21 @@ var render = function() {
                               slot: "target"
                             },
                             [
+                              _c("div", {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isItemActive(item),
+                                    expression: "isItemActive(item)"
+                                  }
+                                ],
+                                staticClass: "active-dec",
+                                class:
+                                  "au-theme-background-color--" +
+                                  (_vm.itemActiveFontColor || "primary-3")
+                              }),
+                              _vm._v(" "),
                               item.icon
                                 ? _c("au-icon", {
                                     staticClass: "menu-icon",
@@ -1894,9 +2013,18 @@ var render = function() {
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
-                              _c("span", { staticClass: "menu-text" }, [
-                                _vm._v(_vm._s(item.text))
-                              ]),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "menu-text",
+                                  style: {
+                                    marginRight: _vm.hasChildren(item)
+                                      ? "16px"
+                                      : ""
+                                  }
+                                },
+                                [_vm._v(_vm._s(item.text))]
+                              ),
                               _vm._v(" "),
                               _vm.hasChildren(item)
                                 ? _c("au-icon", {
@@ -1915,12 +2043,9 @@ var render = function() {
                                         "rotate(" +
                                         (item.collapse ? "-90" : "0") +
                                         "deg)",
-                                      right: item.collapse ? "14px" : ""
+                                      right: item.collapse ? "12px" : ""
                                     },
-                                    attrs: {
-                                      type: "angle-down",
-                                      "unify-size": ""
-                                    },
+                                    attrs: { type: "angle-down" },
                                     nativeOn: {
                                       click: function($event) {
                                         $event.stopPropagation()
@@ -1986,7 +2111,25 @@ var render = function() {
                                   "is-popover": true,
                                   "popover-ins": _vm.$refs.popover,
                                   "is-top-level": false,
-                                  all: _vm.isTopLevel ? _vm.localItems : _vm.all
+                                  all: _vm.isTopLevel
+                                    ? _vm.localItems
+                                    : _vm.all,
+                                  "background-color": _vm.backgroundColor,
+                                  "item-font-color": _vm.itemFontColor,
+                                  "item-background-color":
+                                    _vm.itemBackgroundColor,
+                                  "item-unlink-font-color":
+                                    _vm.itemUnlinkTextColor,
+                                  "item-hover-font-color":
+                                    _vm.itemHoverFontColor,
+                                  "item-hover-background-color":
+                                    _vm.itemHoverBackgroundColor,
+                                  "item-active-font-color":
+                                    _vm.itemActiveFontColor,
+                                  "item-active-background-color":
+                                    _vm.itemActiveBackgroundColor,
+                                  "collapse-handlebar-seprator-color":
+                                    _vm.collapseHandlebarSepratorColor
                                 },
                                 on: { select: _vm.handlePopSelect }
                               })
@@ -2011,7 +2154,19 @@ var render = function() {
                         attrs: {
                           items: item.children,
                           "is-top-level": false,
-                          all: _vm.isTopLevel ? _vm.localItems : _vm.all
+                          all: _vm.isTopLevel ? _vm.localItems : _vm.all,
+                          "background-color": _vm.backgroundColor,
+                          "item-font-color": _vm.itemFontColor,
+                          "item-background-color": _vm.itemBackgroundColor,
+                          "item-unlink-font-color": _vm.itemUnlinkTextColor,
+                          "item-hover-font-color": _vm.itemHoverFontColor,
+                          "item-hover-background-color":
+                            _vm.itemHoverBackgroundColor,
+                          "item-active-font-color": _vm.itemActiveFontColor,
+                          "item-active-background-color":
+                            _vm.itemActiveBackgroundColor,
+                          "collapse-handlebar-seprator-color":
+                            _vm.collapseHandlebarSepratorColor
                         },
                         on: { select: _vm.handlePopSelect }
                       })
@@ -2019,6 +2174,7 @@ var render = function() {
                 ],
                 1
               )
+              var _obj
             })
           )
         : _vm._e(),
@@ -2029,8 +2185,17 @@ var render = function() {
         ? _c(
             "div",
             {
-              staticClass:
-                "collapse-handle-bottom au-theme-border-color--base-8-important au-theme-font-color--base-3",
+              staticClass: "collapse-handle-bottom",
+              class: ((_obj$1 = {}),
+              (_obj$1[
+                "au-theme-border-color--" +
+                  (_vm.collapseHandlebarSepratorColor || "base-8") +
+                  "-important"
+              ] = true),
+              (_obj$1[
+                "au-theme-font-color--" + (_vm.itemFontColor || "base-3")
+              ] = true),
+              _obj$1),
               on: { click: _vm.toggle }
             },
             [
@@ -2048,6 +2213,8 @@ var render = function() {
     ],
     1
   )
+  var _obj
+  var _obj$1
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2110,15 +2277,10 @@ module.exports = function (it) {
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -2693,7 +2855,7 @@ module.exports = function (done, value) {
   mounted: function mounted() {
     this.reconstruct();
     this.addEvents();
-    // this.calPos() // TODO:
+    // this.calPos()
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('click', this.handleWindowClick, true);
     // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
@@ -2834,6 +2996,35 @@ module.exports = function (done, value) {
       var targetSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(target);
       var targetPos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["b" /* getElementPagePos */])(target);
       var popSize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(content);
+      var windowSize = {
+        width: document.body.clientWidth,
+        height: document.body.clientHeight
+
+        // handle screen overflow
+      };var targetRect = target.getBoundingClientRect();
+      if (targetRect.top < popSize.height && keys[0] === 'top') keys[0] = 'bottom';
+      if (windowSize.height - targetRect.bottom < popSize.height && keys[0] === 'bottom') keys[0] = 'top';
+      if (targetRect.left < popSize.width && keys[0] === 'left') keys[0] = 'rigth';
+      if (windowSize.width - targetRect.right < popSize.width && keys[0] === 'right') keys[0] = 'left';
+
+      if (keys[0] === 'left' || keys[0] === 'right') {
+        if (keys[1] !== 'top') {
+          if (targetRect.top < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'top';
+        }
+        if (keys[1] !== 'bottom') {
+          if (windowSize.height - targetRect.bottom < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'bottom';
+        }
+      }
+      if (keys[0] === 'top' || keys[0] === 'bottom') {
+        if (keys[1] !== 'left') {
+          if (targetRect.left < popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width) keys[1] = 'left';
+        }
+        if (keys[1] !== 'right') {
+          if (windowSize.width - targetRect.right < popSize.widht / (keys[1] === 'middle' ? 2 : 1) - targetSize.width) keys[1] = 'right';
+        }
+      }
+
+      this.localPlacement = keys.join(' ');
 
       // fix the size bug witch caused by the wordwrap
       // this.$refs.pop.style.width = popSize.width + 'px'
@@ -2848,7 +3039,7 @@ module.exports = function (done, value) {
         },
         y: {
           top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height + offset + 10 + parseInt(this.yFix) // do not kown why should add 10 but it works
+          bottom: targetPos.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
       var horizontal = {
@@ -2858,8 +3049,8 @@ module.exports = function (done, value) {
         },
         y: {
           top: targetPos.top + parseInt(this.yFix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix), // do not kown why should add 2 but it works
-          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 10 but it works
+          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
+          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
         }
       };
       var res = {};
@@ -4278,6 +4469,63 @@ module.exports = {};
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4321,7 +4569,16 @@ module.exports = {};
     reactivateOnHashchange: {
       type: Boolean,
       default: true
-    }
+    },
+    backgroundColor: String,
+    itemFontColor: String,
+    itemUnlinkTextColor: String,
+    itemBackgroundColor: String,
+    itemHoverFontColor: String,
+    itemHoverBackgroundColor: String,
+    itemActiveFontColor: String,
+    itemActiveBackgroundColor: String,
+    collapseHandlebarSepratorColor: String
   },
   mounted: function mounted() {
     if (this.isTopLevel) {
@@ -4408,7 +4665,7 @@ module.exports = {};
         this.activate(this.currentItem);
       }
     },
-    decoration: function decoration(item) {
+    isItemActive: function isItemActive(item) {
       if (this.localCollapse) {
         return item.active || item.childrenActive;
       } else {
@@ -4505,7 +4762,18 @@ module.exports = {};
       return !!(item.children && item.children.length);
     },
     handlePopSelect: function handlePopSelect(item) {
+      // hide children container popover
+      if (this.isCurrent(item)) return;
+      if (this.$refs.popover) {
+        this.$refs.popover.forEach(function (p) {
+          return p.hide();
+        });
+      }
       this.$emit('select', item);
+    },
+    isColorNum: function isColorNum(color) {
+      return (/^#/.test(color)
+      );
     }
   }
 });

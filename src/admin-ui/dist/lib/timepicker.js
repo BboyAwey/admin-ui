@@ -104,6 +104,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+Fmx":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -114,162 +170,130 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-timepicker au-theme-font-color--base-3" },
+    {
+      staticClass: "au-timepicker au-theme-font-color--base-3",
+      style: { display: !_vm.inline && _vm.fullWidth ? "block" : "" }
+    },
     [
       _c(
-        "div",
+        "form-item",
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.label,
-              expression: "label"
-            }
-          ],
-          staticClass: "au-form-label",
-          style: {
-            cursor: _vm.disabled ? "not-allowed" : "default"
-          },
-          on: { click: _vm.labelClick }
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.inline,
+            warnings: _vm.warnings || _vm.localWarnings
+          }
         },
-        [_vm._v(_vm._s(_vm.label))]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "au-timepicker-container" },
         [
-          _c("au-input", {
-            ref: "core",
-            staticClass: "au-timepicker-core",
-            attrs: {
-              icon: "clock-o",
-              warnings: _vm.calcedWarnings,
-              size: _vm.size,
-              disabled: _vm.disabled,
-              readonly: _vm.readonly,
-              placeholder: _vm.placeholder
-            },
-            on: { input: _vm.input, focus: _vm.coreFocus, blur: _vm.coreBlur },
-            model: {
-              value: _vm.inputTime,
-              callback: function($$v) {
-                _vm.inputTime = $$v
-              },
-              expression: "inputTime"
-            }
-          }),
-          _vm._v(" "),
           _c(
             "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.popup,
-                  expression: "popup"
-                }
-              ],
-              ref: "popup",
-              staticClass: "au-timepicker-popup",
-              class:
-                "\n      au-theme-border-color--base-8\n      au-theme-font-color--base-3\n      au-theme-background-color--base-12\n      au-theme-shadow--level-3\n      au-sizegap-" +
-                _vm.size +
-                "\n    ",
-              attrs: { tabindex: "0" },
-              on: { blur: _vm.popupBlur }
-            },
+            { staticClass: "au-timepicker-container" },
             [
-              _c(
-                "ul",
-                {
-                  ref: "hours",
-                  staticClass:
-                    "au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8",
-                  class: { "au-timepicker-no-seconds": !_vm.seconds },
-                  style: {
-                    top: _vm.hoursOffset + "px"
+              _c("au-input", {
+                ref: "core",
+                staticClass: "au-timepicker-core",
+                attrs: {
+                  icon: "clock-o",
+                  warning: _vm.hasWarnings,
+                  size: _vm.size,
+                  inline: false,
+                  "fullfill-with": _vm.inline && _vm.fullWidth,
+                  width: _vm.width || "114px",
+                  disabled: _vm.disabled,
+                  readonly: _vm.readonly,
+                  placeholder: _vm.placeholder
+                },
+                on: {
+                  input: _vm.input,
+                  focus: _vm.coreFocus,
+                  blur: _vm.coreBlur
+                },
+                model: {
+                  value: _vm.inputTime,
+                  callback: function($$v) {
+                    _vm.inputTime = $$v
                   },
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                    }
-                  }
-                },
-                _vm._l(24, function(num, index) {
-                  return _c(
-                    "li",
-                    {
-                      key: index,
-                      class: {
-                        "au-theme-font-color--primary-3":
-                          _vm.isValid(num, "h") && num - 1 == _vm.hour,
-                        "au-theme-font-color--base-7": !_vm.isValid(num, "h")
-                      },
-                      style: {
-                        cursor: _vm.isValid(num, "h") ? "" : "not-allowed"
-                      },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.selectTime(num, "hour")
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
-                  )
-                })
-              ),
+                  expression: "inputTime"
+                }
+              }),
               _vm._v(" "),
               _c(
-                "ul",
+                "div",
                 {
-                  ref: "minutes",
-                  staticClass:
-                    "au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8",
-                  class: { "au-timepicker-no-seconds": !_vm.seconds },
-                  style: { top: _vm.minutesOffset + "px" },
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                    }
-                  }
-                },
-                _vm._l(60, function(num) {
-                  return _c(
-                    "li",
+                  directives: [
                     {
-                      key: num,
-                      class: {
-                        "au-theme-font-color--primary-3":
-                          _vm.isValid(num, "m") && num - 1 == _vm.minute,
-                        "au-theme-font-color--base-7": !_vm.isValid(num, "m")
-                      },
-                      style: {
-                        cursor: _vm.isValid(num, "m") ? "" : "not-allowed"
-                      },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.selectTime(num, "minute")
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
-                  )
-                })
-              ),
-              _vm._v(" "),
-              _vm.seconds
-                ? _c(
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.popup,
+                      expression: "popup"
+                    }
+                  ],
+                  ref: "popup",
+                  staticClass: "au-timepicker-popup",
+                  class:
+                    "\n        au-theme-border-color--base-8\n        au-theme-font-color--base-3\n        au-theme-background-color--base-12\n        au-theme-box-shadow--level-2\n        au-sizegap-" +
+                    _vm.size +
+                    "\n      ",
+                  attrs: { tabindex: "0" },
+                  on: { blur: _vm.popupBlur }
+                },
+                [
+                  _c(
                     "ul",
                     {
-                      ref: "seconds",
+                      ref: "hours",
                       staticClass:
-                        "au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8",
-                      style: { top: _vm.secondsOffset + "px" },
+                        "au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-8",
+                      class: { "au-timepicker-no-seconds": !_vm.seconds },
+                      style: {
+                        top: _vm.hoursOffset + "px"
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                        }
+                      }
+                    },
+                    _vm._l(24, function(num, index) {
+                      return _c(
+                        "li",
+                        {
+                          key: index,
+                          class: {
+                            "au-theme-font-color--primary-3":
+                              _vm.isValid(num, "h") && num - 1 == _vm.hour,
+                            "au-theme-font-color--base-7": !_vm.isValid(
+                              num,
+                              "h"
+                            )
+                          },
+                          style: {
+                            cursor: _vm.isValid(num, "h") ? "" : "not-allowed"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              _vm.selectTime(num, "hour")
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    {
+                      ref: "minutes",
+                      staticClass:
+                        "au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-8",
+                      class: { "au-timepicker-no-seconds": !_vm.seconds },
+                      style: { top: _vm.minutesOffset + "px" },
                       on: {
                         click: function($event) {
                           $event.stopPropagation()
@@ -283,33 +307,81 @@ var render = function() {
                           key: num,
                           class: {
                             "au-theme-font-color--primary-3":
-                              _vm.isValid(num, "s") && num - 1 == _vm.second,
+                              _vm.isValid(num, "m") && num - 1 == _vm.minute,
                             "au-theme-font-color--base-7": !_vm.isValid(
                               num,
-                              "s"
+                              "m"
                             )
                           },
                           style: {
-                            cursor: _vm.isValid(num, "s") ? "" : "not-allowed"
+                            cursor: _vm.isValid(num, "m") ? "" : "not-allowed"
                           },
                           on: {
                             click: function($event) {
                               $event.stopPropagation()
-                              _vm.selectTime(num, "second")
+                              _vm.selectTime(num, "minute")
                             }
                           }
                         },
                         [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
                       )
                     })
-                  )
-                : _vm._e()
-            ]
+                  ),
+                  _vm._v(" "),
+                  _vm.seconds
+                    ? _c(
+                        "ul",
+                        {
+                          ref: "seconds",
+                          staticClass:
+                            "au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-8",
+                          style: { top: _vm.secondsOffset + "px" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                            }
+                          }
+                        },
+                        _vm._l(60, function(num) {
+                          return _c(
+                            "li",
+                            {
+                              key: num,
+                              class: {
+                                "au-theme-font-color--primary-3":
+                                  _vm.isValid(num, "s") &&
+                                  num - 1 == _vm.second,
+                                "au-theme-font-color--base-7": !_vm.isValid(
+                                  num,
+                                  "s"
+                                )
+                              },
+                              style: {
+                                cursor: _vm.isValid(num, "s")
+                                  ? ""
+                                  : "not-allowed"
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  _vm.selectTime(num, "second")
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.formatNum(num - 1)))]
+                          )
+                        })
+                      )
+                    : _vm._e()
+                ]
+              )
+            ],
+            1
           )
-        ],
-        1
+        ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -680,447 +752,447 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-input" },
+    {
+      staticClass: "au-input",
+      style: { display: _vm.fullWidth ? "block" : "" }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label au-theme-font-color--base-3",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.labelClick()
-                }
-              }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.type === "textarea"
-        ? _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.localValue,
-                expression: "localValue"
-              }
-            ],
-            ref: "core",
-            staticClass: "au-input-core",
-            class: {
-              "au-theme-radius au-theme-placeholder-color--base-7": true,
-              "au-theme-border-color--base-8": !_vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--primary-3":
-                _vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--danger-3": _vm.hasWarnings,
-              "au-theme-focus-shadow--primary": _vm.active && !_vm.hasWarnings,
-              "au-theme-focus-shadow--danger": _vm.active && _vm.hasWarnings,
-              "au-theme-font-color--base-3": true,
-              "au-theme-disabled-background-color--base-8": _vm.disabled
-            },
-            style: {
-              width: _vm.textareaWidth,
-              height: _vm.textareaHeight,
-              minWidth: _vm.textareaMinWidth,
-              maxWidth: _vm.textareaMaxWidth,
-              minHeight: _vm.textareaMinHeight,
-              maxHeight: _vm.textareaMaxHeight
-            },
-            attrs: {
-              disabled: _vm.disabled,
-              readonly: _vm.readonly,
-              placeholder: _vm.placeholder
-            },
-            domProps: { value: _vm.localValue },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.type !== "textarea",
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        [
+          _vm.type === "textarea"
+            ? _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.localValue,
+                    expression: "localValue"
                   }
-                  _vm.localValue = $event.target.value
+                ],
+                ref: "core",
+                staticClass: "au-input-core",
+                class: {
+                  "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                  "au-theme-border-color--base-8":
+                    !_vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--primary-3":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--danger-3": _vm.hasWarnings,
+                  "au-theme-focus-box-shadow--primary":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-focus-box-shadow--danger":
+                    _vm.active && _vm.hasWarnings,
+                  "au-theme-font-color--base-3": true,
+                  "au-theme-disabled-background-color--base-8": _vm.disabled
                 },
-                function($event) {
-                  _vm.input($event)
-                }
-              ],
-              change: function($event) {
-                _vm.change($event)
-              },
-              focus: function($event) {
-                _vm.coreFocus($event)
-              },
-              blur: function($event) {
-                _vm.coreBlur($event)
-              },
-              keyup: function($event) {
-                _vm.keyup($event)
-              },
-              keypress: function($event) {
-                _vm.keypress($event)
-              },
-              keydown: function($event) {
-                _vm.keydown($event)
-              }
-            }
-          })
-        : _c(
-            "span",
-            { staticClass: "au-input-container" },
-            [
-              _vm.icon
-                ? _c("au-icon", {
-                    staticClass: "au-input-icon",
-                    class: {
-                      "au-theme-font-color--base-3": !_vm.active,
-                      "au-theme-font-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-font-color--danger-3": _vm.hasWarnings
-                    },
-                    style: {
-                      left:
-                        !_vm.iconPosition || _vm.iconPosition === "left"
-                          ? "8px"
-                          : "auto",
-                      right: _vm.iconPosition === "right" ? "8px" : "auto"
-                    },
-                    attrs: { type: _vm.icon },
-                    on: { click: _vm.iconClick }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "text"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
+                style: {
+                  width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width,
+                  height: _vm.height,
+                  minWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.minWidth,
+                  maxWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.maxWidth,
+                  minHeight: _vm.minHeight,
+                  maxHeight: _vm.maxHeight
+                },
+                attrs: {
+                  disabled: _vm.disabled,
+                  readonly: _vm.readonly,
+                  placeholder: _vm.placeholder
+                },
+                domProps: { value: _vm.localValue },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
+                      _vm.localValue = $event.target.value
                     },
-                    attrs: {
-                      type: "text",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "number"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$1 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$1),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "number",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "password"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$2 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$2),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "password",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "au-scroller",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.type !== "textarea" && _vm.associationsShow,
-                      expression: "type !== 'textarea' && associationsShow"
+                    function($event) {
+                      _vm.input($event)
                     }
                   ],
-                  staticClass: "au-input-associations-scroller",
-                  class:
-                    "\n        au-theme-border-color--base-8\n        au-theme-shadow--level-3\n        au-theme-background-color--base-12\n        au-theme-radius\n        au-sizegap-" +
-                    _vm.size +
-                    "\n      "
+                  change: function($event) {
+                    _vm.change($event)
+                  },
+                  focus: function($event) {
+                    _vm.coreFocus($event)
+                  },
+                  blur: function($event) {
+                    _vm.coreBlur($event)
+                  },
+                  keyup: function($event) {
+                    _vm.keyup($event)
+                  },
+                  keypress: function($event) {
+                    _vm.keypress($event)
+                  },
+                  keydown: function($event) {
+                    _vm.keydown($event)
+                  }
+                }
+              })
+            : _c(
+                "span",
+                {
+                  staticClass: "au-core-container",
+                  style: {
+                    verticalAlign: _vm.inline ? "top" : "",
+                    width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                  }
                 },
                 [
-                  _c(
-                    "ul",
-                    {
-                      ref: "associations",
-                      staticClass: "au-input-associations",
-                      attrs: { tabindex: "0" },
-                      on: { blur: _vm.associationsBlur }
-                    },
-                    _vm._l(_vm.associations, function(association, index) {
-                      return _c(
-                        "li",
-                        {
-                          key: index,
-                          class: {
-                            "au-theme-font-color--base-3": true,
-                            "au-theme-background-color--primary-5":
-                              association === _vm.localValue,
-                            "au-theme-hover-background-color--base-10":
-                              association !== _vm.localValue
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.selectAssociation(association)
-                            }
-                          }
+                  _vm.icon
+                    ? _c("au-icon", {
+                        staticClass: "au-input-icon",
+                        class: {
+                          "au-theme-font-color--base-3": !_vm.active,
+                          "au-theme-font-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-font-color--danger-3": _vm.hasWarnings
                         },
-                        [_vm._v(_vm._s(association))]
+                        style: {
+                          left:
+                            !_vm.iconPosition || _vm.iconPosition === "left"
+                              ? "8px"
+                              : "auto",
+                          right: _vm.iconPosition === "right" ? "8px" : "auto"
+                        },
+                        attrs: { type: _vm.icon },
+                        on: { click: _vm.iconClick }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "text"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "number"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$1 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$1),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "number",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "password"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$2 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$2),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px"
+                        },
+                        attrs: {
+                          type: "password",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "au-scroller",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.type !== "textarea" && _vm.associationsShow,
+                          expression: "type !== 'textarea' && associationsShow"
+                        }
+                      ],
+                      staticClass: "au-input-associations-scroller",
+                      class:
+                        "\n          au-theme-border-color--base-8\n          au-theme-box-shadow--level-2\n          au-theme-background-color--base-12\n          au-theme-border-radius--normal\n          au-sizegap-" +
+                        _vm.size +
+                        "\n        "
+                    },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          ref: "associations",
+                          staticClass: "au-input-associations",
+                          attrs: { tabindex: "0" },
+                          on: { blur: _vm.associationsBlur }
+                        },
+                        _vm._l(_vm.associations, function(association, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              class: {
+                                "au-theme-font-color--base-3": true,
+                                "au-theme-background-color--primary-5":
+                                  association === _vm.localValue,
+                                "au-theme-hover-background-color--base-10":
+                                  association !== _vm.localValue
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.selectAssociation(association)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(association))]
+                          )
+                        })
                       )
-                    })
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          ),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      })
+        ]
+      )
     ],
-    2
+    1
   )
   var _obj
   var _obj$1
@@ -1776,6 +1848,78 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "LKnP":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1972,7 +2116,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -2122,8 +2266,9 @@ module.exports = function (it) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__ = __webpack_require__("TN9u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scroller__ = __webpack_require__("ovkV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__ = __webpack_require__("+FN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scroller__ = __webpack_require__("ovkV");
 //
 //
 //
@@ -2374,6 +2519,11 @@ module.exports = function (it) {
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -2383,7 +2533,7 @@ module.exports = function (it) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-input',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */]],
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_2__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_3__scroller__["a" /* default */] },
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__["a" /* default */] },
   data: function data() {
     return {
       // is the throttlling on
@@ -2405,12 +2555,16 @@ module.exports = function (it) {
     associations: Array,
     icon: String,
     iconPosition: String,
-    textareaWidth: String,
-    textareaHeight: String,
-    textareaMinWidth: String,
-    textareaMaxWidth: String,
-    textareaMinHeight: String,
-    textareaMaxHeight: String
+    fullWidth: Boolean,
+    width: {
+      type: String,
+      default: '260px'
+    },
+    height: String,
+    minWidth: String,
+    maxWidth: String,
+    minHeight: String,
+    maxHeight: String
   },
   watch: {
     associations: function associations(v) {
@@ -2433,9 +2587,6 @@ module.exports = function (it) {
     },
     click: function click(e) {
       this.$emit('click', e.target.value, e);
-    },
-    labelClick: function labelClick() {
-      this.$refs.core.focus();
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v;
@@ -2493,6 +2644,7 @@ module.exports = function (it) {
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -2525,7 +2677,8 @@ module.exports = function (it) {
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -2620,15 +2773,10 @@ module.exports = function (it) {
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -2702,6 +2850,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_dom__ = __webpack_require__("8CCO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils__ = __webpack_require__("AP3u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__input__ = __webpack_require__("vG5W");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_form_item_vue__ = __webpack_require__("+FN5");
 
 //
 //
@@ -2860,6 +3009,11 @@ module.exports = Object.getPrototypeOf || function (O) {
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -2871,10 +3025,14 @@ var SPEED = 32;
 var HOURSRANGE = 736;
 var MSRANGE = 1888;
 
+function getNumberIncludeZero(number) {
+  if (number === '') return false;else return number || (Number(number) === 0 ? '0' : false);
+}
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-timepicker',
   mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__["a" /* default */]],
-  components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */] },
+  components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_6__helpers_form_item_vue__["a" /* default */] },
   mounted: function mounted() {
     var _this = this;
 
@@ -2913,29 +3071,17 @@ var MSRANGE = 1888;
       type: String,
       default: '请选择时间'
     },
-    start: {
-      type: String
-      // validator (v) {
-      //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-      //   if (!res) console.error('Admin UI@au-timepicker@ start should be formated like hh:mm:ss')
-      //   return res
-      // }
-    },
-    end: {
-      type: String
-      // validator (v) {
-      //   let res = /^\d{1,2}:\d{1,2}:?(\d?)|(\d{2})$/.test(v)
-      //   if (!res) console.error('Admin UI@au-timepicker@ end should be formated like hh:mm:ss')
-      //   return res
-      // }
-    },
-    readonly: Boolean
+    start: String,
+    end: String,
+    readonly: Boolean,
+    fullWidth: Boolean,
+    width: String
   },
   watch: {
     popup: function popup(v) {
       if (v) {
         var now = new Date();
-        this.scrollTo([this.hour || this.formatNum(now.getHours()), this.minute || this.formatNum(now.getMinutes()), this.second || this.formatNum(now.getSeconds())]);
+        this.scrollTo([getNumberIncludeZero(this.hour) || this.formatNum(now.getHours()), getNumberIncludeZero(this.minute) || this.formatNum(now.getMinutes()), getNumberIncludeZero(this.second) || this.formatNum(now.getSeconds())]);
         this.$emit('focus', this.time);
       } else {
         if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__helpers_utils__["a" /* isEmptyString */])(this.inputTime)) {
@@ -2969,14 +3115,6 @@ var MSRANGE = 1888;
     }
   },
   computed: {
-    calcedWarnings: function calcedWarnings() {
-      if (this.warnings) return this.warnings;
-      var res = [];
-      for (var key in this.localWarnings) {
-        res.push(this.localWarnings[key]);
-      }
-      return res.length ? res : null;
-    },
     validTime: function validTime() {
       var res = {
         start: {
@@ -3149,9 +3287,6 @@ var MSRANGE = 1888;
         }) : false;
       }
       this.setSeparateTime(res);
-    },
-    labelClick: function labelClick() {
-      if (!this.disabled) this.$refs.core.$refs.core.focus();
     },
     popupBlur: function popupBlur(e) {
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
@@ -3773,6 +3908,17 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
   props: {
     label: {
       type: String
+    },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -4648,6 +4794,13 @@ module.exports = { "default": __webpack_require__("Zbun"), __esModule: true };
 
 /***/ }),
 
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nJ75":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4659,6 +4812,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 

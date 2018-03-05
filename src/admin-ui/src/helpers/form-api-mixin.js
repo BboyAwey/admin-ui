@@ -10,7 +10,7 @@ export default {
       type: String
     },
     labelWidth: String,
-    comments: {
+    tips: {
       type: Array,
       default: () => []
     },

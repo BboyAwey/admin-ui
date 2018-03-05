@@ -1314,7 +1314,7 @@ var render = function() {
         {
           ref: "header",
           staticClass:
-            "au-page-header au-theme-background-color--primary-3 au-theme-shadow--level-2"
+            "au-page-header au-theme-background-color--primary-3 au-theme-box-shadow--level-1"
         },
         [_vm._t("header")],
         2
@@ -1326,7 +1326,7 @@ var render = function() {
           {
             ref: "sidebar",
             staticClass:
-              "au-page-sidebar au-theme-background-color--base-12 au-theme-shadow--level-2"
+              "au-page-sidebar au-theme-background-color--base-12 au-theme-box-shadow--level-1"
           },
           [_vm._t("sidebar")],
           2

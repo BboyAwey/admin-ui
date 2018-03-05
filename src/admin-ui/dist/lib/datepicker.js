@@ -104,6 +104,62 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
+/***/ "+FN5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__ = __webpack_require__("noLG");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__ = __webpack_require__("Jd6Y");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("n+RL")
+}
+var normalizeComponent = __webpack_require__("XAIM")
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_form_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_4706d8e9_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_form_item_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\admin-ui\\src\\helpers\\form-item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4706d8e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4706d8e9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "+GuK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -313,246 +369,265 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-datepicker au-theme-font-color--base-3" },
+    {
+      staticClass: "au-datepicker au-theme-font-color--base-3",
+      style: { display: !_vm.inline && _vm.fullWidth ? "block" : "" }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label",
-              style: {
-                cursor: _vm.disabled ? "not-allowed" : "default"
-              },
-              on: { click: _vm.labelClick }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "au-datepicker-container" },
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.inline,
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
         [
-          _c("au-input", {
-            ref: "core",
-            staticClass: "au-datepicker-input",
-            attrs: {
-              warnings: _vm.calcedWarnings,
-              icon: "calendar",
-              size: _vm.size,
-              disabled: _vm.disabled,
-              readonly: _vm.readonly,
-              placeholder: _vm.placeholder
-            },
-            on: { focus: _vm.coreFocus, blur: _vm.coreBlur },
-            model: {
-              value: _vm.inputValue,
-              callback: function($$v) {
-                _vm.inputValue = $$v
-              },
-              expression: "inputValue"
-            }
-          }),
-          _vm._v(" "),
           _c(
             "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.popup,
-                  expression: "popup"
-                }
-              ],
-              ref: "popup",
-              staticClass:
-                "au-datepicker-popup-container au-theme-shadow--level-3",
-              class: "au-sizegap-" + _vm.size,
-              attrs: { tabindex: "0" },
-              on: { blur: _vm.popupBlur }
-            },
+            { staticClass: "au-datepicker-container" },
             [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n        au-datepicker-dates-header\n        au-theme-font-color--base-12\n        au-theme-top-left-radius\n        au-theme-top-right-radius\n        au-theme-background-color--primary-3"
+              _c("au-input", {
+                ref: "core",
+                staticClass: "au-datepicker-input",
+                attrs: {
+                  warning: _vm.hasWarnings,
+                  icon: "calendar",
+                  width: _vm.width || "116px",
+                  inline: false,
+                  "fullfill-with": !_vm.inline && _vm.fullWidth,
+                  size: _vm.size,
+                  disabled: _vm.disabled,
+                  readonly: _vm.readonly,
+                  placeholder: _vm.placeholder
                 },
-                [
-                  _c("div", { staticClass: "au-datepicker-fastmoves" }, [
-                    _c("table", [
-                      _c("tr", [
-                        _c("td", [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "au-datepicker-fastmove simu2",
-                              on: {
-                                click: function($event) {
-                                  _vm.step(true)
-                                }
-                              }
-                            },
-                            [_c("au-icon", { attrs: { type: "backward" } })],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "au-datepicker-fastmove simu",
-                              on: {
-                                click: function($event) {
-                                  _vm.step(false)
-                                }
-                              }
-                            },
-                            [_c("au-icon", { attrs: { type: "caret-left" } })],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(_vm.renderedDateObj.month) +
-                              "月  " +
-                              _vm._s(_vm.renderedDateObj.year) +
-                              "\n              "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "au-datepicker-fastmove simu",
-                              on: {
-                                click: function($event) {
-                                  _vm.step(false, true)
-                                }
-                              }
-                            },
-                            [_c("au-icon", { attrs: { type: "caret-right" } })],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "au-datepicker-fastmove simu2",
-                              on: {
-                                click: function($event) {
-                                  _vm.step(true, true)
-                                }
-                              }
-                            },
-                            [_c("au-icon", { attrs: { type: "forward" } })],
-                            1
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0, false, false)
-                ]
-              ),
+                on: { focus: _vm.coreFocus, blur: _vm.coreBlur },
+                model: {
+                  value: _vm.inputValue,
+                  callback: function($$v) {
+                    _vm.inputValue = $$v
+                  },
+                  expression: "inputValue"
+                }
+              }),
               _vm._v(" "),
               _c(
                 "div",
                 {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.popup,
+                      expression: "popup"
+                    }
+                  ],
+                  ref: "popup",
                   staticClass:
-                    "\n        au-datepicker-dates-body\n        au-theme-border-color--base-8\n        au-theme-background-color--base-12"
+                    "au-datepicker-popup-container au-theme-box-shadow--level-2",
+                  class: "au-sizegap-" + _vm.size,
+                  attrs: { tabindex: "0" },
+                  on: { blur: _vm.popupBlur }
                 },
                 [
                   _c(
-                    "table",
-                    { staticClass: "au-datepicker-dates-table" },
-                    _vm._l(_vm.dates, function(row, i) {
-                      return _c(
-                        "tr",
-                        { key: i },
-                        _vm._l(row, function(date, j) {
-                          return _c("td", { key: j }, [
-                            _c(
-                              "span",
-                              {
-                                class: {
-                                  "au-theme-hover-border-color--primary-3":
-                                    _vm.isValid(date) && !_vm.isSelected(date),
-                                  "au-theme-background-color--primary-3 au-theme-font-color--base-12": _vm.isSelected(
-                                    date
-                                  ),
-                                  "au-theme-font-color--base-3":
-                                    !_vm.isToday(date) &&
-                                    _vm.renderedDateObj.month === date.month,
-                                  "au-theme-font-color--base-5":
-                                    _vm.isValid(date) &&
-                                    _vm.renderedDateObj.month !== date.month,
-                                  "au-theme-font-color--base-9": !_vm.isValid(
-                                    date
-                                  ),
-                                  "au-theme-font-color--primary-3":
-                                    _vm.isToday(date) &&
-                                    !_vm.isSelected(date) &&
-                                    _vm.isValid(date)
-                                },
-                                style: {
-                                  cursor: _vm.isValid(date) ? "" : "not-allowed"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.selectDate(date)
+                    "div",
+                    {
+                      staticClass:
+                        "\n          au-datepicker-dates-header\n          au-theme-font-color--base-12\n          au-theme-top-left-radius\n          au-theme-top-right-radius\n          au-theme-background-color--primary-3"
+                    },
+                    [
+                      _c("div", { staticClass: "au-datepicker-fastmoves" }, [
+                        _c("table", [
+                          _c("tr", [
+                            _c("td", [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "au-datepicker-fastmove simu2",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.step(true)
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.isToday(date) ? "今天" : date.date)
-                                )
-                              ]
-                            )
+                                },
+                                [
+                                  _c("au-icon", { attrs: { type: "backward" } })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "au-datepicker-fastmove simu",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.step(false)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("au-icon", {
+                                    attrs: { type: "caret-left" }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(_vm.renderedDateObj.month) +
+                                  "月  " +
+                                  _vm._s(_vm.renderedDateObj.year) +
+                                  "\n                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "au-datepicker-fastmove simu",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.step(false, true)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("au-icon", {
+                                    attrs: { type: "caret-right" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "au-datepicker-fastmove simu2",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.step(true, true)
+                                    }
+                                  }
+                                },
+                                [_c("au-icon", { attrs: { type: "forward" } })],
+                                1
+                              )
+                            ])
                           ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("table", { staticClass: "au-datepicker-week" }, [
+                        _c("tr", [
+                          _c("td", [_vm._v("日")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("一")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("二")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("三")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("四")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("五")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("六")])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "\n          au-datepicker-dates-body\n          au-theme-border-color--base-8\n          au-theme-background-color--base-12"
+                    },
+                    [
+                      _c(
+                        "table",
+                        { staticClass: "au-datepicker-dates-table" },
+                        _vm._l(_vm.dates, function(row, i) {
+                          return _c(
+                            "tr",
+                            { key: i },
+                            _vm._l(row, function(date, j) {
+                              return _c("td", { key: j }, [
+                                _c(
+                                  "span",
+                                  {
+                                    class: {
+                                      "au-theme-hover-border-color--primary-3":
+                                        _vm.isValid(date) &&
+                                        !_vm.isSelected(date),
+                                      "au-theme-background-color--primary-3 au-theme-font-color--base-12": _vm.isSelected(
+                                        date
+                                      ),
+                                      "au-theme-font-color--base-3":
+                                        !_vm.isToday(date) &&
+                                        _vm.renderedDateObj.month ===
+                                          date.month,
+                                      "au-theme-font-color--base-5":
+                                        _vm.isValid(date) &&
+                                        _vm.renderedDateObj.month !==
+                                          date.month,
+                                      "au-theme-font-color--base-9": !_vm.isValid(
+                                        date
+                                      ),
+                                      "au-theme-font-color--primary-3":
+                                        _vm.isToday(date) &&
+                                        !_vm.isSelected(date) &&
+                                        _vm.isValid(date)
+                                    },
+                                    style: {
+                                      cursor: _vm.isValid(date)
+                                        ? ""
+                                        : "not-allowed"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.selectDate(date)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.isToday(date) ? "今天" : date.date
+                                      )
+                                    )
+                                  ]
+                                )
+                              ])
+                            })
+                          )
                         })
                       )
-                    })
+                    ]
                   )
                 ]
               )
-            ]
+            ],
+            1
           )
-        ],
-        1
+        ]
       )
-    ]
+    ],
+    1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "au-datepicker-week" }, [
-      _c("tr", [
-        _c("td", [_vm._v("日")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("一")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("二")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("三")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("四")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("五")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("六")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -665,447 +740,447 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "au-input" },
+    {
+      staticClass: "au-input",
+      style: { display: _vm.fullWidth ? "block" : "" }
+    },
     [
-      _vm.label
-        ? _c(
-            "div",
-            {
-              staticClass: "au-form-label au-theme-font-color--base-3",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.labelClick()
-                }
-              }
-            },
-            [_vm._v(_vm._s(_vm.label))]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.type === "textarea"
-        ? _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.localValue,
-                expression: "localValue"
-              }
-            ],
-            ref: "core",
-            staticClass: "au-input-core",
-            class: {
-              "au-theme-radius au-theme-placeholder-color--base-7": true,
-              "au-theme-border-color--base-8": !_vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--primary-3":
-                _vm.active && !_vm.hasWarnings,
-              "au-theme-border-color--danger-3": _vm.hasWarnings,
-              "au-theme-focus-shadow--primary": _vm.active && !_vm.hasWarnings,
-              "au-theme-focus-shadow--danger": _vm.active && _vm.hasWarnings,
-              "au-theme-font-color--base-3": true,
-              "au-theme-disabled-background-color--base-8": _vm.disabled
-            },
-            style: {
-              width: _vm.textareaWidth,
-              height: _vm.textareaHeight,
-              minWidth: _vm.textareaMinWidth,
-              maxWidth: _vm.textareaMaxWidth,
-              minHeight: _vm.textareaMinHeight,
-              maxHeight: _vm.textareaMaxHeight
-            },
-            attrs: {
-              disabled: _vm.disabled,
-              readonly: _vm.readonly,
-              placeholder: _vm.placeholder
-            },
-            domProps: { value: _vm.localValue },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "form-item",
+        {
+          attrs: {
+            label: _vm.label,
+            labelWidth: _vm.labelWidth,
+            inline: _vm.inline,
+            tips: _vm.tips,
+            size: _vm.size,
+            middle: _vm.type !== "textarea",
+            warnings: _vm.warnings || _vm.localWarnings
+          }
+        },
+        [
+          _vm.type === "textarea"
+            ? _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.localValue,
+                    expression: "localValue"
                   }
-                  _vm.localValue = $event.target.value
+                ],
+                ref: "core",
+                staticClass: "au-input-core",
+                class: {
+                  "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                  "au-theme-border-color--base-8":
+                    !_vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--primary-3":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-border-color--danger-3": _vm.hasWarnings,
+                  "au-theme-focus-box-shadow--primary":
+                    _vm.active && !_vm.hasWarnings,
+                  "au-theme-focus-box-shadow--danger":
+                    _vm.active && _vm.hasWarnings,
+                  "au-theme-font-color--base-3": true,
+                  "au-theme-disabled-background-color--base-8": _vm.disabled
                 },
-                function($event) {
-                  _vm.input($event)
-                }
-              ],
-              change: function($event) {
-                _vm.change($event)
-              },
-              focus: function($event) {
-                _vm.coreFocus($event)
-              },
-              blur: function($event) {
-                _vm.coreBlur($event)
-              },
-              keyup: function($event) {
-                _vm.keyup($event)
-              },
-              keypress: function($event) {
-                _vm.keypress($event)
-              },
-              keydown: function($event) {
-                _vm.keydown($event)
-              }
-            }
-          })
-        : _c(
-            "span",
-            { staticClass: "au-input-container" },
-            [
-              _vm.icon
-                ? _c("au-icon", {
-                    staticClass: "au-input-icon",
-                    class: {
-                      "au-theme-font-color--base-3": !_vm.active,
-                      "au-theme-font-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-font-color--danger-3": _vm.hasWarnings
-                    },
-                    style: {
-                      left:
-                        !_vm.iconPosition || _vm.iconPosition === "left"
-                          ? "8px"
-                          : "auto",
-                      right: _vm.iconPosition === "right" ? "8px" : "auto"
-                    },
-                    attrs: { type: _vm.icon },
-                    on: { click: _vm.iconClick }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "text"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
+                style: {
+                  width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width,
+                  height: _vm.height,
+                  minWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.minWidth,
+                  maxWidth:
+                    !_vm.inline && _vm.fullWidth ? "100%" : _vm.maxWidth,
+                  minHeight: _vm.minHeight,
+                  maxHeight: _vm.maxHeight
+                },
+                attrs: {
+                  disabled: _vm.disabled,
+                  readonly: _vm.readonly,
+                  placeholder: _vm.placeholder
+                },
+                domProps: { value: _vm.localValue },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
+                      _vm.localValue = $event.target.value
                     },
-                    attrs: {
-                      type: "text",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "number"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$1 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$1),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "number",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === "password"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.localValue,
-                        expression: "localValue"
-                      }
-                    ],
-                    ref: "core",
-                    staticClass: "au-input-core",
-                    class: ((_obj$2 = {
-                      "au-theme-radius au-theme-placeholder-color--base-7": true,
-                      "au-theme-border-color--base-8":
-                        !_vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--primary-3":
-                        _vm.active && !_vm.hasWarnings,
-                      "au-theme-border-color--danger-3": _vm.hasWarnings,
-                      "au-theme-focus-shadow--primary":
-                        !_vm.hasWarnings && _vm.active,
-                      "au-theme-focus-shadow--danger":
-                        _vm.hasWarnings && _vm.active,
-                      "au-theme-font-color--base-3": true,
-                      "au-theme-disabled-background-color--base-9": _vm.disabled
-                    }),
-                    (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
-                    _obj$2),
-                    style: {
-                      "padding-left":
-                        _vm.icon &&
-                        (!_vm.iconPosition || _vm.iconPosition === "left")
-                          ? "30px"
-                          : "12px",
-                      "padding-right":
-                        _vm.icon && _vm.iconPosition === "right"
-                          ? "30px"
-                          : "12px"
-                    },
-                    attrs: {
-                      type: "password",
-                      disabled: _vm.disabled,
-                      readonly: _vm.readonly,
-                      placeholder: _vm.placeholder
-                    },
-                    domProps: { value: _vm.localValue },
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        _vm.click($event)
-                      },
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.localValue = $event.target.value
-                        },
-                        function($event) {
-                          _vm.input($event)
-                        }
-                      ],
-                      change: function($event) {
-                        _vm.change($event)
-                      },
-                      focus: function($event) {
-                        _vm.coreFocus($event)
-                      },
-                      blur: function($event) {
-                        _vm.coreBlur($event)
-                      },
-                      keyup: function($event) {
-                        _vm.keyup($event)
-                      },
-                      keypress: function($event) {
-                        _vm.keypress($event)
-                      },
-                      keydown: function($event) {
-                        _vm.keydown($event)
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "au-scroller",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.type !== "textarea" && _vm.associationsShow,
-                      expression: "type !== 'textarea' && associationsShow"
+                    function($event) {
+                      _vm.input($event)
                     }
                   ],
-                  staticClass: "au-input-associations-scroller",
-                  class:
-                    "\n        au-theme-border-color--base-8\n        au-theme-shadow--level-3\n        au-theme-background-color--base-12\n        au-theme-radius\n        au-sizegap-" +
-                    _vm.size +
-                    "\n      "
+                  change: function($event) {
+                    _vm.change($event)
+                  },
+                  focus: function($event) {
+                    _vm.coreFocus($event)
+                  },
+                  blur: function($event) {
+                    _vm.coreBlur($event)
+                  },
+                  keyup: function($event) {
+                    _vm.keyup($event)
+                  },
+                  keypress: function($event) {
+                    _vm.keypress($event)
+                  },
+                  keydown: function($event) {
+                    _vm.keydown($event)
+                  }
+                }
+              })
+            : _c(
+                "span",
+                {
+                  staticClass: "au-core-container",
+                  style: {
+                    verticalAlign: _vm.inline ? "top" : "",
+                    width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                  }
                 },
                 [
-                  _c(
-                    "ul",
-                    {
-                      ref: "associations",
-                      staticClass: "au-input-associations",
-                      attrs: { tabindex: "0" },
-                      on: { blur: _vm.associationsBlur }
-                    },
-                    _vm._l(_vm.associations, function(association, index) {
-                      return _c(
-                        "li",
-                        {
-                          key: index,
-                          class: {
-                            "au-theme-font-color--base-3": true,
-                            "au-theme-background-color--primary-5":
-                              association === _vm.localValue,
-                            "au-theme-hover-background-color--base-10":
-                              association !== _vm.localValue
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.selectAssociation(association)
-                            }
-                          }
+                  _vm.icon
+                    ? _c("au-icon", {
+                        staticClass: "au-input-icon",
+                        class: {
+                          "au-theme-font-color--base-3": !_vm.active,
+                          "au-theme-font-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-font-color--danger-3": _vm.hasWarnings
                         },
-                        [_vm._v(_vm._s(association))]
+                        style: {
+                          left:
+                            !_vm.iconPosition || _vm.iconPosition === "left"
+                              ? "8px"
+                              : "auto",
+                          right: _vm.iconPosition === "right" ? "8px" : "auto"
+                        },
+                        attrs: { type: _vm.icon },
+                        on: { click: _vm.iconClick }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "text"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "number"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$1 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$1["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$1),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px",
+                          width:
+                            !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
+                        },
+                        attrs: {
+                          type: "number",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "password"
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.localValue,
+                            expression: "localValue"
+                          }
+                        ],
+                        ref: "core",
+                        staticClass: "au-input-core",
+                        class: ((_obj$2 = {
+                          "au-theme-border-radius--normal au-theme-placeholder-color--base-7": true,
+                          "au-theme-border-color--base-8":
+                            !_vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--primary-3":
+                            _vm.active && !_vm.hasWarnings,
+                          "au-theme-border-color--danger-3": _vm.hasWarnings,
+                          "au-theme-focus-box-shadow--primary":
+                            !_vm.hasWarnings && _vm.active,
+                          "au-theme-focus-box-shadow--danger":
+                            _vm.hasWarnings && _vm.active,
+                          "au-theme-font-color--base-3": true,
+                          "au-theme-disabled-background-color--base-9":
+                            _vm.disabled
+                        }),
+                        (_obj$2["au-size-" + _vm.size + "-bordered"] = true),
+                        _obj$2),
+                        style: {
+                          "padding-left":
+                            _vm.icon &&
+                            (!_vm.iconPosition || _vm.iconPosition === "left")
+                              ? "30px"
+                              : "12px",
+                          "padding-right":
+                            _vm.icon && _vm.iconPosition === "right"
+                              ? "30px"
+                              : "12px"
+                        },
+                        attrs: {
+                          type: "password",
+                          disabled: _vm.disabled,
+                          readonly: _vm.readonly,
+                          placeholder: _vm.placeholder
+                        },
+                        domProps: { value: _vm.localValue },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.click($event)
+                          },
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.localValue = $event.target.value
+                            },
+                            function($event) {
+                              _vm.input($event)
+                            }
+                          ],
+                          change: function($event) {
+                            _vm.change($event)
+                          },
+                          focus: function($event) {
+                            _vm.coreFocus($event)
+                          },
+                          blur: function($event) {
+                            _vm.coreBlur($event)
+                          },
+                          keyup: function($event) {
+                            _vm.keyup($event)
+                          },
+                          keypress: function($event) {
+                            _vm.keypress($event)
+                          },
+                          keydown: function($event) {
+                            _vm.keydown($event)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "au-scroller",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.type !== "textarea" && _vm.associationsShow,
+                          expression: "type !== 'textarea' && associationsShow"
+                        }
+                      ],
+                      staticClass: "au-input-associations-scroller",
+                      class:
+                        "\n          au-theme-border-color--base-8\n          au-theme-box-shadow--level-2\n          au-theme-background-color--base-12\n          au-theme-border-radius--normal\n          au-sizegap-" +
+                        _vm.size +
+                        "\n        "
+                    },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          ref: "associations",
+                          staticClass: "au-input-associations",
+                          attrs: { tabindex: "0" },
+                          on: { blur: _vm.associationsBlur }
+                        },
+                        _vm._l(_vm.associations, function(association, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              class: {
+                                "au-theme-font-color--base-3": true,
+                                "au-theme-background-color--primary-5":
+                                  association === _vm.localValue,
+                                "au-theme-hover-background-color--base-10":
+                                  association !== _vm.localValue
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.selectAssociation(association)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(association))]
+                          )
+                        })
                       )
-                    })
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          ),
-      _vm._v(" "),
-      _vm._l(_vm.warnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.localWarnings, function(warning, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "au-form-warning au-theme-font-color--danger-3"
-          },
-          [_vm._v(_vm._s(warning))]
-        )
-      })
+        ]
+      )
     ],
-    2
+    1
   )
   var _obj
   var _obj$1
@@ -1781,6 +1856,78 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "Jd6Y":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "au-form-item" }, [
+    _vm.label
+      ? _c(
+          "div",
+          {
+            staticClass: "au-theme-font-color--base-3",
+            class: ((_obj = {}),
+            (_obj["au-form-label" + (_vm.inline ? "-inline" : "")] = true),
+            (_obj["au-size-" + _vm.size] = _vm.inline && _vm.middle),
+            _obj),
+            style: {
+              width: _vm.inline ? _vm.labelWidth : ""
+            }
+          },
+          [_vm._v(_vm._s(_vm.label))]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: "au-form-item-main" + (_vm.inline ? "-inline" : "-block") },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.warnings, function(warning, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--danger-3"
+            },
+            [_vm._v(_vm._s(warning))]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.tips, function(tip, i) {
+          return _c(
+            "div",
+            {
+              key: i,
+              staticClass: "au-form-warning au-theme-font-color--base-7"
+            },
+            [_vm._v(_vm._s(tip))]
+          )
+        })
+      ],
+      2
+    )
+  ])
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4706d8e9", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "JyN8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1981,7 +2128,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -2138,8 +2285,9 @@ module.exports = function (it) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__ = __webpack_require__("TN9u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__ = __webpack_require__("gU9b");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scroller__ = __webpack_require__("ovkV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__ = __webpack_require__("+FN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scroller__ = __webpack_require__("ovkV");
 //
 //
 //
@@ -2390,6 +2538,11 @@ module.exports = function (it) {
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -2399,7 +2552,7 @@ module.exports = function (it) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-input',
   mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__helpers_form_api_mixin__["a" /* default */]],
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_2__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_3__scroller__["a" /* default */] },
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_3__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_4__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_2__helpers_form_item_vue__["a" /* default */] },
   data: function data() {
     return {
       // is the throttlling on
@@ -2421,12 +2574,16 @@ module.exports = function (it) {
     associations: Array,
     icon: String,
     iconPosition: String,
-    textareaWidth: String,
-    textareaHeight: String,
-    textareaMinWidth: String,
-    textareaMaxWidth: String,
-    textareaMinHeight: String,
-    textareaMaxHeight: String
+    fullWidth: Boolean,
+    width: {
+      type: String,
+      default: '260px'
+    },
+    height: String,
+    minWidth: String,
+    maxWidth: String,
+    minHeight: String,
+    maxHeight: String
   },
   watch: {
     associations: function associations(v) {
@@ -2449,9 +2606,6 @@ module.exports = function (it) {
     },
     click: function click(e) {
       this.$emit('click', e.target.value, e);
-    },
-    labelClick: function labelClick() {
-      this.$refs.core.focus();
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v;
@@ -2517,6 +2671,7 @@ exports.f = Object.getOwnPropertySymbols;
     //   async: false
     // }]
     warnings: Array,
+    warning: Boolean,
     validateOnBlur: Boolean
   },
   watch: {
@@ -2549,7 +2704,8 @@ exports.f = Object.getOwnPropertySymbols;
       return false;
     },
     hasWarnings: function hasWarnings() {
-      return this.hasLocalWarnings || this.warnings instanceof Array;
+      // return this.hasLocalWarnings || this.warnings instanceof Array
+      return this.hasLocalWarnings || this.warnings && this.warnings.length || this.warning;
     },
     throttling: function throttling() {
       // if there has async validator we should enable throttling
@@ -2644,15 +2800,10 @@ exports.f = Object.getOwnPropertySymbols;
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -3169,6 +3320,7 @@ exports.RETURN = RETURN;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils__ = __webpack_require__("AP3u");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__input__ = __webpack_require__("vG5W");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_form_item_vue__ = __webpack_require__("+FN5");
 
 
 //
@@ -3379,6 +3531,10 @@ exports.RETURN = RETURN;
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3386,26 +3542,11 @@ exports.RETURN = RETURN;
 
 
 
-// function startMustEarlierThanEnd (start, rnd) {
-//   if (start && end) {
-//     let s = start.split('-').map(e => {
-//       return e.trim()
-//     })
-//     let e = end.split('-').map(e => {
-//       return e.trim()
-//     })
-//     let res = (new Date(...s).getTime() <= (new Date(...e).getTime()))
-//     if (!res) {
-//       console.error('Admin UI@au-datepicker@start must earlier or equal than end')
-//     }
-//     return res
-//   }
-// }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-datepicker',
   mixins: [__WEBPACK_IMPORTED_MODULE_2__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__helpers_form_api_mixin__["a" /* default */]],
-  components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_6__icon__["a" /* default */] },
+  components: { AuInput: __WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_6__icon__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_7__helpers_form_item_vue__["a" /* default */] },
   data: function data() {
     return {
       dateObj: {},
@@ -3423,37 +3564,11 @@ exports.RETURN = RETURN;
       type: String,
       default: '请选择日期'
     },
-    start: {
-      type: String
-      // validator (v) {
-      //   if (v) {
-      //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-      //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-      //     return res
-      //   } else return true
-      // }
-    },
-    end: {
-      type: String
-      // validator (v) {
-      //   if (v) {
-      //     let res = /^\d{4}-\d{1,2}-\d{1,2}$/.test(v)
-      //     if (!res) console.error('Admin UI@au-datepicker@ start should be formated like yyyy-mm-dd or yyyy-m-d')
-      //     return res
-      //   } else return true
-      // }
-    },
-    readonly: Boolean
-  },
-  computed: {
-    calcedWarnings: function calcedWarnings() {
-      if (this.warnings) return this.warnings;
-      var res = [];
-      for (var key in this.localWarnings) {
-        res.push(this.localWarnings[key]);
-      }
-      return res.length ? res : null;
-    }
+    start: String,
+    end: String,
+    readonly: Boolean,
+    fullWidth: Boolean,
+    width: String
   },
   watch: {
     value: function value(v) {
@@ -3477,7 +3592,7 @@ exports.RETURN = RETURN;
   methods: {
     monthDayCount: function monthDayCount(year) {
       // date count in each month
-      return [31, year % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      return [31, year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     },
     render: function render(value) {
       function calcYmdObj(value) {
@@ -3595,7 +3710,7 @@ exports.RETURN = RETURN;
         // the date count of this month
         var dayCount = monthDayCount(ymdArr[0])[ymdArr[1] - 1];
         // limit the date range
-        ymdArr[0] = Number(ymdArr[0]) < 1900 ? 1900 : Number(ymdArr[0]) > 2200 ? 2200 : Number(ymdArr[0]);
+        ymdArr[0] = Number(ymdArr[0]) < 100 ? 100 : Number(ymdArr[0]) > 9999 ? 9999 : Number(ymdArr[0]);
         ymdArr[1] = Number(ymdArr[1]) < 1 ? 1 : Number(ymdArr[1]) > 12 ? 12 : Number(ymdArr[1]);
         ymdArr[2] = Number(ymdArr[2]) < 1 ? 1 : Number(ymdArr[2]) > dayCount ? dayCount : Number(ymdArr[2]);
         // supplement "0"
@@ -3684,7 +3799,7 @@ exports.RETURN = RETURN;
       var direc = isForward ? 1 : -1;
       if (isYear) {
         dateObj.year = dateObj.year + direc;
-        dateObj.year = dateObj.year < 1900 ? 1900 : dateObj.year > 2200 ? 2200 : dateObj.year;
+        dateObj.year = dateObj.year < 100 ? 100 : dateObj.year > 9999 ? 9999 : dateObj.year;
       } else {
         dateObj.month = dateObj.month + direc;
         if (dateObj.month < 1) {
@@ -3696,9 +3811,6 @@ exports.RETURN = RETURN;
         }
       }
       this.render(dateObj.year + '-' + dateObj.month + '-' + dateObj.date);
-    },
-    labelClick: function labelClick() {
-      if (!this.disabled) this.$refs.core.$refs.core.focus();
     },
     coreFocus: function coreFocus() {
       if (this.readonly) return;
@@ -3891,6 +4003,17 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
   props: {
     label: {
       type: String
+    },
+    labelWidth: String,
+    tips: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    inline: {
+      type: Boolean,
+      default: true
     },
     size: {
       type: String,
@@ -4822,6 +4945,13 @@ module.exports = { "default": __webpack_require__("Zbun"), __esModule: true };
 
 /***/ }),
 
+/***/ "n+RL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nJ75":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4833,6 +4963,65 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
+
+/***/ }),
+
+/***/ "noLG":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
+  }
+});
 
 /***/ }),
 

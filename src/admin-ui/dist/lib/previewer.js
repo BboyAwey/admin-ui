@@ -155,7 +155,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("i", {
     staticClass: "au-icon",
-    class: "fa fa-" + _vm.type,
+    class: _vm.custom || "fa fa-" + _vm.type,
     style: {
       fontSize: _vm.size,
       color: _vm.color
@@ -274,15 +274,10 @@ if (false) {(function () {
   },
 
   props: {
-    type: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    color: {
-      type: String
-    },
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
     unifySize: Boolean
   },
   watch: {
@@ -606,7 +601,7 @@ module.exports = function normalizeComponent (
   },
   data: function data() {
     return {
-      localDisplay: this.display,
+      localDisplay: this.visible,
       localCurrent: this.isCurrentIllegal(this.current) ? this.current : 0
     };
   },
@@ -616,7 +611,7 @@ module.exports = function normalizeComponent (
       type: Array,
       required: true
     },
-    display: {
+    visible: {
       required: true
     },
     current: {
@@ -634,7 +629,7 @@ module.exports = function normalizeComponent (
     }
   },
   watch: {
-    display: function display(v) {
+    visible: function visible(v) {
       this.localDisplay = v;
     },
     localDisplay: function localDisplay(v) {

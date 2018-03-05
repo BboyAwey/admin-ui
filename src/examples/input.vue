@@ -227,8 +227,7 @@
             </td>
             <td>
               输入框的宽度<br>
-              当inline为true时请使用px单位<br>
-              当inline为false时，可设置100%并在组件上使用display: block来让组件占满父元素宽度
+              仅支持px单位<br>
             </td>
           </tr>
           <tr>

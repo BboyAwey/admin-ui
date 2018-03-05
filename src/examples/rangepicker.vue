@@ -316,6 +316,23 @@
             </td>
           </tr>
           <tr>
+            <td>seconds</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否显示秒
+            </td>
+          </tr>
+          <tr>
             <td>disabled</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->

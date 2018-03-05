@@ -85,6 +85,7 @@
               v-show="type !== 'date'"
               class="au-rangepicker-time"
               placeholder="开始时间"
+              :seconds="seconds"
               width="99px"
               v-model="startTime"
               :start="valid.startTime.start"
@@ -101,6 +102,7 @@
               v-show="type !== 'date'"
               class="au-rangepicker-time"
               placeholder="结束时间"
+              :seconds="seconds"
               width="99px"
               v-model="endTime"
               :start="valid.endTime.start"
@@ -254,6 +256,10 @@ export default {
     start: String,
     end: String,
     span: [Number, String],
+    seconds: {
+      type: Boolean,
+      default: true
+    },
     startPlaceholder: {
       type: String,
       default: '请选择开始时间'

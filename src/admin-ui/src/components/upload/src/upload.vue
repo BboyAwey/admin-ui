@@ -177,7 +177,7 @@
     <form-item
       :label="label"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="buttonSize"
       middle="inline">
       <au-button

@@ -74,7 +74,7 @@
             </td>
           </tr>
           <tr>
-            <td>comments</td>
+            <td>tips</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>

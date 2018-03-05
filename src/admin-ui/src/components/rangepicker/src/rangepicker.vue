@@ -54,7 +54,7 @@
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="size"
       :middle="inline">
       <au-popover plain hide-on-blur

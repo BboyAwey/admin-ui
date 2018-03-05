@@ -6,8 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-input label="表白吧" label-width="150px" :comments="comments" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations"></au-input><br><br>
-        <au-input label="我是一个textarea" label-width="150px" :comments="comments" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
+        <au-input label="表白吧" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations"></au-input><br><br>
+        <au-input label="我是一个textarea" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -52,7 +52,7 @@
             </td>
           </tr>
           <tr>
-            <td>comments</td>
+            <td>tips</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -571,7 +571,7 @@
             warning: '快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！'
           }
         ],
-        comments: [
+        tips: [
           '我是第一条提示',
           '风骚的第二条提示'
         ],

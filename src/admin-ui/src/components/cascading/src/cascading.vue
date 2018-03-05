@@ -24,7 +24,7 @@
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="size"
       :middle="listType === 'inline'"
       :warnings="warnings || localWarnings">

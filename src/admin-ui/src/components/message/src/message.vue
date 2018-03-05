@@ -1,6 +1,6 @@
 <style lang="scss">
   @import "../../../style/vars";
-  .au-toast {
+  .au-message {
     position: fixed;
     z-index: $z-level-3;
     top: 100px;
@@ -12,8 +12,8 @@
     box-sizing: border-box;
     font-size: 0;
     overflow: hidden;
-    .au-toast-icon-container,
-    .au-toast-close-container {
+    .au-message-icon-container,
+    .au-message-close-container {
       position: absolute;
       top: 0;
       left: 0;
@@ -22,12 +22,12 @@
       vertical-align: middle;
       font-size: $normal;
     }
-    .au-toast-close-container {
+    .au-message-close-container {
       left: auto;
       right: 0;
     }
-    .au-toast-icon,
-    .au-toast-close {
+    .au-message-icon,
+    .au-message-close {
       width: 18px;
       height: 18px;
       border-radius: 100%;
@@ -36,28 +36,28 @@
       font-size: $small;
       line-height: 18px;
     }
-    .au-toast-close {
+    .au-message-close {
       cursor: pointer;
     }
-    .au-toast-message {
+    .au-message-message {
       overflow: hidden;
       vertical-align: middle;
       font-size: $normal;
     }
   }
-  .au-toast-border {
+  .au-message-border {
     border-width: 1px;
     border-style: solid;
   }
 
-  .au-toast-enter-active,
-  .au-toast-leave-active {
+  .au-message-enter-active,
+  .au-message-leave-active {
     transition:
       transform .2s ease-in-out,
       opacity .2s ease-in-out;
   }
-  .au-toast-enter,
-  .au-toast-leave-to {
+  .au-message-enter,
+  .au-message-leave-to {
     opacity: 0;
     transform: translateY(-100px)
   }
@@ -65,38 +65,37 @@
 </style>
 <template>
   <transition
-    name="au-toast"
-    @after-leave="afterLeave"
-    @before-enter="beforeEnter">
+    name="au-message"
+    @after-leave="afterLeave">
     <div
-      class="au-toast"
+      class="au-message"
       :class="customClass || `
         au-theme-border-radius--large
         au-theme-before-radius
         au-theme-font-color--base-3
         au-theme-background-color--base-12
         au-theme-box-shadow--level-3
-        au-toast-border
+        au-message-border
         au-theme-border-color--base-8
       `"
         v-if="visible">
-        <div class="au-toast-icon-container" v-show="iconType">
+        <div class="au-message-icon-container" v-show="iconType">
           <au-icon
-            class="au-toast-icon au-theme-font-color--base-12"
-            :class="`au-theme-background-color--${mood || 'info'}-3`"
+            class="au-message-icon au-theme-font-color--base-12"
+            :class="`au-theme-background-color--${type || 'info'}-3`"
             :type="iconType"></au-icon>
         </div>
         <div
-          class="au-toast-message"
+          class="au-message-message"
           :style="{
             paddingLeft: iconType ? '32px' : '',
             paddingRight: closeable ? '32px' : ''
           }">
           {{ message }}
         </div>
-        <div class="au-toast-close-container" v-show="closeable" @click="visible = false">
+        <div class="au-message-close-container" v-show="closeable" @click="visible = false">
           <au-icon
-            class="au-toast-close au-theme-font-color--base-3 au-theme-hover-font-color--base-6"
+            class="au-message-close au-theme-font-color--base-3 au-theme-hover-font-color--base-6"
             size="16px"
             type="times"></au-icon>
         </div>
@@ -107,14 +106,14 @@
   import AuIcon from '../../icon'
 
   export default {
-    name: 'au-toast',
+    name: 'au-message',
     components: { AuIcon },
     props: {
       visible: Boolean,
       message: String,
       customClass: String,
       icon: String,
-      mood: {
+      type: {
         type: String,
         default: 'info' // info, success, warning, danger
       },
@@ -123,8 +122,9 @@
     computed: {
       iconType () {
         if (this.icon) return this.icon
-        switch (this.mood) {
-          case 'info': return 'info'
+        switch (this.type) {
+          case 'info':
+          case 'primary': return 'info'
           case 'warning': return 'exclamation'
           case 'success': return 'check'
           case 'danger': return 'times'
@@ -133,11 +133,8 @@
       }
     },
     methods: {
-      beforeEnter () {
-        this.$emit('show', this)
-      },
       afterLeave () {
-        this.$emit('hide', this)
+        this.$emit('close', this)
       }
     }
   }

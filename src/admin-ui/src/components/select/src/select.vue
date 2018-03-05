@@ -95,7 +95,7 @@
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="size"
       :middle="inline"
       :warnings="warnings || localWarnings">

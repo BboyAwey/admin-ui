@@ -17,7 +17,7 @@
             warning: '必须打开'
           }]"
           warning
-          :comments="[
+          :tips="[
             '注释1',
             '注释2，注释2',
             '注释1，注释2，注释3',
@@ -66,7 +66,7 @@
             </td>
           </tr>
           <tr>
-            <td>comments</td>
+            <td>tips</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>

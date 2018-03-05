@@ -28,7 +28,7 @@ import Cascading from './components/cascading'
 import Datepicker from './components/datepicker'
 import Timepicker from './components/timepicker'
 import Rangepicker from './components/rangepicker'
-import Toast from './components/toast'
+import Message from './components/message'
 import Modal from './components/modal'
 import MessageBox from './components/message-box'
 import Paginator from './components/paginator'
@@ -61,7 +61,7 @@ const components = [
   Datepicker,
   Timepicker,
   Rangepicker,
-  Toast,
+  Message,
   MessageBox,
   Modal,
   Paginator,
@@ -95,7 +95,7 @@ export {
   Datepicker,
   Timepicker,
   Rangepicker,
-  Toast,
+  Message,
   Modal,
   MessageBox,
   Paginator,
@@ -129,7 +129,7 @@ const adminUi = {
   Datepicker,
   Timepicker,
   Rangepicker,
-  Toast,
+  Message,
   Modal,
   MessageBox,
   Paginator,
@@ -147,7 +147,7 @@ adminUi.install = function (Vue, options = {}) {
   Vue.prototype.$alert = MessageBox.alert
   Vue.prototype.$confirm = MessageBox.confirm
   Vue.prototype.$prompt = MessageBox.prompt
-  Vue.prototype.$toast = Toast
+  Vue.prototype.$message = Message
   Vue.prototype.$loading = Loading
 }
 

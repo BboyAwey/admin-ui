@@ -146,9 +146,9 @@ export default new Router({
       component: (resolve) => require(['../examples/rangepicker.vue'], resolve)
     },
     {
-      path: '/toast',
-      name: 'toast',
-      component: (resolve) => require(['../examples/toast.vue'], resolve)
+      path: '/message',
+      name: 'message',
+      component: (resolve) => require(['../examples/message.vue'], resolve)
     },
     {
       path: '/modal',

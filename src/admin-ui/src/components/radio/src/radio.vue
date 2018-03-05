@@ -49,7 +49,7 @@
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="size"
       :warnings="warnings || localWarnings">
       <div

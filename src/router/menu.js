@@ -112,8 +112,8 @@ export default [
         'url': '/rangepicker'
       },
       {
-        'text': '提示消息',
-        'url': '/toast'
+        'text': '消息',
+        'url': '/message'
       },
       {
         'text': '模态框',

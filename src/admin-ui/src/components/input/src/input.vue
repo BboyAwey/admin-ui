@@ -67,7 +67,7 @@
       :label="label"
       :labelWidth="labelWidth"
       :inline="inline"
-      :comments="comments"
+      :tips="tips"
       :size="size"
       :middle="type !== 'textarea'"
       :warnings="warnings || localWarnings">

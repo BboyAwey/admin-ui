@@ -3,7 +3,7 @@ export default {
     // ui props
     label: String,
     inline: Boolean,
-    comments: Array,
+    tips: Array,
     buttonText: {
       default: '上传文件'
     },

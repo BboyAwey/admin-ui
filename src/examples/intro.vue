@@ -10,7 +10,7 @@
       <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
         相比
         <a class="au-theme-font-color--info-3" href="http://wiki.dataengine.com/display/AD/Admin-UI" target="_blank">1.X版本</a>
-        Admin UI 2做了很多改进，比如增加了主题系统，新增了不少基础组件，简化了API命名，优化了原有组件设计同时修复了BUG。
+        Admin UI 2做了很多改进，比如增加了主题系统，新增了不少基础组件，简化了API命名，优化了原有组件设计同时修复了BUG。Admin UI 3在2的基础上继续改进，新增了组件，优化了接口命名，组件本身的特性也得到了增强和扩展。
       </cite>
     </au-panel>
   </div>

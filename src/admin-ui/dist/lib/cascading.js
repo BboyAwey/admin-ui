@@ -2957,7 +2957,9 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
     },
     inline: {
       type: Boolean,
-      default: true
+      default: function _default() {
+        return !!this.label;
+      }
     },
     size: {
       type: String,
@@ -2969,6 +2971,11 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
     },
     disabled: Boolean,
     readonly: Boolean
+  },
+  computed: {
+    inlineLabel: function inlineLabel() {
+      return this.label && this.inline;
+    }
   },
   watch: {
     value: {

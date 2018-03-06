@@ -121,12 +121,6 @@ return /******/ (function(modules) { // webpackBootstrap
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -138,6 +132,7 @@ return /******/ (function(modules) { // webpackBootstrap
       default: 'primary'
     },
     closable: Boolean,
+    hoverable: Boolean,
     size: {
       type: String,
       default: 'normal'
@@ -151,6 +146,23 @@ return /******/ (function(modules) { // webpackBootstrap
   computed: {
     localType: function localType() {
       if (this.type === 'default') return 'base';else return this.type;
+    },
+    classes: function classes() {
+      var normal = '';
+      var hover = '';
+      var size = this.size ? 'au-size-' + this.size + (this.active ? '' : '-bordered') : '';
+      if (this.active) {
+        normal = 'au-theme-font-color--base-12 au-theme-background-color--' + this.localType + '-3';
+      } else {
+        if (this.hoverable) {
+          normal = 'au-theme-border-color--base-8 au-theme-font-color--base-3';
+          hover = 'au-theme-hover-border-color--' + this.localType + '-3 au-theme-hover-font-color--' + this.localType + '-3';
+        } else {
+          normal = 'au-theme-border-color--' + this.localType + '-3 au-theme-font-color--' + this.localType + '-3';
+        }
+      }
+
+      return normal + ' ' + hover + ' ' + size;
     }
   }
 });
@@ -515,16 +527,10 @@ var render = function() {
     "div",
     {
       staticClass: "au-tag au-theme-border-radius--normal",
-      class: ((_obj = {}),
-      (_obj["au-theme-font-color--" + _vm.localType + "-3"] = !_vm.active),
-      (_obj["au-theme-border-color--" + _vm.localType + "-3"] = !_vm.active),
-      (_obj["au-theme-font-color--base-12"] = _vm.active),
-      (_obj["au-theme-background-color--" + _vm.localType + "-3"] = _vm.active),
-      (_obj["au-size-" + _vm.size + "-bordered"] = !_vm.active),
-      (_obj["au-size-" + _vm.size] = _vm.active),
-      _obj),
+      class: _vm.classes,
       style: {
-        border: _vm.active ? "none" : ""
+        border: _vm.active ? "none" : "",
+        cursor: _vm.hoverable ? "pointer" : ""
       }
     },
     [
@@ -542,15 +548,15 @@ var render = function() {
             }
           ],
           staticClass: "au-tag-close",
-          class: ((_obj$1 = {}),
-          (_obj$1[
+          class: ((_obj = {}),
+          (_obj[
             "au-theme-hover-background-color--" + _vm.localType + "-3"
           ] = !_vm.active),
-          (_obj$1["au-theme-hover-background-color--base-12"] = _vm.active),
-          (_obj$1["au-theme-hover-font-color--base-12"] = !_vm.active),
-          (_obj$1["au-theme-hover-font-color--" + _vm.localType + "-3"] =
+          (_obj["au-theme-hover-background-color--base-12"] = _vm.active),
+          (_obj["au-theme-hover-font-color--base-12"] = !_vm.active),
+          (_obj["au-theme-hover-font-color--" + _vm.localType + "-3"] =
             _vm.active),
-          _obj$1),
+          _obj),
           on: {
             click: function($event) {
               _vm.$emit("close")
@@ -569,7 +575,6 @@ var render = function() {
     2
   )
   var _obj
-  var _obj$1
 }
 var staticRenderFns = []
 render._withStripped = true

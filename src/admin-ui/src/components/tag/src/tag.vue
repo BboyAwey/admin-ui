@@ -23,15 +23,9 @@
   }
 </style>
 <template>
-  <div class="au-tag au-theme-border-radius--normal" :class="{
-    [`au-theme-font-color--${localType}-3`]: !active,
-    [`au-theme-border-color--${localType}-3`]: !active,
-    [`au-theme-font-color--base-12`]: active,
-    [`au-theme-background-color--${localType}-3`]: active,
-    [`au-size-${size}-bordered`]: !active,
-    [`au-size-${size}`]: active
-  }" :style="{
-    border: active ? 'none' : ''
+  <div class="au-tag au-theme-border-radius--normal" :class="classes" :style="{
+    border: active ? 'none' : '',
+    cursor: hoverable ? 'pointer' : ''
   }">
     <slot></slot>
     <span class="au-tag-close" v-show="closable" :class="{
@@ -53,6 +47,7 @@
         default: 'primary'
       },
       closable: Boolean,
+      hoverable: Boolean,
       size: {
         type: String,
         default: 'normal'
@@ -66,6 +61,23 @@
       localType () {
         if (this.type === 'default') return 'base'
         else return this.type
+      },
+      classes () {
+        let normal = ''
+        let hover = ''
+        let size = this.size ? `au-size-${this.size}${this.active ? '' : '-bordered'}` : ''
+        if (this.active) {
+          normal = `au-theme-font-color--base-12 au-theme-background-color--${this.localType}-3`
+        } else {
+          if (this.hoverable) {
+            normal = 'au-theme-border-color--base-8 au-theme-font-color--base-3'
+            hover = `au-theme-hover-border-color--${this.localType}-3 au-theme-hover-font-color--${this.localType}-3`
+          } else {
+            normal = `au-theme-border-color--${this.localType}-3 au-theme-font-color--${this.localType}-3`
+          }
+        }
+
+        return normal + ' ' + hover + ' ' + size
       }
     }
   }

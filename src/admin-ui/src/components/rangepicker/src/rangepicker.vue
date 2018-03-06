@@ -112,7 +112,7 @@
             <au-button type="primary" @click="handleConfirm" :disabled="!fullfill">确定</au-button>
           </div>
           <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative && filteredRelatives.length">
-            <div
+            <!-- <div
               class="au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8"
               v-for="(item, i) in filteredRelatives" :key="i"
               :class="{
@@ -127,7 +127,16 @@
               size="small"
               @click="handleRelativeTagClick(item)">
               {{ item.text }}
-            </div>
+            </div> -->
+            <au-tag
+              class="au-rangepicker-relative-tag"
+              v-for="(item, i) in filteredRelatives" :key="i"
+              size="small"
+              hoverable
+              :active="isCurrent(item)"
+              @click.native="handleRelativeTagClick(item)">
+              {{ item.text }}
+            </au-tag>
           </div>
         </div>
       </au-popover>
@@ -182,9 +191,9 @@ function resolveRange (range) {
   return temp
 }
 
-function getRangeFromNow (span = 30 * 60 * 1000) {
+function getRangeFromDateObj (dateObj, span = 30 * 60 * 1000) {
   // default range is 30 minutes
-  let now = (new Date()).getTime()
+  let now = dateObj.getTime()
   let start = resolveTimestamp(now - span)
   let end = resolveTimestamp(now)
   return {
@@ -196,12 +205,14 @@ function getRangeFromNow (span = 30 * 60 * 1000) {
 }
 
 function getTimeFromDateStr (dateStr) {
+  if (!dateStr) return 0
   let dateArr = dateStr.split('-')
   dateArr[1] = dateArr[1] - 1
   return (new Date(...dateArr)).getTime()
 }
 
 function getMsFromTimeStr (timeStr) {
+  if (!timeStr) return 0
   return timeStr.split(':').reverse().reduce((t, c, i) => Math.pow(60, i) * c + t, 0) * 1000
 }
 
@@ -499,7 +510,6 @@ export default {
   },
   methods: {
     handlePopup () {
-      for (let key in this.localRange) { this[key] = this.localRange[key] }
       this.$nextTick(() => {
         this.$refs.popContent.style.width = getElementSize(this.$refs.absolute).width + 'px'
       })
@@ -532,15 +542,40 @@ export default {
       this.localRange = temp
     },
     handleRelativeTagClick (item) {
-      let temp1 = getRangeFromNow(item.span)
-      let temp2 = {}
-      if (Object.keys(this.localRange).length) {
-        for (let key in this.localRange) temp2[key] = temp1[key]
-        this.localRange = temp2
-      } else {
-        this.localRange = temp1
+      let now = new Date()
+      let temp = {}
+      let endSpot = now.getTime()
+      let span = item.span
+
+      if (this.end) {
+        let end = this.end.split(/\s+/)
+        let endStamp =
+          getTimeFromDateStr(end.find(e => e.indexOf('-') !== -1)) +
+          getMsFromTimeStr(end.find(e => e.indexOf(':') !== -1))
+        endSpot = endStamp < endSpot ? endStamp : endSpot
       }
+
+      if (this.start) {
+        let start = this.start.split(/\s+/)
+        let startStamp =
+          getTimeFromDateStr(start.find(e => e.indexOf('-') !== -1)) +
+          getMsFromTimeStr(start.find(e => e.indexOf(':') !== -1))
+        if (endSpot - span < startStamp) span = endSpot - startStamp
+      }
+
+      temp = getRangeFromDateObj(new Date(endSpot), span)
+      let res = {}
+      if (Object.keys(this.localRange).length) {
+        for (let key in this.localRange) {
+          res[key] = temp[key]
+        }
+      } else {
+        res = temp
+      }
+
+      this.localRange = res
       this.$refs.popover.hide()
+      this.splitRange(res)
     },
     isCurrent (item) {
       return item.span === getSpanFromRange(this.localRange)
@@ -551,6 +586,26 @@ export default {
       this.startTime = ''
       this.endDate = ''
       this.endTime = ''
+    },
+    splitRange (range, callback) { // to avoid memory overflow
+      this.startDate = range.startDate || null
+      this.$nextTick(() => {
+        this.startTime = range.startTime || null
+        this.$nextTick(() => {
+          this.endDate = range.endDate || null
+          this.$nextTick(() => {
+            this.endTime = range.endTime || null
+            if (typeof callback === 'function') {
+              callback({
+                startDate: this.startDate,
+                startTime: this.startTime,
+                endDate: this.endDate,
+                endTime: this.endTime
+              })
+            }
+          })
+        })
+      })
     }
   }
 }

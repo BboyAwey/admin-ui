@@ -179,7 +179,7 @@
       :inline="inline"
       :tips="tips"
       :size="buttonSize"
-      middle="inline">
+      :middle="inline">
       <au-button
         class="au-upload-button au-plain"
         :type="buttonType"

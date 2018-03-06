@@ -1,6 +1,7 @@
 <style lang="scss">
   @import "../../../style/vars";
   .au-prompt {
+    position: relative;
     padding-bottom: 4px;
   }
   .au-prompt-message {
@@ -19,21 +20,56 @@
       }
     }
   }
+  .au-message-box-icon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    vertical-align: middle;
+    font-size: $large;
+  }
+  .au-message-box-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 100%;
+  }
 </style>
 <template>
   <div class="au-prompt au-theme-font-color--base-3">
-    <div class="au-prompt-message">{{ message }}</div>
-    <div class="au-prompt-core-container">
-      <au-input class="au-prompt-core" v-model="value" :placeholder="placeholder" :validators="validators" ref="core"></au-input>
+    <div class="au-message-box-icon-container" v-show="iconType">
+      <au-icon
+        class="au-message-box-icon au-theme-font-color--base-12"
+        :class="`au-theme-background-color--${messageType || 'info'}-3`"
+        :type="iconType"/>
+    </div>
+    <div
+      class="au-prompt-right"
+      :style="{
+        paddingTop: iconType ? '6px' : '',
+        paddingLeft: iconType ? '48px' : ''
+      }">
+      <div class="au-prompt-message">{{ message }}</div>
+      <div class="au-prompt-core-container">
+        <au-input
+          class="au-prompt-core"
+          v-model="value"
+          :placeholder="placeholder"
+          :validators="validators"
+          :full-width="true"
+          ref="core"/>
+      </div>
     </div>
   </div>
 </template>
 <script>
   import AuInput from '../../input'
+  import AuIcon from '../../icon'
 
   export default {
     name: 'au-prompt',
-    components: { AuInput },
+    components: { AuInput, AuIcon },
     data () {
       return {
         value: ''
@@ -43,7 +79,22 @@
       message: String,
       trigger: Boolean,
       validators: Array,
-      placeholder: String
+      placeholder: String,
+      icon: String,
+      messageType: String
+    },
+    computed: {
+      iconType () {
+        if (this.icon) return this.icon
+        switch (this.messageType) {
+          case 'info':
+          case 'primary': return 'info'
+          case 'warning': return 'exclamation'
+          case 'success': return 'check'
+          case 'danger': return 'times'
+          default: return null
+        }
+      }
     },
     methods: {
       validate () {

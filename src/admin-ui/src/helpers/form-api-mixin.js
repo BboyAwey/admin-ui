@@ -16,7 +16,9 @@ export default {
     },
     inline: {
       type: Boolean,
-      default: true
+      default () {
+        return !!this.label
+      }
     },
     size: {
       type: String,
@@ -28,6 +30,11 @@ export default {
     },
     disabled: Boolean,
     readonly: Boolean
+  },
+  computed: {
+    inlineLabel () {
+      return this.label && this.inline
+    }
   },
   watch: {
     value: {

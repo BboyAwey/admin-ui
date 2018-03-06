@@ -9,7 +9,7 @@
         <au-rangepicker
           v-model="range"
           label="选择日期范围"
-          start="2018-2-5 12:12:12"
+          start="2018-2-29 12:12:12"
           end="2018-3-2 12:12:33"
           span="539200000"
           type="all"
@@ -237,7 +237,8 @@
             </td>
             <td>
               自定义的相对时间选项<br>
-              如果设置了span选项，则大于span的选项会被过滤而不显示
+              如果设置了span选项，则大于span的选项会被过滤而不显示<br>
+              如果设置了start和end，则span的选中后的值会被前二者的值所限制
             </td>
           </tr>
           <tr>

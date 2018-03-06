@@ -16,13 +16,16 @@
     }
     .au-panel-title-icon {
       position: relative;
-      bottom: -1px;
-      vertical-align: middle;
       float: left;
+      bottom: -2px;
+      padding-right: 4px;
+      vertical-align: middle;
     }
     .au-panel-title-text {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
       vertical-align: middle;
-      float: left;
     }
     .au-panel-title-right {
       vertical-align: middle;

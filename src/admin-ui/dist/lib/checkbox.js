@@ -2013,7 +2013,9 @@ module.exports = function (fn, args, that) {
     },
     inline: {
       type: Boolean,
-      default: true
+      default: function _default() {
+        return !!this.label;
+      }
     },
     size: {
       type: String,
@@ -2025,6 +2027,11 @@ module.exports = function (fn, args, that) {
     },
     disabled: Boolean,
     readonly: Boolean
+  },
+  computed: {
+    inlineLabel: function inlineLabel() {
+      return this.label && this.inline;
+    }
   },
   watch: {
     value: {

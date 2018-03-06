@@ -887,28 +887,16 @@ var render = function() {
                     },
                     _vm._l(_vm.filteredRelatives, function(item, i) {
                       return _c(
-                        "div",
+                        "au-tag",
                         {
                           key: i,
-                          staticClass:
-                            "au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8",
-                          class: {
-                            "au-theme-hover-font-color--primary-3": !_vm.isCurrent(
-                              item
-                            ),
-                            "au-theme-hover-border-color--primary-3": !_vm.isCurrent(
-                              item
-                            ),
-                            "au-theme-background-color--primary-3": _vm.isCurrent(
-                              item
-                            ),
-                            "au-theme-font-color--base-12": _vm.isCurrent(item)
+                          staticClass: "au-rangepicker-relative-tag",
+                          attrs: {
+                            size: "small",
+                            hoverable: "",
+                            active: _vm.isCurrent(item)
                           },
-                          style: {
-                            border: _vm.isCurrent(item) ? "none" : ""
-                          },
-                          attrs: { size: "small" },
-                          on: {
+                          nativeOn: {
                             click: function($event) {
                               _vm.handleRelativeTagClick(item)
                             }
@@ -1094,12 +1082,6 @@ module.exports = { "default": __webpack_require__("x/31"), __esModule: true };
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -1111,6 +1093,7 @@ module.exports = { "default": __webpack_require__("x/31"), __esModule: true };
       default: 'primary'
     },
     closable: Boolean,
+    hoverable: Boolean,
     size: {
       type: String,
       default: 'normal'
@@ -1124,6 +1107,23 @@ module.exports = { "default": __webpack_require__("x/31"), __esModule: true };
   computed: {
     localType: function localType() {
       if (this.type === 'default') return 'base';else return this.type;
+    },
+    classes: function classes() {
+      var normal = '';
+      var hover = '';
+      var size = this.size ? 'au-size-' + this.size + (this.active ? '' : '-bordered') : '';
+      if (this.active) {
+        normal = 'au-theme-font-color--base-12 au-theme-background-color--' + this.localType + '-3';
+      } else {
+        if (this.hoverable) {
+          normal = 'au-theme-border-color--base-8 au-theme-font-color--base-3';
+          hover = 'au-theme-hover-border-color--' + this.localType + '-3 au-theme-hover-font-color--' + this.localType + '-3';
+        } else {
+          normal = 'au-theme-border-color--' + this.localType + '-3 au-theme-font-color--' + this.localType + '-3';
+        }
+      }
+
+      return normal + ' ' + hover + ' ' + size;
     }
   }
 });
@@ -1144,14 +1144,71 @@ module.exports = { "default": __webpack_require__("x/31"), __esModule: true };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-confirm',
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */] },
   props: {
-    message: String
+    message: String,
+    icon: String,
+    messageType: String
+  },
+  computed: {
+    iconType: function iconType() {
+      if (this.icon) return this.icon;
+      switch (this.messageType) {
+        case 'info':
+        case 'primary':
+          return 'info';
+        case 'warning':
+          return 'exclamation';
+        case 'success':
+          return 'check';
+        case 'danger':
+          return 'times';
+        default:
+          return null;
+      }
+    }
   }
 });
 
@@ -2003,6 +2060,13 @@ if (false) {
 
 /***/ }),
 
+/***/ "2fV4":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "2m2c":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2670,6 +2734,10 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_alert_vue__ = __webpack_require__("T8Ak");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_326e109a_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_alert_vue__ = __webpack_require__("yKiU");
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("nPZ/")
+}
 var normalizeComponent = __webpack_require__("XAIM")
 /* script */
 
@@ -2678,7 +2746,7 @@ var normalizeComponent = __webpack_require__("XAIM")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -7273,7 +7341,7 @@ var render = function() {
             inline: _vm.inline,
             tips: _vm.tips,
             size: _vm.buttonSize,
-            middle: "inline"
+            middle: _vm.inline
           }
         },
         [
@@ -8253,6 +8321,8 @@ function MessageBox(config) {
       type = _config$type === undefined ? 'alert' : _config$type,
       title = config.title,
       message = config.message,
+      icon = config.icon,
+      messageType = config.messageType,
       validators = config.validators,
       reset = config.reset,
       placeholder = config.placeholder;
@@ -8296,12 +8366,9 @@ function MessageBox(config) {
       contentInstance.value = reset;
       contentInstance.$refs.core.localValue = reset;
     }
-    // instances.modal.$on('hide', () => { // we should reset on hide otherwise it will trigger validate when clear
-
-    // })
   }
   // set content instance props
-  __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(contentInstance, { message: message, validators: validators, placeholder: placeholder });
+  __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(contentInstance, { message: message, icon: icon, messageType: messageType, validators: validators, placeholder: placeholder });
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance);
   instances.modal.title = title;
@@ -8807,6 +8874,15 @@ if (false) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8857,11 +8933,11 @@ function resolveRange(range) {
   return temp;
 }
 
-function getRangeFromNow() {
-  var span = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30 * 60 * 1000;
+function getRangeFromDateObj(dateObj) {
+  var span = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 30 * 60 * 1000;
 
   // default range is 30 minutes
-  var now = new Date().getTime();
+  var now = dateObj.getTime();
   var start = resolveTimestamp(now - span);
   var end = resolveTimestamp(now);
   return {
@@ -8873,12 +8949,14 @@ function getRangeFromNow() {
 }
 
 function getTimeFromDateStr(dateStr) {
+  if (!dateStr) return 0;
   var dateArr = dateStr.split('-');
   dateArr[1] = dateArr[1] - 1;
   return new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(dateArr))))().getTime();
 }
 
 function getMsFromTimeStr(timeStr) {
+  if (!timeStr) return 0;
   return timeStr.split(':').reverse().reduce(function (t, c, i) {
     return Math.pow(60, i) * c + t;
   }, 0) * 1000;
@@ -9166,9 +9244,6 @@ function getSpanFromRange(range) {
     handlePopup: function handlePopup() {
       var _this2 = this;
 
-      for (var key in this.localRange) {
-        this[key] = this.localRange[key];
-      }
       this.$nextTick(function () {
         _this2.$refs.popContent.style.width = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__helpers_dom__["a" /* getElementSize */])(_this2.$refs.absolute).width + 'px';
       });
@@ -9203,16 +9278,44 @@ function getSpanFromRange(range) {
       this.localRange = temp;
     },
     handleRelativeTagClick: function handleRelativeTagClick(item) {
-      var temp1 = getRangeFromNow(item.span);
-      var temp2 = {};
+      var now = new Date();
+      var temp = {};
+      var endSpot = now.getTime();
+      var span = item.span;
+
+      if (this.end) {
+        var end = this.end.split(/\s+/);
+        var endStamp = getTimeFromDateStr(end.find(function (e) {
+          return e.indexOf('-') !== -1;
+        })) + getMsFromTimeStr(end.find(function (e) {
+          return e.indexOf(':') !== -1;
+        }));
+        endSpot = endStamp < endSpot ? endStamp : endSpot;
+      }
+
+      if (this.start) {
+        var start = this.start.split(/\s+/);
+        var startStamp = getTimeFromDateStr(start.find(function (e) {
+          return e.indexOf('-') !== -1;
+        })) + getMsFromTimeStr(start.find(function (e) {
+          return e.indexOf(':') !== -1;
+        }));
+        if (endSpot - span < startStamp) span = endSpot - startStamp;
+      }
+
+      temp = getRangeFromDateObj(new Date(endSpot), span);
+      var res = {};
       if (__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(this.localRange).length) {
         for (var key in this.localRange) {
-          temp2[key] = temp1[key];
-        }this.localRange = temp2;
+          res[key] = temp[key];
+        }
       } else {
-        this.localRange = temp1;
+        res = temp;
       }
+
+      this.localRange = res;
       this.$refs.popover.hide();
+      this.splitRange(res);
     },
     isCurrent: function isCurrent(item) {
       return item.span === getSpanFromRange(this.localRange);
@@ -9223,6 +9326,29 @@ function getSpanFromRange(range) {
       this.startTime = '';
       this.endDate = '';
       this.endTime = '';
+    },
+    splitRange: function splitRange(range, callback) {
+      var _this4 = this;
+
+      // to avoid memory overflow
+      this.startDate = range.startDate || null;
+      this.$nextTick(function () {
+        _this4.startTime = range.startTime || null;
+        _this4.$nextTick(function () {
+          _this4.endDate = range.endDate || null;
+          _this4.$nextTick(function () {
+            _this4.endTime = range.endTime || null;
+            if (typeof callback === 'function') {
+              callback({
+                startDate: _this4.startDate,
+                startTime: _this4.startTime,
+                endDate: _this4.endDate,
+                endTime: _this4.endTime
+              });
+            }
+          });
+        });
+      });
     }
   }
 });
@@ -9233,6 +9359,9 @@ function getSpanFromRange(range) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
 //
 //
 //
@@ -11123,6 +11252,7 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__input__ = __webpack_require__("vG5W");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__icon__ = __webpack_require__("dJt8");
 //
 //
 //
@@ -11153,12 +11283,48 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-prompt',
-  components: { AuInput: __WEBPACK_IMPORTED_MODULE_0__input__["a" /* default */] },
+  components: { AuInput: __WEBPACK_IMPORTED_MODULE_0__input__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_1__icon__["a" /* default */] },
   data: function data() {
     return {
       value: ''
@@ -11169,7 +11335,27 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
     message: String,
     trigger: Boolean,
     validators: Array,
-    placeholder: String
+    placeholder: String,
+    icon: String,
+    messageType: String
+  },
+  computed: {
+    iconType: function iconType() {
+      if (this.icon) return this.icon;
+      switch (this.messageType) {
+        case 'info':
+        case 'primary':
+          return 'info';
+        case 'warning':
+          return 'exclamation';
+        case 'success':
+          return 'check';
+        case 'danger':
+          return 'times';
+        default:
+          return null;
+      }
+    }
   },
   methods: {
     validate: function validate() {
@@ -11184,14 +11370,72 @@ module.exports = __webpack_require__("iANj").getIterator = function (it) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-alert',
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */] },
   props: {
-    message: String
+    message: String,
+    icon: String,
+    messageType: String
+  },
+  computed: {
+    iconType: function iconType() {
+      if (this.icon) return this.icon;
+      switch (this.messageType) {
+        case 'info':
+        case 'primary':
+          return 'info';
+        case 'warning':
+          return 'exclamation';
+        case 'success':
+          return 'check';
+        case 'danger':
+          return 'times';
+        default:
+          return null;
+      }
+    }
   }
 });
 
@@ -12222,8 +12466,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "au-confirm au-theme-font-color--base-3" }, [
-    _vm._v(_vm._s(_vm.message))
+  return _c("div", { staticClass: "au-confirm" }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.iconType,
+            expression: "iconType"
+          }
+        ],
+        staticClass: "au-message-box-icon-container"
+      },
+      [
+        _c("au-icon", {
+          staticClass: "au-message-box-icon au-theme-font-color--base-12",
+          class:
+            "au-theme-background-color--" + (_vm.messageType || "info") + "-3",
+          attrs: { type: _vm.iconType }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "au-confirm-message au-theme-font-color--base-3",
+        style: {
+          paddingTop: _vm.iconType ? "6px" : "",
+          paddingLeft: _vm.iconType ? "48px" : ""
+        }
+      },
+      [_vm._v(_vm._s(_vm.message))]
+    )
   ])
 }
 var staticRenderFns = []
@@ -16117,7 +16395,9 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
     },
     inline: {
       type: Boolean,
-      default: true
+      default: function _default() {
+        return !!this.label;
+      }
     },
     size: {
       type: String,
@@ -16129,6 +16409,11 @@ module.exports = { "default": __webpack_require__("mG69"), __esModule: true };
     },
     disabled: Boolean,
     readonly: Boolean
+  },
+  computed: {
+    inlineLabel: function inlineLabel() {
+      return this.label && this.inline;
+    }
   },
   watch: {
     value: {
@@ -17997,6 +18282,13 @@ module.exports = function (target, src, safe) {
 
 /***/ }),
 
+/***/ "nPZ/":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "nekN":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18150,16 +18442,10 @@ var render = function() {
     "div",
     {
       staticClass: "au-tag au-theme-border-radius--normal",
-      class: ((_obj = {}),
-      (_obj["au-theme-font-color--" + _vm.localType + "-3"] = !_vm.active),
-      (_obj["au-theme-border-color--" + _vm.localType + "-3"] = !_vm.active),
-      (_obj["au-theme-font-color--base-12"] = _vm.active),
-      (_obj["au-theme-background-color--" + _vm.localType + "-3"] = _vm.active),
-      (_obj["au-size-" + _vm.size + "-bordered"] = !_vm.active),
-      (_obj["au-size-" + _vm.size] = _vm.active),
-      _obj),
+      class: _vm.classes,
       style: {
-        border: _vm.active ? "none" : ""
+        border: _vm.active ? "none" : "",
+        cursor: _vm.hoverable ? "pointer" : ""
       }
     },
     [
@@ -18177,15 +18463,15 @@ var render = function() {
             }
           ],
           staticClass: "au-tag-close",
-          class: ((_obj$1 = {}),
-          (_obj$1[
+          class: ((_obj = {}),
+          (_obj[
             "au-theme-hover-background-color--" + _vm.localType + "-3"
           ] = !_vm.active),
-          (_obj$1["au-theme-hover-background-color--base-12"] = _vm.active),
-          (_obj$1["au-theme-hover-font-color--base-12"] = !_vm.active),
-          (_obj$1["au-theme-hover-font-color--" + _vm.localType + "-3"] =
+          (_obj["au-theme-hover-background-color--base-12"] = _vm.active),
+          (_obj["au-theme-hover-font-color--base-12"] = !_vm.active),
+          (_obj["au-theme-hover-font-color--" + _vm.localType + "-3"] =
             _vm.active),
-          _obj$1),
+          _obj),
           on: {
             click: function($event) {
               _vm.$emit("close")
@@ -18204,7 +18490,6 @@ var render = function() {
     2
   )
   var _obj
-  var _obj$1
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18665,6 +18950,10 @@ module.exports = !__webpack_require__("zyKz")(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_13_5_0_vue_loader_lib_selector_type_script_index_0_bustCache_confirm_vue__ = __webpack_require__("/VuO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_13_5_0_vue_loader_lib_template_compiler_index_id_data_v_3720e152_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_13_5_0_vue_loader_lib_selector_type_template_index_0_bustCache_confirm_vue__ = __webpack_require__("WjlS");
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("2fV4")
+}
 var normalizeComponent = __webpack_require__("XAIM")
 /* script */
 
@@ -18673,7 +18962,7 @@ var normalizeComponent = __webpack_require__("XAIM")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -19739,28 +20028,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "au-prompt au-theme-font-color--base-3" }, [
-    _c("div", { staticClass: "au-prompt-message" }, [
-      _vm._v(_vm._s(_vm.message))
-    ]),
-    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "au-prompt-core-container" },
-      [
-        _c("au-input", {
-          ref: "core",
-          staticClass: "au-prompt-core",
-          attrs: { placeholder: _vm.placeholder, validators: _vm.validators },
-          model: {
-            value: _vm.value,
-            callback: function($$v) {
-              _vm.value = $$v
-            },
-            expression: "value"
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.iconType,
+            expression: "iconType"
           }
+        ],
+        staticClass: "au-message-box-icon-container"
+      },
+      [
+        _c("au-icon", {
+          staticClass: "au-message-box-icon au-theme-font-color--base-12",
+          class:
+            "au-theme-background-color--" + (_vm.messageType || "info") + "-3",
+          attrs: { type: _vm.iconType }
         })
       ],
       1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "au-prompt-right",
+        style: {
+          paddingTop: _vm.iconType ? "6px" : "",
+          paddingLeft: _vm.iconType ? "48px" : ""
+        }
+      },
+      [
+        _c("div", { staticClass: "au-prompt-message" }, [
+          _vm._v(_vm._s(_vm.message))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "au-prompt-core-container" },
+          [
+            _c("au-input", {
+              ref: "core",
+              staticClass: "au-prompt-core",
+              attrs: {
+                placeholder: _vm.placeholder,
+                validators: _vm.validators,
+                "full-width": true
+              },
+              model: {
+                value: _vm.value,
+                callback: function($$v) {
+                  _vm.value = $$v
+                },
+                expression: "value"
+              }
+            })
+          ],
+          1
+        )
+      ]
     )
   ])
 }
@@ -19785,8 +20114,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "au-alert au-theme-font-color--base-3" }, [
-    _vm._v(_vm._s(_vm.message))
+  return _c("div", { staticClass: "au-alert" }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.iconType,
+            expression: "iconType"
+          }
+        ],
+        staticClass: "au-message-box-icon-container"
+      },
+      [
+        _c("au-icon", {
+          staticClass: "au-message-box-icon au-theme-font-color--base-12",
+          class:
+            "au-theme-background-color--" + (_vm.messageType || "info") + "-3",
+          attrs: { type: _vm.iconType }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "au-alert-message au-theme-font-color--base-3",
+        style: {
+          paddingTop: _vm.iconType ? "6px" : "",
+          paddingLeft: _vm.iconType ? "48px" : ""
+        }
+      },
+      [_vm._v(_vm._s(_vm.message))]
+    )
   ])
 }
 var staticRenderFns = []

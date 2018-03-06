@@ -7,11 +7,11 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-tag type="default" size="large">标签</au-tag>
-        <au-tag type="primary">标签</au-tag>
+        <au-tag type="primary" hoverable>标签</au-tag>
         <au-tag type="danger" size="small">标签</au-tag>
         <au-tag type="info" size="mini">标签</au-tag>
         <au-tag type="warning" closable>标签</au-tag>
-        <au-tag type="success" closable active>标签</au-tag>
+        <au-tag type="success" closable hoverable>标签</au-tag>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -85,6 +85,22 @@
               </ol>
             </td>
             <td>实心标签（选中效果）</td>
+          </tr>
+          <tr>
+            <td>hoverable</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>是否响应鼠标hover交互</td>
           </tr>
           <tr>
             <td>closable</td>

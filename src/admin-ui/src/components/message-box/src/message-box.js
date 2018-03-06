@@ -90,7 +90,7 @@ function getConfirmButton (instance, config) {
 }
 
 function MessageBox (config) {
-  let { type = 'alert', title, message, validators, reset, placeholder } = config
+  let { type = 'alert', title, message, icon, messageType, validators, reset, placeholder } = config
   if (!type || ['alert', 'confirm', 'prompt'].indexOf(type) === -1) {
     console.warn('Admin UI@massage-box@ "type" is required and must be "alert","confirm" or "prompt"')
   }
@@ -102,23 +102,29 @@ function MessageBox (config) {
     instances.modal.onEnter = instances.modal.buttons[0].text
   }
   if (type === 'confirm') {
-    instances.modal.buttons = [getCancelButton(instances.modal, config), getConfirmButton(instances.modal, config)]
+    instances.modal.buttons = [
+      getCancelButton(instances.modal, config),
+      getConfirmButton(instances.modal, config)
+    ]
     instances.modal.onEnter = instances.modal.buttons[1].text
   }
   if (type === 'prompt') {
-    instances.modal.buttons = [getCancelButton(instances.modal, config), Object.assign({}, getConfirmButton(instances.modal, config), {
-      handler (loading) {
-        let config = instances.modal.config
-        loading.start()
-        instances[config.type].validate().then(res => {
-          loading.stop()
-          if (res) {
-            if (config.confirm) config.confirm(instances[config.type].value)
-            instances.modal.visible = false
-          }
-        })
-      }
-    })]
+    instances.modal.buttons = [
+      getCancelButton(instances.modal, config),
+      Object.assign({}, getConfirmButton(instances.modal, config), {
+        handler (loading) {
+          let config = instances.modal.config
+          loading.start()
+          instances[config.type].validate().then(res => {
+            loading.stop()
+            if (res) {
+              if (config.confirm) config.confirm(instances[config.type].value)
+              instances.modal.visible = false
+            }
+          })
+        }
+      })
+    ]
     instances.modal.onEnter = instances.modal.buttons[1].text
   }
 
@@ -130,12 +136,9 @@ function MessageBox (config) {
       contentInstance.value = reset
       contentInstance.$refs.core.localValue = reset
     }
-    // instances.modal.$on('hide', () => { // we should reset on hide otherwise it will trigger validate when clear
-
-    // })
   }
   // set content instance props
-  Object.assign(contentInstance, {message, validators, placeholder})
+  Object.assign(contentInstance, {message, icon, messageType, validators, placeholder})
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance)
   instances.modal.title = title

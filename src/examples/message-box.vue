@@ -263,6 +263,8 @@
         this.$alert({
           title: 'Alert',
           message: 'oh yes~',
+          messageType: 'warning',
+          icon: 'home',
           confirm () {
             console.log('confirm')
           }
@@ -273,6 +275,8 @@
           title: 'Confirm',
           message: 'you feel good?',
           confirmText: 'Yes',
+          messageType: 'info',
+          icon: 'home',
           cancelText: 'No'
         })
       },
@@ -281,6 +285,7 @@
           title: 'Prompt',
           message: 'How\'d you feel?',
           reset: true,
+          messageType: 'danger',
           validators: [
             {
               validator (v) {

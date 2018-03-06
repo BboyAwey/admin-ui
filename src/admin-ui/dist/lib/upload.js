@@ -1901,7 +1901,7 @@ var render = function() {
             inline: _vm.inline,
             tips: _vm.tips,
             size: _vm.buttonSize,
-            middle: "inline"
+            middle: _vm.inline
           }
         },
         [

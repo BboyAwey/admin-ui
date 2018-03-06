@@ -7,9 +7,9 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        Admin UI 2中的图标组件，是基于著名的
+        Admin UI中的图标组件，是基于著名的
         <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome 4</a>
-        ，我们将其内置到了Admin UI 2中。
+        ，我们将其内置到了Admin UI中。
       </p>
       <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
         Admin UI 1中的图标组件是基于

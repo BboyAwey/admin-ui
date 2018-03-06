@@ -6,6 +6,7 @@
         <li class="au-theme-border-color--base-8">Theme system: shadow style and radius class name changed, add values on radius</li>
         <li class="au-theme-border-color--base-8">Toast组件变更为Message组件，其接口也有变更，详见组件文档</li>
         <li class="au-theme-border-color--base-8">previewer、modal组件display接口变更为visible</li>
+        <li class="au-theme-border-color--base-8">button组件loading尺寸调整（实现更换为loading组件而非内置实现）</li>
       </ol>
       <h3 class="title-1">## 新增特性</h3>
       <ol class="option-list">
@@ -18,10 +19,13 @@
         <li class="au-theme-border-color--base-8">input,select,cascading,datepicker,timepicker组件新增full-width接口更方便地进行宽度控制</li>
         <li class="au-theme-border-color--base-8">menu组件新增background-color/item-font-color/item-background-color/item-unlink-font-color/item-hover-font-color/item-hover-background-color/item-active-font-color/item-active-background-color/collapse-handlebar-seprator-color接口更方便地进行颜色定制</li>
         <li class="au-theme-border-color--base-8">popover组件新增自动回避屏幕边缘特性，在指定方向空间不足时会尝试反向显示</li>
+        <li class="au-theme-border-color--base-8">message-box组件新增icon, messageType字段，可以设置图标了</li>
+        <li class="au-theme-border-color--base-8">tag组件新增hoverable接口，指定tag是否响应鼠标hover交互</li>
       </ol>
       <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
         <li class="au-theme-border-color--base-8">timepicker popover should scroll to 00:00:00 if the value is 00:00:00</li>
+        <li class="au-theme-border-color--base-8">fix the condition of a menu item been the current item</li>
       </ol>
     </au-panel>
     <au-panel class="section" title="2.2.24">

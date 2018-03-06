@@ -87,6 +87,45 @@
             <td>消息内容</td>
           </tr>
           <tr>
+            <td>messageType</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              info
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">info</li>
+                <li class="au-theme-border-color--base-8">primary</li>
+                <li class="au-theme-border-color--base-8">success</li>
+                <li class="au-theme-border-color--base-8">warning</li>
+                <li class="au-theme-border-color--base-8">danger</li>
+              </ol>
+            </td>
+            <td>
+              消息类型
+            </td>
+          </tr>
+          <tr>
+            <td>icon</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link>
+            </td>
+            <td>
+              消息图标<br>
+              默认图标会随type的不同而不同
+            </td>
+          </tr>
+          <tr>
             <td>confirm</td>
             <td>
               <au-icon type="times"></au-icon>

@@ -109,7 +109,7 @@
             </td>
             <td>
               消息图标<br>
-              默认图标会随type的不同而不同
+              默认图标会随messageType的不同而不同
             </td>
           </tr>
           <tr>

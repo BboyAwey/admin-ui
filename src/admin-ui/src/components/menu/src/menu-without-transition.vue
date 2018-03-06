@@ -566,9 +566,7 @@
           let pos = href.indexOf(url)
           if (pos !== -1) {
             let rest = href.slice(href.indexOf(url) + url.length)
-            return rest.indexOf('/') === -1 ||
-              (/^\/\?/g.test(rest) && rest.substring(2).indexOf('/') === -1) ||
-              (/\/$/g.test(rest))
+            return !rest || rest === '/' || /^\s*\/+\s*$/.test(rest)
           }
           return false
         }

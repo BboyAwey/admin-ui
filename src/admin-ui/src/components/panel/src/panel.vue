@@ -49,7 +49,7 @@
       au-theme-border-color--base-8
       au-theme-font-color--base-3
       au-theme-border-radius--normal
-      au-theme-box-shadow--level-1">
+      ">
     <h3 v-if="title"
       class="
         au-panel-title

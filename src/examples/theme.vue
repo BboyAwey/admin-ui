@@ -42,48 +42,48 @@
         AdminUi.theme({
           colors: {
             'base-0': '#000',
-            'base-1': '#303030',
-            'base-2': '#444144',
-            'base-3': '#625f64 ',
-            'base-4': '#666666',
-            'base-5': '#a09da0',
-            'base-6': '#bebbbf',
-            'base-7': '#9e9e9e',
-            'base-8': '#dcdcdc',
-            'base-9': '#cccccc',
-            'base-10': '#ededed',
-            'base-11': '#f7f7f7',
+            'base-1': '#232a29',
+            'base-2': '#2f3938',
+            'base-3': '#44514f ',
+            'base-4': '#616e6c',
+            'base-5': '#7c8886',
+            'base-6': '#b1bbba',
+            'base-7': '#d9dedd',
+            'base-8': '#eaf0ef',
+            'base-9': '#f3f7f6',
+            'base-10': '#f7fcfb',
+            'base-11': '#fdfdfd',
             'base-12': '#fff',
 
-            'primary-1': '#042039', // TODO:
+            'primary-1': '#01241d',
             'primary-2': '#3fd5b8',
             'primary-3': '#19bc9d',
             'primary-4': '#169f85',
-            'primary-5': '#c7e5ff', // TODO:
+            'primary-5': '#e7f7f4',
 
-            'info-1': '#062846', // TODO:
+            'info-1': '#011725',
             'info-2': '#f0faf8',
             'info-3': '#3498db',
             'info-4': '#2d82ba',
-            'info-5': '#ceecff', // TODO:
+            'info-5': '#e6f3fc',
 
-            'warning-1': '#322600', // TODO:
+            'warning-1': '#251800',
             'warning-2': '#fec564',
             'warning-3': '#ffb433',
             'warning-4': '#e99b14',
-            'warning-5': '#ffe9b2', // TODO:
+            'warning-5': '#fbf3e5',
 
-            'danger-1': '#400c10', // TODO:
+            'danger-1': '#220401',
             'danger-2': '#f56354',
             'danger-3': '#e74c3c',
             'danger-4': '#c33a2c',
-            'danger-5': '#ffbcc2', // TODO:
+            'danger-5': '#fae7e5',
 
-            'success-1': '#00301e', // TODO:
+            'success-1': '#012401',
             'success-2': '#7fcb7f',
             'success-3': '#5cb95c',
             'success-4': '#3da63d',
-            'success-5': '#ace6ce' // TODO:
+            'success-5': '#e7fae7'
           },
           shadows: {
             'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
@@ -289,6 +289,62 @@
           au-theme-border-radius--my-radius
         "></div>
       `'></code-h>
+    </au-panel>
+    <au-panel class="section">
+      <h4 class="title-1">配色参考</h4>
+      <p class="paragraph">
+        有时候你可能不希望自己配置颜色，但又不想使用官方默认配色，所以我们提供一些配色方案供你选择。
+      </p>
+      <h4 class="title-2">蓝色主题（Admin-UI 2的默认主题）：</h4>
+      <code-h lang="js">
+        {
+          colors: {
+            'base-0': '#000',
+            'base-1': '#3c4147',
+            'base-2': '#575e66',
+            'base-3': '#757f8a ',
+            'base-4': '#8b97a3',
+            'base-5': '#a4b0bc',
+            'base-6': '#b4bdc8',
+            'base-7': '#cbd1d9',
+            'base-8': '#d8dde6',
+            'base-9': '#e6ecf2',
+            'base-10': '#eef5f9',
+            'base-11': '#f7fafb',
+            'base-12': '#fff',
+
+            'primary-1': '#042039',
+            'primary-2': '#1c7dd2',
+            'primary-3': '#1c86e2',
+            'primary-4': '#1e8cee',
+            'primary-5': '#c7e5ff',
+
+            'info-1': '#062846',
+            'info-2': '#2391d7',
+            'info-3': '#32a2ea',
+            'info-4': '#37aefa',
+            'info-5': '#ceecff',
+
+            'warning-1': '#322600',
+            'warning-2': '#eea806',
+            'warning-3': '#f5ae08',
+            'warning-4': '#fab612',
+            'warning-5': '#ffe9b2',
+
+            'danger-1': '#400c10',
+            'danger-2': '#e03743',
+            'danger-3': '#ea3a46',
+            'danger-4': '#f53e50',
+            'danger-5': '#ffbcc2',
+
+            'success-1': '#00301e',
+            'success-2': '#0cae6c',
+            'success-3': '#0cb470',
+            'success-4': '#0ebc74',
+            'success-5': '#ace6ce'
+          }
+        }
+      </code-h>
     </au-panel>
   </div>
 </template>

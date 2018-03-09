@@ -3,12 +3,8 @@
   // @import "../../../style/fade";
   .au-popover {
     position: absolute;
-    // top: -99999;
-    // left: -99999;
     z-index: $z-level-1;
     line-height: inherit;
-    // min-height: 30px;
-    // opacity: .95;
   }
   .au-popover:focus {
     outline: none;
@@ -137,6 +133,15 @@
   import { getElementSize, getElementPagePos, isAncestor } from '../../../helpers/dom'
   import { namespace } from '../../../helpers/utils'
 
+  function getRealZIndex (el) {
+    if (!el || el === document) return 0
+    let zIndex = 0
+    zIndex = window.getComputedStyle(el).zIndex
+    zIndex = (zIndex === 'auto' || !zIndex) ? 0 : parseInt(zIndex)
+    zIndex = zIndex + (el.parentNode ? getRealZIndex(el.parentNode) : 0)
+    return zIndex
+  }
+
   export default {
     name: 'au-popover',
     props: {
@@ -162,10 +167,11 @@
         default: '0px'
       },
       hideOnBlur: Boolean
+      // zIndex: [String, Number]
     },
     data () {
       return {
-        display: false,
+        visible: false,
         originPopSize: {},
         localPlacement: '',
         rootIndex: 0
@@ -198,7 +204,7 @@
         this.removeEvents()
         this.addEvents()
       },
-      display (v) {
+      visible (v) {
         if (v) this.$emit('show')
         else this.$emit('hide')
       },
@@ -223,7 +229,7 @@
         let target = this.getTarget()
         let pop = this.$refs.pop
         let id = 'au-popover-' + this._uid
-
+        let zIndex = getRealZIndex(pop.parentNode) || 9999 // sometimes it will use in a modal or other elements witch has z-index style
         // register popover on root
         pop.setAttribute('data-au-popover', id)
         namespace.set('au-popover-' + id, this)
@@ -231,6 +237,7 @@
         if (target.parentNode === pop) {
           pop.parentNode.insertBefore(target, pop)
           pop.parentNode.removeChild(pop)
+          pop.style.zIndex = zIndex
         }
         // if (pop.parentNode !== document.body) document.body.appendChild(pop)
       },
@@ -251,17 +258,17 @@
       },
       handleClick () {
         if (this.trigger === 'click') {
-          this.display ? this.hide() : this.show()
+          this.visible ? this.hide() : this.show()
         }
       },
       // handleBlur (e) { // pop blur
-      //   if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
+      //   if (this.trigger === 'click' && this.visible && this.hideOnBlur) this.hide()
       // },
       handleMouseover () {
         this.show()
       },
       handleMouseout () {
-        if (this.trigger !== 'click' && this.display) this.hide()
+        if (this.trigger !== 'click' && this.visible) this.hide()
       },
       show () {
         if (this.disabled) return
@@ -272,7 +279,7 @@
         // }
         if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
         this.$refs.pop.focus()
-        this.display = true
+        this.visible = true
         if (!this.$root._auPopovers) this.$root._auPopovers = {}
         this.$root._auPopovers[this._uid] = this
         this.rootIndex = this.$root._auPopovers.length - 1
@@ -282,7 +289,7 @@
         try {
           this.$refs.pop.parentNode.removeChild(this.$refs.pop)
         } catch (e) {}
-        this.display = false
+        this.visible = false
         if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid]
         // clearInterval(this.calPos.bind(this))
       },
@@ -388,12 +395,12 @@
       },
       handleWindowClick (e) {
         if (this.trigger === 'click' &&
-          this.display && this.hideOnBlur &&
+          this.visible && this.hideOnBlur &&
           !isAncestor(e.target, this.$el) &&
           !isAncestor(e.target, this.getTarget())) this.hide()
       },
       handleWindowResize () {
-        if (this.display) this.calPos()
+        if (this.visible) this.calPos()
       }
     }
   }

@@ -2810,13 +2810,18 @@ module.exports = function (done, value) {
 //
 //
 //
-//
-//
-//
-//
 
 
 
+
+function getRealZIndex(el) {
+  if (!el || el === document) return 0;
+  var zIndex = 0;
+  zIndex = window.getComputedStyle(el).zIndex;
+  zIndex = zIndex === 'auto' || !zIndex ? 0 : parseInt(zIndex);
+  zIndex = zIndex + (el.parentNode ? getRealZIndex(el.parentNode) : 0);
+  return zIndex;
+}
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-popover',
@@ -2843,10 +2848,11 @@ module.exports = function (done, value) {
       default: '0px'
     },
     hideOnBlur: Boolean
+    // zIndex: [String, Number]
   },
   data: function data() {
     return {
-      display: false,
+      visible: false,
       originPopSize: {},
       localPlacement: '',
       rootIndex: 0
@@ -2880,7 +2886,7 @@ module.exports = function (done, value) {
       this.removeEvents();
       this.addEvents();
     },
-    display: function display(v) {
+    visible: function visible(v) {
       if (v) this.$emit('show');else this.$emit('hide');
     },
     disabled: function disabled(v) {
@@ -2905,7 +2911,7 @@ module.exports = function (done, value) {
       var target = this.getTarget();
       var pop = this.$refs.pop;
       var id = 'au-popover-' + this._uid;
-
+      var zIndex = getRealZIndex(pop.parentNode) || 9999; // sometimes it will use in a modal or other elements witch has z-index style
       // register popover on root
       pop.setAttribute('data-au-popover', id);
       __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].set('au-popover-' + id, this);
@@ -2913,6 +2919,7 @@ module.exports = function (done, value) {
       if (target.parentNode === pop) {
         pop.parentNode.insertBefore(target, pop);
         pop.parentNode.removeChild(pop);
+        pop.style.zIndex = zIndex;
       }
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
@@ -2933,18 +2940,18 @@ module.exports = function (done, value) {
     },
     handleClick: function handleClick() {
       if (this.trigger === 'click') {
-        this.display ? this.hide() : this.show();
+        this.visible ? this.hide() : this.show();
       }
     },
 
     // handleBlur (e) { // pop blur
-    //   if (this.trigger === 'click' && this.display && this.hideOnBlur) this.hide()
+    //   if (this.trigger === 'click' && this.visible && this.hideOnBlur) this.hide()
     // },
     handleMouseover: function handleMouseover() {
       this.show();
     },
     handleMouseout: function handleMouseout() {
-      if (this.trigger !== 'click' && this.display) this.hide();
+      if (this.trigger !== 'click' && this.visible) this.hide();
     },
     show: function show() {
       if (this.disabled) return;
@@ -2955,7 +2962,7 @@ module.exports = function (done, value) {
       // }
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop);
       this.$refs.pop.focus();
-      this.display = true;
+      this.visible = true;
       if (!this.$root._auPopovers) this.$root._auPopovers = {};
       this.$root._auPopovers[this._uid] = this;
       this.rootIndex = this.$root._auPopovers.length - 1;
@@ -2965,7 +2972,7 @@ module.exports = function (done, value) {
       try {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop);
       } catch (e) {}
-      this.display = false;
+      this.visible = false;
       if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid];
       // clearInterval(this.calPos.bind(this))
     },
@@ -3069,10 +3076,10 @@ module.exports = function (done, value) {
       pop.style.top = this.y || res.y + 'px';
     },
     handleWindowClick: function handleWindowClick(e) {
-      if (this.trigger === 'click' && this.display && this.hideOnBlur && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["c" /* isAncestor */])(e.target, this.$el) && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["c" /* isAncestor */])(e.target, this.getTarget())) this.hide();
+      if (this.trigger === 'click' && this.visible && this.hideOnBlur && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["c" /* isAncestor */])(e.target, this.$el) && !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["c" /* isAncestor */])(e.target, this.getTarget())) this.hide();
     },
     handleWindowResize: function handleWindowResize() {
-      if (this.display) this.calPos();
+      if (this.visible) this.calPos();
     }
   }
 });

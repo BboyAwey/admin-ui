@@ -48,7 +48,7 @@
       au-theme-background-color--base-12
       au-theme-border-color--base-8
       au-theme-font-color--base-3
-      au-theme-border-radius--normal
+      au-theme-border-radius--large
       ">
     <h3 v-if="title"
       class="

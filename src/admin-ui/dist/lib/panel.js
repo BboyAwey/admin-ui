@@ -101,7 +101,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "\n    au-panel\n    au-theme-background-color--base-12\n    au-theme-border-color--base-8\n    au-theme-font-color--base-3\n    au-theme-border-radius--normal\n    "
+        "\n    au-panel\n    au-theme-background-color--base-12\n    au-theme-border-color--base-8\n    au-theme-font-color--base-3\n    au-theme-border-radius--large\n    "
     },
     [
       _vm.title

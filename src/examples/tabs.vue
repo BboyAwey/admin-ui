@@ -391,58 +391,58 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'tabs-examples',
-    data () {
-      return {
-        current: 'baseInfo',
-        tabs: [
-          {
-            name: 'baseInfo',
-            text: '基本信息'
+export default {
+  name: 'tabs-examples',
+  data () {
+    return {
+      current: 'baseInfo',
+      tabs: [
+        {
+          name: 'baseInfo',
+          text: '基本信息'
+        },
+        {
+          name: 'externalResource',
+          text: '列表信息'
+        }
+      ],
+      tabCounter: 0,
+      validators: [
+        {
+          validator (v) {
+            return v !== '' && !/^\s+$/g.test(v)
           },
-          {
-            name: 'externalResource',
-            text: '列表信息'
-          }
-        ],
-        tabCounter: 0,
-        validators: [
-          {
-            validator (v) {
-              return v !== '' && !/^\s+$/g.test(v)
-            },
-            warning: '必须输入新名称'
+          warning: '必须输入新名称'
+        },
+        {
+          validator (v) {
+            return new Promise((resolve, reject) => {
+              setTimeout(function () {
+                if (v.indexOf('有间客栈') !== -1) resolve(true)
+                else resolve(false)
+              }, 2000)
+            })
           },
-          {
-            validator (v) {
-              return new Promise((resolve, reject) => {
-                setTimeout(function () {
-                  if (v.indexOf('有间客栈') !== -1) resolve(true)
-                  else resolve(false)
-                }, 2000)
-              })
-            },
-            warning: '请在输入中包含“有间客栈”',
-            async: true
-          }
-        ]
-      }
+          warning: '请在输入中包含“有间客栈”',
+          async: true
+        }
+      ]
+    }
+  },
+  methods: {
+    remove (index, tab) {
+      this.tabs.splice(index, 1)
+      if (this.current === tab.name) this.current = this.tabs[0].name
     },
-    methods: {
-      remove (index, tab) {
-        this.tabs.splice(index, 1)
-        if (this.current === tab.name) this.current = this.tabs[0].name
-      },
-      create (text) {
-        this.tabs.push({
-          name: 'tab' + this.tabCounter++,
-          text: text || 'tab' + this.tabCounter
-        })
-      },
-      rename (newText, index, tab) {
-        this.$set(this.tabs[index], 'text', newText)
-      }
+    create (text) {
+      this.tabs.push({
+        name: 'tab' + this.tabCounter++,
+        text: text || 'tab' + this.tabCounter
+      })
+    },
+    rename (newText, index, tab) {
+      this.$set(this.tabs[index], 'text', newText)
     }
   }
+}
 </script>

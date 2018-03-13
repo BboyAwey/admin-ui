@@ -1,30 +1,16 @@
 .DS_Store
 node_modules/
-dist/
-admin-ui/dist/
+/dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-test/unit/coverage
-test/e2e/reports
-selenium-debug.log
+/test/unit/coverage/
+/src/admin-ui/dist/
 
 # Editor directories and files
 .idea
+.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-.history/
-
-# documentation build files
-documentation/node_modules/
-documentation/_book/
-documentation/*.epub
-documentation/*.mobi
-documentation/*.pdf
-
-
-
-
-

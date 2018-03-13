@@ -432,17 +432,25 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'rangepicker-examples',
-    data () {
-      return {
-        range: {}
-      }
-    },
-    watch: {
-      range (r) {
-        console.log(r)
-      }
+export default {
+  name: 'rangepicker-examples',
+  mounted () {
+    this.range = {
+      startDate: '2018-2-1',
+      startTime: '10:10:10',
+      endDate: '',
+      endTime: ''
+    }
+  },
+  data () {
+    return {
+      range: {}
+    }
+  },
+  watch: {
+    range (r) {
+      console.log(r)
     }
   }
+}
 </script>

@@ -30,123 +30,123 @@
   </div>
 </template>
 <script>
-  import AuIcon from '../../icon'
-  import AuButton from '../../button'
-  import MessageBox from '../../message-box'
+import AuIcon from '../../icon'
+import AuButton from '../../button'
+import MessageBox from '../../message-box'
 
-  export default {
-    name: 'au-tabs',
-    components: { AuIcon, AuButton },
-    data () {
-      return {
-        localCurrent: this.current
+export default {
+  name: 'au-tabs',
+  components: { AuIcon, AuButton },
+  data () {
+    return {
+      localCurrent: this.current
+    }
+  },
+  props: {
+    tabs: {
+      type: Array,
+      default () {
+        return []
       }
     },
-    props: {
-      tabs: {
-        type: Array,
-        default () {
-          return []
-        }
-      },
-      current: [String, Number],
-      canRemove: Boolean,
-      canRename: Boolean,
-      canCreate: Boolean,
-      creatingModal: {
-        type: Boolean,
-        default: true
-      },
-      removeMessage: String,
-      renameMessage: String,
-      renameValidators: {
-        type: Array,
-        default () { return [] }
-      },
-      createMessage: String,
-      createValidators: {
-        type: Array,
-        default () { return [] }
-      }
+    current: [String, Number],
+    canRemove: Boolean,
+    canRename: Boolean,
+    canCreate: Boolean,
+    creatingModal: {
+      type: Boolean,
+      default: true
     },
-    watch: {
-      current (v) {
-        if (this.localCurrent !== v) {
-          this.localCurrent = v
-          this.toggleTabs(v)
-        }
-      }
+    removeMessage: String,
+    renameMessage: String,
+    renameValidators: {
+      type: Array,
+      default () { return [] }
     },
-    mounted () {
-      if (this.localCurrent) this.toggleContents()
-    },
-    methods: {
-      toggleTabs (name, e) {
-        if (e && e.target.parentNode.className === 'au-tabs-active') return false
-        this.localCurrent = name
-        this.$emit('toggle', name, e)
-        this.$nextTick(() => this.toggleContents(name))
-      },
-      toggleContents () {
-        let name = this.localCurrent
-        let _cons = this.$el.querySelectorAll('.au-tabs-container>*')
-        let _activeEl = this.$el.querySelectorAll(`.au-tabs-container>*[name="${name}"]`)
-        let cons = []
-        let activeEl = null
-        for (let con of _cons) {
-          if (con.parentNode === this.$refs.contents) cons.push(con)
-        }
-        for (let el of _activeEl) {
-          if (el.parentNode === this.$refs.contents) {
-            activeEl = el
-            break
-          }
-        }
-        if (activeEl) {
-          for (var i = 0, len = cons.length; i < len; i++) {
-            cons[i].style.display = 'none'
-          }
-          activeEl.style.display = 'block'
-        }
-      },
-      remove (index, tab) {
-        let vm = this
-        MessageBox.confirm({
-          'message': vm.removeMessage || `确定要删除标签 “${tab.text}” 吗？`,
-          confirm () {
-            vm.$emit('remove', index, tab)
-            vm.toggleContents()
-          }
-        })
-      },
-      create () {
-        let vm = this
-        if (this.creatingModal) {
-          MessageBox.prompt({
-            'message': vm.createMessage || `请输入新标签的名称:`,
-            reset: true,
-            confirm (v) {
-              vm.$emit('create', v)
-            },
-            validators: vm.createValidators
-          })
-        } else {
-          vm.$emit('create')
-        }
-      },
-      rename (index, tab) {
-        let vm = this
-        MessageBox.prompt({
-          'message': vm.renameMessage || `重命名标签 “${tab.text}” 为:`,
-          reset: tab.text,
-          confirm (v) {
-            vm.$emit('rename', v, index, tab)
-          },
-          validators: vm.renameValidators
-        })
+    createMessage: String,
+    createValidators: {
+      type: Array,
+      default () { return [] }
+    }
+  },
+  watch: {
+    current (v) {
+      if (this.localCurrent !== v) {
+        this.localCurrent = v
+        this.toggleTabs(v)
       }
     }
+  },
+  mounted () {
+    if (this.localCurrent) this.toggleContents()
+  },
+  methods: {
+    toggleTabs (name, e) {
+      if (e && e.target.parentNode.className === 'au-tabs-active') return false
+      this.localCurrent = name
+      this.$emit('toggle', name, e)
+      this.$nextTick(() => this.toggleContents(name))
+    },
+    toggleContents () {
+      let name = this.localCurrent
+      let _cons = this.$el.querySelectorAll('.au-tabs-container>*')
+      let _activeEl = this.$el.querySelectorAll(`.au-tabs-container>*[name="${name}"]`)
+      let cons = []
+      let activeEl = null
+      for (let con of _cons) {
+        if (con.parentNode === this.$refs.contents) cons.push(con)
+      }
+      for (let el of _activeEl) {
+        if (el.parentNode === this.$refs.contents) {
+          activeEl = el
+          break
+        }
+      }
+      if (activeEl) {
+        for (var i = 0, len = cons.length; i < len; i++) {
+          cons[i].style.display = 'none'
+        }
+        activeEl.style.display = 'block'
+      }
+    },
+    remove (index, tab) {
+      let vm = this
+      MessageBox.confirm({
+        'message': vm.removeMessage || `确定要删除标签 “${tab.text}” 吗？`,
+        confirm () {
+          vm.$emit('remove', index, tab)
+          vm.toggleContents()
+        }
+      })
+    },
+    create () {
+      let vm = this
+      if (this.creatingModal) {
+        MessageBox.prompt({
+          'message': vm.createMessage || `请输入新标签的名称:`,
+          reset: true,
+          confirm (v) {
+            vm.$emit('create', v)
+          },
+          validators: vm.createValidators
+        })
+      } else {
+        vm.$emit('create')
+      }
+    },
+    rename (index, tab) {
+      let vm = this
+      MessageBox.prompt({
+        'message': vm.renameMessage || `重命名标签 “${tab.text}” 为:`,
+        reset: tab.text,
+        confirm (v) {
+          vm.$emit('rename', v, index, tab)
+        },
+        validators: vm.renameValidators
+      })
+    }
   }
+}
 </script>
 <style lang="scss">
   @import '../../../style/vars';

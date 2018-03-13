@@ -103,145 +103,145 @@
   </div>
 </template>
 <script>
-  import { getElementSize, getWindowSize } from '../../../helpers/dom'
-  import AuButton from '../../button'
-  import AuIcon from '../../icon'
-  import AuScroller from '../../scroller'
+import { getElementSize, getWindowSize } from '../../../helpers/dom'
+import AuButton from '../../button'
+import AuIcon from '../../icon'
+import AuScroller from '../../scroller'
 
-  export default {
-    name: 'au-modal',
-    components: { AuButton, AuIcon, AuScroller },
-    mounted () {
-      window.addEventListener('resize', this.resizeHandler)
+export default {
+  name: 'au-modal',
+  components: { AuButton, AuIcon, AuScroller },
+  mounted () {
+    window.addEventListener('resize', this.resizeHandler)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.resizeHandler)
+  },
+  data () {
+    return {
+      localDisplay: this.visible
+    }
+  },
+  props: {
+    visible: {
+      type: Boolean
     },
-    destroyed () {
-      window.removeEventListener('resize', this.resizeHandler)
+    title: {
+      type: String
     },
-    data () {
-      return {
-        localDisplay: this.visible
-      }
+    buttons: {
+      type: Array
     },
-    props: {
-      visible: {
-        type: Boolean
-      },
-      title: {
-        type: String
-      },
-      buttons: {
-        type: Array
-      },
-      width: {
-        type: [String, Number]
-      },
-      height: {
-        type: [String, Number]
-      },
-      onEnter: String
+    width: {
+      type: [String, Number]
     },
-    watch: {
-      visible (v) {
-        this.localDisplay = v
-        if (v) {
-          this.calcModalStyle()
-          this.calModalContentStyle()
-          window.addEventListener('keyup', this.escHandler)
-          if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
-        } else {
-          window.removeEventListener('keyup', this.escHandler)
-          if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
-        }
-      },
-      localDisplay (v) {
-        this.$emit(v ? 'show' : 'hide')
-      }
+    height: {
+      type: [String, Number]
     },
-    computed: {
-      buttonList () {
-        let buttons = this.buttons
-        let buttonList = []
-        if (buttons instanceof Array) {
-          buttons.forEach(button => {
-            if (typeof button === 'string') {
-              if (this.builtInButtons[button]) buttonList.push(this.builtInButtons[button])
-            } else if (typeof button === 'object') {
-              buttonList.push(button)
-            }
-          })
-        }
-        return buttonList
-      }
-    },
-    methods: {
-      hide () {
-        this.localDisplay = false
-      },
-      show () {
-        this.localDisplay = true
-      },
-      operate (button) {
-        let vm = this
-        button.handler.call(this.$parent, {
-          start () {
-            vm.$set(button, 'loading', true)
-          },
-          stop () {
-            vm.$set(button, 'loading', false)
-          }
-        })
-      },
-      calcModalStyle () {
-        // width and height has to be legal css value
-        let { width, height } = this
-        let maxWidth = null
-        let maxHeight = null
-        let winSize = getWindowSize()
-        // if not given height we should set a max height
-        if (!height) maxHeight = winSize.height - 80 + 'px'
-        // if not given width
-        if (!width) maxWidth = winSize.width - 200 + 'px'
-
-        let modalStyle = {
-          [maxWidth ? 'max-width' : 'width']: maxWidth || width,
-          [maxHeight ? 'max-height' : 'height']: maxHeight || height
-        }
-
-        for (let key in modalStyle) {
-          this.$refs.modal.style[key] = modalStyle[key]
-        }
-      },
-      calModalContentStyle () {
-        // clear the prev result
-        if (!this.height) this.$refs.content.style.height = 'auto'
-
-        let operationHeight = 0
-        let titleHeight = 0
-        if (this.buttonList.length && this.$refs.operations) {
-          operationHeight = getElementSize(this.$refs.operations).height
-        }
-        if (this.title) {
-          titleHeight = getElementSize(this.$refs.title).height
-        }
-        let modalHeight = getElementSize(this.$refs.modal).height
-
-        // we need to minus the padding value of modal and opreation divs and the decline height
-        this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
-      },
-      resizeHandler () {
+    onEnter: String
+  },
+  watch: {
+    visible (v) {
+      this.localDisplay = v
+      if (v) {
         this.calcModalStyle()
         this.calModalContentStyle()
-      },
-      escHandler (e) {
-        if (e.keyCode !== 27) return
-        this.hide()
-      },
-      enterHandler (e) {
-        if (e.keyCode !== 13) return
-        this.buttonList.forEach(button => {
-          if (button.text === this.onEnter) this.operate(button)
+        window.addEventListener('keyup', this.escHandler)
+        if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
+      } else {
+        window.removeEventListener('keyup', this.escHandler)
+        if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
+      }
+    },
+    localDisplay (v) {
+      this.$emit(v ? 'show' : 'hide')
+    }
+  },
+  computed: {
+    buttonList () {
+      let buttons = this.buttons
+      let buttonList = []
+      if (buttons instanceof Array) {
+        buttons.forEach(button => {
+          if (typeof button === 'string') {
+            if (this.builtInButtons[button]) buttonList.push(this.builtInButtons[button])
+          } else if (typeof button === 'object') {
+            buttonList.push(button)
+          }
         })
       }
+      return buttonList
+    }
+  },
+  methods: {
+    hide () {
+      this.localDisplay = false
+    },
+    show () {
+      this.localDisplay = true
+    },
+    operate (button) {
+      let vm = this
+      button.handler.call(this.$parent, {
+        start () {
+          vm.$set(button, 'loading', true)
+        },
+        stop () {
+          vm.$set(button, 'loading', false)
+        }
+      })
+    },
+    calcModalStyle () {
+      // width and height has to be legal css value
+      let { width, height } = this
+      let maxWidth = null
+      let maxHeight = null
+      let winSize = getWindowSize()
+      // if not given height we should set a max height
+      if (!height) maxHeight = winSize.height - 80 + 'px'
+      // if not given width
+      if (!width) maxWidth = winSize.width - 200 + 'px'
+
+      let modalStyle = {
+        [maxWidth ? 'max-width' : 'width']: maxWidth || width,
+        [maxHeight ? 'max-height' : 'height']: maxHeight || height
+      }
+
+      for (let key in modalStyle) {
+        this.$refs.modal.style[key] = modalStyle[key]
+      }
+    },
+    calModalContentStyle () {
+      // clear the prev result
+      if (!this.height) this.$refs.content.style.height = 'auto'
+
+      let operationHeight = 0
+      let titleHeight = 0
+      if (this.buttonList.length && this.$refs.operations) {
+        operationHeight = getElementSize(this.$refs.operations).height
+      }
+      if (this.title) {
+        titleHeight = getElementSize(this.$refs.title).height
+      }
+      let modalHeight = getElementSize(this.$refs.modal).height
+
+      // we need to minus the padding value of modal and opreation divs and the decline height
+      this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
+    },
+    resizeHandler () {
+      this.calcModalStyle()
+      this.calModalContentStyle()
+    },
+    escHandler (e) {
+      if (e.keyCode !== 27) return
+      this.hide()
+    },
+    enterHandler (e) {
+      if (e.keyCode !== 13) return
+      this.buttonList.forEach(button => {
+        if (button.text === this.onEnter) this.operate(button)
+      })
     }
   }
+}
 </script>

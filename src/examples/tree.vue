@@ -193,74 +193,72 @@
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        treeData: [
-          {
-            label: '行为分析',
-            checked: true,
-            children: [
-              {
-                label: '时间',
-                checked: true,
-                children: [
-                  {
-                    label: '二级',
-                    checked: true,
-                    children: [
-                      {
-                        label: '三一级',
-                        checked: false
-                      },
-                      {
-                        label: '三二级',
-                        checked: true
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                label: '操作类型',
-                checked: true
-              }
-            ]
-          },
-          {
-            label: '漏斗分析',
-            checked: true
-          },
-          {
-            label: '路径分析',
-            checked: true
-          }
-        ]
-      }
+export default {
+  data () {
+    return {
+      treeData: [
+        {
+          label: '行为分析',
+          checked: true,
+          children: [
+            {
+              label: '时间',
+              checked: true,
+              children: [
+                {
+                  label: '二级',
+                  checked: true,
+                  children: [
+                    {
+                      label: '三一级',
+                      checked: false
+                    },
+                    {
+                      label: '三二级',
+                      checked: true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              label: '操作类型',
+              checked: true
+            }
+          ]
+        },
+        {
+          label: '漏斗分析',
+          checked: true
+        },
+        {
+          label: '路径分析',
+          checked: true
+        }
+      ]
+    }
+  },
+  methods: {
+    treeChange (item, items, e) {
+      console.dir(item)
+      console.dir(items)
+      console.dir(e)
     },
-    methods: {
-      treeChange (item, items, e) {
-        console.dir(item)
-        console.dir(items)
-        console.dir(e)
-      },
-      nodeClick (item, items, e) {
-        console.dir(item)
-        console.dir(items)
-        console.dir(e)
-      },
-      nodeExpand (item, items, e) {
-        console.dir(item)
-        console.dir(items)
-        console.dir(e)
-      },
-      nodeCollapse (item, items, e) {
-        console.dir(item)
-        console.dir(items)
-        console.dir(e)
-      }
+    nodeClick (item, items, e) {
+      console.dir(item)
+      console.dir(items)
+      console.dir(e)
+    },
+    nodeExpand (item, items, e) {
+      console.dir(item)
+      console.dir(items)
+      console.dir(e)
+    },
+    nodeCollapse (item, items, e) {
+      console.dir(item)
+      console.dir(items)
+      console.dir(e)
     }
   }
+}
 </script>
-
-

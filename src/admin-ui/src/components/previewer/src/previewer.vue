@@ -154,92 +154,86 @@
   </div>
 </template>
 <script>
-  // Author: Awey
-  // email: chenwei@rongcapital.cn
-  // github: https://github.com/BboyAwey
-  // blog: http://www.jianshu.com/u/3c8fe1455914
+import Icon from '../../icon'
 
-  // Modifier:
-  import Icon from '../../icon'
-
-  export default {
-    name: 'au-previewer',
-    components: { Icon },
-    mounted () {
-      // window.document.body.appendChild(this.$refs.previewer)
+export default {
+  name: 'au-previewer',
+  components: { Icon },
+  mounted () {
+    // window.document.body.appendChild(this.$refs.previewer)
+  },
+  data () {
+    return {
+      localDisplay: this.visible,
+      localCurrent: this.isCurrentIllegal(this.current) ? this.current : 0
+    }
+  },
+  props: {
+    images: {
+      type: Array,
+      required: true
     },
-    data () {
-      return {
-        localDisplay: this.visible,
-        localCurrent: this.isCurrentIllegal(this.current) ? this.current : 0
-      }
+    visible: {
+      required: true
     },
-    props: {
-      images: {
-        type: Array,
-        required: true
-      },
-      visible: {
-        required: true
-      },
-      current: {
-        type: [Number, String],
-        default: 0
-      }
-    },
-    computed: {
-      currentImgAlt () {
-        if (this.images && this.images.length) {
-          return this.images[this.localCurrent].alt
-        } else {
-          return ''
-        }
-      }
-    },
-    watch: {
-      visible (v) {
-        this.localDisplay = v
-      },
-      localDisplay (v) {
-        if (v) {
-          document.body.appendChild(this.$refs.previewer)
-          this.$emit('show', this.images[this.localCurrent])
-          window.addEventListener('keyup', this.escHandler)
-        } else {
-          this.$emit('hide', this.images[this.localCurrent])
-          window.removeEventListener('keyup', this.escHandler)
-        }
-      },
-      current (v) {
-        this.localCurrent = v
-      },
-      localCurrent (v) {
-        this.$emit('toggle', this.images[this.localCurrent])
-      }
-    },
-    methods: {
-      close () {
-        this.localDisplay = false
-      },
-      prev () {
-        if (this.localCurrent > 0) --this.localCurrent
-      },
-      next () {
-        if (this.localCurrent < this.images.length - 1) ++this.localCurrent
-      },
-      isCurrentIllegal (c) {
-        if (!(this.images && this.images.length)) return true
-        c = Number(c)
-        return c >= 0 && c <= this.images.length - 1
-      },
-      allow (direc) {
-        if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0
-        else return this.images && this.images.length && this.localCurrent < this.images.length - 1
-      },
-      escHandler (e) {
-        if (e.keyCode !== 27) return
-        this.close()
+    current: {
+      type: [Number, String],
+      default: 0
+    }
+  },
+  computed: {
+    currentImgAlt () {
+      if (this.images && this.images.length) {
+        return this.images[this.localCurrent].alt
+      } else {
+        return ''
       }
     }
+  },
+  watch: {
+    visible (v) {
+      this.localDisplay = v
+    },
+    localDisplay (v) {
+      if (v) {
+        document.body.appendChild(this.$refs.previewer)
+        this.$emit('show', this.images[this.localCurrent])
+        window.addEventListener('keyup', this.escHandler)
+      } else {
+        this.$emit('hide', this.images[this.localCurrent])
+        window.removeEventListener('keyup', this.escHandler)
+      }
+    },
+    current (v) {
+      this.localCurrent = v
+    },
+    localCurrent (v) {
+      this.$emit('toggle', this.images[this.localCurrent])
+    }
+  },
+  methods: {
+    close () {
+      this.localDisplay = false
+    },
+    prev () {
+      if (this.localCurrent > 0) --this.localCurrent
+    },
+    next () {
+      if (this.localCurrent < this.images.length - 1) ++this.localCurrent
+    },
+    isCurrentIllegal (c) {
+      if (!(this.images && this.images.length)) return true
+      c = Number(c)
+      return c >= 0 && c <= this.images.length - 1
+    },
+    allow (direc) {
+      if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0
+      else return this.images && this.images.length && this.localCurrent < this.images.length - 1
+    },
+    escHandler (e) {
+      if (e.keyCode !== 27) return
+      this.close()
+    }
   }
+}
 </script>

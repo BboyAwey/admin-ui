@@ -322,38 +322,38 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'radio-examples',
-    data () {
-      return {
-        values: [],
-        radios: [
-          {
-            text: 'Breaking',
-            value: 'b'
+export default {
+  name: 'radio-examples',
+  data () {
+    return {
+      values: [],
+      radios: [
+        {
+          text: 'Breaking',
+          value: 'b'
+        },
+        {
+          text: 'Jazz',
+          value: 'j'
+        },
+        {
+          text: 'Popppin',
+          value: 'p'
+        },
+        {
+          text: 'Locking',
+          value: 'l'
+        }
+      ],
+      validators: [
+        {
+          validator (v) {
+            return v === 'b'
           },
-          {
-            text: 'Jazz',
-            value: 'j'
-          },
-          {
-            text: 'Popppin',
-            value: 'p'
-          },
-          {
-            text: 'Locking',
-            value: 'l'
-          }
-        ],
-        validators: [
-          {
-            validator (v) {
-              return v === 'b'
-            },
-            warning: 'If bboy then bboy forever'
-          }
-        ]
-      }
+          warning: 'If bboy then bboy forever'
+        }
+      ]
     }
   }
+}
 </script>

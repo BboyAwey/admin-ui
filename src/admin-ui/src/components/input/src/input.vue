@@ -238,14 +238,14 @@
             tabindex="0"
             @blur="associationsBlur">
             <li
-              v-for="(association, index) in associations"
+              v-for="(association, index) in localAssociations"
               @click="selectAssociation(association)"
               :class="{
                 'au-theme-font-color--base-3': true,
-                'au-theme-background-color--primary-5': association === localValue,
-                'au-theme-hover-background-color--base-10': association !== localValue
+                'au-theme-background-color--primary-5': association._text === localValue,
+                'au-theme-hover-background-color--base-10': association._text !== localValue
               }"
-              :key="index">{{ association }}</li>
+              :key="index">{{ association._text }}</li>
           </ul>
         </au-scroller>
       </span>
@@ -253,88 +253,98 @@
   </div>
 </template>
 <script>
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import FormItem from '../../../helpers/form-item.vue'
-  import AuIcon from '../../icon'
-  import AuScroller from '../../scroller'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import FormItem from '../../../helpers/form-item.vue'
+import AuIcon from '../../icon'
+import AuScroller from '../../scroller'
 
-  export default {
-    name: 'au-input',
-    mixins: [ValidatorMixin, FormApiMixin],
-    components: { AuIcon, AuScroller, FormItem },
-    data () {
-      return {
-        // is the throttlling on
-        // throttlling: true,
-        associationsShow: false,
-        active: false
-      }
+export default {
+  name: 'au-input',
+  mixins: [ValidatorMixin, FormApiMixin],
+  components: { AuIcon, AuScroller, FormItem },
+  data () {
+    return {
+      // is the throttlling on
+      // throttlling: true,
+      associationsShow: false,
+      active: false
+    }
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'text'
     },
-    props: {
-      type: {
-        type: String,
-        default: 'text'
-      },
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      associations: Array,
-      icon: String,
-      iconPosition: String,
-      fullWidth: Boolean,
-      width: {
-        type: String,
-        default: '260px'
-      },
-      height: String,
-      minWidth: String,
-      maxWidth: String,
-      minHeight: String,
-      maxHeight: String
+    placeholder: {
+      type: String,
+      default: ''
     },
-    watch: {
-      associations (v) {
-        // this.associationsShow = true
-      },
-      localValue (v) {
-        this.input()
-        this.change()
-      }
+    associations: Array,
+    icon: String,
+    iconPosition: String,
+    fullWidth: Boolean,
+    width: {
+      type: String,
+      default: '260px'
     },
-    methods: {
-      keyup (e) { this.$emit('keyup', e.target.value, e) },
-      keypress (e) { this.$emit('keypress', e.target.value, e) },
-      keydown (e) { this.$emit('keydown', e.target.value, e) },
-      click (e) {
-        this.$emit('click', e.target.value, e)
-      },
-      selectAssociation (v) {
-        this.localValue = v
-        // this.input()
-        // this.$refs.core.focus()
-        this.associationsShow = false
-      },
-      coreFocus (e) {
-        if (this.readonly) return
-        this.focus(e)
-        this.active = true
-        if (this.associations && this.associations instanceof Array) {
-          this.associationsShow = true
-        }
-      },
-      coreBlur (e) {
-        this.blur(e)
-        this.active = false
-        if (e.relatedTarget !== this.$refs.associations) this.associationsShow = false
-      },
-      associationsBlur (e) {
-        if (e.relatedTarget !== this.$refs.core) this.associationsShow = false
-      },
-      iconClick () {
-        this.$refs.core.focus()
+    height: String,
+    minWidth: String,
+    maxWidth: String,
+    minHeight: String,
+    maxHeight: String
+  },
+  computed: {
+    localAssociations () {
+      if (this.associations) {
+        return this.associations.map(a => {
+          if (typeof a === 'object') return a
+          else return { _text: a }
+        })
+      } else {
+        return null
       }
     }
+  },
+  watch: {
+    localValue (v) {
+      this.input()
+      this.change()
+    }
+  },
+  methods: {
+    keyup (e) { this.$emit('keyup', e.target.value, e) },
+    keypress (e) { this.$emit('keypress', e.target.value, e) },
+    keydown (e) { this.$emit('keydown', e.target.value, e) },
+    click (e) {
+      this.$emit('click', e.target.value, e)
+    },
+    selectAssociation (v) {
+      this.localValue = v._text
+      // this.input()
+      // this.$refs.core.focus()
+      this.associationsShow = false
+      this.$emit('association-select', v)
+    },
+    coreFocus (e) {
+      if (this.readonly) return
+      this.focus(e)
+      this.active = true
+      if (this.associations && this.associations instanceof Array) {
+        this.associationsShow = true
+      }
+    },
+    coreBlur (e) {
+      this.blur(e)
+      this.active = false
+      if (e.relatedTarget !== this.$refs.associations) this.associationsShow = false
+    },
+    associationsBlur (e) {
+      if (e.relatedTarget !== this.$refs.core) this.associationsShow = false
+    },
+    iconClick () {
+      this.$refs.core.focus()
+    }
   }
+}
 </script>

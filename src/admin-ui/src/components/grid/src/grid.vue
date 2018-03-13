@@ -28,175 +28,174 @@
 </template>
 
 <script>
-  // import { hasClass, getElementSize } from '../../../helpers/dom'
-  // import { getElementSize, getWindowSize } from '../../../helpers/dom'
-  import { getWindowSize } from '../../../helpers/dom'
+// import { hasClass, getElementSize } from '../../../helpers/dom'
+// import { getElementSize, getWindowSize } from '../../../helpers/dom'
+import { getWindowSize } from '../../../helpers/dom'
 
-  function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
+function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
 
-  export default {
-    name: 'au-grid',
-    props: {
-      widthLg: {
-        type: [String, Number],
-        validator: validateWidth
-      },
-      widthMd: {
-        type: [String, Number],
-        validator: validateWidth
-      },
-      widthSm: {
-        type: [String, Number],
-        validator: validateWidth
-      },
-      widthXs: {
-        type: [String, Number],
-        validator: validateWidth
-      },
-      offsetLg: {
-        type: [String, Number],
-        default: 0
-      },
-      offsetMd: {
-        type: [String, Number],
-        default: 0
-      },
-      offsetSm: {
-        type: [String, Number],
-        default: 0
-      },
-      offsetXs: {
-        type: [String, Number],
-        default: 0
-      }
+export default {
+  name: 'au-grid',
+  props: {
+    widthLg: {
+      type: [String, Number],
+      validator: validateWidth
     },
-    data () {
-      return {
-        cellNumber: 12,
-        offsetNumber: 0,
-        breakPoint: { // base on this size to pile cells or list them horizontally
-          lg: 1170,
-          md: 970,
-          sm: 750
-        },
-        observer: null,
-        observerCount: 0,
-        observerClock: null
-      }
+    widthMd: {
+      type: [String, Number],
+      validator: validateWidth
     },
-    mounted () {
-      // if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
-      //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
-      // }
-      this.setContainer()
-      this.getNumber()
-      window.addEventListener('resize', this.getNumber)
-      let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-      if (MutationObserver) {
-        let config = {
-          attributes: true,
-          childList: false,
-          subtree: false,
-          characterData: false,
-          attributeOldValue: false,
-          characterDataOldValue: false,
-          attributeFilter: ['style']
-        }
-        let vm = this
-        vm.observer = new MutationObserver(function (mutations) {
-          let hasDisplayChange = false
-          mutations.forEach(m => {
-            if (m.attributeName === 'style' && m.target.style.display !== 'none') {
-              hasDisplayChange = true
-            }
-          })
-          if (hasDisplayChange) {
-            vm.observer.disconnect() // need pause observe to prevent infinity loop
-            vm.$el.parentNode.style.display = 'flex'
-            vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
+    widthSm: {
+      type: [String, Number],
+      validator: validateWidth
+    },
+    widthXs: {
+      type: [String, Number],
+      validator: validateWidth
+    },
+    offsetLg: {
+      type: [String, Number],
+      default: 0
+    },
+    offsetMd: {
+      type: [String, Number],
+      default: 0
+    },
+    offsetSm: {
+      type: [String, Number],
+      default: 0
+    },
+    offsetXs: {
+      type: [String, Number],
+      default: 0
+    }
+  },
+  data () {
+    return {
+      cellNumber: 12,
+      offsetNumber: 0,
+      breakPoint: { // base on this size to pile cells or list them horizontally
+        lg: 1170,
+        md: 970,
+        sm: 750
+      },
+      observer: null,
+      observerCount: 0,
+      observerClock: null
+    }
+  },
+  mounted () {
+    // if (!(this.widthLg || this.widthMd || this.widthSm || this.widthXs)) {
+    //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
+    // }
+    this.setContainer()
+    this.getNumber()
+    window.addEventListener('resize', this.getNumber)
+    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    if (MutationObserver) {
+      let config = {
+        attributes: true,
+        childList: false,
+        subtree: false,
+        characterData: false,
+        attributeOldValue: false,
+        characterDataOldValue: false,
+        attributeFilter: ['style']
+      }
+      let vm = this
+      vm.observer = new MutationObserver(function (mutations) {
+        let hasDisplayChange = false
+        mutations.forEach(m => {
+          if (m.attributeName === 'style' && m.target.style.display !== 'none') {
+            hasDisplayChange = true
           }
         })
-        vm.observer.observe(vm.$el.parentNode, config)
+        if (hasDisplayChange) {
+          vm.observer.disconnect() // need pause observe to prevent infinity loop
+          vm.$el.parentNode.style.display = 'flex'
+          vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
+        }
+      })
+      vm.observer.observe(vm.$el.parentNode, config)
+    }
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.getNumber)
+    if (this.observe) this.observer.disconnect()
+  },
+  watch: {
+    widthLg () {
+      this.getNumber()
+    },
+    widthMd () {
+      this.getNumber()
+    },
+    widthSm () {
+      this.getNumber()
+    },
+    widthXs () {
+      this.getNumber()
+    },
+    offsetLg () {
+      this.getNumber()
+    },
+    offsetMd () {
+      this.getNumber()
+    },
+    offsetSm () {
+      this.getNumber()
+    },
+    offsetXs () {
+      this.getNumber()
+    }
+  },
+  methods: {
+    setContainer () {
+      let container = this.$el.parentNode
+      container.style.display = 'flex'
+      container.style.flexWrap = 'wrap'
+    },
+    getNumber () {
+      this.getCellNumber()
+      this.getOffsetNumber()
+    },
+    getCellNumber () {
+      // let containerWidth = getElementSize(this.$el.parentNode).width
+      let windowWidth = getWindowSize().width
+
+      if (this.widthLg && windowWidth >= this.breakPoint.lg) {
+        this.cellNumber = this.widthLg
+        // this.offsetNumber = this.offsetLg
+      } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
+        this.cellNumber = this.widthMd
+        // this.offsetNumber = this.offsetMd
+      } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
+        this.cellNumber = this.widthSm
+        // this.offsetNumber = this.offsetSm
+      } else if (this.widthXs) {
+        this.cellNumber = this.widthXs
+        // this.offsetNumber = this.offsetXs
+      } else {
+        this.cellNumber = 12
+        // this.offsetNumber = 0
       }
     },
-    destroyed () {
-      window.removeEventListener('resize', this.getNumber)
-      if (this.observe) this.observer.disconnect()
-    },
-    watch: {
-      widthLg () {
-        this.getNumber()
-      },
-      widthMd () {
-        this.getNumber()
-      },
-      widthSm () {
-        this.getNumber()
-      },
-      widthXs () {
-        this.getNumber()
-      },
-      offsetLg () {
-        this.getNumber()
-      },
-      offsetMd () {
-        this.getNumber()
-      },
-      offsetSm () {
-        this.getNumber()
-      },
-      offsetXs () {
-        this.getNumber()
-      }
-    },
-    methods: {
-      setContainer () {
-        let container = this.$el.parentNode
-        container.style.display = 'flex'
-        container.style.flexWrap = 'wrap'
-      },
-      getNumber () {
-        this.getCellNumber()
-        this.getOffsetNumber()
-      },
-      getCellNumber () {
-        // let containerWidth = getElementSize(this.$el.parentNode).width
-        let windowWidth = getWindowSize().width
+    getOffsetNumber () {
+      // let containerWidth = getElementSize(this.$el.parentNode).width
+      let windowWidth = getWindowSize().width
 
-        if (this.widthLg && windowWidth >= this.breakPoint.lg) {
-          this.cellNumber = this.widthLg
-          // this.offsetNumber = this.offsetLg
-        } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
-          this.cellNumber = this.widthMd
-          // this.offsetNumber = this.offsetMd
-        } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
-          this.cellNumber = this.widthSm
-          // this.offsetNumber = this.offsetSm
-        } else if (this.widthXs) {
-          this.cellNumber = this.widthXs
-          // this.offsetNumber = this.offsetXs
-        } else {
-          this.cellNumber = 12
-          // this.offsetNumber = 0
-        }
-      },
-      getOffsetNumber () {
-        // let containerWidth = getElementSize(this.$el.parentNode).width
-        let windowWidth = getWindowSize().width
-
-        if (this.offsetLg && windowWidth >= this.breakPoint.lg) {
-          this.offsetNumber = this.offsetLg
-        } else if (this.offsetMd && windowWidth >= this.breakPoint.md) {
-          this.offsetNumber = this.offsetMd
-        } else if (this.offsetSm && windowWidth >= this.breakPoint.sm) {
-          this.offsetNumber = this.offsetSm
-        } else if (this.offsetXs) {
-          this.offsetNumber = this.offsetXs
-        } else {
-          this.offsetNumber = 0
-        }
+      if (this.offsetLg && windowWidth >= this.breakPoint.lg) {
+        this.offsetNumber = this.offsetLg
+      } else if (this.offsetMd && windowWidth >= this.breakPoint.md) {
+        this.offsetNumber = this.offsetMd
+      } else if (this.offsetSm && windowWidth >= this.breakPoint.sm) {
+        this.offsetNumber = this.offsetSm
+      } else if (this.offsetXs) {
+        this.offsetNumber = this.offsetXs
+      } else {
+        this.offsetNumber = 0
       }
     }
   }
+}
 </script>
-

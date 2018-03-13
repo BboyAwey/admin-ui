@@ -310,63 +310,63 @@
   </div>
 </template>
 <script>
-  import AuIcon from '../../icon'
-  import AuPreviewer from '../../previewer'
-  import methods from './methods'
-  import props from './props'
-  import FormItem from '../../../helpers/form-item.vue'
+import AuIcon from '../../icon'
+import AuPreviewer from '../../previewer'
+import methods from './methods'
+import props from './props'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-upload',
-    components: { AuIcon, AuPreviewer, FormItem },
-    mixins: [methods, props],
-    data () {
-      return {
-        desc: 'this is a file desc. this is a file desc. this is a file desc. this is a file desc. this is a file desc.',
-        files: [],
-        localFileList: this.getValuePreviewInfo(this.value),
-        editingStatus: [],
-        descriptions: [],
-        lastDescriptions: [],
-        fileReader: new window.FileReader(),
-        images: [],
-        previewerVisible: false,
-        currentPreview: 0,
-        mouseenter: false
+export default {
+  name: 'au-upload',
+  components: { AuIcon, AuPreviewer, FormItem },
+  mixins: [methods, props],
+  data () {
+    return {
+      desc: 'this is a file desc. this is a file desc. this is a file desc. this is a file desc. this is a file desc.',
+      files: [],
+      localFileList: this.getValuePreviewInfo(this.value),
+      editingStatus: [],
+      descriptions: [],
+      lastDescriptions: [],
+      fileReader: new window.FileReader(),
+      images: [],
+      previewerVisible: false,
+      currentPreview: 0,
+      mouseenter: false
+    }
+  },
+  watch: {
+    files: {
+      deep: true,
+      handler (v) {
+        this.getFilesPreviewInfo(v).then(files => {
+          if (this.multiple) {
+            this.localFileList = this.localFileList.concat(files)
+          } else {
+            this.localFileList = files
+          }
+          if (this.autoUpload) this.uploadFiles()
+        })
       }
     },
-    watch: {
-      files: {
-        deep: true,
-        handler (v) {
-          this.getFilesPreviewInfo(v).then(files => {
-            if (this.multiple) {
-              this.localFileList = this.localFileList.concat(files)
-            } else {
-              this.localFileList = files
-            }
-            if (this.autoUpload) this.uploadFiles()
-          })
-        }
-      },
-      value: {
-        deep: true,
-        handler (v) {
-          this.localFileList = this.getValuePreviewInfo(v)
-        }
-      },
-      localFileList: {
-        deep: true,
-        handler (v) {
-          if (!this.autoUpload) {
-            this.$emit('input', v)
-            this.$emit('change', v)
-          }
-        }
-      },
-      autoUpload (v) {
-        if (v) this.uploadFiles()
+    value: {
+      deep: true,
+      handler (v) {
+        this.localFileList = this.getValuePreviewInfo(v)
       }
+    },
+    localFileList: {
+      deep: true,
+      handler (v) {
+        if (!this.autoUpload) {
+          this.$emit('input', v)
+          this.$emit('change', v)
+        }
+      }
+    },
+    autoUpload (v) {
+      if (v) this.uploadFiles()
     }
   }
+}
 </script>

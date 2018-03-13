@@ -21,6 +21,8 @@
         <li class="au-theme-border-color--base-8">popover组件新增自动回避屏幕边缘特性，在指定方向空间不足时会尝试反向显示</li>
         <li class="au-theme-border-color--base-8">message-box组件新增icon, messageType字段，可以设置图标了</li>
         <li class="au-theme-border-color--base-8">tag组件新增hoverable接口，指定tag是否响应鼠标hover交互</li>
+        <li class="au-theme-border-color--base-8">input组件associations接口现在支持传入对象数组，同时新增association-select事件</li>
+        <li class="au-theme-border-color--base-8">popover组件新增beforeShow接口</li>
       </ol>
       <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
@@ -40,8 +42,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'change-log'
-  }
+export default {
+  name: 'change-log'
+}
 </script>
-

@@ -37,28 +37,28 @@
 </template>
 
 <script>
-  import menu from './router/menu'
+import menu from './router/menu'
 
-  export default {
-    name: 'app',
-    data () {
-      return {
-        menu,
-        scrollTop: 0
+export default {
+  name: 'app',
+  data () {
+    return {
+      menu,
+      scrollTop: 0
+    }
+  },
+  methods: {
+    go (item) {
+      if (item.url) {
+        this.$router.push({
+          path: item.url
+        })
+        this.scrollTop = 0
       }
     },
-    methods: {
-      go (item) {
-        if (item.url) {
-          this.$router.push({
-            path: item.url
-          })
-          this.scrollTop = 0
-        }
-      },
-      handleScroll (v) {
-        this.scrollTop = v
-      }
+    handleScroll (v) {
+      this.scrollTop = v
     }
   }
+}
 </script>

@@ -126,12 +126,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'paginator-examples',
-    methods: {
-      togglePage (page) {
-        console.log(page)
-      }
+export default {
+  name: 'paginator-examples',
+  methods: {
+    togglePage (page) {
+      console.log(page)
     }
   }
+}
 </script>

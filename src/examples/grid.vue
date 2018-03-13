@@ -15,9 +15,14 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        一个与著名的<a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Bootstrap</a>中的栅格系统设计理念一致的栅格组件。<br>
+        一个与著名的
+        <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Bootstrap</a>
+        中的栅格系统设计理念一致的栅格组件。<br>
         它将父元素的宽度均等划分为12份，通过设置每个栅格占其中几份宽度来进行布局。<br>
-        更准确地讲，是通过设置每个栅格在<span class="emphasize au-theme-font-color--success-3">不同的屏幕宽度下</span>占父元素宽度的十二分之几来进行<span class="emphasize au-theme-font-color--success-3"span>响应式布局</span>。<br>
+        更准确地讲，是通过设置每个栅格在
+        <span class="emphasize au-theme-font-color--success-3">不同的屏幕宽度下</span>
+        占父元素宽度的十二分之几来进行
+        <span class="emphasize au-theme-font-color--success-3">响应式布局</span>。
       </p>
       <!-- 组件示例 -->
       <div class="component-example au-theme-border-color--base-8">
@@ -238,7 +243,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'grid-examples'
-  }
+export default {
+  name: 'grid-examples'
+}
 </script>

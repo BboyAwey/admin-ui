@@ -1,7 +1,3 @@
-<style lang="scss" scoped>
-
-</style>
-
 <template>
   <div class="page">
     <au-panel class="section" title="组件描述">
@@ -192,42 +188,42 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'table-examples',
-    data () {
-      return {
-        list: [
-          {
-            name: 'Cube',
-            date: '2016-12-14',
-            status: '已发布'
-          },
-          {
-            name: 'Cube',
-            date: '2016-12-14',
-            status: '已发布'
-          },
-          {
-            name: 'Cube',
-            date: '2016-12-14',
-            status: '已发布'
-          },
-          {
-            name: 'Cube',
-            date: '2016-12-14',
-            status: '已发布'
-          }
-        ]
-      }
-    },
-    methods: {
-      add () {
-        this.list.push({
+export default {
+  name: 'table-examples',
+  data () {
+    return {
+      list: [
+        {
           name: 'Cube',
           date: '2016-12-14',
           status: '已发布'
-        })
-      }
+        },
+        {
+          name: 'Cube',
+          date: '2016-12-14',
+          status: '已发布'
+        },
+        {
+          name: 'Cube',
+          date: '2016-12-14',
+          status: '已发布'
+        },
+        {
+          name: 'Cube',
+          date: '2016-12-14',
+          status: '已发布'
+        }
+      ]
+    }
+  },
+  methods: {
+    add () {
+      this.list.push({
+        name: 'Cube',
+        date: '2016-12-14',
+        status: '已发布'
+      })
     }
   }
+}
 </script>

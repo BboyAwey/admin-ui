@@ -36,27 +36,27 @@
   </div>
 </template>
 <script>
-  import AuIcon from '../../icon'
-  export default {
-    name: 'au-confirm',
-    components: { AuIcon },
-    props: {
-      message: String,
-      icon: String,
-      messageType: String
-    },
-    computed: {
-      iconType () {
-        if (this.icon) return this.icon
-        switch (this.messageType) {
-          case 'info':
-          case 'primary': return 'info'
-          case 'warning': return 'exclamation'
-          case 'success': return 'check'
-          case 'danger': return 'times'
-          default: return null
-        }
+import AuIcon from '../../icon'
+export default {
+  name: 'au-confirm',
+  components: { AuIcon },
+  props: {
+    message: String,
+    icon: String,
+    messageType: String
+  },
+  computed: {
+    iconType () {
+      if (this.icon) return this.icon
+      switch (this.messageType) {
+        case 'info':
+        case 'primary': return 'info'
+        case 'warning': return 'exclamation'
+        case 'success': return 'check'
+        case 'danger': return 'times'
+        default: return null
       }
     }
   }
+}
 </script>

@@ -35,7 +35,6 @@
         import theme from 'admin-ui/dist/theme'
         theme()
 
-
         // 然后引入并注册组件
         import Button from 'admin-ui/dist/lib/button'
         import Icon from 'admin-ui/dist/lib/icon'
@@ -60,8 +59,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'installtion-examples'
-  }
+export default {
+  name: 'installtion-examples'
+}
 </script>
-

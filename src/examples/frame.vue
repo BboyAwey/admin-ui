@@ -1,6 +1,3 @@
-<style lang="scss" scoped>
-
-</style>
 <template>
   <div class="page">
     <au-panel class="section" title="组件描述">
@@ -122,8 +119,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'frame-examples'
-  }
+export default {
+  name: 'frame-examples'
+}
 </script>
-

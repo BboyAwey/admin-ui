@@ -99,55 +99,55 @@
   </div>
 </template>
 <script>
-  import { getElementSize } from '../../../helpers/dom'
-  import Scroller from '../../scroller'
+import { getElementSize } from '../../../helpers/dom'
+import Scroller from '../../scroller'
 
-  export default {
-    name: 'au-frame',
-    components: { Scroller },
-    created () {
-      window.addEventListener('resize', this.resize)
-    },
-    destroyed () {
-      window.removeEventListener('resize', this.resize)
-    },
-    mounted () {
-      this.resize()
-      this.footerShow = this.$refs.footer.innerHTML !== ''
-    },
-    updated () {
-      this.resize()
-      this.footerShow = this.$refs.footer.innerHTML !== ''
-    },
-    data () {
-      return {
-        footerShow: true
-      }
-    },
-    methods: {
-      resize () {
-        let headerSize = getElementSize(this.$refs.header)
-        let containerSize = getElementSize(this.$refs.container)
-        let contentMainSize = getElementSize(this.$refs.contentMain)
-        let footerSize = null
+export default {
+  name: 'au-frame',
+  components: { Scroller },
+  created () {
+    window.addEventListener('resize', this.resize)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.resize)
+  },
+  mounted () {
+    this.resize()
+    this.footerShow = this.$refs.footer.innerHTML !== ''
+  },
+  updated () {
+    this.resize()
+    this.footerShow = this.$refs.footer.innerHTML !== ''
+  },
+  data () {
+    return {
+      footerShow: true
+    }
+  },
+  methods: {
+    resize () {
+      let headerSize = getElementSize(this.$refs.header)
+      let containerSize = getElementSize(this.$refs.container)
+      let contentMainSize = getElementSize(this.$refs.contentMain)
+      let footerSize = null
 
-        if (this.footerShow) footerSize = getElementSize(this.$refs.footer)
+      if (this.footerShow) footerSize = getElementSize(this.$refs.footer)
 
-        // resize the container of page main part height to full the screen
-        let pageMainheight = containerSize.height - headerSize.height
-        this.$refs.main.style.height = pageMainheight + 'px'
-        // resize the content part width to full the screen
-        // if the content is not high enough
-        if (this.footerShow && contentMainSize.height + footerSize.height < pageMainheight) {
-          if (this.$refs.content.className.indexOf('not-full') === -1) {
-            this.$refs.content.setAttribute('class', this.$refs.content.className + ' not-full')
-          }
-        } else {
-          if (this.$refs.content.className.indexOf('not-full') !== -1) {
-            this.$refs.content.setAttribute('class', this.$refs.content.className.replace('not-full', ''))
-          }
+      // resize the container of page main part height to full the screen
+      let pageMainheight = containerSize.height - headerSize.height
+      this.$refs.main.style.height = pageMainheight + 'px'
+      // resize the content part width to full the screen
+      // if the content is not high enough
+      if (this.footerShow && contentMainSize.height + footerSize.height < pageMainheight) {
+        if (this.$refs.content.className.indexOf('not-full') === -1) {
+          this.$refs.content.setAttribute('class', this.$refs.content.className + ' not-full')
+        }
+      } else {
+        if (this.$refs.content.className.indexOf('not-full') !== -1) {
+          this.$refs.content.setAttribute('class', this.$refs.content.className.replace('not-full', ''))
         }
       }
     }
   }
+}
 </script>

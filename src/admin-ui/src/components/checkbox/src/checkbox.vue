@@ -123,122 +123,122 @@
   </div>
 </template>
 <script>
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import FormItem from '../../../helpers/form-item.vue'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-checkbox',
-    mixins: [ValidatorMixin, FormApiMixin],
-    components: { FormItem },
-    props: {
-      // label value disabled from mixins
-      text: {
-        type: String
-      },
-      value: {
-        type: [Boolean, Array],
-        required: true
-      },
-      checkboxes: {
-        type: Array,
-        default () {
-          return []
-        }
-      },
-      listType: {
-        type: String,
-        default: 'inline'
-      },
-      indeterminate: Boolean
+export default {
+  name: 'au-checkbox',
+  mixins: [ValidatorMixin, FormApiMixin],
+  components: { FormItem },
+  props: {
+    // label value disabled from mixins
+    text: {
+      type: String
     },
-    data () {
-      return {
-        hover: false,
-        localValue: this.value,
-        localCheckboxes: this.getLocalCbsFromCbs(),
-        // localValues: this.value,
-        localIndeterminate: this.indeterminate
+    value: {
+      type: [Boolean, Array],
+      required: true
+    },
+    checkboxes: {
+      type: Array,
+      default () {
+        return []
       }
     },
-    computed: {
-      multiple () {
-        return this.checkboxes && this.checkboxes.length
+    listType: {
+      type: String,
+      default: 'inline'
+    },
+    indeterminate: Boolean
+  },
+  data () {
+    return {
+      hover: false,
+      localValue: this.value,
+      localCheckboxes: this.getLocalCbsFromCbs(),
+      // localValues: this.value,
+      localIndeterminate: this.indeterminate
+    }
+  },
+  computed: {
+    multiple () {
+      return this.checkboxes && this.checkboxes.length
+    }
+  },
+  watch: {
+    localValue (v) {
+      this.localIndeterminate = false
+      this.input()
+      this.change()
+    },
+    // localValues () {
+    //   this.$emit('input', this.localValues)
+    //   this.$emit('change', this.localValues)
+    // },
+    checkboxes: {
+      deep: true,
+      handler () {
+        this.localCheckboxes = this.getLocalCbsFromCbs()
       }
     },
-    watch: {
-      localValue (v) {
-        this.localIndeterminate = false
-        this.input()
-        this.change()
-      },
-      // localValues () {
-      //   this.$emit('input', this.localValues)
-      //   this.$emit('change', this.localValues)
-      // },
-      checkboxes: {
-        deep: true,
-        handler () {
-          this.localCheckboxes = this.getLocalCbsFromCbs()
-        }
-      },
-      value: {
-        deep: true,
-        handler (v) {
-          this.localCheckboxes = this.getLocalCbsFromCbs()
-        }
-      },
-      indeterminate (v) {
-        this.localIndeterminate = v
+    value: {
+      deep: true,
+      handler (v) {
+        this.localCheckboxes = this.getLocalCbsFromCbs()
       }
     },
-    methods: {
-      handleMouseEnter (index) {
-        this.handleHover(true, index)
-      },
-      handleMouseLeave (index) {
-        this.handleHover(false, index)
-      },
-      handleHover (status, index) {
-        if (this.disabled) return
-        if (this.multiple) {
-          this.$set(this.localCheckboxes[index], 'hover', status)
-        } else {
-          this.hover = status
-        }
-      },
-      handleClick (index) {
-        if (this.disabled) return
-        if (this.multiple) {
-          this.$set(this.localCheckboxes[index], 'checked', !this.localCheckboxes[index].checked)
-          this.localValue = this.getValuesFromLcbs()
-        } else {
-          this.localValue = !this.localValue
-        }
-      },
-      getLocalCbsFromCbs () {
-        let vm = this
-        if (vm.checkboxes instanceof Array) {
-          return vm.checkboxes.map(cb => {
-            let { text, value } = cb
-            return {
-              text,
-              value,
-              hover: false,
-              checked: vm.value.includes(value)
-            }
-          })
-        } else {
-          return []
-        }
-      },
-      getValuesFromLcbs () {
-        let res = []
-        this.localCheckboxes.forEach(cb => {
-          if (cb.checked) res.push(cb.value)
+    indeterminate (v) {
+      this.localIndeterminate = v
+    }
+  },
+  methods: {
+    handleMouseEnter (index) {
+      this.handleHover(true, index)
+    },
+    handleMouseLeave (index) {
+      this.handleHover(false, index)
+    },
+    handleHover (status, index) {
+      if (this.disabled) return
+      if (this.multiple) {
+        this.$set(this.localCheckboxes[index], 'hover', status)
+      } else {
+        this.hover = status
+      }
+    },
+    handleClick (index) {
+      if (this.disabled) return
+      if (this.multiple) {
+        this.$set(this.localCheckboxes[index], 'checked', !this.localCheckboxes[index].checked)
+        this.localValue = this.getValuesFromLcbs()
+      } else {
+        this.localValue = !this.localValue
+      }
+    },
+    getLocalCbsFromCbs () {
+      let vm = this
+      if (vm.checkboxes instanceof Array) {
+        return vm.checkboxes.map(cb => {
+          let { text, value } = cb
+          return {
+            text,
+            value,
+            hover: false,
+            checked: vm.value.includes(value)
+          }
         })
-        return res
+      } else {
+        return []
       }
+    },
+    getValuesFromLcbs () {
+      let res = []
+      this.localCheckboxes.forEach(cb => {
+        if (cb.checked) res.push(cb.value)
+      })
+      return res
     }
   }
+}
 </script>

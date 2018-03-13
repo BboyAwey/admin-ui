@@ -215,31 +215,30 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'modal-examples',
-    data () {
-      let vm = this
-      return {
-        modalVisible: false,
-        buttons: [
-          {
-            text: '确认',
-            type: 'primary',
-            handler () {
-              vm.modalVisible = false
-            }
-          },
-          {
-            text: '取消',
-            plain: true,
-            type: 'default',
-            handler () {
-              vm.modalVisible = false
-            }
+export default {
+  name: 'modal-examples',
+  data () {
+    let vm = this
+    return {
+      modalVisible: false,
+      buttons: [
+        {
+          text: '确认',
+          type: 'primary',
+          handler () {
+            vm.modalVisible = false
           }
-        ]
-      }
+        },
+        {
+          text: '取消',
+          plain: true,
+          type: 'default',
+          handler () {
+            vm.modalVisible = false
+          }
+        }
+      ]
     }
   }
+}
 </script>
-

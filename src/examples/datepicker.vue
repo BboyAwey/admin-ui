@@ -414,20 +414,20 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'datepicker-examples',
-    data () {
-      return {
-        date: '',
-        validators: [
-          {
-            validator (v) {
-              return v === '2018-02-15'
-            },
-            warning: '请选择2018年02月15日'
-          }
-        ]
-      }
+export default {
+  name: 'datepicker-examples',
+  data () {
+    return {
+      date: '',
+      validators: [
+        {
+          validator (v) {
+            return v === '2018-02-15'
+          },
+          warning: '请选择2018年02月15日'
+        }
+      ]
     }
   }
+}
 </script>

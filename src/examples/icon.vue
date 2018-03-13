@@ -208,7 +208,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'icon-examples'
-  }
+export default {
+  name: 'icon-examples'
+}
 </script>

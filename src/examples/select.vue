@@ -460,39 +460,39 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'select-examples',
-    data () {
-      return {
-        value: 'j',
-        values: ['b', 'p'],
-        options: [
-          {
-            text: 'Breaking',
-            value: 'b'
+export default {
+  name: 'select-examples',
+  data () {
+    return {
+      value: 'j',
+      values: ['b', 'p'],
+      options: [
+        {
+          text: 'Breaking',
+          value: 'b'
+        },
+        {
+          text: 'Jazz',
+          value: 'j'
+        },
+        {
+          text: 'Popppin',
+          value: 'p'
+        },
+        {
+          text: 'Locking',
+          value: 'l'
+        }
+      ],
+      validators: [
+        {
+          validator (v) {
+            return v === 'b' || (v instanceof Array && v.includes('b'))
           },
-          {
-            text: 'Jazz',
-            value: 'j'
-          },
-          {
-            text: 'Popppin',
-            value: 'p'
-          },
-          {
-            text: 'Locking',
-            value: 'l'
-          }
-        ],
-        validators: [
-          {
-            validator (v) {
-              return v === 'b' || (v instanceof Array && v.includes('b'))
-            },
-            warning: 'Bboy Forever'
-          }
-        ]
-      }
+          warning: 'Bboy Forever'
+        }
+      ]
     }
   }
+}
 </script>

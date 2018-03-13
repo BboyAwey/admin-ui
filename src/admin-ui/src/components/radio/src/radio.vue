@@ -83,49 +83,47 @@
   </div>
 </template>
 <script>
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormItem from '../../../helpers/form-item.vue'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-radio',
-    mixins: [FormApiMixin, ValidatorMixin],
-    components: { FormItem },
-    props: {
-      radios: Array,
-      listType: {
-        type: String,
-        default: 'inline'
-      }
+export default {
+  name: 'au-radio',
+  mixins: [FormApiMixin, ValidatorMixin],
+  components: { FormItem },
+  props: {
+    radios: Array,
+    listType: {
+      type: String,
+      default: 'inline'
+    }
+  },
+  data () {
+    return {
+      hovers: []
+    }
+  },
+  watch: {
+    localValue (v) {
+      this.input()
+      this.change()
+    }
+  },
+  methods: {
+    handleMouseEnter (index) {
+      this.handleHover(true, index)
     },
-    data () {
-      return {
-        hovers: []
-      }
+    handleMouseLeave (index) {
+      this.handleHover(false, index)
     },
-    watch: {
-      localValue (v) {
-        this.input()
-        this.change()
-      }
+    handleHover (status, index) {
+      if (this.disabled) return
+      this.$set(this.hovers, index, status)
     },
-    methods: {
-      handleMouseEnter (index) {
-        this.handleHover(true, index)
-      },
-      handleMouseLeave (index) {
-        this.handleHover(false, index)
-      },
-      handleHover (status, index) {
-        if (this.disabled) return
-        this.$set(this.hovers, index, status)
-      },
-      handleClick (v) {
-        if (this.disabled) return
-        this.localValue = v
-      }
+    handleClick (v) {
+      if (this.disabled) return
+      this.localValue = v
     }
   }
+}
 </script>
-
-

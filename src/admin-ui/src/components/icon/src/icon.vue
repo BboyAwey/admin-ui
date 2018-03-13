@@ -14,34 +14,31 @@
     }"></i>
 </template>
 <script>
-  import '../../../style/font-awesome/style.css'
-  export default {
-    name: 'au-icon',
-    mounted () {
-      if (this.unifySize) this.setUnifiedWidth()
+import '../../../style/font-awesome/style.css'
+export default {
+  name: 'au-icon',
+  mounted () {
+    if (this.unifySize) this.setUnifiedWidth()
+  },
+  props: {
+    type: String,
+    custom: String,
+    size: String,
+    color: String,
+    unifySize: Boolean
+  },
+  watch: {
+    size (v) {
+      if (this.unifySize) this.$nextTick(this.setUnifiedWidth)
     },
-    props: {
-      type: String,
-      custom: String,
-      size: String,
-      color: String,
-      unifySize: Boolean
-    },
-    watch: {
-      size (v) {
-        if (this.unifySize) this.$nextTick(this.setUnifiedWidth)
-      },
-      unifySize (v) {
-        if (v) this.$nextTick(this.setUnifiedWidth)
-      }
-    },
-    methods: {
-      setUnifiedWidth () {
-        this.$el.style.width = parseInt(window.getComputedStyle(this.$el).fontSize) + 4 + 'px'
-      }
+    unifySize (v) {
+      if (v) this.$nextTick(this.setUnifiedWidth)
+    }
+  },
+  methods: {
+    setUnifiedWidth () {
+      this.$el.style.width = parseInt(window.getComputedStyle(this.$el).fontSize) + 4 + 'px'
     }
   }
+}
 </script>
-
-
-

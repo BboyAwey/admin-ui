@@ -349,7 +349,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'theme'
-  }
+export default {
+  name: 'theme'
+}
 </script>

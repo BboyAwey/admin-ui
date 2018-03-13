@@ -202,12 +202,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'button-examples',
-    data () {
-      return {
-        loading: true
-      }
+export default {
+  name: 'button-examples',
+  data () {
+    return {
+      loading: true
     }
   }
+}
 </script>

@@ -67,102 +67,100 @@
   </button>
 </template>
 <script>
-  import Loading from '../../loading'
+import Loading from '../../loading'
 
-  export default {
-    name: 'au-button',
-    mounted () {
-      this.load()
-    },
-    data () {
-      return {
-        loadingIns: null
-      }
-    },
-    props: {
+export default {
+  name: 'au-button',
+  mounted () {
+    this.load()
+  },
+  data () {
+    return {
+      loadingIns: null
+    }
+  },
+  props: {
+    type: String,
+    size: {
       type: String,
-      size: {
-        type: String,
-        default: 'normal'
-      },
-      plain: Boolean,
-      disabled: Boolean,
-      loading: Boolean,
-      nativeType: String // button,submit,reset
+      default: 'normal'
     },
-    watch: {
-      loading () {
-        // this.$nextTick(this.setPos)
-        this.load()
+    plain: Boolean,
+    disabled: Boolean,
+    loading: Boolean,
+    nativeType: String // button,submit,reset
+  },
+  watch: {
+    loading () {
+      // this.$nextTick(this.setPos)
+      this.load()
+    }
+  },
+  computed: {
+    isDefault () {
+      return [
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'primary'
+      ].indexOf(this.type) === -1
+    },
+    canActivate () {
+      return !(this.disabled || this.loading)
+    },
+    buttonClasses () {
+      let res = []
+      if (this.plain) {
+        res = [
+          `plain`,
+          `au-theme-background-color--base-12`,
+          `au-theme-border-color--base-8`,
+          this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+          this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-4-important` : '',
+          `au-theme-font-color--base-3`,
+          this.canActivate ? `au-theme-hover-font-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+          this.canActivate ? `au-theme-active-font-color--${this.isDefault ? 'primary' : this.type}-4-important` : ''
+        ]
+      } else {
+        res = [
+          `au-theme-background-color--${this.isDefault ? 'base-5' : this.type + '-3'}`,
+          `au-theme-font-color--base-12`
+        ]
       }
+
+      res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''))
+
+      return res.join(' ')
     },
-    computed: {
-      isDefault () {
-        return [
-          'success',
-          'danger',
-          'warning',
-          'info',
-          'primary'
-        ].indexOf(this.type) === -1
-      },
-      canActivate () {
-        return !(this.disabled || this.loading)
-      },
-      buttonClasses () {
-        let res = []
-        if (this.plain) {
-          res = [
-            `plain`,
-            `au-theme-background-color--base-12`,
-            `au-theme-border-color--base-8`,
-            this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
-            this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-4-important` : '',
-            `au-theme-font-color--base-3`,
-            this.canActivate ? `au-theme-hover-font-color--${this.isDefault ? 'primary' : this.type}-3` : '',
-            this.canActivate ? `au-theme-active-font-color--${this.isDefault ? 'primary' : this.type}-4-important` : ''
-          ]
-        } else {
-          res = [
-            `au-theme-background-color--${this.isDefault ? 'base-5' : this.type + '-3'}`,
-            `au-theme-font-color--base-12`
-          ]
-        }
-
-        res.push('au-size-' + this.size + (this.plain ? '-bordered' : ''))
-
-        return res.join(' ')
-      },
-      loadingSize () {
-        switch (this.size) {
-          case 'mini': // 20
-            return 16
-          case 'small': // 26
-            return 20
-          case 'normal': // 32
-            return 24
-          case 'large': // 38
-            return 28
-        }
+    loadingSize () {
+      switch (this.size) {
+        case 'mini': // 20
+          return 16
+        case 'small': // 26
+          return 20
+        case 'normal': // 32
+          return 24
+        case 'large': // 38
+          return 28
       }
+    }
+  },
+  methods: {
+    handleClick (e) {
+      this.$emit('click', e)
     },
-    methods: {
-      handleClick (e) {
-        this.$emit('click', e)
-      },
-      load () {
-        if (this.loading) {
-          this.loadingIns = Loading({
-            target: this.$refs.button,
-            color: this.type,
-            size: this.loadingSize
-          })
-        } else {
-          if (this.loadingIns) this.loadingIns.close()
-        }
+    load () {
+      if (this.loading) {
+        this.loadingIns = Loading({
+          target: this.$refs.button,
+          color: this.type,
+          size: this.loadingSize
+        })
+      } else {
+        if (this.loadingIns) this.loadingIns.close()
       }
     }
   }
+}
 </script>
-
-

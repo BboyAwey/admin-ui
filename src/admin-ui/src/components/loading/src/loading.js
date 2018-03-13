@@ -41,7 +41,7 @@ export default (config = {}) => {
   }
 
   instance.message = message
-  instance.size = size
+  instance.size = parseInt(size)
   instance.mask = mask
   // instance.color = colorValidator(color) ? color : 'primary'
   instance.color = color

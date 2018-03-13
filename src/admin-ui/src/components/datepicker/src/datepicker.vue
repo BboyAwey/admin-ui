@@ -211,210 +211,199 @@
   </div>
 </template>
 <script>
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import { isEmptyString } from '../../../helpers/utils'
-  import AuInput from '../../input'
-  import AuIcon from '../../icon'
-  import FormItem from '../../../helpers/form-item.vue'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import { isEmptyString } from '../../../helpers/utils'
+import AuInput from '../../input'
+import AuIcon from '../../icon'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-datepicker',
-    mixins: [ValidatorMixin, FormApiMixin],
-    components: { AuInput, AuIcon, FormItem },
-    data () {
-      return {
-        dateObj: {},
-        inputValue: this.format(this.value),
-        // the significant value after last fomat
-        lastInputValue: this.format(this.value),
-        dates: [],
-        renderedDateObj: {},
-        popup: false
+export default {
+  name: 'au-datepicker',
+  mixins: [ValidatorMixin, FormApiMixin],
+  components: { AuInput, AuIcon, FormItem },
+  data () {
+    return {
+      dateObj: {},
+      inputValue: this.format(this.value),
+      // the significant value after last fomat
+      lastInputValue: this.format(this.value),
+      dates: [],
+      renderedDateObj: {},
+      popup: false
+    }
+  },
+  props: {
+    placeholder: {
+      type: String,
+      default: '请选择日期'
+    },
+    start: String,
+    end: String,
+    readonly: Boolean,
+    fullWidth: Boolean,
+    width: String
+  },
+  watch: {
+    value (v) {
+      this.changeInputValue(v)
+      this.localValue = v
+    },
+    inputValue (v) {
+      let res = this.format(v)
+      // this.localValue = res
+      if (this.popup) this.render(res)
+    },
+    popup (v) {
+      if (v) {
+        this.render(this.inputValue)
+        this.$emit('focus', this.inputValue)
+      } else {
+        this.$emit('blur', this.inputValue)
       }
+    }
+  },
+  methods: {
+    monthDayCount (year) {
+      // date count in each month
+      return [
+        31,
+        ((year % 4 === 0) && (year % 100 !== 0)) ||
+        (year % 400 === 0) ? 29 : 28,
+        31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+      ]
     },
-    props: {
-      placeholder: {
-        type: String,
-        default: '请选择日期'
-      },
-      start: String,
-      end: String,
-      readonly: Boolean,
-      fullWidth: Boolean,
-      width: String
-    },
-    watch: {
-      value (v) {
-        this.changeInputValue(v)
-        this.localValue = v
-      },
-      inputValue (v) {
-        let res = this.format(v)
-        // this.localValue = res
-        if (this.popup) this.render(res)
-      },
-      popup (v) {
-        if (v) {
-          this.render(this.inputValue)
-          this.$emit('focus', this.inputValue)
-        } else {
-          this.$emit('blur', this.inputValue)
-        }
-      }
-    },
-    methods: {
-      monthDayCount (year) {
-        // date count in each month
-        return [
-          31,
-          ((year % 4 === 0) && (year % 100 !== 0)) ||
-          (year % 400 === 0)
-          ? 29 : 28, 31,
-          30, 31, 30,
-          31, 31, 30,
-          31, 30, 31
-        ]
-      },
-      render (value) {
-        function calcYmdObj (value) {
-          let tempDate = null
-          if (typeof value === 'string' && value !== '' && !isEmptyString(value)) {
-            let tempArr = value.split('-')
-            if (tempArr[1]) tempArr[1] -= 1
-            try {
-              tempDate = new Date(...tempArr)
-            } catch (e) {
-              tempDate = new Date()
-            }
-          } else if (!value) {
-            // no input
+    render (value) {
+      function calcYmdObj (value) {
+        let tempDate = null
+        if (typeof value === 'string' && value !== '' && !isEmptyString(value)) {
+          let tempArr = value.split('-')
+          if (tempArr[1]) tempArr[1] -= 1
+          try {
+            tempDate = new Date(...tempArr)
+          } catch (e) {
             tempDate = new Date()
           }
-          return {
-            year: tempDate.getFullYear(),
-            month: tempDate.getMonth() + 1,
-            date: tempDate.getDate()
-          }
+        } else if (!value) {
+          // no input
+          tempDate = new Date()
         }
+        return {
+          year: tempDate.getFullYear(),
+          month: tempDate.getMonth() + 1,
+          date: tempDate.getDate()
+        }
+      }
 
-        // save the renderd value
-        this.renderedDateObj = calcYmdObj(value)
-        let {year, month} = this.renderedDateObj
-        // the day of the first date in this month
-        let firstDay = new Date(year, month - 1, 1).getDay()
-        let monthDayCount = this.monthDayCount(year)
+      // save the renderd value
+      this.renderedDateObj = calcYmdObj(value)
+      let {year, month} = this.renderedDateObj
+      // the day of the first date in this month
+      let firstDay = new Date(year, month - 1, 1).getDay()
+      let monthDayCount = this.monthDayCount(year)
+      // the date count of this month
+      let dayCount = monthDayCount[month - 1]
+      // the day of the last date in this month
+      let lastDay = new Date(year, month - 1, dayCount).getDay()
+      // the date count of last month
+      let lastMonthDayCount = month - 2 === -1 ? monthDayCount[11] : monthDayCount[month - 2]
+      let linearTemp = []
+
+      // put the renderd date of last month into the one-dimensional array
+      for (let i = 0; i < firstDay; i++) {
+        linearTemp.push({
+          date: lastMonthDayCount - firstDay + 1 + i,
+          month: month - 1 === 0 ? 12 : month - 1,
+          year: month - 1 === 0 ? year - 1 : year
+        })
+      }
+      // put the renderd date of this month into the one-dimensional array
+      for (let i = 0; i < dayCount; i++) {
+        linearTemp.push({
+          date: i + 1,
+          month,
+          year
+        })
+      }
+      // put the renderd date of next month into the one-dimensional array
+      for (let i = lastDay + 1; i < 7; i++) {
+        linearTemp.push({
+          date: i - lastDay,
+          month: month + 1 === 13 ? 1 : month + 1,
+          year: month + 1 === 13 ? year + 1 : year
+        })
+      }
+
+      // traverse all the date into a two-demensional array for render
+      let dyadicArray = []
+      for (let i = 0; i < linearTemp.length / 7; i++) {
+        dyadicArray[i] = []
+        for (let j = 0; j < 7; j++) {
+          dyadicArray[i][j] = linearTemp[j + 7 * i]
+        }
+      }
+      this.dates = dyadicArray
+    },
+    format (value) {
+      let monthDayCount = this.monthDayCount
+      // formate the string into [y, m, d]
+
+      function reConstruct (value) {
+        // already according with the [y, m, d], just return it
+        if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(value)) {
+          return value.split('-')
+        }
+        // if the symble "-" exists, then reconstruct based on it
+        if (value.indexOf('-') !== -1) {
+          return value.split('-').map(v => {
+            let num = v.match(/\d/g)
+            if (num) return num.join('')
+          }).map((v, i) => {
+            if (i < 3) {
+              return v
+            }
+          })
+        } else {
+          // if the symble "-" not exists, then reconstruct based on 4-2-2
+          let nums = value.match(/\d/g)
+          let res = ['', '', '']
+          // if no number exists return empty array
+          if (!nums) return []
+          for (let i = 0; i < nums.length; i++) {
+            if (i < 4) res[0] += nums[i] ? nums[i] : ''
+            else if (i < 6) res[1] += nums[i] ? nums[i] : ''
+            else if (i < 8) res[2] += nums[i] ? nums[i] : ''
+          }
+          for (let i = 0; i < 3; i++) {
+            if (!res[i]) res[i] = i === 1 ? '01' : res[i]
+          }
+          return res
+        }
+      }
+      // limit the date range and supplement the "0"
+      function limitYMD (ymdArr, start, end) {
+        if (!ymdArr.length) return ''
+        if (!ymdArr[1]) ymdArr[1] = 1
+        if (!ymdArr[2]) ymdArr[2] = 1
         // the date count of this month
-        let dayCount = monthDayCount[month - 1]
-        // the day of the last date in this month
-        let lastDay = new Date(year, month - 1, dayCount).getDay()
-        // the date count of last month
-        let lastMonthDayCount = month - 2 === -1 ? monthDayCount[11] : monthDayCount[month - 2]
-        let linearTemp = []
+        let dayCount = monthDayCount(ymdArr[0])[ymdArr[1] - 1]
+        // limit the date range
+        ymdArr[0] = Number(ymdArr[0]) < 100 ? 100 : (Number(ymdArr[0]) > 9999 ? 9999 : Number(ymdArr[0]))
+        ymdArr[1] = Number(ymdArr[1]) < 1 ? 1 : (Number(ymdArr[1]) > 12 ? 12 : Number(ymdArr[1]))
+        ymdArr[2] = Number(ymdArr[2]) < 1 ? 1 : (Number(ymdArr[2]) > dayCount ? dayCount : Number(ymdArr[2]))
+        // supplement "0"
+        if (ymdArr[1].toString().length === 1) ymdArr[1] = '0' + ymdArr[1]
+        if (ymdArr[2].toString().length === 1) ymdArr[2] = '0' + ymdArr[2]
+        return ymdArr.join('-')
+      }
 
-        // put the renderd date of last month into the one-dimensional array
-        for (let i = 0; i < firstDay; i++) {
-          linearTemp.push({
-            date: lastMonthDayCount - firstDay + 1 + i,
-            month: month - 1 === 0 ? 12 : month - 1,
-            year: month - 1 === 0 ? year - 1 : year
-          })
-        }
-        // put the renderd date of this month into the one-dimensional array
-        for (let i = 0; i < dayCount; i++) {
-          linearTemp.push({
-            date: i + 1,
-            month,
-            year
-          })
-        }
-        // put the renderd date of next month into the one-dimensional array
-        for (let i = lastDay + 1; i < 7; i++) {
-          linearTemp.push({
-            date: i - lastDay,
-            month: month + 1 === 13 ? 1 : month + 1,
-            year: month + 1 === 13 ? year + 1 : year
-          })
-        }
-
-        // traverse all the date into a two-demensional array for render
-        let dyadicArray = []
-        for (let i = 0; i < linearTemp.length / 7; i++) {
-          dyadicArray[i] = []
-          for (let j = 0; j < 7; j++) {
-            dyadicArray[i][j] = linearTemp[j + 7 * i]
-          }
-        }
-        this.dates = dyadicArray
-      },
-      format (value) {
-        let monthDayCount = this.monthDayCount
-        // formate the string into [y, m, d]
-
-        function reConstruct (value) {
-          // already according with the [y, m, d], just return it
-          if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(value)) {
-            return value.split('-')
-          }
-          // if the symble "-" exists, then reconstruct based on it
-          if (value.indexOf('-') !== -1) {
-            return value.split('-').map(v => {
-              let num = v.match(/\d/g)
-              if (num) return num.join('')
-            }).map((v, i) => {
-              if (i < 3) {
-                return v
-              }
-            })
-          } else {
-            // if the symble "-" not exists, then reconstruct based on 4-2-2
-            let nums = value.match(/\d/g)
-            let res = ['', '', '']
-            // if no number exists return empty array
-            if (!nums) return []
-            for (let i = 0; i < nums.length; i++) {
-              if (i < 4) res[0] += nums[i] ? nums[i] : ''
-              else if (i < 6) res[1] += nums[i] ? nums[i] : ''
-              else if (i < 8) res[2] += nums[i] ? nums[i] : ''
-            }
-            for (let i = 0; i < 3; i++) {
-              if (!res[i]) res[i] = i === 1 ? '01' : res[i]
-            }
-            return res
-          }
-        }
-        // limit the date range and supplement the "0"
-        function limitYMD (ymdArr, start, end) {
-          if (!ymdArr.length) return ''
-          if (!ymdArr[1]) ymdArr[1] = 1
-          if (!ymdArr[2]) ymdArr[2] = 1
-          // the date count of this month
-          let dayCount = monthDayCount(ymdArr[0])[ymdArr[1] - 1]
-          // limit the date range
-          ymdArr[0] = Number(ymdArr[0]) < 100 ? 100 : (Number(ymdArr[0]) > 9999 ? 9999 : Number(ymdArr[0]))
-          ymdArr[1] = Number(ymdArr[1]) < 1 ? 1 : (Number(ymdArr[1]) > 12 ? 12 : Number(ymdArr[1]))
-          ymdArr[2] = Number(ymdArr[2]) < 1 ? 1 : (Number(ymdArr[2]) > dayCount ? dayCount : Number(ymdArr[2]))
-          // supplement "0"
-          if (ymdArr[1].toString().length === 1) ymdArr[1] = '0' + ymdArr[1]
-          if (ymdArr[2].toString().length === 1) ymdArr[2] = '0' + ymdArr[2]
-          return ymdArr.join('-')
-        }
-
-        if (isEmptyString(value)) return ''
-        let input = reConstruct(value)
-        let res = null
-        if (this.start) {
-          let start = reConstruct(this.start)
-          if (new Date(...input).getTime() < new Date(...start).getTime()) {
-            res = start
-          } else {
-            if (this.end) {
-              let end = reConstruct(this.end)
-              if (new Date(...input).getTime() > new Date(...end).getTime()) {
-                res = end
-              } else res = input
-            } else res = input
-          }
+      if (isEmptyString(value)) return ''
+      let input = reConstruct(value)
+      let res = null
+      if (this.start) {
+        let start = reConstruct(this.start)
+        if (new Date(...input).getTime() < new Date(...start).getTime()) {
+          res = start
         } else {
           if (this.end) {
             let end = reConstruct(this.end)
@@ -423,104 +412,111 @@
             } else res = input
           } else res = input
         }
-
-        return limitYMD(res)
-      },
-      changeInputValue (value, e) {
-        let res = this.format(value)
-        if (value === '' || res) {
-          if (res !== this.inputValue) {
-            this.inputValue = res
-            this.lastInputValue = res
-            this.$emit('input', res, e) // input first to ensure changes of father comp
-            this.$emit('change', res, e)
-          } else {
-            this.$emit('input', res, e) // input first to ensure changes of father comp
-            this.$emit('change', res, e)
-          }
-        } else {
-          this.inputValue = this.lastInputValue
-        }
-      },
-      isSelected (dateObj) {
-        // used to check if the date is selected
-        if (isEmptyString(this.inputValue)) return false
-        let valueYMD = this.inputValue.split('-')
-        if (Number(valueYMD[0]) !== dateObj.year) return false
-        if (Number(valueYMD[1]) !== dateObj.month) return false
-        if (Number(valueYMD[2]) !== dateObj.date) return false
-        return true
-      },
-      isToday (dateObj) {
-        // used to check if the date is today
-        let curr = new Date()
-        let currObj = {
-          year: curr.getFullYear(),
-          month: curr.getMonth() + 1,
-          date: curr.getDate()
-        }
-        for (var k in dateObj) {
-          if (dateObj[k].toString() !== currObj[k].toString()) return false
-        }
-        return true
-      },
-      selectDate (dateObj) {
-        if (!this.isValid(dateObj)) return
-        this.changeInputValue(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
-        let timer = setTimeout(() => {
-          this.popup = false
-          clearTimeout(timer)
-          timer = null
-        }, 100)
-      },
-      step (isYear, isForward) {
-        let dateObj = Object.assign({}, this.renderedDateObj)
-        let direc = isForward ? 1 : -1
-        if (isYear) {
-          dateObj.year = dateObj.year + direc
-          dateObj.year = dateObj.year < 100 ? 100 : dateObj.year > 9999 ? 9999 : dateObj.year
-        } else {
-          dateObj.month = dateObj.month + direc
-          if (dateObj.month < 1) {
-            dateObj.month = 12
-            dateObj.year--
-          } else if (dateObj.month > 12) {
-            dateObj.month = 1
-            dateObj.year++
-          }
-        }
-        this.render(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
-      },
-      coreFocus () {
-        if (this.readonly) return
-        this.popup = true
-      },
-      coreBlur (v, e) {
-        if (e.relatedTarget !== this.$refs.popup) this.popup = false
-        this.changeInputValue(v, e)
-        if (this.popup) this.render(this.format(v))
-      },
-      popupBlur (e) {
-        if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
-      },
-      isValid (date) {
-        let d = (new Date(date.year, date.month, date.date)).getTime()
-        let res = true
-        if (this.start) {
-          let start = this.start.split('-').map(e => {
-            return e.trim()
-          })
-          if (d < (new Date(...start).getTime())) res = false
-        }
+      } else {
         if (this.end) {
-          let end = this.end.split('-').map(e => {
-            return e.trim()
-          })
-          if (d > (new Date(...end).getTime())) res = false
-        }
-        return res
+          let end = reConstruct(this.end)
+          if (new Date(...input).getTime() > new Date(...end).getTime()) {
+            res = end
+          } else res = input
+        } else res = input
       }
+
+      return limitYMD(res)
+    },
+    changeInputValue (value, e) {
+      let res = this.format(value)
+      if (value === '' || res) {
+        if (res !== this.inputValue) {
+          this.inputValue = res
+          this.lastInputValue = res
+          this.$emit('input', res, e) // input first to ensure changes of father comp
+          this.$emit('change', res, e)
+        } else {
+          this.$emit('input', res, e) // input first to ensure changes of father comp
+          this.$emit('change', res, e)
+        }
+      } else {
+        this.inputValue = this.lastInputValue
+      }
+    },
+    isSelected (dateObj) {
+      // used to check if the date is selected
+      if (isEmptyString(this.inputValue)) return false
+      let valueYMD = this.inputValue.split('-')
+      if (Number(valueYMD[0]) !== dateObj.year) return false
+      if (Number(valueYMD[1]) !== dateObj.month) return false
+      if (Number(valueYMD[2]) !== dateObj.date) return false
+      return true
+    },
+    isToday (dateObj) {
+      // used to check if the date is today
+      let curr = new Date()
+      let currObj = {
+        year: curr.getFullYear(),
+        month: curr.getMonth() + 1,
+        date: curr.getDate()
+      }
+      for (var k in dateObj) {
+        if (dateObj[k].toString() !== currObj[k].toString()) return false
+      }
+      return true
+    },
+    selectDate (dateObj) {
+      if (!this.isValid(dateObj)) return
+      this.changeInputValue(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
+      let timer = setTimeout(() => {
+        this.popup = false
+        clearTimeout(timer)
+        timer = null
+      }, 100)
+    },
+    step (isYear, isForward) {
+      let dateObj = Object.assign({}, this.renderedDateObj)
+      let direc = isForward ? 1 : -1
+      if (isYear) {
+        dateObj.year = dateObj.year + direc
+        dateObj.year = dateObj.year < 100 ? 100 : dateObj.year > 9999 ? 9999 : dateObj.year
+      } else {
+        dateObj.month = dateObj.month + direc
+        if (dateObj.month < 1) {
+          dateObj.month = 12
+          dateObj.year--
+        } else if (dateObj.month > 12) {
+          dateObj.month = 1
+          dateObj.year++
+        }
+      }
+      this.render(dateObj.year + '-' + dateObj.month + '-' + dateObj.date)
+    },
+    coreFocus () {
+      if (this.readonly) return
+      this.popup = true
+    },
+    coreBlur (v, e) {
+      if (e.relatedTarget !== this.$refs.popup) this.popup = false
+      this.changeInputValue(v, e)
+      if (this.popup) this.render(this.format(v))
+    },
+    popupBlur (e) {
+      if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
+    },
+    isValid (date) {
+      let d = (new Date(date.year, date.month, date.date)).getTime()
+      let res = true
+      if (this.start) {
+        let start = this.start.split('-').map(e => {
+          return e.trim()
+        })
+        if (d < (new Date(...start).getTime())) res = false
+      }
+      if (this.end) {
+        let end = this.end.split('-').map(e => {
+          return e.trim()
+        })
+        if (d > (new Date(...end).getTime())) res = false
+      }
+      return res
     }
   }
+}
 </script>
-

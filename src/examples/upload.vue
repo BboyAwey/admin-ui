@@ -643,12 +643,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'upload-examples',
-    data () {
-      return {
-        files: []
-      }
+export default {
+  name: 'upload-examples',
+  data () {
+    return {
+      files: []
     }
   }
+}
 </script>

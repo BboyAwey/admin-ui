@@ -65,11 +65,11 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'au-panel',
-    props: {
-      title: String,
-      icon: String
-    }
+export default {
+  name: 'au-panel',
+  props: {
+    title: String,
+    icon: String
   }
+}
 </script>

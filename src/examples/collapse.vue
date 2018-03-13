@@ -167,13 +167,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'collapse-examples',
-    data () {
-      return {
-        collapse: false
-      }
+export default {
+  name: 'collapse-examples',
+  data () {
+    return {
+      collapse: false
     }
   }
+}
 </script>
-

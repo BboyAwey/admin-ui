@@ -54,141 +54,141 @@
   </div>
 </template>
 <script>
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import auSelect from '../../select'
-  import FormItem from '../../../helpers/form-item.vue'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import auSelect from '../../select'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-cascading',
-    mixins: [FormApiMixin, ValidatorMixin],
-    components: {auSelect, FormItem},
-    data () {
-      return {
-        // ancestor chain, used to save selected value
-        selectedOptions: this.initAncestorsLink(this.value),
-        level: 0
-      }
+export default {
+  name: 'au-cascading',
+  mixins: [FormApiMixin, ValidatorMixin],
+  components: {auSelect, FormItem},
+  data () {
+    return {
+      // ancestor chain, used to save selected value
+      selectedOptions: this.initAncestorsLink(this.value),
+      level: 0
+    }
+  },
+  props: {
+    options: {
+      type: Array,
+      required: true
     },
-    props: {
-      options: {
-        type: Array,
-        required: true
-      },
-      placeholder: {
-        type: [Array, String]
-      },
-      listType: {
-        type: String,
-        default: 'inline'
-      },
-      fullWidth: Boolean,
-      singleWidth: String,
-      singleMaxWidth: String,
-      singleMinWidth: String
+    placeholder: {
+      type: [Array, String]
     },
-    computed: {
-      cascadingData () {
-        return this.calcCascadingData(this.options)
-      },
-      selectedData () {
-        let cascadingData = this.cascadingData
-        let res = []
-        this.selectedOptions.forEach((e, i) => {
-          if (cascadingData[i] instanceof Array) {
-            for (let j = 0; j < cascadingData[i].length; j++) {
-              if (cascadingData[i][j].value === e) {
-                res.push(cascadingData[i][j])
-                break
-              }
+    listType: {
+      type: String,
+      default: 'inline'
+    },
+    fullWidth: Boolean,
+    singleWidth: String,
+    singleMaxWidth: String,
+    singleMinWidth: String
+  },
+  computed: {
+    cascadingData () {
+      return this.calcCascadingData(this.options)
+    },
+    selectedData () {
+      let cascadingData = this.cascadingData
+      let res = []
+      this.selectedOptions.forEach((e, i) => {
+        if (cascadingData[i] instanceof Array) {
+          for (let j = 0; j < cascadingData[i].length; j++) {
+            if (cascadingData[i][j].value === e) {
+              res.push(cascadingData[i][j])
+              break
             }
           }
-        })
-        return res
-      }
-    },
-    watch: {
-      options: {
-        handler (v) {
-          this.cascadingData = this.calcCascadingData(v)
-        },
-        deep: true
-      },
-      value (v) {
-        this.selectedOptions = this.initAncestorsLink(v)
-      },
-      localValue (v) {
-        this.input() // input first to ensure changes of father comp
-        // this.change()
-        this.$emit('change', v, this.selectedOptions, this.selectedData)
-      }
-    },
-    methods: {
-      calcCascadingData (originArr) {
-        // reconstruct the tree data into two-dimensional array based on the level of tree data
-        let container = []
-        let level = 0
-        function resolve (arr, parent) {
-          if (!container[level]) container[level] = []
-          // traverse current level
-          for (let i = 0; i < arr.length; i++) {
-            container[level].push(Object.assign(arr[i], { level, parent }))
-            // if has child level
-            if (arr[i].children && arr[i].children.length) {
-              level++
-              // traverse child level
-              resolve(arr[i].children, arr[i])
-            }
-          }
-          level--
         }
-        resolve(originArr)
-        this.level = container.length
-        return container
+      })
+      return res
+    }
+  },
+  watch: {
+    options: {
+      handler (v) {
+        this.cascadingData = this.calcCascadingData(v)
       },
-      initAncestorsLink (bottomNodeValue) {
-        if (!bottomNodeValue) return []
-        // use the bottom level to calc ancestor chain
-        let res = []
-        let cascadingData = this.calcCascadingData(this.options)
-        let bottomNodes = cascadingData[cascadingData.length - 1]
-        let bottomNode = null
+      deep: true
+    },
+    value (v) {
+      this.selectedOptions = this.initAncestorsLink(v)
+    },
+    localValue (v) {
+      this.input() // input first to ensure changes of father comp
+      // this.change()
+      this.$emit('change', v, this.selectedOptions, this.selectedData)
+    }
+  },
+  methods: {
+    calcCascadingData (originArr) {
+      // reconstruct the tree data into two-dimensional array based on the level of tree data
+      let container = []
+      let level = 0
+      function resolve (arr, parent) {
+        if (!container[level]) container[level] = []
+        // traverse current level
+        for (let i = 0; i < arr.length; i++) {
+          container[level].push(Object.assign(arr[i], { level, parent }))
+          // if has child level
+          if (arr[i].children && arr[i].children.length) {
+            level++
+            // traverse child level
+            resolve(arr[i].children, arr[i])
+          }
+        }
+        level--
+      }
+      resolve(originArr)
+      this.level = container.length
+      return container
+    },
+    initAncestorsLink (bottomNodeValue) {
+      if (!bottomNodeValue) return []
+      // use the bottom level to calc ancestor chain
+      let res = []
+      let cascadingData = this.calcCascadingData(this.options)
+      let bottomNodes = cascadingData[cascadingData.length - 1]
+      let bottomNode = null
 
-        for (let i = 0; i < bottomNodes.length; i++) {
-          if (bottomNodes[i].value === bottomNodeValue) {
-            bottomNode = bottomNodes[i]
-            break
-          }
+      for (let i = 0; i < bottomNodes.length; i++) {
+        if (bottomNodes[i].value === bottomNodeValue) {
+          bottomNode = bottomNodes[i]
+          break
         }
-        function calcLink (node) {
-          res.unshift(node.value)
-          let parent = node.parent
-          if (parent) calcLink(parent)
-        }
-        calcLink(bottomNode)
-        return res
-      },
-      select (node) {
-        // if some node in the ancestor chain changed then all the descendant node should change
-        let vm = this
-        function revalueNextLevel (node) {
-          if (node.children && node.children.length) {
-            // set the corresponding node in ancestor chain if has child node
-            vm.$set(vm.selectedOptions, node.level + 1, node.children[0].value)
-            revalueNextLevel(node.children[0], node.level + 1)
-          } else {
-            // if has no child node then it is the bottom level
-            vm.$set(vm.selectedOptions, node.level, node.value)
-          }
-        }
-        revalueNextLevel(node)
-        vm.localValue = vm.selectedOptions[vm.selectedOptions.length - 1]
-      },
-      // filter the options in each level
-      filterOptions (options, level) {
-        if (!level) return options
-        return options.filter(option => option.parent.value === this.selectedOptions[level - 1])
       }
+      function calcLink (node) {
+        res.unshift(node.value)
+        let parent = node.parent
+        if (parent) calcLink(parent)
+      }
+      calcLink(bottomNode)
+      return res
+    },
+    select (node) {
+      // if some node in the ancestor chain changed then all the descendant node should change
+      let vm = this
+      function revalueNextLevel (node) {
+        if (node.children && node.children.length) {
+          // set the corresponding node in ancestor chain if has child node
+          vm.$set(vm.selectedOptions, node.level + 1, node.children[0].value)
+          revalueNextLevel(node.children[0], node.level + 1)
+        } else {
+          // if has no child node then it is the bottom level
+          vm.$set(vm.selectedOptions, node.level, node.value)
+        }
+      }
+      revalueNextLevel(node)
+      vm.localValue = vm.selectedOptions[vm.selectedOptions.length - 1]
+    },
+    // filter the options in each level
+    filterOptions (options, level) {
+      if (!level) return options
+      return options.filter(option => option.parent.value === this.selectedOptions[level - 1])
     }
   }
+}
 </script>

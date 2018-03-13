@@ -295,51 +295,49 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'message-box-examles',
-    methods: {
-      alert () {
-        this.$alert({
-          title: 'Alert',
-          message: 'oh yes~',
-          messageType: 'warning',
-          icon: 'home',
-          confirm () {
-            console.log('confirm')
+export default {
+  name: 'message-box-examles',
+  methods: {
+    alert () {
+      this.$alert({
+        title: 'Alert',
+        message: 'oh yes~',
+        messageType: 'warning',
+        icon: 'home',
+        confirm () {
+          console.log('confirm')
+        }
+      })
+    },
+    confirm () {
+      this.$confirm({
+        title: 'Confirm',
+        message: 'you feel good?',
+        confirmText: 'Yes',
+        messageType: 'info',
+        icon: 'home',
+        cancelText: 'No'
+      })
+    },
+    prompt () {
+      this.$prompt({
+        title: 'Prompt',
+        message: 'How\'d you feel?',
+        reset: true,
+        messageType: 'danger',
+        validators: [
+          {
+            validator (v) {
+              return v !== ''
+            },
+            warning: 'Write Sth!'
           }
-        })
-      },
-      confirm () {
-        this.$confirm({
-          title: 'Confirm',
-          message: 'you feel good?',
-          confirmText: 'Yes',
-          messageType: 'info',
-          icon: 'home',
-          cancelText: 'No'
-        })
-      },
-      prompt () {
-        this.$prompt({
-          title: 'Prompt',
-          message: 'How\'d you feel?',
-          reset: true,
-          messageType: 'danger',
-          validators: [
-            {
-              validator (v) {
-                return v !== ''
-              },
-              warning: 'Write Sth!'
-            }
-          ],
-          confirm () {
-            console.log('yes!')
-          }
-        })
-      }
+        ],
+        confirm () {
+          console.log('yes!')
+        }
+      })
     }
   }
+}
 </script>
-
-

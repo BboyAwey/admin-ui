@@ -34,49 +34,49 @@
   </ul>
 </template>
 <script>
-  import { deepClone } from '../../../helpers/utils'
+import { deepClone } from '../../../helpers/utils'
 
-  export default {
-    name: 'au-breadcrumb',
-    data () {
-      return {
-        localCrumbs: deepClone(this.crumbs)
+export default {
+  name: 'au-breadcrumb',
+  data () {
+    return {
+      localCrumbs: deepClone(this.crumbs)
+    }
+  },
+  props: {
+    crumbs: {
+      type: Array,
+      required: true
+      // default () {
+      //   return [
+      //     {
+      //       text: '',
+      //       url: ''
+      //     }
+      //   ]
+      // }
+    },
+    separator: {
+      type: String,
+      default: '/'
+    },
+    separatorClass: String
+  },
+  watch: {
+    crumbs: {
+      deep: true,
+      handler (v) {
+        this.localCrumbs = deepClone(v)
       }
-    },
-    props: {
-      crumbs: {
-        type: Array,
-        required: true
-        // default () {
-        //   return [
-        //     {
-        //       text: '',
-        //       url: ''
-        //     }
-        //   ]
-        // }
-      },
-      separator: {
-        type: String,
-        default: '/'
-      },
-      separatorClass: String
-    },
-    watch: {
-      crumbs: {
-        deep: true,
-        handler (v) {
-          this.localCrumbs = deepClone(v)
-        }
-      }
-    },
-    methods: {
-      handleCrumbClick (crumb, index) {
-        if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
-          this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
-          this.$emit('select', crumb)
-        }
+    }
+  },
+  methods: {
+    handleCrumbClick (crumb, index) {
+      if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
+        this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
+        this.$emit('select', crumb)
       }
     }
   }
+}
 </script>

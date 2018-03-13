@@ -147,26 +147,24 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'breadcrumb-examples',
-    data () {
-      return {
-        crumbs: [
-          {
-            text: 'Admin UI',
-            url: '/'
-          },
-          {
-            text: '组件'
-          },
-          {
-            text: '面包屑',
-            url: '/breadcrumb'
-          }
-        ]
-      }
+export default {
+  name: 'breadcrumb-examples',
+  data () {
+    return {
+      crumbs: [
+        {
+          text: 'Admin UI',
+          url: '/'
+        },
+        {
+          text: '组件'
+        },
+        {
+          text: '面包屑',
+          url: '/breadcrumb'
+        }
+      ]
     }
   }
+}
 </script>
-
-

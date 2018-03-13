@@ -181,22 +181,22 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'message-examples',
-    methods: {
-      message () {
-        let messageIns = this.$message({
-          message: '一则消息',
-          duration: 0,
-          type: 'primary',
-          icon: '',
-          closeable: true,
-          customClass: ''
-        })
-        messageIns.$on('close', () => {
-          console.log('Closed!')
-        })
-      }
+export default {
+  name: 'message-examples',
+  methods: {
+    message () {
+      let messageIns = this.$message({
+        message: '一则消息',
+        duration: 0,
+        type: 'primary',
+        icon: '',
+        closeable: true,
+        customClass: ''
+      })
+      messageIns.$on('close', () => {
+        console.log('Closed!')
+      })
     }
   }
+}
 </script>

@@ -29,25 +29,25 @@
       }">{{ label }}</div>
     <div :class="`au-form-item-main${inline ? '-inline' : '-block'}`">
       <slot></slot>
-      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="i">{{ warning }}</div>
-      <div class="au-form-warning au-theme-font-color--base-7" v-for="(tip, i) in tips" :key="i">{{ tip }}</div>
+      <div class="au-form-warning au-theme-font-color--danger-3" v-for="warning in warnings" :key="warning">{{ warning }}</div>
+      <div class="au-form-warning au-theme-font-color--base-7" v-for="tip in tips" :key="tip">{{ tip }}</div>
     </div>
   </div>
 </template>
 <script>
-  export default {
-    name: 'au-form-item',
-    props: {
-      label: String,
-      inline: Boolean,
-      tips: Array,
-      warnings: [Array, Object],
-      labelWidth: String,
-      size: {
-        type: String,
-        default: 'normal'
-      },
-      middle: Boolean
-    }
+export default {
+  name: 'au-form-item',
+  props: {
+    label: String,
+    inline: Boolean,
+    tips: Array,
+    warnings: [Array, Object],
+    labelWidth: String,
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    middle: Boolean
   }
+}
 </script>

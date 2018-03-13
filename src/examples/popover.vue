@@ -215,6 +215,19 @@
               仅trigger为click有效
             </td>
           </tr>
+          <tr>
+            <td>beforeShow</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Function</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td></td>
+            <td>
+              有时可能会需要在显示之前做一些事情，可以在函数中返回false来阻止显示
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>
@@ -344,12 +357,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'button-examples',
-    methods: {
-      show () {
-        this.$refs.myPopover.show()
-      }
+export default {
+  name: 'button-examples',
+  methods: {
+    show () {
+      this.$refs.myPopover.show()
     }
   }
+}
 </script>

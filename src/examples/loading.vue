@@ -96,9 +96,14 @@
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
-            <td>String</td>
             <td>
 
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">String</li>
+                <li class="au-theme-border-color--base-8">Number</li>
+              </ol>
             </td>
             <td>
               合法的CSS长度值，仅支持px单位
@@ -181,27 +186,26 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'loading-examples',
-    data () {
-      return {
-        loading: null
-      }
-    },
-    methods: {
-      toggle () {
-        if (!this.loading) {
-          this.loading = this.$loading({
-            target: this.$refs.target,
-            message: '拼命加载中',
-            color: 'danger'
-          })
-        } else {
-          this.loading.close()
-          this.loading = null
-        }
+export default {
+  name: 'loading-examples',
+  data () {
+    return {
+      loading: null
+    }
+  },
+  methods: {
+    toggle () {
+      if (!this.loading) {
+        this.loading = this.$loading({
+          target: this.$refs.target,
+          message: '拼命加载中',
+          color: 'danger'
+        })
+      } else {
+        this.loading.close()
+        this.loading = null
       }
     }
   }
+}
 </script>
-

@@ -286,22 +286,22 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'switch-examples',
-    data () {
-      return {
-        value: true
-      }
-    },
-    computed: {
-      shadowValue: {
-        get: function () {
-          return !this.value
-        },
-        set: function (v) {
-          this.value = !v
-        }
+export default {
+  name: 'switch-examples',
+  data () {
+    return {
+      value: true
+    }
+  },
+  computed: {
+    shadowValue: {
+      get: function () {
+        return !this.value
+      },
+      set: function (v) {
+        this.value = !v
       }
     }
   }
+}
 </script>

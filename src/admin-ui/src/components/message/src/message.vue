@@ -103,39 +103,39 @@
   </transition>
 </template>
 <script>
-  import AuIcon from '../../icon'
+import AuIcon from '../../icon'
 
-  export default {
-    name: 'au-message',
-    components: { AuIcon },
-    props: {
-      visible: Boolean,
-      message: String,
-      customClass: String,
-      icon: String,
-      type: {
-        type: String,
-        default: 'info' // info, success, warning, danger
-      },
-      closeable: Boolean
+export default {
+  name: 'au-message',
+  components: { AuIcon },
+  props: {
+    visible: Boolean,
+    message: String,
+    customClass: String,
+    icon: String,
+    type: {
+      type: String,
+      default: 'info' // info, success, warning, danger
     },
-    computed: {
-      iconType () {
-        if (this.icon) return this.icon
-        switch (this.type) {
-          case 'info':
-          case 'primary': return 'info'
-          case 'warning': return 'exclamation'
-          case 'success': return 'check'
-          case 'danger': return 'times'
-          default: return null
-        }
-      }
-    },
-    methods: {
-      afterLeave () {
-        this.$emit('close', this)
+    closeable: Boolean
+  },
+  computed: {
+    iconType () {
+      if (this.icon) return this.icon
+      switch (this.type) {
+        case 'info':
+        case 'primary': return 'info'
+        case 'warning': return 'exclamation'
+        case 'success': return 'check'
+        case 'danger': return 'times'
+        default: return null
       }
     }
+  },
+  methods: {
+    afterLeave () {
+      this.$emit('close', this)
+    }
   }
+}
 </script>

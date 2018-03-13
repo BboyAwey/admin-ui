@@ -61,78 +61,77 @@
   </div>
 </template>
 <script>
-  import { getElementSize } from '../../../helpers/dom'
-  import { namespace } from '../../../helpers/utils'
+import { getElementSize } from '../../../helpers/dom'
+import { namespace } from '../../../helpers/utils'
 
-  export default {
-    name: 'au-loading',
-    data () {
-      return {
-        closed: false,
-        el: null
+export default {
+  name: 'au-loading',
+  data () {
+    return {
+      closed: false,
+      el: null
+    }
+  },
+  mounted () {
+    this.insertSvgStyleTag()
+  },
+  beforeDestroy () {
+    this.close()
+  },
+  props: {
+    size: Number,
+    message: String,
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    mask: Boolean
+  },
+  computed: {
+    stroke () {
+      return namespace.get('theme').colors[this.color + '-3']
+    }
+  },
+  methods: {
+    setTop (elHeight) { // exec in loading.js
+      this.$refs.coreContainer.style.top = (elHeight - getElementSize(this.$refs.coreContainer).height) / 2 + 'px'
+    },
+    insertSvgStyleTag () {
+      let style = document.createElement('style')
+      style.innerHTML = `
+        /* &lt;![CDATA[ */
+          @keyframes Rotate { 100% { transform: rotate(360deg); } }
+
+          @keyframes CircularBarDash {
+            0% {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+          }
+          50% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -35;
+          }
+          100% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -124;
+          }
+          }
+        /* ]]&gt; */
+      `
+
+      let styles = this.$refs.svg.querySelectorAll('style')
+      for (let i = 0; i < styles.length; i++) {
+        styles[i].parentNode.removeChild(styles[i])
       }
+      this.$refs.svg.insertBefore(style, this.$refs.core)
     },
-    mounted () {
-      this.insertSvgStyleTag()
-    },
-    beforeDestroy () {
-      this.close()
-    },
-    props: {
-      size: Number,
-      message: String,
-      color: {
-        type: String,
-        default: 'primary'
-      },
-      mask: Boolean
-    },
-    computed: {
-      stroke () {
-        return namespace.get('theme').colors[this.color + '-3']
-      }
-    },
-    methods: {
-      setTop (elHeight) { // exec in loading.js
-        this.$refs.coreContainer.style.top = (elHeight - getElementSize(this.$refs.coreContainer).height) / 2 + 'px'
-      },
-      insertSvgStyleTag () {
-        let style = document.createElement('style')
-        style.innerHTML = `
-          /* &lt;![CDATA[ */
-            @keyframes Rotate { 100% { transform: rotate(360deg); } }
-
-            @keyframes CircularBarDash {
-              0% {
-              stroke-dasharray: 1, 200;
-              stroke-dashoffset: 0;
-            }
-            50% {
-              stroke-dasharray: 89, 200;
-              stroke-dashoffset: -35;
-            }
-            100% {
-              stroke-dasharray: 89, 200;
-              stroke-dashoffset: -124;
-            }
-            }
-          /* ]]&gt; */
-        `
-
-        let styles = this.$refs.svg.querySelectorAll('style')
-        for (let i = 0; i < styles.length; i++) {
-          styles[i].parentNode.removeChild(styles[i])
-        }
-        this.$refs.svg.insertBefore(style, this.$refs.core)
-      },
-      close () {
-        if (!this.closed) {
-          let el = this.el ? this.el : this.$el
-          el.parentNode.removeChild(el)
-          this.closed = true
-        }
+    close () {
+      if (!this.closed) {
+        let el = this.el ? this.el : this.$el
+        el.parentNode.removeChild(el)
+        this.closed = true
       }
     }
   }
+}
 </script>
-

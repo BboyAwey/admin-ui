@@ -497,6 +497,18 @@
               参数event表示事件对象
             </td>
           </tr>
+          <tr>
+            <td>@association-select</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">association</li>
+              </ol>
+            </td>
+            <td>
+              关联项点击事件<br>
+              参数association表示当前关联项<br>
+            </td>
+          </tr>
         </tbody>
       </au-table>
       <!-- <au-icon type="minus"></au-icon> -->
@@ -558,29 +570,29 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'input-examples',
-    data () {
-      return {
-        value: '',
-        validators: [
-          {
-            validator (v) {
-              return v === '我爱你'
-            },
-            warning: '快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！'
-          }
-        ],
-        tips: [
-          '我是第一条提示',
-          '风骚的第二条提示'
-        ],
-        associations: [
-          '第1条关联',
-          '第2条关联',
-          '第3条关联'
-        ]
-      }
+export default {
+  name: 'input-examples',
+  data () {
+    return {
+      value: '',
+      validators: [
+        {
+          validator (v) {
+            return v === '我爱你'
+          },
+          warning: '快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！快说你爱我！'
+        }
+      ],
+      tips: [
+        '我是第一条提示',
+        '风骚的第二条提示'
+      ],
+      associations: [
+        '第1条关联',
+        '第2条关联',
+        '第3条关联'
+      ]
     }
   }
+}
 </script>

@@ -64,42 +64,42 @@
   </div>
 </template>
 <script>
-  import AuInput from '../../input'
-  import AuIcon from '../../icon'
+import AuInput from '../../input'
+import AuIcon from '../../icon'
 
-  export default {
-    name: 'au-prompt',
-    components: { AuInput, AuIcon },
-    data () {
-      return {
-        value: ''
-      }
-    },
-    props: {
-      message: String,
-      trigger: Boolean,
-      validators: Array,
-      placeholder: String,
-      icon: String,
-      messageType: String
-    },
-    computed: {
-      iconType () {
-        if (this.icon) return this.icon
-        switch (this.messageType) {
-          case 'info':
-          case 'primary': return 'info'
-          case 'warning': return 'exclamation'
-          case 'success': return 'check'
-          case 'danger': return 'times'
-          default: return null
-        }
-      }
-    },
-    methods: {
-      validate () {
-        return this.$refs.core.validate()
+export default {
+  name: 'au-prompt',
+  components: { AuInput, AuIcon },
+  data () {
+    return {
+      value: ''
+    }
+  },
+  props: {
+    message: String,
+    trigger: Boolean,
+    validators: Array,
+    placeholder: String,
+    icon: String,
+    messageType: String
+  },
+  computed: {
+    iconType () {
+      if (this.icon) return this.icon
+      switch (this.messageType) {
+        case 'info':
+        case 'primary': return 'info'
+        case 'warning': return 'exclamation'
+        case 'success': return 'check'
+        case 'danger': return 'times'
+        default: return null
       }
     }
+  },
+  methods: {
+    validate () {
+      return this.$refs.core.validate()
+    }
   }
+}
 </script>

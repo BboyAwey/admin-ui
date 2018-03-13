@@ -163,149 +163,149 @@
   </div>
 </template>
 <script>
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import { getElementSize } from '../../../helpers/dom'
-  import AuIcon from '../../icon'
-  import AuScroller from '../../scroller'
-  import FormItem from '../../../helpers/form-item.vue'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import { getElementSize } from '../../../helpers/dom'
+import AuIcon from '../../icon'
+import AuScroller from '../../scroller'
+import FormItem from '../../../helpers/form-item.vue'
 
-  export default {
-    name: 'au-select',
-    mixins: [ValidatorMixin, FormApiMixin],
-    components: {AuIcon, AuScroller, FormItem},
-    created () {
+export default {
+  name: 'au-select',
+  mixins: [ValidatorMixin, FormApiMixin],
+  components: {AuIcon, AuScroller, FormItem},
+  created () {
+    this.localValueToSelectedOptions()
+  },
+  mounted () {
+    if (this.multiple && !(this.value instanceof Array)) {
+      console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
+    }
+    this.reposPopup()
+  },
+  data () {
+    return {
+      optionDisplay: false,
+      selectedOptions: [],
+      active: false
+    }
+  },
+  props: {
+    placeholder: {
+      type: String,
+      default: '请选择'
+    },
+    options: {
+      type: Array,
+      required: true
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    fullWidth: Boolean,
+    width: String,
+    maxWidth: String,
+    minWidth: String
+  },
+  watch: {
+    localValue () {
       this.localValueToSelectedOptions()
+      this.input()
+      this.change()
+      this.$nextTick(this.reposPopup)
     },
-    mounted () {
-      if (this.multiple && !(this.value instanceof Array)) {
-        console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
-      }
-      this.reposPopup()
-    },
-    data () {
-      return {
-        optionDisplay: false,
-        selectedOptions: [],
-        active: false
-      }
-    },
-    props: {
-      placeholder: {
-        type: String,
-        default: '请选择'
-      },
-      options: {
-        type: Array,
-        required: true
-      },
-      multiple: {
-        type: Boolean,
-        default: false
-      },
-      fullWidth: Boolean,
-      width: String,
-      maxWidth: String,
-      minWidth: String
-    },
-    watch: {
-      localValue () {
+    options: {
+      deep: true,
+      handler (v) {
         this.localValueToSelectedOptions()
-        this.input()
-        this.change()
-        this.$nextTick(this.reposPopup)
-      },
-      options: {
-        deep: true,
-        handler (v) {
-          this.localValueToSelectedOptions()
-        }
-      }
-    },
-    methods: {
-      deleteSelectedOption (index) {
-        this.selectedOptions.splice(index, 1)
-        this.localValue.splice(index, 1)
-        this.$nextTick(this.resize)
-      },
-      coreClick () {
-        if (this.disabled) return false
-        this.active = !this.active
-        this.optionDisplay = !this.optionDisplay
-      },
-      coreFocus (e) {
-        if (!this.disabled) {
-          this.focus(e)
-        }
-      },
-      coreBlur (e) {
-        if (e.relatedTarget !== this.$refs.options) {
-          this.optionDisplay = false
-          this.active = false
-          this.blur(e)
-        }
-      },
-      optionsBlur (e) {
-        if (e.relatedTarget !== this.$refs.core) {
-          this.optionDisplay = false
-          this.blur(e)
-        }
-      },
-      select (option, e, silent) {
-        if (this.multiple) {
-          if (!this.localValue.includes(option.value)) {
-            this.localValue.push(option.value)
-          } else {
-            this.localValue.splice(this.localValue.indexOf(option.value), 1)
-          }
-          this.$nextTick(this.resize)
-        } else {
-          if (this.localValue !== option.value) {
-            this.selectedOptions = [option]
-            this.localValue = option.value
-          }
-        }
-        if (!this.multiple) this.optionDisplay = false
-        this.active = false
-        if (!silent) this.$emit('select', option, e)
-      },
-      resize () {
-        let height = getElementSize(this.$refs.selectMultiple).height
-        this.$refs.coreContainer.style.height = height + 'px'
-        this.$refs.core.style.height = height + 'px'
-        this.$refs.selectScroller.$el.style.top = height + 2 + 'px'
-      },
-      localValueToSelectedOptions () {
-        let {options, localValue} = this
-        let res = []
-        let findSelectedOptionByValue = (value, options) => {
-          for (let i = 0; i < options.length; i++) {
-            if (options[i].value === value) {
-              return options[i]
-            }
-          }
-        }
-        if (localValue instanceof Array) {
-          for (let i = 0; i < localValue.length; i++) {
-            let option = findSelectedOptionByValue(localValue[i], options)
-            if (option) res.push(option)
-          }
-        } else {
-          let option = findSelectedOptionByValue(localValue, options)
-          if (option) res.push(option)
-        }
-        this.selectedOptions = res
-      },
-      reposPopup () {
-        if (this.multiple) {
-          let coreHeight = getElementSize(this.$refs.core).height
-          let options = this.$refs.options
-          options.style.top = coreHeight + 2 + 'px'
-        }
-      },
-      isSelected (value) {
-        return this.multiple ? this.localValue.includes(value) : (this.localValue === value)
       }
     }
+  },
+  methods: {
+    deleteSelectedOption (index) {
+      this.selectedOptions.splice(index, 1)
+      this.localValue.splice(index, 1)
+      this.$nextTick(this.resize)
+    },
+    coreClick () {
+      if (this.disabled) return false
+      this.active = !this.active
+      this.optionDisplay = !this.optionDisplay
+    },
+    coreFocus (e) {
+      if (!this.disabled) {
+        this.focus(e)
+      }
+    },
+    coreBlur (e) {
+      if (e.relatedTarget !== this.$refs.options) {
+        this.optionDisplay = false
+        this.active = false
+        this.blur(e)
+      }
+    },
+    optionsBlur (e) {
+      if (e.relatedTarget !== this.$refs.core) {
+        this.optionDisplay = false
+        this.blur(e)
+      }
+    },
+    select (option, e, silent) {
+      if (this.multiple) {
+        if (!this.localValue.includes(option.value)) {
+          this.localValue.push(option.value)
+        } else {
+          this.localValue.splice(this.localValue.indexOf(option.value), 1)
+        }
+        this.$nextTick(this.resize)
+      } else {
+        if (this.localValue !== option.value) {
+          this.selectedOptions = [option]
+          this.localValue = option.value
+        }
+      }
+      if (!this.multiple) this.optionDisplay = false
+      this.active = false
+      if (!silent) this.$emit('select', option, e)
+    },
+    resize () {
+      let height = getElementSize(this.$refs.selectMultiple).height
+      this.$refs.coreContainer.style.height = height + 'px'
+      this.$refs.core.style.height = height + 'px'
+      this.$refs.selectScroller.$el.style.top = height + 2 + 'px'
+    },
+    localValueToSelectedOptions () {
+      let {options, localValue} = this
+      let res = []
+      let findSelectedOptionByValue = (value, options) => {
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === value) {
+            return options[i]
+          }
+        }
+      }
+      if (localValue instanceof Array) {
+        for (let i = 0; i < localValue.length; i++) {
+          let option = findSelectedOptionByValue(localValue[i], options)
+          if (option) res.push(option)
+        }
+      } else {
+        let option = findSelectedOptionByValue(localValue, options)
+        if (option) res.push(option)
+      }
+      this.selectedOptions = res
+    },
+    reposPopup () {
+      if (this.multiple) {
+        let coreHeight = getElementSize(this.$refs.core).height
+        let options = this.$refs.options
+        options.style.top = coreHeight + 2 + 'px'
+      }
+    },
+    isSelected (value) {
+      return this.multiple ? this.localValue.includes(value) : (this.localValue === value)
+    }
   }
+}
 </script>

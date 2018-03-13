@@ -429,20 +429,20 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'timepicker-examples',
-    data () {
-      return {
-        time: '',
-        validators: [
-          {
-            validator (v) {
-              return v === '01:00:00'
-            },
-            warning: '请选择01:00:00'
-          }
-        ]
-      }
+export default {
+  name: 'timepicker-examples',
+  data () {
+    return {
+      time: '',
+      validators: [
+        {
+          validator (v) {
+            return v === '01:00:00'
+          },
+          warning: '请选择01:00:00'
+        }
+      ]
     }
   }
+}
 </script>

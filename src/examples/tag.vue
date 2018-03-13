@@ -179,7 +179,7 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'tag-examples'
-  }
+export default {
+  name: 'tag-examples'
+}
 </script>

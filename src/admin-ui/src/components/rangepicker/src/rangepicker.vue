@@ -47,6 +47,9 @@
   .au-rangepicker-to {
     font-size: $normal;
   }
+  .au-rangepicker-pop {
+    min-width: 633px;
+  }
 </style>
 <template>
   <div class="au-rangepicker">
@@ -62,6 +65,7 @@
         :placement="placement"
         ref="popover"
         :disabled="disabled"
+        :beforeShow="beforeShow"
         @show="handlePopup">
         <au-button slot="target" plain :size="size" :disabled="disabled">
           {{ type !== 'time' ? localRange.startDate : '' }}
@@ -150,11 +154,11 @@ import Datepicker from '../../datepicker'
 import Timepicker from '../../timepicker'
 import Tag from '../../tag'
 import FormApiMixin from '../../../helpers/form-api-mixin'
-let formApiMixin = { props: FormApiMixin.props }
-formApiMixin.props.value = null
-// import { isEmptyString } from '../../../helpers/utils'
+import { isEmptyString } from '../../../helpers/utils'
 import { getElementSize } from '../../../helpers/dom'
 import FormItem from '../../../helpers/form-item.vue'
+let formApiMixin = { props: FormApiMixin.props }
+formApiMixin.props.value = null
 
 function padNum (num) {
   return Number(num) < 10 ? ('0' + Number(num)) : Number(num)
@@ -184,10 +188,10 @@ function padTimeStr (time) {
 
 function resolveRange (range) {
   let temp = {}
-  if (range.startDate) temp.startDate = padDateStr(range.startDate)
-  if (range.startTime) temp.startTime = padTimeStr(range.startTime)
-  if (range.endDate) temp.endDate = padDateStr(range.endDate)
-  if (range.endTime) temp.endTime = padTimeStr(range.endTime)
+  if (range.startDate || isEmptyString(range.startDate)) temp.startDate = padDateStr(range.startDate)
+  if (range.startTime || isEmptyString(range.startTime)) temp.startTime = padTimeStr(range.startTime)
+  if (range.endDate || isEmptyString(range.endDate)) temp.endDate = padDateStr(range.endDate)
+  if (range.endTime || isEmptyString(range.endDate)) temp.endTime = padTimeStr(range.endTime)
   return temp
 }
 
@@ -237,6 +241,27 @@ function getSpanFromRange (range) {
       new Date(
       getTimeFromDateStr(range.startDate) +
       getMsFromTimeStr(range.startTime))
+  }
+}
+
+function isRangeChange (a, b, type) {
+  if (type === 'time') {
+    return (
+      padTimeStr(a.startTime) !== b.startTime ||
+      padTimeStr(a.endTime) !== b.endTime
+    )
+  } else if (type === 'date') {
+    return (
+      padDateStr(a.startDate) !== b.startDate ||
+      padDateStr(a.endDate) !== b.endDate
+    )
+  } else {
+    return (
+      padTimeStr(a.startTime) !== (b.startTime || '') ||
+      padTimeStr(a.endTime) !== (b.endTime || '') ||
+      padDateStr(a.startDate) !== (b.startDate || '') ||
+      padDateStr(a.endDate) !== (b.endDate || '')
+    )
   }
 }
 
@@ -477,32 +502,15 @@ export default {
     localRange: {
       deep: true,
       handler (v) {
-        this.$emit('change', resolveRange(v))
+        if (isRangeChange(v, this.localRange, this.type)) {
+          this.$emit('change', resolveRange(v))
+        }
       }
     },
     range: {
       deep: true,
       handler (v) {
-        if (this.type === 'time') {
-          if (
-            padTimeStr(v.startTime) !== this.localRange.startTime ||
-            padTimeStr(v.endTime) !== this.localRange.endTime
-          ) {
-            this.localRange = resolveRange(v)
-          }
-        } else if (this.type === 'date') {
-          if (
-            padDateStr(v.startDate) !== this.localRange.startDate ||
-            padDateStr(v.endDate) !== this.localRange.endDate
-          ) {
-            this.localRange = resolveRange(v)
-          }
-        } else if (
-          padTimeStr(v.startTime) !== this.localRange.startTime ||
-          padTimeStr(v.endTime) !== this.localRange.endTime ||
-          padDateStr(v.startDate) !== this.localRange.startDate ||
-          padDateStr(v.endDate) !== this.localRange.endDate
-        ) {
+        if (isRangeChange(v, this.localRange, this.type)) {
           this.localRange = resolveRange(v)
         }
       }
@@ -575,7 +583,7 @@ export default {
 
       this.localRange = res
       this.$refs.popover.hide()
-      this.splitRange(res)
+      // this.splitRange(res)
     },
     isCurrent (item) {
       return item.span === getSpanFromRange(this.localRange)
@@ -596,6 +604,7 @@ export default {
           this.$nextTick(() => {
             this.endTime = range.endTime || null
             if (typeof callback === 'function') {
+              // eslint-disable-next-line
               callback({
                 startDate: this.startDate,
                 startTime: this.startTime,
@@ -606,6 +615,9 @@ export default {
           })
         })
       })
+    },
+    beforeShow () {
+      this.splitRange(this.localRange)
     }
   }
 }

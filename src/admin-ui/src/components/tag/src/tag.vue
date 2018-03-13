@@ -37,48 +37,48 @@
   </div>
 </template>
 <script>
-  import auIcon from '../../icon'
-  export default {
-    name: 'au-tag',
-    components: { auIcon },
-    props: {
-      type: {
-        type: String,
-        default: 'primary'
-      },
-      closable: Boolean,
-      hoverable: Boolean,
-      size: {
-        type: String,
-        default: 'normal'
-      },
-      active: Boolean
+import auIcon from '../../icon'
+export default {
+  name: 'au-tag',
+  components: { auIcon },
+  props: {
+    type: {
+      type: String,
+      default: 'primary'
     },
-    data () {
-      return {}
+    closable: Boolean,
+    hoverable: Boolean,
+    size: {
+      type: String,
+      default: 'normal'
     },
-    computed: {
-      localType () {
-        if (this.type === 'default') return 'base'
-        else return this.type
-      },
-      classes () {
-        let normal = ''
-        let hover = ''
-        let size = this.size ? `au-size-${this.size}${this.active ? '' : '-bordered'}` : ''
-        if (this.active) {
-          normal = `au-theme-font-color--base-12 au-theme-background-color--${this.localType}-3`
+    active: Boolean
+  },
+  data () {
+    return {}
+  },
+  computed: {
+    localType () {
+      if (this.type === 'default') return 'base'
+      else return this.type
+    },
+    classes () {
+      let normal = ''
+      let hover = ''
+      let size = this.size ? `au-size-${this.size}${this.active ? '' : '-bordered'}` : ''
+      if (this.active) {
+        normal = `au-theme-font-color--base-12 au-theme-background-color--${this.localType}-3`
+      } else {
+        if (this.hoverable) {
+          normal = 'au-theme-border-color--base-8 au-theme-font-color--base-3'
+          hover = `au-theme-hover-border-color--${this.localType}-3 au-theme-hover-font-color--${this.localType}-3`
         } else {
-          if (this.hoverable) {
-            normal = 'au-theme-border-color--base-8 au-theme-font-color--base-3'
-            hover = `au-theme-hover-border-color--${this.localType}-3 au-theme-hover-font-color--${this.localType}-3`
-          } else {
-            normal = `au-theme-border-color--${this.localType}-3 au-theme-font-color--${this.localType}-3`
-          }
+          normal = `au-theme-border-color--${this.localType}-3 au-theme-font-color--${this.localType}-3`
         }
-
-        return normal + ' ' + hover + ' ' + size
       }
+
+      return normal + ' ' + hover + ' ' + size
     }
   }
+}
 </script>

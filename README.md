@@ -1,12 +1,27 @@
-# Admin UI 2
+# admin-ui
 
-> The realization of background-management-system-like UI design specifications. This is ths version 3 of Admin UI.
+> A concise and elegant admin-system-like ui component library
 
-## 开发文档
+## Build Setup
 
-开发文档使用gitbook编写，参与开发时请首先阅读开发文档：
 ``` bash
-cd documentation
+# install dependencies
+npm install
 
-gitbook serve
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run all tests
+npm test
 ```
+
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

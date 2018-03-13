@@ -64,81 +64,80 @@
   </div>
 </template>
 <script>
-  import FormApiMixin from '../../../helpers/form-api-mixin'
-  import ValidatorMixin from '../../../helpers/validator-mixin'
-  import FormItem from '../../../helpers/form-item.vue'
-  import { getElementSize } from '../../../helpers/dom'
-  import Loading from '../../loading'
+import FormApiMixin from '../../../helpers/form-api-mixin'
+import ValidatorMixin from '../../../helpers/validator-mixin'
+import FormItem from '../../../helpers/form-item.vue'
+import { getElementSize } from '../../../helpers/dom'
+import Loading from '../../loading'
 
-  export default {
-    name: 'au-switch',
-    mixins: [FormApiMixin, ValidatorMixin],
-    components: { FormItem },
-    mounted () {
+export default {
+  name: 'au-switch',
+  mixins: [FormApiMixin, ValidatorMixin],
+  components: { FormItem },
+  mounted () {
+    this.getBg()
+    this.getLeft()
+    this.load()
+  },
+  data () {
+    return {
+      bg: 'base-8',
+      left: '2px',
+      loadingIns: null
+    }
+  },
+  props: {
+    color: {
+      type: String,
+      default: 'success'
+    },
+    loading: Boolean
+  },
+  watch: {
+    value () {
       this.getBg()
       this.getLeft()
+    },
+    localValue (v) {
+      this.input()
+      this.change()
+    },
+    color () {
+      this.getBg()
+    },
+    loading () {
       this.load()
+    }
+  },
+  computed: {
+    localDisabled () {
+      return this.disabled || this.loading || this.readonly
+    }
+  },
+  methods: {
+    getBg () {
+      this.bg = this.localValue ? this.color + '-3' : 'base-8'
     },
-    data () {
-      return {
-        bg: 'base-8',
-        left: '2px',
-        loadingIns: null
-      }
+    getLeft () {
+      if (this.localValue) {
+        let width = getElementSize(this.$refs.switch).width
+        this.left = width - 4 - 16 + 1 + 'px'
+      } else this.left = '2px'
     },
-    props: {
-      color: {
-        type: String,
-        default: 'success'
-      },
-      loading: Boolean
+    handleClick () {
+      if (this.localDisabled) return
+      this.localValue = !this.localValue
     },
-    watch: {
-      value () {
-        this.getBg()
-        this.getLeft()
-      },
-      localValue (v) {
-        this.input()
-        this.change()
-      },
-      color () {
-        this.getBg()
-      },
-      loading () {
-        this.load()
-      }
-    },
-    computed: {
-      localDisabled () {
-        return this.disabled || this.loading || this.readonly
-      }
-    },
-    methods: {
-      getBg () {
-        this.bg = this.localValue ? this.color + '-3' : 'base-8'
-      },
-      getLeft () {
-        if (this.localValue) {
-          let width = getElementSize(this.$refs.switch).width
-          this.left = width - 4 - 16 + 1 + 'px'
-        } else this.left = '2px'
-      },
-      handleClick () {
-        if (this.localDisabled) return
-        this.localValue = !this.localValue
-      },
-      load () {
-        if (this.loading) {
-          this.loadingIns = Loading({
-            target: this.$refs.core,
-            color: this.color
-          })
-        } else {
-          if (this.loadingIns) this.loadingIns.close()
-        }
+    load () {
+      if (this.loading) {
+        this.loadingIns = Loading({
+          target: this.$refs.core,
+          color: this.color
+        })
+      } else {
+        if (this.loadingIns) this.loadingIns.close()
       }
     }
   }
+}
 </script>
-

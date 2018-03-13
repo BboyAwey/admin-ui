@@ -391,57 +391,57 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'checkbox-examples',
-    data () {
-      return {
-        allChecked: false,
-        indeterminate: false,
-        kinds: [],
-        checkboxes: [
-          {
-            text: 'Breaking',
-            value: 'b'
-          },
-          {
-            text: 'Jazz',
-            value: 'j'
-          },
-          {
-            text: 'Popppin',
-            value: 'p'
-          },
-          {
-            text: 'Locking',
-            value: 'l'
-          }
-        ]
-      }
-    },
-    computed: {
-      validators () {
-        let vm = this
-        return [
-          {
-            validator (v) {
-              return vm.kinds ? v.includes('b') : true
-            },
-            warning: 'Bboy forever'
-          }
-        ]
-      }
-    },
-    methods: {
-      kindsCheck (v) {
-        if (!this.allChecked || !v.length) {
-          this.allChecked = v.length === this.checkboxes.length
+export default {
+  name: 'checkbox-examples',
+  data () {
+    return {
+      allChecked: false,
+      indeterminate: false,
+      kinds: [],
+      checkboxes: [
+        {
+          text: 'Breaking',
+          value: 'b'
+        },
+        {
+          text: 'Jazz',
+          value: 'j'
+        },
+        {
+          text: 'Popppin',
+          value: 'p'
+        },
+        {
+          text: 'Locking',
+          value: 'l'
         }
-        this.indeterminate = v.length > 0 && v.length < this.checkboxes.length
-      },
-      checkAll (v) {
-        this.indeterminate = false
-        this.kinds = v ? this.checkboxes.map(e => e.value) : []
+      ]
+    }
+  },
+  computed: {
+    validators () {
+      let vm = this
+      return [
+        {
+          validator (v) {
+            return vm.kinds ? v.includes('b') : true
+          },
+          warning: 'Bboy forever'
+        }
+      ]
+    }
+  },
+  methods: {
+    kindsCheck (v) {
+      if (!this.allChecked || !v.length) {
+        this.allChecked = v.length === this.checkboxes.length
       }
+      this.indeterminate = v.length > 0 && v.length < this.checkboxes.length
+    },
+    checkAll (v) {
+      this.indeterminate = false
+      this.kinds = v ? this.checkboxes.map(e => e.value) : []
     }
   }
+}
 </script>

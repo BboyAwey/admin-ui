@@ -1,5 +1,4 @@
 <style lang="scss">
-  @import '../../../style/vars';
   .au-paginator {
     display: inline-block;
     user-select: none;
@@ -10,221 +9,227 @@
     }
     & > ul > li {
       float: left;
-      width: 40px;
+      min-width: 32px;
       height: 32px;
-      border-top-width: 1px/*$grayBrighten15*/;
-      border-top-style: solid;
-      border-bottom-width: 1px/*$grayBrighten15*/;
-      border-bottom-style: solid;
-      border-right-width: 1px/*$grayBrighten15*/;
-      border-right-style: solid;
+      padding: 0 5px;
+      border-width: 1px;
+      border-style: solid;
       line-height: 32px;
       text-align: center;
       font-size: 12px;
-      // color: $grayDarken35;
     }
     & > ul > .ellipsis{
-      border-bottom: none;
-      border-top: none;
-      // border-right: 1px solid /*$grayBrighten15*/;
-      border-right-width: 1px;
-      border-right-style: solid;
+      // border-bottom: none;
+      // border-top: none;
+      // border: none;
     }
-    & > ul > .active{
-      // background-color: $primary;
-      color: #fff;
+    .fast-ward {
+      display: none;
+    }
+    .ellipsis:hover {
+      .ellipsis-text {
+        display: none;
+      }
+      .fast-ward {
+        display: inline;
+      }
+    }
+    & > ul > .current{
       border: none;
     }
     & > ul > .disabled{
-      // background-color: $grayBrighten20;
-      // color: $grayBrighten10;
       cursor: not-allowed;
     }
-    & > ul > li:not(.active):not(.disabled):not(.ellipsis):hover{
-      // background-color: $grayBrighten20;
-      // color: $primary;
+    & > ul > li:not(.current):not(.disabled):hover{
       cursor: pointer;
     }
-    & > ul > li:first-child {
-      // border-left: 1px solid /*$grayBrighten15*/;
-      border-left-width: 1px;
-      border-left-style: solid;
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
+    & > ul > li:not(:last-child) {
+      margin-right: 8px;
     }
-    & > ul > li:last-child {
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
-    }
+    // & > ul > li:first-child {
+    //   border-left-width: 1px;
+    //   border-left-style: solid;
+    //   border-top-left-radius: 3px;
+    //   border-bottom-left-radius: 3px;
+    // }
+    // & > ul > li:last-child {
+    //   border-top-right-radius: 3px;
+    //   border-bottom-right-radius: 3px;
+    // }
   }
 </style>
-<template lang="html">
+<template>
   <div class="au-paginator">
     <ul>
-     <li :class="{disabled: curPage <= 1,
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-background-color--base-9': curPage <= 1,
-                  'au-theme-font-color--base-6': curPage <= 1,
-                  'au-theme-hover-background-color--base-10': curPage > 1,
-                  'au-theme-hover-font-color--primary-3': curPage > 1}" @click="prevPage" v-if="_pageCount() >= 0"><au-icon type="angle-left" size="16px"></au-icon></li>
-     <!-- 总数小等于 0-->
-     <li :class="{active: curPage == 1,
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage != 1,
-                  'au-theme-hover-font-color--primary-3': curPage != 1,
-                  'au-theme-background-color--primary-5': curPage == 1,
-                  'au-theme-font-color--primary-3-important': curPage == 1}" class="  " attr="ion-more-1" v-if="_pageCount()<=0" @click="page(1)">1</li>
-     <!-- 总数大于等于 0 且小于等10-->
-     <li :class="{active: curPage == index,
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage != index,
-                  'au-theme-hover-font-color--primary-3': curPage != index,
-                  'au-theme-background-color--primary-5': curPage == index,
-                  'au-theme-font-color--primary-3-important': curPage == index}" v-show="_pageCount() > 0 && _pageCount() <= 10" v-for="index in _pageCount()" @click="page(index)">{{index}}</li>
-     <!-- 总数大于 10-->
-     <li :class="{active: curPage == 1,
-                  'au-theme-border-color--base-8-important': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage != 1,
-                  'au-theme-hover-font-color--primary-3': curPage != 1,
-                  'au-theme-background-color--primary-5': curPage == 1,
-                  'au-theme-font-color--primary-3-important': curPage == 1}" attr="ion-more-1" v-if="_pageCount() > 10 " @click="page(1)">1</li>
-     <li :class="{'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true}" attr="ion-more-left" class="ellipsis" v-show="_offset()>1 && _pageCount() > 10"><au-icon type='ellipsis-h'></au-icon></li>
-     <li :class="{active: curPage == _cPage(index),
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage != _cPage(index),
-                  'au-theme-hover-font-color--primary-3': curPage != _cPage(index),
-                  'au-theme-background-color--primary-5': curPage == _cPage(index),
-                  'au-theme-font-color--primary-3-important': curPage == _cPage(index) }" v-show="(_cPage(index) <= _limit() ) && _pageCount() > 10" v-for="index in _limit()" @click="page(_cPage(index))">{{_cPage(index)}}</li>
-     <li :class="{'au-theme-border-color--base-8-important': true,
-                  'au-theme-font-color--base-3': true}" attr="ion-more-right" class="ellipsis" v-show="(_limit() < _pageCount() - 1) && _pageCount() > 10"><au-icon type='ellipsis-h'></au-icon></li>
-     <li :class="{active: curPage == _pageCount(),
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage != _pageCount(),
-                  'au-theme-hover-font-color--primary-3': curPage != _pageCount(),
-                  'au-theme-background-color--primary-5': curPage == _pageCount(),
-                  'au-theme-font-color--primary-3-important': curPage == _pageCount()}" attr="pageCount"  @click="page(_pageCount())" v-if="_pageCount() > 10">{{_pageCount()}}</li>
-     <li :class="{disabled: curPage >= _pageCount(),
-                  'au-theme-border-color--base-8': true,
-                  'au-theme-font-color--base-3': true,
-                  'au-theme-hover-background-color--base-10': curPage < _pageCount(),
-                  'au-theme-hover-font-color--primary-3': curPage < _pageCount(),
-                  'au-theme-background-color--base-9': curPage >= _pageCount(),
-                  'au-theme-font-color--base-6': curPage >= _pageCount()}" @click="nextPage" v-if="_pageCount() >=0"><au-icon type="angle-right" size="16px"></au-icon></li>
-     </ul>
+      <li class="
+        au-theme-border-color--base-8
+        au-theme-font-color--base-3
+        au-theme-border-radius--large"
+        :class="{
+          'disabled': !canPrev,
+          'au-theme-border-color--base-8': true,
+          'au-theme-font-color--base-3': canPrev,
+          'au-theme-font-color--base-6': !canPrev,
+          'au-theme-background-color--base-10': !canPrev,
+          'au-theme-hover-font-color--primary-3': canPrev,
+          'au-theme-hover-border-color--primary-3': canPrev
+        }" @click="prev">
+        <au-icon type="angle-left" size="16px"></au-icon>
+      </li>
+      <li
+        v-for="(num, i) in nums"
+        :key="num"
+        class="au-theme-border-radius--large"
+        :class="{
+          'current': num == localCurrent,
+          'ellipsis': num == '···',
+          'au-theme-font-color--base-12': num == localCurrent,
+          'au-theme-background-color--primary-3': num == localCurrent,
+          'au-theme-border-color--base-8': num != localCurrent,
+          'au-theme-font-color--base-3': num != localCurrent,
+          'au-theme-background-color--base-12': num != localCurrent,
+          'au-theme-hover-border-color--primary-3': num != localCurrent,
+          'au-theme-hover-font-color--primary-3': num != localCurrent
+        }"
+        @click="paginate(num, i)">
+          <span class="ellipsis-text">{{ num }}</span>
+          <span class="fast-ward"><au-icon :type="i < nums.indexOf(localCurrent) ? 'angle-double-left' : 'angle-double-right'" /></span>
+        </li>
+      <li class="
+        au-theme-border-color--base-8
+        au-theme-font-color--base-3
+        au-theme-border-radius--large"
+        :class="{
+          'disabled': !canNext,
+          'au-theme-border-color--base-8': true,
+          'au-theme-font-color--base-3': canNext,
+          'au-theme-font-color--base-6': !canNext,
+          'au-theme-background-color--base-10': !canNext,
+          'au-theme-hover-font-color--primary-3': canNext,
+          'au-theme-hover-border-color--primary-3': canNext
+        }" @click="next">
+        <au-icon type="angle-right" size="16px"></au-icon>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
-  /*
-    author: lilijing@rongcapital.cn
-  */
-  export default {
-    name: 'au-paginator',
-    props: {
-      total: {
-        type: Number,
-        default: 0
-      },
-      current: {
-        type: Number,
-        default: 1
-      },
-      size: {
-        type: Number,
-        default: 10
-      }
+import AuIcon from '../../icon'
+export default {
+  name: 'au-paginator',
+  components: { AuIcon },
+  mounted () {
+    if (this.pageCount <= this.localCurrent) this.localCurrent = this.pageCount
+  },
+  data () {
+    return {
+      localCurrent: this.current
+    }
+  },
+  props: {
+    total: {
+      type: Number,
+      default: 0
     },
-    data () {
-      return {
-        // _newMiddleLimit: 0,
-        middleLimit: 6,
-        showPageNum: 10,
-        curPage: 1,
-        totalC: 0,
-        pageS: 10
-      }
+    current: {
+      type: Number,
+      default: 1
     },
-    created () {
-      var pc = 1
-      if (this.total > 0 && this.size > 0) {
-        pc = Math.ceil(this.total / this.size)
-      }
-      if (pc < this.current) {
-        this.curPage = pc
+    size: {
+      type: Number,
+      default: 10
+    }
+  },
+  computed: {
+    pageCount () {
+      return this.total <= this.size ? 1 : Math.ceil(this.total / this.size)
+    },
+    nums () {
+      if (this.pageCount < 10) {
+        let res = []
+        for (let i = 1; i <= this.pageCount; i++) {
+          res.push(i)
+        }
+        return res
       } else {
-        this.curPage = this.current
-      }
-      this.totalC = this.total
-      this.pageS = this.size
-    },
-    computed: {
-      _newMiddleLimit () {
-        // console.log('_newMiddleLimit', this.curPage + 3)
-        return this.curPage + 3
-      }
-    },
-    watch: {
-      total (val) {
-        this.totalC = val > 0 ? val : 0
-      },
-      current (val) {
-        this.curPage = val > this.totalC ? this.totalC || 1 : val
-      },
-      size (val) {
-        this.pageS = val
-        this._currentPage = val > this.totalC ? this.totalC || 1 : val
-      }
-    },
-    methods: {
-      _offset () {
-        var v = this.curPage + 3 - this.middleLimit
-        var r = 1
-        if (v > 1 && this._pageCount() - v <= this.middleLimit) {
-          r = this._pageCount() - this.middleLimit
-        } else if (v > 1 && this._pageCount() - v > this.middleLimit) {
-          r = v
-        }
-        return r
-      },
-      _limit () {
-        var c = 0
-        if (this._newMiddleLimit <= this.middleLimit) {
-          c = this.middleLimit
-        } else if (this._newMiddleLimit > this._pageCount() - 1) {
-          c = this._pageCount() - 1
+        let left = []
+        if (this.localCurrent - 5 > 1) {
+          let offset = []
+          let temp = this.localCurrent + 5 - this.pageCount
+          for (let i = 1; i <= 3 + (temp > 0 ? temp : 0); i++) {
+            offset.unshift(this.localCurrent - i)
+          }
+          left = [
+            1,
+            '···',
+            ...offset
+          ]
         } else {
-          c = this._newMiddleLimit
+          for (let i = 1; i < this.localCurrent; i++) {
+            left.push(i)
+          }
         }
-        return c
-      },
-      _cPage (p) {
-        // console.log('this._offset()', this._offset())
-        return p + this._offset()
-      },
-      _pageCount () {
-        return Math.ceil(this.total / this.size)
-      },
-      page (indexPage) {
-        this.$emit('toggle', indexPage)
-        this.curPage = indexPage
-      },
-      nextPage () {
-        if (this.curPage < this.totalC / this.pageS) {
-          this.page(this.curPage + 1)
+
+        let right = []
+        if (this.localCurrent + 5 < this.pageCount) {
+          let offset = []
+          let temp = 5 - this.localCurrent
+          for (let i = 1; i <= 3 + (temp > 0 ? temp : 0); i++) {
+            offset.push(this.localCurrent + i)
+          }
+          right = [
+            ...offset,
+            '···',
+            this.pageCount
+          ]
+        } else {
+          for (let i = this.localCurrent + 1; i <= this.pageCount; i++) {
+            right.push(i)
+          }
         }
-      },
-      prevPage () {
-        if (this.curPage > 1) {
-          this.page(this.curPage - 1)
+
+        return [
+          ...left,
+          this.localCurrent,
+          ...right
+        ]
+      }
+    },
+    canPrev () {
+      return this.localCurrent > 1
+    },
+    canNext () {
+      return this.localCurrent < this.pageCount
+    }
+  },
+  watch: {
+    current (v) {
+      this.localCurrent = v
+    },
+    localCurrent (v) {
+      this.$emit('toggle', v)
+    },
+    pageCount (v) {
+      if (v < this.localCurrent) this.localCurrent = v
+    }
+  },
+  methods: {
+    paginate (num, i) {
+      if (num !== '···') this.localCurrent = num
+      else if (i) {
+        if (i < this.nums.indexOf(this.localCurrent)) {
+          this.paginate(this.localCurrent - 5)
+        } else {
+          this.paginate(this.localCurrent + 5)
         }
       }
-
+    },
+    next () {
+      if (this.canNext) this.localCurrent++
+    },
+    prev () {
+      if (this.canPrev) this.localCurrent--
     }
   }
+}
 </script>

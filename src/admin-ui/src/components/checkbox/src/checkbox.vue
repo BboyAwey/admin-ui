@@ -85,7 +85,7 @@
             'au-theme-font-color--base-12': true
           }"></au-icon>
         </span>
-        <span class="au-checkbox-text">{{ text }}</span>
+        <span class="au-checkbox-text" v-show="text">{{ text }}</span>
       </div>
       <div
         class="au-checkbox-container"
@@ -117,7 +117,7 @@
               'au-theme-font-color--base-12': disabled
             }"></au-icon>
         </span>
-        <span class="au-checkbox-text">{{ checkbox.text }}</span>
+        <span class="au-checkbox-text" v-show="checkbox.text">{{ checkbox.text }}</span>
       </div>
     </form-item>
   </div>

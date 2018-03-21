@@ -8,8 +8,7 @@
       <div class="component-example">
         <au-checkbox
           v-model="allChecked"
-          label=""
-          text="All above"
+          label="All above"
           @change="checkAll"
           :indeterminate="indeterminate"></au-checkbox><br><br>
         <au-checkbox

@@ -1,5 +1,18 @@
 <template>
   <div class="page">
+    <au-panel class="section" title="3.1.0">
+      <h3 class="title-1">## 新增特性</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">新增tagfactory组件，详见<router-link class="au-theme-font-color--info-3" :to="{path: '/tagfactory'}" target="_blank">tagfactory</router-link></li>
+      </ol>
+      <h3 class="title-2">## Bug Fixed</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">修正input关联项不响应输入</li>
+        <li class="au-theme-border-color--base-8">去除表单类组件横排时label的冒号</li>
+        <li class="au-theme-border-color--base-8">修正rangepicker选中相对时间后不回填绝对时间</li>
+        <li class="au-theme-border-color--base-8">checkbox半选状态解除与值的关联</li>
+      </ol>
+    </au-panel>
     <au-panel class="section" title="3.0.0">
       <h3 class="title-1">## 特性变更</h3>
       <ol class="option-list">

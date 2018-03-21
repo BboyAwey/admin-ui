@@ -20,15 +20,6 @@ function resolve (dir) {
 baseWebpackConfig.entry = {}
 baseWebpackConfig.module.rules = [
   {
-    test: /\.(js|vue)$/,
-    loader: 'eslint-loader',
-    enforce: 'pre',
-    include: [resolve('src'), resolve('test')],
-    options: {
-      formatter: require('eslint-friendly-formatter')
-    }
-  },
-  {
     test: /\.vue$/,
     loader: 'vue-loader',
     options: vueLoaderConfig
@@ -36,28 +27,23 @@ baseWebpackConfig.module.rules = [
   {
     test: /\.js$/,
     loader: 'babel-loader',
-    include: [resolve('src'), resolve('test')]
+    include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
   },
   {
-    test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
     loader: 'url-loader',
     options: {
       limit: 10000,
-      name: utils.assetsPath('fonts/[name].[ext]')
+      name: utils.assetsPath('img/[name].[hash:7].[ext]')
     }
   }
 ]
 
-
-var env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : config.publish.env
-
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
-      sourceMap: config.publish.productionSourceMap,
-      extract: true
+      extract: true,
+      usePostCSS: true
     })
   },
   devtool: config.publish.productionSourceMap ? '#source-map' : false,
@@ -67,9 +53,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.publish[!isMin ? 'distRoot' : 'minRoot'],
     filename: 'index.js',
-    publicPath: process.env.NODE_ENV === 'publish'
-      ? config.publish.assetsPublicPath
-      : config.dev.assetsPublicPath,
+    publicPath: config.publish.assetsPublicPath,
     library: 'admin-ui',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -99,39 +83,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // keep module.id stable when vender modules does not change
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.HashedModuleIdsPlugin()
   ]
 })
-
-if (isMin) {
-  webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    }
-  }))
-}
-
-if (config.publish.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
-
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(' +
-        config.publish.productionGzipExtensions.join('|') +
-        ')$'
-      ),
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
-}
-
-if (config.publish.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
 
 module.exports = webpackConfig

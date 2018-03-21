@@ -10,15 +10,21 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var vueLoaderConfig = require('./vue-loader.conf')
 
-let args = process.argv.slice(2)
-let isMin = args.includes('min')
-
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 baseWebpackConfig.entry = {}
 baseWebpackConfig.module.rules = [
+  {
+    test: /\.(js|vue)$/,
+    loader: 'eslint-loader',
+    enforce: 'pre',
+    include: [resolve('src'), resolve('test')],
+    options: {
+      formatter: require('eslint-friendly-formatter')
+    }
+  },
   {
     test: /\.vue$/,
     loader: 'vue-loader',
@@ -27,31 +33,37 @@ baseWebpackConfig.module.rules = [
   {
     test: /\.js$/,
     loader: 'babel-loader',
-    include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+    include: [resolve('src')]
   },
   {
-    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+    test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
     loader: 'url-loader',
     options: {
       limit: 10000,
-      name: utils.assetsPath('img/[name].[hash:7].[ext]')
+      name: utils.assetsPath('fonts/[name].[ext]')
     }
   }
 ]
 
+
+var env = process.env.NODE_ENV === 'testing'
+  ? require('../config/test.env')
+  : config.publish.env
+
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
-      extract: true,
-      usePostCSS: true
+      sourceMap: config.publish.productionSourceMap,
+      extract: true
     })
   },
   devtool: config.publish.productionSourceMap ? '#source-map' : false,
   entry: {
     adminUi: './src/admin-ui/src/index.js'
   },
+
   output: {
-    path: config.publish[!isMin ? 'distRoot' : 'minRoot'],
+    path: config.publish.distRoot,
     filename: 'index.js',
     publicPath: config.publish.assetsPublicPath,
     library: 'admin-ui',
@@ -83,8 +95,31 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // keep module.id stable when vender modules does not change
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
   ]
 })
+
+if (config.publish.productionGzip) {
+  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+
+  webpackConfig.plugins.push(
+    new CompressionWebpackPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp(
+        '\\.(' +
+        config.publish.productionGzipExtensions.join('|') +
+        ')$'
+      ),
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  )
+}
+
+if (config.publish.bundleAnalyzerReport) {
+  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
 
 module.exports = webpackConfig

@@ -583,7 +583,7 @@ export default {
 
       this.localRange = res
       this.$refs.popover.hide()
-      // this.splitRange(res)
+      this.splitRange(res)
     },
     isCurrent (item) {
       return item.span === getSpanFromRange(this.localRange)

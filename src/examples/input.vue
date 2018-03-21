@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-input label="表白吧" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations"></au-input><br><br>
+        <au-input label="表白吧" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations" @association-select="handleAssociationSelect"></au-input><br><br>
         <au-input label="我是一个textarea" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
       </div>
       <!-- 组件示例 -->
@@ -127,7 +127,9 @@
             <td><au-icon type="minus"></au-icon></td>
             <td>
               需要显示的关联项<br>
-              仅当type不是textarea时生效
+              仅当type不是textarea时生效<br>
+              元素可以是字符串，也可以是对象<br>
+              如果是对象，则需要提供_text属性供显示用<br>
             </td>
           </tr>
           <tr>
@@ -592,6 +594,11 @@ export default {
         '第2条关联',
         '第3条关联'
       ]
+    }
+  },
+  methods: {
+    handleAssociationSelect (v) {
+      console.log(v)
     }
   }
 }

@@ -131,7 +131,7 @@
           au-tagfactory-associations-container
           au-theme-border-color--base-8
           au-theme-background-color--base-12"
-          v-show="associationsShow">
+          v-show="associationsShow && localAssociations.length">
           <ul
             class="au-tagfactory-associations">
             <li

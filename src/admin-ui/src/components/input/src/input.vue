@@ -111,7 +111,8 @@
         :style="{
           verticalAlign: inline ? 'top' : '',
           width: !inline && fullWidth ? '100%' : width,
-        }">
+        }"
+        @click="handleCoreContainerClick">
         <au-icon
           v-if="icon"
           class="au-input-icon"
@@ -150,7 +151,7 @@
           :disabled="disabled"
           :readonly="readonly"
           :placeholder="placeholder"
-          @click.stop="click($event)"
+          @click="click($event)"
           @input="input($event)"
           @change="change($event)"
           @focus="coreFocus($event)"
@@ -158,6 +159,9 @@
           @keyup="keyup($event)"
           @keypress="keypress($event)"
           @keydown="keydown($event)"
+          @keyup.up="handleDirectionUpPress"
+          @keyup.down="handleDirectionDownPress"
+          @keypress.enter="handleCoreEnter"
           ref="core">
         <input
           class="au-input-core"
@@ -183,14 +187,17 @@
           :disabled="disabled"
           :readonly="readonly"
           :placeholder="placeholder"
-          @click.stop="click($event)"
-          @input="input($event)"
-          @change="change($event)"
-          @focus="coreFocus($event)"
-          @blur="coreBlur($event)"
-          @keyup="keyup($event)"
-          @keypress="keypress($event)"
-          @keydown="keydown($event)"
+          @click="click"
+          @input="input"
+          @change="change"
+          @focus="coreFocus"
+          @blur="coreBlur"
+          @keyup="keyup"
+          @keypress="keypress"
+          @keydown="keydown"
+          @keyup.up="handleDirectionUpPress"
+          @keyup.down="handleDirectionDownPress"
+          @keypress.enter="handleCoreEnter"
           ref="core">
         <input
           class="au-input-core"
@@ -215,7 +222,7 @@
           :disabled="disabled"
           :readonly="readonly"
           :placeholder="placeholder"
-          @click.stop="click($event)"
+          @click="click($event)"
           @input="input($event)"
           @change="change($event)"
           @focus="coreFocus($event)"
@@ -223,9 +230,12 @@
           @keyup="keyup($event)"
           @keypress="keypress($event)"
           @keydown="keydown($event)"
+          @keyup.up="handleDirectionUpPress"
+          @keyup.down="handleDirectionDownPress"
+          @keypress.enter="handleCoreEnter"
           ref="core">
         <au-scroller class="au-input-associations-scroller"
-          v-show="type !== 'textarea' && associationsShow"
+          v-show="type !== 'textarea' && associationsShow && localAssociations.length"
           :class="`
             au-theme-border-color--base-8
             au-theme-box-shadow--level-2
@@ -242,8 +252,8 @@
               @click="selectAssociation(association)"
               :class="{
                 'au-theme-font-color--base-3': true,
-                'au-theme-background-color--primary-5': association._text === localValue,
-                'au-theme-hover-background-color--base-10': association._text !== localValue
+                'au-theme-hover-background-color--base-10': true,
+                'au-theme-background-color--base-10': index === activeAssociationIndex - 1
               }"
               :key="index">{{ association._text }}</li>
           </ul>
@@ -268,6 +278,7 @@ export default {
       // is the throttlling on
       // throttlling: true,
       associationsShow: false,
+      activeAssociationIndex: 0,
       active: false
     }
   },
@@ -280,7 +291,12 @@ export default {
       type: String,
       default: ''
     },
-    associations: Array,
+    associations: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
     icon: String,
     iconPosition: String,
     fullWidth: Boolean,
@@ -296,20 +312,33 @@ export default {
   },
   computed: {
     localAssociations () {
-      if (this.associations) {
-        return this.associations.map(a => {
-          if (typeof a === 'object') return a
-          else return { _text: a }
-        })
-      } else {
-        return null
-      }
+      let res = this.associations.map(a => {
+        if (typeof a === 'object') return a
+        else return { _text: a }
+      }).filter(a => a._text.indexOf(this.localValue) !== -1)
+      return res
     }
   },
   watch: {
     localValue (v) {
       this.input()
       this.change()
+    },
+    localAssociations: {
+      deep: true,
+      handler (v, ov) {
+        let oldAss = ov[this.activeAssociationIndex - 1]
+        if (oldAss) {
+          let newIndex = v.findIndex(a => a._text === oldAss._text)
+          if (newIndex !== -1) {
+            this.activeAssociationIndex = newIndex + 1
+          } else {
+            this.activeAssociationIndex = 1
+          }
+        } else {
+          this.activeAssociationIndex = 0
+        }
+      }
     }
   },
   methods: {
@@ -319,18 +348,11 @@ export default {
     click (e) {
       this.$emit('click', e.target.value, e)
     },
-    selectAssociation (v) {
-      this.localValue = v._text
-      // this.input()
-      // this.$refs.core.focus()
-      this.associationsShow = false
-      this.$emit('association-select', v)
-    },
     coreFocus (e) {
       if (this.readonly) return
       this.focus(e)
       this.active = true
-      if (this.associations && this.associations instanceof Array) {
+      if (this.associations.length) {
         this.associationsShow = true
       }
     },
@@ -344,6 +366,43 @@ export default {
     },
     iconClick () {
       this.$refs.core.focus()
+    },
+    handleDirectionUpPress (e) {
+      e.preventDefault()
+      if (this.activeAssociationIndex > 0) this.activeAssociationIndex--
+    },
+    handleDirectionDownPress (e) {
+      e.preventDefault()
+      if (this.activeAssociationIndex < this.localAssociations.length) this.activeAssociationIndex++
+    },
+    handleCoreEnter (e) {
+      if (this.activeAssociationIndex) {
+        let activeAssociation = this.localAssociations[this.activeAssociationIndex - 1]
+        this.localValue = activeAssociation._text
+        this.$emit('association-select', this.associations.find(a => {
+          if (typeof a === 'object') {
+            return a._text === activeAssociation._text
+          } else {
+            return a === activeAssociation._text
+          }
+        }))
+      }
+    },
+    selectAssociation (v) {
+      this.localValue = v._text
+      console.log(this.$refs.core)
+      this.$refs.core.focus()
+      // this.associationsShow = false
+      this.$emit('association-select', this.associations.find(a => {
+        if (typeof a === 'object') {
+          return a._text === v._text
+        } else {
+          return a === v._text
+        }
+      }))
+    },
+    handleCoreContainerClick () {
+      console.log('coreClick')
     }
   }
 }

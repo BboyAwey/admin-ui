@@ -100,7 +100,7 @@
         <span class="au-checkbox-core au-theme-border-radius--normal" tabindex="0"
         :class="{
           'au-theme-border-color--base-8': !hasWarnings && !checkbox.hover && !checkbox.checked,
-          'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
+          'au-theme-border-color--base-9': disabled && localValue,
           'au-theme-border-color--primary-3': !hasWarnings && checkbox.hover && !checkbox.checked,
           'au-theme-border-color--danger-3': hasWarnings && !checkbox.checked && !disabled,
           'au-theme-background-color--primary-3': !hasWarnings && checkbox.checked && !disabled,
@@ -168,7 +168,7 @@ export default {
   },
   watch: {
     localValue (v) {
-      this.localIndeterminate = false
+      // this.localIndeterminate = false
       this.input()
       this.change()
     },

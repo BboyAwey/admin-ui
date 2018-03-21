@@ -649,6 +649,16 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -665,6 +675,7 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       // is the throttlling on
       // throttlling: true,
       associationsShow: false,
+      activeAssociationIndex: 0,
       active: false
     };
   },
@@ -678,7 +689,12 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       type: String,
       default: ''
     },
-    associations: Array,
+    associations: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
     icon: String,
     iconPosition: String,
     fullWidth: Boolean,
@@ -694,19 +710,39 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
   },
   computed: {
     localAssociations: function localAssociations() {
-      if (this.associations) {
-        return this.associations.map(function (a) {
-          if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') return a;else return { _text: a };
-        });
-      } else {
-        return null;
-      }
+      var _this = this;
+
+      var res = this.associations.map(function (a) {
+        if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') return a;else return { _text: a };
+      }).filter(function (a) {
+        return a._text.indexOf(_this.localValue) !== -1;
+      });
+      return res;
     }
   },
   watch: {
     localValue: function localValue(v) {
       this.input();
       this.change();
+    },
+
+    localAssociations: {
+      deep: true,
+      handler: function handler(v, ov) {
+        var oldAss = ov[this.activeAssociationIndex - 1];
+        if (oldAss) {
+          var newIndex = v.findIndex(function (a) {
+            return a._text === oldAss._text;
+          });
+          if (newIndex !== -1) {
+            this.activeAssociationIndex = newIndex + 1;
+          } else {
+            this.activeAssociationIndex = 1;
+          }
+        } else {
+          this.activeAssociationIndex = 0;
+        }
+      }
     }
   },
   methods: {
@@ -722,18 +758,11 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
     click: function click(e) {
       this.$emit('click', e.target.value, e);
     },
-    selectAssociation: function selectAssociation(v) {
-      this.localValue = v._text;
-      // this.input()
-      // this.$refs.core.focus()
-      this.associationsShow = false;
-      this.$emit('association-select', v);
-    },
     coreFocus: function coreFocus(e) {
       if (this.readonly) return;
       this.focus(e);
       this.active = true;
-      if (this.associations && this.associations instanceof Array) {
+      if (this.associations.length) {
         this.associationsShow = true;
       }
     },
@@ -747,6 +776,43 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
     },
     iconClick: function iconClick() {
       this.$refs.core.focus();
+    },
+    handleDirectionUpPress: function handleDirectionUpPress(e) {
+      e.preventDefault();
+      if (this.activeAssociationIndex > 0) this.activeAssociationIndex--;
+    },
+    handleDirectionDownPress: function handleDirectionDownPress(e) {
+      e.preventDefault();
+      if (this.activeAssociationIndex < this.localAssociations.length) this.activeAssociationIndex++;
+    },
+    handleCoreEnter: function handleCoreEnter(e) {
+      if (this.activeAssociationIndex) {
+        var activeAssociation = this.localAssociations[this.activeAssociationIndex - 1];
+        this.localValue = activeAssociation._text;
+        this.$emit('association-select', this.associations.find(function (a) {
+          if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') {
+            return a._text === activeAssociation._text;
+          } else {
+            return a === activeAssociation._text;
+          }
+        }));
+      }
+    },
+    selectAssociation: function selectAssociation(v) {
+      this.localValue = v._text;
+      console.log(this.$refs.core);
+      this.$refs.core.focus();
+      // this.associationsShow = false
+      this.$emit('association-select', this.associations.find(function (a) {
+        if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') {
+          return a._text === v._text;
+        } else {
+          return a === v._text;
+        }
+      }));
+    },
+    handleCoreContainerClick: function handleCoreContainerClick() {
+      console.log('coreClick');
     }
   }
 });
@@ -1578,7 +1644,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/helpers/form-item.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,aAAa;CACd;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,eAAe;CAChB;AACD;EACE,sBAAsB;EACtB,oBAAoB;CACrB","file":"form-item.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/helpers/form-item.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,eAAe;CAChB;AACD;EACE,sBAAsB;EACtB,oBAAoB;CACrB","file":"form-item.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -3763,22 +3829,22 @@ var render = function() {
       [
         _vm._t("default"),
         _vm._v(" "),
-        _vm._l(_vm.warnings, function(warning) {
+        _vm._l(_vm.warnings, function(warning, i) {
           return _c(
             "div",
             {
-              key: warning,
+              key: warning + "" + i,
               staticClass: "au-form-warning au-theme-font-color--danger-3"
             },
             [_vm._v(_vm._s(warning))]
           )
         }),
         _vm._v(" "),
-        _vm._l(_vm.tips, function(tip) {
+        _vm._l(_vm.tips, function(tip, i) {
           return _c(
             "div",
             {
-              key: tip,
+              key: tip + "" + i,
               staticClass: "au-form-warning au-theme-font-color--base-7"
             },
             [_vm._v(_vm._s(tip))]
@@ -4850,7 +4916,8 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  }
+                  },
+                  on: { click: _vm.handleCoreContainerClick }
                 },
                 [
                   _vm.icon
@@ -4925,7 +4992,6 @@ var render = function() {
                         domProps: { value: _vm.localValue },
                         on: {
                           click: function($event) {
-                            $event.stopPropagation()
                             _vm.click($event)
                           },
                           input: [
@@ -4948,12 +5014,55 @@ var render = function() {
                           blur: function($event) {
                             _vm.coreBlur($event)
                           },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
+                          keyup: [
+                            function($event) {
+                              _vm.keyup($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
+                            }
+                          ],
+                          keypress: [
+                            function($event) {
+                              _vm.keypress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
                           keydown: function($event) {
                             _vm.keydown($event)
                           }
@@ -5011,10 +5120,7 @@ var render = function() {
                         },
                         domProps: { value: _vm.localValue },
                         on: {
-                          click: function($event) {
-                            $event.stopPropagation()
-                            _vm.click($event)
-                          },
+                          click: _vm.click,
                           input: [
                             function($event) {
                               if ($event.target.composing) {
@@ -5022,28 +5128,57 @@ var render = function() {
                               }
                               _vm.localValue = $event.target.value
                             },
+                            _vm.input
+                          ],
+                          change: _vm.change,
+                          focus: _vm.coreFocus,
+                          blur: _vm.coreBlur,
+                          keyup: [
+                            _vm.keyup,
                             function($event) {
-                              _vm.input($event)
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
                             }
                           ],
-                          change: function($event) {
-                            _vm.change($event)
-                          },
-                          focus: function($event) {
-                            _vm.coreFocus($event)
-                          },
-                          blur: function($event) {
-                            _vm.coreBlur($event)
-                          },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
-                          keydown: function($event) {
-                            _vm.keydown($event)
-                          }
+                          keypress: [
+                            _vm.keypress,
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
+                          keydown: _vm.keydown
                         }
                       })
                     : _vm._e(),
@@ -5097,7 +5232,6 @@ var render = function() {
                         domProps: { value: _vm.localValue },
                         on: {
                           click: function($event) {
-                            $event.stopPropagation()
                             _vm.click($event)
                           },
                           input: [
@@ -5120,12 +5254,55 @@ var render = function() {
                           blur: function($event) {
                             _vm.coreBlur($event)
                           },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
+                          keyup: [
+                            function($event) {
+                              _vm.keyup($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
+                            }
+                          ],
+                          keypress: [
+                            function($event) {
+                              _vm.keypress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
                           keydown: function($event) {
                             _vm.keydown($event)
                           }
@@ -5141,8 +5318,11 @@ var render = function() {
                           name: "show",
                           rawName: "v-show",
                           value:
-                            _vm.type !== "textarea" && _vm.associationsShow,
-                          expression: "type !== 'textarea' && associationsShow"
+                            _vm.type !== "textarea" &&
+                            _vm.associationsShow &&
+                            _vm.localAssociations.length,
+                          expression:
+                            "type !== 'textarea' && associationsShow && localAssociations.length"
                         }
                       ],
                       staticClass: "au-input-associations-scroller",
@@ -5170,10 +5350,9 @@ var render = function() {
                               key: index,
                               class: {
                                 "au-theme-font-color--base-3": true,
-                                "au-theme-background-color--primary-5":
-                                  association._text === _vm.localValue,
-                                "au-theme-hover-background-color--base-10":
-                                  association._text !== _vm.localValue
+                                "au-theme-hover-background-color--base-10": true,
+                                "au-theme-background-color--base-10":
+                                  index === _vm.activeAssociationIndex - 1
                               },
                               on: {
                                 click: function($event) {

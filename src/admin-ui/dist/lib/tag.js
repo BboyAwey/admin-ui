@@ -275,19 +275,16 @@ var render = function() {
               expression: "closable"
             }
           ],
-          staticClass: "au-tag-close",
+          staticClass: "au-tag-close au-theme-font-color--base-7",
           class: ((_obj = {}),
           (_obj[
-            "au-theme-hover-background-color--" + _vm.localType + "-3"
+            "au-theme-hover-font-color--" + _vm.localType + "-3"
           ] = !_vm.active),
-          (_obj["au-theme-hover-background-color--base-12"] = _vm.active),
-          (_obj["au-theme-hover-font-color--base-12"] = !_vm.active),
-          (_obj["au-theme-hover-font-color--" + _vm.localType + "-3"] =
-            _vm.active),
+          (_obj["au-theme-hover-font-color--base-12"] = _vm.active),
           _obj),
           on: {
             click: function($event) {
-              _vm.$emit("close")
+              _vm.$emit("close", $event)
             }
           }
         },
@@ -390,6 +387,10 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
+//
+//
+//
+//
 //
 //
 //

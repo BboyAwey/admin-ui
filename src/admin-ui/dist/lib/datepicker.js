@@ -1198,6 +1198,16 @@ module.exports = __webpack_require__("FeBl").Array.from;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1214,6 +1224,7 @@ module.exports = __webpack_require__("FeBl").Array.from;
       // is the throttlling on
       // throttlling: true,
       associationsShow: false,
+      activeAssociationIndex: 0,
       active: false
     };
   },
@@ -1227,7 +1238,12 @@ module.exports = __webpack_require__("FeBl").Array.from;
       type: String,
       default: ''
     },
-    associations: Array,
+    associations: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
     icon: String,
     iconPosition: String,
     fullWidth: Boolean,
@@ -1243,19 +1259,39 @@ module.exports = __webpack_require__("FeBl").Array.from;
   },
   computed: {
     localAssociations: function localAssociations() {
-      if (this.associations) {
-        return this.associations.map(function (a) {
-          if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') return a;else return { _text: a };
-        });
-      } else {
-        return null;
-      }
+      var _this = this;
+
+      var res = this.associations.map(function (a) {
+        if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') return a;else return { _text: a };
+      }).filter(function (a) {
+        return a._text.indexOf(_this.localValue) !== -1;
+      });
+      return res;
     }
   },
   watch: {
     localValue: function localValue(v) {
       this.input();
       this.change();
+    },
+
+    localAssociations: {
+      deep: true,
+      handler: function handler(v, ov) {
+        var oldAss = ov[this.activeAssociationIndex - 1];
+        if (oldAss) {
+          var newIndex = v.findIndex(function (a) {
+            return a._text === oldAss._text;
+          });
+          if (newIndex !== -1) {
+            this.activeAssociationIndex = newIndex + 1;
+          } else {
+            this.activeAssociationIndex = 1;
+          }
+        } else {
+          this.activeAssociationIndex = 0;
+        }
+      }
     }
   },
   methods: {
@@ -1271,18 +1307,11 @@ module.exports = __webpack_require__("FeBl").Array.from;
     click: function click(e) {
       this.$emit('click', e.target.value, e);
     },
-    selectAssociation: function selectAssociation(v) {
-      this.localValue = v._text;
-      // this.input()
-      // this.$refs.core.focus()
-      this.associationsShow = false;
-      this.$emit('association-select', v);
-    },
     coreFocus: function coreFocus(e) {
       if (this.readonly) return;
       this.focus(e);
       this.active = true;
-      if (this.associations && this.associations instanceof Array) {
+      if (this.associations.length) {
         this.associationsShow = true;
       }
     },
@@ -1296,6 +1325,43 @@ module.exports = __webpack_require__("FeBl").Array.from;
     },
     iconClick: function iconClick() {
       this.$refs.core.focus();
+    },
+    handleDirectionUpPress: function handleDirectionUpPress(e) {
+      e.preventDefault();
+      if (this.activeAssociationIndex > 0) this.activeAssociationIndex--;
+    },
+    handleDirectionDownPress: function handleDirectionDownPress(e) {
+      e.preventDefault();
+      if (this.activeAssociationIndex < this.localAssociations.length) this.activeAssociationIndex++;
+    },
+    handleCoreEnter: function handleCoreEnter(e) {
+      if (this.activeAssociationIndex) {
+        var activeAssociation = this.localAssociations[this.activeAssociationIndex - 1];
+        this.localValue = activeAssociation._text;
+        this.$emit('association-select', this.associations.find(function (a) {
+          if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') {
+            return a._text === activeAssociation._text;
+          } else {
+            return a === activeAssociation._text;
+          }
+        }));
+      }
+    },
+    selectAssociation: function selectAssociation(v) {
+      this.localValue = v._text;
+      console.log(this.$refs.core);
+      this.$refs.core.focus();
+      // this.associationsShow = false
+      this.$emit('association-select', this.associations.find(function (a) {
+        if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') {
+          return a._text === v._text;
+        } else {
+          return a === v._text;
+        }
+      }));
+    },
+    handleCoreContainerClick: function handleCoreContainerClick() {
+      console.log('coreClick');
     }
   }
 });
@@ -2138,7 +2204,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/helpers/form-item.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,aAAa;CACd;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,eAAe;CAChB;AACD;EACE,sBAAsB;EACtB,oBAAoB;CACrB","file":"form-item.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/helpers/form-item.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,eAAe;CAChB;AACD;EACE,sBAAsB;EACtB,oBAAoB;CACrB","file":"form-item.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-size-mini {\n  height: 20px;\n  line-height: 20px;\n}\n.au-size-small {\n  height: 24px;\n  line-height: 24px;\n}\n.au-size-normal {\n  height: 32px;\n  line-height: 32px;\n}\n.au-size-large {\n  height: 36px;\n  line-height: 36px;\n}\n.au-size-mini-bordered {\n  height: 20px;\n  line-height: 18px;\n}\n.au-size-small-bordered {\n  height: 24px;\n  line-height: 22px;\n}\n.au-size-normal-bordered {\n  height: 32px;\n  line-height: 30px;\n}\n.au-size-large-bordered {\n  height: 36px;\n  line-height: 34px;\n}\n.au-form-warning {\n  margin-top: 8px;\n  font-size: 12px;\n  line-height: 12px;\n}\n.au-form-item {\n  font-size: 14px;\n}\n.au-form-item-main-block {\n  display: block;\n}\n.au-form-item-main-inline {\n  display: inline-block;\n  vertical-align: top;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -2293,7 +2359,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-sizegap-mini {\n  top: 24px;\n}\n.au-sizegap-small {\n  top: 28px;\n}\n.au-sizegap-normal {\n  top: 36px;\n}\n.au-sizegap-large {\n  top: 40px;\n}\n.au-datepicker {\n  display: inline-block;\n  position: relative;\n}\n.au-datepicker-label-text {\n  margin-bottom: 8px;\n  font-size: 14px;\n}\n.au-datepicker-container {\n  position: relative;\n  width: 100%;\n}\n.au-datepicker-input {\n  width: 100%;\n}\n.au-datepicker-popup-container {\n  position: absolute;\n  left: 0;\n  top: 34px;\n  width: 276px;\n  z-index: 9999;\n  font-size: 12px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  outline: none;\n}\n.au-datepicker-popup-container td span {\n    cursor: default;\n}\n.au-datepicker-fastmoves {\n  padding-top: 12px;\n  font-size: 14px;\n  cursor: default;\n}\n.au-datepicker-fastmoves table {\n    width: 100%;\n}\n.au-datepicker-fastmoves td {\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-fastmoves td:first-child {\n    text-align: left;\n    padding-left: 12px;\n}\n.au-datepicker-fastmoves td:last-child {\n    text-align: right;\n    padding-right: 12px;\n}\n.au-datepicker-fastmoves .simu {\n    font-size: 20px;\n}\n.au-datepicker-fastmoves .simu2 {\n    position: relative;\n    top: -2px;\n}\nspan.au-datepicker-fastmove {\n  display: inline-block;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  cursor: pointer !important;\n}\n.au-datepicker-week {\n  width: 100%;\n}\n.au-datepicker-week td {\n    text-align: center;\n    padding: 12px 0;\n    vertical-align: middle;\n}\n.au-datepicker-dates-body {\n  padding: 4px;\n  border-left-width: 1px;\n  border-right-width: 1px;\n  border-bottom-width: 1px;\n  border-left-style: solid;\n  border-right-style: solid;\n  border-bottom-style: solid;\n}\n.au-datepicker-dates-table {\n  width: 100%;\n}\n.au-datepicker-dates-table td {\n    position: relative;\n    width: 38px;\n    height: 38px;\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-dates-table td > span {\n    display: inline-block;\n    width: 32px;\n    height: 32px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border-radius: 100%;\n    border: 1px solid transparent;\n    line-height: 30px;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/datepicker/src/datepicker.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,gBAAgB;EAChB,aAAa;CACd;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,sBAAsB;EACtB,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,gBAAgB;CACjB;AACD;EACE,mBAAmB;EACnB,YAAY;CACb;AACD;EACE,YAAY;CACb;AACD;EACE,mBAAmB;EACnB,QAAQ;EACR,UAAU;EACV,aAAa;EACb,cAAc;EACd,gBAAgB;EAChB,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;EAC1B,cAAc;CACf;AACD;IACI,gBAAgB;CACnB;AACD;EACE,kBAAkB;EAClB,gBAAgB;EAChB,gBAAgB;CACjB;AACD;IACI,YAAY;CACf;AACD;IACI,mBAAmB;IACnB,uBAAuB;CAC1B;AACD;IACI,iBAAiB;IACjB,mBAAmB;CACtB;AACD;IACI,kBAAkB;IAClB,oBAAoB;CACvB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;CACb;AACD;EACE,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,2BAA2B;CAC5B;AACD;EACE,YAAY;CACb;AACD;IACI,mBAAmB;IACnB,gBAAgB;IAChB,uBAAuB;CAC1B;AACD;EACE,aAAa;EACb,uBAAuB;EACvB,wBAAwB;EACxB,yBAAyB;EACzB,yBAAyB;EACzB,0BAA0B;EAC1B,2BAA2B;CAC5B;AACD;EACE,YAAY;CACb;AACD;IACI,mBAAmB;IACnB,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;CAC1B;AACD;IACI,sBAAsB;IACtB,YAAY;IACZ,aAAa;IACb,+BAA+B;YACvB,uBAAuB;IAC/B,oBAAoB;IACpB,8BAA8B;IAC9B,kBAAkB;IAClB,gBAAgB;CACnB","file":"datepicker.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-form-label-inline:after {\n  display: inline;\n  content: \":\";\n}\n.au-sizegap-mini {\n  top: 24px;\n}\n.au-sizegap-small {\n  top: 28px;\n}\n.au-sizegap-normal {\n  top: 36px;\n}\n.au-sizegap-large {\n  top: 40px;\n}\n.au-datepicker {\n  display: inline-block;\n  position: relative;\n}\n.au-datepicker-label-text {\n  margin-bottom: 8px;\n  font-size: 14px;\n}\n.au-datepicker-container {\n  position: relative;\n  width: 100%;\n}\n.au-datepicker-input {\n  width: 100%;\n}\n.au-datepicker-popup-container {\n  position: absolute;\n  left: 0;\n  top: 34px;\n  width: 276px;\n  z-index: 9999;\n  font-size: 12px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  outline: none;\n}\n.au-datepicker-popup-container td span {\n    cursor: default;\n}\n.au-datepicker-fastmoves {\n  padding-top: 12px;\n  font-size: 14px;\n  cursor: default;\n}\n.au-datepicker-fastmoves table {\n    width: 100%;\n}\n.au-datepicker-fastmoves td {\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-fastmoves td:first-child {\n    text-align: left;\n    padding-left: 12px;\n}\n.au-datepicker-fastmoves td:last-child {\n    text-align: right;\n    padding-right: 12px;\n}\n.au-datepicker-fastmoves .simu {\n    font-size: 20px;\n}\n.au-datepicker-fastmoves .simu2 {\n    position: relative;\n    top: -2px;\n}\nspan.au-datepicker-fastmove {\n  display: inline-block;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  cursor: pointer !important;\n}\n.au-datepicker-week {\n  width: 100%;\n}\n.au-datepicker-week td {\n    text-align: center;\n    padding: 12px 0;\n    vertical-align: middle;\n}\n.au-datepicker-dates-body {\n  padding: 4px;\n  border-left-width: 1px;\n  border-right-width: 1px;\n  border-bottom-width: 1px;\n  border-left-style: solid;\n  border-right-style: solid;\n  border-bottom-style: solid;\n}\n.au-datepicker-dates-table {\n  width: 100%;\n}\n.au-datepicker-dates-table td {\n    position: relative;\n    width: 38px;\n    height: 38px;\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-dates-table td > span {\n    display: inline-block;\n    width: 32px;\n    height: 32px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border-radius: 100%;\n    border: 1px solid transparent;\n    line-height: 30px;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-sizegap-mini {\n  top: 24px;\n}\n.au-sizegap-small {\n  top: 28px;\n}\n.au-sizegap-normal {\n  top: 36px;\n}\n.au-sizegap-large {\n  top: 40px;\n}\n.au-datepicker {\n  display: inline-block;\n  position: relative;\n}\n.au-datepicker-label-text {\n  margin-bottom: 8px;\n  font-size: 14px;\n}\n.au-datepicker-container {\n  position: relative;\n  width: 100%;\n}\n.au-datepicker-input {\n  width: 100%;\n}\n.au-datepicker-popup-container {\n  position: absolute;\n  left: 0;\n  top: 34px;\n  width: 276px;\n  z-index: 9999;\n  font-size: 12px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  outline: none;\n}\n.au-datepicker-popup-container td span {\n    cursor: default;\n}\n.au-datepicker-fastmoves {\n  padding-top: 12px;\n  font-size: 14px;\n  cursor: default;\n}\n.au-datepicker-fastmoves table {\n    width: 100%;\n}\n.au-datepicker-fastmoves td {\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-fastmoves td:first-child {\n    text-align: left;\n    padding-left: 12px;\n}\n.au-datepicker-fastmoves td:last-child {\n    text-align: right;\n    padding-right: 12px;\n}\n.au-datepicker-fastmoves .simu {\n    font-size: 20px;\n}\n.au-datepicker-fastmoves .simu2 {\n    position: relative;\n    top: -2px;\n}\nspan.au-datepicker-fastmove {\n  display: inline-block;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  cursor: pointer !important;\n}\n.au-datepicker-week {\n  width: 100%;\n}\n.au-datepicker-week td {\n    text-align: center;\n    padding: 12px 0;\n    vertical-align: middle;\n}\n.au-datepicker-dates-body {\n  padding: 4px;\n  border-left-width: 1px;\n  border-right-width: 1px;\n  border-bottom-width: 1px;\n  border-left-style: solid;\n  border-right-style: solid;\n  border-bottom-style: solid;\n}\n.au-datepicker-dates-table {\n  width: 100%;\n}\n.au-datepicker-dates-table td {\n    position: relative;\n    width: 38px;\n    height: 38px;\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-dates-table td > span {\n    display: inline-block;\n    width: 32px;\n    height: 32px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border-radius: 100%;\n    border: 1px solid transparent;\n    line-height: 30px;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/datepicker/src/datepicker.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;CACnB;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,UAAU;CACX;AACD;EACE,sBAAsB;EACtB,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,gBAAgB;CACjB;AACD;EACE,mBAAmB;EACnB,YAAY;CACb;AACD;EACE,YAAY;CACb;AACD;EACE,mBAAmB;EACnB,QAAQ;EACR,UAAU;EACV,aAAa;EACb,cAAc;EACd,gBAAgB;EAChB,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;EAC1B,cAAc;CACf;AACD;IACI,gBAAgB;CACnB;AACD;EACE,kBAAkB;EAClB,gBAAgB;EAChB,gBAAgB;CACjB;AACD;IACI,YAAY;CACf;AACD;IACI,mBAAmB;IACnB,uBAAuB;CAC1B;AACD;IACI,iBAAiB;IACjB,mBAAmB;CACtB;AACD;IACI,kBAAkB;IAClB,oBAAoB;CACvB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;CACb;AACD;EACE,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,2BAA2B;CAC5B;AACD;EACE,YAAY;CACb;AACD;IACI,mBAAmB;IACnB,gBAAgB;IAChB,uBAAuB;CAC1B;AACD;EACE,aAAa;EACb,uBAAuB;EACvB,wBAAwB;EACxB,yBAAyB;EACzB,yBAAyB;EACzB,0BAA0B;EAC1B,2BAA2B;CAC5B;AACD;EACE,YAAY;CACb;AACD;IACI,mBAAmB;IACnB,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;CAC1B;AACD;IACI,sBAAsB;IACtB,YAAY;IACZ,aAAa;IACb,+BAA+B;YACvB,uBAAuB;IAC/B,oBAAoB;IACpB,8BAA8B;IAC9B,kBAAkB;IAClB,gBAAgB;CACnB","file":"datepicker.vue","sourcesContent":["\n.au-form-label {\n  display: block;\n  margin-bottom: 8px;\n  font-size: 14px;\n  line-height: 14px;\n}\n.au-form-label-inline {\n  display: inline-block;\n  margin-right: 8px;\n  font-size: 14px;\n  text-align: right;\n}\n.au-sizegap-mini {\n  top: 24px;\n}\n.au-sizegap-small {\n  top: 28px;\n}\n.au-sizegap-normal {\n  top: 36px;\n}\n.au-sizegap-large {\n  top: 40px;\n}\n.au-datepicker {\n  display: inline-block;\n  position: relative;\n}\n.au-datepicker-label-text {\n  margin-bottom: 8px;\n  font-size: 14px;\n}\n.au-datepicker-container {\n  position: relative;\n  width: 100%;\n}\n.au-datepicker-input {\n  width: 100%;\n}\n.au-datepicker-popup-container {\n  position: absolute;\n  left: 0;\n  top: 34px;\n  width: 276px;\n  z-index: 9999;\n  font-size: 12px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  outline: none;\n}\n.au-datepicker-popup-container td span {\n    cursor: default;\n}\n.au-datepicker-fastmoves {\n  padding-top: 12px;\n  font-size: 14px;\n  cursor: default;\n}\n.au-datepicker-fastmoves table {\n    width: 100%;\n}\n.au-datepicker-fastmoves td {\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-fastmoves td:first-child {\n    text-align: left;\n    padding-left: 12px;\n}\n.au-datepicker-fastmoves td:last-child {\n    text-align: right;\n    padding-right: 12px;\n}\n.au-datepicker-fastmoves .simu {\n    font-size: 20px;\n}\n.au-datepicker-fastmoves .simu2 {\n    position: relative;\n    top: -2px;\n}\nspan.au-datepicker-fastmove {\n  display: inline-block;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  cursor: pointer !important;\n}\n.au-datepicker-week {\n  width: 100%;\n}\n.au-datepicker-week td {\n    text-align: center;\n    padding: 12px 0;\n    vertical-align: middle;\n}\n.au-datepicker-dates-body {\n  padding: 4px;\n  border-left-width: 1px;\n  border-right-width: 1px;\n  border-bottom-width: 1px;\n  border-left-style: solid;\n  border-right-style: solid;\n  border-bottom-style: solid;\n}\n.au-datepicker-dates-table {\n  width: 100%;\n}\n.au-datepicker-dates-table td {\n    position: relative;\n    width: 38px;\n    height: 38px;\n    text-align: center;\n    vertical-align: middle;\n}\n.au-datepicker-dates-table td > span {\n    display: inline-block;\n    width: 32px;\n    height: 32px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border-radius: 100%;\n    border: 1px solid transparent;\n    line-height: 30px;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -4508,22 +4574,22 @@ var render = function() {
       [
         _vm._t("default"),
         _vm._v(" "),
-        _vm._l(_vm.warnings, function(warning) {
+        _vm._l(_vm.warnings, function(warning, i) {
           return _c(
             "div",
             {
-              key: warning,
+              key: warning + "" + i,
               staticClass: "au-form-warning au-theme-font-color--danger-3"
             },
             [_vm._v(_vm._s(warning))]
           )
         }),
         _vm._v(" "),
-        _vm._l(_vm.tips, function(tip) {
+        _vm._l(_vm.tips, function(tip, i) {
           return _c(
             "div",
             {
-              key: tip,
+              key: tip + "" + i,
               staticClass: "au-form-warning au-theme-font-color--base-7"
             },
             [_vm._v(_vm._s(tip))]
@@ -5948,7 +6014,8 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  }
+                  },
+                  on: { click: _vm.handleCoreContainerClick }
                 },
                 [
                   _vm.icon
@@ -6023,7 +6090,6 @@ var render = function() {
                         domProps: { value: _vm.localValue },
                         on: {
                           click: function($event) {
-                            $event.stopPropagation()
                             _vm.click($event)
                           },
                           input: [
@@ -6046,12 +6112,55 @@ var render = function() {
                           blur: function($event) {
                             _vm.coreBlur($event)
                           },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
+                          keyup: [
+                            function($event) {
+                              _vm.keyup($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
+                            }
+                          ],
+                          keypress: [
+                            function($event) {
+                              _vm.keypress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
                           keydown: function($event) {
                             _vm.keydown($event)
                           }
@@ -6109,10 +6218,7 @@ var render = function() {
                         },
                         domProps: { value: _vm.localValue },
                         on: {
-                          click: function($event) {
-                            $event.stopPropagation()
-                            _vm.click($event)
-                          },
+                          click: _vm.click,
                           input: [
                             function($event) {
                               if ($event.target.composing) {
@@ -6120,28 +6226,57 @@ var render = function() {
                               }
                               _vm.localValue = $event.target.value
                             },
+                            _vm.input
+                          ],
+                          change: _vm.change,
+                          focus: _vm.coreFocus,
+                          blur: _vm.coreBlur,
+                          keyup: [
+                            _vm.keyup,
                             function($event) {
-                              _vm.input($event)
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
                             }
                           ],
-                          change: function($event) {
-                            _vm.change($event)
-                          },
-                          focus: function($event) {
-                            _vm.coreFocus($event)
-                          },
-                          blur: function($event) {
-                            _vm.coreBlur($event)
-                          },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
-                          keydown: function($event) {
-                            _vm.keydown($event)
-                          }
+                          keypress: [
+                            _vm.keypress,
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
+                          keydown: _vm.keydown
                         }
                       })
                     : _vm._e(),
@@ -6195,7 +6330,6 @@ var render = function() {
                         domProps: { value: _vm.localValue },
                         on: {
                           click: function($event) {
-                            $event.stopPropagation()
                             _vm.click($event)
                           },
                           input: [
@@ -6218,12 +6352,55 @@ var render = function() {
                           blur: function($event) {
                             _vm.coreBlur($event)
                           },
-                          keyup: function($event) {
-                            _vm.keyup($event)
-                          },
-                          keypress: function($event) {
-                            _vm.keypress($event)
-                          },
+                          keyup: [
+                            function($event) {
+                              _vm.keyup($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "up", 38, $event.key, [
+                                  "Up",
+                                  "ArrowUp"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionUpPress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "down", 40, $event.key, [
+                                  "Down",
+                                  "ArrowDown"
+                                ])
+                              ) {
+                                return null
+                              }
+                              return _vm.handleDirectionDownPress($event)
+                            }
+                          ],
+                          keypress: [
+                            function($event) {
+                              _vm.keypress($event)
+                            },
+                            function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.handleCoreEnter($event)
+                            }
+                          ],
                           keydown: function($event) {
                             _vm.keydown($event)
                           }
@@ -6239,8 +6416,11 @@ var render = function() {
                           name: "show",
                           rawName: "v-show",
                           value:
-                            _vm.type !== "textarea" && _vm.associationsShow,
-                          expression: "type !== 'textarea' && associationsShow"
+                            _vm.type !== "textarea" &&
+                            _vm.associationsShow &&
+                            _vm.localAssociations.length,
+                          expression:
+                            "type !== 'textarea' && associationsShow && localAssociations.length"
                         }
                       ],
                       staticClass: "au-input-associations-scroller",
@@ -6268,10 +6448,9 @@ var render = function() {
                               key: index,
                               class: {
                                 "au-theme-font-color--base-3": true,
-                                "au-theme-background-color--primary-5":
-                                  association._text === _vm.localValue,
-                                "au-theme-hover-background-color--base-10":
-                                  association._text !== _vm.localValue
+                                "au-theme-hover-background-color--base-10": true,
+                                "au-theme-background-color--base-10":
+                                  index === _vm.activeAssociationIndex - 1
                               },
                               on: {
                                 click: function($event) {

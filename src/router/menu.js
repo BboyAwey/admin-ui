@@ -138,6 +138,10 @@ export default [
       {
         'text': '标签',
         'url': '/tag'
+      },
+      {
+        'text': '标签工厂',
+        'url': '/tagfactory'
       }
     ]
   },

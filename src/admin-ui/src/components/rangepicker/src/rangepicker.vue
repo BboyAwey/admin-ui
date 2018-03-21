@@ -502,7 +502,7 @@ export default {
     localRange: {
       deep: true,
       handler (v) {
-        if (isRangeChange(v, this.localRange, this.type)) {
+        if (isRangeChange(v, this.range, this.type)) {
           this.$emit('change', resolveRange(v))
         }
       }

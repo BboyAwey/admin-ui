@@ -245,7 +245,7 @@ export default {
       let target = this.getTarget()
       if (this.trigger === 'click') {
         target.addEventListener('click', this.handleClick)
-      } else {
+      } else if (this.trigger === 'hover') {
         target.addEventListener('mouseenter', this.handleMouseover)
         target.addEventListener('mouseleave', this.handleMouseout)
       }
@@ -282,7 +282,7 @@ export default {
       //   height: window.getComputedStyle(this.$refs.pop).height
       // }
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
-      this.$refs.pop.focus()
+      if (this.trigger && this.hideOnBlur) this.$refs.pop.focus()
       this.visible = true
       if (!this.$root._auPopovers) this.$root._auPopovers = {}
       this.$root._auPopovers[this._uid] = this

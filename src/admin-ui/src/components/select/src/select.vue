@@ -96,7 +96,6 @@
       :labelWidth="labelWidth"
       :inline="inline"
       :tips="tips"
-      :size="size"
       :middle="inline"
       :warnings="warnings || localWarnings">
       <div
@@ -116,7 +115,7 @@
             'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
             'au-theme-border-color--danger-3': hasWarnings,
             'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
-            'au-theme-box-shadow--danger': hasWarnings
+            'au-theme-box-shadow--danger': !disabled && active && hasWarnings
           }"
           :style="{
             cursor: disabled ? 'not-allowed' : 'default'
@@ -158,7 +157,7 @@
               @click.stop="select(option, $event)">{{ option.text }}</li>
           </ul>
         </au-scroller>
-    </div>
+      </div>
     </form-item>
   </div>
 </template>

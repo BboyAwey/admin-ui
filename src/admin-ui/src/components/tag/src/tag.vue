@@ -28,12 +28,16 @@
     cursor: hoverable ? 'pointer' : ''
   }">
     <slot></slot>
-    <span class="au-tag-close" v-show="closable" :class="{
+    <span class="au-tag-close au-theme-font-color--base-7" v-show="closable" :class="{
+      [`au-theme-hover-font-color--${localType}-3`]: !active,
+      [`au-theme-hover-font-color--base-12`]: active
+    }" @click="$emit('close', $event)"><au-icon class="au-tag-close-icon" type="times"/></span>
+    <!-- <span class="au-tag-close au-theme-font-color--base-5" v-show="closable" :class="{
       [`au-theme-hover-background-color--${localType}-3`]: !active,
       [`au-theme-hover-background-color--base-12`]: active,
       [`au-theme-hover-font-color--base-12`]: !active,
       [`au-theme-hover-font-color--${localType}-3`]: active
-    }" @click="$emit('close')"><au-icon class="au-tag-close-icon" type="times"/></span>
+    }" @click="$emit('close')"><au-icon class="au-tag-close-icon" type="times"/></span> -->
   </div>
 </template>
 <script>

@@ -179,6 +179,11 @@ export default new Router({
       path: '/tag',
       name: 'tag',
       component: (resolve) => require(['../examples/tag.vue'], resolve)
+    },
+    {
+      path: '/tagfactory',
+      name: 'tagfactory',
+      component: (resolve) => require(['../examples/tagfactory.vue'], resolve)
     }
   ]
 })

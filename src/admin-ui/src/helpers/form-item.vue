@@ -29,8 +29,8 @@
       }">{{ label }}</div>
     <div :class="`au-form-item-main${inline ? '-inline' : '-block'}`">
       <slot></slot>
-      <div class="au-form-warning au-theme-font-color--danger-3" v-for="warning in warnings" :key="warning">{{ warning }}</div>
-      <div class="au-form-warning au-theme-font-color--base-7" v-for="tip in tips" :key="tip">{{ tip }}</div>
+      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="warning + '' + i">{{ warning }}</div>
+      <div class="au-form-warning au-theme-font-color--base-7" v-for="(tip, i) in tips" :key="tip + '' + i">{{ tip }}</div>
     </div>
   </div>
 </template>

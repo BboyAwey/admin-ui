@@ -35,6 +35,7 @@ import Paginator from './components/paginator'
 import Tabs from './components/tabs'
 import Loading from './components/loading'
 import Tag from './components/tag'
+import Tagfactory from './components/tagfactory'
 
 // add all comps into an array
 const components = [
@@ -67,7 +68,8 @@ const components = [
   Paginator,
   Tabs,
   Loading,
-  Tag
+  Tag,
+  Tagfactory
 ]
 
 // export comps one by one
@@ -101,7 +103,8 @@ export {
   Paginator,
   Tabs,
   Loading,
-  Tag
+  Tag,
+  Tagfactory
 }
 
 // export all comps as an object
@@ -135,7 +138,8 @@ const adminUi = {
   Paginator,
   Tabs,
   Loading,
-  Tag
+  Tag,
+  Tagfactory
 }
 
 adminUi.install = function (Vue, options = {}) {

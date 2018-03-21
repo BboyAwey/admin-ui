@@ -10,7 +10,7 @@
         <au-tag type="primary" hoverable>标签</au-tag>
         <au-tag type="danger" size="small">标签</au-tag>
         <au-tag type="info" size="mini">标签</au-tag>
-        <au-tag type="warning" closable>标签</au-tag>
+        <au-tag type="warning" closable active>标签</au-tag>
         <au-tag type="success" closable hoverable>标签</au-tag>
       </div>
       <!-- 组件示例 -->

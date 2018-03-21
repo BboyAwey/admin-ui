@@ -45,7 +45,7 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td>hover</td>
+            <td><au-icon type="minus"></au-icon></td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">hover</li>
@@ -53,7 +53,7 @@
               </ol>
             </td>
             <td>
-              触发方式
+              触发方式，不指定则target不会触发popover，仅能通过方法show()来显示
             </td>
           </tr>
           <tr>

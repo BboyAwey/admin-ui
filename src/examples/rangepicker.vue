@@ -5,18 +5,17 @@
         日期/时间范围选择组件，支持v-model
       </p>
       <!-- 组件示例 -->
-      <div class="component-example" style="position: absolute;top: 0; right: 30px; text-align: right;">
+      <div class="component-example">
         <au-rangepicker
           v-model="range"
           label="选择日期范围"
           type="all"
-          start="2017"
-          end="2018"
+          start="2017-1-1"
+          end="2018-12-12"
           :relative="true"
           :absolute="true"
           size="normal"
           :disabled="false"
-          placement="bottom right"
         ></au-rangepicker>
       </div>
       <!-- 组件示例 -->

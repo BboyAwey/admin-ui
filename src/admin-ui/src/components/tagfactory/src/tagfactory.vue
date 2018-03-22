@@ -338,13 +338,19 @@ export default {
       if (this.activeAssociationIndex < this.localAssociations.length) this.activeAssociationIndex++
     },
     handleCoreFocus (e) {
-      this.active = true
       if (this.associations.length) {
         this.associationsShow = true
       }
+      if (!this.active) {
+        this.active = true
+        this.$emit('focus', this.localTags)
+      }
     },
     handleCoreBlur (e) {
-      this.active = false
+      if (!this.active) {
+        this.active = false
+        this.$emit('blur', this.localTags)
+      }
     },
     handleWindowClick (e) {
       if (!isAncestor(e.target, this.$refs.body)) this.associationsShow = false

@@ -17,15 +17,6 @@ function resolve (dir) {
 baseWebpackConfig.entry = {}
 baseWebpackConfig.module.rules = [
   {
-    test: /\.(js|vue)$/,
-    loader: 'eslint-loader',
-    enforce: 'pre',
-    include: [resolve('src'), resolve('test')],
-    options: {
-      formatter: require('eslint-friendly-formatter')
-    }
-  },
-  {
     test: /\.vue$/,
     loader: 'vue-loader',
     options: vueLoaderConfig
@@ -44,11 +35,6 @@ baseWebpackConfig.module.rules = [
     }
   }
 ]
-
-
-var env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : config.publish.env
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -81,7 +67,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': config.publish.env
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -95,31 +81,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // keep module.id stable when vender modules does not change
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.HashedModuleIdsPlugin()
   ]
 })
-
-if (config.publish.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
-
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(' +
-        config.publish.productionGzipExtensions.join('|') +
-        ')$'
-      ),
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
-}
-
-if (config.publish.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
 
 module.exports = webpackConfig

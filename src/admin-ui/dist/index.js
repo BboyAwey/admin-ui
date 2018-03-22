@@ -13153,13 +13153,19 @@ module.exports = function (key) {
       if (this.activeAssociationIndex < this.localAssociations.length) this.activeAssociationIndex++;
     },
     handleCoreFocus: function handleCoreFocus(e) {
-      this.active = true;
       if (this.associations.length) {
         this.associationsShow = true;
       }
+      if (!this.active) {
+        this.active = true;
+        this.$emit('focus', this.localTags);
+      }
     },
     handleCoreBlur: function handleCoreBlur(e) {
-      this.active = false;
+      if (!this.active) {
+        this.active = false;
+        this.$emit('blur', this.localTags);
+      }
     },
     handleWindowClick: function handleWindowClick(e) {
       if (!Object(__WEBPACK_IMPORTED_MODULE_7__helpers_dom__["e" /* isAncestor */])(e.target, this.$refs.body)) this.associationsShow = false;

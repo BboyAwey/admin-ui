@@ -9,7 +9,7 @@
         <au-tagfactory
           v-model="tags"
           :associations="associations"
-          :tag-matcher="tagMatcher"
+          @input-change="inputChange"
           label="打标签"/>
       </div>
       <!-- 组件示例 -->
@@ -392,6 +392,28 @@
               处理函数接受一个表示新值的字符串参数
             </td>
           </tr>
+          <tr>
+            <td>@focus</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">tags</li>
+              </ol>
+            </td>
+            <td>
+              聚焦事件<br>
+            </td>
+          </tr>
+          <tr>
+            <td>@focus</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">tags</li>
+              </ol>
+            </td>
+            <td>
+              失焦事件<br>
+            </td>
+          </tr>
         </tbody>
       </au-table>
       <!-- <au-icon type="minus"></au-icon> -->
@@ -460,6 +482,14 @@ export default {
   watch: {
     tags (v) {
       console.log(v)
+    }
+  },
+  methods: {
+    inputChange (v) {
+      console.log(v)
+      setTimeout(() => {
+        this.associations.push(v)
+      }, 1000)
     }
   }
 }

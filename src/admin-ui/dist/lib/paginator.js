@@ -1902,7 +1902,7 @@ var render = function() {
           return _c(
             "li",
             {
-              key: num,
+              key: i,
               staticClass: "au-theme-border-radius--large",
               class: {
                 current: num == _vm.localCurrent,

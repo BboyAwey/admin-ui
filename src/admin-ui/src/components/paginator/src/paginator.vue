@@ -78,7 +78,7 @@
       </li>
       <li
         v-for="(num, i) in nums"
-        :key="num"
+        :key="i"
         class="au-theme-border-radius--large"
         :class="{
           'current': num == localCurrent,

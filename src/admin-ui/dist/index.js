@@ -12504,6 +12504,7 @@ var render = function() {
               _c(
                 "au-scroller",
                 {
+                  ref: "tagsContainer",
                   staticClass:
                     "au-tagfactory-core au-theme-border-radius--normal",
                   class: {
@@ -12678,10 +12679,14 @@ var render = function() {
                       name: "show",
                       rawName: "v-show",
                       value:
-                        _vm.associationsShow && _vm.localAssociations.length,
-                      expression: "associationsShow && localAssociations.length"
+                        (_vm.associationsShow &&
+                          _vm.localAssociations.length) ||
+                        (_vm.canCreate && _vm.inputValue),
+                      expression:
+                        "(associationsShow && localAssociations.length) || (canCreate && inputValue)"
                     }
                   ],
+                  ref: "associationsContainer",
                   staticClass:
                     "\n        au-tagfactory-associations-container\n        au-theme-border-color--base-8\n        au-theme-background-color--base-12"
                 },
@@ -12792,8 +12797,9 @@ module.exports = function (key) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tag__ = __webpack_require__("MI60");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__popover__ = __webpack_require__("LV4O");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scroller__ = __webpack_require__("ovkV");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_form_item_vue__ = __webpack_require__("+FN5");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loading__ = __webpack_require__("l0us");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_form_item_vue__ = __webpack_require__("+FN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_dom__ = __webpack_require__("8CCO");
 
 //
 //
@@ -12951,6 +12957,9 @@ module.exports = function (key) {
 //
 //
 //
+//
+//
+
 
 
 
@@ -12962,7 +12971,7 @@ module.exports = function (key) {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-tagfactory',
-  components: { AuTag: __WEBPACK_IMPORTED_MODULE_3__tag__["a" /* default */], AuPopover: __WEBPACK_IMPORTED_MODULE_4__popover__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_5__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_6__helpers_form_item_vue__["a" /* default */] },
+  components: { AuTag: __WEBPACK_IMPORTED_MODULE_3__tag__["a" /* default */], AuPopover: __WEBPACK_IMPORTED_MODULE_4__popover__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_5__scroller__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_7__helpers_form_item_vue__["a" /* default */] },
   mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_validator_mixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__helpers_form_api_mixin__["a" /* default */]],
   model: {
     prop: 'tags',
@@ -13014,7 +13023,8 @@ module.exports = function (key) {
       default: '请填写标签'
     },
     warnings: Array,
-    warning: Boolean
+    warning: Boolean,
+    loading: false
   },
   data: function data() {
     return {
@@ -13024,7 +13034,8 @@ module.exports = function (key) {
       inputValue: '',
       associationsShow: false,
       activeAssociationIndex: 0,
-      active: false
+      active: false,
+      loadingInstance: null
     };
   },
 
@@ -13074,19 +13085,36 @@ module.exports = function (key) {
         } else {
           this.activeAssociationIndex = 0;
         }
+        this.checkAssociationsDisplay();
       }
     },
     inputValue: function inputValue(v) {
+      // this.checkAssociationsDisplay()
       this.$emit('input-change', v);
+    },
+    loading: function loading(v) {
+      var _this2 = this;
+
+      if (v) {
+        this.$nextTick(function () {
+          _this2.loadingInstance = Object(__WEBPACK_IMPORTED_MODULE_6__loading__["a" /* default */])({
+            target: _this2.associationsShow ? _this2.$refs.associationsContainer.$el : _this2.$refs.tagsContainer.$el
+          });
+        });
+      } else {
+        if (this.loadingInstance) {
+          this.loadingInstance.close();
+        }
+      }
     }
   },
   methods: {
     throughMatcher: function throughMatcher(value) {
-      var _this2 = this;
+      var _this3 = this;
 
       return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
-        if (typeof _this2.tagMatcher === 'function') {
-          var res = _this2.tagMatcher(value);
+        if (typeof _this3.tagMatcher === 'function') {
+          var res = _this3.tagMatcher(value);
           if (res instanceof __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a) {
             res.then(function (r) {
               return resolve(r);
@@ -13100,12 +13128,14 @@ module.exports = function (key) {
       });
     },
     setTag: function setTag(value) {
-      if (!this.repeat && this.localTags.indexOf(value) !== -1) return;
-      this.localTags.push(value);
-      this.inputValue = '';
+      if (!this.repeat && this.localTags.indexOf(value) !== -1) {
+        this.inputValue = value;
+      } else {
+        this.localTags.push(value);
+        this.inputValue = '';
+      }
     },
     handleClick: function handleClick() {
-      console.log('click');
       if (!this.disabled) this.$refs.input.focus();
     },
     handleCoreChange: function handleCoreChange(e) {
@@ -13130,17 +13160,17 @@ module.exports = function (key) {
       }
     },
     handleCoreEnter: function handleCoreEnter(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.activeAssociationIndex) {
         var activeAssociation = this.localAssociations[this.activeAssociationIndex - 1];
         this.throughMatcher(activeAssociation).then(function (res) {
-          if (res) _this3.setTag(activeAssociation);else _this3.inputValue = activeAssociation;
+          if (res) _this4.setTag(activeAssociation);else _this4.inputValue = activeAssociation;
         });
       } else if (this.inputValue.length) {
         this.throughMatcher(this.inputValue).then(function (res) {
           if (!res) return;
-          _this3.setTag(_this3.inputValue);
+          _this4.setTag(_this4.inputValue);
         });
       }
     },
@@ -13168,15 +13198,15 @@ module.exports = function (key) {
       }
     },
     handleWindowClick: function handleWindowClick(e) {
-      if (!Object(__WEBPACK_IMPORTED_MODULE_7__helpers_dom__["e" /* isAncestor */])(e.target, this.$refs.body)) this.associationsShow = false;
+      if (!Object(__WEBPACK_IMPORTED_MODULE_8__helpers_dom__["e" /* isAncestor */])(e.target, this.$refs.body)) this.associationsShow = false;
     },
     handleAssociationClick: function handleAssociationClick(v) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.throughMatcher(v).then(function (res) {
         if (res) {
-          _this4.setTag(v);
-        } else _this4.inputValue = v;
+          _this5.setTag(v);
+        } else _this5.inputValue = v;
       });
       this.$refs.input.focus();
     },
@@ -13184,6 +13214,11 @@ module.exports = function (key) {
       e.stopPropagation();
       if (this.canRemove) {
         this.localTags.splice(index, 1);
+      }
+    },
+    checkAssociationsDisplay: function checkAssociationsDisplay() {
+      if (this.active && this.localAssociations.length && !this.associationsShow) {
+        this.associationsShow = true;
       }
     }
   },

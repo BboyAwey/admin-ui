@@ -10,6 +10,7 @@
           v-model="tags"
           :associations="associations"
           @input-change="inputChange"
+          :loading="loading"
           label="打标签"/>
       </div>
       <!-- 组件示例 -->
@@ -352,6 +353,24 @@
             </td>
             <td>禁用</td>
           </tr>
+          <tr>
+            <td>loading</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              加载状态
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>
@@ -427,7 +446,8 @@
         <au-tagfactory
           v-model="tags"
           :associations="associations"
-          :tag-matcher="tagMatcher"
+          @input-change="inputChange"
+          :loading="loading"
           label="打标签"/>
       '></code-h>
       <code-h lang="js">
@@ -446,12 +466,22 @@
               ],
               tagMatcher (v) {
                 return /\d/g.test(v)
-              }
+              },
+              loading: false
             }
           },
           watch: {
             tags (v) {
               console.log(v)
+            }
+          },
+          methods: {
+            inputChange (v) {
+              this.loading = true
+              setTimeout(() => {
+                this.associations.push(v)
+                this.loading = false
+              }, 2000)
             }
           }
         }
@@ -476,7 +506,8 @@ export default {
       ],
       tagMatcher (v) {
         return /\d/g.test(v)
-      }
+      },
+      loading: false
     }
   },
   watch: {
@@ -486,10 +517,11 @@ export default {
   },
   methods: {
     inputChange (v) {
-      console.log(v)
+      this.loading = true
       setTimeout(() => {
         this.associations.push(v)
-      }, 1000)
+        this.loading = false
+      }, 2000)
     }
   }
 }

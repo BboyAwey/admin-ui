@@ -79,6 +79,7 @@
         class="au-tagfactory-body"
         ref="body">
         <au-scroller
+          ref="tagsContainer"
           class="au-tagfactory-core au-theme-border-radius--normal"
           :class="{
             'au-theme-background-color--base-12': !disabled,
@@ -131,7 +132,8 @@
           au-tagfactory-associations-container
           au-theme-border-color--base-8
           au-theme-background-color--base-12"
-          v-show="associationsShow && localAssociations.length">
+          v-show="(associationsShow && localAssociations.length) || (canCreate && inputValue)"
+          ref="associationsContainer">
           <ul
             class="au-tagfactory-associations">
             <li
@@ -160,6 +162,7 @@ import FormApiMixin from '../../../helpers/form-api-mixin'
 import AuTag from '../../tag'
 import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
+import Loading from '../../loading'
 import FormItem from '../../../helpers/form-item.vue'
 import { isAncestor } from '../../../helpers/dom'
 
@@ -209,7 +212,8 @@ export default {
       default: '请填写标签'
     },
     warnings: Array,
-    warning: Boolean
+    warning: Boolean,
+    loading: false
   },
   data () {
     return {
@@ -219,7 +223,8 @@ export default {
       inputValue: '',
       associationsShow: false,
       activeAssociationIndex: 0,
-      active: false
+      active: false,
+      loadingInstance: null
     }
   },
   computed: {
@@ -264,10 +269,25 @@ export default {
         } else {
           this.activeAssociationIndex = 0
         }
+        this.checkAssociationsDisplay()
       }
     },
     inputValue (v) {
+      // this.checkAssociationsDisplay()
       this.$emit('input-change', v)
+    },
+    loading (v) {
+      if (v) {
+        this.$nextTick(() => {
+          this.loadingInstance = Loading({
+            target: this.associationsShow ? this.$refs.associationsContainer.$el : this.$refs.tagsContainer.$el
+          })
+        })
+      } else {
+        if (this.loadingInstance) {
+          this.loadingInstance.close()
+        }
+      }
     }
   },
   methods: {
@@ -286,12 +306,14 @@ export default {
       })
     },
     setTag (value) {
-      if (!this.repeat && this.localTags.indexOf(value) !== -1) return
-      this.localTags.push(value)
-      this.inputValue = ''
+      if (!this.repeat && this.localTags.indexOf(value) !== -1) {
+        this.inputValue = value
+      } else {
+        this.localTags.push(value)
+        this.inputValue = ''
+      }
     },
     handleClick () {
-      console.log('click')
       if (!this.disabled) this.$refs.input.focus()
     },
     handleCoreChange (e) {
@@ -367,6 +389,11 @@ export default {
       e.stopPropagation()
       if (this.canRemove) {
         this.localTags.splice(index, 1)
+      }
+    },
+    checkAssociationsDisplay () {
+      if (this.active && this.localAssociations.length && !this.associationsShow) {
+        this.associationsShow = true
       }
     }
   },

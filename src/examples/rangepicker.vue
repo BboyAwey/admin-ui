@@ -1,22 +1,22 @@
 <template>
-  <div class="page">
+  <div class="page" style="position: relative">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
         日期/时间范围选择组件，支持v-model
       </p>
       <!-- 组件示例 -->
-      <div class="component-example">
+      <div class="component-example" style="position: absolute;top: 0; right: 30px; text-align: right;">
         <au-rangepicker
           v-model="range"
           label="选择日期范围"
-          start="2018-2-29 12:12:12"
-          end="2018-3-2 12:12:33"
-          span="539200000"
           type="all"
+          start="2017"
+          end="2018"
           :relative="true"
           :absolute="true"
           size="normal"
           :disabled="false"
+          placement="bottom right"
         ></au-rangepicker>
       </div>
       <!-- 组件示例 -->
@@ -157,8 +157,7 @@
               日期分隔符只能为'-'<br>
               时间分隔符只能为':'<br>
               当type为'date'时不能只给定时间<br>
-              当type为'time'时不能只给定日期<br>
-              当type为'all'时可以只给定日期<br>
+              当type为'time'时不能只给定日期
             </td>
           </tr>
           <tr>
@@ -182,8 +181,7 @@
               日期分隔符只能为'-'<br>
               时间分隔符只能为':'<br>
               当type为'date'时不能只给定时间<br>
-              当type为'time'时不能只给定日期<br>
-              当type为'all'时可以只给定日期<br>
+              当type为'time'时不能只给定日期
             </td>
           </tr>
           <tr>
@@ -404,9 +402,6 @@
         <au-rangepicker
           v-model="range"
           label="选择日期范围"
-          start="2018-2-5 12:12:12"
-          end="2018-3-2 12:12:33"
-          span="539200000"
           type="all"
           :relative="true"
           :absolute="true"
@@ -434,17 +429,14 @@
 <script>
 export default {
   name: 'rangepicker-examples',
-  mounted () {
-    this.range = {
-      startDate: '2018-2-1',
-      startTime: '10:10:10',
-      endDate: '',
-      endTime: ''
-    }
-  },
   data () {
     return {
-      range: {}
+      range: {
+        startDate: '2018-2-1',
+        startTime: '10:10:10',
+        endDate: '2018-2-10',
+        endTime: '19:32:26'
+      }
     }
   },
   watch: {

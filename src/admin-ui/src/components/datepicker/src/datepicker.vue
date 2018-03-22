@@ -230,7 +230,11 @@ export default {
       lastInputValue: this.format(this.value),
       dates: [],
       renderedDateObj: {},
-      popup: false
+      popup: false,
+      lastValidatedDate: {
+        date: '',
+        res: null
+      }
     }
   },
   props: {
@@ -501,18 +505,24 @@ export default {
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false
     },
     isValid (date) {
-      let d = (new Date(date.year, date.month, date.date)).getTime()
+      let d = (new Date(date.year, date.month - 1, date.date)).getTime()
       let res = true
       if (this.start) {
         let start = this.start.split('-').map(e => {
           return e.trim()
         })
+        if (!start[1]) start[1] = 0
+        else start[1]-- // calfull with month
+        if (!start[2]) start[2] = 1
         if (d < (new Date(...start).getTime())) res = false
       }
       if (this.end) {
         let end = this.end.split('-').map(e => {
           return e.trim()
         })
+        if (!end[1]) end[1] = 0
+        else end[1]-- // calfull with month
+        if (!end[2]) end[2] = 1
         if (d > (new Date(...end).getTime())) res = false
       }
       return res

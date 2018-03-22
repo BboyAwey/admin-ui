@@ -219,7 +219,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 40px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 40px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -3504,9 +3504,9 @@ var render = function() {
                       value:
                         (_vm.associationsShow &&
                           _vm.localAssociations.length) ||
-                        (_vm.canCreate && _vm.inputValue),
+                        (_vm.canCreate && _vm.inputValue && _vm.active),
                       expression:
-                        "(associationsShow && localAssociations.length) || (canCreate && inputValue)"
+                        "(associationsShow && localAssociations.length) || (canCreate && inputValue && active)"
                     }
                   ],
                   ref: "associationsContainer",
@@ -3875,6 +3875,10 @@ module.exports = function (key) {
     tags: {
       deep: true,
       handler: function handler(v) {
+        if (!v.length && this.localTags.length) {
+          this.localTags = v;
+          return;
+        }
         for (var i = 0; i < v.length; i++) {
           if (v[i] !== this.localTags[i]) {
             this.localTags = v;
@@ -3886,6 +3890,10 @@ module.exports = function (key) {
     localTags: {
       deep: true,
       handler: function handler(v) {
+        if (!v.length && this.tags.length) {
+          this.$emit('change', v);
+          return;
+        }
         for (var i = 0; i < v.length; i++) {
           if (v[i] !== this.tags[i]) {
             this.$emit('change', v);
@@ -3927,6 +3935,7 @@ module.exports = function (key) {
       } else {
         if (this.loadingInstance) {
           this.loadingInstance.close();
+          this.loadingInstance = null;
         }
       }
     }
@@ -4015,10 +4024,8 @@ module.exports = function (key) {
       }
     },
     handleCoreBlur: function handleCoreBlur(e) {
-      if (!this.active) {
-        this.active = false;
-        this.$emit('blur', this.localTags);
-      }
+      this.active = false;
+      this.$emit('blur', this.localTags);
     },
     handleWindowClick: function handleWindowClick(e) {
       if (!Object(__WEBPACK_IMPORTED_MODULE_8__helpers_dom__["c" /* isAncestor */])(e.target, this.$refs.body)) this.associationsShow = false;
@@ -4781,7 +4788,15 @@ function getRealZIndex(el) {
       type: [String, Number],
       default: '0px'
     },
-    hideOnBlur: Boolean
+    hideOnBlur: Boolean,
+    beforeShow: {
+      type: Function,
+      default: function _default() {
+        return function () {
+          return true;
+        };
+      }
+    }
     // zIndex: [String, Number]
   },
   data: function data() {
@@ -4889,10 +4904,8 @@ function getRealZIndex(el) {
     },
     show: function show() {
       if (this.disabled) return;
-      if (typeof this.beforeShow === 'function') {
-        var res = this.beforeShow();
-        if (!res && res !== undefined) return;
-      }
+      var res = this.beforeShow();
+      if (res !== undefined && !res) return;
       this.calPos();
       // this.originPopSize = {
       //   width: window.getComputedStyle(this.$refs.pop).width,

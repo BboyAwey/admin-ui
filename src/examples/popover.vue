@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example" style="position: relative;">
-        <au-popover ref="myPopover">
+        <au-popover ref="myPopover" trigger="hover">
           <au-button slot="target" type="primary" @click.stop>A:(top center, hover)</au-button>
           <div slot="content">
             <p style="font-size: 14px; padding: 10px;">
@@ -225,7 +225,9 @@
             <td><au-icon type="minus"></au-icon></td>
             <td></td>
             <td>
-              有时可能会需要在显示之前做一些事情，可以在函数中返回false来阻止显示
+              有时可能会需要在显示之前做一些事情<br>
+              比如动态改变气泡中某些元素的大小等等<br>
+              可以在函数中返回false来阻止显示
             </td>
           </tr>
         </tbody>

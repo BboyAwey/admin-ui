@@ -2152,7 +2152,15 @@ function getRealZIndex(el) {
       type: [String, Number],
       default: '0px'
     },
-    hideOnBlur: Boolean
+    hideOnBlur: Boolean,
+    beforeShow: {
+      type: Function,
+      default: function _default() {
+        return function () {
+          return true;
+        };
+      }
+    }
     // zIndex: [String, Number]
   },
   data: function data() {
@@ -2260,10 +2268,8 @@ function getRealZIndex(el) {
     },
     show: function show() {
       if (this.disabled) return;
-      if (typeof this.beforeShow === 'function') {
-        var res = this.beforeShow();
-        if (!res && res !== undefined) return;
-      }
+      var res = this.beforeShow();
+      if (res !== undefined && !res) return;
       this.calPos();
       // this.originPopSize = {
       //   width: window.getComputedStyle(this.$refs.pop).width,

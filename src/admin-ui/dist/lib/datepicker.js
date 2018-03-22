@@ -631,7 +631,11 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       lastInputValue: this.format(this.value),
       dates: [],
       renderedDateObj: {},
-      popup: false
+      popup: false,
+      lastValidatedDate: {
+        date: '',
+        res: null
+      }
     };
   },
 
@@ -901,18 +905,22 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
     },
     isValid: function isValid(date) {
-      var d = new Date(date.year, date.month, date.date).getTime();
+      var d = new Date(date.year, date.month - 1, date.date).getTime();
       var res = true;
       if (this.start) {
         var start = this.start.split('-').map(function (e) {
           return e.trim();
         });
+        if (!start[1]) start[1] = 0;else start[1]--; // calfull with month
+        if (!start[2]) start[2] = 1;
         if (d < new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(start))))().getTime()) res = false;
       }
       if (this.end) {
         var end = this.end.split('-').map(function (e) {
           return e.trim();
         });
+        if (!end[1]) end[1] = 0;else end[1]--; // calfull with month
+        if (!end[2]) end[2] = 1;
         if (d > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
       }
       return res;
@@ -944,7 +952,6 @@ module.exports = __webpack_require__("FeBl").Array.from;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icon__ = __webpack_require__("dJt8");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scroller__ = __webpack_require__("ovkV");
 
-//
 //
 //
 //
@@ -1349,7 +1356,6 @@ module.exports = __webpack_require__("FeBl").Array.from;
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v._text;
-      console.log(this.$refs.core);
       this.$refs.core.focus();
       // this.associationsShow = false
       this.$emit('association-select', this.associations.find(function (a) {
@@ -1359,9 +1365,6 @@ module.exports = __webpack_require__("FeBl").Array.from;
           return a === v._text;
         }
       }));
-    },
-    handleCoreContainerClick: function handleCoreContainerClick() {
-      console.log('coreClick');
     }
   }
 });
@@ -6014,8 +6017,7 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  },
-                  on: { click: _vm.handleCoreContainerClick }
+                  }
                 },
                 [
                   _vm.icon

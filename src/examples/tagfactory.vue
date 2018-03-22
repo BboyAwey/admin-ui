@@ -523,6 +523,9 @@ export default {
         this.loading = false
       }, 2000)
     }
+  },
+  mounted () {
+    this.tags = []
   }
 }
 </script>

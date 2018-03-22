@@ -10,6 +10,8 @@
         <li class="au-theme-border-color--base-8">修正input关联项不响应输入</li>
         <li class="au-theme-border-color--base-8">去除表单类组件横排时label的冒号</li>
         <li class="au-theme-border-color--base-8">修正rangepicker选中相对时间后不回填绝对时间</li>
+        <li class="au-theme-border-color--base-8">修正rangepicker弹层定位不准问题</li>
+        <li class="au-theme-border-color--base-8">修正datepicker start和end计算不准问题</li>
         <li class="au-theme-border-color--base-8">checkbox半选状态解除与值的关联</li>
       </ol>
     </au-panel>

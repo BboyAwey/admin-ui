@@ -696,7 +696,6 @@ if(false) {
 //
 //
 //
-//
 
 
 
@@ -838,7 +837,6 @@ if(false) {
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v._text;
-      console.log(this.$refs.core);
       this.$refs.core.focus();
       // this.associationsShow = false
       this.$emit('association-select', this.associations.find(function (a) {
@@ -848,9 +846,6 @@ if(false) {
           return a === v._text;
         }
       }));
-    },
-    handleCoreContainerClick: function handleCoreContainerClick() {
-      console.log('coreClick');
     }
   }
 });
@@ -5840,8 +5835,7 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  },
-                  on: { click: _vm.handleCoreContainerClick }
+                  }
                 },
                 [
                   _vm.icon

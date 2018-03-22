@@ -688,7 +688,11 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       lastInputValue: this.format(this.value),
       dates: [],
       renderedDateObj: {},
-      popup: false
+      popup: false,
+      lastValidatedDate: {
+        date: '',
+        res: null
+      }
     };
   },
 
@@ -958,18 +962,22 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
     },
     isValid: function isValid(date) {
-      var d = new Date(date.year, date.month, date.date).getTime();
+      var d = new Date(date.year, date.month - 1, date.date).getTime();
       var res = true;
       if (this.start) {
         var start = this.start.split('-').map(function (e) {
           return e.trim();
         });
+        if (!start[1]) start[1] = 0;else start[1]--; // calfull with month
+        if (!start[2]) start[2] = 1;
         if (d < new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(start))))().getTime()) res = false;
       }
       if (this.end) {
         var end = this.end.split('-').map(function (e) {
           return e.trim();
         });
+        if (!end[1]) end[1] = 0;else end[1]--; // calfull with month
+        if (!end[2]) end[2] = 1;
         if (d > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
       }
       return res;
@@ -1406,7 +1414,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 
 
@@ -1548,7 +1555,6 @@ if (false) {(function () {
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v._text;
-      console.log(this.$refs.core);
       this.$refs.core.focus();
       // this.associationsShow = false
       this.$emit('association-select', this.associations.find(function (a) {
@@ -1558,9 +1564,6 @@ if (false) {(function () {
           return a === v._text;
         }
       }));
-    },
-    handleCoreContainerClick: function handleCoreContainerClick() {
-      console.log('coreClick');
     }
   }
 });
@@ -6414,7 +6417,15 @@ function getRealZIndex(el) {
       type: [String, Number],
       default: '0px'
     },
-    hideOnBlur: Boolean
+    hideOnBlur: Boolean,
+    beforeShow: {
+      type: Function,
+      default: function _default() {
+        return function () {
+          return true;
+        };
+      }
+    }
     // zIndex: [String, Number]
   },
   data: function data() {
@@ -6522,10 +6533,8 @@ function getRealZIndex(el) {
     },
     show: function show() {
       if (this.disabled) return;
-      if (typeof this.beforeShow === 'function') {
-        var res = this.beforeShow();
-        if (!res && res !== undefined) return;
-      }
+      var res = this.beforeShow();
+      if (res !== undefined && !res) return;
       this.calPos();
       // this.originPopSize = {
       //   width: window.getComputedStyle(this.$refs.pop).width,
@@ -8372,7 +8381,6 @@ module.exports.f = function (C) {
 //
 //
 //
-//
 
 
 
@@ -8505,8 +8513,14 @@ function isRangeChange(a, b, type) {
       type: String,
       default: 'all' // all, date, time
     },
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: ''
+    },
+    end: {
+      type: String,
+      default: ''
+    },
     span: [Number, String],
     seconds: {
       type: Boolean,
@@ -8735,13 +8749,6 @@ function isRangeChange(a, b, type) {
     }
   },
   methods: {
-    handlePopup: function handlePopup() {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_9__helpers_dom__["b" /* getElementSize */])(_this2.$refs.absolute).width + 'px';
-      });
-    },
     handleCancel: function handleCancel() {
       this.$refs.popover.hide();
     },
@@ -8750,16 +8757,16 @@ function isRangeChange(a, b, type) {
       this.$refs.popover.hide();
     },
     confirm: function confirm() {
-      var _this3 = this;
+      var _this2 = this;
 
       var temp = {};
       var setTime = function setTime() {
-        temp.startTime = _this3.startTime;
-        temp.endTime = _this3.endTime;
+        temp.startTime = _this2.startTime;
+        temp.endTime = _this2.endTime;
       };
       var setDate = function setDate() {
-        temp.startDate = _this3.startDate;
-        temp.endDate = _this3.endDate;
+        temp.startDate = _this2.startDate;
+        temp.endDate = _this2.endDate;
       };
       if (this.type === 'time') {
         setTime();
@@ -8822,23 +8829,23 @@ function isRangeChange(a, b, type) {
       this.endTime = '';
     },
     splitRange: function splitRange(range, callback) {
-      var _this4 = this;
+      var _this3 = this;
 
       // to avoid memory overflow
-      this.startDate = range.startDate || null;
+      this.startDate = range.startDate || '';
       this.$nextTick(function () {
-        _this4.startTime = range.startTime || null;
-        _this4.$nextTick(function () {
-          _this4.endDate = range.endDate || null;
-          _this4.$nextTick(function () {
-            _this4.endTime = range.endTime || null;
+        _this3.startTime = range.startTime || '';
+        _this3.$nextTick(function () {
+          _this3.endDate = range.endDate || '';
+          _this3.$nextTick(function () {
+            _this3.endTime = range.endTime || '';
             if (typeof callback === 'function') {
               // eslint-disable-next-line
               callback({
-                startDate: _this4.startDate,
-                startTime: _this4.startTime,
-                endDate: _this4.endDate,
-                endTime: _this4.endTime
+                startDate: _this3.startDate,
+                startTime: _this3.startTime,
+                endDate: _this3.endDate,
+                endTime: _this3.endTime
               });
             }
           });
@@ -8846,6 +8853,7 @@ function isRangeChange(a, b, type) {
       });
     },
     beforeShow: function beforeShow() {
+      this.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_9__helpers_dom__["b" /* getElementSize */])(this.$refs.absolute).width + 'px';
       this.splitRange(this.localRange);
     }
   }
@@ -9614,8 +9622,7 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  },
-                  on: { click: _vm.handleCoreContainerClick }
+                  }
                 },
                 [
                   _vm.icon
@@ -10205,9 +10212,8 @@ var render = function() {
                 trigger: "click",
                 placement: _vm.placement,
                 disabled: _vm.disabled,
-                beforeShow: _vm.beforeShow
-              },
-              on: { show: _vm.handlePopup }
+                "before-show": _vm.beforeShow
+              }
             },
             [
               _c(

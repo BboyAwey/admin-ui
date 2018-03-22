@@ -111,8 +111,7 @@
         :style="{
           verticalAlign: inline ? 'top' : '',
           width: !inline && fullWidth ? '100%' : width,
-        }"
-        @click="handleCoreContainerClick">
+        }">
         <au-icon
           v-if="icon"
           class="au-input-icon"
@@ -390,7 +389,6 @@ export default {
     },
     selectAssociation (v) {
       this.localValue = v._text
-      console.log(this.$refs.core)
       this.$refs.core.focus()
       // this.associationsShow = false
       this.$emit('association-select', this.associations.find(a => {
@@ -400,9 +398,6 @@ export default {
           return a === v._text
         }
       }))
-    },
-    handleCoreContainerClick () {
-      console.log('coreClick')
     }
   }
 }

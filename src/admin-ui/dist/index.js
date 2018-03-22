@@ -507,7 +507,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 40px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 40px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -2098,7 +2098,11 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       lastInputValue: this.format(this.value),
       dates: [],
       renderedDateObj: {},
-      popup: false
+      popup: false,
+      lastValidatedDate: {
+        date: '',
+        res: null
+      }
     };
   },
 
@@ -2368,18 +2372,22 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       if (e.relatedTarget !== this.$refs.core.$refs.core) this.popup = false;
     },
     isValid: function isValid(date) {
-      var d = new Date(date.year, date.month, date.date).getTime();
+      var d = new Date(date.year, date.month - 1, date.date).getTime();
       var res = true;
       if (this.start) {
         var start = this.start.split('-').map(function (e) {
           return e.trim();
         });
+        if (!start[1]) start[1] = 0;else start[1]--; // calfull with month
+        if (!start[2]) start[2] = 1;
         if (d < new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(start))))().getTime()) res = false;
       }
       if (this.end) {
         var end = this.end.split('-').map(function (e) {
           return e.trim();
         });
+        if (!end[1]) end[1] = 0;else end[1]--; // calfull with month
+        if (!end[2]) end[2] = 1;
         if (d > new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(end))))().getTime()) res = false;
       }
       return res;
@@ -3513,7 +3521,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 
 
@@ -3655,7 +3662,6 @@ if (false) {(function () {
     },
     selectAssociation: function selectAssociation(v) {
       this.localValue = v._text;
-      console.log(this.$refs.core);
       this.$refs.core.focus();
       // this.associationsShow = false
       this.$emit('association-select', this.associations.find(function (a) {
@@ -3665,9 +3671,6 @@ if (false) {(function () {
           return a === v._text;
         }
       }));
-    },
-    handleCoreContainerClick: function handleCoreContainerClick() {
-      console.log('coreClick');
     }
   }
 });
@@ -12681,9 +12684,9 @@ var render = function() {
                       value:
                         (_vm.associationsShow &&
                           _vm.localAssociations.length) ||
-                        (_vm.canCreate && _vm.inputValue),
+                        (_vm.canCreate && _vm.inputValue && _vm.active),
                       expression:
-                        "(associationsShow && localAssociations.length) || (canCreate && inputValue)"
+                        "(associationsShow && localAssociations.length) || (canCreate && inputValue && active)"
                     }
                   ],
                   ref: "associationsContainer",
@@ -13052,6 +13055,10 @@ module.exports = function (key) {
     tags: {
       deep: true,
       handler: function handler(v) {
+        if (!v.length && this.localTags.length) {
+          this.localTags = v;
+          return;
+        }
         for (var i = 0; i < v.length; i++) {
           if (v[i] !== this.localTags[i]) {
             this.localTags = v;
@@ -13063,6 +13070,10 @@ module.exports = function (key) {
     localTags: {
       deep: true,
       handler: function handler(v) {
+        if (!v.length && this.tags.length) {
+          this.$emit('change', v);
+          return;
+        }
         for (var i = 0; i < v.length; i++) {
           if (v[i] !== this.tags[i]) {
             this.$emit('change', v);
@@ -13104,6 +13115,7 @@ module.exports = function (key) {
       } else {
         if (this.loadingInstance) {
           this.loadingInstance.close();
+          this.loadingInstance = null;
         }
       }
     }
@@ -13192,10 +13204,8 @@ module.exports = function (key) {
       }
     },
     handleCoreBlur: function handleCoreBlur(e) {
-      if (!this.active) {
-        this.active = false;
-        this.$emit('blur', this.localTags);
-      }
+      this.active = false;
+      this.$emit('blur', this.localTags);
     },
     handleWindowClick: function handleWindowClick(e) {
       if (!Object(__WEBPACK_IMPORTED_MODULE_8__helpers_dom__["e" /* isAncestor */])(e.target, this.$refs.body)) this.associationsShow = false;
@@ -16792,7 +16802,15 @@ function getRealZIndex(el) {
       type: [String, Number],
       default: '0px'
     },
-    hideOnBlur: Boolean
+    hideOnBlur: Boolean,
+    beforeShow: {
+      type: Function,
+      default: function _default() {
+        return function () {
+          return true;
+        };
+      }
+    }
     // zIndex: [String, Number]
   },
   data: function data() {
@@ -16900,10 +16918,8 @@ function getRealZIndex(el) {
     },
     show: function show() {
       if (this.disabled) return;
-      if (typeof this.beforeShow === 'function') {
-        var res = this.beforeShow();
-        if (!res && res !== undefined) return;
-      }
+      var res = this.beforeShow();
+      if (res !== undefined && !res) return;
       this.calPos();
       // this.originPopSize = {
       //   width: window.getComputedStyle(this.$refs.pop).width,
@@ -19287,7 +19303,6 @@ module.exports.f = function (C) {
 //
 //
 //
-//
 
 
 
@@ -19420,8 +19435,14 @@ function isRangeChange(a, b, type) {
       type: String,
       default: 'all' // all, date, time
     },
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: ''
+    },
+    end: {
+      type: String,
+      default: ''
+    },
     span: [Number, String],
     seconds: {
       type: Boolean,
@@ -19650,13 +19671,6 @@ function isRangeChange(a, b, type) {
     }
   },
   methods: {
-    handlePopup: function handlePopup() {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_9__helpers_dom__["c" /* getElementSize */])(_this2.$refs.absolute).width + 'px';
-      });
-    },
     handleCancel: function handleCancel() {
       this.$refs.popover.hide();
     },
@@ -19665,16 +19679,16 @@ function isRangeChange(a, b, type) {
       this.$refs.popover.hide();
     },
     confirm: function confirm() {
-      var _this3 = this;
+      var _this2 = this;
 
       var temp = {};
       var setTime = function setTime() {
-        temp.startTime = _this3.startTime;
-        temp.endTime = _this3.endTime;
+        temp.startTime = _this2.startTime;
+        temp.endTime = _this2.endTime;
       };
       var setDate = function setDate() {
-        temp.startDate = _this3.startDate;
-        temp.endDate = _this3.endDate;
+        temp.startDate = _this2.startDate;
+        temp.endDate = _this2.endDate;
       };
       if (this.type === 'time') {
         setTime();
@@ -19737,23 +19751,23 @@ function isRangeChange(a, b, type) {
       this.endTime = '';
     },
     splitRange: function splitRange(range, callback) {
-      var _this4 = this;
+      var _this3 = this;
 
       // to avoid memory overflow
-      this.startDate = range.startDate || null;
+      this.startDate = range.startDate || '';
       this.$nextTick(function () {
-        _this4.startTime = range.startTime || null;
-        _this4.$nextTick(function () {
-          _this4.endDate = range.endDate || null;
-          _this4.$nextTick(function () {
-            _this4.endTime = range.endTime || null;
+        _this3.startTime = range.startTime || '';
+        _this3.$nextTick(function () {
+          _this3.endDate = range.endDate || '';
+          _this3.$nextTick(function () {
+            _this3.endTime = range.endTime || '';
             if (typeof callback === 'function') {
               // eslint-disable-next-line
               callback({
-                startDate: _this4.startDate,
-                startTime: _this4.startTime,
-                endDate: _this4.endDate,
-                endTime: _this4.endTime
+                startDate: _this3.startDate,
+                startTime: _this3.startTime,
+                endDate: _this3.endDate,
+                endTime: _this3.endTime
               });
             }
           });
@@ -19761,6 +19775,7 @@ function isRangeChange(a, b, type) {
       });
     },
     beforeShow: function beforeShow() {
+      this.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_9__helpers_dom__["c" /* getElementSize */])(this.$refs.absolute).width + 'px';
       this.splitRange(this.localRange);
     }
   }
@@ -22247,8 +22262,7 @@ var render = function() {
                   style: {
                     verticalAlign: _vm.inline ? "top" : "",
                     width: !_vm.inline && _vm.fullWidth ? "100%" : _vm.width
-                  },
-                  on: { click: _vm.handleCoreContainerClick }
+                  }
                 },
                 [
                   _vm.icon
@@ -22977,9 +22991,8 @@ var render = function() {
                 trigger: "click",
                 placement: _vm.placement,
                 disabled: _vm.disabled,
-                beforeShow: _vm.beforeShow
-              },
-              on: { show: _vm.handlePopup }
+                "before-show": _vm.beforeShow
+              }
             },
             [
               _c(

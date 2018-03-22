@@ -7,7 +7,7 @@
 .au-tagfactory-core {
   position: relative;
   display: inline-block;
-  min-width: 40px;
+  min-width: 83px;
   width: 100%;
   padding: 5px;
   padding-bottom: 0;
@@ -132,7 +132,7 @@
           au-tagfactory-associations-container
           au-theme-border-color--base-8
           au-theme-background-color--base-12"
-          v-show="(associationsShow && localAssociations.length) || (canCreate && inputValue)"
+          v-show="(associationsShow && localAssociations.length) || (canCreate && inputValue && active)"
           ref="associationsContainer">
           <ul
             class="au-tagfactory-associations">
@@ -236,6 +236,10 @@ export default {
     tags: {
       deep: true,
       handler (v) {
+        if (!v.length && this.localTags.length) {
+          this.localTags = v
+          return
+        }
         for (let i = 0; i < v.length; i++) {
           if (v[i] !== this.localTags[i]) {
             this.localTags = v
@@ -247,6 +251,10 @@ export default {
     localTags: {
       deep: true,
       handler (v) {
+        if (!v.length && this.tags.length) {
+          this.$emit('change', v)
+          return
+        }
         for (let i = 0; i < v.length; i++) {
           if (v[i] !== this.tags[i]) {
             this.$emit('change', v)
@@ -286,6 +294,7 @@ export default {
       } else {
         if (this.loadingInstance) {
           this.loadingInstance.close()
+          this.loadingInstance = null
         }
       }
     }
@@ -369,10 +378,8 @@ export default {
       }
     },
     handleCoreBlur (e) {
-      if (!this.active) {
-        this.active = false
-        this.$emit('blur', this.localTags)
-      }
+      this.active = false
+      this.$emit('blur', this.localTags)
     },
     handleWindowClick (e) {
       if (!isAncestor(e.target, this.$refs.body)) this.associationsShow = false

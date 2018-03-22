@@ -65,8 +65,7 @@
         :placement="placement"
         ref="popover"
         :disabled="disabled"
-        :beforeShow="beforeShow"
-        @show="handlePopup">
+        :before-show="beforeShow">
         <au-button slot="target" plain :size="size" :disabled="disabled">
           {{ type !== 'time' ? localRange.startDate : '' }}
           {{ type !== 'date' ? localRange.startTime : '' }}
@@ -289,8 +288,14 @@ export default {
       type: String,
       default: 'all' // all, date, time
     },
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: ''
+    },
+    end: {
+      type: String,
+      default: ''
+    },
     span: [Number, String],
     seconds: {
       type: Boolean,
@@ -517,11 +522,6 @@ export default {
     }
   },
   methods: {
-    handlePopup () {
-      this.$nextTick(() => {
-        this.$refs.popContent.style.width = getElementSize(this.$refs.absolute).width + 'px'
-      })
-    },
     handleCancel () {
       this.$refs.popover.hide()
     },
@@ -596,13 +596,13 @@ export default {
       this.endTime = ''
     },
     splitRange (range, callback) { // to avoid memory overflow
-      this.startDate = range.startDate || null
+      this.startDate = range.startDate || ''
       this.$nextTick(() => {
-        this.startTime = range.startTime || null
+        this.startTime = range.startTime || ''
         this.$nextTick(() => {
-          this.endDate = range.endDate || null
+          this.endDate = range.endDate || ''
           this.$nextTick(() => {
-            this.endTime = range.endTime || null
+            this.endTime = range.endTime || ''
             if (typeof callback === 'function') {
               // eslint-disable-next-line
               callback({
@@ -617,6 +617,7 @@ export default {
       })
     },
     beforeShow () {
+      this.$refs.popContent.style.width = getElementSize(this.$refs.absolute).width + 'px'
       this.splitRange(this.localRange)
     }
   }

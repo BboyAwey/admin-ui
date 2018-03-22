@@ -166,7 +166,11 @@ export default {
       type: [String, Number],
       default: '0px'
     },
-    hideOnBlur: Boolean
+    hideOnBlur: Boolean,
+    beforeShow: {
+      type: Function,
+      default () { return () => true }
+    }
     // zIndex: [String, Number]
   },
   data () {
@@ -272,10 +276,8 @@ export default {
     },
     show () {
       if (this.disabled) return
-      if (typeof this.beforeShow === 'function') {
-        let res = this.beforeShow()
-        if (!res && res !== undefined) return
-      }
+      let res = this.beforeShow()
+      if (res !== undefined && !res) return
       this.calPos()
       // this.originPopSize = {
       //   width: window.getComputedStyle(this.$refs.pop).width,

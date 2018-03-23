@@ -3229,6 +3229,9 @@ if (false) {(function () {
       this.calcModalStyle();
       this.calModalContentStyle();
     },
+    handleModalMaskingClick: function handleModalMaskingClick(e) {
+      if (e.target === this.$refs.modalContainer) this.hide();
+    },
     escHandler: function escHandler(e) {
       if (e.keyCode !== 27) return;
       this.hide();
@@ -3837,7 +3840,7 @@ var render = function() {
       ref: "modalContainer",
       staticClass:
         "au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3",
-      on: { click: _vm.hide }
+      on: { click: _vm.handleModalMaskingClick }
     },
     [
       _c("div", { staticClass: "au-modal-cell" }, [
@@ -3846,13 +3849,7 @@ var render = function() {
           {
             ref: "modal",
             staticClass:
-              "au-modal au-theme-border-radius--large au-theme-background-color--base-12",
-            on: {
-              click: function($event) {
-                $event.stopPropagation()
-                return (function() {})($event)
-              }
-            }
+              "au-modal au-theme-border-radius--large au-theme-background-color--base-12"
           },
           [
             _c(
@@ -16971,28 +16968,50 @@ function getRealZIndex(el) {
       var windowSize = {
         width: document.body.clientWidth,
         height: document.body.clientHeight
-
         // handle screen overflow
       };var targetRect = target.getBoundingClientRect();
-      if (targetRect.top < popSize.height && keys[0] === 'top') keys[0] = 'bottom';
-      if (windowSize.height - targetRect.bottom < popSize.height && keys[0] === 'bottom') keys[0] = 'top';
-      if (targetRect.left < popSize.width && keys[0] === 'left') keys[0] = 'rigth';
-      if (windowSize.width - targetRect.right < popSize.width && keys[0] === 'right') keys[0] = 'left';
+
+      if (keys[0] === 'top') {
+        if (targetRect.top < popSize.height) keys[0] = 'bottom';
+      } else if (keys[0] === 'bottom') {
+        if (windowSize.height - targetRect.bottom < popSize.height) keys[0] = 'top';
+      } else if (keys[0] === 'left') {
+        if (targetRect.left < popSize.width) keys[0] = 'rigth';
+      } else if (keys[0] === 'right') {
+        if (windowSize.width - targetRect.right < popSize.width) keys[0] = 'left';
+      }
 
       if (keys[0] === 'left' || keys[0] === 'right') {
-        if (keys[1] !== 'top') {
-          if (targetRect.top < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'top';
-        }
-        if (keys[1] !== 'bottom') {
-          if (windowSize.height - targetRect.bottom < popSize.height / (keys[1] === 'middle' ? 2 : 1) - targetSize.height) keys[1] = 'bottom';
+        if (keys[1] === 'bottom') {
+          if (targetRect.top < popSize.height - targetSize.height) keys[1] = 'top';
+        } else if (keys[1] === 'top') {
+          if (windowSize.height - targetRect.bottom < popSize.height - targetSize.height) keys[1] = 'bottom';
+        } else if (keys[1] === 'middle') {
+          var bottomSpace = windowSize.height - targetRect.bottom;
+          var topSpace = targetRect.top;
+          var halfSize = popSize.height / 2 - targetSize.height;
+          var min = Math.min(bottomSpace, topSpace, halfSize);
+          var max = Math.max(bottomSpace, topSpace, halfSize);
+          if (min !== halfSize && max !== halfSize) {
+            if (min === topSpace) keys[1] = 'top';else keys[1] = 'bottom';
+          }
         }
       }
+
       if (keys[0] === 'top' || keys[0] === 'bottom') {
-        if (keys[1] !== 'left') {
+        if (keys[1] === 'right') {
           if (targetRect.left < popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width) keys[1] = 'left';
-        }
-        if (keys[1] !== 'right') {
-          if (windowSize.width - targetRect.right < popSize.widht / (keys[1] === 'middle' ? 2 : 1) - targetSize.width) keys[1] = 'right';
+        } else if (keys[1] === 'left') {
+          if (windowSize.width - targetRect.right < popSize.width - targetSize.width) keys[1] = 'right';
+        } else if (keys[1] === 'center') {
+          var leftSpace = targetRect.left;
+          var rightSpace = windowSize.width - targetRect.right;
+          var _halfSize = popSize.width / 2 - targetSize.width;
+          var _min = Math.min(leftSpace, rightSpace, _halfSize);
+          var _max = Math.max(leftSpace, rightSpace, _halfSize);
+          if (_min !== _halfSize && _max !== _halfSize) {
+            if (_min === leftSpace) keys[1] = 'left';else keys[1] = 'right';
+          }
         }
       }
 
@@ -17001,7 +17020,7 @@ function getRealZIndex(el) {
       // fix the size bug witch caused by the wordwrap
       // this.$refs.pop.style.width = popSize.width + 'px'
       // this.$refs.pop.style.height = popSize.height + 'px'
-
+      if (this.placement === 'bottom right') console.log(this.localPlacement, 3);
       var offset = 10;
       var vertical = {
         x: {

@@ -1,5 +1,17 @@
 <template>
   <div class="page">
+    <au-panel class="section" title="3.1.2">
+      <h3 class="title-1">## 新增特性</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">tagfactory新增loading接口</li>
+      </ol>
+      <h3 class="title-2">## Bug Fixed</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">修正popover自动回避屏幕边缘不准问题</li>
+        <li class="au-theme-border-color--base-8">修正modal点击蒙层关闭自身的条件，允许内部点击事件冒泡</li>
+        <li class="au-theme-border-color--base-8">修正tagfactory气泡失焦后未关闭无法关闭问题</li>
+      </ol>
+    </au-panel>
     <au-panel class="section" title="3.1.0">
       <h3 class="title-1">## 新增特性</h3>
       <ol class="option-list">

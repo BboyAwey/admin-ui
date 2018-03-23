@@ -957,6 +957,9 @@ if (false) {(function () {
       this.calcModalStyle();
       this.calModalContentStyle();
     },
+    handleModalMaskingClick: function handleModalMaskingClick(e) {
+      if (e.target === this.$refs.modalContainer) this.hide();
+    },
     escHandler: function escHandler(e) {
       if (e.keyCode !== 27) return;
       this.hide();
@@ -1452,7 +1455,7 @@ var render = function() {
       ref: "modalContainer",
       staticClass:
         "au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3",
-      on: { click: _vm.hide }
+      on: { click: _vm.handleModalMaskingClick }
     },
     [
       _c("div", { staticClass: "au-modal-cell" }, [
@@ -1461,13 +1464,7 @@ var render = function() {
           {
             ref: "modal",
             staticClass:
-              "au-modal au-theme-border-radius--large au-theme-background-color--base-12",
-            on: {
-              click: function($event) {
-                $event.stopPropagation()
-                return (function() {})($event)
-              }
-            }
+              "au-modal au-theme-border-radius--large au-theme-background-color--base-12"
           },
           [
             _c(

@@ -75,9 +75,9 @@
     class="au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3"
     v-show="localDisplay"
     ref="modalContainer"
-    @click="hide">
+    @click="handleModalMaskingClick">
     <div class="au-modal-cell">
-      <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" @click.stop="() => {}" ref="modal">
+      <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" ref="modal">
         <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
           <au-scroller class="au-modal-content-scroller" stop-propagation>
@@ -231,6 +231,9 @@ export default {
     resizeHandler () {
       this.calcModalStyle()
       this.calModalContentStyle()
+    },
+    handleModalMaskingClick (e) {
+      if (e.target === this.$refs.modalContainer) this.hide()
     },
     escHandler (e) {
       if (e.keyCode !== 27) return

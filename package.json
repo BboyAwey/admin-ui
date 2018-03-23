@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A concise and elegant admin-system-like ui component library",
   "author": "chenwei1 <chenwei1@rongcapital.cn>",
   "private": true,

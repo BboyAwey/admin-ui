@@ -384,7 +384,6 @@ export default {
       // fix the size bug witch caused by the wordwrap
       // this.$refs.pop.style.width = popSize.width + 'px'
       // this.$refs.pop.style.height = popSize.height + 'px'
-      if (this.placement === 'bottom right') console.log(this.localPlacement, 3)
       let offset = 10
       let vertical = {
         x: {

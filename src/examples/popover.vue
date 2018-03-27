@@ -1,23 +1,23 @@
 <template>
-  <div class="page">
+  <div class="page" style="position: relative;">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
         气泡提示
       </p>
       <!-- 组件示例 -->
-      <div class="component-example" style="position: relative;">
+      <div class="component-example" style="position: absolute; top: 10px; right: 40px;">
         <au-popover ref="myPopover" trigger="hover">
           <au-button slot="target" type="primary" @click.stop>A:(top center, hover)</au-button>
           <div slot="content">
-            <p style="font-size: 14px; padding: 10px;">
+            <p style="font-size: 14px; padding: 10px; width: 300px; height: 400px;">
               Hi Popover! Hi Popover!
             </p>
           </div>
         </au-popover>
-        <au-popover placement="right middle" trigger="click" :plain="true" :hide-on-blur="true">
+        <au-popover placement="bottom left" trigger="click" :plain="true" :hide-on-blur="true">
           <au-button slot="target" type="primary" style="">B:(right top, click)</au-button>
           <div slot="content">
-            <p style="font-size: 14px; padding: 10px;">
+            <p style="font-size: 14px; padding: 10px; width: 400px; height: 200px;">
               Hi Popover! Hi Popover!
             </p>
           </div>

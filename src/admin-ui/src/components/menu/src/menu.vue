@@ -409,12 +409,11 @@ export default {
     if (this.isTopLevel) {
       this.localItems = this.setInfo(this.items)
       this.activate(this.currentItem)
-
-      window.addEventListener('hashchange', this.handleHashchange)
+      if (!this.$route) window.addEventListener('hashchange', this.handleHashchange)
     } else this.localItems = this.items
   },
   destroyed () {
-    window.removeEventListener('hashchange', this.handleHashchange)
+    if (this.isTopLevel && !this.$route) window.removeEventListener('hashchange', this.handleHashchange)
   },
   watch: {
     items: {
@@ -438,6 +437,11 @@ export default {
         this.$refs.self.style.width = this.originWidth
       }
       this.$emit('toggle', v)
+    },
+    $route (v) {
+      if (this.isTopLevel) {
+        this.handleHashchange()
+      }
     }
   },
   methods: {
@@ -445,7 +449,6 @@ export default {
       this.currentItem = item
       this.activate()
       this.toggleCollapse(item)
-      // console.log(this.$refs.tipPopover)
       if (i !== undefined && this.localCollapse && item.children && item.children.length) this.$refs.tipPopover[i].hide()
       if (i !== undefined) this.$emit('select', item)
     },
@@ -529,7 +532,6 @@ export default {
         let allItems = this.isTopLevel ? this.localItems : this.all
         let parentItem = null
         item.indexes.forEach((e, i) => {
-          // if (this.isPopover) console.log(e, i)
           parentItem = !parentItem ? allItems[e] : parentItem.children[e]
           if (parentItem.icon) {
             res += 18

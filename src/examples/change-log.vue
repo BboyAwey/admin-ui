@@ -3,6 +3,7 @@
     <au-panel class="section" title="3.1.3">
       <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
+        <li class="au-theme-border-color--base-8">menu现在会响应route的变化自动定位当前项</li>
         <li class="au-theme-border-color--base-8">breadcrumbs点击链接仅触发事件而不再处理crumbs</li>
       </ol>
     </au-panel>

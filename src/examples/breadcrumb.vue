@@ -168,7 +168,7 @@ export default {
   },
   methods: {
     handleSelect (crumb, crumbs) {
-      console.log(crumb)
+      this.$router.push({path: crumb.url})
     }
   }
 }

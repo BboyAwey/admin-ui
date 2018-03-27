@@ -8241,178 +8241,181 @@ module.exports.f = function (C) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__("fZjL");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__button__ = __webpack_require__("Wz8r");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__popover__ = __webpack_require__("LV4O");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datepicker__ = __webpack_require__("AbnL");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__timepicker__ = __webpack_require__("ovvg");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tag__ = __webpack_require__("MI60");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_form_api_mixin__ = __webpack_require__("gU9b");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_utils__ = __webpack_require__("AP3u");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_dom__ = __webpack_require__("8CCO");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_form_item_vue__ = __webpack_require__("+FN5");
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__("woOf");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__button__ = __webpack_require__("Wz8r");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__popover__ = __webpack_require__("LV4O");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datepicker__ = __webpack_require__("AbnL");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__timepicker__ = __webpack_require__("ovvg");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tag__ = __webpack_require__("MI60");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_form_api_mixin__ = __webpack_require__("gU9b");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_utils__ = __webpack_require__("AP3u");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__helpers_form_item_vue__ = __webpack_require__("+FN5");
 
 
 
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
-var formApiMixin = { props: __WEBPACK_IMPORTED_MODULE_7__helpers_form_api_mixin__["a" /* default */].props };
+
+
+
+
+
+
+var formApiMixin = { props: __WEBPACK_IMPORTED_MODULE_8__helpers_form_api_mixin__["a" /* default */].props };
 formApiMixin.props.value = null;
 
 function padNum(num) {
@@ -8445,10 +8448,11 @@ function padTimeStr(time) {
 
 function resolveRange(range) {
   var temp = {};
-  if (range.startDate || Object(__WEBPACK_IMPORTED_MODULE_8__helpers_utils__["a" /* isEmptyString */])(range.startDate)) temp.startDate = padDateStr(range.startDate);
-  if (range.startTime || Object(__WEBPACK_IMPORTED_MODULE_8__helpers_utils__["a" /* isEmptyString */])(range.startTime)) temp.startTime = padTimeStr(range.startTime);
-  if (range.endDate || Object(__WEBPACK_IMPORTED_MODULE_8__helpers_utils__["a" /* isEmptyString */])(range.endDate)) temp.endDate = padDateStr(range.endDate);
-  if (range.endTime || Object(__WEBPACK_IMPORTED_MODULE_8__helpers_utils__["a" /* isEmptyString */])(range.endDate)) temp.endTime = padTimeStr(range.endTime);
+  if (range.startDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["a" /* isEmptyString */])(range.startDate)) temp.startDate = padDateStr(range.startDate);
+  if (range.startTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["a" /* isEmptyString */])(range.startTime)) temp.startTime = padTimeStr(range.startTime);
+  if (range.endDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["a" /* isEmptyString */])(range.endDate)) temp.endDate = padDateStr(range.endDate);
+  if (range.endTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["a" /* isEmptyString */])(range.endDate)) temp.endTime = padTimeStr(range.endTime);
+  if (range.relative) temp.relative = range.relative;
   return temp;
 }
 
@@ -8471,7 +8475,7 @@ function getTimeFromDateStr(dateStr) {
   if (!dateStr) return 0;
   var dateArr = dateStr.split('-');
   dateArr[1] = dateArr[1] - 1;
-  return new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(dateArr))))().getTime();
+  return new (Function.prototype.bind.apply(Date, [null].concat(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default()(dateArr))))().getTime();
 }
 
 function getMsFromTimeStr(timeStr) {
@@ -8488,25 +8492,30 @@ function getTimeStrFromMs(ms) {
   return padNum(h) + ':' + padNum(m) + ':' + padNum(s);
 }
 
-function getSpanFromRange(range) {
-  if (range.startDate && range.endDate && !(range.startTime && range.endTime)) {
-    return getTimeFromDateStr(range.endDate) - getTimeFromDateStr(range.startDate);
-  }
-  if (range.startTime && range.endTime && !(range.startDate && range.endDate)) {
-    return getMsFromTimeStr(range.endTime) - getMsFromTimeStr(range.startTime);
-  }
-  if (range.startTime && range.endTime && range.startDate && range.endDate) {
-    return new Date(getTimeFromDateStr(range.endDate) + getMsFromTimeStr(range.endTime)) - new Date(getTimeFromDateStr(range.startDate) + getMsFromTimeStr(range.startTime));
-  }
-}
+// function getSpanFromRange (range) {
+//   if (range.startDate && range.endDate && !(range.startTime && range.endTime)) {
+//     return getTimeFromDateStr(range.endDate) - getTimeFromDateStr(range.startDate)
+//   }
+//   if (range.startTime && range.endTime && !(range.startDate && range.endDate)) {
+//     return getMsFromTimeStr(range.endTime) - getMsFromTimeStr(range.startTime)
+//   }
+//   if (range.startTime && range.endTime && range.startDate && range.endDate) {
+//     return new Date(
+//       getTimeFromDateStr(range.endDate) +
+//       getMsFromTimeStr(range.endTime)) -
+//       new Date(
+//       getTimeFromDateStr(range.startDate) +
+//       getMsFromTimeStr(range.startTime))
+//   }
+// }
 
 function isRangeChange(a, b, type) {
   if (type === 'time') {
-    return padTimeStr(a.startTime) !== b.startTime || padTimeStr(a.endTime) !== b.endTime;
+    return padTimeStr(a.startTime) !== b.startTime || padTimeStr(a.endTime) !== b.endTime || a.relative !== b.relative;
   } else if (type === 'date') {
-    return padDateStr(a.startDate) !== b.startDate || padDateStr(a.endDate) !== b.endDate;
+    return padDateStr(a.startDate) !== b.startDate || padDateStr(a.endDate) !== b.endDate || a.relative !== b.relative;
   } else {
-    return padTimeStr(a.startTime) !== (b.startTime || '') || padTimeStr(a.endTime) !== (b.endTime || '') || padDateStr(a.startDate) !== (b.startDate || '') || padDateStr(a.endDate) !== (b.endDate || '');
+    return padTimeStr(a.startTime) !== (b.startTime || '') || padTimeStr(a.endTime) !== (b.endTime || '') || padDateStr(a.startDate) !== (b.startDate || '') || padDateStr(a.endDate) !== (b.endDate || '') || a.relative !== b.relative;
   }
 }
 
@@ -8514,12 +8523,12 @@ function isRangeChange(a, b, type) {
   name: 'au-rangepicker',
   mixins: [formApiMixin],
   components: {
-    auButton: __WEBPACK_IMPORTED_MODULE_2__button__["a" /* default */],
-    auPopover: __WEBPACK_IMPORTED_MODULE_3__popover__["a" /* default */],
-    auDatepicker: __WEBPACK_IMPORTED_MODULE_4__datepicker__["a" /* default */],
-    auTimepicker: __WEBPACK_IMPORTED_MODULE_5__timepicker__["a" /* default */],
-    auTag: __WEBPACK_IMPORTED_MODULE_6__tag__["a" /* default */],
-    FormItem: __WEBPACK_IMPORTED_MODULE_10__helpers_form_item_vue__["a" /* default */]
+    auButton: __WEBPACK_IMPORTED_MODULE_3__button__["a" /* default */],
+    auPopover: __WEBPACK_IMPORTED_MODULE_4__popover__["a" /* default */],
+    auDatepicker: __WEBPACK_IMPORTED_MODULE_5__datepicker__["a" /* default */],
+    auTimepicker: __WEBPACK_IMPORTED_MODULE_6__timepicker__["a" /* default */],
+    auTag: __WEBPACK_IMPORTED_MODULE_7__tag__["a" /* default */],
+    FormItem: __WEBPACK_IMPORTED_MODULE_11__helpers_form_item_vue__["a" /* default */]
   },
   model: {
     prop: 'range',
@@ -8764,7 +8773,7 @@ function isRangeChange(a, b, type) {
       deep: true,
       handler: function handler(v) {
         if (isRangeChange(v, this.localRange, this.type)) {
-          this.localRange = resolveRange(v);
+          this.localRange = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({ relative: v.relative }, resolveRange(v.relative ? getRangeFromDateObj(new Date(), v.relative) : v));
         }
       }
     }
@@ -8835,12 +8844,14 @@ function isRangeChange(a, b, type) {
         res = temp;
       }
 
+      res.relative = item.span;
       this.localRange = res;
       this.$refs.popover.hide();
       this.splitRange(res);
     },
     isCurrent: function isCurrent(item) {
-      return item.span === getSpanFromRange(this.localRange);
+      // return item.span === getSpanFromRange(this.localRange)
+      return item.span === this.localRange.relative;
     },
     clear: function clear() {
       // this.localRange = {}
@@ -8874,7 +8885,7 @@ function isRangeChange(a, b, type) {
       });
     },
     beforeShow: function beforeShow() {
-      this.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_9__helpers_dom__["b" /* getElementSize */])(this.$refs.absolute).width + 'px';
+      this.$refs.popContent.style.width = Object(__WEBPACK_IMPORTED_MODULE_10__helpers_dom__["b" /* getElementSize */])(this.$refs.absolute).width + 'px';
       this.splitRange(this.localRange);
     }
   }

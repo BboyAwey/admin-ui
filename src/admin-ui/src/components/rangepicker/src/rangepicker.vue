@@ -191,6 +191,7 @@ function resolveRange (range) {
   if (range.startTime || isEmptyString(range.startTime)) temp.startTime = padTimeStr(range.startTime)
   if (range.endDate || isEmptyString(range.endDate)) temp.endDate = padDateStr(range.endDate)
   if (range.endTime || isEmptyString(range.endDate)) temp.endTime = padTimeStr(range.endTime)
+  if (range.relative) temp.relative = range.relative
   return temp
 }
 
@@ -226,40 +227,43 @@ function getTimeStrFromMs (ms) {
   return `${padNum(h)}:${padNum(m)}:${padNum(s)}`
 }
 
-function getSpanFromRange (range) {
-  if (range.startDate && range.endDate && !(range.startTime && range.endTime)) {
-    return getTimeFromDateStr(range.endDate) - getTimeFromDateStr(range.startDate)
-  }
-  if (range.startTime && range.endTime && !(range.startDate && range.endDate)) {
-    return getMsFromTimeStr(range.endTime) - getMsFromTimeStr(range.startTime)
-  }
-  if (range.startTime && range.endTime && range.startDate && range.endDate) {
-    return new Date(
-      getTimeFromDateStr(range.endDate) +
-      getMsFromTimeStr(range.endTime)) -
-      new Date(
-      getTimeFromDateStr(range.startDate) +
-      getMsFromTimeStr(range.startTime))
-  }
-}
+// function getSpanFromRange (range) {
+//   if (range.startDate && range.endDate && !(range.startTime && range.endTime)) {
+//     return getTimeFromDateStr(range.endDate) - getTimeFromDateStr(range.startDate)
+//   }
+//   if (range.startTime && range.endTime && !(range.startDate && range.endDate)) {
+//     return getMsFromTimeStr(range.endTime) - getMsFromTimeStr(range.startTime)
+//   }
+//   if (range.startTime && range.endTime && range.startDate && range.endDate) {
+//     return new Date(
+//       getTimeFromDateStr(range.endDate) +
+//       getMsFromTimeStr(range.endTime)) -
+//       new Date(
+//       getTimeFromDateStr(range.startDate) +
+//       getMsFromTimeStr(range.startTime))
+//   }
+// }
 
 function isRangeChange (a, b, type) {
   if (type === 'time') {
     return (
       padTimeStr(a.startTime) !== b.startTime ||
-      padTimeStr(a.endTime) !== b.endTime
+      padTimeStr(a.endTime) !== b.endTime ||
+      a.relative !== b.relative
     )
   } else if (type === 'date') {
     return (
       padDateStr(a.startDate) !== b.startDate ||
-      padDateStr(a.endDate) !== b.endDate
+      padDateStr(a.endDate) !== b.endDate ||
+      a.relative !== b.relative
     )
   } else {
     return (
       padTimeStr(a.startTime) !== (b.startTime || '') ||
       padTimeStr(a.endTime) !== (b.endTime || '') ||
       padDateStr(a.startDate) !== (b.startDate || '') ||
-      padDateStr(a.endDate) !== (b.endDate || '')
+      padDateStr(a.endDate) !== (b.endDate || '') ||
+      a.relative !== b.relative
     )
   }
 }
@@ -516,7 +520,10 @@ export default {
       deep: true,
       handler (v) {
         if (isRangeChange(v, this.localRange, this.type)) {
-          this.localRange = resolveRange(v)
+          this.localRange = Object.assign(
+            {relative: v.relative},
+            resolveRange(v.relative ? getRangeFromDateObj(new Date(), v.relative) : v)
+          )
         }
       }
     }
@@ -581,12 +588,14 @@ export default {
         res = temp
       }
 
+      res.relative = item.span
       this.localRange = res
       this.$refs.popover.hide()
       this.splitRange(res)
     },
     isCurrent (item) {
-      return item.span === getSpanFromRange(this.localRange)
+      // return item.span === getSpanFromRange(this.localRange)
+      return item.span === this.localRange.relative
     },
     clear () {
       // this.localRange = {}

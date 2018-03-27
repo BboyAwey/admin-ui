@@ -5,6 +5,7 @@
       <ol class="option-list">
         <li class="au-theme-border-color--base-8">menu现在会响应route的变化自动定位当前项</li>
         <li class="au-theme-border-color--base-8">breadcrumbs点击链接仅触发事件而不再处理crumbs</li>
+        <li class="au-theme-border-color--base-8">rangepicker的range新增relative选项用于保存相对时间</li>
       </ol>
     </au-panel>
     <au-panel class="section" title="3.1.2">

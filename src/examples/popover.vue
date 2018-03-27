@@ -5,11 +5,11 @@
         气泡提示
       </p>
       <!-- 组件示例 -->
-      <div class="component-example" style="position: absolute; top: 10px; right: 40px;">
+      <div class="component-example" style="">
         <au-popover ref="myPopover" trigger="hover">
           <au-button slot="target" type="primary" @click.stop>A:(top center, hover)</au-button>
           <div slot="content">
-            <p style="font-size: 14px; padding: 10px; width: 300px; height: 400px;">
+            <p style="font-size: 14px; padding: 10px;">
               Hi Popover! Hi Popover!
             </p>
           </div>
@@ -17,7 +17,7 @@
         <au-popover placement="bottom left" trigger="click" :plain="true" :hide-on-blur="true">
           <au-button slot="target" type="primary" style="">B:(right top, click)</au-button>
           <div slot="content">
-            <p style="font-size: 14px; padding: 10px; width: 400px; height: 200px;">
+            <p style="font-size: 14px; padding: 10px;">
               Hi Popover! Hi Popover!
             </p>
           </div>

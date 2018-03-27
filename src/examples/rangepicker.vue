@@ -10,13 +10,12 @@
           v-model="range"
           label="选择日期范围"
           type="all"
-          start="2017-1-1"
-          end="2018-12-12"
           :relative="true"
           :absolute="true"
           size="normal"
           :disabled="false"
         ></au-rangepicker>
+        <au-button @click="handleButtonClick">最近30分钟</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -43,7 +42,8 @@
               - string<br>
               - string<br>
               - string<br>
-              - string
+              - string<br>
+              - Number
             </td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
@@ -52,6 +52,7 @@
                 <li class="au-theme-border-color--base-8">startTime: 开始时间</li>
                 <li class="au-theme-border-color--base-8">endDate: 结束日期</li>
                 <li class="au-theme-border-color--base-8">endTime: 结束时间</li>
+                <li class="au-theme-border-color--base-8">relative: 相对时间</li>
               </ol>
             </td>
             <td>
@@ -59,7 +60,8 @@
               当type为'date'时仅startDate和endDate有效<br>
               当type为'time'时仅startTime和endTime有效<br>
               当type为'all'时四个字段都有效<br>
-              可使用v-model语法糖来进行绑定
+              可使用v-model语法糖来进行绑定<br>
+              如果给定了relative相对时间，则开始和结束时间都不再需要给定，以相对时间为准
             </td>
           </tr>
           <tr>
@@ -441,6 +443,13 @@ export default {
   watch: {
     range (r) {
       console.log(r)
+    }
+  },
+  methods: {
+    handleButtonClick () {
+      this.range = {
+        relative: 1800000
+      }
     }
   }
 }

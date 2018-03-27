@@ -149,8 +149,11 @@ export default {
                 value: item.checked,
                 indeterminate: item.checkedType === 'part'
               },
+              ref: 'box-' + item.index.join('-'),
               nativeOn: {
                 'click': (e) => {
+                  // console.log(this.$refs['box-' + item.index.join('-')])
+                  if (item.checkedType === 'part') this.$refs['box-' + item.index.join('-')].localValue = true
                   this.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType, e)
                   e.stopPropagation()
                 }

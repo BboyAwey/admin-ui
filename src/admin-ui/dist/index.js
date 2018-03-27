@@ -9392,9 +9392,7 @@ exports.push([module.i, "\nhtml, body {\n  width: 100%;\n  height: 100%;\n  over
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-breadcrumb',
   data: function data() {
-    return {
-      localCrumbs: Object(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* deepClone */])(this.crumbs)
-    };
+    return {};
   },
 
   props: {
@@ -9416,20 +9414,21 @@ exports.push([module.i, "\nhtml, body {\n  width: 100%;\n  height: 100%;\n  over
     },
     separatorClass: String
   },
-  watch: {
-    crumbs: {
-      deep: true,
-      handler: function handler(v) {
-        this.localCrumbs = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* deepClone */])(v);
-      }
+  computed: {
+    localCrumbs: function localCrumbs() {
+      return Object(__WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* deepClone */])(this.crumbs);
     }
   },
   methods: {
     handleCrumbClick: function handleCrumbClick(crumb, index) {
-      if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
-        this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index);
+      // if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
+      //   this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
+      //   this.$emit('select', crumb)
+      // }
+      if (crumb.url && index < this.localCrumbs.length - 1) {
         this.$emit('select', crumb);
       }
+      this.$emit('click', crumb);
     }
   }
 });

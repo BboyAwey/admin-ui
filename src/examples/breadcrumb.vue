@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-breadcrumb :crumbs="crumbs"/>
+        <au-breadcrumb :crumbs="crumbs" @select="handleSelect"/>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -164,6 +164,11 @@ export default {
           url: '/breadcrumb'
         }
       ]
+    }
+  },
+  methods: {
+    handleSelect (crumb, crumbs) {
+      console.log(crumb)
     }
   }
 }

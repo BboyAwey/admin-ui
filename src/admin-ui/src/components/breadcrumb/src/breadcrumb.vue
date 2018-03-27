@@ -39,9 +39,7 @@ import { deepClone } from '../../../helpers/utils'
 export default {
   name: 'au-breadcrumb',
   data () {
-    return {
-      localCrumbs: deepClone(this.crumbs)
-    }
+    return {}
   },
   props: {
     crumbs: {
@@ -62,20 +60,21 @@ export default {
     },
     separatorClass: String
   },
-  watch: {
-    crumbs: {
-      deep: true,
-      handler (v) {
-        this.localCrumbs = deepClone(v)
-      }
+  computed: {
+    localCrumbs () {
+      return deepClone(this.crumbs)
     }
   },
   methods: {
     handleCrumbClick (crumb, index) {
-      if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
-        this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
+      // if (crumb && index < this.localCrumbs.length - 1 && crumb.url) {
+      //   this.localCrumbs = this.localCrumbs.splice(index, this.localCrumbs.length - 2 - index)
+      //   this.$emit('select', crumb)
+      // }
+      if (crumb.url && index < this.localCrumbs.length - 1) {
         this.$emit('select', crumb)
       }
+      this.$emit('click', crumb)
     }
   }
 }

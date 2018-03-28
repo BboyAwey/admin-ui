@@ -187,11 +187,15 @@ function padTimeStr (time) {
 
 function resolveRange (range) {
   let temp = {}
-  if (range.startDate || isEmptyString(range.startDate)) temp.startDate = padDateStr(range.startDate)
-  if (range.startTime || isEmptyString(range.startTime)) temp.startTime = padTimeStr(range.startTime)
-  if (range.endDate || isEmptyString(range.endDate)) temp.endDate = padDateStr(range.endDate)
-  if (range.endTime || isEmptyString(range.endDate)) temp.endTime = padTimeStr(range.endTime)
-  if (range.relative) temp.relative = range.relative
+  if (range.relative) {
+    temp = getRangeFromDateObj(new Date(), range.relative)
+    temp.relative = range.relative
+  } else {
+    if (range.startDate || isEmptyString(range.startDate)) temp.startDate = padDateStr(range.startDate)
+    if (range.startTime || isEmptyString(range.startTime)) temp.startTime = padTimeStr(range.startTime)
+    if (range.endDate || isEmptyString(range.endDate)) temp.endDate = padDateStr(range.endDate)
+    if (range.endTime || isEmptyString(range.endDate)) temp.endTime = padTimeStr(range.endTime)
+  }
   return temp
 }
 

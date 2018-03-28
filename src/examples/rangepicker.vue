@@ -433,10 +433,11 @@ export default {
   data () {
     return {
       range: {
-        startDate: '2018-2-1',
-        startTime: '10:10:10',
-        endDate: '2018-2-10',
-        endTime: '19:32:26'
+        // startDate: '2018-2-1',
+        // startTime: '10:10:10',
+        // endDate: '2018-2-10',
+        // endTime: '19:32:26'
+        relative: 1800000
       }
     }
   },

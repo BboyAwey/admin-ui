@@ -19371,11 +19371,15 @@ function padTimeStr(time) {
 
 function resolveRange(range) {
   var temp = {};
-  if (range.startDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.startDate)) temp.startDate = padDateStr(range.startDate);
-  if (range.startTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.startTime)) temp.startTime = padTimeStr(range.startTime);
-  if (range.endDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.endDate)) temp.endDate = padDateStr(range.endDate);
-  if (range.endTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.endDate)) temp.endTime = padTimeStr(range.endTime);
-  if (range.relative) temp.relative = range.relative;
+  if (range.relative) {
+    temp = getRangeFromDateObj(new Date(), range.relative);
+    temp.relative = range.relative;
+  } else {
+    if (range.startDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.startDate)) temp.startDate = padDateStr(range.startDate);
+    if (range.startTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.startTime)) temp.startTime = padTimeStr(range.startTime);
+    if (range.endDate || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.endDate)) temp.endDate = padDateStr(range.endDate);
+    if (range.endTime || Object(__WEBPACK_IMPORTED_MODULE_9__helpers_utils__["c" /* isEmptyString */])(range.endDate)) temp.endTime = padTimeStr(range.endTime);
+  }
   return temp;
 }
 

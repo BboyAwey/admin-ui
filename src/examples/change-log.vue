@@ -1,11 +1,15 @@
 <template>
   <div class="page">
     <au-panel class="section" title="3.1.3">
+      <h3 class="title-1">## 新增特性</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">rangepicker的range新增relative选项用于保存相对时间</li>
+      </ol>
       <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
         <li class="au-theme-border-color--base-8">menu现在会响应route的变化自动定位当前项</li>
         <li class="au-theme-border-color--base-8">breadcrumbs点击链接仅触发事件而不再处理crumbs</li>
-        <li class="au-theme-border-color--base-8">rangepicker的range新增relative选项用于保存相对时间</li>
+        <li class="au-theme-border-color--base-8">修复tree组件半选与选择状态不准确问题</li>
       </ol>
     </au-panel>
     <au-panel class="section" title="3.1.2">

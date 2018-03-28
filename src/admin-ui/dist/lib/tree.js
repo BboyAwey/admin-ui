@@ -717,8 +717,11 @@ module.exports = function (it) {
             value: item.checked,
             indeterminate: item.checkedType === 'part'
           },
+          ref: 'box-' + item.index.join('-'),
           nativeOn: {
             'click': function click(e) {
+              // console.log(this.$refs['box-' + item.index.join('-')])
+              if (item.checkedType === 'part') _this2.$refs['box-' + item.index.join('-')].localValue = true;
               _this2.treeCheckedChange(!item.checked, item.index.join('-'), item.checkedType, e);
               e.stopPropagation();
             }

@@ -110,7 +110,7 @@
         class="au-core-container"
         :style="{
           verticalAlign: inline ? 'top' : '',
-          width: !inline && fullWidth ? '100%' : width,
+          width: !inline && fullWidth ? '100%' : width
         }">
         <au-icon
           v-if="icon"
@@ -142,7 +142,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width: !inline && fullWidth ? '100%' : width,
+             width: !inline && fullWidth ? '100%' : width
           }"
           type="text"
           v-if="type === 'text'"
@@ -180,7 +180,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
-            width: !inline && fullWidth ? '100%' : width,
+             width: !inline && fullWidth ? '100%' : width
           }"
           v-model="localValue"
           :disabled="disabled"
@@ -216,6 +216,7 @@
           :style="{
             'padding-left': icon && (!iconPosition || iconPosition ==='left') ? '30px' : '12px',
             'padding-right': icon && iconPosition ==='right' ? '30px' : '12px',
+             width: !inline && fullWidth ? '100%' : width
           }"
           v-model="localValue"
           :disabled="disabled"

@@ -1643,7 +1643,7 @@ function toComment(sourceMap) {
 /***/ "FeBl":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.3' };
+var core = module.exports = { version: '2.5.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -3062,6 +3062,7 @@ var global = __webpack_require__("7KvD");
 var core = __webpack_require__("FeBl");
 var ctx = __webpack_require__("+ZMJ");
 var hide = __webpack_require__("hJx8");
+var has = __webpack_require__("D2L2");
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -3079,7 +3080,7 @@ var $export = function (type, name, source) {
   for (key in source) {
     // contains in native
     own = !IS_FORCED && target && target[key] !== undefined;
-    if (own && key in exports) continue;
+    if (own && has(exports, key)) continue;
     // export native or passed
     out = own ? target[key] : source[key];
     // prevent global pollution for namespaces
@@ -4117,7 +4118,6 @@ var LIBRARY = __webpack_require__("O4g8");
 var $export = __webpack_require__("kM2E");
 var redefine = __webpack_require__("880/");
 var hide = __webpack_require__("hJx8");
-var has = __webpack_require__("D2L2");
 var Iterators = __webpack_require__("/bQp");
 var $iterCreate = __webpack_require__("94VQ");
 var setToStringTag = __webpack_require__("e6n0");
@@ -4144,7 +4144,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   var VALUES_BUG = false;
   var proto = Base.prototype;
   var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-  var $default = (!BUGGY && $native) || getMethod(DEFAULT);
+  var $default = $native || getMethod(DEFAULT);
   var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
   var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
   var methods, key, IteratorPrototype;
@@ -4155,7 +4155,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
       // Set @@toStringTag to native iterators
       setToStringTag(IteratorPrototype, TAG, true);
       // fix for some old engines
-      if (!LIBRARY && !has(IteratorPrototype, ITERATOR)) hide(IteratorPrototype, ITERATOR, returnThis);
+      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
     }
   }
   // fix Array#{values, @@iterator}.name in V8 / FF

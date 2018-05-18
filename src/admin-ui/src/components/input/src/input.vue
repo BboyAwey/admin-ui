@@ -235,6 +235,10 @@
           @keypress.enter="handleCoreEnter"
           ref="core">
         <au-scroller class="au-input-associations-scroller"
+          :style="{
+            height: associationsHeight,
+            maxHeight: associationsMaxHeight
+          }"
           v-show="type !== 'textarea' && associationsShow && localAssociations.length"
           :class="`
             au-theme-border-color--base-8
@@ -296,6 +300,11 @@ export default {
       default () {
         return []
       }
+    },
+    associationsHeight: String,
+    associationsMaxHeight: {
+      type: String,
+      default: '237px'
     },
     icon: String,
     iconPosition: String,

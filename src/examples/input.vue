@@ -133,6 +133,32 @@
             </td>
           </tr>
           <tr>
+            <td>associations-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>合法的css高度值，仅支持‘px’</td>
+            <td>
+              关联项框的高度<br>
+            </td>
+          </tr>
+          <tr>
+            <td>associations-max-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>合法的css高度值，仅支持‘px’</td>
+            <td>
+              关联项框的最大高度<br>
+            </td>
+          </tr>
+          <tr>
             <td>placeholder</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->

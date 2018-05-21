@@ -23,11 +23,12 @@
       clear: both;
     }
     .au-page-sidebar {
-      display: inline-block;
       position: relative;
       float: left;
       height: 100%;
       z-index: 1;
+      border-right-style: solid;
+      border-right-width: 1px;
       & > div {
         height: 100%;
       }
@@ -81,11 +82,11 @@
 </style>
 <template>
   <div class="au-frame au-theme-font-color--base-3" ref="container">
-    <div class="au-page-header au-theme-background-color--primary-3 au-theme-box-shadow--level-1" ref="header">
+    <div class="au-page-header au-theme-background-color--primary-3" ref="header">
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">
-      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-box-shadow--level-1" ref="sidebar">
+      <div class="au-page-sidebar au-theme-background-color--base-12 au-theme-border-color--base-8" ref="sidebar">
         <slot name="sidebar"></slot>
       </div>
       <div class="au-page-content" ref="content">
@@ -152,3 +153,4 @@ export default {
   }
 }
 </script>
+

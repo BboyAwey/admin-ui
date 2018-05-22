@@ -45,7 +45,8 @@
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">String</li>
                 <li class="au-theme-border-color--base-8">Number</li>
-              </ol></td>
+              </ol>
+            </td>
             <td>
               <au-icon type="minus"></au-icon>
             </td>
@@ -53,6 +54,26 @@
             <td>
               类似原生的scrollTop属性，用于控制滚动的距离<br>
               可以配合@scroll事件使用来动态控制滚动
+            </td>
+          </tr>
+          <tr>
+            <td>hide-popovers</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Boolean
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td></td>
+            <td>
+              滚动时是否隐藏页面中的popover<br>
+              这在scroll内部包含popover时非常有用
             </td>
           </tr>
           <tr>

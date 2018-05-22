@@ -228,6 +228,7 @@ export default {
     },
     popoverVisibal (v) {
       if (!v) this.tempSelectIndex = null
+      if (v) this.$refs.options.style.minWidth = this.$refs.core.getBoundingClientRect().width - 2 + 'px'
     },
     tempSelectIndex (v) {
       this.updateScrollTop()

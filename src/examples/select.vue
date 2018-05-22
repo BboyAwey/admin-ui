@@ -482,6 +482,38 @@ export default {
         {
           text: 'Locking',
           value: 'l'
+        },
+        {
+          text: 'Breaking',
+          value: 'b'
+        },
+        {
+          text: 'Jazz',
+          value: 'j'
+        },
+        {
+          text: 'Popppin',
+          value: 'p'
+        },
+        {
+          text: 'Locking',
+          value: 'l'
+        },
+        {
+          text: 'Breaking',
+          value: 'b'
+        },
+        {
+          text: 'Jazz',
+          value: 'j'
+        },
+        {
+          text: 'Popppin',
+          value: 'p'
+        },
+        {
+          text: 'Locking',
+          value: 'l'
         }
       ],
       validators: [

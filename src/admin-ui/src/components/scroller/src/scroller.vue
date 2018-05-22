@@ -53,13 +53,17 @@
     @mouseleave="handleMouseleave"
     @mousemove="handleScrollerMousemove"
     ref="monitor">
-    <div class="au-scroller-content" ref="content" :style="{ top: contentTop + 'px' }" :class="{ 'au-no-select': onDrag }">
+    <div
+      class="au-scroller-content"
+      ref="content"
+      :style="{ top: contentTop + 'px' }"
+      :class="{ 'au-no-select': onDrag }">
       <slot></slot>
     </div>
     <div class="au-scroller-bar-container"
       @mouseenter="handleBarMouseenter"
       @mouseleave="handleBarMouseleave"
-      v-show="needScroll"
+      v-show="(mouseenter && needScroll) || onDrag"
       ref="barContainer">
       <div class="au-scroller-bar au-theme-background-color--base-1" ref="bar" @click="handleBarClick"></div>
       <div
@@ -121,12 +125,13 @@ export default {
       onDrag: false,
       onOver: false,
       needScroll: false,
-      clock: null
+      clock: null,
+      mouseenter: false
     }
   },
   watch: {
     scrollTop (v) {
-      if (this.contentTop !== v * -1) this.setContentTop(v)
+      if (this.contentTop !== v * -1) this.setContentTop(-v)
     },
     contentTop (v) {
       if (!this.$root._auPopovers) this.$root._auPopovers = {}
@@ -161,7 +166,7 @@ export default {
       let { needScroll, monitorHeight, contentHeight } = this.detectIfNeedScroll()
       if (!needScroll) return
       let contentTopMin = monitorHeight - contentHeight
-      let contentTop = v
+      let contentTop = parseInt(v)
 
       contentTop = contentTop >= 0 ? 0 : (contentTop <= contentTopMin ? contentTopMin : contentTop)
       this.contentTop = contentTop
@@ -194,6 +199,7 @@ export default {
       this.$refs.barContainer.style.height = monitor - 20 + 'px'
     },
     handleMouseenter () {
+      this.mouseenter = true
       this.$refs.bar.style.opacity = '.3'
       this.$refs.core.style.opacity = '.5'
       let monitorHeight = getElementSize(this.$refs.monitor).height
@@ -205,6 +211,7 @@ export default {
       )
     },
     handleMouseleave () {
+      this.mouseenter = false
       if (!this.onDrag) {
         this.$refs.bar.style.opacity = '0'
         this.$refs.core.style.opacity = '0'

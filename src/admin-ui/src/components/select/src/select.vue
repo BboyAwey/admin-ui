@@ -42,17 +42,12 @@
     font-size: $large;
   }
   .au-select-option-scroller {
-    z-index: $z-level-1;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    padding: 4px 0;
-    // min-width: 84px;
     width: 100%;
     max-height: 237px;
   }
   .au-select-option {
     outline: none;
+    padding-bottom: 5px;
     & > li {
       height: 28px;
       padding: 0 8px;
@@ -98,66 +93,76 @@
       :tips="tips"
       :middle="inline"
       :warnings="warnings || localWarnings">
-      <div
-        :class="`au-select-core-container au-size-${size}`"
-        ref="coreContainer"
-        :style="{width, maxWidth, minWidth}">
+      <au-popover
+        trigger="click"
+        placement="bottom left"
+        :disabled="disabled"
+        hideOnBlur
+        ref="popover"
+        @hide="popoverVisibal = false"
+        @show="popoverVisibal = true"
+        @keyup.native.down="optionsDownPress"
+        @keyup.native.up="optionsUpPress"
+        @keyup.native.enter="optionsEnterPress"
+        @keyup.native.esc="optionsEscPress"
+        plain>
         <div
-          class="au-select-core au-theme-border-radius--normal"
-          ref="core"
-          tabindex="0"
-          @click.stop="coreClick" @focus="coreFocus" @blur="coreBlur"
-          :class="{
-            [`au-size-${size}-bordered`]: true,
-            'au-theme-background-color--base-12': !disabled,
-            'au-theme-background-color--base-9': disabled,
-            'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
-            'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
-            'au-theme-border-color--danger-3': hasWarnings,
-            'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
-            'au-theme-box-shadow--danger': !disabled && active && hasWarnings
-          }"
-          :style="{
-            cursor: disabled ? 'not-allowed' : 'default'
-          }">
-          <ul class="au-select-multiple" ref="selectMultiple">
-            <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</li>
-            <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
-            <li v-else v-for="(option, i) in selectedOptions" :key="i">
-              <span>{{ option.text }}</span>
-              <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
-                <au-icon type="times"/>
-              </span>
-            </li>
-          </ul>
-          <au-icon
-            class="au-select-arrow"
-            type="caret-down"
+          slot="target"
+          :class="`au-select-core-container au-size-${size}`"
+          ref="coreContainer"
+          :style="{width, maxWidth, minWidth}">
+          <div
+            class="au-select-core au-theme-border-radius--normal"
+            ref="core"
+            tabindex="0"
+            @focus="coreFocus"
+            @blur="coreBlur"
+            @keyup.enter="enterPress"
             :class="{
-              'au-theme-font-color--primary-3': !disabled && active
-            }"/>
+              [`au-size-${size}-bordered`]: true,
+              'au-theme-background-color--base-12': !disabled,
+              'au-theme-background-color--base-9': disabled,
+              'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
+              'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
+              'au-theme-border-color--danger-3': hasWarnings,
+              'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
+              'au-theme-box-shadow--danger': !disabled && active && hasWarnings
+            }"
+            :style="{
+              cursor: disabled ? 'not-allowed' : 'default'
+            }">
+            <ul class="au-select-multiple" ref="selectMultiple">
+              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</li>
+              <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
+              <li v-else v-for="(option, i) in selectedOptions" :key="i">
+                <span>{{ option.text }}</span>
+                <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
+                  <au-icon type="times"/>
+                </span>
+              </li>
+            </ul>
+            <au-icon
+              class="au-select-arrow"
+              type="caret-down"
+              :class="{
+                'au-theme-font-color--primary-3': !disabled && active
+              }"/>
+          </div>
         </div>
-        <au-scroller class="au-select-option-scroller"
-          ref="selectScroller"
-          :class="`
-          au-sizegap-${size}
-          au-select-option
-          au-theme-background-color--base-12
-          au-theme-border-color--base-8
-          au-theme-box-shadow--level-2
-          au-theme-border-radius--normal`" v-show="optionDisplay">
-          <ul class="au-select-option" ref="options" tabindex="0" @blur="optionsBlur">
+        <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
+          <ul class="au-select-option" ref="options">
             <li
               v-for="(option, i) in options" :key="i"
               :class="{
-                'au-theme-background-color--primary-3': isSelected(option.value),
-                'au-theme-font-color--base-12': isSelected(option.value),
-                'au-theme-hover-background-color--base-10': !isSelected(option.value)
+                'au-theme-font-color--primary-3': isSelected(option.value),
+                'au-theme-hover-background-color--base-10': !isSelected(option.value) && i !== tempSelectIndex,
+                'au-theme-background-color--primary-5': i === tempSelectIndex
               }"
               @click.stop="select(option, $event)">{{ option.text }}</li>
           </ul>
         </au-scroller>
-      </div>
+      </au-popover>
+
     </form-item>
   </div>
 </template>
@@ -168,11 +173,12 @@ import { getElementSize } from '../../../helpers/dom'
 import AuIcon from '../../icon'
 import AuScroller from '../../scroller'
 import FormItem from '../../../helpers/form-item.vue'
+import AuPopover from '../../popover'
 
 export default {
   name: 'au-select',
   mixins: [ValidatorMixin, FormApiMixin],
-  components: {AuIcon, AuScroller, FormItem},
+  components: {AuIcon, AuScroller, FormItem, AuPopover},
   created () {
     this.localValueToSelectedOptions()
   },
@@ -180,13 +186,14 @@ export default {
     if (this.multiple && !(this.value instanceof Array)) {
       console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
     }
-    this.reposPopup()
   },
   data () {
     return {
-      optionDisplay: false,
       selectedOptions: [],
-      active: false
+      active: false,
+      popoverVisibal: false,
+      tempSelectIndex: null,
+      scrollTop: 0
     }
   },
   props: {
@@ -219,6 +226,12 @@ export default {
       handler (v) {
         this.localValueToSelectedOptions()
       }
+    },
+    popoverVisibal (v) {
+      if (!v) this.tempSelectIndex = null
+    },
+    tempSelectIndex (v) {
+      this.updateScrollTop()
     }
   },
   methods: {
@@ -226,29 +239,6 @@ export default {
       this.selectedOptions.splice(index, 1)
       this.localValue.splice(index, 1)
       this.$nextTick(this.resize)
-    },
-    coreClick () {
-      if (this.disabled) return false
-      this.active = !this.active
-      this.optionDisplay = !this.optionDisplay
-    },
-    coreFocus (e) {
-      if (!this.disabled) {
-        this.focus(e)
-      }
-    },
-    coreBlur (e) {
-      if (e.relatedTarget !== this.$refs.options) {
-        this.optionDisplay = false
-        this.active = false
-        this.blur(e)
-      }
-    },
-    optionsBlur (e) {
-      if (e.relatedTarget !== this.$refs.core) {
-        this.optionDisplay = false
-        this.blur(e)
-      }
     },
     select (option, e, silent) {
       if (this.multiple) {
@@ -264,7 +254,10 @@ export default {
           this.localValue = option.value
         }
       }
-      if (!this.multiple) this.optionDisplay = false
+      if (!this.multiple) {
+        this.$refs.popover.hide()
+        this.$nextTick(_ => this.$refs.core.focus())
+      }
       this.active = false
       if (!silent) this.$emit('select', option, e)
     },
@@ -272,7 +265,6 @@ export default {
       let height = getElementSize(this.$refs.selectMultiple).height
       this.$refs.coreContainer.style.height = height + 'px'
       this.$refs.core.style.height = height + 'px'
-      this.$refs.selectScroller.$el.style.top = height + 2 + 'px'
     },
     localValueToSelectedOptions () {
       let {options, localValue} = this
@@ -295,15 +287,46 @@ export default {
       }
       this.selectedOptions = res
     },
-    reposPopup () {
-      if (this.multiple) {
-        let coreHeight = getElementSize(this.$refs.core).height
-        let options = this.$refs.options
-        options.style.top = coreHeight + 2 + 'px'
-      }
-    },
     isSelected (value) {
       return this.multiple ? this.localValue.includes(value) : (this.localValue === value)
+    },
+    coreFocus () {
+      this.active = true
+      // this.$refs.popover.show()
+      this.$emit('focus', this.localValue)
+    },
+    coreBlur () {
+      if (this.active) this.active = false
+      this.$emit('blur', this.localValue)
+    },
+    enterPress () {
+      if (this.active) this.$refs.popover.show()
+    },
+    optionsDownPress () {
+      if (this.tempSelectIndex === null) this.tempSelectIndex = 0
+      else if (this.tempSelectIndex < this.options.length - 1) this.tempSelectIndex++
+    },
+    optionsUpPress () {
+      if (this.tempSelectIndex === null) this.tempSelectIndex = this.options.length - 1
+      else if (this.tempSelectIndex > 0) this.tempSelectIndex--
+    },
+    optionsEnterPress () {
+      if (this.tempSelectIndex !== null) {
+        this.select(this.options[this.tempSelectIndex])
+      }
+    },
+    optionsEscPress () {
+      if (this.popoverVisibal) {
+        this.$refs.popover.hide()
+        this.$nextTick(_ => this.$refs.core.focus())
+      }
+    },
+    updateScrollTop () {
+      if (this.tempSelectIndex * 32 < this.scrollTop) {
+        this.scrollTop = this.tempSelectIndex * 32
+      } else if ((this.tempSelectIndex + 1) * 32 > this.scrollTop + 237) {
+        this.scrollTop = (this.tempSelectIndex + 1) * 32 - 232
+      }
     }
   }
 }

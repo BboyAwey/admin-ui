@@ -47,7 +47,6 @@
   }
   .au-select-option {
     outline: none;
-    padding-bottom: 5px;
     & > li {
       height: 28px;
       padding: 0 8px;
@@ -150,7 +149,7 @@
           </div>
         </div>
         <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
-          <ul class="au-select-option" ref="options">
+          <ul class="au-select-option" ref="options" :style="{paddingBottom: scrollTop < 32 ? 0 : '5px'}">
             <li
               v-for="(option, i) in options" :key="i"
               :class="{

@@ -60,6 +60,9 @@
       user-select: none;
       cursor: pointer;
     }
+    .empty-item {
+      cursor: default;
+    }
   }
   .au-select-multiple {
     line-height: inherit;
@@ -150,6 +153,7 @@
         </div>
         <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
           <ul class="au-select-option" ref="options" :style="{paddingBottom: scrollTop < 32 ? 0 : '5px'}">
+            <li v-show="!options.length" class="empty-item au-theme-font-color--base-7">没有选项</li>
             <li
               v-for="(option, i) in options" :key="i"
               :class="{

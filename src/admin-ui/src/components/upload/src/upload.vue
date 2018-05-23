@@ -352,15 +352,24 @@ export default {
     value: {
       deep: true,
       handler (v) {
-        this.localFileList = this.getValuePreviewInfo(v)
+        if (v.length !== this.localFileList.length) this.localFileList = this.getValuePreviewInfo(v)
       }
     },
     localFileList: {
       deep: true,
       handler (v) {
         if (!this.autoUpload) {
-          this.$emit('input', v)
-          this.$emit('change', v)
+          let isSame = true
+          for (let i = 0; i < v.length; i++) {
+            if (!this.value || !this.value[i] || v[i].file !== this.value[i].file) {
+              isSame = false
+              break
+            }
+          }
+          if (!!v.length || !isSame) {
+            this.$emit('input', v)
+            this.$emit('change', v)
+          }
         }
       }
     },

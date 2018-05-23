@@ -6,7 +6,8 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload" :auto-upload="false"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload" :auto-upload="false"></au-upload>
       </div>
       <!-- 组件示例 -->
     </au-panel>

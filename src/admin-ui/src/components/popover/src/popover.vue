@@ -368,7 +368,7 @@ export default {
           if (windowSize.width - targetRect.right - 10 < (popSize.width - targetSize.width)) keys[1] = 'right'
         } else if (keys[1] === 'center') {
           let leftSpace = targetRect.left - 10
-          let rightSpace = windowSize.width - targetRect.right -10
+          let rightSpace = windowSize.width - targetRect.right - 10
           let halfSize = popSize.width / 2 - targetSize.width
           let min = Math.min(leftSpace, rightSpace, halfSize)
           let max = Math.max(leftSpace, rightSpace, halfSize)

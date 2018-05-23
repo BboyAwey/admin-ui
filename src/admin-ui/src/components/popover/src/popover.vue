@@ -334,23 +334,23 @@ export default {
       let targetRect = target.getBoundingClientRect()
 
       if (keys[0] === 'top') {
-        if (targetRect.top < popSize.height) keys[0] = 'bottom'
+        if (targetRect.top - 10 < popSize.height) keys[0] = 'bottom'
       } else if (keys[0] === 'bottom') {
-        if (windowSize.height - targetRect.bottom < popSize.height) keys[0] = 'top'
+        if (windowSize.height - targetRect.bottom - 10 < popSize.height) keys[0] = 'top'
       } else if (keys[0] === 'left') {
-        if (targetRect.left < popSize.width) keys[0] = 'rigth'
+        if (targetRect.left - 10 < popSize.width) keys[0] = 'rigth'
       } else if (keys[0] === 'right') {
-        if (windowSize.width - targetRect.right < popSize.width) keys[0] = 'left'
+        if (windowSize.width - targetRect.right - 10 < popSize.width) keys[0] = 'left'
       }
 
       if (keys[0] === 'left' || keys[0] === 'right') {
         if (keys[1] === 'bottom') {
-          if (targetRect.top < (popSize.height - targetSize.height)) keys[1] = 'top'
+          if (targetRect.top - 10 < (popSize.height - targetSize.height)) keys[1] = 'top'
         } else if (keys[1] === 'top') {
-          if (windowSize.height - targetRect.bottom < (popSize.height - targetSize.height)) keys[1] = 'bottom'
+          if (windowSize.height - targetRect.bottom - 10 < (popSize.height - targetSize.height)) keys[1] = 'bottom'
         } else if (keys[1] === 'middle') {
-          let bottomSpace = windowSize.height - targetRect.bottom
-          let topSpace = targetRect.top
+          let bottomSpace = windowSize.height - targetRect.bottom - 10
+          let topSpace = targetRect.top - 10
           let halfSize = popSize.height / 2 - targetSize.height
           let min = Math.min(bottomSpace, topSpace, halfSize)
           let max = Math.max(bottomSpace, topSpace, halfSize)
@@ -363,12 +363,12 @@ export default {
 
       if (keys[0] === 'top' || keys[0] === 'bottom') {
         if (keys[1] === 'right') {
-          if (targetRect.left < (popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width)) keys[1] = 'left'
+          if (targetRect.left - 10 < (popSize.width / (keys[1] === 'center' ? 2 : 1) - targetSize.width)) keys[1] = 'left'
         } else if (keys[1] === 'left') {
-          if (windowSize.width - targetRect.right < (popSize.width - targetSize.width)) keys[1] = 'right'
+          if (windowSize.width - targetRect.right - 10 < (popSize.width - targetSize.width)) keys[1] = 'right'
         } else if (keys[1] === 'center') {
-          let leftSpace = targetRect.left
-          let rightSpace = windowSize.width - targetRect.right
+          let leftSpace = targetRect.left - 10
+          let rightSpace = windowSize.width - targetRect.right -10
           let halfSize = popSize.width / 2 - targetSize.width
           let min = Math.min(leftSpace, rightSpace, halfSize)
           let max = Math.max(leftSpace, rightSpace, halfSize)

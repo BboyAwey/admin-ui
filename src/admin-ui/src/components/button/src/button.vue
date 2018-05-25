@@ -157,7 +157,7 @@ export default {
       if (this.loading) {
         this.loadingIns = Loading({
           target: this.$refs.button,
-          color: this.type,
+          color: this.type === 'default' ? 'primary' : this.type,
           size: this.loadingSize
         })
       } else {

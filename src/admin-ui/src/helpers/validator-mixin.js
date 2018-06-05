@@ -59,8 +59,9 @@ export default {
   methods: {
     validate () {
       let vm = this
-      if (vm.warnings && vm.warnings.length) return false
-      if (!vm.validators) return false
+      if (vm.warnings && vm.warnings.length) return Promise.resolve(true)
+      if (!vm.validators) return Promise.resolve(true)
+
       // separate async and sync
       let syncStack = []
       let asyncStack = []

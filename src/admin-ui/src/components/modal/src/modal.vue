@@ -145,8 +145,10 @@ export default {
     visible (v) {
       this.localDisplay = v
       if (v) {
-        this.calcModalStyle()
-        this.calModalContentStyle()
+        this.$nextTick(_ => {
+          this.calcModalStyle()
+          this.calModalContentStyle()
+        })
         window.addEventListener('keyup', this.escHandler)
         if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
       } else {

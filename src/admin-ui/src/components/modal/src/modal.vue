@@ -42,6 +42,7 @@
     overflow: hidden;
     text-align: left;
     font-weight: bold;
+    font-size: 16px;
   }
   .au-modal-content {
     min-width: 320px;

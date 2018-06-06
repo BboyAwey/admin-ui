@@ -98,7 +98,7 @@
       <au-popover
         trigger="click"
         placement="bottom left"
-        :disabled="disabled"
+        :disabled="disabled || loading"
         hideOnBlur
         ref="popover"
         @hide="popoverVisibal = false"
@@ -177,6 +177,7 @@ import AuIcon from '../../icon'
 import AuScroller from '../../scroller'
 import FormItem from '../../../helpers/form-item.vue'
 import AuPopover from '../../popover'
+import Loading from '../../loading'
 
 export default {
   name: 'au-select',
@@ -189,6 +190,7 @@ export default {
     if (this.multiple && !(this.value instanceof Array)) {
       console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
     }
+    this.load()
   },
   data () {
     return {
@@ -196,7 +198,8 @@ export default {
       active: false,
       popoverVisibal: false,
       tempSelectIndex: null,
-      scrollTop: 0
+      scrollTop: 0,
+      laodingIns: null
     }
   },
   props: {
@@ -215,7 +218,8 @@ export default {
     fullWidth: Boolean,
     width: String,
     maxWidth: String,
-    minWidth: String
+    minWidth: String,
+    loading: Boolean
   },
   watch: {
     localValue () {
@@ -236,6 +240,9 @@ export default {
     },
     tempSelectIndex (v) {
       this.updateScrollTop()
+    },
+    loading () {
+      this.load()
     }
   },
   methods: {
@@ -330,6 +337,18 @@ export default {
         this.scrollTop = this.tempSelectIndex * 32
       } else if ((this.tempSelectIndex + 1) * 32 > this.scrollTop + 237) {
         this.scrollTop = (this.tempSelectIndex + 1) * 32 - 232
+      }
+    },
+    load () {
+      if (this.loading) {
+        this.loadingIns = Loading({
+          target: this.$refs.core
+        })
+      } else {
+        if (this.loadingIns) {
+          this.loadingIns.close()
+          this.loadingIns = null
+        }
       }
     }
   }

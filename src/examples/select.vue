@@ -7,6 +7,7 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-select label="不如跳舞" v-model="value" :options="options" :validators="validators"></au-select><br><br>
+        <au-select label="不如跳舞" v-model="value" :options="options" :validators="validators"></au-select><br><br>
         <au-select label="不如跳舞" v-model="values" :options="options" :multiple="true" :validators="validators"></au-select>
       </div>
       <!-- 组件示例 -->
@@ -226,6 +227,23 @@
               </ol>
             </td>
             <td>禁用</td>
+          </tr>
+          <tr>
+            <td>loading</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              加载状态，是否正在加载
+            </td>
           </tr>
           <tr>
             <td>warning</td>

@@ -17,7 +17,7 @@
   .au-select-core {
     position: relative;
     display: inline-block;
-    padding: 0 8px;
+    padding: 0 12px;
     padding-right: 26px;
     width: 100%;
     border-width: 1px;
@@ -49,7 +49,7 @@
     outline: none;
     & > li {
       height: 28px;
-      padding: 0 8px;
+      padding: 0 12px;
       margin: 4px 0;
       line-height: 28px;
       font-size: $normal;

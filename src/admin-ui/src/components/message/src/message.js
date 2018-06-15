@@ -9,7 +9,6 @@ let getMessageInstance = function () {
     return pool.shift()
   } else {
     let ins = new (Vue.extend(MessageConfig))({el: document.createElement('div')})
-    ins._new = true
     return ins
   }
 }
@@ -27,6 +26,7 @@ let Message = function (config = {}) {
   } = config
 
   let instance = getMessageInstance()
+  instance.$off()
   instance.message = message
   instance.icon = icon
   instance.type = type
@@ -35,12 +35,9 @@ let Message = function (config = {}) {
   // instance.center = center
 
   instance.$mount()
-  if (instance._new) {
-    instance.$on('close', (ins) => {
-      pool.push(ins)
-    })
-    instance._new = false
-  }
+  instance.$on('close', (ins) => {
+    pool.push(ins)
+  })
   document.body.appendChild(instance.$el)
   instance.visible = true
 

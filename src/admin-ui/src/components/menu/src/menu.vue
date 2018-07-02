@@ -356,7 +356,8 @@
 import AuIcon from '../../icon'
 import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
-import { deepClone, isEmptyString } from '../../../helpers/utils'
+// import { deepClone, isEmptyString } from '../../../helpers/utils'
+import { isEmptyString } from '../../../helpers/utils'
 // import { hasClass } from '../../../helpers/dom'
 // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
 
@@ -418,7 +419,7 @@ export default {
   watch: {
     items: {
       deep: true,
-      handler () {
+      handler (v, o) {
         if (this.isTopLevel) {
           this.localItems = this.setInfo(this.items)
           this.activate(this.currentItem)
@@ -446,6 +447,7 @@ export default {
   },
   methods: {
     select (item, i) {
+      console.log(this.isTopLevel)
       this.currentItem = item
       this.activate()
       this.toggleCollapse(item)
@@ -504,7 +506,7 @@ export default {
     setInfo (items, parentIndex = []) {
       let result = []
       if (items instanceof Array && items.length) {
-        result = deepClone(items)
+        result = items
         result.forEach((item, i) => {
           let res = [].concat(parentIndex)
           res.push(i)

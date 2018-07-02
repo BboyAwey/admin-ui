@@ -122,13 +122,6 @@
     border-width: 1px;
     border-style: solid;
   }
-  .au-menu-children-popup {
-    position: absolute;
-    top: 0;
-    left: 65px;
-    left: 100%;
-    z-index: 1;
-  }
   .au-menu-popover-content {
     padding: 10px 0;
     max-height: 320px;
@@ -356,10 +349,14 @@
 import AuIcon from '../../icon'
 import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
-// import { deepClone, isEmptyString } from '../../../helpers/utils'
 import { isEmptyString } from '../../../helpers/utils'
+// import { deepClone, isEmptyString } from '../../../helpers/utils'
 // import { hasClass } from '../../../helpers/dom'
 // import { getElementSize, getElementPagePos } from '../../../helpers/dom'
+
+function plainObjectEqual (o1, o2) {
+  return JSON.stringify(o1) === JSON.stringify(o2)
+}
 
 export default {
   name: 'au-menu',
@@ -420,10 +417,13 @@ export default {
     items: {
       deep: true,
       handler (v, o) {
+        if (plainObjectEqual(this.localItems, this.items)) return
         if (this.isTopLevel) {
           this.localItems = this.setInfo(this.items)
           this.activate(this.currentItem)
-        } else this.localItems = this.items
+        } else {
+          this.localItems = this.items
+        }
       }
     },
     collapse (v) {
@@ -447,7 +447,6 @@ export default {
   },
   methods: {
     select (item, i) {
-      console.log(this.isTopLevel)
       this.currentItem = item
       this.activate()
       this.toggleCollapse(item)

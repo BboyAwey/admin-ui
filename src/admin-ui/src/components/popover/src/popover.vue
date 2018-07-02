@@ -234,6 +234,7 @@ export default {
       let pop = this.$refs.pop
       let id = 'au-popover-' + this._uid
       let zIndex = getRealZIndex(pop.parentNode) || 9999 // sometimes it will use in a modal or other elements witch has z-index style
+      // console.log(zIndex)
       // register popover on root
       pop.setAttribute('data-au-popover', id)
       namespace.set('au-popover-' + id, this)

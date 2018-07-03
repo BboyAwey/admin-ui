@@ -8222,7 +8222,6 @@ if (false) {(function () {
     el.appendChild(instance.$el);
     // instance.el = el
   } else el = instance.$el;
-  if (window.getComputedStyle(target, 'z-index')) target.style.zIndex = 0;
   target.appendChild(el);
   // instance.setColor()
   instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));

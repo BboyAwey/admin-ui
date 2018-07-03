@@ -8,8 +8,8 @@
       <div class="component-example">
         <au-button type="primary" @click="loading = !loading">按钮</au-button>
         <au-button type="primary" :disabled="true">按钮</au-button>
-        <au-button type="danger" :loading="loading">按钮</au-button>
-        <au-button type="primary" plain :loading="loading">按钮</au-button>
+        <au-button style="z-index: 0" type="danger" :loading="loading">按钮</au-button>
+        <au-button style="z-index: 0" type="primary" plain :loading="loading">按钮</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>

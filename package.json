@@ -18,7 +18,8 @@
   "dependencies": {
     "highlightjs": "^9.10.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "theme-class-generator": "^1.0.1"
   },
   "devDependencies": {
     "multiparty": "^4.1.4",

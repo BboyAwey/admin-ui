@@ -15,5 +15,8 @@
     "vue",
     "components"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "theme-class-generator": "^1.0.1"
+  }
 }

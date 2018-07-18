@@ -101,7 +101,7 @@ export default {
         {
           class: {
             'admin-tree-warp': isTop,
-            'au-theme-font-color--base-3': true,
+            'au-theme-color--base-3': true,
             'admin-tree-sub-warp': !isTop,
             'sub-toggle': !isTop && !data.showChildren
             // 'list-inline': !isTop && this.displayInline(data)
@@ -138,7 +138,7 @@ export default {
             'i', {
               class: {
                 'tree-menu-open': true,
-                'au-theme-font-color--base-7': true,
+                'au-theme-color--base-7': true,
                 'fa': true,
                 'fa-chevron-down': item.showChildren,
                 'fa-chevron-right': !item.showChildren
@@ -181,7 +181,7 @@ export default {
               {
                 class: {
                   'tree-menu-open': true,
-                  'au-theme-font-color--base-7': true,
+                  'au-theme-color--base-7': true,
                   'fa': true,
                   'fa-chevron-down': item.showChildren,
                   'fa-chevron-right': !item.showChildren

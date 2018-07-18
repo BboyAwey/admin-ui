@@ -72,16 +72,16 @@
       :class="customClass || `
         au-theme-border-radius--large
         au-theme-before-radius
-        au-theme-font-color--base-3
+        au-theme-color--base-3
         au-theme-background-color--base-12
-        au-theme-box-shadow--level-3
+        au-theme-box-shadow--base
         au-message-border
         au-theme-border-color--base-8
       `"
         v-if="visible">
         <div class="au-message-icon-container" v-show="iconType">
           <au-icon
-            class="au-message-icon au-theme-font-color--base-12"
+            class="au-message-icon au-theme-color--base-12"
             :class="`au-theme-background-color--${type || 'info'}-3`"
             :type="iconType"></au-icon>
         </div>
@@ -95,7 +95,7 @@
         </div>
         <div class="au-message-close-container" v-show="closeable" @click="visible = false">
           <au-icon
-            class="au-message-close au-theme-font-color--base-3 au-theme-hover-font-color--base-6"
+            class="au-message-close au-theme-color--base-3 au-theme-hover-color--base-6"
             size="16px"
             type="times"></au-icon>
         </div>

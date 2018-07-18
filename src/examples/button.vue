@@ -29,7 +29,7 @@
           <tr>
             <td>type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -52,7 +52,7 @@
           <tr>
             <td>size</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -72,7 +72,7 @@
           <tr>
             <td>plain</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -88,7 +88,7 @@
           <tr>
             <td>disabled</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -104,7 +104,7 @@
           <tr>
             <td>loading</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -120,7 +120,7 @@
           <tr>
             <td>native-type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -176,7 +176,7 @@
           </tr>
         </tbody>
       </au-table>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-bottom">.native</span>修饰符</cite>
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">

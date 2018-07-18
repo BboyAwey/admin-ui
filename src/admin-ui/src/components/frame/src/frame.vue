@@ -81,8 +81,8 @@
   }
 </style>
 <template>
-  <div class="au-frame au-theme-font-color--base-3" ref="container">
-    <div class="au-page-header au-theme-background-color--primary-3" ref="header">
+  <div class="au-frame au-theme-color--base-3" ref="container">
+    <div class="au-page-header au-theme-background-color--primary" ref="header">
       <slot name="header"></slot>
     </div>
     <div class="au-page-main" ref="main">

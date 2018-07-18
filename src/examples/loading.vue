@@ -24,7 +24,7 @@
     </au-panel>
     <au-panel class="section" title="Methods">
       <p class="paragraph">
-        Loading组件是一个方法组件，用于在元素上显示加载动画。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">Loading()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$loading()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
+        Loading组件是一个方法组件，用于在元素上显示加载动画。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-bottom">Loading()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-bottom">$loading()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-bottom">config</span>，其字段如下：
       </p>
       <au-table>
         <thead>
@@ -41,7 +41,7 @@
           <tr>
             <td>target</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Dom Element</td>
@@ -56,7 +56,7 @@
           <tr>
             <td>message</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -71,7 +71,7 @@
           <tr>
             <td>color</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -93,7 +93,7 @@
           <tr>
             <td>size</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -113,7 +113,7 @@
           <tr>
             <td>mask</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -131,7 +131,7 @@
           <tr>
             <td>tag</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>

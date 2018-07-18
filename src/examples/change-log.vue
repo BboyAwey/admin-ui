@@ -27,7 +27,7 @@
     <au-panel class="section" title="3.1.0">
       <h3 class="title-1">## 新增特性</h3>
       <ol class="option-list">
-        <li class="au-theme-border-color--base-8">新增tagfactory组件，详见<router-link class="au-theme-font-color--info-3" :to="{path: '/tagfactory'}" target="_blank">tagfactory</router-link></li>
+        <li class="au-theme-border-color--base-8">新增tagfactory组件，详见<router-link class="au-theme-color--info" :to="{path: '/tagfactory'}" target="_blank">tagfactory</router-link></li>
       </ol>
       <h3 class="title-2">## Bug Fixed</h3>
       <ol class="option-list">
@@ -49,7 +49,7 @@
       </ol>
       <h3 class="title-1">## 新增特性</h3>
       <ol class="option-list">
-        <li class="au-theme-border-color--base-8">新增rangepicker组件，详见<router-link class="au-theme-font-color--info-3" :to="{path: '/rangepicker'}" target="_blank">rangepicker</router-link></li>
+        <li class="au-theme-border-color--base-8">新增rangepicker组件，详见<router-link class="au-theme-color--info" :to="{path: '/rangepicker'}" target="_blank">rangepicker</router-link></li>
         <li class="au-theme-border-color--base-8">messageBox新增confirmText/cancelText选项</li>
         <li class="au-theme-border-color--base-8">icon新增custom接口，支持第三方css图标库</li>
         <li class="au-theme-border-color--base-8">loading组件新增size，mask接口用于自定义尺寸和是否显示遮罩</li>

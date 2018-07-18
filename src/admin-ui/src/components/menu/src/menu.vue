@@ -128,7 +128,7 @@
   }
 </style>
 <template>
-  <div class="au-menu au-theme-font-color--base-3"
+  <div class="au-menu au-theme-color--base-3"
     :class="{
       [`top-level au-theme-background-color--${backgroundColor || 'base-12'}`]: isTopLevel,
       'collapsable-top': collapsable && isTopLevel && collapseHandlebarPosition !='bottom',
@@ -136,7 +136,7 @@
       'collapse': localCollapse
     }" ref="self">
     <div
-      class="collapse-handle-top au-theme-border-color--base-8-important au-theme-font-color--base-3"
+      class="collapse-handle-top au-theme-border-color--base-8-important au-theme-color--base-3"
       @click="toggle"
       v-if="collapsable && isTopLevel && collapseHandlebarPosition != 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
@@ -165,11 +165,11 @@
                 slot="target"
                 :class="{
                   [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
-                  [`au-theme-font-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
+                  [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
                   [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
-                  [`au-theme-hover-font-color--${itemHoverFontColor || 'primary-3'}`]: !isItemActive(item) && item.url,
-                  [`au-theme-font-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
-                  [`au-theme-font-color--${itemActiveFontColor || 'primary-3'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-5'}`]: isItemActive(item),
+                  [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
+                  [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
+                  [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
                 }"
                 :style="{
                   paddingLeft: calcPaddingLeft(item)
@@ -178,13 +178,13 @@
                 <div
                   v-show="isItemActive(item)"
                   class="active-dec"
-                  :class="`au-theme-background-color--${itemActiveFontColor || 'primary-3'}`"
+                  :class="`au-theme-background-color--${itemActiveFontColor || 'primary'}`"
                 ></div>
                 <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
                 <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
                 <au-icon class="menu-fold-icon
-                  au-theme-font-color--base-3
-                  au-theme-hover-font-color--primary-3"
+                  au-theme-color--base-3
+                  au-theme-hover-color--primary"
                   type="angle-down"
                   v-if="hasChildren(item)"
                   v-show="!localCollapse"
@@ -199,7 +199,7 @@
             <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
               {{ item.text }}
             </div>
-            <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-font-color--base-3">
+            <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-color--base-3">
               <au-menu
                 :items="item.children"
                 :collapsable="false"
@@ -259,11 +259,11 @@
               slot="target"
               :class="{
                 [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
-                [`au-theme-font-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
+                [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
                 [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
-                [`au-theme-hover-font-color--${itemHoverFontColor || 'primary-3'}`]: !isItemActive(item) && item.url,
-                [`au-theme-font-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
-                [`au-theme-font-color--${itemActiveFontColor || 'primary-3'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-5'}`]: isItemActive(item),
+                [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
+                [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
+                [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
               }"
               :style="{
                 paddingLeft: calcPaddingLeft(item)
@@ -272,13 +272,13 @@
               <div
                 v-show="isItemActive(item)"
                 class="active-dec"
-                :class="`au-theme-background-color--${itemActiveFontColor || 'primary-3'}`"
+                :class="`au-theme-background-color--${itemActiveFontColor || 'primary'}`"
               ></div>
               <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
               <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
               <au-icon class="menu-fold-icon
-                au-theme-font-color--base-3
-                au-theme-hover-font-color--primary-3"
+                au-theme-color--base-3
+                au-theme-hover-color--primary"
                 type="angle-down"
                 v-if="hasChildren(item)"
                 v-show="!localCollapse"
@@ -293,7 +293,7 @@
           <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
             {{ item.text }}
           </div>
-          <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-font-color--base-3">
+          <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-color--base-3">
             <au-menu
               :items="item.children"
               :collapsable="false"
@@ -335,7 +335,7 @@
       class="collapse-handle-bottom"
       :class="{
         [`au-theme-border-color--${collapseHandlebarSepratorColor || 'base-8'}-important`]: true,
-        [`au-theme-font-color--${itemFontColor || 'base-3'}`] : true
+        [`au-theme-color--${itemFontColor || 'base-3'}`] : true
       }"
       @click="toggle"
       v-if="collapsable && isTopLevel && collapseHandlebarPosition === 'bottom'">

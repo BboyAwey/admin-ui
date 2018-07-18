@@ -34,7 +34,7 @@
           <tr>
             <td>visible</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -50,7 +50,7 @@
           <tr>
             <td>title</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -64,7 +64,7 @@
           <tr>
             <td>buttons</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -75,10 +75,10 @@
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">text: String，按钮文字</li>
-                <li class="au-theme-border-color--base-8">type: String，按钮类型，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
-                <li class="au-theme-border-color--base-8">size: String，按钮尺寸，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
-                <li class="au-theme-border-color--base-8">plain: Boolean，空心按钮，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
-                <li class="au-theme-border-color--base-8">disabled: Boolean，禁用按钮，参考<router-link class="au-theme-font-color--info-3" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
+                <li class="au-theme-border-color--base-8">type: String，按钮类型，参考<router-link class="au-theme-color--info" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
+                <li class="au-theme-border-color--base-8">size: String，按钮尺寸，参考<router-link class="au-theme-color--info" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
+                <li class="au-theme-border-color--base-8">plain: Boolean，空心按钮，参考<router-link class="au-theme-color--info" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
+                <li class="au-theme-border-color--base-8">disabled: Boolean，禁用按钮，参考<router-link class="au-theme-color--info" :to="{path: '/button'}" target="_blank">按钮组件</router-link></li>
                 <li class="au-theme-border-color--base-8">handler: Function，点击按钮时的处理函数，接受一个loading对象作为参数，该对象有两个方法start()和stop()，用于开启和停止按钮loading</li>
               </ol>
             </td>
@@ -89,7 +89,7 @@
           <tr>
             <td>on-enter</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -104,7 +104,7 @@
           <tr>
             <td>width</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -118,7 +118,7 @@
           <tr>
             <td>height</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>

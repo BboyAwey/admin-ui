@@ -38,7 +38,7 @@
           <tr>
             <td>scroll-top</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -59,7 +59,7 @@
           <tr>
             <td>hide-popovers</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -79,7 +79,7 @@
           <tr>
             <td>stop-propagation</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>

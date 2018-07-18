@@ -41,7 +41,7 @@
           <tr>
             <td>trigger</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -59,7 +59,7 @@
           <tr>
             <td>triangle</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -77,7 +77,7 @@
           <tr>
             <td>plain</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -93,7 +93,7 @@
           <tr>
             <td>placement</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -119,7 +119,7 @@
           <tr>
             <td>disabled</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -135,7 +135,7 @@
           <tr>
             <td>x</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -151,7 +151,7 @@
           <tr>
             <td>y</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -167,7 +167,7 @@
           <tr>
             <td>xFix</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -183,7 +183,7 @@
           <tr>
             <td>yFix</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -199,7 +199,7 @@
           <tr>
             <td>hideOnblur</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -218,7 +218,7 @@
           <tr>
             <td>beforeShow</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -252,7 +252,7 @@
             <td>content</td>
             <td>
               提示框内的内容
-              <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+              <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
                 提示框的内容最外层的元素不能设置margin-bottom，否则会把三角形顶出来
               </cite>
             </td>
@@ -287,7 +287,7 @@
           </tr>
         </tbody>
       </au-table>
-      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite> -->
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-bottom">.native</span>修饰符</cite> -->
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">

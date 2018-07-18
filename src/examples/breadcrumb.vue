@@ -26,7 +26,7 @@
           <tr>
             <td>crumbs</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
@@ -49,7 +49,7 @@
           <tr>
             <td>separator</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -64,7 +64,7 @@
           <tr>
             <td>separatorClass</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>

@@ -54,7 +54,7 @@
   <button
     class="
       au-button
-      au-theme-border-radius--normal"
+      au-theme-border-radius--small"
     :class="buttonClasses"
     :style="{
       cursor: loading ? 'wait' : ''
@@ -118,18 +118,18 @@ export default {
           `plain`,
           `au-theme-background-color--base-12`,
           `au-theme-border-color--base-8`,
-          this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+          this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}` : '',
           // this.canActivate ? `au-theme-focus-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
-          this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-4-important` : '',
-          `au-theme-font-color--base-3`,
-          this.canActivate ? `au-theme-hover-font-color--${this.isDefault ? 'primary' : this.type}-3` : '',
-          // this.canActivate ? `au-theme-focus-font-color--${this.isDefault ? 'primary' : this.type}-3` : '',
-          this.canActivate ? `au-theme-active-font-color--${this.isDefault ? 'primary' : this.type}-4-important` : ''
+          this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-down-important` : '',
+          `au-theme-color--base-3`,
+          this.canActivate ? `au-theme-hover-color--${this.isDefault ? 'primary' : this.type}` : '',
+          // this.canActivate ? `au-theme-focus-color--${this.isDefault ? 'primary' : this.type}-3` : '',
+          this.canActivate ? `au-theme-active-color--${this.isDefault ? 'primary' : this.type}-down-important` : ''
         ]
       } else {
         res = [
-          `au-theme-background-color--${this.isDefault ? 'base-5' : this.type + '-3'}`,
-          `au-theme-font-color--base-12`
+          `au-theme-background-color--${this.isDefault ? 'base-5' : this.type}`,
+          `au-theme-color--base-12`
         ]
       }
 

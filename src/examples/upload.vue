@@ -27,7 +27,7 @@
           <tr>
             <td>value</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
@@ -45,7 +45,7 @@
                 <li class="au-theme-border-color--base-8">name: String, 文件名</li>
                 <li class="au-theme-border-color--base-8">percent: Number, 上传进度</li>
                 <li class="au-theme-border-color--base-8">timestamp: Number, 用户选择文件时的时间戳</li>
-                <li class="au-theme-border-color--base-8">type: String, 文件类型，参考<a class="au-theme-font-color--info-3" href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">Media Types</a></li>
+                <li class="au-theme-border-color--base-8">type: String, 文件类型，参考<a class="au-theme-color--info" href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">Media Types</a></li>
                 <li class="au-theme-border-color--base-8">url: String, 文件地址</li>
               </ol>
               <!-- <au-icon type="minus"></au-icon> -->
@@ -58,7 +58,7 @@
           <tr>
             <td>multiple</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -77,13 +77,13 @@
           <tr>
             <td>accept</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              参考：<a class="au-theme-font-color--info-3" href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">Media Types</a>表中的template字段
+              参考：<a class="au-theme-color--info" href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">Media Types</a>表中的template字段
               <!-- <au-icon type="minus"></au-icon> -->
             </td>
             <td>
@@ -93,7 +93,7 @@
           <tr>
             <td>auto-upload</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -112,7 +112,7 @@
           <tr>
             <td>action</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -131,7 +131,7 @@
           <tr>
             <td>method</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -151,7 +151,7 @@
           <tr>
             <td>data</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Object</td>
@@ -165,7 +165,7 @@
           <tr>
             <td>withCredentials</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -185,7 +185,7 @@
           <tr>
             <td>headers</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Object</td>
@@ -205,7 +205,7 @@
           <tr>
             <td>show-upload-button</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -224,7 +224,7 @@
           <tr>
             <td>label</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -240,7 +240,7 @@
           <tr>
             <td>button-text</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -256,7 +256,7 @@
           <tr>
             <td>button-type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -279,7 +279,7 @@
           <tr>
             <td>button-size</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -300,7 +300,7 @@
           <tr>
             <td>button-plain</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -319,7 +319,7 @@
           <tr>
             <td>disabled</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -335,7 +335,7 @@
           <tr>
             <td>show-file-list</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -351,7 +351,7 @@
           <tr>
             <td>list-type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -370,7 +370,7 @@
           <tr>
             <td>can-remove</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -389,7 +389,7 @@
           <tr>
             <td>can-describe</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -408,7 +408,7 @@
           <tr>
             <td>can-download</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -427,7 +427,7 @@
           <tr>
             <td>can-preview</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -446,7 +446,7 @@
           <tr>
             <td>before-remove</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -464,7 +464,7 @@
           <tr>
             <td>before-describe</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -482,7 +482,7 @@
           <tr>
             <td>before-preview</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -500,7 +500,7 @@
           <tr>
             <td>before-download</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -518,7 +518,7 @@
           <tr>
             <td>before-upload</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -536,7 +536,7 @@
           <tr>
             <td>on-Error</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -551,7 +551,7 @@
           <tr>
             <td>on-progress</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -566,7 +566,7 @@
           <tr>
             <td>on-success</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Function</td>
@@ -620,7 +620,7 @@
           </tr>
         </tbody>
       </au-table>
-      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-5">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-5">@change</span>事件</cite> -->
+      <!-- <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5"><span class="code au-theme-radius au-theme-background-color--warning-bottom">@input</span>事件仅是为了支持v-model语法糖，从语法上建议使用<span class="code au-theme-radius au-theme-background-color--warning-bottom">@change</span>事件</cite> -->
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">

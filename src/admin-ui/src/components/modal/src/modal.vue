@@ -73,7 +73,7 @@
 </style>
 <template>
   <div
-    class="au-modal-container au-theme-before-background-color--base-0 au-theme-font-color--base-3"
+    class="au-modal-container au-theme-before-background-color--base-0 au-theme-color--base-3"
     v-show="localDisplay"
     ref="modalContainer"
     @click="handleModalMaskingClick">
@@ -98,7 +98,7 @@
             :loading="button.loading"
             @click="operate(button)">{{ button.text }}</au-button>
         </div>
-        <au-icon type="times" @click="hide" class="au-modal-close-icon au-theme-hover-font-color--primary-3"></au-icon>
+        <au-icon type="times" @click="hide" class="au-modal-close-icon au-theme-hover-color--primary"></au-icon>
       </div>
     </div>
   </div>

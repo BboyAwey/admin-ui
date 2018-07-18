@@ -87,7 +87,7 @@
   }
 </style>
 <template>
-  <div class="au-select au-theme-font-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
+  <div class="au-select au-theme-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -114,7 +114,7 @@
           ref="coreContainer"
           :style="{width, maxWidth, minWidth}">
           <div
-            class="au-select-core au-theme-border-radius--normal"
+            class="au-select-core au-theme-border-radius--small"
             ref="core"
             tabindex="0"
             @focus="coreFocus"
@@ -125,8 +125,8 @@
               'au-theme-background-color--base-12': !disabled,
               'au-theme-background-color--base-9': disabled,
               'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
-              'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
-              'au-theme-border-color--danger-3': hasWarnings,
+              'au-theme-border-color--primary': !disabled && !hasWarnings && active,
+              'au-theme-border-color--danger': hasWarnings,
               'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
               'au-theme-box-shadow--danger': !disabled && active && hasWarnings
             }"
@@ -134,7 +134,7 @@
               cursor: disabled ? 'not-allowed' : 'default'
             }">
             <ul class="au-select-multiple" ref="selectMultiple">
-              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-font-color--base-7">{{ placeholder }}</li>
+              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-color--base-7">{{ placeholder }}</li>
               <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
               <li v-else v-for="(option, i) in selectedOptions" :key="i">
                 <span>{{ option.text }}</span>
@@ -147,19 +147,19 @@
               class="au-select-arrow"
               type="caret-down"
               :class="{
-                'au-theme-font-color--primary-3': !disabled && active
+                'au-theme-color--primary': !disabled && active
               }"/>
           </div>
         </div>
         <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
           <ul class="au-select-option" ref="options" :style="{paddingBottom: scrollTop < 32 ? 0 : '5px'}">
-            <li v-show="!options.length" class="empty-item au-theme-font-color--base-7">没有选项</li>
+            <li v-show="!options.length" class="empty-item au-theme-color--base-7">没有选项</li>
             <li
               v-for="(option, i) in options" :key="i"
               :class="{
-                'au-theme-font-color--primary-3': isSelected(option.value),
+                'au-theme-color--primary': isSelected(option.value),
                 'au-theme-hover-background-color--base-10': !isSelected(option.value) && i !== tempSelectIndex,
-                'au-theme-background-color--primary-5': i === tempSelectIndex
+                'au-theme-background-color--primary-bottom': i === tempSelectIndex
               }"
               @click.stop="select(option, $event)">{{ option.text }}</li>
           </ul>

@@ -6,22 +6,22 @@
           v-for="(tab, index) in tabs"
           :key="index"
           :class="{
-            'au-theme-hover-font-color--primary-3': true,
-            'au-theme-font-color--base-7': tab.name !== localCurrent,
-            'au-tabs-active au-theme-font-color--base-3 au-theme-border-color--primary-3': tab.name == localCurrent
+            'au-theme-hover-color--primary': true,
+            'au-theme-color--base-7': tab.name !== localCurrent,
+            'au-tabs-active au-theme-color--base-3 au-theme-border-color--primary': tab.name == localCurrent
           }"
           :name="['tab-'+tab.name]"
           @click="toggleTabs(tab.name, $event)">
           <a href="javascript:void(0);" :title="tab.text">{{ tab.text }}</a>
-          <au-icon v-show="canRemove && tabs.length > 1" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-font-color--base-3 au-theme-hover-font-color--danger-3" type="times"></au-icon>
-          <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-font-color--base-3 au-theme-hover-font-color--info-3" type="pencil"></au-icon>
+          <au-icon v-show="canRemove && tabs.length > 1" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-color--base-3 au-theme-hover-color--danger" type="times"></au-icon>
+          <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-color--base-3 au-theme-hover-color--info" type="pencil"></au-icon>
         </li>
-        <li v-show="canCreate" class="au-theme-font-color--base-7 au-theme-hover-font-color--primary-3" @click="create">
+        <li v-show="canCreate" class="au-theme-color--base-7 au-theme-hover-color--primary" @click="create">
           <au-icon type="plus"></au-icon>
         </li>
       </ul>
       <!-- <au-button v-show="canCreate" type="success" @click="create" size="mini" class="au-tabs-btn au-tabs-create-btn">
-        <au-icon class="au-theme-font-color--base-12" type="plus"></au-icon>
+        <au-icon class="au-theme-color--base-12" type="plus"></au-icon>
       </au-button> -->
     </div>
     <div class="au-tabs-container" v-show="tabs && tabs.length" ref="contents">

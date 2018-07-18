@@ -4,36 +4,36 @@
       <p class="paragraph">
         Admin UI使用样式类来构建主题系统。
       </p>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
-        Admin UI所有组件中与颜色相关的样式现在都通过诸如<span class="code au-theme-radius au-theme-background-color--warning-5">.au-theme-background--primary-3</span>这样的样式类来控制。我们设计了一套简单的规则来使用它们，并使得动态切换主题变得十分便捷，但代价便是在颜色一类的样式使用上存在很多限制，需要你适应它，同时发挥创造力在这套规则的限制下创造出同样丰富的颜色。
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
+        Admin UI所有组件中与颜色相关的样式现在都通过诸如<span class="code au-theme-radius au-theme-background-color--warning-bottom">.au-theme-background--primary</span>这样的样式类来控制。我们设计了一套简单的规则来使用它们，并使得动态切换主题变得十分便捷，但代价便是在颜色一类的样式使用上存在很多限制，需要你适应它，同时发挥创造力在这套规则的限制下创造出同样丰富的颜色。
       </cite>
     </au-panel>
     <au-panel class="section">
       <h4 class="title-1">自定义主题</h4>
       <p class="paragraph">
-        Admin UI提供了<span class="code au-theme-radius au-theme-background-color--warning-5">.theme()</span>方法来让开发者和用户动态更换主题
+        Admin UI提供了<span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme()</span>方法来让开发者和用户动态更换主题
       </p>
       <p class="paragraph">
         需要注意的是，颜色类的值中：<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">primary-3</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">warning-3</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">danger-3</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">info-3</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">success-3</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">primary</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">warning</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">danger</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">info</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">success</span>
         为主要颜色<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[color]-2</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[color]-4</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-2</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-4</span>
         为明度较接近主要颜色的次要颜色<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[color]-1</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[color]-5</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-1</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-5</span>
         为明度与主要颜色相差较大的辅助颜色<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">base-0</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">base-12</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-0</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-12</span>
         为最暗无彩色和最亮无彩色（建议使用纯黑和纯白）<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">base-[1~11]</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-[1~11]</span>
         为按明度排列的无彩色（灰色）。<br>
         彩色从[1~5]无彩色从[0~12]按明度顺序排列，彩色和无彩色的明度顺序需要一致。
-        <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+        <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
           请牢记上面的规则，这对你进行主题自定义和主题系统全站应用非常重要。
         </cite>
       </p>
@@ -41,54 +41,13 @@
         import AdminUi from 'admin-ui'
         AdminUi.theme({
           colors: {
-            'base-0': '#000',
-            'base-1': '#232a29',
-            'base-2': '#2f3938',
-            'base-3': '#44514f ',
-            'base-4': '#616e6c',
-            'base-5': '#7c8886',
-            'base-6': '#b1bbba',
-            'base-7': '#d9dedd',
-            'base-8': '#eaf0ef',
-            'base-9': '#f3f7f6',
-            'base-10': '#f7fcfb',
-            'base-11': '#fdfdfd',
-            'base-12': '#fff',
-
-            'primary-1': '#01241d',
-            'primary-2': '#3fd5b8',
-            'primary-3': '#19bc9d',
-            'primary-4': '#169f85',
-            'primary-5': '#e7f7f4',
-
-            'info-1': '#011725',
-            'info-2': '#f0faf8',
-            'info-3': '#3498db',
-            'info-4': '#2d82ba',
-            'info-5': '#e6f3fc',
-
-            'warning-1': '#251800',
-            'warning-2': '#fec564',
-            'warning-3': '#ffb433',
-            'warning-4': '#e99b14',
-            'warning-5': '#fbf3e5',
-
-            'danger-1': '#220401',
-            'danger-2': '#f56354',
-            'danger-3': '#e74c3c',
-            'danger-4': '#c33a2c',
-            'danger-5': '#fae7e5',
-
-            'success-1': '#012401',
-            'success-2': '#7fcb7f',
-            'success-3': '#5cb95c',
-            'success-4': '#3da63d',
-            'success-5': '#e7fae7'
+            'primary': '#19bc9d',
+            'info': '#3498db',
+            'warning': '#ffb433',
+            'danger': '#e74c3c',
+            'success': '#5cb95c'
           },
           shadows: {
-            'level-1': '0 1px 3px rgba(60, 65, 71, .5)',
-            'level-2': '0 2px 4px rgba(60, 65, 71, .4)',
-            'level-3': '0 3px 6px rgba(60, 65, 71, .3)',
             'primary': '0 0 3px rgba(25, 188, 157, .5)',
             'info': '0 0 3px rgba(52, 152, 219, .5)',
             'warning': '0 0 3px rgba(255, 180, 51, .5)',
@@ -111,11 +70,11 @@
         因为整套主题系统是基于样式类构建的，所以即使应用到全站当中也非常简单，只需要按规则为你的元素编写样式类即可。Admin UI中的主题样式类按照下面的规则来使用：
       </p>
       <p class="paragraph">
-        <span class="code au-theme-radius au-theme-background-color--warning-5">前缀</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[-伪类名]</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">-属性名</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">--属性值</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-5">[-权重]</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">前缀</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[-伪类名]</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">-属性名</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">--属性值</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[-权重]</span>
       </p>
       <au-table class="table">
         <thead>
@@ -130,7 +89,7 @@
           <tr>
             <td>前缀</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
@@ -143,7 +102,7 @@
           <tr>
             <td>伪类名</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -164,13 +123,13 @@
             </td>
             <td>
               如果主题是应用在当前元素的伪类上的，则可以在类名中连接伪类名。
-              <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">注意，伪类名不可叠加使用，请发挥你的聪明才智。</cite>
+              <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">注意，伪类名不可叠加使用，请发挥你的聪明才智。</cite>
             </td>
           </tr>
           <tr>
             <td>属性名</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
@@ -197,7 +156,7 @@
           <tr>
             <td>属性值</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -227,13 +186,13 @@
             </td>
             <td>
               除了参考自定义主题中的规则，还有一点需要注意的是<br>
-              <span class="code au-theme-radius au-theme-background-color--warning-5">au-theme-radius</span>不需要属性值
+              <span class="code au-theme-radius au-theme-background-color--warning-bottom">au-theme-radius</span>不需要属性值
             </td>
           </tr>
           <tr>
             <td>权重</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -243,7 +202,7 @@
             </td>
             <td>
               为css属性值添加
-              <span class="code au-theme-radius au-theme-background-color--warning-5">！important</span>前缀
+              <span class="code au-theme-radius au-theme-background-color--warning-bottom">！important</span>前缀
             </td>
           </tr>
         </tbody>
@@ -254,9 +213,9 @@
       <code-h lang="html" :content='`
         <div class="
           au-theme-bakcground-color--base-12
-          au-theme-border-color--primary-3
-          au-theme-font-color--base-3
-          au-theme-box-shadow--level-1
+          au-theme-border-color--primary
+          au-theme-color--base-3
+          au-theme-box-shadow--base
           au-theme-radius
         "></div>
       `'></code-h>
@@ -264,7 +223,7 @@
     <au-panel class="section">
       <h4 class="title-1">自定义主题类名</h4>
       <p class="paragraph">
-        <span class="code au-theme-radius au-theme-background-color--warning-5">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-5">options</span>参数中，可以使用自定义的主题类名。Admin UI的默认主题中提供了5种彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-color</span>类作为颜色类，一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-radius</span>作为圆角类，一个<span class="code au-theme-radius au-theme-background-color--warning-5">my-shadow</span>作为阴影类，则可以像下面这样定义：
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-bottom">options</span>参数中，可以使用自定义的主题类名。Admin UI的默认主题中提供了5种彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-color</span>类作为颜色类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-radius</span>作为圆角类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-shadow</span>作为阴影类，则可以像下面这样定义：
       </p>
       <code-h lang="js">
         adminUi.theme({
@@ -284,7 +243,7 @@
       </p>
       <code-h lang="html" :content='`
         <div class="
-          au-theme-font-color--my-color
+          au-theme-color--my-color
           au-theme-box-shadow--my-shadow
           au-theme-border-radius--my-radius
         "></div>
@@ -299,49 +258,11 @@
       <code-h lang="js">
         {
           colors: {
-            'base-0': '#000',
-            'base-1': '#3c4147',
-            'base-2': '#575e66',
-            'base-3': '#757f8a ',
-            'base-4': '#8b97a3',
-            'base-5': '#a4b0bc',
-            'base-6': '#b4bdc8',
-            'base-7': '#cbd1d9',
-            'base-8': '#d8dde6',
-            'base-9': '#e6ecf2',
-            'base-10': '#eef5f9',
-            'base-11': '#f7fafb',
-            'base-12': '#fff',
-
-            'primary-1': '#042039',
-            'primary-2': '#1c7dd2',
-            'primary-3': '#1c86e2',
-            'primary-4': '#1e8cee',
-            'primary-5': '#c7e5ff',
-
-            'info-1': '#062846',
-            'info-2': '#2391d7',
-            'info-3': '#32a2ea',
-            'info-4': '#37aefa',
-            'info-5': '#ceecff',
-
-            'warning-1': '#322600',
-            'warning-2': '#eea806',
-            'warning-3': '#f5ae08',
-            'warning-4': '#fab612',
-            'warning-5': '#ffe9b2',
-
-            'danger-1': '#400c10',
-            'danger-2': '#e03743',
-            'danger-3': '#ea3a46',
-            'danger-4': '#f53e50',
-            'danger-5': '#ffbcc2',
-
-            'success-1': '#00301e',
-            'success-2': '#0cae6c',
-            'success-3': '#0cb470',
-            'success-4': '#0ebc74',
-            'success-5': '#ace6ce'
+            'primary': '#1c86e2',
+            'info': '#32a2ea',
+            'warning': '#f5ae08',
+            'danger': '#ea3a46',
+            'success': '#0cb470'
           }
         }
       </code-h>

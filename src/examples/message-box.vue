@@ -24,8 +24,8 @@
     <au-panel class="section" title="Methods">
       <p class="paragraph">
         MessageBox组件本身就是一个方法。<br>
-        如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox()</span>方法或者调用MessageBox上附加的三个别名方法<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">MessageBox.prompt()</span>即可。<br>
-        如果是全局引入的Admin UI，Admin UI会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-5">$confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-5">$prompt()</span>三个别名方法（他们是前三者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
+        如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-bottom">MessageBox()</span>方法或者调用MessageBox上附加的三个别名方法<span class="code au-theme-radius au-theme-background-color--warning-bottom">MessageBox.alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-bottom">MessageBox.confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-bottom">MessageBox.prompt()</span>即可。<br>
+        如果是全局引入的Admin UI，Admin UI会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-bottom">$alert()</span>、<span class="code au-theme-radius au-theme-background-color--warning-bottom">$confirm()</span>和<span class="code au-theme-radius au-theme-background-color--warning-bottom">$prompt()</span>三个别名方法（他们是前三者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-bottom">config</span>，其字段如下：
       </p>
       <au-table>
         <thead>
@@ -42,7 +42,7 @@
           <tr>
             <td>type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -59,7 +59,7 @@
           <tr>
             <td>title</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -74,7 +74,7 @@
           <tr>
             <td>message</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -118,7 +118,7 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link>
+              参考<router-link class="au-theme-color--info" :to="{path: '/icon'}" target="_blank">图标组件</router-link>
             </td>
             <td>
               消息图标<br>
@@ -144,7 +144,7 @@
           <tr>
             <td>confirmText</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -175,7 +175,7 @@
           <tr>
             <td>cancelText</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -201,8 +201,8 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
-                <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+                <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+                <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
               </ol>
             </td>
             <td>

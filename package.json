@@ -17,12 +17,11 @@
   },
   "dependencies": {
     "highlightjs": "^9.10.0",
+    "theme-class-generator": "^1.0.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "theme-class-generator": "^1.0.1"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "multiparty": "^4.1.4",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
@@ -54,6 +53,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
+    "multiparty": "^4.1.4",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.7.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",

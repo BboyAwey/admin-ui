@@ -75,13 +75,13 @@
         v-if="type==='textarea'"
         class="au-input-core"
         :class="{
-          'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+          'au-theme-border-radius--small au-theme-placeholder-color--base-7': true,
           'au-theme-border-color--base-8': !active && !hasWarnings,
-          'au-theme-border-color--primary-3': active && !hasWarnings,
-          'au-theme-border-color--danger-3': hasWarnings,
+          'au-theme-border-color--primary': active && !hasWarnings,
+          'au-theme-border-color--danger': hasWarnings,
           'au-theme-focus-box-shadow--primary': active && !hasWarnings,
           'au-theme-focus-box-shadow--danger': active && hasWarnings,
-          'au-theme-font-color--base-3': true,
+          'au-theme-color--base-3': true,
           'au-theme-disabled-background-color--base-8': disabled
         }"
         :style="{
@@ -117,9 +117,9 @@
           class="au-input-icon"
           :type="icon"
           :class="{
-            'au-theme-font-color--base-3': !active,
-            'au-theme-font-color--primary-3': active && !hasWarnings,
-            'au-theme-font-color--danger-3': hasWarnings,
+            'au-theme-color--base-3': !active,
+            'au-theme-color--primary': active && !hasWarnings,
+            'au-theme-color--danger': hasWarnings,
           }"
           :style="{
             'left': !iconPosition || iconPosition === 'left' ? '8px' : 'auto',
@@ -130,13 +130,13 @@
           class="au-input-core"
           :class="{
             [`au-size-${size}-bordered`]: true,
-            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-radius--small au-theme-placeholder-color--base-7': true,
             'au-theme-border-color--base-8': !active && !hasWarnings,
-            'au-theme-border-color--primary-3': active && !hasWarnings,
-            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-border-color--primary': active && !hasWarnings,
+            'au-theme-border-color--danger': hasWarnings,
             'au-theme-focus-box-shadow--primary': !hasWarnings && active,
             'au-theme-focus-box-shadow--danger': hasWarnings && active,
-            'au-theme-font-color--base-3': true,
+            'au-theme-color--base-3': true,
             'au-theme-disabled-background-color--base-9': disabled
           }"
           :style="{
@@ -168,13 +168,13 @@
           v-if="type === 'number'"
           :class="{
             [`au-size-${size}-bordered`]: true,
-            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-radius--small au-theme-placeholder-color--base-7': true,
             'au-theme-border-color--base-8': !active && !hasWarnings,
-            'au-theme-border-color--primary-3': active && !hasWarnings,
-            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-border-color--primary': active && !hasWarnings,
+            'au-theme-border-color--danger': hasWarnings,
             'au-theme-focus-box-shadow--primary': !hasWarnings && active,
             'au-theme-focus-box-shadow--danger': hasWarnings && active,
-            'au-theme-font-color--base-3': true,
+            'au-theme-color--base-3': true,
             'au-theme-disabled-background-color--base-9': disabled
           }"
           :style="{
@@ -204,13 +204,13 @@
           v-if="type === 'password'"
           :class="{
             [`au-size-${size}-bordered`]: true,
-            'au-theme-border-radius--normal au-theme-placeholder-color--base-7': true,
+            'au-theme-border-radius--small au-theme-placeholder-color--base-7': true,
             'au-theme-border-color--base-8': !active && !hasWarnings,
-            'au-theme-border-color--primary-3': active && !hasWarnings,
-            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-border-color--primary': active && !hasWarnings,
+            'au-theme-border-color--danger': hasWarnings,
             'au-theme-focus-box-shadow--primary': !hasWarnings && active,
             'au-theme-focus-box-shadow--danger': hasWarnings && active,
-            'au-theme-font-color--base-3': true,
+            'au-theme-color--base-3': true,
             'au-theme-disabled-background-color--base-9': disabled
           }"
           :style="{
@@ -242,9 +242,9 @@
           v-show="type !== 'textarea' && associationsShow && localAssociations.length"
           :class="`
             au-theme-border-color--base-8
-            au-theme-box-shadow--level-2
+            au-theme-box-shadow--base
             au-theme-background-color--base-12
-            au-theme-border-radius--normal
+            au-theme-border-radius--small
             au-sizegap-${size}
           `">
           <ul class="au-input-associations"
@@ -255,7 +255,7 @@
               v-for="(association, index) in localAssociations"
               @click="selectAssociation(association)"
               :class="{
-                'au-theme-font-color--base-3': true,
+                'au-theme-color--base-3': true,
                 'au-theme-hover-background-color--base-10': true,
                 'au-theme-background-color--base-10': index === activeAssociationIndex - 1
               }"

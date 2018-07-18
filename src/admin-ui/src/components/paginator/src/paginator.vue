@@ -63,16 +63,16 @@
     <ul>
       <li class="
         au-theme-border-color--base-8
-        au-theme-font-color--base-3
+        au-theme-color--base-3
         au-theme-border-radius--large"
         :class="{
           'disabled': !canPrev,
           'au-theme-border-color--base-8': true,
-          'au-theme-font-color--base-3': canPrev,
-          'au-theme-font-color--base-6': !canPrev,
+          'au-theme-color--base-3': canPrev,
+          'au-theme-color--base-6': !canPrev,
           'au-theme-background-color--base-10': !canPrev,
-          'au-theme-hover-font-color--primary-3': canPrev,
-          'au-theme-hover-border-color--primary-3': canPrev
+          'au-theme-hover-color--primary': canPrev,
+          'au-theme-hover-border-color--primary': canPrev
         }" @click="prev">
         <au-icon type="angle-left" size="16px"></au-icon>
       </li>
@@ -83,13 +83,13 @@
         :class="{
           'current': num == localCurrent,
           'ellipsis': num == '···',
-          'au-theme-font-color--base-12': num == localCurrent,
-          'au-theme-background-color--primary-3': num == localCurrent,
+          'au-theme-color--base-12': num == localCurrent,
+          'au-theme-background-color--primary': num == localCurrent,
           'au-theme-border-color--base-8': num != localCurrent,
-          'au-theme-font-color--base-3': num != localCurrent,
+          'au-theme-color--base-3': num != localCurrent,
           'au-theme-background-color--base-12': num != localCurrent,
-          'au-theme-hover-border-color--primary-3': num != localCurrent,
-          'au-theme-hover-font-color--primary-3': num != localCurrent
+          'au-theme-hover-border-color--primary': num != localCurrent,
+          'au-theme-hover-color--primary': num != localCurrent
         }"
         @click="paginate(num, i)">
           <span class="ellipsis-text">{{ num }}</span>
@@ -97,16 +97,16 @@
         </li>
       <li class="
         au-theme-border-color--base-8
-        au-theme-font-color--base-3
+        au-theme-color--base-3
         au-theme-border-radius--large"
         :class="{
           'disabled': !canNext,
           'au-theme-border-color--base-8': true,
-          'au-theme-font-color--base-3': canNext,
-          'au-theme-font-color--base-6': !canNext,
+          'au-theme-color--base-3': canNext,
+          'au-theme-color--base-6': !canNext,
           'au-theme-background-color--base-10': !canNext,
-          'au-theme-hover-font-color--primary-3': canNext,
-          'au-theme-hover-border-color--primary-3': canNext
+          'au-theme-hover-color--primary': canNext,
+          'au-theme-hover-border-color--primary': canNext
         }" @click="next">
         <au-icon type="angle-right" size="16px"></au-icon>
       </li>

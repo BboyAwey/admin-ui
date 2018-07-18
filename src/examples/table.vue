@@ -2,7 +2,7 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        一个非常简单的表格组件，仅仅提供了样式，使用方式与原生的<span class="code au-theme-radius au-theme-background-color--warning-5">table</span>元素一致。
+        一个非常简单的表格组件，仅仅提供了样式，使用方式与原生的<span class="code au-theme-radius au-theme-background-color--warning-bottom">table</span>元素一致。
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
@@ -76,7 +76,7 @@
           <tr>
             <td>bordered</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -129,8 +129,8 @@
         </tbody>
       </au-table>
       <!-- <au-icon type="minus"></au-icon> -->
-      <cite class="cite au-theme-before-background-color--success-5 au-theme-font-color--base-5">
-        当<span class="code au-theme-radius au-theme-background-color--warning-5">tfoot</span>中只有唯一一个<span class="code au-theme-radius au-theme-background-color--warning-5">td</span>时，该行默认为注脚样式（小一号文字并靠右对齐）
+      <cite class="cite au-theme-before-background-color--success5 au-theme-color--base-5">
+        当<span class="code au-theme-radius au-theme-background-color--warning-bottom">tfoot</span>中只有唯一一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">td</span>时，该行默认为注脚样式（小一号文字并靠右对齐）
       </cite>
     </au-panel>
     <au-panel class="section" title="Events">

@@ -23,12 +23,12 @@
   <div class="au-alert">
     <div class="au-message-box-icon-container" v-show="iconType">
       <au-icon
-        class="au-message-box-icon au-theme-font-color--base-12"
+        class="au-message-box-icon au-theme-color--base-12"
         :class="`au-theme-background-color--${messageType || 'info'}-3`"
         :type="iconType"></au-icon>
     </div>
     <div
-      class="au-alert-message au-theme-font-color--base-3"
+      class="au-alert-message au-theme-color--base-3"
       :style="{
         paddingTop: iconType ? '6px' : '',
         paddingLeft: iconType ? '48px' : ''

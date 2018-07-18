@@ -42,7 +42,7 @@
 </style>
 <template>
   <div class="au-loading" :class="{
-    [`au-theme-font-color--${color}-3`]: true,
+    [`au-theme-color--${color}-3`]: true,
   }">
     <div class="au-loading-mask au-theme-background-color--base-12" v-show="mask"></div>
     <div class="au-loading-core-container" ref="coreContainer">
@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     stroke () {
-      return namespace.get('theme').colors[this.color + '-3']
+      return namespace.get('theme').theme.colors[this.color]
     }
   },
   methods: {

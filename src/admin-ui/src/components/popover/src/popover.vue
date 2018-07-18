@@ -99,24 +99,24 @@
 </style>
 <template>
   <!-- <div
-    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-3"
+    class="au-popover au-theme-border-radius--small au-theme-box-shadow--base"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     @blur="handleBlur($event)" -->
   <div
-    class="au-popover au-theme-border-radius--normal au-theme-box-shadow--level-2"
+    class="au-popover au-theme-border-radius--small au-theme-box-shadow--base"
     :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
     :tabindex="_uid"
     ref="pop">
     <slot name="target"></slot>
     <div ref="content" :class="{
       'au-popover-content': true,
-      'au-theme-border-radius--normal': true,
+      'au-theme-border-radius--small': true,
       'au-theme-background-color--base-2': !plain,
-      'au-theme-font-color--base-12': !plain,
+      'au-theme-color--base-12': !plain,
       'au-theme-background-color--base-12': plain,
       'au-theme-border-color--base-8': plain,
-      'au-theme-font-color--base-3': plain}">
+      'au-theme-color--base-3': plain}">
       <slot name="content"></slot>
     </div>
     <span

@@ -44,7 +44,7 @@
         <tr>
           <td>tabs</td>
           <td>
-            <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+            <au-icon type="check" class="au-theme-color--success"></au-icon>
             <!--<au-icon type="times"></au-icon>-->
           </td>
           <td>
@@ -69,7 +69,7 @@
         <tr>
           <td>current</td>
           <td>
-            <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+            <au-icon type="check" class="au-theme-color--success"></au-icon>
             <!--<au-icon type="times"></au-icon>-->
           </td>
           <td>String</td>
@@ -85,7 +85,7 @@
         <tr>
           <td>can-remove</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>Boolean</td>
@@ -105,7 +105,7 @@
         <tr>
           <td>can-rename</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>Boolean</td>
@@ -125,7 +125,7 @@
         <tr>
           <td>rename-validators</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>
@@ -137,8 +137,8 @@
           </td>
           <td>
             <ol class="option-list">
-              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
-              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
             </ol>
           </td>
           <td>
@@ -148,7 +148,7 @@
         <tr>
           <td>can-create</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>Boolean</td>
@@ -168,7 +168,7 @@
         <tr>
           <td>creating-modal</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>Boolean</td>
@@ -189,7 +189,7 @@
         <tr>
           <td>create-validators</td>
           <td>
-            <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+            <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
             <au-icon type="times"></au-icon>
           </td>
           <td>
@@ -201,8 +201,8 @@
           </td>
           <td>
             <ol class="option-list">
-              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
-              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-font-color--info-3" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">validator: Function，验证器函数，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
+              <li class="au-theme-border-color--base-8">warning: String，验证失败后的警告信息，具体参见<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link></li>
             </ol>
           </td>
           <td>

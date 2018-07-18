@@ -203,7 +203,7 @@
           au-theme-border-color--base-8
           au-theme-background-color--base-12
           au-theme-hover-background-color--base-11
-          au-theme-border-radius--normal
+          au-theme-border-radius--small
         ">
         <div
           class="
@@ -211,7 +211,7 @@
           "
           :class="{
             'au-theme-background-color--base-8': !file.url,
-            'au-theme-background-color--primary-3': file.url
+            'au-theme-background-color--primary': file.url
           }"
           v-show="!(autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64))">
           <div
@@ -230,11 +230,11 @@
           :src="autoUpload ? (file.base64 || file.url) : file.base64"
           @click="preview(index)"
           v-show="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
-        <p class="au-upload-file-info au-theme-font-color--base-3" :class="{'au-upload-no-desc': !canDescribe}">
-          <span class="au-upload-file-name au-theme-font-color--primary-3">{{ file.name }}</span><br>
+        <p class="au-upload-file-info au-theme-color--base-3" :class="{'au-upload-no-desc': !canDescribe}">
+          <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
           <span class="au-upload-file-description"
             :class="{
-              'au-theme-font-color--base-7': !value[index] && !file.description || (value[index] && !value[index].description),
+              'au-theme-color--base-7': !value[index] && !file.description || (value[index] && !value[index].description),
               'au-upload-inline-desc': listType === 'inline'
             }"
             v-show="canDescribe && !editingStatus[index]">
@@ -251,8 +251,8 @@
               au-upload-file-operation-icon
               au-upload-file-desc-icon
               au-theme-background-color--base-12
-              au-theme-font-color--base-6
-              au-theme-hover-font-color--base-3"
+              au-theme-color--base-6
+              au-theme-hover-color--base-3"
             type="pencil"
             v-show="canDescribe && !editingStatus[index]"
             @click.native="intoDescEditingMode(index)"/>
@@ -262,40 +262,40 @@
               au-upload-file-desc-icon
               au-upload-desc-icon-editing
               au-theme-background-color--base-12
-              au-theme-font-color--base-6
-              au-theme-hover-font-color--base-3"
+              au-theme-color--base-6
+              au-theme-hover-color--base-3"
             type="check"
             v-show="canDescribe && editingStatus[index]"
             @click.native="checkDescEditingMode(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing au-theme-background-color--base-12 au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing au-theme-background-color--base-12 au-theme-color--base-6 au-theme-hover-color--base-3"
             type="times"
             v-show="canDescribe && editingStatus[index]"
             @click.native="cancelDescEditingMode(index)"/>
           <span
             class="au-upload-progress-bar"
             :class="{
-              'au-theme-background-color--danger-5': file.isError,
-              'au-theme-background-color--primary-5': !file.isError
+              'au-theme-background-color--danger-bottom': file.isError,
+              'au-theme-background-color--primary-bottom': !file.isError
             }"
             v-show="file.isError ? true : (file.percent !== 100 && file.percent !== undefined)">
             <span
               class="au-upload-progress-bar-core"
               :class="{
-                'au-theme-background-color--danger-3': file.isError,
-                'au-theme-background-color--primary-3': !file.isError
+                'au-theme-background-color--danger': file.isError,
+                'au-theme-background-color--primary': !file.isError
               }"
               :style="{width: file.percent + '%'}"></span>
           </span>
         </p>
         <span class="au-upload-file-edit-icon-container">
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-6 au-theme-hover-color--base-3"
             type="close"
             v-show="canRemove"
             @click.native="remove(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-font-color--base-6 au-theme-hover-font-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-color--base-6 au-theme-hover-color--base-3"
             type="cloud-download"
             v-show="canDownload && file.url"
             @click.native="download(file, index)"/>

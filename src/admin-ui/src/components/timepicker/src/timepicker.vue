@@ -68,7 +68,7 @@
   // }
 </style>
 <template>
-  <div class="au-timepicker au-theme-font-color--base-3"  :style="{display: !inline && fullWidth ? 'block' : ''}">
+  <div class="au-timepicker au-theme-color--base-3"  :style="{display: !inline && fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -96,9 +96,9 @@
           ref="core"/>
         <div class="au-timepicker-popup" :class="`
           au-theme-border-color--base-8
-          au-theme-font-color--base-3
+          au-theme-color--base-3
           au-theme-background-color--base-12
-          au-theme-box-shadow--level-2
+          au-theme-box-shadow--base
           au-sizegap-${size}
         `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
           <ul
@@ -114,8 +114,8 @@
               :key="index"
               @click.stop="selectTime(num, 'hour')"
               :class="{
-                'au-theme-font-color--primary-3': isValid(num, 'h') && num - 1 == hour,
-                'au-theme-font-color--base-7': !isValid(num, 'h'),
+                'au-theme-color--primary': isValid(num, 'h') && num - 1 == hour,
+                'au-theme-color--base-7': !isValid(num, 'h'),
               }" :style="{
                 cursor: isValid(num, 'h') ? '' : 'not-allowed'
               }">{{ formatNum(num - 1) }}</li>
@@ -131,8 +131,8 @@
               :key="num"
               @click.stop="selectTime(num, 'minute')"
               :class="{
-                'au-theme-font-color--primary-3': isValid(num, 'm') && num - 1 == minute,
-                'au-theme-font-color--base-7': !isValid(num, 'm')
+                'au-theme-color--primary': isValid(num, 'm') && num - 1 == minute,
+                'au-theme-color--base-7': !isValid(num, 'm')
               }" :style="{
                 cursor: isValid(num, 'm') ? '' : 'not-allowed'
               }">{{ formatNum(num - 1) }}</li>
@@ -148,8 +148,8 @@
               :key="num"
               @click.stop="selectTime(num, 'second')"
               :class="{
-                'au-theme-font-color--primary-3': isValid(num, 's') && num - 1 == second,
-                'au-theme-font-color--base-7': !isValid(num, 's')
+                'au-theme-color--primary': isValid(num, 's') && num - 1 == second,
+                'au-theme-color--base-7': !isValid(num, 's')
               }" :style="{
                 cursor: isValid(num, 's') ? '' : 'not-allowed'
               }">{{ formatNum(num - 1) }}</li>

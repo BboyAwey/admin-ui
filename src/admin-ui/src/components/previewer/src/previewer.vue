@@ -125,7 +125,7 @@
     class="au-previewer au-theme-before-background-color--base-0"
     ref="previewer" v-show="localDisplay">
     <div
-      class="au-previewer-header au-theme-font-color--base-12 au-theme-background-color--base-0"
+      class="au-previewer-header au-theme-color--base-12 au-theme-background-color--base-0"
       ref="header">
       <span class="au-previewer-name">{{ currentImgAlt }}</span>
       <icon

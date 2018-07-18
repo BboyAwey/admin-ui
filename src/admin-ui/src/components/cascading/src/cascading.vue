@@ -19,7 +19,7 @@
   }
 </style>
 <template>
-  <div class="au-cascading au-theme-font-color--base-3" :style="{display: listType === 'block' && fullWidth ? 'block' : ''}">
+  <div class="au-cascading au-theme-color--base-3" :style="{display: listType === 'block' && fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"

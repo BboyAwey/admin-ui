@@ -7,7 +7,7 @@
       <code-h lang="ssh">
         yarn add admin-ui git+ssh://git@gogs.in.dataengine.com:Admin-UI/admin-ui-3-publish.git
       </code-h>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
         由于使用的是公司的私有代码库，请确保你的机器有权访问这个git地址。
       </cite>
     </au-panel>
@@ -27,7 +27,7 @@
     </au-panel>
     <au-panel class="section" title="按需加载">
       <p class="paragraph">
-        如果是按需加载，则需要从<span class="code au-theme-radius au-theme-background-color--warning-5">admin-ui/dist/lib</span>目录加载需要的组件。
+        如果是按需加载，则需要从<span class="code au-theme-radius au-theme-background-color--warning-bottom">admin-ui/dist/lib</span>目录加载需要的组件。
       </p>
       <code-h lang="js">
         // 组件依赖样式、字体和主题，所以你还需要额外在你的入口文件中先引入它们：

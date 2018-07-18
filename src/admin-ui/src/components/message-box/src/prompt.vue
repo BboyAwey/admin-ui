@@ -37,10 +37,10 @@
   }
 </style>
 <template>
-  <div class="au-prompt au-theme-font-color--base-3">
+  <div class="au-prompt au-theme-color--base-3">
     <div class="au-message-box-icon-container" v-show="iconType">
       <au-icon
-        class="au-message-box-icon au-theme-font-color--base-12"
+        class="au-message-box-icon au-theme-color--base-12"
         :class="`au-theme-background-color--${messageType || 'info'}-3`"
         :type="iconType"/>
     </div>

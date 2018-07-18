@@ -14,8 +14,8 @@ function absorb (base, target, name) {
   if (!isObject(base, name) || !isObject(target, name)) return
   for (let key in base) {
     if (typeof base[key] !== 'object') {
-      base[key] = target[key]
-    } else {
+      base[key] = target[key] || base[key]
+    } else if (base[key] && target[key]) {
       absorb(base[key], target[key], key)
     }
   }
@@ -23,7 +23,7 @@ function absorb (base, target, name) {
 
 export default function (config) {
   let finalConfig = deepClone(defaultConfig)
-  absorb(finalConfig, config)
+  absorb(finalConfig, config || {})
   // save theme to namespace
   namespace.set('theme', finalConfig)
 

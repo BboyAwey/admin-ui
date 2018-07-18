@@ -18,7 +18,7 @@
 <template>
   <div class="au-form-item">
     <div
-      class="au-theme-font-color--base-3"
+      class="au-theme-color--base-3"
       :class="{
         [`au-form-label${inline ? '-inline' : ''}`]: true,
         [`au-size-${size}`]: inline && middle
@@ -29,8 +29,8 @@
       }">{{ label }}</div>
     <div :class="`au-form-item-main${inline ? '-inline' : '-block'}`">
       <slot></slot>
-      <div class="au-form-warning au-theme-font-color--danger-3" v-for="(warning, i) in warnings" :key="warning + '' + i">{{ warning }}</div>
-      <div class="au-form-warning au-theme-font-color--base-7" v-for="(tip, i) in tips" :key="tip + '' + i">{{ tip }}</div>
+      <div class="au-form-warning au-theme-color--danger" v-for="(warning, i) in warnings" :key="warning + '' + i">{{ warning }}</div>
+      <div class="au-form-warning au-theme-color--base-7" v-for="(tip, i) in tips" :key="tip + '' + i">{{ tip }}</div>
     </div>
   </div>
 </template>

@@ -8,20 +8,20 @@
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
         Admin UI中的图标组件，是基于著名的
-        <a class="au-theme-font-color--info-3" href="http://fontawesome.io" target="_blank">Font Awesome 4</a>
+        <a class="au-theme-color--info" href="http://fontawesome.io" target="_blank">Font Awesome 4</a>
         ，我们将其内置到了Admin UI中。
       </p>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
         Admin UI 1中的图标组件是基于
-        <a class="au-theme-font-color--info-3" href="http://ionicons.com/" target="_blank">Ionicons</a>
+        <a class="au-theme-color--info" href="http://ionicons.com/" target="_blank">Ionicons</a>
         ，但由于其图标数量较少，这一版本中我们替换了它，如果你仍旧希望使用，可以手动引入到项目中，然后通过组件的"custom"接口来使用
       </cite>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-icon class="icon-item au-theme-font-color--primary-3" type="home" size="48px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--success-3" type="heart" size="44px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--danger-3" type="globe" size="46px"></au-icon>
-        <au-icon class="icon-item au-theme-font-color--warning-3" type="user" size="46px"></au-icon>
+        <au-icon class="icon-item au-theme-color--primary" type="home" size="48px"></au-icon>
+        <au-icon class="icon-item au-theme-color--success" type="heart" size="44px"></au-icon>
+        <au-icon class="icon-item au-theme-color--danger" type="globe" size="46px"></au-icon>
+        <au-icon class="icon-item au-theme-color--warning" type="user" size="46px"></au-icon>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -41,15 +41,15 @@
           <tr>
             <td>type</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              <a class="au-theme-font-color--info-3" href="https://fontawesome.com/icons?d=listing&m=free" target="_blank">Font Awesome Icons</a><br>
+              <a class="au-theme-color--info" href="https://fontawesome.com/icons?d=listing&m=free" target="_blank">Font Awesome Icons</a><br>
               由于Font Awesome项目已经升级到5，其官网已经改版，建议优先参考：
-              <a class="au-theme-font-color--info-3" href="https://9iphp.com/fa-icons" target="_blank">第三方提供的Font Awesome Icons列表</a>
+              <a class="au-theme-color--info" href="https://9iphp.com/fa-icons" target="_blank">第三方提供的Font Awesome Icons列表</a>
             </td>
             <td>
               图标的类型（仅支持免费版的FontAwesome）
@@ -58,7 +58,7 @@
           <tr>
             <td>custom</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -71,7 +71,7 @@
           <tr>
             <td>size</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -90,7 +90,7 @@
           <tr>
             <td>color</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -105,7 +105,7 @@
           <tr>
             <td>unify-size</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -164,7 +164,7 @@
             </td>
           </tr>
         </tbody>
-        <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-5">.native</span>修饰符</cite>
+        <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">当需要监听除点击事件之外的其它事件时，请使用<span class="code au-theme-radius au-theme-background-color--warning-bottom">.native</span>修饰符</cite>
       </au-table>
     </au-panel>
     <au-panel class="section" title="Methods">

@@ -10,7 +10,7 @@
           <div slot="title-right">
             <au-icon type="bars"></au-icon>
           </div>
-          <p class="au-theme-font-color--base-3">
+          <p class="au-theme-color--base-3">
             Minim anim minim consectetur non veniam sint tempor ea irure aliqua reprehenderit. Adipisicing est ut elit elit. Et cillum anim aute do sunt exercitation anim excepteur incididunt.
           </p>
         </au-panel>
@@ -33,7 +33,7 @@
           <tr>
             <td>title</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -46,12 +46,12 @@
           <tr>
             <td>icon</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
             <td>
-              详情参考<router-link class="au-theme-font-color--info-3" :to="{name: 'icon'}">icon</router-link>组件
+              详情参考<router-link class="au-theme-color--info" :to="{name: 'icon'}">icon</router-link>组件
             </td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
@@ -146,7 +146,7 @@
           <div slot="title-right">
             <au-icon type="bars"></au-icon>
           </div>
-          <p class="au-theme-font-color--base-3">
+          <p class="au-theme-color--base-3">
             Minim anim minim consectetur non veniam sint tempor ea irure aliqua reprehenderit. Adipisicing est ut elit elit. Et cillum anim aute do sunt exercitation anim excepteur incididunt.
           </p>
         </au-panel>

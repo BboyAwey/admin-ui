@@ -107,7 +107,7 @@
   }
 </style>
 <template>
-  <div class="au-datepicker au-theme-font-color--base-3" :style="{display: !inline && fullWidth ? 'block' : ''}">
+  <div class="au-datepicker au-theme-color--base-3" :style="{display: !inline && fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -133,7 +133,7 @@
           :placeholder="placeholder"
           ref="core"/>
         <div
-          class="au-datepicker-popup-container au-theme-box-shadow--level-2"
+          class="au-datepicker-popup-container au-theme-box-shadow--base"
           :class="`au-sizegap-${size}`"
           v-show="popup"
           @blur="popupBlur"
@@ -141,10 +141,10 @@
           ref="popup">
           <div class="
             au-datepicker-dates-header
-            au-theme-font-color--base-12
+            au-theme-color--base-12
             au-theme-top-left-radius
             au-theme-top-right-radius
-            au-theme-background-color--primary-3">
+            au-theme-background-color--primary">
             <div class="au-datepicker-fastmoves">
               <table>
                 <tr>
@@ -192,12 +192,12 @@
                   v-for="(date, j) in row"
                   :key="j">
                   <span :class="{
-                    'au-theme-hover-border-color--primary-3': isValid(date) && !isSelected(date),
-                    'au-theme-background-color--primary-3 au-theme-font-color--base-12': isSelected(date),
-                    'au-theme-font-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
-                    'au-theme-font-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
-                    'au-theme-font-color--base-9': !isValid(date),
-                    'au-theme-font-color--primary-3': isToday(date) && !isSelected(date) && isValid(date),
+                    'au-theme-hover-border-color--primary': isValid(date) && !isSelected(date),
+                    'au-theme-background-color--primary au-theme-color--base-12': isSelected(date),
+                    'au-theme-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
+                    'au-theme-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
+                    'au-theme-color--base-9': !isValid(date),
+                    'au-theme-color--primary': isToday(date) && !isSelected(date) && isValid(date),
                   }" :style="{
                     cursor: isValid(date) ? '' : 'not-allowed'
                   }" @click="selectDate(date)">{{ isToday(date) ? '今天' : date.date }}</span>

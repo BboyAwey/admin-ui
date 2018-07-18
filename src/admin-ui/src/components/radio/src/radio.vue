@@ -65,15 +65,15 @@
         :class="{
           'au-theme-border-color--base-8': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
           'au-theme-background-color--base-8': disabled && radio.value!== localValue,
-          'au-theme-border-color--primary-3': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
-          'au-theme-border-color--danger-3': hasWarnings && !disabled
+          'au-theme-border-color--primary': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
+          'au-theme-border-color--danger': hasWarnings && !disabled
         }">
           <span v-show="radio.value === localValue"
             class="au-radio-dot"
             :class="{
               'au-radio-dot-disabled': disabled,
-              'au-theme-background-color--primary-3': !disabled && !hasWarnings,
-              'au-theme-background-color--danger-3': !disabled && hasWarnings,
+              'au-theme-background-color--primary': !disabled && !hasWarnings,
+              'au-theme-background-color--danger': !disabled && hasWarnings,
               'au-theme-background-color--base-10': disabled
             }"></span>
         </span>

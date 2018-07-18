@@ -112,23 +112,23 @@ export default {
         addClass(allTr[i], 'au-theme-border-color--base-8')
       }
       for (let i = 0; i < allTh.length; i++) {
-        addClass(allTh[i], 'au-theme-font-color--base-3')
+        addClass(allTh[i], 'au-theme-color--base-3')
       }
       for (let i = 0; i < allTd.length; i++) {
-        addClass(allTd[i], 'au-theme-font-color--base-3 au-theme-border-color--base-8')
+        addClass(allTd[i], 'au-theme-color--base-3 au-theme-border-color--base-8')
       }
 
       for (let i = 0; i < tfoot.length; i++) {
         let tds = tfoot[i].querySelectorAll('td')
         for (let i = 0; i < tds.length; i++) {
-          addClass(tds[i], 'au-theme-font-color--base-6')
+          addClass(tds[i], 'au-theme-color--base-6')
         }
       }
 
       for (let i = 0; i < thead.length; i++) {
         let ths = thead[i].querySelectorAll('th')
         for (let i = 0; i < ths.length; i++) {
-          addClass(ths[i], 'au-theme-font-color--base-6 au-theme-border-color--base-8')
+          addClass(ths[i], 'au-theme-color--base-6 au-theme-border-color--base-8')
         }
       }
 

@@ -21,7 +21,7 @@
     </au-panel>
     <au-panel class="section" title="Methods">
       <p class="paragraph">
-        Message组件本身就是一个方法，用于显示一些简单的提示信息。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-5">Message()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-5">$message()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-5">config</span>，其字段如下：
+        Message组件本身就是一个方法，用于显示一些简单的提示信息。如果是按需引入，则直接调用<span class="code au-theme-radius au-theme-background-color--warning-bottom">Message()</span>方法即可。如果是全局引入的Admin UI，则其会在Vue实例上注册<span class="code au-theme-radius au-theme-background-color--warning-bottom">$message()</span>方法（它是前者的别名）。方法接受一个表示选项的参数<span class="code au-theme-radius au-theme-background-color--warning-bottom">config</span>，其字段如下：
       </p>
       <au-table>
         <thead>
@@ -38,7 +38,7 @@
           <tr>
             <td>message</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -53,7 +53,7 @@
           <tr>
             <td>duration</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
@@ -105,7 +105,7 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              参考<router-link class="au-theme-font-color--info-3" :to="{path: '/icon'}" target="_blank">图标组件</router-link>
+              参考<router-link class="au-theme-color--info" :to="{path: '/icon'}" target="_blank">图标组件</router-link>
             </td>
             <td>
               消息图标<br>
@@ -115,7 +115,7 @@
           <tr>
             <td>closeable</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
@@ -133,7 +133,7 @@
           <tr>
             <td>customClass</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
@@ -149,7 +149,7 @@
 
       </au-table>
       <p class="paragraph">
-        <span class="code au-theme-radius au-theme-background-color--warning-5">Message()</span>方法返回一个<span class="code au-theme-radius au-theme-background-color--warning-5">Message</span>实例，它是一个Vue实例，可以让其监听<span class="code au-theme-radius au-theme-background-color--warning-5">close</span>事件。
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">Message()</span>方法返回一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">Message</span>实例，它是一个Vue实例，可以让其监听<span class="code au-theme-radius au-theme-background-color--warning-bottom">close</span>事件。
       </p>
     </au-panel>
     <au-panel class="section" title="使用示例">

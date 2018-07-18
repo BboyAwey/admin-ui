@@ -66,7 +66,7 @@
 }
 </style>
 <template>
-  <div class="au-tagfactory au-theme-font-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
+  <div class="au-tagfactory au-theme-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
     <form-item
       :label="label"
       :labelWidth="labelWidth"
@@ -80,13 +80,13 @@
         ref="body">
         <au-scroller
           ref="tagsContainer"
-          class="au-tagfactory-core au-theme-border-radius--normal"
+          class="au-tagfactory-core au-theme-border-radius--small"
           :class="{
             'au-theme-background-color--base-12': !disabled,
             'au-theme-background-color--base-9': disabled,
             'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
-            'au-theme-border-color--primary-3': !disabled && !hasWarnings && active,
-            'au-theme-border-color--danger-3': hasWarnings,
+            'au-theme-border-color--primary': !disabled && !hasWarnings && active,
+            'au-theme-border-color--danger': hasWarnings,
             'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
             'au-theme-box-shadow--danger': !disabled && active && hasWarnings
           }"
@@ -96,7 +96,7 @@
           }"
           @click.native.stop="handleClick">
           <div
-            class="au-tagfactory-placeholder au-theme-font-color--base-7"
+            class="au-tagfactory-placeholder au-theme-color--base-7"
             v-show="!localTags.length && !inputValue.length">
             {{ placeholder }}
           </div>
@@ -137,7 +137,7 @@
           <ul
             class="au-tagfactory-associations">
             <li
-              class="au-theme-hover-background-color--base-10 au-theme-font-color--primary-3"
+              class="au-theme-hover-background-color--base-10 au-theme-color--primary"
               v-show="canCreate && inputValue && associations.indexOf(inputValue) === -1"
               @click="handleAssociationClick(inputValue)"> {{ inputValue }} </li>
             <li

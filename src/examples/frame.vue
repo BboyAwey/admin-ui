@@ -4,7 +4,7 @@
       <p class="paragraph">
         一个带有头部、侧边栏、内容区和页尾的，用于快速布局的页面框架组件
       </p>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-font-color--base-5">
+      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
         示例请参考本页面
       </cite>
     </au-panel>
@@ -47,8 +47,8 @@
         </tbody>
       </au-table>
       <!-- <au-icon type="minus"></au-icon> -->
-      <cite class="cite au-theme-before-background-color--danger-5 au-theme-font-color--base-5">
-        注意，使用frame组件时，需要保证其所有祖先元素（包括body和html）的<span class="code au-theme-radius au-theme-background-color--warning-5">height</span>都为<span class="code au-theme-radius au-theme-background-color--warning-5">100%</span>
+      <cite class="cite au-theme-before-background-color--danger-bottom au-theme-color--base-5">
+        注意，使用frame组件时，需要保证其所有祖先元素（包括body和html）的<span class="code au-theme-radius au-theme-background-color--warning-bottom">height</span>都为<span class="code au-theme-radius au-theme-background-color--warning-bottom">100%</span>
       </cite>
     </au-panel>
     <au-panel class="section" title="Events">

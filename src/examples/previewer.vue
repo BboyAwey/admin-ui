@@ -27,7 +27,7 @@
           <tr>
             <td>images</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>
@@ -48,7 +48,7 @@
           <tr>
             <td>visible</td>
             <td>
-              <au-icon type="check" class="au-theme-font-color--success-3"></au-icon>
+              <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
             </td>
             <td>Boolean</td>
@@ -67,7 +67,7 @@
           <tr>
             <td>current</td>
             <td>
-              <!-- <au-icon type="check" class="au-theme-font-color--success-3"></au-icon> -->
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>Number</td>

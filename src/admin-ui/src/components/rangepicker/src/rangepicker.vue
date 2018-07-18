@@ -69,11 +69,11 @@
         <au-button slot="target" plain :size="size" :disabled="disabled">
           {{ type !== 'time' ? localRange.startDate : '' }}
           {{ type !== 'date' ? localRange.startTime : '' }}
-          <span class="au-theme-font-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? startPlaceholder : '' }}</span>
+          <span class="au-theme-color--base-7">{{ !(localRange.startDate || localRange.startTime) ? startPlaceholder : '' }}</span>
           至
           {{ type !== 'time' ? localRange.endDate : '' }}
           {{ type !== 'date' ? localRange.endTime : '' }}
-          <span class="au-theme-font-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? endPlaceholder : '' }}</span>
+          <span class="au-theme-color--base-7">{{ !(localRange.endDate || localRange.endTime) ? endPlaceholder : '' }}</span>
         </au-button>
         <div class="au-rangepicker-pop"  slot="content" ref="popContent">
           <div class="au-rangepicker-absolute" v-show="absolute" ref="absolute">
@@ -116,13 +116,13 @@
           </div>
           <div class="au-rangepicker-relative au-theme-border-color--base-8" v-show="relative && filteredRelatives.length">
             <!-- <div
-              class="au-rangepicker-relative-tag au-theme-font-color--base-3 au-theme-border-color--base-8"
+              class="au-rangepicker-relative-tag au-theme-color--base-3 au-theme-border-color--base-8"
               v-for="(item, i) in filteredRelatives" :key="i"
               :class="{
-                'au-theme-hover-font-color--primary-3': !isCurrent(item),
-                'au-theme-hover-border-color--primary-3': !isCurrent(item),
-                'au-theme-background-color--primary-3': isCurrent(item),
-                'au-theme-font-color--base-12': isCurrent(item)
+                'au-theme-hover-color--primary': !isCurrent(item),
+                'au-theme-hover-border-color--primary': !isCurrent(item),
+                'au-theme-background-color--primary': isCurrent(item),
+                'au-theme-color--base-12': isCurrent(item)
               }"
               :style="{
                 border: isCurrent(item) ? 'none' : ''

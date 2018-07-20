@@ -79,13 +79,13 @@
     @click="handleModalMaskingClick">
     <div class="au-modal-cell">
       <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" ref="modal">
-        <h4 class="au-modal-title au-theme-border-color--base-8" v-show="title" ref="title">{{ title }}</h4>
+        <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
           <au-scroller class="au-modal-content-scroller" stop-propagation>
             <slot></slot>
           </au-scroller>
         </div>
-        <div class="au-modal-dec-line au-theme-border-color--base-8" ref="decline"></div>
+        <div class="au-modal-dec-line au-theme-border-color--base-10" ref="decline"></div>
         <div class="au-modal-operations" v-show="buttonList.length" ref="operations">
           <au-button
             class="au-modal-button"

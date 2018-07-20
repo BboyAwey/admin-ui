@@ -57,7 +57,7 @@
           :style="{left}"
           :class="{
             'au-theme-background-color--base-12': !localDisabled,
-            'au-theme-background-color--base-9': localDisabled
+            'au-theme-background-color--base-11': localDisabled
           }" ref="core"></div>
       </div>
     </form-item>
@@ -81,7 +81,7 @@ export default {
   },
   data () {
     return {
-      bg: 'base-8',
+      bg: 'base-10',
       left: '2px',
       loadingIns: null
     }
@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     getBg () {
-      this.bg = this.localValue ? this.color + '-3' : 'base-8'
+      this.bg = this.localValue ? this.color : 'base-9'
     },
     getLeft () {
       if (this.localValue) {

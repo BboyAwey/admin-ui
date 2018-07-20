@@ -17,12 +17,12 @@
 <template>
   <ul class="au-breadcrumb au-theme-color--base-3">
     <li class="au-breadcrumb-item" v-for="(crumb, index) in localCrumbs" :key="index">
-      <span class="au-breadcrumb-separator au-theme-color--base-7" v-if="index" :class="separatorClass">{{ separator }}</span>
+      <span class="au-breadcrumb-separator au-theme-color--base-8" v-if="index" :class="separatorClass">{{ separator }}</span>
       <span
         class="au-breadcrumb-text"
         :class="{
           'au-theme-hover-color--primary': index != localCrumbs.length - 1 && crumb.url,
-          'au-theme-color--base-7': index == localCrumbs.length - 1 || !crumb.url
+          'au-theme-color--base-8': index == localCrumbs.length - 1 || !crumb.url
         }"
         :style="{
           cursor: (index != localCrumbs.length - 1 && crumb.url) ? 'pointer' : 'auto'

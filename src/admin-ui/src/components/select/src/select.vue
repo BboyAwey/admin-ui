@@ -123,8 +123,8 @@
             :class="{
               [`au-size-${size}-bordered`]: true,
               'au-theme-background-color--base-12': !disabled,
-              'au-theme-background-color--base-9': disabled,
-              'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
+              'au-theme-background-color--base-11': disabled,
+              'au-theme-border-color--base-10': disabled || (!hasWarnings && !active),
               'au-theme-border-color--primary': !disabled && !hasWarnings && active,
               'au-theme-border-color--danger': hasWarnings,
               'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
@@ -134,7 +134,7 @@
               cursor: disabled ? 'not-allowed' : 'default'
             }">
             <ul class="au-select-multiple" ref="selectMultiple">
-              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-color--base-7">{{ placeholder }}</li>
+              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-color--base-8">{{ placeholder }}</li>
               <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
               <li v-else v-for="(option, i) in selectedOptions" :key="i">
                 <span>{{ option.text }}</span>
@@ -153,12 +153,12 @@
         </div>
         <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
           <ul class="au-select-option" ref="options" :style="{paddingBottom: scrollTop < 32 ? 0 : '5px'}">
-            <li v-show="!options.length" class="empty-item au-theme-color--base-7">没有选项</li>
+            <li v-show="!options.length" class="empty-item au-theme-color--base-8">没有选项</li>
             <li
               v-for="(option, i) in options" :key="i"
               :class="{
                 'au-theme-color--primary': isSelected(option.value),
-                'au-theme-hover-background-color--base-10': !isSelected(option.value) && i !== tempSelectIndex,
+                'au-theme-hover-background-color--base-11': !isSelected(option.value) && i !== tempSelectIndex,
                 'au-theme-background-color--primary-bottom': i === tempSelectIndex
               }"
               @click.stop="select(option, $event)">{{ option.text }}</li>

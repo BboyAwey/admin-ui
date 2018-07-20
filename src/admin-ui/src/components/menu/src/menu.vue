@@ -136,7 +136,12 @@
       'collapse': localCollapse
     }" ref="self">
     <div
-      class="collapse-handle-top au-theme-border-color--base-8-important au-theme-color--base-3"
+      class="collapse-handle-top"
+      :class="{
+        [`au-theme-border-color--${collapseHandlebarSepratorColor || 'base-9'}-important`]: true,
+        [`au-theme-color--${itemFontColor || 'base-3'}`] : true,
+        [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`] : true
+      }"
       @click="toggle"
       v-if="collapsable && isTopLevel && collapseHandlebarPosition != 'bottom'">
       <au-icon type="angle-double-right" class="collapse-handle-icon" :style="{
@@ -166,7 +171,7 @@
                 :class="{
                   [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
                   [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
-                  [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
+                  [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'primary-bottom'}`]: !isItemActive(item),
                   [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
                   [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
                   [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
@@ -260,7 +265,7 @@
               :class="{
                 [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
                 [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
-                [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'base-10'}`]: !isItemActive(item),
+                [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'primary-bottom'}`]: !isItemActive(item),
                 [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
                 [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
                 [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
@@ -334,8 +339,9 @@
     <div
       class="collapse-handle-bottom"
       :class="{
-        [`au-theme-border-color--${collapseHandlebarSepratorColor || 'base-8'}-important`]: true,
-        [`au-theme-color--${itemFontColor || 'base-3'}`] : true
+        [`au-theme-border-color--${collapseHandlebarSepratorColor || 'base-10'}-important`]: true,
+        [`au-theme-color--${itemFontColor || 'base-3'}`] : true,
+        [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`] : true
       }"
       @click="toggle"
       v-if="collapsable && isTopLevel && collapseHandlebarPosition === 'bottom'">

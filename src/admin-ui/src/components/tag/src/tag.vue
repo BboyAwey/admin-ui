@@ -28,15 +28,15 @@
     cursor: hoverable ? 'pointer' : ''
   }">
     <slot></slot>
-    <span class="au-tag-close au-theme-color--base-7" v-show="closable" :class="{
-      [`au-theme-hover-color--${localType}-3`]: !active,
+    <span class="au-tag-close au-theme-color--base-3" v-show="closable" :class="{
+      [`au-theme-hover-color--${type}`]: !active,
       [`au-theme-hover-color--base-12`]: active
     }" @click="$emit('close', $event)"><au-icon class="au-tag-close-icon" type="times"/></span>
     <!-- <span class="au-tag-close au-theme-color--base-5" v-show="closable" :class="{
-      [`au-theme-hover-background-color--${localType}-3`]: !active,
+      [`au-theme-hover-background-color--${type}-3`]: !active,
       [`au-theme-hover-background-color--base-12`]: active,
       [`au-theme-hover-color--base-12`]: !active,
-      [`au-theme-hover-color--${localType}-3`]: active
+      [`au-theme-hover-color--${type}-3`]: active
     }" @click="$emit('close')"><au-icon class="au-tag-close-icon" type="times"/></span> -->
   </div>
 </template>
@@ -48,7 +48,20 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary'
+      default: 'primary',
+      validator (v) {
+        switch (v) {
+          case 'primary':
+          case 'info':
+          case 'danger':
+          case 'warning':
+          case 'success':
+            return true
+          default:
+            console.error(`Admin UI @ tag @ type of tag should be primary, info, danger, warning, or success. The default type is primary.`)
+            return false
+        }
+      }
     },
     closable: Boolean,
     hoverable: Boolean,
@@ -62,22 +75,18 @@ export default {
     return {}
   },
   computed: {
-    localType () {
-      if (this.type === 'default') return 'base'
-      else return this.type
-    },
     classes () {
       let normal = ''
       let hover = ''
       let size = this.size ? `au-size-${this.size}${this.active ? '' : '-bordered'}` : ''
       if (this.active) {
-        normal = `au-theme-color--base-12 au-theme-background-color--${this.localType}-3`
+        normal = `au-theme-color--base-12 au-theme-background-color--${this.type}`
       } else {
         if (this.hoverable) {
           normal = 'au-theme-border-color--base-8 au-theme-color--base-3'
-          hover = `au-theme-hover-border-color--${this.localType}-3 au-theme-hover-color--${this.localType}-3`
+          hover = `au-theme-hover-border-color--${this.type} au-theme-hover-color--${this.type}`
         } else {
-          normal = `au-theme-border-color--${this.localType}-3 au-theme-color--${this.localType}-3`
+          normal = `au-theme-border-color--${this.type} au-theme-color--${this.type}`
         }
       }
 

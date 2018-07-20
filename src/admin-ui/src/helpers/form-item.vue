@@ -30,7 +30,7 @@
     <div :class="`au-form-item-main${inline ? '-inline' : '-block'}`">
       <slot></slot>
       <div class="au-form-warning au-theme-color--danger" v-for="(warning, i) in warnings" :key="warning + '' + i">{{ warning }}</div>
-      <div class="au-form-warning au-theme-color--base-7" v-for="(tip, i) in tips" :key="tip + '' + i">{{ tip }}</div>
+      <div class="au-form-warning au-theme-color--base-11" v-for="(tip, i) in tips" :key="tip + '' + i">{{ tip }}</div>
     </div>
   </div>
 </template>

@@ -100,12 +100,12 @@
 <template>
   <!-- <div
     class="au-popover au-theme-border-radius--small au-theme-box-shadow--base"
-    :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+    :class="{'au-popover-plain au-theme-border-color--base-11': plain}"
     :tabindex="_uid"
     @blur="handleBlur($event)" -->
   <div
     class="au-popover au-theme-border-radius--small au-theme-box-shadow--base"
-    :class="{'au-popover-plain au-theme-border-color--base-8': plain}"
+    :class="{'au-popover-plain au-theme-border-color--base-10': plain}"
     :tabindex="_uid"
     ref="pop">
     <slot name="target"></slot>
@@ -115,7 +115,7 @@
       'au-theme-background-color--base-2': !plain,
       'au-theme-color--base-12': !plain,
       'au-theme-background-color--base-12': plain,
-      'au-theme-border-color--base-8': plain,
+      'au-theme-border-color--base-10': plain,
       'au-theme-color--base-3': plain}">
       <slot name="content"></slot>
     </div>
@@ -126,7 +126,7 @@
         [localPlacement.split(/\s+/).join('-')]: true,
         'au-theme-background-color--base-2': !plain,
         'au-theme-background-color--base-12': plain,
-        'au-popover-plain-triangle au-theme-border-color--base-8': plain}"></span>
+        'au-popover-plain-triangle au-theme-border-color--base-10': plain}"></span>
   </div>
 </template>
 <script>

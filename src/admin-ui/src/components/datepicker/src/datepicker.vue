@@ -184,7 +184,7 @@
           </div>
           <div class="
             au-datepicker-dates-body
-            au-theme-border-color--base-8
+            au-theme-border-color--base-9
             au-theme-background-color--base-12">
             <table class="au-datepicker-dates-table">
               <tr v-for="(row, i) in dates" :key="i">
@@ -195,8 +195,8 @@
                     'au-theme-hover-border-color--primary': isValid(date) && !isSelected(date),
                     'au-theme-background-color--primary au-theme-color--base-12': isSelected(date),
                     'au-theme-color--base-3': !isToday(date) && renderedDateObj.month === date.month,
-                    'au-theme-color--base-5': isValid(date) && renderedDateObj.month !== date.month,
-                    'au-theme-color--base-9': !isValid(date),
+                    'au-theme-color--base-8': isValid(date) && renderedDateObj.month !== date.month,
+                    'au-theme-color--base-11': !isValid(date),
                     'au-theme-color--primary': isToday(date) && !isSelected(date) && isValid(date),
                   }" :style="{
                     cursor: isValid(date) ? '' : 'not-allowed'

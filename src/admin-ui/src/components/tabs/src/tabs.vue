@@ -1,13 +1,13 @@
 <template>
   <div class="au-tabs">
-    <div class="au-tabs-nav au-theme-border-color--base-8" v-show="tabs && tabs.length">
+    <div class="au-tabs-nav au-theme-border-color--base-10" v-show="tabs && tabs.length">
       <ul>
         <li
           v-for="(tab, index) in tabs"
           :key="index"
           :class="{
             'au-theme-hover-color--primary': true,
-            'au-theme-color--base-7': tab.name !== localCurrent,
+            'au-theme-color--base-8': tab.name !== localCurrent,
             'au-tabs-active au-theme-color--base-3 au-theme-border-color--primary': tab.name == localCurrent
           }"
           :name="['tab-'+tab.name]"
@@ -16,7 +16,7 @@
           <au-icon v-show="canRemove && tabs.length > 1" @click.native.stop="remove(index, tab)" class="au-tabs-btn au-tabs-delete-btn au-theme-color--base-3 au-theme-hover-color--danger" type="times"></au-icon>
           <au-icon v-show="canRename" @click.native.stop="rename(index, tab)" class="au-tabs-btn au-tabs-rename-btn au-theme-color--base-3 au-theme-hover-color--info" type="pencil"></au-icon>
         </li>
-        <li v-show="canCreate" class="au-theme-color--base-7 au-theme-hover-color--primary" @click="create">
+        <li v-show="canCreate" class="au-theme-color--base-8 au-theme-hover-color--primary" @click="create">
           <au-icon type="plus"></au-icon>
         </li>
       </ul>

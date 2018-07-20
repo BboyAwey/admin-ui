@@ -62,14 +62,14 @@
   <div class="au-paginator">
     <ul>
       <li class="
-        au-theme-border-color--base-8
+        au-theme-border-color--base-9
         au-theme-color--base-3
         au-theme-border-radius--large"
         :class="{
           'disabled': !canPrev,
-          'au-theme-border-color--base-8': true,
+          'au-theme-border-color--base-9': true,
           'au-theme-color--base-3': canPrev,
-          'au-theme-color--base-6': !canPrev,
+          'au-theme-color--base-8': !canPrev,
           'au-theme-background-color--base-10': !canPrev,
           'au-theme-hover-color--primary': canPrev,
           'au-theme-hover-border-color--primary': canPrev
@@ -85,7 +85,7 @@
           'ellipsis': num == '···',
           'au-theme-color--base-12': num == localCurrent,
           'au-theme-background-color--primary': num == localCurrent,
-          'au-theme-border-color--base-8': num != localCurrent,
+          'au-theme-border-color--base-9': num != localCurrent,
           'au-theme-color--base-3': num != localCurrent,
           'au-theme-background-color--base-12': num != localCurrent,
           'au-theme-hover-border-color--primary': num != localCurrent,
@@ -96,14 +96,14 @@
           <span class="fast-ward"><au-icon :type="i < nums.indexOf(localCurrent) ? 'angle-double-left' : 'angle-double-right'" /></span>
         </li>
       <li class="
-        au-theme-border-color--base-8
+        au-theme-border-color--base-9
         au-theme-color--base-3
         au-theme-border-radius--large"
         :class="{
           'disabled': !canNext,
-          'au-theme-border-color--base-8': true,
+          'au-theme-border-color--base-9': true,
           'au-theme-color--base-3': canNext,
-          'au-theme-color--base-6': !canNext,
+          'au-theme-color--base-8': !canNext,
           'au-theme-background-color--base-10': !canNext,
           'au-theme-hover-color--primary': canNext,
           'au-theme-hover-border-color--primary': canNext

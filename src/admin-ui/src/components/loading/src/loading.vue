@@ -42,7 +42,7 @@
 </style>
 <template>
   <div class="au-loading" :class="{
-    [`au-theme-color--${color}-3`]: true,
+    [`au-theme-color--${color}`]: true,
   }">
     <div class="au-loading-mask au-theme-background-color--base-12" v-show="mask"></div>
     <div class="au-loading-core-container" ref="coreContainer">

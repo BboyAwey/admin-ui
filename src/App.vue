@@ -12,7 +12,7 @@
 </style>
 
 <template>
-  <div id="app" class="au-theme-background-color--base-10">
+  <div id="app" class="au-theme-background-color--base-11">
     <au-frame>
       <div slot="header">
         <!-- <h3 class="banner">Admin UI 2</h3> -->

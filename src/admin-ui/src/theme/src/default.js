@@ -21,10 +21,10 @@ export default {
   },
   prefix: 'au-theme', // 样式类的前缀
   lightnessReverse: false, // 反转lightness排序（黑白主题）
-  colorTopBottom: 10, // top和bottom颜色距离纯黑和纯白的lightness的距离，越小越接近纯黑纯白
+  colorTopBottom: 5, // top和bottom颜色距离纯黑和纯白的lightness的距离，越小越接近纯黑纯白
   colorUpDown: 10, // 彩色上下接近色与正色的lightness距离
   baseColorLeve: 12, // 无彩色分级数量
-  baseColorHue: '18%', // 无彩色饱和度
+  baseColorHue: '20%', // 无彩色饱和度
   baseShadowOpacity: 0.2, // 无彩色阴影不透明度
   colorShadowOpacity: 0.6 // 彩色阴影不透明度
 }

@@ -6,7 +6,6 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-tag type="default" size="large">标签</au-tag>
         <au-tag type="primary" hoverable>标签</au-tag>
         <au-tag type="danger" size="small">标签</au-tag>
         <au-tag type="info" size="mini">标签</au-tag>
@@ -38,7 +37,6 @@
             <td>primary</td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">default</li>
                 <li class="au-theme-border-color--base-8">primary</li>
                 <li class="au-theme-border-color--base-8">danger</li>
                 <li class="au-theme-border-color--base-8">warning</li>

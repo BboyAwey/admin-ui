@@ -1,8 +1,6 @@
 <style lang="scss">
   @import '../../../style/vars';
   .au-table {
-    // margin: 8px 0;
-    // border-radius: 4px;
     // the border around table
     // every tr except the last one in tbody has a bottom line
     width: 100%;
@@ -10,7 +8,6 @@
     tbody > tr,
     tfoot > tr:not(:last-child),
     thead > tr {
-      // border-bottom: 1px solid $grayBrighten15;
       border-bottom-width: 1px;
       border-bottom-style: solid;
     }
@@ -19,42 +16,25 @@
       text-align: left;
     }
     th {
-      // color: $grayDarken25;
       font-size: $normal;
     }
     td {
-      // color: $grayDarken45;
       font-size: $normal;
     }
     tfoot td:only-child {
-      // color: $grayDarken25;
       font-size: $small;
       text-align: right;
     }
-    tfoot td:not(:only-child) {
-      // color: $grayDarken25;
-    }
-    tbody > tr:hover {
-      // background-color: $grayBrighten20;
-    }
   }
-  // stripe table
-  .au-striped {
-    tbody>tr:nth-child(2n) {
-      // background-color: rgba($grayBrighten20, .3);
-    }
-  }
+
   .au-bordered {
-    // border: 1px solid $grayBrighten15;
     border-width: 1px;
     border-style: solid;
     th:not(:last-child), td:not(:last-child) {
-      // border-right: 1px solid $grayBrighten15;
       border-right-width: 1px;
       border-right-style: solid;
     }
     thead > tr:last-child, tbody > tr:last-child {
-      // border-bottom-color: $grayBrighten10;
       border-bottom-width: 1px;
       border-bottom-style: solid;
     }
@@ -63,7 +43,7 @@
 
 <template>
   <table class="
-    au-table au-theme-border-color--base-8
+    au-table au-theme-border-color--base-9
     au-theme-background-color--base-12"
     :class="{ 'au-bordered' : bordered }" ref="table">
     <slot></slot>
@@ -109,26 +89,26 @@ export default {
       // let tbodyTr = tbody.querySelectorAll('tr')
       // let tfootTr = tfoot.querySelectorAll('tr')
       for (let i = 0; i < allTr.length; i++) {
-        addClass(allTr[i], 'au-theme-border-color--base-8')
+        addClass(allTr[i], 'au-theme-border-color--base-9')
       }
       for (let i = 0; i < allTh.length; i++) {
         addClass(allTh[i], 'au-theme-color--base-3')
       }
       for (let i = 0; i < allTd.length; i++) {
-        addClass(allTd[i], 'au-theme-color--base-3 au-theme-border-color--base-8')
+        addClass(allTd[i], 'au-theme-color--base-3 au-theme-border-color--base-9')
       }
 
       for (let i = 0; i < tfoot.length; i++) {
         let tds = tfoot[i].querySelectorAll('td')
         for (let i = 0; i < tds.length; i++) {
-          addClass(tds[i], 'au-theme-color--base-6')
+          addClass(tds[i], 'au-theme-color--base-7')
         }
       }
 
       for (let i = 0; i < thead.length; i++) {
         let ths = thead[i].querySelectorAll('th')
         for (let i = 0; i < ths.length; i++) {
-          addClass(ths[i], 'au-theme-color--base-6 au-theme-border-color--base-8')
+          addClass(ths[i], 'au-theme-color--base-7 au-theme-border-color--base-9')
         }
       }
 
@@ -136,7 +116,7 @@ export default {
         for (let i = 0; i < tbody.length; i++) {
           let trs = table.querySelectorAll('tbody > tr')
           for (let i = 0; i < trs.length; i++) {
-            addClass(trs[i], 'au-theme-hover-background-color--base-10')
+            addClass(trs[i], 'au-theme-hover-background-color--primary-bottom')
           }
           if (this.striped) {
             for (let i = 0; i < trs.length; i++) {
@@ -146,7 +126,7 @@ export default {
         }
       } else {
         for (let i = 0; i < allTr.length; i++) {
-          if (allTr[i].parentNode === table) addClass(allTr[i], 'au-theme-hover-background-color--base-10')
+          if (allTr[i].parentNode === table) addClass(allTr[i], 'au-theme-hover-background-color--primary-bottom')
         }
         if (this.striped) {
           for (let i = 0; i < allTr.length; i++) {
@@ -157,12 +137,12 @@ export default {
 
       if (thead.length) {
         for (let i = 0; i < thead.length; i++) {
-          addClass(thead[i].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important')
+          addClass(thead[i].querySelector('tr:last-child'), 'au-theme-border-color--base-9-important')
         }
       }
       if (tbody.length && tfoot.length) {
         for (let i = 0; i < tbody.length; i++) {
-          addClass(tbody[i].querySelector('tr:last-child'), 'au-theme-border-color--base-6-important')
+          addClass(tbody[i].querySelector('tr:last-child'), 'au-theme-border-color--base-9-important')
         }
       }
     },

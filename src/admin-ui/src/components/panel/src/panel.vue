@@ -46,14 +46,14 @@
     class="
       au-panel
       au-theme-background-color--base-12
-      au-theme-border-color--base-8
+      au-theme-border-color--base-10
       au-theme-color--base-3
       au-theme-border-radius--large
       ">
     <h3 v-if="title"
       class="
         au-panel-title
-        au-theme-border-color--base-8
+        au-theme-border-color--base-10
         au-theme-color--base-3">
         <au-icon class="au-panel-title-icon" v-if="icon" :type="icon"></au-icon>
         <span class="au-panel-title-text">{{ title }}</span>

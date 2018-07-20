@@ -63,8 +63,8 @@
         @click="handleClick(radio.value)">
         <span class="au-radio-core" tabindex="0"
         :class="{
-          'au-theme-border-color--base-8': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
-          'au-theme-background-color--base-8': disabled && radio.value!== localValue,
+          'au-theme-border-color--base-9': (!hasWarnings && !hovers[i] && radio.value!== localValue) || disabled,
+          'au-theme-background-color--base-11': disabled && radio.value!== localValue,
           'au-theme-border-color--primary': ((!hasWarnings && hovers[i]) || radio.value === localValue) && !disabled,
           'au-theme-border-color--danger': hasWarnings && !disabled
         }">
@@ -74,7 +74,7 @@
               'au-radio-dot-disabled': disabled,
               'au-theme-background-color--primary': !disabled && !hasWarnings,
               'au-theme-background-color--danger': !disabled && hasWarnings,
-              'au-theme-background-color--base-10': disabled
+              'au-theme-background-color--base-11': disabled
             }"></span>
         </span>
         <span class="au-radio-text">{{ radio.text }}</span>

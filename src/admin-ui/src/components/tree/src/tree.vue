@@ -138,7 +138,7 @@ export default {
             'i', {
               class: {
                 'tree-menu-open': true,
-                'au-theme-color--base-7': true,
+                'au-theme-color--base-8': true,
                 'fa': true,
                 'fa-chevron-down': item.showChildren,
                 'fa-chevron-right': !item.showChildren
@@ -181,7 +181,7 @@ export default {
               {
                 class: {
                   'tree-menu-open': true,
-                  'au-theme-color--base-7': true,
+                  'au-theme-color--base-8': true,
                   'fa': true,
                   'fa-chevron-down': item.showChildren,
                   'fa-chevron-right': !item.showChildren

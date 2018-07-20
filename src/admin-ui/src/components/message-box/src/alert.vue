@@ -24,7 +24,7 @@
     <div class="au-message-box-icon-container" v-show="iconType">
       <au-icon
         class="au-message-box-icon au-theme-color--base-12"
-        :class="`au-theme-background-color--${messageType || 'info'}-3`"
+        :class="`au-theme-background-color--${messageType || 'info'}`"
         :type="iconType"></au-icon>
     </div>
     <div

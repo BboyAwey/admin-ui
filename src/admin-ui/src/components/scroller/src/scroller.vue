@@ -31,17 +31,17 @@
   .au-scroller-bar,
   .au-scroller-bar-core {
     right: 1px;
-    width: 6px;
+    width: 3px;
     height: 100%;
-    border-radius: 12px;
-    opacity: .3;
+    border-radius: 6px;
+    opacity: .2;
     transition-property: top, width, opacity;
     transition-duration: .3s;
     transition-timing-function: ease-out;
     cursor: pointer;
   }
   .au-scroller-bar-core {
-     opacity: .5;
+     opacity: .4;
   }
   .au-no-select * {
     user-select: none;
@@ -65,9 +65,9 @@
       @mouseleave="handleBarMouseleave"
       v-show="(mouseenter && needScroll) || onDrag"
       ref="barContainer">
-      <div class="au-scroller-bar au-theme-background-color--base-1" ref="bar" @click="handleBarClick"></div>
+      <div class="au-scroller-bar au-theme-background-color--base-0" ref="bar" @click="handleBarClick"></div>
       <div
-        class="au-scroller-bar-core au-theme-background-color--base-1"
+        class="au-scroller-bar-core au-theme-background-color--base-0"
         ref="core"
         :style="{ top: scrollCoreTop + 'px', height: coreHeight + 'px' }"
         @mousedown="handleCoreMousedown"
@@ -200,8 +200,10 @@ export default {
     },
     handleMouseenter () {
       this.mouseenter = true
-      this.$refs.bar.style.opacity = '.3'
-      this.$refs.core.style.opacity = '.5'
+      this.$refs.bar.style.opacity = '.2'
+      this.$refs.core.style.opacity = '.4'
+      this.$refs.bar.style.borderRadius = '3px'
+      this.$refs.core.style.borderRadius = '3px'
       let monitorHeight = getElementSize(this.$refs.monitor).height
       this.setBarHeight(monitorHeight)
       this.calcCoreHeight(
@@ -232,14 +234,18 @@ export default {
     },
     handleBarMouseenter () {
       this.onOver = true
-      this.$refs.bar.style.width = '12px'
-      this.$refs.core.style.width = '12px'
+      this.$refs.bar.style.width = '8px'
+      this.$refs.core.style.width = '8px'
+      this.$refs.bar.style.borderRadius = '6px'
+      this.$refs.core.style.borderRadius = '6px'
     },
     handleBarMouseleave () {
       this.onOver = false
       if (!this.onDrag) {
-        this.$refs.bar.style.width = '6px'
-        this.$refs.core.style.width = '6px'
+        this.$refs.bar.style.width = '3px'
+        this.$refs.core.style.width = '3px'
+        this.$refs.bar.style.borderRadius = '3px'
+        this.$refs.core.style.borderRadius = '3px'
       }
     },
     handleCoreMousedown (e) {
@@ -264,8 +270,8 @@ export default {
       window.removeEventListener('mousemove', this.handleMousemove)
       window.removeEventListener('mouseup', this.handleCoreMouseUp)
       if (!this.onOver) {
-        this.$refs.bar.style.width = '6px'
-        this.$refs.core.style.width = '6px'
+        this.$refs.bar.style.width = '3px'
+        this.$refs.core.style.width = '3px'
       }
       this.$refs.core.style.transitionDuration = '.3s'
       this.$refs.content.style.transitionDuration = '.3s'

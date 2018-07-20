@@ -30,7 +30,7 @@
   .au-button:disabled > .after-mask {
     opacity: .5;
   }
-  .au-button:not(.plain):not(:disabled):focus > .before-mask,
+  // .au-button:not(.plain):not(:disabled):focus > .before-mask,
   .au-button:not(.plain):not(:disabled):hover > .before-mask {
     opacity: .15;
   }
@@ -117,7 +117,7 @@ export default {
         res = [
           `plain`,
           `au-theme-background-color--base-12`,
-          `au-theme-border-color--base-8`,
+          `au-theme-border-color--base-9`,
           this.canActivate ? `au-theme-hover-border-color--${this.isDefault ? 'primary' : this.type}` : '',
           // this.canActivate ? `au-theme-focus-border-color--${this.isDefault ? 'primary' : this.type}-3` : '',
           this.canActivate ? `au-theme-active-border-color--${this.isDefault ? 'primary' : this.type}-down-important` : '',

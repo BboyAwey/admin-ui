@@ -83,8 +83,8 @@
           class="au-tagfactory-core au-theme-border-radius--small"
           :class="{
             'au-theme-background-color--base-12': !disabled,
-            'au-theme-background-color--base-9': disabled,
-            'au-theme-border-color--base-8': disabled || (!hasWarnings && !active),
+            'au-theme-background-color--base-11': disabled,
+            'au-theme-border-color--base-9': disabled || (!hasWarnings && !active),
             'au-theme-border-color--primary': !disabled && !hasWarnings && active,
             'au-theme-border-color--danger': hasWarnings,
             'au-theme-box-shadow--primary': !disabled && active && !hasWarnings,
@@ -96,7 +96,7 @@
           }"
           @click.native.stop="handleClick">
           <div
-            class="au-tagfactory-placeholder au-theme-color--base-7"
+            class="au-tagfactory-placeholder au-theme-color--base-11"
             v-show="!localTags.length && !inputValue.length">
             {{ placeholder }}
           </div>
@@ -130,23 +130,24 @@
         </au-scroller>
         <au-scroller class="
           au-tagfactory-associations-container
-          au-theme-border-color--base-8
+          au-theme-border-color--base-11
           au-theme-background-color--base-12"
           v-show="(associationsShow && localAssociations.length) || (canCreate && inputValue && active)"
-          ref="associationsContainer">
+          ref="associationsContainer"
+          :scroll-top="associationsScrollTop" @scroll="v => associationsScrollTop = v">
           <ul
             class="au-tagfactory-associations">
             <li
-              class="au-theme-hover-background-color--base-10 au-theme-color--primary"
+              class="au-theme-hover-background-color--base-11 au-theme-color--primary"
               v-show="canCreate && inputValue && associations.indexOf(inputValue) === -1"
               @click="handleAssociationClick(inputValue)"> {{ inputValue }} </li>
             <li
-              class="au-theme-hover-background-color--base-10"
               v-for="(association, i) in localAssociations"
               :key="i"
               :class="{
-                'au-theme-background-color--base-10': activeAssociationIndex === i + 1
+                'au-theme-background-color--primary-bottom': activeAssociationIndex === i + 1
               }"
+              @mousemove="activeAssociationIndex = i + 1"
               @click="handleAssociationClick(association)">
               {{ association }}
             </li>
@@ -224,7 +225,8 @@ export default {
       associationsShow: false,
       activeAssociationIndex: 0,
       active: false,
-      loadingInstance: null
+      loadingInstance: null,
+      associationsScrollTop: 0
     }
   },
   computed: {
@@ -296,6 +298,13 @@ export default {
           this.loadingInstance.close()
           this.loadingInstance = null
         }
+      }
+    },
+    activeAssociationIndex (v) {
+      if (v * 32 + 4 > this.associationsScrollTop + 8 * 32) {
+        this.associationsScrollTop = (v - 7) * 32
+      } else if ((v - 1) * 32 < this.associationsScrollTop) {
+        this.associationsScrollTop = (v - 1) * 32
       }
     }
   },

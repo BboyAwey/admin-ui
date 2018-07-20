@@ -63,13 +63,12 @@
         }">
         <span class="au-checkbox-core au-theme-border-radius--small" tabindex="0"
         :class="{
-          'au-theme-border-color--base-8': !hasWarnings && !hover && !localValue && !localIndeterminate,
-          'au-theme-border-color--base-9': disabled && (localValue || localIndeterminate),
+          'au-theme-border-color--base-9': (!hasWarnings && !hover && !localValue && !localIndeterminate) || (disabled && (localValue || localIndeterminate)),
           'au-theme-border-color--primary': !hasWarnings && hover && !localValue && !disabled,
           'au-theme-border-color--danger': hasWarnings && !localValue &&!disabled,
           'au-theme-background-color--primary': !hasWarnings && (localValue || localIndeterminate) && !disabled,
           'au-theme-background-color--danger': hasWarnings && (localValue || localIndeterminate) && !disabled,
-          'au-theme-background-color--base-9': disabled
+          'au-theme-background-color--base-11': disabled
         }"
         :style="{
           border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
@@ -99,13 +98,12 @@
         @click="handleClick(i)">
         <span class="au-checkbox-core au-theme-border-radius--small" tabindex="0"
         :class="{
-          'au-theme-border-color--base-8': !hasWarnings && !checkbox.hover && !checkbox.checked,
-          'au-theme-border-color--base-9': disabled && localValue,
+          'au-theme-border-color--base-9': (!hasWarnings && !checkbox.hover && !checkbox.checked) || (disabled && localValue),
           'au-theme-border-color--primary': !hasWarnings && checkbox.hover && !checkbox.checked,
           'au-theme-border-color--danger': hasWarnings && !checkbox.checked && !disabled,
           'au-theme-background-color--primary': !hasWarnings && checkbox.checked && !disabled,
           'au-theme-background-color--danger': hasWarnings && checkbox.checked && !disabled,
-          'au-theme-background-color--base-9': disabled
+          'au-theme-background-color--base-11': disabled
         }"
         :style="{
           border: checkbox.checked && !disabled ? 'none' : ''

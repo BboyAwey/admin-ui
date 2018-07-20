@@ -46,7 +46,6 @@
       float: left;
       width: 64px;
       height: 64px;
-      border-radius: 2px;
       line-height: 64px;
       font-size: 16px;
       text-align: center;
@@ -115,7 +114,8 @@
       right: 8px;
     }
     .au-upload-desc-core {
-      width: 75%;
+      // width: 75%;
+      margin-top: 5px;
       margin-bottom: 6px;
     }
     .au-upload-file-edit-icon {
@@ -134,7 +134,6 @@
     .au-upload-progress-bar, .au-upload-progress-bar-core {
       display: block;
       height: 4px;
-      border-radius: 4px;
       margin-top: 4px;
     }
     .au-upload-progress-bar-core {
@@ -200,7 +199,7 @@
         @mouseleave="mouseenter = false"
         :class="{'au-upload-desc-mode': editingStatus[index]}"
         class="
-          au-theme-border-color--base-8
+          au-theme-border-color--base-10
           au-theme-background-color--base-12
           au-theme-hover-background-color--base-11
           au-theme-border-radius--small
@@ -208,9 +207,10 @@
         <div
           class="
             au-upload-preview-icon
+            au-theme-border-radius--small
           "
           :class="{
-            'au-theme-background-color--base-8': !file.url,
+            'au-theme-background-color--base-9': !file.url,
             'au-theme-background-color--primary': file.url
           }"
           v-show="!(autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64))">
@@ -221,7 +221,7 @@
             }"
             class="
               au-upload-preview-default-icon
-              au-theme-before-radius
+              au-theme-before-border-radius--small
               au-theme-before-background-color--base-12
           ">{{ file.extension.toUpperCase().substring(0, 4) }}</div>
         </div>
@@ -234,7 +234,7 @@
           <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
           <span class="au-upload-file-description"
             :class="{
-              'au-theme-color--base-7': !value[index] && !file.description || (value[index] && !value[index].description),
+              'au-theme-color--base-8': !value[index] && !file.description || (value[index] && !value[index].description),
               'au-upload-inline-desc': listType === 'inline'
             }"
             v-show="canDescribe && !editingStatus[index]">
@@ -250,8 +250,7 @@
             class="
               au-upload-file-operation-icon
               au-upload-file-desc-icon
-              au-theme-background-color--base-12
-              au-theme-color--base-6
+              au-theme-color--base-8
               au-theme-hover-color--base-3"
             type="pencil"
             v-show="canDescribe && !editingStatus[index]"
@@ -261,14 +260,13 @@
               au-upload-file-operation-icon
               au-upload-file-desc-icon
               au-upload-desc-icon-editing
-              au-theme-background-color--base-12
-              au-theme-color--base-6
+              au-theme-color--base-8
               au-theme-hover-color--base-3"
             type="check"
             v-show="canDescribe && editingStatus[index]"
             @click.native="checkDescEditingMode(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing au-theme-background-color--base-12 au-theme-color--base-6 au-theme-hover-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3"
             type="times"
             v-show="canDescribe && editingStatus[index]"
             @click.native="cancelDescEditingMode(index)"/>
@@ -290,12 +288,12 @@
         </p>
         <span class="au-upload-file-edit-icon-container">
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-6 au-theme-hover-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-11 au-theme-hover-color--base-3"
             type="close"
             v-show="canRemove"
             @click.native="remove(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-color--base-6 au-theme-hover-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-color--base-11 au-theme-hover-color--base-3"
             type="cloud-download"
             v-show="canDownload && file.url"
             @click.native="download(file, index)"/>

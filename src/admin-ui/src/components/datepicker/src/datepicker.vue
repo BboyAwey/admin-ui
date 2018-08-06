@@ -124,7 +124,7 @@
           icon="calendar"
           @focus="coreFocus"
           @blur="coreBlur"
-          :width="width || '116px'"
+          :width="width || '120px'"
           :inline="false"
           :fullfill-with="!inline && fullWidth"
           :size="size"

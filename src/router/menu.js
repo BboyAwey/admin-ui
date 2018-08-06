@@ -15,6 +15,11 @@ export default [
     'icon': 'th-large'
   },
   {
+    'text': '更新日志',
+    'url': '/change-log',
+    'icon': 'info-circle'
+  },
+  {
     'text': '组件',
     'icon': 'cube',
     'collapse': false,
@@ -144,10 +149,5 @@ export default [
         'url': '/tagfactory'
       }
     ]
-  },
-  {
-    'text': '更新日志',
-    'url': '/change-log',
-    'icon': 'info-circle'
   }
 ]

@@ -28,7 +28,7 @@
   white-space: nowrap;
   vertical-align: middle;
   .au-tagfactory-input-core {
-    width: 2px;
+    width: 5px;
     outline: none;
     border: none;
     vertical-align: middle;

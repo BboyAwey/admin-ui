@@ -1,5 +1,18 @@
 <template>
   <div class="page">
+    <au-panel class="section" title="Todo List 【置顶】">
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">栅格系统增加边距支持</li>
+        <li class="au-theme-border-color--base-8">目前表格组件仅是样式，无任何功能封装，需要重构表格组件</li>
+        <li class="au-theme-border-color--base-8">新增标签页的第二种样式</li>
+      </ol>
+    </au-panel>
+    <au-panel class="section" title="3.1.6">
+      <h3 class="title-1">## 特性变更</h3>
+      <ol class="option-list">
+        <li class="au-theme-border-color--base-8">简化主体系统配置项，增强相关色的名称语义，现在无彩色和相关色已经不需要配置了，系统会自动计算</li>
+      </ol>
+    </au-panel>
     <au-panel class="section" title="3.1.3">
       <h3 class="title-1">## 新增特性</h3>
       <ol class="option-list">

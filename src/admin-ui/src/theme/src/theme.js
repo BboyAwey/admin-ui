@@ -5,7 +5,7 @@ import defaultConfig from './default'
 function isObject (obj, name) {
   let res = typeof obj === 'object'
   if (!res) {
-    console.log(`Admin UI @ theme-system @ theme config ${name || ''} should be an object`)
+    console.error(`Admin UI @ theme-system @ theme config ${name || ''} should be an object`)
   }
   return res
 }

@@ -9,65 +9,95 @@
       </cite>
     </au-panel>
     <au-panel class="section">
-      <h4 class="title-1">自定义主题</h4>
+      <h4 class="title-1">主题配置项</h4>
       <p class="paragraph">
-        Admin UI提供了<span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme()</span>方法来让开发者和用户动态更换主题
+        Admin UI提供了<span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme()</span>方法来让开发者和用户动态配置和更换主题：
+      </p>
+      <code-h lang="js">
+        import AdminUi from 'admin-ui'
+        AdminUi.theme({
+          theme: {
+            // 彩色配置
+            colors: {
+              primary: '#1c86e2',
+              info: '#68217a',
+              warning: '#f5ae08',
+              danger: '#ea3a46',
+              success: '#0cb470'
+            },
+            // 阴影配置，默认基于primary颜色自动计算
+            shadows: {
+              base: '',
+              primary: '',
+              info: '',
+              warning: '',
+              danger: '',
+              success: ''
+            },
+            // 圆角配置
+            radiuses: {
+              small: '3px',
+              large: '5px'
+            }
+          },
+          // 反转lightness排序（黑白主题）
+          lightnessReverse: false,
+          // top和bottom颜色距离纯黑和纯白的lightness的距离，越小越接近纯黑纯白
+          colorTopBottom: 5,
+          // 彩色上下接近色与正色的lightness距离
+          colorUpDown: 10,
+          // 无彩色分级数量
+          baseColorLeve: 12,
+          // 无彩色饱和度
+          baseColorHue: '20%',
+          // 无彩色阴影不透明度
+          baseShadowOpacity: 0.2,
+          // 彩色阴影不透明度
+          colorShadowOpacity: 0.6
+        })
+      </code-h>
+      <p class="paragraph">
+        上述配置是Admin UI用到的所有配置，也即官方的默认配置。修改这些配置，Admin UI的所有组件都将被影响。
       </p>
       <p class="paragraph">
-        需要注意的是，颜色类的值中：<br>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">theme</span>选项是最主要的配置项，可以配置颜色、阴影和圆角。除外的其它选项都为辅助选项，其具体作用见上述注释。所有这些选项都是可选的，上述选项的值即为Admin UI提供的默认值。
+      </p>
+      <p class="paragraph">
+        基于上述配置，Admin UI提供了一系列的样式类名称，其本身的所有组件都使用了这些样式类名称来应用主题。这些样式类名称不仅仅局限于Admin UI本身，它也可以被应用到你的整个项目。
+      </p>
+    </au-panel>
+    <au-panel class="section">
+      <h4 class="title-1">颜色生成规则</h4>
+      <p class="paragraph">
+        颜色配置中的五个颜色<br>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">primary</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">warning</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">danger</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">info</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">success</span>
-        为主要颜色<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-2</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-4</span>
-        为明度较接近主要颜色的次要颜色<br>
-        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-1</span>
-        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-5</span>
-        为明度与主要颜色相差较大的辅助颜色<br>
+        为主要颜色。基于这五个主要颜色，为其生成了4个辅助色。<br>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-up</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-down</span>
+        为明度较接近主要颜色的两个接近色。<br>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-top</span>
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">[color]-bottom</span>
+        为明度与主要颜色相差较大的两个远离色。<br>
+        基于配置中无彩色的相关配置，以及<span class="code au-theme-radius au-theme-background-color--warning-bottom">primary</span>色，Admin UI自动生成了一系列按明度排列的无彩色。假如配置中无彩色的分级设置为了12，则：
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-0</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-12</span>
-        为最暗无彩色和最亮无彩色（建议使用纯黑和纯白）<br>
+        为纯黑和纯白<br>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">base-[1~11]</span>
-        为按明度排列的无彩色（灰色）。<br>
-        彩色从[1~5]无彩色从[0~12]按明度顺序排列，彩色和无彩色的明度顺序需要一致。
+        为按明度排列的无彩色。<br>
+        可以看到，每种彩色自上而下依次为：<span class="code au-theme-radius au-theme-background-color--warning-bottom">top</span> -> <span class="code au-theme-radius au-theme-background-color--warning-bottom">up</span> -> <span class="code au-theme-radius au-theme-background-color--warning-bottom">[primary]</span> -> <span class="code au-theme-radius au-theme-background-color--warning-bottom">down</span> -> <span class="code au-theme-radius au-theme-background-color--warning-bottom">bottom</span>，无彩色则按照0-分级排列，这些颜色的明度顺序是一致的，可以使用<span class="code au-theme-radius au-theme-background-color--warning-bottom">lightnessReverse</span>对明度顺序进行反转。
         <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
-          请牢记上面的规则，这对你进行主题自定义和主题系统全站应用非常重要。
+          如此设计的规则，主要是为了在满足主体功能的前提下，尽可能减少类的数量，减少大家的认知成本。请牢记上面的规则，这对你进行主题自定义和主题系统全站应用非常重要。
         </cite>
       </p>
-      <code-h lang="js">
-        import AdminUi from 'admin-ui'
-        AdminUi.theme({
-          colors: {
-            'primary': '#19bc9d',
-            'info': '#3498db',
-            'warning': '#ffb433',
-            'danger': '#e74c3c',
-            'success': '#5cb95c'
-          },
-          shadows: {
-            'primary': '0 0 3px rgba(25, 188, 157, .5)',
-            'info': '0 0 3px rgba(52, 152, 219, .5)',
-            'warning': '0 0 3px rgba(255, 180, 51, .5)',
-            'danger': '0 0 3px rgba(231, 76, 60, .5)',
-            'success': '0 0 3px rgba(92, 185, 92, .5)'
-          },
-          radiuses: {
-            'normal': '2px',
-            'large': '5px'
-          }
-        })
-      </code-h>
     </au-panel>
     <au-panel class="section">
       <h4 class="title-1">全站应用</h4>
       <p class="paragraph">
-        如果你的网站有换肤需求，那仅仅更换Admin-UI的主题似乎满足不了你的需求。这时候你可能希望将这套主题系统应用到全站当中。
-      </p>
-      <p class="paragraph">
-        因为整套主题系统是基于样式类构建的，所以即使应用到全站当中也非常简单，只需要按规则为你的元素编写样式类即可。Admin UI中的主题样式类按照下面的规则来使用：
+        Admin UI中的主题样式类是按照下面的规则来生成的：
       </p>
       <p class="paragraph">
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">前缀</span>
@@ -75,6 +105,9 @@
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">-属性名</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">--属性值</span>
         <span class="code au-theme-radius au-theme-background-color--warning-bottom">[-权重]</span>
+      </p>
+      <p class="paragraph">
+        每个部分的可选值如下：
       </p>
       <au-table class="table">
         <thead>
@@ -123,7 +156,7 @@
             </td>
             <td>
               如果主题是应用在当前元素的伪类上的，则可以在类名中连接伪类名。
-              <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">注意，伪类名不可叠加使用，请发挥你的聪明才智。</cite>
+              <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">很遗憾，伪类名不可叠加使用，请发挥你的聪明才智。</cite>
             </td>
           </tr>
           <tr>
@@ -162,12 +195,36 @@
             <td>
               颜色类：
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">primary-[1~5]</li>
-                <li class="au-theme-border-color--base-8">warning-[1~5]</li>
-                <li class="au-theme-border-color--base-8">danger-[1~5]</li>
-                <li class="au-theme-border-color--base-8">info-[1~5]</li>
-                <li class="au-theme-border-color--base-8">success-[1~5]</li>
-                <li class="au-theme-border-color--base-8">base-[0~12]</li>
+                <li class="au-theme-border-color--base-8">primary-top</li>
+                <li class="au-theme-border-color--base-8">primary-up</li>
+                <li class="au-theme-border-color--base-8">primary</li>
+                <li class="au-theme-border-color--base-8">primary-down</li>
+                <li class="au-theme-border-color--base-8">primary-bottom</li>
+                <li class="au-theme-border-color--base-8">warning-top</li>
+                <li class="au-theme-border-color--base-8">warning-up</li>
+                <li class="au-theme-border-color--base-8">warning</li>
+                <li class="au-theme-border-color--base-8">warning-down</li>
+                <li class="au-theme-border-color--base-8">warning-bottom</li>
+                <li class="au-theme-border-color--base-8">danger-top</li>
+                <li class="au-theme-border-color--base-8">dange-up</li>
+                <li class="au-theme-border-color--base-8">danger</li>
+                <li class="au-theme-border-color--base-8">danger-down</li>
+                <li class="au-theme-border-color--base-8">danger-bottom</li>
+                <li class="au-theme-border-color--base-8">info-top</li>
+                <li class="au-theme-border-color--base-8">info-up</li>
+                <li class="au-theme-border-color--base-8">info</li>
+                <li class="au-theme-border-color--base-8">info-down</li>
+                <li class="au-theme-border-color--base-8">info-bottom</li>
+                <li class="au-theme-border-color--base-8">success-top</li>
+                <li class="au-theme-border-color--base-8">success-up</li>
+                <li class="au-theme-border-color--base-8">success</li>
+                <li class="au-theme-border-color--base-8">success-down</li>
+                <li class="au-theme-border-color--base-8">success-bottom</li>
+                <li class="au-theme-border-color--base-8">base-top</li>
+                <li class="au-theme-border-color--base-8">base-up</li>
+                <li class="au-theme-border-color--base-8">base</li>
+                <li class="au-theme-border-color--base-8">base-down</li>
+                <li class="au-theme-border-color--base-8">base-bottom</li>
               </ol>
               圆角类：
               <ol class="option-list">
@@ -176,7 +233,7 @@
               </ol>
               阴影类：
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">level-[1~3]</li>
+                <li class="au-theme-border-color--base-8">base</li>
                 <li class="au-theme-border-color--base-8">primary</li>
                 <li class="au-theme-border-color--base-8">warning</li>
                 <li class="au-theme-border-color--base-8">danger</li>
@@ -185,8 +242,7 @@
               </ol>
             </td>
             <td>
-              除了参考自定义主题中的规则，还有一点需要注意的是<br>
-              <span class="code au-theme-radius au-theme-background-color--warning-bottom">au-theme-radius</span>不需要属性值
+              可使用的属性值
             </td>
           </tr>
           <tr>
@@ -202,13 +258,13 @@
             </td>
             <td>
               为css属性值添加
-              <span class="code au-theme-radius au-theme-background-color--warning-bottom">！important</span>前缀
+              <span class="code au-theme-radius au-theme-background-color--warning-bottom">!important</span>后缀
             </td>
           </tr>
         </tbody>
       </au-table>
       <p class="paragraph">
-        例如：
+        所有，我们可以这样使用Admin UI提供的样式类：
       </p>
       <code-h lang="html" :content='`
         <div class="
@@ -216,14 +272,14 @@
           au-theme-border-color--primary
           au-theme-color--base-3
           au-theme-box-shadow--base
-          au-theme-radius
+          au-theme-border-radius--large
         "></div>
       `'></code-h>
     </au-panel>
     <au-panel class="section">
       <h4 class="title-1">自定义主题类名</h4>
       <p class="paragraph">
-        <span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-bottom">options</span>参数中，可以使用自定义的主题类名。Admin UI的默认主题中提供了5种彩色及其各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-color</span>类作为颜色类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-radius</span>作为圆角类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-shadow</span>作为阴影类，则可以像下面这样定义：
+        <span class="code au-theme-radius au-theme-background-color--warning-bottom">.theme(options)</span>方法的<span class="code au-theme-radius au-theme-background-color--warning-bottom">options</span>参数中，可以使用自定义的主题类名。Admin UI的默认主题中提供了5种彩色，及根据这5种彩色生成的各自的四种辅助色，假设现在你希望添加一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-color</span>类作为颜色类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-radius</span>作为圆角类，一个<span class="code au-theme-radius au-theme-background-color--warning-bottom">my-shadow</span>作为阴影类，则可以像下面这样定义：
       </p>
       <code-h lang="js">
         adminUi.theme({
@@ -249,7 +305,7 @@
         "></div>
       `'></code-h>
     </au-panel>
-    <au-panel class="section">
+    <!-- <au-panel class="section">
       <h4 class="title-1">配色参考</h4>
       <p class="paragraph">
         有时候你可能不希望自己配置颜色，但又不想使用官方默认配色，所以我们提供一些配色方案供你选择。
@@ -266,7 +322,7 @@
           }
         }
       </code-h>
-    </au-panel>
+    </au-panel> -->
   </div>
 </template>
 <script>

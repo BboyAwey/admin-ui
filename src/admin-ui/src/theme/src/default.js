@@ -8,11 +8,11 @@ export default {
       success: '#0cb470'
     },
     shadows: { // 阴影配置，默认配置如下
-      primary: '0 0 4px #1c86e2',
-      info: '0 0 4px #68217a',
-      warning: '0 0 4px #f5ae08',
-      danger: '0 0 4px #ea3a46',
-      success: '0 0 4px #0cb470'
+      // primary: '0 0 4px #1c86e2',
+      // info: '0 0 4px #68217a',
+      // warning: '0 0 4px #f5ae08',
+      // danger: '0 0 4px #ea3a46',
+      // success: '0 0 4px #0cb470'
     },
     radiuses: {
       small: '3px',

@@ -11,7 +11,6 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit --fix",
     "build": "node build/build.js",
-    "publish-min": "node build/publish.js min && node build/publish-per-comp.js min",
     "publish": "node build/publish.js && node build/publish-per-comp.js",
     "upgrade": "npm run build && npm run publish"
   },

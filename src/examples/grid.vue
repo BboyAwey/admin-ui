@@ -2,12 +2,6 @@
   .component-example {
     border-width: 1px;
     border-style: solid;
-    padding: 12px;
-  }
-  .my-grid {
-    padding: 12px;
-    border-width: 1px;
-    border-style: solid;
   }
 </style>
 
@@ -26,16 +20,31 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example au-theme-border-color--base-8">
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
-          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="8" width-md="4" width-sm="3" width-xs="6">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
-          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="7" width-sm="6" width-xs="12">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
-          <h3 class="title-2">width-lg="3" width-md="4" width-sm="6" width-xs="12"</h3>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="6" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="9" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="5" width-md="5" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Esta occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="7" width-md="3" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="4" width-md="4" width-sm="6" width-xs="12">
+          Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaec
+        </au-grid>
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="4" width-sm="6" width-xs="12">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
       </div>
@@ -208,6 +217,27 @@
             </td>
             <td>
               在超小屏幕宽度（所有屏幕宽度）时当前栅格向右偏移的距离
+            </td>
+          </tr>
+          <tr>
+            <td>space</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              String
+            </td>
+            <td>
+              0px
+            </td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">合法的css宽度值，单位px</li>
+              </ol>
+            </td>
+            <td>
+              网格间的间距
             </td>
           </tr>
         </tbody>

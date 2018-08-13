@@ -10,7 +10,8 @@
   @for $i from 1 through 12 {
     .au-grid-cell-#{$i} {
       flex: 0 0 $i/12*100%;
-      width: $i/12*100%;
+      flex-basis: auto;
+      // width: $i/12*100%;
     }
   }
   // simple offset rule
@@ -22,17 +23,34 @@
 </style>
 
 <template>
-  <div class="au-grid" :class="`au-grid-cell-${cellNumber} au-grid-offset-${offsetNumber}`">
-    <slot></slot>
+  <div
+    class="au-grid"
+    :class="`au-grid-cell-${cellNumber} au-grid-offset-${offsetNumber}`"
+    :style="{
+      margin: `0 ${row[row.length - 1] === $el ? 0 : space} ${isLastRow ? 0 : space} 0`,
+      width: `${(containerWidth + parseInt(space)) / (12 / cellNumber) - parseInt(space)}px`
+    }">
+      <slot></slot>
   </div>
 </template>
 
 <script>
 // import { hasClass, getElementSize } from '../../../helpers/dom'
-// import { getElementSize, getWindowSize } from '../../../helpers/dom'
-import { getWindowSize } from '../../../helpers/dom'
+import { getElementSize, getWindowSize } from '../../../helpers/dom'
+// import { getWindowSize } from '../../../helpers/dom'
 
 function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
+function getElementInnerWidth (el) {
+  let copy = el.cloneNode()
+  copy.innerHTML = ''
+  let div = document.createElement('div')
+  div.style.width = '100%'
+  copy.appendChild(div)
+  el.parentNode.appendChild(copy)
+  let res = getElementSize(div).width
+  copy.parentNode.removeChild(copy)
+  return res
+}
 
 export default {
   name: 'au-grid',
@@ -68,6 +86,10 @@ export default {
     offsetXs: {
       type: [String, Number],
       default: 0
+    },
+    space: {
+      type: [String, Number],
+      default: 0
     }
   },
   data () {
@@ -81,7 +103,11 @@ export default {
       },
       observer: null,
       observerCount: 0,
-      observerClock: null
+      observerClock: null,
+      containerWidth: 0,
+      row: [],
+      isLastRow: false,
+      timer: null
     }
   },
   mounted () {
@@ -89,7 +115,7 @@ export default {
     //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
     // }
     this.setContainer()
-    this.getNumber()
+    this.getNumber(false)
     window.addEventListener('resize', this.getNumber)
     let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     if (MutationObserver) {
@@ -125,28 +151,28 @@ export default {
   },
   watch: {
     widthLg () {
-      this.getNumber()
+      this.getNumber(false)
     },
     widthMd () {
-      this.getNumber()
+      this.getNumber(false)
     },
     widthSm () {
-      this.getNumber()
+      this.getNumber(false)
     },
     widthXs () {
-      this.getNumber()
+      this.getNumber(false)
     },
     offsetLg () {
-      this.getNumber()
+      this.getNumber(false)
     },
     offsetMd () {
-      this.getNumber()
+      this.getNumber(false)
     },
     offsetSm () {
-      this.getNumber()
+      this.getNumber(false)
     },
     offsetXs () {
-      this.getNumber()
+      this.getNumber(false)
     }
   },
   methods: {
@@ -155,9 +181,24 @@ export default {
       container.style.display = 'flex'
       container.style.flexWrap = 'wrap'
     },
-    getNumber () {
-      this.getCellNumber()
-      this.getOffsetNumber()
+    getNumber (throttling = true) {
+      let vm = this
+      function getAll () {
+        vm.getCellNumber()
+        vm.getOffsetNumber()
+        vm.getContainerWidth()
+        vm.$nextTick(vm.gatherRow)
+      }
+      if (throttling) {
+        if (vm.timer) {
+          window.clearTimeout(vm.timer)
+          vm.timer = window.setTimeout(getAll, 200)
+        } else {
+          window.setTimeout(getAll, 200)
+        }
+      } else {
+        getAll()
+      }
     },
     getCellNumber () {
       // let containerWidth = getElementSize(this.$el.parentNode).width
@@ -179,6 +220,7 @@ export default {
         this.cellNumber = 12
         // this.offsetNumber = 0
       }
+      this.$el.setAttribute('data-grid', this.cellNumber)
     },
     getOffsetNumber () {
       // let containerWidth = getElementSize(this.$el.parentNode).width
@@ -195,6 +237,40 @@ export default {
       } else {
         this.offsetNumber = 0
       }
+    },
+    getContainerWidth () {
+      this.containerWidth = getElementInnerWidth(this.$el.parentNode)
+    },
+    gatherRow () {
+      let allGrid = this.$el.parentNode.querySelectorAll('.au-grid')
+      let cellCount = 0
+      for (let i = 0; i < allGrid.length; i++) {
+        cellCount += parseInt(allGrid[i].getAttribute('data-grid'))
+        if (allGrid[i + 1] && cellCount + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount / 12) + 1) * 12) {
+          cellCount = (parseInt(cellCount / 12) + 1) * 12
+        }
+        if (allGrid[i] === this.$el) break
+      }
+      let start = 0
+      let end = 0
+      if (cellCount % 12) {
+        start = parseInt(cellCount / 12) * 12
+      } else {
+        start = parseInt(cellCount / 12 - 1) * 12
+      }
+      end = start + 12
+      let cellCount2 = 0
+      for (let i = 0; i < allGrid.length; i++) {
+        cellCount2 += parseInt(allGrid[i].getAttribute('data-grid'))
+        if (allGrid[i + 1] && cellCount2 + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount2 / 12) + 1) * 12) {
+          cellCount2 = (parseInt(cellCount2 / 12) + 1) * 12
+        }
+        if (cellCount2 > start && cellCount2 <= end) {
+          this.row.push(allGrid[i])
+        }
+      }
+      if (cellCount2 > start && cellCount2 <= end) this.isLastRow = true
+      else this.isLastRow = false
     }
   }
 }

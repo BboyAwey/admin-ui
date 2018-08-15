@@ -93,7 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 function isObject(obj, name) {
   var res = (typeof obj === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(obj)) === 'object';
   if (!res) {
-    console.log('Admin UI @ theme-system @ theme config ' + (name || '') + ' should be an object');
+    console.error('Admin UI @ theme-system @ theme config ' + (name || '') + ' should be an object');
   }
   return res;
 }
@@ -4236,12 +4236,12 @@ if(false) {
       danger: '#ea3a46',
       success: '#0cb470'
     },
-    shadows: { // 阴影配置，默认配置如下
-      primary: '0 0 4px #1c86e2',
-      info: '0 0 4px #68217a',
-      warning: '0 0 4px #f5ae08',
-      danger: '0 0 4px #ea3a46',
-      success: '0 0 4px #0cb470'
+    shadows: {// 阴影配置，默认配置如下
+      // primary: '0 0 4px #1c86e2',
+      // info: '0 0 4px #68217a',
+      // warning: '0 0 4px #f5ae08',
+      // danger: '0 0 4px #ea3a46',
+      // success: '0 0 4px #0cb470'
     },
     radiuses: {
       small: '3px',
@@ -6940,7 +6940,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/Projects/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 2px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 5px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/Projects/admin-ui/src/admin-ui/src/components/tagfactory/src/tagfactory.vue"],"names":[],"mappings":";AACA,iBAAiB;AACjB;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,aAAa;CACd;AACD;EACE,kBAAkB;EAClB,mBAAmB;EACnB,uBAAuB;CACxB;AACD;EACE,sBAAsB;EACtB,mBAAmB;EACnB,0IAA0H;EAC1H,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,cAAc;IACd,aAAa;IACb,uBAAuB;CAC1B;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,mBAAmB;EACnB,gBAAgB;EAChB,QAAQ;EACR,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,oBAAoB;EACpB,gBAAgB;CACjB;AACD;IACI,eAAe;IACf,aAAa;IACb,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,gBAAgB;IAChB,qBAAqB;IACrB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,0BAA0B;OACvB,uBAAuB;QACtB,sBAAsB;YAClB,kBAAkB;IAC1B,gBAAgB;CACnB","file":"tagfactory.vue","sourcesContent":["\n@charset \"UTF-8\";\n.au-tagfactory-body {\n  position: relative;\n  display: inline-block;\n}\n.au-tagfactory-core {\n  position: relative;\n  display: inline-block;\n  min-width: 83px;\n  width: 100%;\n  padding: 5px;\n  padding-bottom: 0;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 0;\n}\n.au-tagfactory-item {\n  margin-right: 5px;\n  margin-bottom: 5px;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container {\n  display: inline-block;\n  margin-bottom: 5px;\n  font-family: \"Helvetica Neue\", Helvetica, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n  font-size: 14px;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n.au-tagfactory-input-container .au-tagfactory-input-core {\n    width: 5px;\n    outline: none;\n    border: none;\n    vertical-align: middle;\n}\n.au-tagfactory-placeholder {\n  position: absolute;\n  font-size: 14px;\n  z-index: 0;\n}\n.au-tagfactory-associations-container {\n  position: absolute;\n  margin-top: 4px;\n  left: 0;\n  z-index: 1;\n  min-width: 100%;\n  max-height: 237px;\n  border-width: 1px;\n  border-style: solid;\n  font-size: 14px;\n}\n.au-tagfactory-associations-container li {\n    display: block;\n    height: 28px;\n    padding: 0 8px;\n    margin: 4px 0;\n    line-height: 28px;\n    font-size: 14px;\n    word-break: keep-all;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -8027,7 +8027,22 @@ var render = function() {
     {
       staticClass: "au-grid",
       class:
-        "au-grid-cell-" + _vm.cellNumber + " au-grid-offset-" + _vm.offsetNumber
+        "au-grid-cell-" +
+        _vm.cellNumber +
+        " au-grid-offset-" +
+        _vm.offsetNumber,
+      style: {
+        margin:
+          "0 " +
+          (_vm.row[_vm.row.length - 1] === _vm.$el ? 0 : _vm.space) +
+          " " +
+          (_vm.isLastRow ? 0 : _vm.space) +
+          " 0",
+        width:
+          (_vm.containerWidth + parseInt(_vm.space)) / (12 / _vm.cellNumber) -
+          parseInt(_vm.space) +
+          "px"
+      }
     },
     [_vm._t("default")],
     2
@@ -15069,13 +15084,31 @@ module.exports = function (index, length) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 // import { hasClass, getElementSize } from '../../../helpers/dom'
-// import { getElementSize, getWindowSize } from '../../../helpers/dom'
 
+// import { getWindowSize } from '../../../helpers/dom'
 
 function validateWidth(v) {
   return v >= 1 && v <= 12 && parseInt(v) === Number(v);
+}
+function getElementInnerWidth(el) {
+  var copy = el.cloneNode();
+  copy.innerHTML = '';
+  var div = document.createElement('div');
+  div.style.width = '100%';
+  copy.appendChild(div);
+  el.parentNode.appendChild(copy);
+  var res = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_dom__["c" /* getElementSize */])(div).width;
+  copy.parentNode.removeChild(copy);
+  return res;
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -15112,6 +15145,10 @@ function validateWidth(v) {
     offsetXs: {
       type: [String, Number],
       default: 0
+    },
+    space: {
+      type: [String, Number],
+      default: 0
     }
   },
   data: function data() {
@@ -15125,7 +15162,11 @@ function validateWidth(v) {
       },
       observer: null,
       observerCount: 0,
-      observerClock: null
+      observerClock: null,
+      containerWidth: 0,
+      row: [],
+      isLastRow: false,
+      timer: null
     };
   },
   mounted: function mounted() {
@@ -15133,7 +15174,7 @@ function validateWidth(v) {
     //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
     // }
     this.setContainer();
-    this.getNumber();
+    this.getNumber(false);
     window.addEventListener('resize', this.getNumber);
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
     if (MutationObserver) {
@@ -15172,28 +15213,28 @@ function validateWidth(v) {
 
   watch: {
     widthLg: function widthLg() {
-      this.getNumber();
+      this.getNumber(false);
     },
     widthMd: function widthMd() {
-      this.getNumber();
+      this.getNumber(false);
     },
     widthSm: function widthSm() {
-      this.getNumber();
+      this.getNumber(false);
     },
     widthXs: function widthXs() {
-      this.getNumber();
+      this.getNumber(false);
     },
     offsetLg: function offsetLg() {
-      this.getNumber();
+      this.getNumber(false);
     },
     offsetMd: function offsetMd() {
-      this.getNumber();
+      this.getNumber(false);
     },
     offsetSm: function offsetSm() {
-      this.getNumber();
+      this.getNumber(false);
     },
     offsetXs: function offsetXs() {
-      this.getNumber();
+      this.getNumber(false);
     }
   },
   methods: {
@@ -15203,8 +15244,25 @@ function validateWidth(v) {
       container.style.flexWrap = 'wrap';
     },
     getNumber: function getNumber() {
-      this.getCellNumber();
-      this.getOffsetNumber();
+      var throttling = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      var vm = this;
+      function getAll() {
+        vm.getCellNumber();
+        vm.getOffsetNumber();
+        vm.getContainerWidth();
+        vm.$nextTick(vm.gatherRow);
+      }
+      if (throttling) {
+        if (vm.timer) {
+          window.clearTimeout(vm.timer);
+          vm.timer = window.setTimeout(getAll, 200);
+        } else {
+          window.setTimeout(getAll, 200);
+        }
+      } else {
+        getAll();
+      }
     },
     getCellNumber: function getCellNumber() {
       // let containerWidth = getElementSize(this.$el.parentNode).width
@@ -15226,6 +15284,7 @@ function validateWidth(v) {
         this.cellNumber = 12;
         // this.offsetNumber = 0
       }
+      this.$el.setAttribute('data-grid', this.cellNumber);
     },
     getOffsetNumber: function getOffsetNumber() {
       // let containerWidth = getElementSize(this.$el.parentNode).width
@@ -15242,6 +15301,39 @@ function validateWidth(v) {
       } else {
         this.offsetNumber = 0;
       }
+    },
+    getContainerWidth: function getContainerWidth() {
+      this.containerWidth = getElementInnerWidth(this.$el.parentNode);
+    },
+    gatherRow: function gatherRow() {
+      var allGrid = this.$el.parentNode.querySelectorAll('.au-grid');
+      var cellCount = 0;
+      for (var i = 0; i < allGrid.length; i++) {
+        cellCount += parseInt(allGrid[i].getAttribute('data-grid'));
+        if (allGrid[i + 1] && cellCount + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount / 12) + 1) * 12) {
+          cellCount = (parseInt(cellCount / 12) + 1) * 12;
+        }
+        if (allGrid[i] === this.$el) break;
+      }
+      var start = 0;
+      var end = 0;
+      if (cellCount % 12) {
+        start = parseInt(cellCount / 12) * 12;
+      } else {
+        start = parseInt(cellCount / 12 - 1) * 12;
+      }
+      end = start + 12;
+      var cellCount2 = 0;
+      for (var _i = 0; _i < allGrid.length; _i++) {
+        cellCount2 += parseInt(allGrid[_i].getAttribute('data-grid'));
+        if (allGrid[_i + 1] && cellCount2 + parseInt(allGrid[_i + 1].getAttribute('data-grid')) > (parseInt(cellCount2 / 12) + 1) * 12) {
+          cellCount2 = (parseInt(cellCount2 / 12) + 1) * 12;
+        }
+        if (cellCount2 > start && cellCount2 <= end) {
+          this.row.push(allGrid[_i]);
+        }
+      }
+      if (cellCount2 > start && cellCount2 <= end) this.isLastRow = true;else this.isLastRow = false;
     }
   }
 });
@@ -22427,7 +22519,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-grid {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.au-grid-cell-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  width: 8.33333%;\n}\n.au-grid-cell-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  width: 16.66667%;\n}\n.au-grid-cell-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  width: 25%;\n}\n.au-grid-cell-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  width: 33.33333%;\n}\n.au-grid-cell-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  width: 41.66667%;\n}\n.au-grid-cell-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  width: 50%;\n}\n.au-grid-cell-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  width: 58.33333%;\n}\n.au-grid-cell-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  width: 66.66667%;\n}\n.au-grid-cell-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  width: 75%;\n}\n.au-grid-cell-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  width: 83.33333%;\n}\n.au-grid-cell-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  width: 91.66667%;\n}\n.au-grid-cell-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  width: 100%;\n}\n.au-grid-offset-1 {\n  margin-left: 8.33333%;\n}\n.au-grid-offset-2 {\n  margin-left: 16.66667%;\n}\n.au-grid-offset-3 {\n  margin-left: 25%;\n}\n.au-grid-offset-4 {\n  margin-left: 33.33333%;\n}\n.au-grid-offset-5 {\n  margin-left: 41.66667%;\n}\n.au-grid-offset-6 {\n  margin-left: 50%;\n}\n.au-grid-offset-7 {\n  margin-left: 58.33333%;\n}\n.au-grid-offset-8 {\n  margin-left: 66.66667%;\n}\n.au-grid-offset-9 {\n  margin-left: 75%;\n}\n.au-grid-offset-10 {\n  margin-left: 83.33333%;\n}\n.au-grid-offset-11 {\n  margin-left: 91.66667%;\n}\n.au-grid-offset-12 {\n  margin-left: 100%;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/Projects/admin-ui/src/admin-ui/src/components/grid/src/grid.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,+BAA+B;UACvB,uBAAuB;CAChC;AACD;EACE,oBAAoB;MAChB,uBAAuB;UACnB,mBAAmB;EAC3B,gBAAgB;CACjB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,WAAW;CACZ;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,WAAW;CACZ;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,WAAW;CACZ;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,iBAAiB;CAClB;AACD;EACE,oBAAoB;MAChB,mBAAmB;UACf,eAAe;EACvB,YAAY;CACb;AACD;EACE,sBAAsB;CACvB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,kBAAkB;CACnB","file":"grid.vue","sourcesContent":["\n.au-grid {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.au-grid-cell-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  width: 8.33333%;\n}\n.au-grid-cell-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  width: 16.66667%;\n}\n.au-grid-cell-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  width: 25%;\n}\n.au-grid-cell-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  width: 33.33333%;\n}\n.au-grid-cell-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  width: 41.66667%;\n}\n.au-grid-cell-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  width: 50%;\n}\n.au-grid-cell-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  width: 58.33333%;\n}\n.au-grid-cell-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  width: 66.66667%;\n}\n.au-grid-cell-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  width: 75%;\n}\n.au-grid-cell-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  width: 83.33333%;\n}\n.au-grid-cell-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  width: 91.66667%;\n}\n.au-grid-cell-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  width: 100%;\n}\n.au-grid-offset-1 {\n  margin-left: 8.33333%;\n}\n.au-grid-offset-2 {\n  margin-left: 16.66667%;\n}\n.au-grid-offset-3 {\n  margin-left: 25%;\n}\n.au-grid-offset-4 {\n  margin-left: 33.33333%;\n}\n.au-grid-offset-5 {\n  margin-left: 41.66667%;\n}\n.au-grid-offset-6 {\n  margin-left: 50%;\n}\n.au-grid-offset-7 {\n  margin-left: 58.33333%;\n}\n.au-grid-offset-8 {\n  margin-left: 66.66667%;\n}\n.au-grid-offset-9 {\n  margin-left: 75%;\n}\n.au-grid-offset-10 {\n  margin-left: 83.33333%;\n}\n.au-grid-offset-11 {\n  margin-left: 91.66667%;\n}\n.au-grid-offset-12 {\n  margin-left: 100%;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-grid {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.au-grid-cell-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-offset-1 {\n  margin-left: 8.33333%;\n}\n.au-grid-offset-2 {\n  margin-left: 16.66667%;\n}\n.au-grid-offset-3 {\n  margin-left: 25%;\n}\n.au-grid-offset-4 {\n  margin-left: 33.33333%;\n}\n.au-grid-offset-5 {\n  margin-left: 41.66667%;\n}\n.au-grid-offset-6 {\n  margin-left: 50%;\n}\n.au-grid-offset-7 {\n  margin-left: 58.33333%;\n}\n.au-grid-offset-8 {\n  margin-left: 66.66667%;\n}\n.au-grid-offset-9 {\n  margin-left: 75%;\n}\n.au-grid-offset-10 {\n  margin-left: 83.33333%;\n}\n.au-grid-offset-11 {\n  margin-left: 91.66667%;\n}\n.au-grid-offset-12 {\n  margin-left: 100%;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/Projects/admin-ui/src/admin-ui/src/components/grid/src/grid.vue"],"names":[],"mappings":";AACA;EACE,eAAe;EACf,+BAA+B;UACvB,uBAAuB;CAChC;AACD;EACE,oBAAoB;MAChB,uBAAuB;UACnB,mBAAmB;EAC3B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,kBAAkB;UACd,cAAc;EACtB,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,wBAAwB;UACpB,oBAAoB;EAC5B,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,oBAAoB;MAChB,mBAAmB;UACf,eAAe;EACvB,8BAA8B;MAC1B,iBAAiB;CACtB;AACD;EACE,sBAAsB;CACvB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,uBAAuB;CACxB;AACD;EACE,kBAAkB;CACnB","file":"grid.vue","sourcesContent":["\n.au-grid {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.au-grid-cell-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-cell-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  -ms-flex-preferred-size: auto;\n      flex-basis: auto;\n}\n.au-grid-offset-1 {\n  margin-left: 8.33333%;\n}\n.au-grid-offset-2 {\n  margin-left: 16.66667%;\n}\n.au-grid-offset-3 {\n  margin-left: 25%;\n}\n.au-grid-offset-4 {\n  margin-left: 33.33333%;\n}\n.au-grid-offset-5 {\n  margin-left: 41.66667%;\n}\n.au-grid-offset-6 {\n  margin-left: 50%;\n}\n.au-grid-offset-7 {\n  margin-left: 58.33333%;\n}\n.au-grid-offset-8 {\n  margin-left: 66.66667%;\n}\n.au-grid-offset-9 {\n  margin-left: 75%;\n}\n.au-grid-offset-10 {\n  margin-left: 83.33333%;\n}\n.au-grid-offset-11 {\n  margin-left: 91.66667%;\n}\n.au-grid-offset-12 {\n  margin-left: 100%;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -22544,7 +22636,7 @@ var render = function() {
                 attrs: {
                   warning: _vm.hasWarnings,
                   icon: "calendar",
-                  width: _vm.width || "116px",
+                  width: _vm.width || "120px",
                   inline: false,
                   "fullfill-with": !_vm.inline && _vm.fullWidth,
                   size: _vm.size,

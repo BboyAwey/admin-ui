@@ -10214,7 +10214,7 @@ var render = function() {
                 attrs: {
                   warning: _vm.hasWarnings,
                   icon: "calendar",
-                  width: _vm.width || "116px",
+                  width: _vm.width || "120px",
                   inline: false,
                   "fullfill-with": !_vm.inline && _vm.fullWidth,
                   size: _vm.size,

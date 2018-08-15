@@ -93,7 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 function isObject(obj, name) {
   var res = (typeof obj === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(obj)) === 'object';
   if (!res) {
-    console.log('Admin UI @ theme-system @ theme config ' + (name || '') + ' should be an object');
+    console.error('Admin UI @ theme-system @ theme config ' + (name || '') + ' should be an object');
   }
   return res;
 }
@@ -370,12 +370,12 @@ module.exports = __webpack_require__("hJx8");
       danger: '#ea3a46',
       success: '#0cb470'
     },
-    shadows: { // 阴影配置，默认配置如下
-      primary: '0 0 4px #1c86e2',
-      info: '0 0 4px #68217a',
-      warning: '0 0 4px #f5ae08',
-      danger: '0 0 4px #ea3a46',
-      success: '0 0 4px #0cb470'
+    shadows: {// 阴影配置，默认配置如下
+      // primary: '0 0 4px #1c86e2',
+      // info: '0 0 4px #68217a',
+      // warning: '0 0 4px #f5ae08',
+      // danger: '0 0 4px #ea3a46',
+      // success: '0 0 4px #0cb470'
     },
     radiuses: {
       small: '3px',

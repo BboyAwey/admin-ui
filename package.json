@@ -1,9 +1,9 @@
 {
   "name": "admin-ui",
   "version": "3.1.5",
-  "description": "A concise and elegant admin-system-like ui component library",
-  "author": "chenwei1 <chenwei1@rongcapital.cn>",
-  "private": true,
+  "description": "An elegant admin-system-like vue ui components library",
+  "author": "bboyawey<bboyawey@sina.cn>",
+  "private": false,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",

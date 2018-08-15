@@ -1,9 +1,17 @@
 language: node_js
 node_js:
-    - '8.10'
+- '8.10'
 install: yarn
 script:
-    - yarn build
+- yarn build
 branches:
-    only:
-        - master
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_8b037622110f_key -iv $encrypted_8b037622110f_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+addons:
+  ssh_known_hosts: 39.104.147.119
+after_success:
+  - scp -r -i ~\/.ssh/id_rsa root@39.104.147.119 ./dist/* /home/admin-ui

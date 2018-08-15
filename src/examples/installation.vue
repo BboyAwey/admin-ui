@@ -5,11 +5,8 @@
         推荐的安装方式是使用yarn（npm或cnpm也可以，但命令略有区别）进行安装：
       </p>
       <code-h lang="ssh">
-        yarn add admin-ui git+ssh://git@gogs.in.dataengine.com:Admin-UI/admin-ui-3-publish.git
+        yarn add admin-ui
       </code-h>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
-        由于使用的是公司的私有代码库，请确保你的机器有权访问这个git地址。
-      </cite>
     </au-panel>
     <au-panel class="section" title="全量加载">
       <p class="paragraph">

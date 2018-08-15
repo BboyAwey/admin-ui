@@ -14,4 +14,4 @@ before_install:
 addons:
   ssh_known_hosts: 39.104.147.119
 after_success:
-  - scp -r -i ~\/.ssh/id_rsa root@39.104.147.119 ./dist/* /home/admin-ui
+- scp -r -i ~\/.ssh/id_rsa root@39.104.147.119 ./dist/* /home/admin-ui

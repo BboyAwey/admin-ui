@@ -2,7 +2,8 @@
   <div class="page">
     <au-panel class="section" title="Todo List 【置顶】">
       <ol class="option-list">
-        <li class="au-theme-border-color--base-8">目前表格组件仅是样式，无任何功能封装，需要重构表格组件</li>
+        <li class="au-theme-border-color--base-8">滚动条组件新增横向滚动支持</li>
+        <li class="au-theme-border-color--base-8">重构表格组件</li>
         <li class="au-theme-border-color--base-8">新增标签页的第二种样式</li>
         <li class="au-theme-border-color--base-8">完善开发者文档</li>
       </ol>

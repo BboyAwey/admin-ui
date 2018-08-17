@@ -21,6 +21,7 @@ addons:
 after_success:
 - export SSHPASS=$DEPLOY_PASS
 # - scp -o stricthostkeychecking=no -i /tmp/id_rsa -r dist/* root@39.104.147.119:/home/admin-ui
+- chmod -R 777 ./dist
 - sshpass -e scp -o stricthostkeychecking=no -r ./dist/* $DEPLOY_USER@39.104.147.119:/home/admin-ui
 env:
   global:

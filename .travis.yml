@@ -9,8 +9,8 @@ branches:
   - master
 before_install:
 - openssl aes-256-cbc -K $encrypted_8b037622110f_key -iv $encrypted_8b037622110f_iv
-  -in id_rsa.enc -out /tmp/id_rsa -d
-- chmod 777 /tmp/id_rsa
+  -in id_ra.enc -out /tmp/id_rsa -d
+- chmod 700 /tmp/id_rsa
 - eval `ssh-agent -s`
 - ssh-add /tmp/id_rsa
 addons:

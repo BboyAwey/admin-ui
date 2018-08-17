@@ -19,7 +19,7 @@ addons:
 after_success:
 - export SSHPASS=$DEPLOY_PASS
 # - scp -i id_rsa -r dist/* root@39.104.147.119:/home/admin-ui
-- sshpass -e scp -o stricthostkeychecking=no -r ./dist/* $DEPLOY_USER@39.104.147.119:/home/admin-ui
+- sudo sshpass -e scp -o stricthostkeychecking=no -r ./dist/* $DEPLOY_USER@39.104.147.119:/home/admin-ui
 env:
   global:
   - secure: sDAJxCAwpyVYy0hwYGpj4RYmitNOWUJ1ZmVzTz6BeiTY0kLWQbg1aATSY1jH2KOCsPpqsNZAt5DScdnvi4J/86jDxKhBRAjTiRhdPYngQBknh7Idtp4QxwpMdrwIh7Pa9WHWyQV/Xu155lzx3zYi6jicS6cL+Yds9fYSvENOrUrNinQ51mV3Tm5/YOShRxlHjquYY/nKwMURD4iiq2KpCzQv6pbtXJe0QjpLFhbhuHC32aQ495HhPeNSyU6OOUxomI9n3oBs+vymCJ6paV1pDoP+/+rpnhLLmP4nyDDAaA5QJ3OsV7k8TmicBFJfINWHwfTFrXnlzVzz/dXaBCcU/df66wHNmuMKOtPiGHkvLGC/zI8x/agDyOgfVBbTbFJ0z6HXGtv6s58PP2qBT4Fqr3YW2hGUxrxFX5YgPTK2COL4fAm35+mqdJqFH7gi1/vvT1SuGv+FEQMxGeyp+ZNpJuTOcWzhYmdDzirsTSPfW5VVt9EItnCOx8v6QKark4bbCplb/opO2YG8YWM2dXQqlK5kt9sbErVXmvIHeKRfEqT+zudIxqO8lccesuXX8glqYmW13o/mvGay0f5t3kJJCk7ELMV5xC+g3HPlOkIUfhHfzL8saEAJvNe76PwWM5JT3e56idZ8v6mLROwzF3GMO877o6moKqT6uw7Ud1BRudQ=

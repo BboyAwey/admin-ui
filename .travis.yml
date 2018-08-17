@@ -7,11 +7,20 @@ script:
 branches:
   only:
   - master
-before_install:
-- openssl aes-256-cbc -K $encrypted_8b037622110f_key -iv $encrypted_8b037622110f_iv
-  -in id_rsa.enc -out id_rsa -d
-- chmod 600 id_rsa
+# before_install:
+# - openssl aes-256-cbc -K $encrypted_8b037622110f_key -iv $encrypted_8b037622110f_iv
+#   -in id_rsa.enc -out id_rsa -d
+# - chmod 600 id_rsa
 addons:
   ssh_known_hosts: 39.104.147.119
+  apt:
+    packages:
+    - sshpass
 after_success:
-- scp -i id_rsa -r dist/* root@39.104.147.119:/home/admin-ui
+- export SSHPASS=$DEPLOY_PASS
+# - scp -i id_rsa -r dist/* root@39.104.147.119:/home/admin-ui
+- sshpass -e scp -o stricthostkeychecking=no -r ./dist/* $DEPLOY_USER@$39.104.147.119:/home/admin-ui
+env:
+  global:
+  - secure: sDAJxCAwpyVYy0hwYGpj4RYmitNOWUJ1ZmVzTz6BeiTY0kLWQbg1aATSY1jH2KOCsPpqsNZAt5DScdnvi4J/86jDxKhBRAjTiRhdPYngQBknh7Idtp4QxwpMdrwIh7Pa9WHWyQV/Xu155lzx3zYi6jicS6cL+Yds9fYSvENOrUrNinQ51mV3Tm5/YOShRxlHjquYY/nKwMURD4iiq2KpCzQv6pbtXJe0QjpLFhbhuHC32aQ495HhPeNSyU6OOUxomI9n3oBs+vymCJ6paV1pDoP+/+rpnhLLmP4nyDDAaA5QJ3OsV7k8TmicBFJfINWHwfTFrXnlzVzz/dXaBCcU/df66wHNmuMKOtPiGHkvLGC/zI8x/agDyOgfVBbTbFJ0z6HXGtv6s58PP2qBT4Fqr3YW2hGUxrxFX5YgPTK2COL4fAm35+mqdJqFH7gi1/vvT1SuGv+FEQMxGeyp+ZNpJuTOcWzhYmdDzirsTSPfW5VVt9EItnCOx8v6QKark4bbCplb/opO2YG8YWM2dXQqlK5kt9sbErVXmvIHeKRfEqT+zudIxqO8lccesuXX8glqYmW13o/mvGay0f5t3kJJCk7ELMV5xC+g3HPlOkIUfhHfzL8saEAJvNe76PwWM5JT3e56idZ8v6mLROwzF3GMO877o6moKqT6uw7Ud1BRudQ=
+  - secure: sN6e99QSHrmEM32EBk2jQJ87X1Dnmk3VFWdUIIDT1qsUQ84hTD4z/yEbaIHMRnmGLnu7Jd/7hHyVHcTWQNz/etGNOycUdFXNbUTB5IZQ8bmRJ3osWnOEnxvPBgVzseyDDNKEBW6ox586olkQ25dEA61TddHlydzZmIHlmpRbO9r79qI74PDLaN2nT9yqp/Yng6GMWqpX3yo30IEXWpReJo9xLEPDYhcaXIAOca5pBP96YHRdTogfcG312Ww9tZM1FxK92cr/2076IQpUoC8QMy0q2ARhxaE7/+Gbv/BwQVmmDHgtcRbWk32EfI+JBsg/Xm+iGwbBtNYGqUYsWikK9CuDbLsoAannLNMfLTv/LLM+osfB7f424rLiyuh742oazXKg39OFhj6vmP/HWGOxB3f9YEHaxS7OR8ENH602I/hubJ9YBhRuoC3Vfn8aDbgMhf5rFDsnxJadTY6Vp6+UbA/zvGp5zNFbgMYf9MD2rPNK5LbDyl2bM/s6nE+sx3EDhpl8+PwwBghn9H+e/OqKOxpPw+CDmbyOdhngheYb7Q/oeFmWCiVfSCeAg9ZuGk1EPDVxSszuTaFvam2Fgs0oOOIF4My9ATLJnO0F752SKglQPwz796nlBtiNFoLtnmAvZ3LiEz4t/7f/3Pcza2ygfwMuBUJoz3dPDWv6zXTlR84=

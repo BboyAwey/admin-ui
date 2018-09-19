@@ -61,8 +61,8 @@
   </div>
 </template>
 <script>
-import { getElementSize } from '../../../helpers/dom'
-import { namespace } from '../../../helpers/utils'
+import getElementSize from '../../../helpers/dom/get-element-size'
+import namespace from '../../../helpers/utils/namespace.js'
 
 export default {
   name: 'au-loading',

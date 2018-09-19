@@ -162,8 +162,8 @@
 <script>
 import FormApiMixin from '../../../helpers/form-api-mixin'
 import ValidatorMixin from '../../../helpers/validator-mixin'
-import { mousewheel } from '../../../helpers/dom'
-import { isEmptyString } from '../../../helpers/utils'
+import mousewheel from '../../../helpers/dom/mousewheel'
+import isEmptyString from '../../../helpers/utils/is-empty-string'
 import AuInput from '../../input'
 import FormItem from '../../../helpers/form-item.vue'
 

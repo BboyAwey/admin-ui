@@ -83,8 +83,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_theme_class_generator__ = __webpack_require__("v8bU");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_theme_class_generator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_theme_class_generator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_utils__ = __webpack_require__("AP3u");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default__ = __webpack_require__("8sWr");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_utils_namespace__ = __webpack_require__("G6Xs");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils_deep_clone__ = __webpack_require__("luDk");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default__ = __webpack_require__("8sWr");
+
 
 
 
@@ -110,10 +112,10 @@ function absorb(base, target, name) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (function (config) {
-  var finalConfig = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* deepClone */])(__WEBPACK_IMPORTED_MODULE_3__default__["a" /* default */]);
+  var finalConfig = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_utils_deep_clone__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_4__default__["a" /* default */]);
   absorb(finalConfig, config || {});
   // save theme to namespace
-  __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["b" /* namespace */].set('theme', finalConfig);
+  __WEBPACK_IMPORTED_MODULE_2__helpers_utils_namespace__["a" /* default */].set('theme', finalConfig);
 
   var styleTag = document.querySelector('style#admin-ui-theme') || document.createElement('style');
   styleTag.id = 'admin-ui-theme';
@@ -415,170 +417,6 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
-/***/ "AP3u":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = deepClone;
-/* unused harmony export isEmptyString */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return namespace; });
-/* unused harmony export upload */
-/* unused harmony export getDataType */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__("fZjL");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__ = __webpack_require__("mvHQ");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__);
-
-
-
-function deepClone(obj) {
-  if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object');
-  return JSON.parse(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default()(obj));
-}
-
-function isEmptyString(str) {
-  return str === '' || /^\s+$/g.test(str);
-}
-
-if (!window.adminUiNameSpace) window.adminUiNameSpace = {};
-var namespace = {
-  set: function set(key, value) {
-    window.adminUiNameSpace[key] = value;
-    return window.adminUiNameSpace[key];
-  },
-  get: function get(key) {
-    return window.adminUiNameSpace[key];
-  },
-  remove: function remove(key) {
-    return delete window.adminUiNameSpace[key];
-  }
-};
-
-function getError(action, option, xhr) {
-  var msg = void 0;
-  if (xhr.response) {
-    msg = xhr.status + ' ' + (xhr.response.error || xhr.response);
-  } else if (xhr.responseText) {
-    msg = xhr.status + ' ' + xhr.responseText;
-  } else {
-    msg = 'fail to post ' + action + ' ' + xhr.status;
-  }
-
-  var err = new Error(msg);
-  err.status = xhr.status;
-  err.method = 'post';
-  err.url = action;
-  return err;
-}
-
-function getBody(xhr) {
-  var text = xhr.responseText || xhr.response;
-  if (!text) {
-    return text;
-  }
-
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    return text;
-  }
-}
-
-function upload(option) {
-  // copy from element
-  // ### option
-  // * option.action // submit url
-  // * option.data // submit data
-  // * option.withCredentials // indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies or authorization headers
-  // * option.headers // change or set headers
-
-  // ### file
-  // * option.file
-  // * option.filename
-
-  // ### events
-  // * option.onProgress(e)
-  // * option.onError(e)
-  // * option.onSuccess()
-
-  if (typeof window.XMLHttpRequest === 'undefined') {
-    return;
-  }
-
-  var xhr = new window.XMLHttpRequest();
-  var action = option.action;
-
-  if (xhr.upload) {
-    if (option.onProgress) {
-      xhr.upload.onprogress = function progress(e) {
-        if (e.total > 0) {
-          e.percent = e.loaded / e.total * 100;
-        }
-        option.onProgress(e, option.index);
-      };
-    }
-  }
-
-  var formData = new window.FormData();
-
-  if (option.data) {
-    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(option.data).map(function (key) {
-      formData.append(key, option.data[key]);
-    });
-  }
-
-  formData.append(option.filename, option.file);
-
-  xhr.onerror = function error(e) {
-    if (option.onError) option.onError(e, option.index);
-  };
-
-  xhr.onload = function onload() {
-    if (xhr.status < 200 || xhr.status >= 300) {
-      return option.onError ? option.onError(getError(action, option, xhr), option.index) : false;
-    }
-    if (option.onSuccess) option.onSuccess(getBody(xhr), option.index);
-  };
-
-  xhr.open(option.method || 'post', action, true);
-
-  if (option.withCredentials && 'withCredentials' in xhr) {
-    xhr.withCredentials = true;
-  }
-
-  var headers = option.headers || {};
-
-  for (var item in headers) {
-    if (headers.hasOwnProperty(item) && headers[item] !== null) {
-      xhr.setRequestHeader(item, headers[item]);
-    }
-  }
-  xhr.send(formData);
-  return xhr;
-}
-function getDataType(o) {
-  // Author: yuhaijun
-  // email: yuhaijun@rongcapital.cn
-  // get data type
-  var regStr = /[^, ]+/g;
-  var type = {};
-  'Boolean Number String Function Array Date RegExp Object Error'.replace(regStr, function (name) {
-    type['[object ' + name + ']'] = name.toLowerCase();
-  });
-  return type[Object.prototype.toString.call(o)];
-}
-
-// export function rgbToHex (color) {
-//   var rgb = color.split(',')
-//   var r = parseInt(rgb[0].split('(')[1])
-//   var g = parseInt(rgb[1])
-//   var b = parseInt(rgb[2].split(')')[0])
-//   var hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
-//   return hex
-// }
-
-/***/ }),
-
 /***/ "BwfY":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -587,22 +425,6 @@ __webpack_require__("M6a0");
 __webpack_require__("OYls");
 __webpack_require__("QWe/");
 module.exports = __webpack_require__("FeBl").Symbol;
-
-
-/***/ }),
-
-/***/ "Cdx3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__("sB3e");
-var $keys = __webpack_require__("lktj");
-
-__webpack_require__("uqUo")('keys', function () {
-  return function keys(it) {
-    return $keys(toObject(it));
-  };
-});
 
 
 /***/ }),
@@ -655,6 +477,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_theme__ = __webpack_require__("+8bE");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return __WEBPACK_IMPORTED_MODULE_0__src_theme__["a"]; });
 
+
+/***/ }),
+
+/***/ "G6Xs":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+if (!window.adminUiNameSpace) window.adminUiNameSpace = {};
+/* harmony default export */ __webpack_exports__["a"] = ({
+  set: function set(key, value) {
+    window.adminUiNameSpace[key] = value;
+    return window.adminUiNameSpace[key];
+  },
+  get: function get(key) {
+    return window.adminUiNameSpace[key];
+  },
+  remove: function remove(key) {
+    return delete window.adminUiNameSpace[key];
+  }
+});
 
 /***/ }),
 
@@ -1358,13 +1200,6 @@ setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
 
-/***/ "fZjL":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__("jFbC"), __esModule: true };
-
-/***/ }),
-
 /***/ "fkB2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1414,15 +1249,6 @@ module.exports = __webpack_require__("+E39") ? function (object, key, value) {
   object[key] = value;
   return object;
 };
-
-
-/***/ }),
-
-/***/ "jFbC":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("Cdx3");
-module.exports = __webpack_require__("FeBl").Object.keys;
 
 
 /***/ }),
@@ -1520,6 +1346,20 @@ module.exports = Object.keys || function keys(O) {
 
 /***/ }),
 
+/***/ "luDk":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__("mvHQ");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
+
+/* harmony default export */ __webpack_exports__["a"] = (function (obj) {
+  if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object');
+  return JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(obj));
+});
+
+/***/ }),
+
 /***/ "mvHQ":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1608,23 +1448,6 @@ module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
 var defined = __webpack_require__("52gC");
 module.exports = function (it) {
   return Object(defined(it));
-};
-
-
-/***/ }),
-
-/***/ "uqUo":
-/***/ (function(module, exports, __webpack_require__) {
-
-// most Object methods by ES6 should accept primitives
-var $export = __webpack_require__("kM2E");
-var core = __webpack_require__("FeBl");
-var fails = __webpack_require__("S82l");
-module.exports = function (KEY, exec) {
-  var fn = (core.Object || {})[KEY] || Object[KEY];
-  var exp = {};
-  exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
 };
 
 

@@ -11,6 +11,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit --fix",
     "build": "node build/build.js",
+    "components": "node build/publish-per-comp.js",
     "publish": "node build/publish.js && node build/publish-per-comp.js",
     "upgrade": "npm run build && npm run publish"
   },
@@ -72,7 +73,7 @@
     "vue-style-loader": "^4.0.2",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-bundle-analyzer": "^3.0.2",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },

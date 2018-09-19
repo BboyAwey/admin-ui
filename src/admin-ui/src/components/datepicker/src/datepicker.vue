@@ -213,7 +213,7 @@
 <script>
 import ValidatorMixin from '../../../helpers/validator-mixin'
 import FormApiMixin from '../../../helpers/form-api-mixin'
-import { isEmptyString } from '../../../helpers/utils'
+import isEmptyString from '../../../helpers/utils/is-empty-string'
 import AuInput from '../../input'
 import AuIcon from '../../icon'
 import FormItem from '../../../helpers/form-item.vue'

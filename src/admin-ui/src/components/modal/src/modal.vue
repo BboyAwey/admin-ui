@@ -104,7 +104,8 @@
   </div>
 </template>
 <script>
-import { getElementSize, getWindowSize } from '../../../helpers/dom'
+import getElementSize from '../../../helpers/dom/get-element-size'
+import getWindowSize from '../../../helpers/dom/get-window-size'
 import AuButton from '../../button'
 import AuIcon from '../../icon'
 import AuScroller from '../../scroller'

@@ -17,7 +17,7 @@
         import Vue from 'vue'
         // 全量加载
         import AdminUi from 'admin-ui/dist/index.js'
-        import 'admin-ui/dist/style.css' // 样式需要单独引入
+        import 'admin-ui/dist/style.css' // 一些全局样式需要单独引入
 
         Vue.use(AdminUi)
       </code-h>
@@ -40,7 +40,7 @@
         Vue.component(Icon.name, Icon)
       </code-h>
       <p class="paragraph">
-        我们没有将组件的样式单独分开有两个原因，首先组件们的样式集合起来体积并不大，压缩打包后控制在60KB以内（这其中绝大部分都是font-awesome的样式代码，组件的所有样式不超过5kb）；其次由于使用了font-awesome，如果每个组件单独引入自己的样式，依赖了font-awesome的组件们就会出现重复的样式。
+        需要单独引入样式的原因是，有一些全局样式以及font-awesome的样式，需要引入。
       </p>
       <p class="paragraph">
         另外方法类组件如果是按需引入，可以直接使用，不需要注册为Vue组件

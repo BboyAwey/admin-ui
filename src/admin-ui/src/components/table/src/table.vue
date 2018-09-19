@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { addClass, removeClass } from '../../../helpers/dom'
+import { addClass, removeClass } from '../../../helpers/dom/class.js'
 
 export default {
   name: 'au-table',

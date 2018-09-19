@@ -35,9 +35,8 @@
 </template>
 
 <script>
-// import { hasClass, getElementSize } from '../../../helpers/dom'
-import { getElementSize, getWindowSize } from '../../../helpers/dom'
-// import { getWindowSize } from '../../../helpers/dom'
+import getElementSize from '../../../helpers/dom/get-element-size'
+import getWindowSize from '../../../helpers/dom/get-window-size'
 
 function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
 function getElementInnerWidth (el) {

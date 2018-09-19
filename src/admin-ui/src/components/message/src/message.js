@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import MessageConfig from './message.vue'
-// import { namespace } from '../../../helpers/utils'
 
 // use a pull to saving created message instance to avoid create repeatly
 let pool = []

@@ -165,7 +165,7 @@ import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
 import Loading from '../../loading'
 import FormItem from '../../../helpers/form-item.vue'
-import { isAncestor } from '../../../helpers/dom'
+import isAncestor from '../../../helpers/dom/is-ancestor'
 
 export default {
   name: 'au-tagfactory',

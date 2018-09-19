@@ -130,8 +130,10 @@
   </div>
 </template>
 <script>
-import { getElementSize, getElementPagePos, isAncestor } from '../../../helpers/dom'
-import { namespace } from '../../../helpers/utils'
+import getElementSize from '../../../helpers/dom/get-element-size'
+import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
+import isAncestor from '../../../helpers/dom/is-ancestor'
+import namespace from '../../../helpers/utils/namespace'
 
 function getRealZIndex (el) {
   if (!el || el === document) return 0

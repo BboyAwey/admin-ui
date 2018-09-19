@@ -113,6 +113,54 @@ module.exports = function (fn, that, length) {
 
 /***/ }),
 
+/***/ "/PwX":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function getSize(el) {
+  // let computed = window.getComputedStyle(el)
+  // let rect = el.getBoundingClientRect()
+  // return {
+  //   width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
+  //   height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
+  // }
+  return {
+    width: el.offsetWidth || 0,
+    height: el.offsetHeight || 0
+  };
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (function (el, isFragment) {
+  var temp = getSize(el);
+  if (temp.width || temp.height) return temp;
+
+  // clone the el
+  var copy = el.cloneNode(true);
+  // ste some style to minimize the influence to the document
+  // if (isFragment) copy.setAttribute('style', 'visibility:hidden !important; display:block !important;')
+  // else copy.setAttribute('style', 'visibility:hidden !important;')
+  copy.style.visibility = 'hidden';
+  copy.style.display = 'block';
+  copy.style.position = 'absolute';
+  copy.style.top = '-9999999px';
+  copy.style.left = '-9999999px';
+
+  var res = null;
+  // insert it to document
+  // if (isFragment) document.body.appendChild(copy)
+  // else el.parentNode.insertBefore(copy, el)
+  document.body.appendChild(copy);
+  res = getSize(copy);
+
+  // remove it
+  // if (isFragment) document.body.removeChild(copy)
+  // else el.parentNode.removeChild(copy)
+  document.body.removeChild(copy);
+  return res;
+});
+
+/***/ }),
+
 /***/ "3Eo+":
 /***/ (function(module, exports) {
 
@@ -162,331 +210,46 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 /***/ }),
 
-/***/ "8CCO":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getElementSize;
-/* unused harmony export getElementPagePos */
-/* unused harmony export getWindowSize */
-/* unused harmony export isFirefox */
-/* harmony export (immutable) */ __webpack_exports__["b"] = mousewheel;
-/* unused harmony export addClass */
-/* unused harmony export removeClass */
-/* unused harmony export hasClass */
-/* unused harmony export isAncestor */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__("AP3u");
-
-
-function getSize(el) {
-  // let computed = window.getComputedStyle(el)
-  // let rect = el.getBoundingClientRect()
-  // return {
-  //   width: el.offsetWidth || rect.width || parseInt(computed.width) || 0,
-  //   height: el.offsetHeight || rect.height || parseInt(computed.height) || 0
-  // }
-  return {
-    width: el.offsetWidth || 0,
-    height: el.offsetHeight || 0
-  };
-}
-
-function getElementSize(el, isFragment) {
-  var temp = getSize(el);
-  if (temp.width || temp.height) return temp;
-
-  // clone the el
-  var copy = el.cloneNode(true);
-  // ste some style to minimize the influence to the document
-  // if (isFragment) copy.setAttribute('style', 'visibility:hidden !important; display:block !important;')
-  // else copy.setAttribute('style', 'visibility:hidden !important;')
-  copy.style.visibility = 'hidden';
-  copy.style.display = 'block';
-  copy.style.position = 'absolute';
-  copy.style.top = '-9999999px';
-  copy.style.left = '-9999999px';
-
-  var res = null;
-  // insert it to document
-  // if (isFragment) document.body.appendChild(copy)
-  // else el.parentNode.insertBefore(copy, el)
-  document.body.appendChild(copy);
-  res = getSize(copy);
-
-  // remove it
-  // if (isFragment) document.body.removeChild(copy)
-  // else el.parentNode.removeChild(copy)
-  document.body.removeChild(copy);
-  return res;
-}
-
-function getElementPagePos(el) {
-  function getLeft(el) {
-    var actualLeft = el.offsetLeft;
-    var current = el.offsetParent;
-
-    while (current !== null) {
-      actualLeft += current.offsetLeft;
-      current = current.offsetParent;
-    }
-
-    return actualLeft;
-  }
-
-  function getTop(el) {
-    var actualTop = el.offsetTop;
-    var current = el.offsetParent;
-
-    while (current !== null) {
-      actualTop += current.offsetTop;
-      current = current.offsetParent;
-    }
-
-    return actualTop;
-  }
-
-  return {
-    left: getLeft(el),
-    top: getTop(el)
-  };
-}
-
-function getWindowSize() {
-  // 获取窗口宽度
-  if (window.innerWidth) {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
-  } else if (document.body.clientWidth) {
-    return {
-      width: document.body.clientWidth,
-      height: document.body.clientHeight
-    };
-  }
-}
-
-var isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-function mousewheel(action, element, handler) {
-  if (element && element[action + 'EventListener']) {
-    element[action + 'EventListener'](isFirefox ? 'DOMMouseScroll' : 'mousewheel', handler, { passive: true });
-  }
-}
-
-function getOriginClasses(el) {
-  var originClasses = [];
-  el.className.split(' ').forEach(function (cl) {
-    if (!Object(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* isEmptyString */])(cl)) originClasses.push(cl);
-  });
-  return originClasses;
-}
-function addClass(el, className) {
-  if (el.className.indexOf(className) === -1) {
-    var originClasses = getOriginClasses(el);
-    originClasses.push(className);
-    el.className = originClasses.join(' ');
-  }
-}
-
-function removeClass(el, className) {
-  if (el.className.indexOf(className) !== -1) {
-    var originClasses = getOriginClasses(el);
-    var temp = [];
-    originClasses.forEach(function (cl) {
-      if (cl !== className) temp.push(cl);
-    });
-    el.className = temp.join(' ');
-  }
-}
-
-function hasClass(el, className) {
-  return getOriginClasses(el).indexOf(className.trim()) !== -1;
-}
-
-function isAncestor(el, ancestor) {
-  var parent = el;
-  if (parent === ancestor) return true;else if (el.parentNode) return isAncestor(el.parentNode, ancestor);else return false;
-}
-
-/***/ }),
-
-/***/ "AP3u":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export deepClone */
-/* harmony export (immutable) */ __webpack_exports__["a"] = isEmptyString;
-/* unused harmony export namespace */
-/* unused harmony export upload */
-/* unused harmony export getDataType */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__("fZjL");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__ = __webpack_require__("mvHQ");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__);
-
-
-
-function deepClone(obj) {
-  if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object');
-  return JSON.parse(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default()(obj));
-}
-
-function isEmptyString(str) {
-  return str === '' || /^\s+$/g.test(str);
-}
-
-if (!window.adminUiNameSpace) window.adminUiNameSpace = {};
-var namespace = {
-  set: function set(key, value) {
-    window.adminUiNameSpace[key] = value;
-    return window.adminUiNameSpace[key];
-  },
-  get: function get(key) {
-    return window.adminUiNameSpace[key];
-  },
-  remove: function remove(key) {
-    return delete window.adminUiNameSpace[key];
-  }
-};
-
-function getError(action, option, xhr) {
-  var msg = void 0;
-  if (xhr.response) {
-    msg = xhr.status + ' ' + (xhr.response.error || xhr.response);
-  } else if (xhr.responseText) {
-    msg = xhr.status + ' ' + xhr.responseText;
-  } else {
-    msg = 'fail to post ' + action + ' ' + xhr.status;
-  }
-
-  var err = new Error(msg);
-  err.status = xhr.status;
-  err.method = 'post';
-  err.url = action;
-  return err;
-}
-
-function getBody(xhr) {
-  var text = xhr.responseText || xhr.response;
-  if (!text) {
-    return text;
-  }
-
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    return text;
-  }
-}
-
-function upload(option) {
-  // copy from element
-  // ### option
-  // * option.action // submit url
-  // * option.data // submit data
-  // * option.withCredentials // indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies or authorization headers
-  // * option.headers // change or set headers
-
-  // ### file
-  // * option.file
-  // * option.filename
-
-  // ### events
-  // * option.onProgress(e)
-  // * option.onError(e)
-  // * option.onSuccess()
-
-  if (typeof window.XMLHttpRequest === 'undefined') {
-    return;
-  }
-
-  var xhr = new window.XMLHttpRequest();
-  var action = option.action;
-
-  if (xhr.upload) {
-    if (option.onProgress) {
-      xhr.upload.onprogress = function progress(e) {
-        if (e.total > 0) {
-          e.percent = e.loaded / e.total * 100;
-        }
-        option.onProgress(e, option.index);
-      };
-    }
-  }
-
-  var formData = new window.FormData();
-
-  if (option.data) {
-    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(option.data).map(function (key) {
-      formData.append(key, option.data[key]);
-    });
-  }
-
-  formData.append(option.filename, option.file);
-
-  xhr.onerror = function error(e) {
-    if (option.onError) option.onError(e, option.index);
-  };
-
-  xhr.onload = function onload() {
-    if (xhr.status < 200 || xhr.status >= 300) {
-      return option.onError ? option.onError(getError(action, option, xhr), option.index) : false;
-    }
-    if (option.onSuccess) option.onSuccess(getBody(xhr), option.index);
-  };
-
-  xhr.open(option.method || 'post', action, true);
-
-  if (option.withCredentials && 'withCredentials' in xhr) {
-    xhr.withCredentials = true;
-  }
-
-  var headers = option.headers || {};
-
-  for (var item in headers) {
-    if (headers.hasOwnProperty(item) && headers[item] !== null) {
-      xhr.setRequestHeader(item, headers[item]);
-    }
-  }
-  xhr.send(formData);
-  return xhr;
-}
-function getDataType(o) {
-  // Author: yuhaijun
-  // email: yuhaijun@rongcapital.cn
-  // get data type
-  var regStr = /[^, ]+/g;
-  var type = {};
-  'Boolean Number String Function Array Date RegExp Object Error'.replace(regStr, function (name) {
-    type['[object ' + name + ']'] = name.toLowerCase();
-  });
-  return type[Object.prototype.toString.call(o)];
-}
-
-// export function rgbToHex (color) {
-//   var rgb = color.split(',')
-//   var r = parseInt(rgb[0].split('(')[1])
-//   var g = parseInt(rgb[1])
-//   var b = parseInt(rgb[2].split(')')[0])
-//   var hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
-//   return hex
-// }
-
-/***/ }),
-
-/***/ "Cdx3":
+/***/ "A/zo":
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__("sB3e");
-var $keys = __webpack_require__("lktj");
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
 
-__webpack_require__("uqUo")('keys', function () {
-  return function keys(it) {
-    return $keys(toObject(it));
-  };
-});
 
+// module
+exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "Beno":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("A/zo");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("9ddb2e7c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
@@ -681,21 +444,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "PuBJ":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/Projects/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "QRG4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -718,6 +466,107 @@ module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
+
+/***/ }),
+
+/***/ "RVR0":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "monitor",
+      staticClass: "au-scroller",
+      on: {
+        mouseenter: _vm.handleMouseenter,
+        mouseleave: _vm.handleMouseleave,
+        mousemove: _vm.handleScrollerMousemove
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "content",
+          staticClass: "au-scroller-content",
+          class: { "au-no-select": _vm.onDrag },
+          style: { top: _vm.contentTop + "px" }
+        },
+        [_vm._t("default")],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
+              expression: "(mouseenter && needScroll) || onDrag"
+            }
+          ],
+          ref: "barContainer",
+          staticClass: "au-scroller-bar-container",
+          on: {
+            mouseenter: _vm.handleBarMouseenter,
+            mouseleave: _vm.handleBarMouseleave
+          }
+        },
+        [
+          _c("div", {
+            ref: "bar",
+            staticClass: "au-scroller-bar au-theme-background-color--base-0",
+            on: { click: _vm.handleBarClick }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            ref: "core",
+            staticClass:
+              "au-scroller-bar-core au-theme-background-color--base-0",
+            style: {
+              top: _vm.scrollCoreTop + "px",
+              height: _vm.coreHeight + "px"
+            },
+            on: {
+              mousedown: _vm.handleCoreMousedown,
+              mouseup: _vm.handleCoreMouseUp
+            }
+          })
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-73df667a", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ "S5ih":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+/* harmony default export */ __webpack_exports__["a"] = (function (action, element, handler) {
+  if (element && element[action + 'EventListener']) {
+    element[action + 'EventListener'](isFirefox ? 'DOMMouseScroll' : 'mousewheel', handler, { passive: true });
+  }
+});
 
 /***/ }),
 
@@ -969,13 +818,6 @@ $export($export.S, 'Object', {
 
 /***/ }),
 
-/***/ "fZjL":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__("jFbC"), __esModule: true };
-
-/***/ }),
-
 /***/ "fkB2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1009,43 +851,6 @@ module.exports = __webpack_require__("+E39") ? function (object, key, value) {
   return object;
 };
 
-
-/***/ }),
-
-/***/ "jFbC":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("Cdx3");
-module.exports = __webpack_require__("FeBl").Object.keys;
-
-
-/***/ }),
-
-/***/ "jlSn":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("PuBJ");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("03299281", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 
@@ -1148,11 +953,11 @@ module.exports = Object.keys || function keys(O) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__ = __webpack_require__("oddz");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("ng1M");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("RVR0");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("jlSn")
+  __webpack_require__("Beno")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -1170,13 +975,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/admin-ui/src/components/scroller/src/scroller.vue"
+Component.options.__file = "src\\admin-ui\\src\\components\\scroller\\src\\scroller.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -1185,9 +990,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5e4daee0", Component.options)
+    hotAPI.createRecord("data-v-73df667a", Component.options)
   } else {
-    hotAPI.reload("data-v-5e4daee0", Component.options)
+    hotAPI.reload("data-v-73df667a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -1222,108 +1027,14 @@ module.exports = function (isEntries) {
 
 /***/ }),
 
-/***/ "mvHQ":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__("qkKv"), __esModule: true };
-
-/***/ }),
-
-/***/ "ng1M":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "monitor",
-      staticClass: "au-scroller",
-      on: {
-        mouseenter: _vm.handleMouseenter,
-        mouseleave: _vm.handleMouseleave,
-        mousemove: _vm.handleScrollerMousemove
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          ref: "content",
-          staticClass: "au-scroller-content",
-          class: { "au-no-select": _vm.onDrag },
-          style: { top: _vm.contentTop + "px" }
-        },
-        [_vm._t("default")],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
-              expression: "(mouseenter && needScroll) || onDrag"
-            }
-          ],
-          ref: "barContainer",
-          staticClass: "au-scroller-bar-container",
-          on: {
-            mouseenter: _vm.handleBarMouseenter,
-            mouseleave: _vm.handleBarMouseleave
-          }
-        },
-        [
-          _c("div", {
-            ref: "bar",
-            staticClass: "au-scroller-bar au-theme-background-color--base-0",
-            on: { click: _vm.handleBarClick }
-          }),
-          _vm._v(" "),
-          _c("div", {
-            ref: "core",
-            staticClass:
-              "au-scroller-bar-core au-theme-background-color--base-0",
-            style: {
-              top: _vm.scrollCoreTop + "px",
-              height: _vm.coreHeight + "px"
-            },
-            on: {
-              mousedown: _vm.handleCoreMousedown,
-              mouseup: _vm.handleCoreMouseUp
-            }
-          })
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5e4daee0", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "oddz":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__ = __webpack_require__("gRE1");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom__ = __webpack_require__("8CCO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__ = __webpack_require__("/PwX");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_mousewheel_js__ = __webpack_require__("S5ih");
 
 //
 //
@@ -1402,6 +1113,7 @@ if (false) {
 //
 //
 //
+
 
 
 
@@ -1416,7 +1128,7 @@ if (false) {
     //   getElementSize(this.$refs.content).height
     // )
     var firstScroll = true;
-    Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["b" /* mousewheel */])('add', this.$refs.monitor, function (e) {
+    Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_mousewheel_js__["a" /* default */])('add', this.$refs.monitor, function (e) {
       if (firstScroll) {
         _this.handleMouseenter();
         firstScroll = false;
@@ -1487,7 +1199,7 @@ if (false) {
     },
     detectIfNeedScroll: function detectIfNeedScroll() {
       var monitorHeight = this.getMonitorHeight();
-      var contentHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height;
+      var contentHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.content).height;
       this.needScroll = monitorHeight < contentHeight;
       return {
         needScroll: this.needScroll,
@@ -1509,7 +1221,7 @@ if (false) {
       this.contentTop = contentTop;
 
       // sync scrollbar
-      var scrollTopMax = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height - Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
+      var scrollTopMax = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.bar).height - Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.core).height;
       var scrollCoreTop = contentTop * monitorHeight / contentHeight * -1;
       this.scrollCoreTop = scrollCoreTop <= 0 ? 0 : scrollCoreTop >= scrollTopMax ? scrollTopMax : scrollCoreTop;
       // fix
@@ -1522,7 +1234,7 @@ if (false) {
           borderTopWidth = _window$getComputedSt.borderTopWidth,
           borderBottomWidth = _window$getComputedSt.borderBottomWidth;
 
-      return Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height - parseInt(paddingTop) - parseInt(paddingBottom) - parseInt(borderTopWidth) - parseInt(borderBottomWidth);
+      return Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.monitor).height - parseInt(paddingTop) - parseInt(paddingBottom) - parseInt(borderTopWidth) - parseInt(borderBottomWidth);
     },
     calcCoreHeight: function calcCoreHeight(monitor, content) {
       if (content <= monitor) {
@@ -1530,7 +1242,7 @@ if (false) {
         this.contentTop = 0;
       } else {
         this.needScroll = true;
-        var barHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.barContainer).height;
+        var barHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.barContainer).height;
         this.coreHeight = monitor * barHeight / content;
       }
     },
@@ -1543,9 +1255,9 @@ if (false) {
       this.$refs.core.style.opacity = '.4';
       this.$refs.bar.style.borderRadius = '3px';
       this.$refs.core.style.borderRadius = '3px';
-      var monitorHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.monitor).height;
+      var monitorHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.monitor).height;
       this.setBarHeight(monitorHeight);
-      this.calcCoreHeight(monitorHeight, Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.content).height, Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height);
+      this.calcCoreHeight(monitorHeight, Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.content).height, Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.bar).height);
     },
     handleMouseleave: function handleMouseleave() {
       this.mouseenter = false;
@@ -1626,8 +1338,8 @@ if (false) {
 
       if (!needScroll) return;
 
-      var barHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.bar).height;
-      var coreHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom__["a" /* getElementSize */])(this.$refs.core).height;
+      var barHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.bar).height;
+      var coreHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.core).height;
 
       var scrollTopMax = barHeight - coreHeight;
       var contentTopMax = monitorHeight - contentHeight;
@@ -1656,18 +1368,6 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_scroller_vue__ = __webpack_require__("lrsZ");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return __WEBPACK_IMPORTED_MODULE_0__src_scroller_vue__["a"]; });
-
-
-/***/ }),
-
-/***/ "qkKv":
-/***/ (function(module, exports, __webpack_require__) {
-
-var core = __webpack_require__("FeBl");
-var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
-module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
-  return $JSON.stringify.apply($JSON, arguments);
-};
 
 
 /***/ }),
@@ -1905,18 +1605,6 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ "sB3e":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__("52gC");
-module.exports = function (it) {
-  return Object(defined(it));
-};
-
-
-/***/ }),
-
 /***/ "tTVk":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1949,23 +1637,6 @@ function listToStyles (parentId, list) {
   }
   return styles
 }
-
-
-/***/ }),
-
-/***/ "uqUo":
-/***/ (function(module, exports, __webpack_require__) {
-
-// most Object methods by ES6 should accept primitives
-var $export = __webpack_require__("kM2E");
-var core = __webpack_require__("FeBl");
-var fails = __webpack_require__("S82l");
-module.exports = function (KEY, exec) {
-  var fn = (core.Object || {})[KEY] || Object[KEY];
-  var exp = {};
-  exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
-};
 
 
 /***/ }),

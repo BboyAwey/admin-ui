@@ -67,7 +67,7 @@
 import FormApiMixin from '../../../helpers/form-api-mixin'
 import ValidatorMixin from '../../../helpers/validator-mixin'
 import FormItem from '../../../helpers/form-item.vue'
-import { getElementSize } from '../../../helpers/dom'
+import getElementSize from '../../../helpers/dom/get-element-size'
 import Loading from '../../loading'
 
 export default {

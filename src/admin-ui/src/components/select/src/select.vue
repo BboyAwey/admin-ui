@@ -172,7 +172,7 @@
 <script>
 import ValidatorMixin from '../../../helpers/validator-mixin'
 import FormApiMixin from '../../../helpers/form-api-mixin'
-import { getElementSize } from '../../../helpers/dom'
+import getElementSize from '../../../helpers/dom/get-element-size'
 import AuIcon from '../../icon'
 import AuScroller from '../../scroller'
 import FormItem from '../../../helpers/form-item.vue'

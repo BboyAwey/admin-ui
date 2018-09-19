@@ -355,10 +355,7 @@
 import AuIcon from '../../icon'
 import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
-import { isEmptyString } from '../../../helpers/utils'
-// import { deepClone, isEmptyString } from '../../../helpers/utils'
-// import { hasClass } from '../../../helpers/dom'
-// import { getElementSize, getElementPagePos } from '../../../helpers/dom'
+import isEmptyString from '../../../helpers/utils/is-empty-string.js'
 
 function plainObjectEqual (o1, o2) {
   return JSON.stringify(o1) === JSON.stringify(o2)

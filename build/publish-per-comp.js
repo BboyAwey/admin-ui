@@ -14,7 +14,6 @@ var chalk = require('chalk')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.publish.conf')
 
-
 function getFolders(dir) {
   return fs.readdirSync(dir).filter(function (file) {
     return fs.statSync(path.join(dir, file)).isDirectory()

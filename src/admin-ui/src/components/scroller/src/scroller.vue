@@ -76,7 +76,8 @@
   </div>
 </template>
 <script>
-import { getElementSize, mousewheel } from '../../../helpers/dom'
+import getElementSize from '../../../helpers/dom/get-element-size'
+import mousewheel from '../../../helpers/dom/mousewheel.js'
 
 export default {
   name: 'au-scroller',

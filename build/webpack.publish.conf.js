@@ -82,10 +82,10 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // keep module.id stable when vender modules does not change
-    new webpack.HashedModuleIdsPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
-    })
+    new webpack.HashedModuleIdsPlugin()
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'static'
+    // })
   ]
 })
 

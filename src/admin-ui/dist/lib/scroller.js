@@ -210,49 +210,6 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 /***/ }),
 
-/***/ "A/zo":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "Beno":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("A/zo");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("9ddb2e7c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "D2L2":
 /***/ (function(module, exports) {
 
@@ -444,6 +401,21 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "PuBJ":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "QRG4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -466,94 +438,6 @@ module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
-
-/***/ }),
-
-/***/ "RVR0":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "monitor",
-      staticClass: "au-scroller",
-      on: {
-        mouseenter: _vm.handleMouseenter,
-        mouseleave: _vm.handleMouseleave,
-        mousemove: _vm.handleScrollerMousemove
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          ref: "content",
-          staticClass: "au-scroller-content",
-          class: { "au-no-select": _vm.onDrag },
-          style: { top: _vm.contentTop + "px" }
-        },
-        [_vm._t("default")],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
-              expression: "(mouseenter && needScroll) || onDrag"
-            }
-          ],
-          ref: "barContainer",
-          staticClass: "au-scroller-bar-container",
-          on: {
-            mouseenter: _vm.handleBarMouseenter,
-            mouseleave: _vm.handleBarMouseleave
-          }
-        },
-        [
-          _c("div", {
-            ref: "bar",
-            staticClass: "au-scroller-bar au-theme-background-color--base-0",
-            on: { click: _vm.handleBarClick }
-          }),
-          _vm._v(" "),
-          _c("div", {
-            ref: "core",
-            staticClass:
-              "au-scroller-bar-core au-theme-background-color--base-0",
-            style: {
-              top: _vm.scrollCoreTop + "px",
-              height: _vm.coreHeight + "px"
-            },
-            on: {
-              mousedown: _vm.handleCoreMousedown,
-              mouseup: _vm.handleCoreMouseUp
-            }
-          })
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-73df667a", esExports)
-  }
-}
 
 /***/ }),
 
@@ -854,6 +738,34 @@ module.exports = __webpack_require__("+E39") ? function (object, key, value) {
 
 /***/ }),
 
+/***/ "jlSn":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("PuBJ");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("03299281", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "kM2E":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -953,11 +865,11 @@ module.exports = Object.keys || function keys(O) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__ = __webpack_require__("oddz");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("RVR0");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("ng1M");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("Beno")
+  __webpack_require__("jlSn")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -975,13 +887,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\admin-ui\\src\\components\\scroller\\src\\scroller.vue"
+Component.options.__file = "src/admin-ui/src/components/scroller/src/scroller.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -990,9 +902,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-73df667a", Component.options)
+    hotAPI.createRecord("data-v-5e4daee0", Component.options)
   } else {
-    hotAPI.reload("data-v-73df667a", Component.options)
+    hotAPI.reload("data-v-5e4daee0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -1024,6 +936,94 @@ module.exports = function (isEntries) {
   };
 };
 
+
+/***/ }),
+
+/***/ "ng1M":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "monitor",
+      staticClass: "au-scroller",
+      on: {
+        mouseenter: _vm.handleMouseenter,
+        mouseleave: _vm.handleMouseleave,
+        mousemove: _vm.handleScrollerMousemove
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "content",
+          staticClass: "au-scroller-content",
+          class: { "au-no-select": _vm.onDrag },
+          style: { top: _vm.contentTop + "px" }
+        },
+        [_vm._t("default")],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
+              expression: "(mouseenter && needScroll) || onDrag"
+            }
+          ],
+          ref: "barContainer",
+          staticClass: "au-scroller-bar-container",
+          on: {
+            mouseenter: _vm.handleBarMouseenter,
+            mouseleave: _vm.handleBarMouseleave
+          }
+        },
+        [
+          _c("div", {
+            ref: "bar",
+            staticClass: "au-scroller-bar au-theme-background-color--base-0",
+            on: { click: _vm.handleBarClick }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            ref: "core",
+            staticClass:
+              "au-scroller-bar-core au-theme-background-color--base-0",
+            style: {
+              top: _vm.scrollCoreTop + "px",
+              height: _vm.coreHeight + "px"
+            },
+            on: {
+              mousedown: _vm.handleCoreMousedown,
+              mouseup: _vm.handleCoreMouseUp
+            }
+          })
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5e4daee0", esExports)
+  }
+}
 
 /***/ }),
 

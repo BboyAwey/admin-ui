@@ -109,7 +109,7 @@
             </td>
             <td>
               消息图标<br>
-              默认图标会随messageType的不同而不同
+              默认图标会随type的不同而不同
             </td>
           </tr>
           <tr>
@@ -164,11 +164,8 @@
             message () {
               let messageIns = this.$message({
                 message: '一则消息',
-                duration: 0,
                 type: 'primary',
-                icon: '',
-                closeable: true,
-                customClass: ''
+                closeable: true
               })
               messageIns.$on('close', () => {
                 console.log('Closed!')
@@ -188,9 +185,7 @@ export default {
       let messageIns = this.$message({
         message: '一则消息',
         type: 'primary',
-        icon: '',
-        closeable: true,
-        customClass: ''
+        closeable: true
       })
       messageIns.$on('close', () => {
         console.log('Closed!')

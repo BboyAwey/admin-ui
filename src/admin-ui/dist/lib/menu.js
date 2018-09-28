@@ -86,6 +86,34 @@ module.exports = !__webpack_require__("S82l")(function () {
 
 /***/ }),
 
+/***/ "+SQz":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("+s0W");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("cde297b8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6e8f300\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./menu.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6e8f300\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./menu.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "+ZMJ":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -109,6 +137,21 @@ module.exports = function (fn, that, length) {
     return fn.apply(that, arguments);
   };
 };
+
+
+/***/ }),
+
+/***/ "+s0W":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.au-menu {\n  position: relative;\n  height: 100%;\n  list-style: none;\n}\n.au-menu li {\n    position: relative;\n}\n.au-menu .menu {\n    position: relative;\n    height: 40px;\n    padding: 0 20px 0 0;\n    overflow: hidden;\n    line-height: 40px;\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n    cursor: pointer;\n}\n.au-menu .menu-text {\n    display: inline-block;\n}\n.au-menu .menu-icon {\n    position: relative;\n    top: 1px;\n    margin-right: 10px;\n    font-size: 18px;\n}\n.au-menu .menu-fold-icon {\n    position: absolute;\n    right: 12px;\n    text-align: center;\n    line-height: 40px;\n    font-size: 18px;\n}\n.au-menu .active-dec {\n    display: inline-block;\n    position: absolute;\n    left: 0;\n    top: 0;\n    z-index: 1;\n    height: 100%;\n    width: 4px;\n}\n.au-menu .collapse-handle-top,\n  .au-menu .collapse-handle-bottom {\n    position: absolute;\n    left: 0;\n    width: 100%;\n    height: 40px;\n    padding: 0 22px;\n    line-height: 40px;\n    text-align: right;\n    font-size: 18px;\n    cursor: pointer;\n}\n.au-menu .collapse-handle-top {\n    top: 0;\n    border-bottom: 1px solid;\n}\n.au-menu .collapse-handle-bottom {\n    bottom: 0;\n    border-top: 1px solid;\n}\n.au-menu.top-level {\n  padding: 10px 0;\n}\n.au-menu.collapsable-top {\n  padding-top: 40px;\n}\n.au-menu.collapsable-bottom {\n  padding-bottom: 40px;\n}\n.au-menu.collapse {\n  width: 60px !important;\n}\n.au-menu.collapse .menu {\n    padding: 0;\n    cursor: pointer;\n}\n.au-menu.collapse .menu-icon {\n    margin-right: 10px;\n}\n.au-menu.collapse .menu-text {\n    display: none;\n}\n.au-menu.collapse .collapse-handle {\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n.au-menu-pop-content {\n  padding: 12px;\n  font-size: 14px;\n}\n.au-menu-children-triangle,\n.au-menu-has-children-pop {\n  border-width: 1px;\n  border-style: solid;\n}\n.au-menu-popover-content {\n  padding: 10px 0;\n  max-height: 320px;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/menu/src/menu.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,aAAa;EACb,iBAAiB;CAClB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,aAAa;IACb,oBAAoB;IACpB,iBAAiB;IACjB,kBAAkB;IAClB,gBAAgB;IAChB,wBAAwB;IACxB,iBAAiB;IACjB,oBAAoB;IACpB,gBAAgB;CACnB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,mBAAmB;IACnB,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,YAAY;IACZ,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;CACnB;AACD;IACI,sBAAsB;IACtB,mBAAmB;IACnB,QAAQ;IACR,OAAO;IACP,WAAW;IACX,aAAa;IACb,WAAW;CACd;AACD;;IAEI,mBAAmB;IACnB,QAAQ;IACR,YAAY;IACZ,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,kBAAkB;IAClB,gBAAgB;IAChB,gBAAgB;CACnB;AACD;IACI,OAAO;IACP,yBAAyB;CAC5B;AACD;IACI,UAAU;IACV,sBAAsB;CACzB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,qBAAqB;CACtB;AACD;EACE,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,gBAAgB;CACnB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,cAAc;CACjB;AACD;IACI,aAAa;IACb,kBAAkB;IAClB,mBAAmB;CACtB;AACD;EACE,cAAc;EACd,gBAAgB;CACjB;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB;AACD;EACE,gBAAgB;EAChB,kBAAkB;CACnB","file":"menu.vue","sourcesContent":["\n.au-menu {\n  position: relative;\n  height: 100%;\n  list-style: none;\n}\n.au-menu li {\n    position: relative;\n}\n.au-menu .menu {\n    position: relative;\n    height: 40px;\n    padding: 0 20px 0 0;\n    overflow: hidden;\n    line-height: 40px;\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n    cursor: pointer;\n}\n.au-menu .menu-text {\n    display: inline-block;\n}\n.au-menu .menu-icon {\n    position: relative;\n    top: 1px;\n    margin-right: 10px;\n    font-size: 18px;\n}\n.au-menu .menu-fold-icon {\n    position: absolute;\n    right: 12px;\n    text-align: center;\n    line-height: 40px;\n    font-size: 18px;\n}\n.au-menu .active-dec {\n    display: inline-block;\n    position: absolute;\n    left: 0;\n    top: 0;\n    z-index: 1;\n    height: 100%;\n    width: 4px;\n}\n.au-menu .collapse-handle-top,\n  .au-menu .collapse-handle-bottom {\n    position: absolute;\n    left: 0;\n    width: 100%;\n    height: 40px;\n    padding: 0 22px;\n    line-height: 40px;\n    text-align: right;\n    font-size: 18px;\n    cursor: pointer;\n}\n.au-menu .collapse-handle-top {\n    top: 0;\n    border-bottom: 1px solid;\n}\n.au-menu .collapse-handle-bottom {\n    bottom: 0;\n    border-top: 1px solid;\n}\n.au-menu.top-level {\n  padding: 10px 0;\n}\n.au-menu.collapsable-top {\n  padding-top: 40px;\n}\n.au-menu.collapsable-bottom {\n  padding-bottom: 40px;\n}\n.au-menu.collapse {\n  width: 60px !important;\n}\n.au-menu.collapse .menu {\n    padding: 0;\n    cursor: pointer;\n}\n.au-menu.collapse .menu-icon {\n    margin-right: 10px;\n}\n.au-menu.collapse .menu-text {\n    display: none;\n}\n.au-menu.collapse .collapse-handle {\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n.au-menu-pop-content {\n  padding: 12px;\n  font-size: 14px;\n}\n.au-menu-children-triangle,\n.au-menu-has-children-pop {\n  border-width: 1px;\n  border-style: solid;\n}\n.au-menu-popover-content {\n  padding: 10px 0;\n  max-height: 320px;\n}\n"],"sourceRoot":""}]);
+
+// exports
 
 
 /***/ }),
@@ -289,34 +332,6 @@ module.exports = function (key) {
 
 /***/ }),
 
-/***/ "3XrO":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("wEUF");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("3e051a4c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73fd09cc\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./menu.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73fd09cc\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./menu.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "3fs2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -343,702 +358,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "44MN":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "self",
-      staticClass: "au-menu au-theme-color--base-3",
-      class: ((_obj = {
-        "collapsable-top":
-          _vm.collapsable &&
-          _vm.isTopLevel &&
-          _vm.collapseHandlebarPosition != "bottom",
-        "collapsable-bottom":
-          _vm.collapsable &&
-          _vm.isTopLevel &&
-          _vm.collapseHandlebarPosition == "bottom",
-        collapse: _vm.localCollapse
-      }),
-      (_obj[
-        "top-level au-theme-background-color--" +
-          (_vm.backgroundColor || "base-12")
-      ] =
-        _vm.isTopLevel),
-      _obj)
-    },
-    [
-      _vm.collapsable &&
-      _vm.isTopLevel &&
-      _vm.collapseHandlebarPosition != "bottom"
-        ? _c(
-            "div",
-            {
-              staticClass: "collapse-handle-top",
-              class: ((_obj$1 = {}),
-              (_obj$1[
-                "au-theme-border-color--" +
-                  (_vm.collapseHandlebarSepratorColor || "base-9") +
-                  "-important"
-              ] = true),
-              (_obj$1[
-                "au-theme-color--" + (_vm.itemFontColor || "base-3")
-              ] = true),
-              (_obj$1[
-                "au-theme-hover-color--" + (_vm.itemHoverFontColor || "primary")
-              ] = true),
-              _obj$1),
-              on: { click: _vm.toggle }
-            },
-            [
-              _c("au-icon", {
-                staticClass: "collapse-handle-icon",
-                style: {
-                  transform: _vm.localCollapse ? "" : "rotate(180deg)"
-                },
-                attrs: { type: "angle-double-right", "unify-size": "" }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.isTopLevel
-        ? _c(
-            "au-scroller",
-            {
-              staticStyle: { height: "100%" },
-              attrs: { "scroll-top": _vm.scrollTop },
-              on: {
-                scroll: function(v) {
-                  return (_vm.scrollTop = v)
-                }
-              }
-            },
-            [
-              _c(
-                "ul",
-                _vm._l(_vm.localItems, function(item, i) {
-                  return _c(
-                    "li",
-                    { key: i },
-                    [
-                      _c(
-                        "au-popover",
-                        {
-                          ref: "popover",
-                          refInFor: true,
-                          attrs: {
-                            disabled: !_vm.localCollapse,
-                            trigger: _vm.hasChildren(item) ? "click" : "hover",
-                            "hide-on-blur": true,
-                            placement: _vm.hasChildren(item)
-                              ? i < 5 ? "right top" : "right bottom"
-                              : "right middle",
-                            plain: _vm.hasChildren(item)
-                          }
-                        },
-                        [
-                          _c(
-                            "au-popover",
-                            {
-                              ref: "tipPopover",
-                              refInFor: true,
-                              attrs: {
-                                slot: "target",
-                                disabled: !_vm.localCollapse,
-                                trigger: "hover",
-                                placement: "right middle"
-                              },
-                              slot: "target"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "menu",
-                                  class: ((_obj = {}),
-                                  (_obj[
-                                    "au-theme-background-color--" +
-                                      _vm.itemBackgroundColor
-                                  ] =
-                                    !!_vm.itemBackgroundColor &&
-                                    !_vm.isItemActive(item)),
-                                  (_obj[
-                                    "au-theme-color--" + _vm.itemFontColor
-                                  ] =
-                                    !!_vm.itemFontColor &&
-                                    !_vm.isItemActive(item) &&
-                                    item.url),
-                                  (_obj[
-                                    "au-theme-hover-background-color--" +
-                                      (_vm.itemHoverBackgroundColor ||
-                                        "primary-bottom")
-                                  ] = !_vm.isItemActive(item)),
-                                  (_obj[
-                                    "au-theme-hover-color--" +
-                                      (_vm.itemHoverFontColor || "primary")
-                                  ] =
-                                    !_vm.isItemActive(item) && item.url),
-                                  (_obj[
-                                    "au-theme-color--" +
-                                      (_vm.itemUnlinkTextColor || "base-7")
-                                  ] =
-                                    !item.url &&
-                                    !_vm.isItemActive(item) &&
-                                    !_vm.localCollapse),
-                                  (_obj[
-                                    "au-theme-color--" +
-                                      (_vm.itemActiveFontColor || "primary") +
-                                      " au-theme-background-color--" +
-                                      (_vm.itemActiveBackgroundColor ||
-                                        "primary-bottom")
-                                  ] = _vm.isItemActive(item)),
-                                  _obj),
-                                  style: {
-                                    paddingLeft: _vm.calcPaddingLeft(item)
-                                  },
-                                  attrs: { slot: "target" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.select(item, i)
-                                    }
-                                  },
-                                  slot: "target"
-                                },
-                                [
-                                  _c("div", {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: _vm.isItemActive(item),
-                                        expression: "isItemActive(item)"
-                                      }
-                                    ],
-                                    staticClass: "active-dec",
-                                    class:
-                                      "au-theme-background-color--" +
-                                      (_vm.itemActiveFontColor || "primary")
-                                  }),
-                                  _vm._v(" "),
-                                  item.icon
-                                    ? _c("au-icon", {
-                                        staticClass: "menu-icon",
-                                        attrs: {
-                                          type: item.icon,
-                                          "unify-size": ""
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "menu-text",
-                                      style: {
-                                        marginRight: _vm.hasChildren(item)
-                                          ? "16px"
-                                          : ""
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(item.text))]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.hasChildren(item)
-                                    ? _c("au-icon", {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value: !_vm.localCollapse,
-                                            expression: "!localCollapse"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "menu-fold-icon\n                au-theme-color--base-3\n                au-theme-hover-color--primary",
-                                        style: {
-                                          transform:
-                                            "rotate(" +
-                                            (item.collapse ? "-90" : "0") +
-                                            "deg)",
-                                          right: item.collapse ? "12px" : ""
-                                        },
-                                        attrs: { type: "angle-down" },
-                                        nativeOn: {
-                                          click: function($event) {
-                                            $event.stopPropagation()
-                                            _vm.toggleCollapse(item)
-                                          }
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "au-menu-pop-content",
-                                  attrs: { slot: "content" },
-                                  slot: "content"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n              " +
-                                      _vm._s(item.text) +
-                                      "\n            "
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          !_vm.hasChildren(item)
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass: "au-menu-pop-content",
-                                  attrs: { slot: "content" },
-                                  slot: "content"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n            " +
-                                      _vm._s(item.text) +
-                                      "\n          "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.hasChildren(item)
-                            ? _c(
-                                "au-scroller",
-                                {
-                                  staticClass:
-                                    "au-menu-popover-content au-theme-color--base-3",
-                                  attrs: { slot: "content" },
-                                  slot: "content"
-                                },
-                                [
-                                  _c("au-menu", {
-                                    attrs: {
-                                      items: item.children,
-                                      collapsable: false,
-                                      "is-popover": true,
-                                      "popover-ins": _vm.$refs.popover,
-                                      "is-top-level": false,
-                                      all: _vm.isTopLevel
-                                        ? _vm.localItems
-                                        : _vm.all,
-                                      "background-color": _vm.backgroundColor,
-                                      "item-font-color": _vm.itemFontColor,
-                                      "item-background-color":
-                                        _vm.itemBackgroundColor,
-                                      "item-unlink-font-color":
-                                        _vm.itemUnlinkTextColor,
-                                      "item-hover-font-color":
-                                        _vm.itemHoverFontColor,
-                                      "item-hover-background-color":
-                                        _vm.itemHoverBackgroundColor,
-                                      "item-active-font-color":
-                                        _vm.itemActiveFontColor,
-                                      "item-active-background-color":
-                                        _vm.itemActiveBackgroundColor,
-                                      "collapse-handlebar-seprator-color":
-                                        _vm.collapseHandlebarSepratorColor
-                                    },
-                                    on: { select: _vm.handlePopSelect }
-                                  })
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm.hasChildren(item)
-                        ? _c("au-menu", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !_vm.localCollapse && !item.collapse,
-                                expression: "!localCollapse && !item.collapse"
-                              }
-                            ],
-                            attrs: {
-                              items: item.children,
-                              "is-top-level": false,
-                              all: _vm.isTopLevel ? _vm.localItems : _vm.all,
-                              "background-color": _vm.backgroundColor,
-                              "item-font-color": _vm.itemFontColor,
-                              "item-background-color": _vm.itemBackgroundColor,
-                              "item-unlink-font-color": _vm.itemUnlinkTextColor,
-                              "item-hover-font-color": _vm.itemHoverFontColor,
-                              "item-hover-background-color":
-                                _vm.itemHoverBackgroundColor,
-                              "item-active-font-color": _vm.itemActiveFontColor,
-                              "item-active-background-color":
-                                _vm.itemActiveBackgroundColor,
-                              "collapse-handlebar-seprator-color":
-                                _vm.collapseHandlebarSepratorColor
-                            },
-                            on: { select: _vm.handlePopSelect }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                  var _obj
-                })
-              )
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.isTopLevel
-        ? _c(
-            "ul",
-            _vm._l(_vm.localItems, function(item, i) {
-              return _c(
-                "li",
-                { key: i },
-                [
-                  _c(
-                    "au-popover",
-                    {
-                      ref: "popover",
-                      refInFor: true,
-                      attrs: {
-                        disabled: !_vm.localCollapse,
-                        trigger: _vm.hasChildren(item) ? "click" : "hover",
-                        "hide-on-blur": true,
-                        placement: _vm.hasChildren(item)
-                          ? i < 5 ? "right top" : "right bottom"
-                          : "right middle",
-                        plain: _vm.hasChildren(item)
-                      }
-                    },
-                    [
-                      _c(
-                        "au-popover",
-                        {
-                          ref: "tipPopover",
-                          refInFor: true,
-                          attrs: {
-                            slot: "target",
-                            disabled: !_vm.localCollapse,
-                            trigger: "hover",
-                            placement: "right middle"
-                          },
-                          slot: "target"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "menu",
-                              class: ((_obj = {}),
-                              (_obj[
-                                "au-theme-background-color--" +
-                                  _vm.itemBackgroundColor
-                              ] =
-                                !!_vm.itemBackgroundColor &&
-                                !_vm.isItemActive(item)),
-                              (_obj["au-theme-color--" + _vm.itemFontColor] =
-                                !!_vm.itemFontColor &&
-                                !_vm.isItemActive(item) &&
-                                item.url),
-                              (_obj[
-                                "au-theme-hover-background-color--" +
-                                  (_vm.itemHoverBackgroundColor ||
-                                    "primary-bottom")
-                              ] = !_vm.isItemActive(item)),
-                              (_obj[
-                                "au-theme-hover-color--" +
-                                  (_vm.itemHoverFontColor || "primary")
-                              ] =
-                                !_vm.isItemActive(item) && item.url),
-                              (_obj[
-                                "au-theme-color--" +
-                                  (_vm.itemUnlinkTextColor || "base-7")
-                              ] =
-                                !item.url &&
-                                !_vm.isItemActive(item) &&
-                                !_vm.localCollapse),
-                              (_obj[
-                                "au-theme-color--" +
-                                  (_vm.itemActiveFontColor || "primary") +
-                                  " au-theme-background-color--" +
-                                  (_vm.itemActiveBackgroundColor ||
-                                    "primary-bottom")
-                              ] = _vm.isItemActive(item)),
-                              _obj),
-                              style: {
-                                paddingLeft: _vm.calcPaddingLeft(item)
-                              },
-                              attrs: { slot: "target" },
-                              on: {
-                                click: function($event) {
-                                  _vm.select(item, i)
-                                }
-                              },
-                              slot: "target"
-                            },
-                            [
-                              _c("div", {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isItemActive(item),
-                                    expression: "isItemActive(item)"
-                                  }
-                                ],
-                                staticClass: "active-dec",
-                                class:
-                                  "au-theme-background-color--" +
-                                  (_vm.itemActiveFontColor || "primary")
-                              }),
-                              _vm._v(" "),
-                              item.icon
-                                ? _c("au-icon", {
-                                    staticClass: "menu-icon",
-                                    attrs: { type: item.icon, "unify-size": "" }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "menu-text",
-                                  style: {
-                                    marginRight: _vm.hasChildren(item)
-                                      ? "16px"
-                                      : ""
-                                  }
-                                },
-                                [_vm._v(_vm._s(item.text))]
-                              ),
-                              _vm._v(" "),
-                              _vm.hasChildren(item)
-                                ? _c("au-icon", {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: !_vm.localCollapse,
-                                        expression: "!localCollapse"
-                                      }
-                                    ],
-                                    staticClass:
-                                      "menu-fold-icon\n              au-theme-color--base-3\n              au-theme-hover-color--primary",
-                                    style: {
-                                      transform:
-                                        "rotate(" +
-                                        (item.collapse ? "-90" : "0") +
-                                        "deg)",
-                                      right: item.collapse ? "12px" : ""
-                                    },
-                                    attrs: { type: "angle-down" },
-                                    nativeOn: {
-                                      click: function($event) {
-                                        $event.stopPropagation()
-                                        _vm.toggleCollapse(item)
-                                      }
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "au-menu-pop-content",
-                              attrs: { slot: "content" },
-                              slot: "content"
-                            },
-                            [
-                              _vm._v(
-                                "\n            " +
-                                  _vm._s(item.text) +
-                                  "\n          "
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      !_vm.hasChildren(item)
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "au-menu-pop-content",
-                              attrs: { slot: "content" },
-                              slot: "content"
-                            },
-                            [
-                              _vm._v(
-                                "\n          " +
-                                  _vm._s(item.text) +
-                                  "\n        "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.hasChildren(item)
-                        ? _c(
-                            "au-scroller",
-                            {
-                              staticClass:
-                                "au-menu-popover-content au-theme-color--base-3",
-                              attrs: { slot: "content" },
-                              slot: "content"
-                            },
-                            [
-                              _c("au-menu", {
-                                attrs: {
-                                  items: item.children,
-                                  collapsable: false,
-                                  "is-popover": true,
-                                  "popover-ins": _vm.$refs.popover,
-                                  "is-top-level": false,
-                                  all: _vm.isTopLevel
-                                    ? _vm.localItems
-                                    : _vm.all,
-                                  "background-color": _vm.backgroundColor,
-                                  "item-font-color": _vm.itemFontColor,
-                                  "item-background-color":
-                                    _vm.itemBackgroundColor,
-                                  "item-unlink-font-color":
-                                    _vm.itemUnlinkTextColor,
-                                  "item-hover-font-color":
-                                    _vm.itemHoverFontColor,
-                                  "item-hover-background-color":
-                                    _vm.itemHoverBackgroundColor,
-                                  "item-active-font-color":
-                                    _vm.itemActiveFontColor,
-                                  "item-active-background-color":
-                                    _vm.itemActiveBackgroundColor,
-                                  "collapse-handlebar-seprator-color":
-                                    _vm.collapseHandlebarSepratorColor
-                                },
-                                on: { select: _vm.handlePopSelect }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.hasChildren(item)
-                    ? _c("au-menu", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.localCollapse && !item.collapse,
-                            expression: "!localCollapse && !item.collapse"
-                          }
-                        ],
-                        attrs: {
-                          items: item.children,
-                          "is-top-level": false,
-                          all: _vm.isTopLevel ? _vm.localItems : _vm.all,
-                          "background-color": _vm.backgroundColor,
-                          "item-font-color": _vm.itemFontColor,
-                          "item-background-color": _vm.itemBackgroundColor,
-                          "item-unlink-font-color": _vm.itemUnlinkTextColor,
-                          "item-hover-font-color": _vm.itemHoverFontColor,
-                          "item-hover-background-color":
-                            _vm.itemHoverBackgroundColor,
-                          "item-active-font-color": _vm.itemActiveFontColor,
-                          "item-active-background-color":
-                            _vm.itemActiveBackgroundColor,
-                          "collapse-handlebar-seprator-color":
-                            _vm.collapseHandlebarSepratorColor
-                        },
-                        on: { select: _vm.handlePopSelect }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-              var _obj
-            })
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.collapsable &&
-      _vm.isTopLevel &&
-      _vm.collapseHandlebarPosition === "bottom"
-        ? _c(
-            "div",
-            {
-              staticClass: "collapse-handle-bottom",
-              class: ((_obj$2 = {}),
-              (_obj$2[
-                "au-theme-border-color--" +
-                  (_vm.collapseHandlebarSepratorColor || "base-10") +
-                  "-important"
-              ] = true),
-              (_obj$2[
-                "au-theme-color--" + (_vm.itemFontColor || "base-3")
-              ] = true),
-              (_obj$2[
-                "au-theme-hover-color--" + (_vm.itemHoverFontColor || "primary")
-              ] = true),
-              _obj$2),
-              on: { click: _vm.toggle }
-            },
-            [
-              _c("au-icon", {
-                staticClass: "collapse-handle-icon",
-                style: {
-                  transform: _vm.localCollapse ? "" : "rotate(180deg)"
-                },
-                attrs: { type: "angle-double-right", "unify-size": "" }
-              })
-            ],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
-  var _obj
-  var _obj$1
-  var _obj$2
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-73fd09cc", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "4WTo":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1057,6 +376,21 @@ module.exports = function (iter, ITERATOR) {
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
+
+
+/***/ }),
+
+/***/ "50m2":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/popover/src/popover.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,cAAc;EACd,qBAAqB;CACtB;AACD;EACE,cAAc;CACf;AACD;EACE,mBAAmB;EACnB,UAAU;EACV,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,WAAW;EACX,WAAW;CACZ;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,YAAY;CACb;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,UAAU;EACV,aAAa;EACb,YAAY;EACZ,WAAW;CACZ;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,iBAAiB;EACjB,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,YAAY;EACZ,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,YAAY;EACZ,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,iBAAiB;EACjB,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,gCAAgC;UACxB,wBAAwB;CACjC;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB","file":"popover.vue","sourcesContent":["\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n"],"sourceRoot":""}]);
+
+// exports
 
 
 /***/ }),
@@ -1138,6 +472,34 @@ module.exports = Array.isArray || function isArray(arg) {
 
 module.exports = __webpack_require__("hJx8");
 
+
+/***/ }),
+
+/***/ "8n+S":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("50m2");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("46ff3d87", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-39184694\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./popover.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-39184694\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./popover.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
@@ -1334,21 +696,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "A/zo":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "ALrJ":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1448,108 +795,6 @@ function getTop(el) {
 
 /***/ }),
 
-/***/ "Beno":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("A/zo");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("9ddb2e7c", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-73df667a\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ "Bhk1":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "pop",
-      staticClass:
-        "au-popover au-theme-border-radius--small au-theme-box-shadow--base",
-      class: { "au-popover-plain au-theme-border-color--base-10": _vm.plain },
-      attrs: { tabindex: _vm._uid }
-    },
-    [
-      _vm._t("target"),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          ref: "content",
-          class: {
-            "au-popover-content": true,
-            "au-theme-border-radius--small": true,
-            "au-theme-background-color--base-2": !_vm.plain,
-            "au-theme-color--base-12": !_vm.plain,
-            "au-theme-background-color--base-12": _vm.plain,
-            "au-theme-border-color--base-10": _vm.plain,
-            "au-theme-color--base-3": _vm.plain
-          }
-        },
-        [_vm._t("content")],
-        2
-      ),
-      _vm._v(" "),
-      _c("span", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.triangle,
-            expression: "triangle"
-          }
-        ],
-        class: ((_obj = {
-          "au-popover-triangle": true,
-          "au-theme-background-color--base-2": !_vm.plain,
-          "au-theme-background-color--base-12": _vm.plain,
-          "au-popover-plain-triangle au-theme-border-color--base-10": _vm.plain
-        }),
-        (_obj[_vm.localPlacement.split(/\s+/).join("-")] = true),
-        _obj)
-      })
-    ],
-    2
-  )
-  var _obj
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7b08a948", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "D2L2":
 /***/ (function(module, exports) {
 
@@ -1567,11 +812,11 @@ module.exports = function (it, key) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_popover_vue__ = __webpack_require__("kpb8");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7b08a948_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_popover_vue__ = __webpack_require__("Bhk1");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_39184694_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_popover_vue__ = __webpack_require__("uDO3");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("Nj6Y")
+  __webpack_require__("8n+S")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -1589,13 +834,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_popover_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7b08a948_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_popover_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_39184694_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_popover_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\admin-ui\\src\\components\\popover\\src\\popover.vue"
+Component.options.__file = "src/admin-ui/src/components/popover/src/popover.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -1604,9 +849,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7b08a948", Component.options)
+    hotAPI.createRecord("data-v-39184694", Component.options)
   } else {
-    hotAPI.reload("data-v-7b08a948", Component.options)
+    hotAPI.reload("data-v-39184694", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -1615,6 +860,42 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
+
+/***/ }),
+
+/***/ "Dk1r":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("i", {
+    staticClass: "au-icon",
+    class: _vm.custom || "fa fa-" + _vm.type,
+    style: {
+      fontSize: _vm.size,
+      color: _vm.color
+    },
+    attrs: { "aria-hidden": "true" },
+    on: {
+      click: function($event) {
+        _vm.$emit("click")
+      }
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a8e77880", esExports)
+  }
+}
 
 /***/ }),
 
@@ -2381,6 +1662,702 @@ function plainObjectEqual(o1, o2) {
 
 /***/ }),
 
+/***/ "HSee":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "self",
+      staticClass: "au-menu au-theme-color--base-3",
+      class: ((_obj = {
+        "collapsable-top":
+          _vm.collapsable &&
+          _vm.isTopLevel &&
+          _vm.collapseHandlebarPosition != "bottom",
+        "collapsable-bottom":
+          _vm.collapsable &&
+          _vm.isTopLevel &&
+          _vm.collapseHandlebarPosition == "bottom",
+        collapse: _vm.localCollapse
+      }),
+      (_obj[
+        "top-level au-theme-background-color--" +
+          (_vm.backgroundColor || "base-12")
+      ] =
+        _vm.isTopLevel),
+      _obj)
+    },
+    [
+      _vm.collapsable &&
+      _vm.isTopLevel &&
+      _vm.collapseHandlebarPosition != "bottom"
+        ? _c(
+            "div",
+            {
+              staticClass: "collapse-handle-top",
+              class: ((_obj$1 = {}),
+              (_obj$1[
+                "au-theme-border-color--" +
+                  (_vm.collapseHandlebarSepratorColor || "base-9") +
+                  "-important"
+              ] = true),
+              (_obj$1[
+                "au-theme-color--" + (_vm.itemFontColor || "base-3")
+              ] = true),
+              (_obj$1[
+                "au-theme-hover-color--" + (_vm.itemHoverFontColor || "primary")
+              ] = true),
+              _obj$1),
+              on: { click: _vm.toggle }
+            },
+            [
+              _c("au-icon", {
+                staticClass: "collapse-handle-icon",
+                style: {
+                  transform: _vm.localCollapse ? "" : "rotate(180deg)"
+                },
+                attrs: { type: "angle-double-right", "unify-size": "" }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isTopLevel
+        ? _c(
+            "au-scroller",
+            {
+              staticStyle: { height: "100%" },
+              attrs: { "scroll-top": _vm.scrollTop },
+              on: {
+                scroll: function(v) {
+                  return (_vm.scrollTop = v)
+                }
+              }
+            },
+            [
+              _c(
+                "ul",
+                _vm._l(_vm.localItems, function(item, i) {
+                  return _c(
+                    "li",
+                    { key: i },
+                    [
+                      _c(
+                        "au-popover",
+                        {
+                          ref: "popover",
+                          refInFor: true,
+                          attrs: {
+                            disabled: !_vm.localCollapse,
+                            trigger: _vm.hasChildren(item) ? "click" : "hover",
+                            "hide-on-blur": true,
+                            placement: _vm.hasChildren(item)
+                              ? i < 5 ? "right top" : "right bottom"
+                              : "right middle",
+                            plain: _vm.hasChildren(item)
+                          }
+                        },
+                        [
+                          _c(
+                            "au-popover",
+                            {
+                              ref: "tipPopover",
+                              refInFor: true,
+                              attrs: {
+                                slot: "target",
+                                disabled: !_vm.localCollapse,
+                                trigger: "hover",
+                                placement: "right middle"
+                              },
+                              slot: "target"
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "menu",
+                                  class: ((_obj = {}),
+                                  (_obj[
+                                    "au-theme-background-color--" +
+                                      _vm.itemBackgroundColor
+                                  ] =
+                                    !!_vm.itemBackgroundColor &&
+                                    !_vm.isItemActive(item)),
+                                  (_obj[
+                                    "au-theme-color--" + _vm.itemFontColor
+                                  ] =
+                                    !!_vm.itemFontColor &&
+                                    !_vm.isItemActive(item) &&
+                                    item.url),
+                                  (_obj[
+                                    "au-theme-hover-background-color--" +
+                                      (_vm.itemHoverBackgroundColor ||
+                                        "primary-bottom")
+                                  ] = !_vm.isItemActive(item)),
+                                  (_obj[
+                                    "au-theme-hover-color--" +
+                                      (_vm.itemHoverFontColor || "primary")
+                                  ] =
+                                    !_vm.isItemActive(item) && item.url),
+                                  (_obj[
+                                    "au-theme-color--" +
+                                      (_vm.itemUnlinkTextColor || "base-7")
+                                  ] =
+                                    !item.url &&
+                                    !_vm.isItemActive(item) &&
+                                    !_vm.localCollapse),
+                                  (_obj[
+                                    "au-theme-color--" +
+                                      (_vm.itemActiveFontColor || "primary") +
+                                      " au-theme-background-color--" +
+                                      (_vm.itemActiveBackgroundColor ||
+                                        "primary-bottom")
+                                  ] = _vm.isItemActive(item)),
+                                  _obj),
+                                  style: {
+                                    paddingLeft: _vm.calcPaddingLeft(item)
+                                  },
+                                  attrs: { slot: "target" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.select(item, i)
+                                    }
+                                  },
+                                  slot: "target"
+                                },
+                                [
+                                  _c("div", {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.isItemActive(item),
+                                        expression: "isItemActive(item)"
+                                      }
+                                    ],
+                                    staticClass: "active-dec",
+                                    class:
+                                      "au-theme-background-color--" +
+                                      (_vm.itemActiveFontColor || "primary")
+                                  }),
+                                  _vm._v(" "),
+                                  item.icon
+                                    ? _c("au-icon", {
+                                        staticClass: "menu-icon",
+                                        attrs: {
+                                          type: item.icon,
+                                          "unify-size": ""
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "menu-text",
+                                      style: {
+                                        marginRight: _vm.hasChildren(item)
+                                          ? "16px"
+                                          : ""
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(item.text))]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.hasChildren(item)
+                                    ? _c("au-icon", {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: !_vm.localCollapse,
+                                            expression: "!localCollapse"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "menu-fold-icon\n                au-theme-color--base-3\n                au-theme-hover-color--primary",
+                                        style: {
+                                          transform:
+                                            "rotate(" +
+                                            (item.collapse ? "-90" : "0") +
+                                            "deg)",
+                                          right: item.collapse ? "12px" : ""
+                                        },
+                                        attrs: { type: "angle-down" },
+                                        nativeOn: {
+                                          click: function($event) {
+                                            $event.stopPropagation()
+                                            _vm.toggleCollapse(item)
+                                          }
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "au-menu-pop-content",
+                                  attrs: { slot: "content" },
+                                  slot: "content"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n              " +
+                                      _vm._s(item.text) +
+                                      "\n            "
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          !_vm.hasChildren(item)
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "au-menu-pop-content",
+                                  attrs: { slot: "content" },
+                                  slot: "content"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n            " +
+                                      _vm._s(item.text) +
+                                      "\n          "
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.hasChildren(item)
+                            ? _c(
+                                "au-scroller",
+                                {
+                                  staticClass:
+                                    "au-menu-popover-content au-theme-color--base-3",
+                                  attrs: { slot: "content" },
+                                  slot: "content"
+                                },
+                                [
+                                  _c("au-menu", {
+                                    attrs: {
+                                      items: item.children,
+                                      collapsable: false,
+                                      "is-popover": true,
+                                      "popover-ins": _vm.$refs.popover,
+                                      "is-top-level": false,
+                                      all: _vm.isTopLevel
+                                        ? _vm.localItems
+                                        : _vm.all,
+                                      "background-color": _vm.backgroundColor,
+                                      "item-font-color": _vm.itemFontColor,
+                                      "item-background-color":
+                                        _vm.itemBackgroundColor,
+                                      "item-unlink-font-color":
+                                        _vm.itemUnlinkTextColor,
+                                      "item-hover-font-color":
+                                        _vm.itemHoverFontColor,
+                                      "item-hover-background-color":
+                                        _vm.itemHoverBackgroundColor,
+                                      "item-active-font-color":
+                                        _vm.itemActiveFontColor,
+                                      "item-active-background-color":
+                                        _vm.itemActiveBackgroundColor,
+                                      "collapse-handlebar-seprator-color":
+                                        _vm.collapseHandlebarSepratorColor
+                                    },
+                                    on: { select: _vm.handlePopSelect }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm.hasChildren(item)
+                        ? _c("au-menu", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.localCollapse && !item.collapse,
+                                expression: "!localCollapse && !item.collapse"
+                              }
+                            ],
+                            attrs: {
+                              items: item.children,
+                              "is-top-level": false,
+                              all: _vm.isTopLevel ? _vm.localItems : _vm.all,
+                              "background-color": _vm.backgroundColor,
+                              "item-font-color": _vm.itemFontColor,
+                              "item-background-color": _vm.itemBackgroundColor,
+                              "item-unlink-font-color": _vm.itemUnlinkTextColor,
+                              "item-hover-font-color": _vm.itemHoverFontColor,
+                              "item-hover-background-color":
+                                _vm.itemHoverBackgroundColor,
+                              "item-active-font-color": _vm.itemActiveFontColor,
+                              "item-active-background-color":
+                                _vm.itemActiveBackgroundColor,
+                              "collapse-handlebar-seprator-color":
+                                _vm.collapseHandlebarSepratorColor
+                            },
+                            on: { select: _vm.handlePopSelect }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                  var _obj
+                })
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isTopLevel
+        ? _c(
+            "ul",
+            _vm._l(_vm.localItems, function(item, i) {
+              return _c(
+                "li",
+                { key: i },
+                [
+                  _c(
+                    "au-popover",
+                    {
+                      ref: "popover",
+                      refInFor: true,
+                      attrs: {
+                        disabled: !_vm.localCollapse,
+                        trigger: _vm.hasChildren(item) ? "click" : "hover",
+                        "hide-on-blur": true,
+                        placement: _vm.hasChildren(item)
+                          ? i < 5 ? "right top" : "right bottom"
+                          : "right middle",
+                        plain: _vm.hasChildren(item)
+                      }
+                    },
+                    [
+                      _c(
+                        "au-popover",
+                        {
+                          ref: "tipPopover",
+                          refInFor: true,
+                          attrs: {
+                            slot: "target",
+                            disabled: !_vm.localCollapse,
+                            trigger: "hover",
+                            placement: "right middle"
+                          },
+                          slot: "target"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "menu",
+                              class: ((_obj = {}),
+                              (_obj[
+                                "au-theme-background-color--" +
+                                  _vm.itemBackgroundColor
+                              ] =
+                                !!_vm.itemBackgroundColor &&
+                                !_vm.isItemActive(item)),
+                              (_obj["au-theme-color--" + _vm.itemFontColor] =
+                                !!_vm.itemFontColor &&
+                                !_vm.isItemActive(item) &&
+                                item.url),
+                              (_obj[
+                                "au-theme-hover-background-color--" +
+                                  (_vm.itemHoverBackgroundColor ||
+                                    "primary-bottom")
+                              ] = !_vm.isItemActive(item)),
+                              (_obj[
+                                "au-theme-hover-color--" +
+                                  (_vm.itemHoverFontColor || "primary")
+                              ] =
+                                !_vm.isItemActive(item) && item.url),
+                              (_obj[
+                                "au-theme-color--" +
+                                  (_vm.itemUnlinkTextColor || "base-7")
+                              ] =
+                                !item.url &&
+                                !_vm.isItemActive(item) &&
+                                !_vm.localCollapse),
+                              (_obj[
+                                "au-theme-color--" +
+                                  (_vm.itemActiveFontColor || "primary") +
+                                  " au-theme-background-color--" +
+                                  (_vm.itemActiveBackgroundColor ||
+                                    "primary-bottom")
+                              ] = _vm.isItemActive(item)),
+                              _obj),
+                              style: {
+                                paddingLeft: _vm.calcPaddingLeft(item)
+                              },
+                              attrs: { slot: "target" },
+                              on: {
+                                click: function($event) {
+                                  _vm.select(item, i)
+                                }
+                              },
+                              slot: "target"
+                            },
+                            [
+                              _c("div", {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isItemActive(item),
+                                    expression: "isItemActive(item)"
+                                  }
+                                ],
+                                staticClass: "active-dec",
+                                class:
+                                  "au-theme-background-color--" +
+                                  (_vm.itemActiveFontColor || "primary")
+                              }),
+                              _vm._v(" "),
+                              item.icon
+                                ? _c("au-icon", {
+                                    staticClass: "menu-icon",
+                                    attrs: { type: item.icon, "unify-size": "" }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "menu-text",
+                                  style: {
+                                    marginRight: _vm.hasChildren(item)
+                                      ? "16px"
+                                      : ""
+                                  }
+                                },
+                                [_vm._v(_vm._s(item.text))]
+                              ),
+                              _vm._v(" "),
+                              _vm.hasChildren(item)
+                                ? _c("au-icon", {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: !_vm.localCollapse,
+                                        expression: "!localCollapse"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "menu-fold-icon\n              au-theme-color--base-3\n              au-theme-hover-color--primary",
+                                    style: {
+                                      transform:
+                                        "rotate(" +
+                                        (item.collapse ? "-90" : "0") +
+                                        "deg)",
+                                      right: item.collapse ? "12px" : ""
+                                    },
+                                    attrs: { type: "angle-down" },
+                                    nativeOn: {
+                                      click: function($event) {
+                                        $event.stopPropagation()
+                                        _vm.toggleCollapse(item)
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "au-menu-pop-content",
+                              attrs: { slot: "content" },
+                              slot: "content"
+                            },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(item.text) +
+                                  "\n          "
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      !_vm.hasChildren(item)
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "au-menu-pop-content",
+                              attrs: { slot: "content" },
+                              slot: "content"
+                            },
+                            [
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(item.text) +
+                                  "\n        "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasChildren(item)
+                        ? _c(
+                            "au-scroller",
+                            {
+                              staticClass:
+                                "au-menu-popover-content au-theme-color--base-3",
+                              attrs: { slot: "content" },
+                              slot: "content"
+                            },
+                            [
+                              _c("au-menu", {
+                                attrs: {
+                                  items: item.children,
+                                  collapsable: false,
+                                  "is-popover": true,
+                                  "popover-ins": _vm.$refs.popover,
+                                  "is-top-level": false,
+                                  all: _vm.isTopLevel
+                                    ? _vm.localItems
+                                    : _vm.all,
+                                  "background-color": _vm.backgroundColor,
+                                  "item-font-color": _vm.itemFontColor,
+                                  "item-background-color":
+                                    _vm.itemBackgroundColor,
+                                  "item-unlink-font-color":
+                                    _vm.itemUnlinkTextColor,
+                                  "item-hover-font-color":
+                                    _vm.itemHoverFontColor,
+                                  "item-hover-background-color":
+                                    _vm.itemHoverBackgroundColor,
+                                  "item-active-font-color":
+                                    _vm.itemActiveFontColor,
+                                  "item-active-background-color":
+                                    _vm.itemActiveBackgroundColor,
+                                  "collapse-handlebar-seprator-color":
+                                    _vm.collapseHandlebarSepratorColor
+                                },
+                                on: { select: _vm.handlePopSelect }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.hasChildren(item)
+                    ? _c("au-menu", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.localCollapse && !item.collapse,
+                            expression: "!localCollapse && !item.collapse"
+                          }
+                        ],
+                        attrs: {
+                          items: item.children,
+                          "is-top-level": false,
+                          all: _vm.isTopLevel ? _vm.localItems : _vm.all,
+                          "background-color": _vm.backgroundColor,
+                          "item-font-color": _vm.itemFontColor,
+                          "item-background-color": _vm.itemBackgroundColor,
+                          "item-unlink-font-color": _vm.itemUnlinkTextColor,
+                          "item-hover-font-color": _vm.itemHoverFontColor,
+                          "item-hover-background-color":
+                            _vm.itemHoverBackgroundColor,
+                          "item-active-font-color": _vm.itemActiveFontColor,
+                          "item-active-background-color":
+                            _vm.itemActiveBackgroundColor,
+                          "collapse-handlebar-seprator-color":
+                            _vm.collapseHandlebarSepratorColor
+                        },
+                        on: { select: _vm.handlePopSelect }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+              var _obj
+            })
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.collapsable &&
+      _vm.isTopLevel &&
+      _vm.collapseHandlebarPosition === "bottom"
+        ? _c(
+            "div",
+            {
+              staticClass: "collapse-handle-bottom",
+              class: ((_obj$2 = {}),
+              (_obj$2[
+                "au-theme-border-color--" +
+                  (_vm.collapseHandlebarSepratorColor || "base-10") +
+                  "-important"
+              ] = true),
+              (_obj$2[
+                "au-theme-color--" + (_vm.itemFontColor || "base-3")
+              ] = true),
+              (_obj$2[
+                "au-theme-hover-color--" + (_vm.itemHoverFontColor || "primary")
+              ] = true),
+              _obj$2),
+              on: { click: _vm.toggle }
+            },
+            [
+              _c("au-icon", {
+                staticClass: "collapse-handle-icon",
+                style: {
+                  transform: _vm.localCollapse ? "" : "rotate(180deg)"
+                },
+                attrs: { type: "angle-double-right", "unify-size": "" }
+              })
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+  var _obj
+  var _obj$1
+  var _obj$2
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e6e8f300", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "HpRW":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2413,6 +2390,21 @@ module.exports = function (COLLECTION) {
     return new this(A);
   } });
 };
+
+
+/***/ }),
+
+/***/ "I+QW":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.au-icon {\n  text-align: center;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/icon/src/icon.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB","file":"icon.vue","sourcesContent":["\n.au-icon {\n  text-align: center;\n}\n"],"sourceRoot":""}]);
+
+// exports
 
 
 /***/ }),
@@ -2549,34 +2541,6 @@ exports.RETURN = RETURN;
 
 /***/ }),
 
-/***/ "Nj6Y":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("UgZh");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("1283a3b2", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7b08a948\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./popover.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7b08a948\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./popover.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "NpIQ":
 /***/ (function(module, exports) {
 
@@ -2603,6 +2567,21 @@ var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
+
+
+/***/ }),
+
+/***/ "PuBJ":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("FZ+f")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/scroller/src/scroller.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB;AACD;EACE,mBAAmB;EACnB,YAAY;EACZ,iBAAiB;EACjB,OAAO;EACP,QAAQ;EACR,qCAAqC;EACrC,6BAA6B;CAC9B;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb;AACD;;;EAGE,mBAAmB;EACnB,OAAO;CACR;AACD;EACE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,aAAa;CACd;AACD;;EAEE,WAAW;EACX,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,iDAAiD;EACjD,yCAAyC;EACzC,iCAAiC;UACzB,yBAAyB;EACjC,6CAA6C;UACrC,qCAAqC;EAC7C,gBAAgB;CACjB;AACD;EACE,YAAY;CACb;AACD;EACE,0BAA0B;KACvB,uBAAuB;MACtB,sBAAsB;UAClB,kBAAkB;CAC3B","file":"scroller.vue","sourcesContent":["\n.au-scroller {\n  overflow-y: hidden;\n}\n.au-scroller-content {\n  position: relative;\n  width: 100%;\n  min-height: 100%;\n  top: 0;\n  left: 0;\n  -webkit-transition: top .3s ease-out;\n  transition: top .3s ease-out;\n}\n.au-scroller-content:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n.au-scroller-bar-container,\n.au-scroller-bar,\n.au-scroller-bar-core {\n  position: absolute;\n  top: 0;\n}\n.au-scroller-bar-container {\n  top: 10px;\n  right: 2px;\n  width: 12px;\n  height: 100%;\n}\n.au-scroller-bar,\n.au-scroller-bar-core {\n  right: 1px;\n  width: 3px;\n  height: 100%;\n  border-radius: 6px;\n  opacity: .2;\n  -webkit-transition-property: top, width, opacity;\n  transition-property: top, width, opacity;\n  -webkit-transition-duration: .3s;\n          transition-duration: .3s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n  cursor: pointer;\n}\n.au-scroller-bar-core {\n  opacity: .4;\n}\n.au-no-select * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n"],"sourceRoot":""}]);
+
+// exports
 
 
 /***/ }),
@@ -2658,11 +2637,11 @@ module.exports = function (it) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_icon_vue__ = __webpack_require__("tzU+");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_35fb8f4c_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_icon_vue__ = __webpack_require__("q+2F");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a8e77880_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_icon_vue__ = __webpack_require__("Dk1r");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("f086")
+  __webpack_require__("u8Bm")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -2680,13 +2659,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_icon_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_35fb8f4c_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_icon_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_a8e77880_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_icon_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\admin-ui\\src\\components\\icon\\src\\icon.vue"
+Component.options.__file = "src/admin-ui/src/components/icon/src/icon.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2695,9 +2674,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-35fb8f4c", Component.options)
+    hotAPI.createRecord("data-v-a8e77880", Component.options)
   } else {
-    hotAPI.reload("data-v-35fb8f4c", Component.options)
+    hotAPI.reload("data-v-a8e77880", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2715,94 +2694,6 @@ if (false) {(function () {
 var document = __webpack_require__("7KvD").document;
 module.exports = document && document.documentElement;
 
-
-/***/ }),
-
-/***/ "RVR0":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "monitor",
-      staticClass: "au-scroller",
-      on: {
-        mouseenter: _vm.handleMouseenter,
-        mouseleave: _vm.handleMouseleave,
-        mousemove: _vm.handleScrollerMousemove
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          ref: "content",
-          staticClass: "au-scroller-content",
-          class: { "au-no-select": _vm.onDrag },
-          style: { top: _vm.contentTop + "px" }
-        },
-        [_vm._t("default")],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
-              expression: "(mouseenter && needScroll) || onDrag"
-            }
-          ],
-          ref: "barContainer",
-          staticClass: "au-scroller-bar-container",
-          on: {
-            mouseenter: _vm.handleBarMouseenter,
-            mouseleave: _vm.handleBarMouseleave
-          }
-        },
-        [
-          _c("div", {
-            ref: "bar",
-            staticClass: "au-scroller-bar au-theme-background-color--base-0",
-            on: { click: _vm.handleBarClick }
-          }),
-          _vm._v(" "),
-          _c("div", {
-            ref: "core",
-            staticClass:
-              "au-scroller-bar-core au-theme-background-color--base-0",
-            style: {
-              top: _vm.scrollCoreTop + "px",
-              height: _vm.coreHeight + "px"
-            },
-            on: {
-              mousedown: _vm.handleCoreMousedown,
-              mouseup: _vm.handleCoreMouseUp
-            }
-          })
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-73df667a", esExports)
-  }
-}
 
 /***/ }),
 
@@ -2891,21 +2782,6 @@ module.exports = function (it) {
 
 __webpack_require__("fZOM");
 module.exports = __webpack_require__("FeBl").Object.values;
-
-
-/***/ }),
-
-/***/ "UgZh":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/popover/src/popover.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,cAAc;EACd,qBAAqB;CACtB;AACD;EACE,cAAc;CACf;AACD;EACE,mBAAmB;EACnB,UAAU;EACV,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,WAAW;EACX,WAAW;CACZ;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,YAAY;CACb;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,UAAU;EACV,aAAa;EACb,YAAY;EACZ,WAAW;CACZ;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,iBAAiB;EACjB,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,YAAY;EACZ,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,YAAY;EACZ,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,iBAAiB;EACjB,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,gCAAgC;UACxB,wBAAwB;CACjC;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB","file":"popover.vue","sourcesContent":["\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n"],"sourceRoot":""}]);
-
-// exports
 
 
 /***/ }),
@@ -3208,34 +3084,6 @@ exports.f = __webpack_require__("+E39") ? Object.defineProperty : function defin
 
 /***/ }),
 
-/***/ "f086":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("krl7");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("rjj0").default
-var update = add("74590d6e", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-35fb8f4c\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./icon.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-35fb8f4c\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./icon.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "fZOM":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3272,11 +3120,11 @@ module.exports = function (index, length) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue__ = __webpack_require__("Gm0U");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73fd09cc_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__ = __webpack_require__("44MN");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e6e8f300_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__ = __webpack_require__("HSee");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("3XrO")
+  __webpack_require__("+SQz")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -3294,13 +3142,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73fd09cc_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e6e8f300_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\admin-ui\\src\\components\\menu\\src\\menu.vue"
+Component.options.__file = "src/admin-ui/src/components/menu/src/menu.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -3309,9 +3157,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-73fd09cc", Component.options)
+    hotAPI.createRecord("data-v-e6e8f300", Component.options)
   } else {
-    hotAPI.reload("data-v-73fd09cc", Component.options)
+    hotAPI.reload("data-v-e6e8f300", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3375,6 +3223,34 @@ module.exports = __webpack_require__("+E39") ? function (object, key, value) {
 // https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
 __webpack_require__("HpRW")('Set');
 
+
+/***/ }),
+
+/***/ "jlSn":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("PuBJ");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("03299281", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e4daee0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroller.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
@@ -3898,21 +3774,6 @@ function getRealZIndex(el) {
 
 /***/ }),
 
-/***/ "krl7":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-icon {\n  text-align: center;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/icon/src/icon.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;CACpB","file":"icon.vue","sourcesContent":["\n.au-icon {\n  text-align: center;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "lHA8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3963,11 +3824,11 @@ module.exports = Object.keys || function keys(O) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__ = __webpack_require__("oddz");
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("RVR0");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__ = __webpack_require__("ng1M");
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("Beno")
+  __webpack_require__("jlSn")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -3985,13 +3846,13 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_scroller_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73df667a_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5e4daee0_hasScoped_false_transformToRequire_video_src_poster_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_scroller_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\admin-ui\\src\\components\\scroller\\src\\scroller.vue"
+Component.options.__file = "src/admin-ui/src/components/scroller/src/scroller.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -4000,9 +3861,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-73df667a", Component.options)
+    hotAPI.createRecord("data-v-5e4daee0", Component.options)
   } else {
-    hotAPI.reload("data-v-73df667a", Component.options)
+    hotAPI.reload("data-v-5e4daee0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -4076,6 +3937,94 @@ module.exports = function (iterator, fn, value, entries) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__("qkKv"), __esModule: true };
+
+/***/ }),
+
+/***/ "ng1M":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "monitor",
+      staticClass: "au-scroller",
+      on: {
+        mouseenter: _vm.handleMouseenter,
+        mouseleave: _vm.handleMouseleave,
+        mousemove: _vm.handleScrollerMousemove
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "content",
+          staticClass: "au-scroller-content",
+          class: { "au-no-select": _vm.onDrag },
+          style: { top: _vm.contentTop + "px" }
+        },
+        [_vm._t("default")],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: (_vm.mouseenter && _vm.needScroll) || _vm.onDrag,
+              expression: "(mouseenter && needScroll) || onDrag"
+            }
+          ],
+          ref: "barContainer",
+          staticClass: "au-scroller-bar-container",
+          on: {
+            mouseenter: _vm.handleBarMouseenter,
+            mouseleave: _vm.handleBarMouseleave
+          }
+        },
+        [
+          _c("div", {
+            ref: "bar",
+            staticClass: "au-scroller-bar au-theme-background-color--base-0",
+            on: { click: _vm.handleBarClick }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            ref: "core",
+            staticClass:
+              "au-scroller-bar-core au-theme-background-color--base-0",
+            style: {
+              top: _vm.scrollCoreTop + "px",
+              height: _vm.coreHeight + "px"
+            },
+            on: {
+              mousedown: _vm.handleCoreMousedown,
+              mouseup: _vm.handleCoreMouseUp
+            }
+          })
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5e4daee0", esExports)
+  }
+}
 
 /***/ }),
 
@@ -4457,42 +4406,6 @@ __webpack_require__("oNmr");
 __webpack_require__("ioQ5");
 module.exports = __webpack_require__("FeBl").Set;
 
-
-/***/ }),
-
-/***/ "q+2F":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("i", {
-    staticClass: "au-icon",
-    class: _vm.custom || "fa fa-" + _vm.type,
-    style: {
-      fontSize: _vm.size,
-      color: _vm.color
-    },
-    attrs: { "aria-hidden": "true" },
-    on: {
-      click: function($event) {
-        _vm.$emit("click")
-      }
-    }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-35fb8f4c", esExports)
-  }
-}
 
 /***/ }),
 
@@ -4951,6 +4864,108 @@ module.exports = __webpack_require__("qo66")(SET, function (get) {
 
 /***/ }),
 
+/***/ "u8Bm":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("I+QW");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("rjj0").default
+var update = add("1f488866", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a8e77880\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./icon.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a8e77880\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./icon.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "uDO3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "pop",
+      staticClass:
+        "au-popover au-theme-border-radius--small au-theme-box-shadow--base",
+      class: { "au-popover-plain au-theme-border-color--base-10": _vm.plain },
+      attrs: { tabindex: _vm._uid }
+    },
+    [
+      _vm._t("target"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "content",
+          class: {
+            "au-popover-content": true,
+            "au-theme-border-radius--small": true,
+            "au-theme-background-color--base-2": !_vm.plain,
+            "au-theme-color--base-12": !_vm.plain,
+            "au-theme-background-color--base-12": _vm.plain,
+            "au-theme-border-color--base-10": _vm.plain,
+            "au-theme-color--base-3": _vm.plain
+          }
+        },
+        [_vm._t("content")],
+        2
+      ),
+      _vm._v(" "),
+      _c("span", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.triangle,
+            expression: "triangle"
+          }
+        ],
+        class: ((_obj = {
+          "au-popover-triangle": true,
+          "au-theme-background-color--base-2": !_vm.plain,
+          "au-theme-background-color--base-12": _vm.plain,
+          "au-popover-plain-triangle au-theme-border-color--base-10": _vm.plain
+        }),
+        (_obj[_vm.localPlacement.split(/\s+/).join("-")] = true),
+        _obj)
+      })
+    ],
+    2
+  )
+  var _obj
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-39184694", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "vFc/":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5055,21 +5070,6 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   }
   return methods;
 };
-
-
-/***/ }),
-
-/***/ "wEUF":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("FZ+f")(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.au-menu {\n  position: relative;\n  height: 100%;\n  list-style: none;\n}\n.au-menu li {\n    position: relative;\n}\n.au-menu .menu {\n    position: relative;\n    height: 40px;\n    padding: 0 20px 0 0;\n    overflow: hidden;\n    line-height: 40px;\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n    cursor: pointer;\n}\n.au-menu .menu-text {\n    display: inline-block;\n}\n.au-menu .menu-icon {\n    position: relative;\n    top: 1px;\n    margin-right: 10px;\n    font-size: 18px;\n}\n.au-menu .menu-fold-icon {\n    position: absolute;\n    right: 12px;\n    text-align: center;\n    line-height: 40px;\n    font-size: 18px;\n}\n.au-menu .active-dec {\n    display: inline-block;\n    position: absolute;\n    left: 0;\n    top: 0;\n    z-index: 1;\n    height: 100%;\n    width: 4px;\n}\n.au-menu .collapse-handle-top,\n  .au-menu .collapse-handle-bottom {\n    position: absolute;\n    left: 0;\n    width: 100%;\n    height: 40px;\n    padding: 0 22px;\n    line-height: 40px;\n    text-align: right;\n    font-size: 18px;\n    cursor: pointer;\n}\n.au-menu .collapse-handle-top {\n    top: 0;\n    border-bottom: 1px solid;\n}\n.au-menu .collapse-handle-bottom {\n    bottom: 0;\n    border-top: 1px solid;\n}\n.au-menu.top-level {\n  padding: 10px 0;\n}\n.au-menu.collapsable-top {\n  padding-top: 40px;\n}\n.au-menu.collapsable-bottom {\n  padding-bottom: 40px;\n}\n.au-menu.collapse {\n  width: 60px !important;\n}\n.au-menu.collapse .menu {\n    padding: 0;\n    cursor: pointer;\n}\n.au-menu.collapse .menu-icon {\n    margin-right: 10px;\n}\n.au-menu.collapse .menu-text {\n    display: none;\n}\n.au-menu.collapse .collapse-handle {\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n.au-menu-pop-content {\n  padding: 12px;\n  font-size: 14px;\n}\n.au-menu-children-triangle,\n.au-menu-has-children-pop {\n  border-width: 1px;\n  border-style: solid;\n}\n.au-menu-popover-content {\n  padding: 10px 0;\n  max-height: 320px;\n}\n", "", {"version":3,"sources":["E:/admin-ui/src/admin-ui/src/components/menu/src/menu.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,aAAa;EACb,iBAAiB;CAClB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,aAAa;IACb,oBAAoB;IACpB,iBAAiB;IACjB,kBAAkB;IAClB,gBAAgB;IAChB,wBAAwB;IACxB,iBAAiB;IACjB,oBAAoB;IACpB,gBAAgB;CACnB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,mBAAmB;IACnB,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,YAAY;IACZ,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;CACnB;AACD;IACI,sBAAsB;IACtB,mBAAmB;IACnB,QAAQ;IACR,OAAO;IACP,WAAW;IACX,aAAa;IACb,WAAW;CACd;AACD;;IAEI,mBAAmB;IACnB,QAAQ;IACR,YAAY;IACZ,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,kBAAkB;IAClB,gBAAgB;IAChB,gBAAgB;CACnB;AACD;IACI,OAAO;IACP,yBAAyB;CAC5B;AACD;IACI,UAAU;IACV,sBAAsB;CACzB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,qBAAqB;CACtB;AACD;EACE,uBAAuB;CACxB;AACD;IACI,WAAW;IACX,gBAAgB;CACnB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,cAAc;CACjB;AACD;IACI,aAAa;IACb,kBAAkB;IAClB,mBAAmB;CACtB;AACD;EACE,cAAc;EACd,gBAAgB;CACjB;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB;AACD;EACE,gBAAgB;EAChB,kBAAkB;CACnB","file":"menu.vue","sourcesContent":["\n.au-menu {\n  position: relative;\n  height: 100%;\n  list-style: none;\n}\n.au-menu li {\n    position: relative;\n}\n.au-menu .menu {\n    position: relative;\n    height: 40px;\n    padding: 0 20px 0 0;\n    overflow: hidden;\n    line-height: 40px;\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n    cursor: pointer;\n}\n.au-menu .menu-text {\n    display: inline-block;\n}\n.au-menu .menu-icon {\n    position: relative;\n    top: 1px;\n    margin-right: 10px;\n    font-size: 18px;\n}\n.au-menu .menu-fold-icon {\n    position: absolute;\n    right: 12px;\n    text-align: center;\n    line-height: 40px;\n    font-size: 18px;\n}\n.au-menu .active-dec {\n    display: inline-block;\n    position: absolute;\n    left: 0;\n    top: 0;\n    z-index: 1;\n    height: 100%;\n    width: 4px;\n}\n.au-menu .collapse-handle-top,\n  .au-menu .collapse-handle-bottom {\n    position: absolute;\n    left: 0;\n    width: 100%;\n    height: 40px;\n    padding: 0 22px;\n    line-height: 40px;\n    text-align: right;\n    font-size: 18px;\n    cursor: pointer;\n}\n.au-menu .collapse-handle-top {\n    top: 0;\n    border-bottom: 1px solid;\n}\n.au-menu .collapse-handle-bottom {\n    bottom: 0;\n    border-top: 1px solid;\n}\n.au-menu.top-level {\n  padding: 10px 0;\n}\n.au-menu.collapsable-top {\n  padding-top: 40px;\n}\n.au-menu.collapsable-bottom {\n  padding-bottom: 40px;\n}\n.au-menu.collapse {\n  width: 60px !important;\n}\n.au-menu.collapse .menu {\n    padding: 0;\n    cursor: pointer;\n}\n.au-menu.collapse .menu-icon {\n    margin-right: 10px;\n}\n.au-menu.collapse .menu-text {\n    display: none;\n}\n.au-menu.collapse .collapse-handle {\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n.au-menu-pop-content {\n  padding: 12px;\n  font-size: 14px;\n}\n.au-menu-children-triangle,\n.au-menu-has-children-pop {\n  border-width: 1px;\n  border-style: solid;\n}\n.au-menu-popover-content {\n  padding: 10px 0;\n  max-height: 320px;\n}\n"],"sourceRoot":""}]);
-
-// exports
 
 
 /***/ }),

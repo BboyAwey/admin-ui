@@ -24,11 +24,13 @@ function packTheme () {
   let originEntry = Object.assign(webpackConfig.entry)
   let originOutput = webpackConfig.output.path
   let originOutputFilename = webpackConfig.output.filename
+  let originOutputLibrary = webpackConfig.output.library
   webpackConfig.entry = {
     'theme': path.join(__dirname, '../src/admin-ui/src/theme/index.js')
   }
   webpackConfig.output.path = path.join(originOutput)
   webpackConfig.output.filename = 'theme.js'
+  webpackConfig.output.library = 'admin-ui-theme'
   var spinner = ora(`building for theme...`)
   spinner.start()
 
@@ -46,6 +48,7 @@ function packTheme () {
     webpackConfig.entry = originEntry
     webpackConfig.output.path = originOutput
     webpackConfig.output.filename = originOutputFilename
+    webpackConfig.output.library = originOutputLibrary
   })
 }
 
@@ -56,6 +59,7 @@ function packComponent (componentName, index) {
     [componentName]: path.join(__dirname, '../src/admin-ui/src/components', componentName, 'index.js')
   }
   webpackConfig.output.path = path.join(originOutput, 'lib', componentName)
+  webpackConfig.output.library = webpackConfig.output.library + '-' + componentName
   var spinner = ora(`building for ${componentName}...`)
   spinner.start()
 

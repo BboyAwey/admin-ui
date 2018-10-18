@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("admin-ui", [], factory);
+		define("admin-ui-breadcrumb-button-cascading-checkbox", [], factory);
 	else if(typeof exports === 'object')
-		exports["admin-ui"] = factory();
+		exports["admin-ui-breadcrumb-button-cascading-checkbox"] = factory();
 	else
-		root["admin-ui"] = factory();
+		root["admin-ui-breadcrumb-button-cascading-checkbox"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

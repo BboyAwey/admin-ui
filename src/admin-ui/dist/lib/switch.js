@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
 	else if(typeof define === 'function' && define.amd)
-		define("admin-ui", ["vue"], factory);
+		define("admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker-scroller-select-switch", ["vue"], factory);
 	else if(typeof exports === 'object')
-		exports["admin-ui"] = factory(require("vue"));
+		exports["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker-scroller-select-switch"] = factory(require("vue"));
 	else
-		root["admin-ui"] = factory(root["Vue"]);
+		root["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker-scroller-select-switch"] = factory(root["Vue"]);
 })(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_lRwf__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

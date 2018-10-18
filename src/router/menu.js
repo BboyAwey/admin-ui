@@ -147,6 +147,10 @@ export default [
       {
         'text': '标签工厂',
         'url': '/tagfactory'
+      },
+      {
+        'text': 'JSON-Schema',
+        'url': '/json-schema'
       }
     ]
   }

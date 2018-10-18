@@ -36,6 +36,7 @@ import Tabs from './components/tabs'
 import Loading from './components/loading'
 import Tag from './components/tag'
 import Tagfactory from './components/tagfactory'
+import JsonSchema from './components/json-schema'
 
 // add all comps into an array
 const components = [
@@ -69,7 +70,8 @@ const components = [
   Tabs,
   Loading,
   Tag,
-  Tagfactory
+  Tagfactory,
+  JsonSchema
 ]
 
 // export comps one by one
@@ -104,7 +106,8 @@ export {
   Tabs,
   Loading,
   Tag,
-  Tagfactory
+  Tagfactory,
+  JsonSchema
 }
 
 // export all comps as an object
@@ -139,7 +142,8 @@ const adminUi = {
   Tabs,
   Loading,
   Tag,
-  Tagfactory
+  Tagfactory,
+  JsonSchema
 }
 
 adminUi.install = function (Vue, options = {}) {

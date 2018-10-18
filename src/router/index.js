@@ -184,6 +184,11 @@ export default new Router({
       path: '/tagfactory',
       name: 'tagfactory',
       component: (resolve) => require(['../examples/tagfactory.vue'], resolve)
+    },
+    {
+      path: '/json-schema',
+      name: 'json-schema',
+      component: (resolve) => require(['../examples/json-schema.vue'], resolve)
     }
   ]
 })

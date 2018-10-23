@@ -155,6 +155,25 @@
               表单项的尺寸<br>
             </td>
           </tr>
+          <tr>
+            <td>root-name</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              String
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              根节点的名称，仅用于显示<br>
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>
@@ -236,28 +255,29 @@
       '></code-h>
       <code-h lang="js">
         export default {
-        name: 'json-schema',
-        data () {
-          return {
-            jsonSchema: {
-              type: 'object',
-              properties: {
-                'a': {
-                  type: 'string'
-                },
-                'b': {
-                  type: 'array',
-                  items: {
+          name: 'json-schema',
+          data () {
+            return {
+              jsonSchema: {
+                type: 'object',
+                properties: {
+                  'a': {
                     type: 'string'
+                  },
+                  'b': {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    }
                   }
                 }
               }
             }
-          }
-        },
-        methods: {
-          alert (v) {
-            console.log(v, 'YEAH!')
+          },
+          watch: {
+            jsonSchema (v) {
+              console.log(v)
+            }
           }
         }
       </code-h>
@@ -286,9 +306,9 @@ export default {
       }
     }
   },
-  methods: {
-    alert (v) {
-      console.log(v, 'YEAH!')
+  watch: {
+    jsonSchema (v) {
+      console.log(v)
     }
   }
 }

@@ -75,7 +75,7 @@
       <div class="au-json-schema-key">
         <au-input
           :disabled="_isRoot || _isItem"
-          :placeholder="_isRoot ? 'root' : localKey"
+          :placeholder="_isRoot ? (rootName || 'root') : localKey"
           full-width
           :size="formItemSize"
           v-model="localKey"/>
@@ -223,6 +223,7 @@ export default {
       type: Array,
       default: _ => types
     },
+    rootName: String,
     init: Boolean,
     formItemSize: String
     // TODO: reqiure, mock
@@ -270,12 +271,7 @@ export default {
       this.localSchema.properties = {}
       this.localSchema.items = {}
       if (v === 'object') {
-        // this.$set(this.localSchema, 'properties', {
-        //   ['property_' + propertyCount++]: {
-        //     type: 'string',
-        //     init: ''
-        //   }
-        // })
+        this.$set(this.localSchema, 'properties', {})
       }
       if (v === 'array') {
         this.$set(this.localSchema, 'items', {

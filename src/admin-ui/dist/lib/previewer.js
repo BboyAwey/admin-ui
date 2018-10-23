@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer", [], factory);
+		define("admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer", [], factory);
 	else if(typeof exports === 'object')
-		exports["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer"] = factory();
+		exports["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer"] = factory();
 	else
-		root["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer"] = factory();
+		root["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
 	else if(typeof define === 'function' && define.amd)
-		define("admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker", ["vue"], factory);
+		define("admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker", ["vue"], factory);
 	else if(typeof exports === 'object')
-		exports["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker"] = factory(require("vue"));
+		exports["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker"] = factory(require("vue"));
 	else
-		root["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker"] = factory(root["Vue"]);
+		root["admin-ui-breadcrumb-button-cascading-checkbox-collapse-datepicker-frame-grid-icon-input-json-schema-loading-menu-message-message-box-modal-paginator-panel-popover-previewer-radio-rangepicker"] = factory(root["Vue"]);
 })(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_lRwf__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

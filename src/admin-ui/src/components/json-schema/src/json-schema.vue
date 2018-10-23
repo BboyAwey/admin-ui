@@ -1,5 +1,10 @@
 <style lang="scss">
   .au-json-schema {}
+  .au-json-schema-label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 14px;
+  }
   .au-json-schema-item {
     display: flex;
     justify-content: flex-end;
@@ -53,6 +58,9 @@
 
 <template>
   <div class="au-json-schema au-theme-color--base-3">
+    <div class="au-json-schema-label" v-if="this._isRoot">
+      {{ label }}
+    </div>
     <div class="au-json-schema-item">
       <div class="au-json-schema-collapse-icon">
         <au-icon
@@ -87,7 +95,8 @@
         <!-- <au-button :disabled="isReferenceType" full-width :size="formItemSize">初始值</au-button> -->
       </div>
       <au-select
-        :options="_isRoot ? rootTypes.map(t => ({text: t, value: t})) : types.map(t => ({text: t, value: t}))"
+        :options="typeOptions"
+        :disabled="typeOptions.length < 2"
         class="au-json-schema-type"
         :size="formItemSize"
         v-model="localSchema.type"/>
@@ -100,7 +109,7 @@
           type="plus"
           v-show="this.localSchema.type === 'object'"
           class="au-json-schema-icon au-theme-color--success"
-          @click="add"/>
+          @click="addProperty"/>
       </div>
     </div>
     <div class="au-json-schema-children-container" v-if="
@@ -115,9 +124,10 @@
         :_is-item="false"
         v-model="localSchema.properties[key]"
         @deep-change="handleDeepChange"
-        @remove="handleRemove"
+        @remove="removeProperty"
         :init="init"
-        @set-init="setInit"/>
+        @set-init="setInit"
+        :types="types"/>
     </div>
     <div class="au-json-schema-children-container" v-if="
       showChildren &&
@@ -130,7 +140,8 @@
         v-model="localSchema.items"
         @deep-change="handleDeepChange"
         :init="init"
-        @set-init="setInit"/>
+        @set-init="setInit"
+        :types="types"/>
     </div>
     <au-modal
       v-if="_isRoot"
@@ -180,7 +191,10 @@ import AuButton from '../../button'
 import AuModal from '../../modal'
 
 let types = ['boolean', 'integer', 'number', 'string', 'object', 'array']
-let propertyCount = 0
+types.isNumberType = type => type === 'number' || type === 'integer'
+types.isReferenceType = type => type === 'object' || type === 'array'
+
+let propertyCount = 1
 
 export default {
   name: 'au-json-schema',
@@ -196,18 +210,8 @@ export default {
     schema: {
       type: Object,
       default: _ => ({
-        type: 'object',
-        properties: {
-          'a': {
-            type: 'string'
-          },
-          'b': {
-            type: 'array',
-            items: {
-              type: 'string'
-            }
-          }
-        }})
+        type: 'string'
+      })
     },
     label: {
       type: String,
@@ -240,13 +244,18 @@ export default {
       },
       currentItemNewInit: '',
       initModalVisible: false,
-      localKey: this._key
+      localKey: this._key,
+      finalChangeTimer: null
     }
   },
   computed: {
     isReferenceType () {
-      return this.localSchema.type === 'object' ||
-        this.localSchema.type === 'array'
+      return types.isReferenceType(this.localSchema.type)
+    },
+    typeOptions () {
+      return this._isRoot
+        ? this.rootTypes.map(t => ({text: t, value: t}))
+        : this.types.map(t => ({text: t, value: t}))
     }
   },
   watch: {
@@ -254,8 +263,8 @@ export default {
       if (this.localKey !== v) this.localKey = v
     },
     localKey (v) {
-      if (this.localSchema.oldKey !== v) {
-        this.$set(this.localSchema, 'oldKey', v)
+      if (this.localSchema.newKey !== v) {
+        this.$set(this.localSchema, 'newKey', v)
       }
     },
     'localSchema.type' (v) {
@@ -263,37 +272,41 @@ export default {
       this.localSchema.properties = {}
       this.localSchema.items = {}
       if (v === 'object') {
-        // object can be empty
         // this.$set(this.localSchema, 'properties', {
-        //   'property_01': {
+        //   ['property_' + propertyCount++]: {
         //     type: 'string',
         //     init: ''
         //   }
         // })
       }
       if (v === 'array') {
-        // this.$set(this.localSchema, 'items', {
-        //   type: 'string',
-        //   init: ''
-        // })
-        this.localSchema.item = {
-          type: 'string',
+        this.$set(this.localSchema, 'items', {
+          type: this.types[0],
           init: ''
-        }
-        // this.$forceUpdate()
+        })
       }
     },
     localSchema: {
       deep: true,
       handler (v) {
         if (this._isRoot) {
-          console.log(v, 'root -- ', this._index)
           this.finalChange()
         } else {
-          console.log(v, 'not root -- ', this._index)
           // no goddam unidirectional data flow
           // and we can only trigger the change by ourselves when nest level is great than 3
-          this.triggerDeepChange(3)
+          this.triggerDeepChange()
+        }
+      }
+    },
+    schema: {
+      deep: true,
+      handler (v) {
+        if (this._isRoot) {
+          if (JSON.stringify(v) !== JSON.stringify(this.purifySchema(this.localSchema))) {
+            this.localSchema = deepClone(v)
+          }
+        } else {
+          this.localSchema = v
         }
       }
     }
@@ -307,6 +320,7 @@ export default {
       } else {
         if (source) {
           item.set = this.$set.bind(this)
+          item.forceUpdate = this.$forceUpdate.bind(this)
         }
         this.$emit('set-init', item)
       }
@@ -318,6 +332,7 @@ export default {
     confirmSetInit () {
       if (this.currentItem.set instanceof Function) {
         this.currentItem.set(this.currentItem, 'init', this.currentItemNewInit)
+        this.currentItem.forceUpdate()
       } else {
         this.currentItem.init = this.currentItemNewInit
         this.finalChange()
@@ -332,34 +347,52 @@ export default {
       if (!this.currentItemNewInit) return
       if (type === 'integer') {
         if (!/^\d$/g.test(this.currentItemNewInit)) {
-          this.currentItemNewInit = this.currentItemNewInit.match(/\d/g).join('')
+          let nums = this.currentItemNewInit.match(/\d/g)
+          if (nums) this.currentItemNewInit = nums.join('')
+          else this.currentItemNewInit = ''
         }
       } else if (type === 'number') {
         if (!/^\d+\.?\d*$/g.test(this.currentItemNewInit)) {
-          let nums = this.currentItemNewInit.match(/\d|\./g).join('')
-          let dotIndex = nums.indexOf('.')
-          let head = nums.substring(0, dotIndex + 1)
-          if (head[0] === '.') head = '0' + head
-          let tail = nums.substring(dotIndex + 1, nums.length).replace('.', '')
-          this.currentItemNewInit = head + tail
+          let nums = this.currentItemNewInit.match(/\d|\./g)
+          if (nums) {
+            nums = nums.join('')
+            let dotIndex = nums.indexOf('.')
+            let head = nums.substring(0, dotIndex + 1)
+            if (head[0] === '.') head = '0' + head
+            let tail = nums.substring(dotIndex + 1, nums.length).replace('.', '')
+            this.currentItemNewInit = head + (tail || '0')
+          } else {
+            this.currentItemNewInit = ''
+          }
         }
       }
     },
     purifySchema (schema) {
-      if (schema.properties) {
-        let res = {}
-        for (let key in schema.properties) {
-          let value = schema.properties[key]
-          if (value.newKey) {
-            res[value.newKey] = value
-            delete res[value.newKey].newKey
+      let res = {}
+      res.type = schema.type
+
+      if (schema.type !== 'object' && schema.type !== 'array') {
+        if (this.init) {
+          if (types.isNumberType(schema.type)) {
+            res.init = schema.init ? schema.init * 1 : null
           } else {
-            res[key] = value
+            res.init = schema.init || null
           }
         }
-        schema.properties = res
+      } else if (schema.type === 'object') {
+        res.properties = {}
+        for (let key in schema.properties) {
+          if (schema.properties[key].newKey) {
+            res.properties[schema.properties[key].newKey] = this.purifySchema(schema.properties[key])
+          } else {
+            res.properties[key] = this.purifySchema(schema.properties[key])
+          }
+        }
+      } else if (schema.type === 'array') {
+        res.items = schema.items ? this.purifySchema(schema.items) : {}
       }
-      return schema
+
+      return res
     },
     handleDeepChange () { // recieve deep change
       if (this._isRoot) {
@@ -371,28 +404,36 @@ export default {
 
     finalChange () {
       // this.$emit('change', )
-      console.log('final change')
+      if (this.finalChangeTimer) {
+        window.clearTimeout(this.finalChangeTimer)
+        this.finalChangeTimer = null
+      }
+      this.finalChangeTimer = window.setTimeout(_ => {
+        // trigger final change
+        // console.log('final change', this.localSchema, this.purifySchema(this.localSchema))
+        this.$emit('change', this.purifySchema(this.localSchema))
+        window.clearTimeout(this.finalChangeTimer)
+        this.finalChangeTimer = null
+      }, 0)
     },
-    handleRemove (key) {
-      console.log('-----', this._index)
+    removeProperty (key) {
       this.$delete(this.localSchema.properties, key)
-      this.triggerDeepChange(2)
+      this.triggerDeepChange()
       this.$forceUpdate()
     },
-    add () {
-      console.log('+++++', this._index)
+    addProperty () {
       if (!this.localSchema.properties) {
         this.localSchema.properties = {}
       }
-      this.$set(this.localSchema.properties, 'property_' + (propertyCount++ + '').padStart(2, '0'), {
-        type: 'string',
+      this.$set(this.localSchema.properties, 'property_' + propertyCount++, {
+        type: this.types[0],
         init: ''
       })
-      this.triggerDeepChange(1)
+      this.triggerDeepChange()
       this.$forceUpdate()
     },
-    triggerDeepChange (level) {
-      if (this._index > level) this.$emit('deep-change')
+    triggerDeepChange () {
+      if (!this._isRoot) this.$emit('deep-change')
     }
   }
 }

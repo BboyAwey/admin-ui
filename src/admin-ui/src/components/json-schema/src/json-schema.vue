@@ -58,7 +58,7 @@
 
 <template>
   <div class="au-json-schema au-theme-color--base-3">
-    <div class="au-json-schema-label" v-if="this._isRoot">
+    <div class="au-json-schema-label" v-if="_isRoot && label">
       {{ label }}
     </div>
     <div class="au-json-schema-item">
@@ -209,9 +209,7 @@ export default {
     },
     schema: {
       type: Object,
-      default: _ => ({
-        type: 'string'
-      })
+      reqiure: true
     },
     label: {
       type: String,

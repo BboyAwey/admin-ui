@@ -1,6 +1,6 @@
 <style lang="scss">
   .code-h {
-    font-family: 'Consolas';
+    font-family: 'Consolas', 'Courier New', monospace;
   }
   .code-h .number {
     user-select: none;

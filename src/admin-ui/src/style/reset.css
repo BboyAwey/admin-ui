@@ -51,7 +51,7 @@ input, textarea {
 }
 /* // code font family */
 code, code *{
-  font-family: 'Consolas';
+  font-family: 'Consolas', 'Courier New', monospace;
 }
 
 /* // firefox button vertical align not center bug fixed */

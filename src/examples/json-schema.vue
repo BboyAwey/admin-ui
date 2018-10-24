@@ -9,9 +9,7 @@
         <au-json-schema
           v-model="jsonSchema"
           init
-          label="JSON Schema 编辑器"
-          :root-types="['object']"
-          :types="['object', 'array', 'string', 'number', 'boolean']"/>
+          label="JSON Schema 编辑器"/>
       </div>
       <!-- 组件示例 -->
     </au-panel>

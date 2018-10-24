@@ -264,6 +264,7 @@ export default {
     localKey (v) {
       if (this.localSchema.newKey !== v) {
         this.$set(this.localSchema, 'newKey', v)
+        this.handleDeepChange()
       }
     },
     'localSchema.type' (v) {
@@ -279,19 +280,20 @@ export default {
           init: ''
         })
       }
+      this.handleDeepChange()
     },
-    localSchema: {
-      deep: true,
-      handler (v) {
-        if (this._isRoot) {
-          this.finalChange()
-        } else {
-          // no goddam unidirectional data flow
-          // and we can only trigger the change by ourselves when nest level is great than 3
-          this.triggerDeepChange()
-        }
-      }
-    },
+    // localSchema: {
+    //   deep: true,
+    //   handler (v) {
+    //     if (this._isRoot) {
+    //       this.finalChange()
+    //     } else {
+    //       // no goddam unidirectional data flow
+    //       // and we can only trigger the change by ourselves when nest level is great than 3
+    //       this.handleDeepChange()
+    //     }
+    //   }
+    // },
     schema: {
       deep: true,
       handler (v) {
@@ -329,10 +331,10 @@ export default {
         this.currentItem.forceUpdate()
       } else {
         this.currentItem.init = this.currentItemNewInit
-        this.finalChange()
       }
       this.initModalVisible = false
       this.currentItemNewInit = ''
+      this.handleDeepChange()
       // this.currentItem.forceUpdate()
       // console.log(this.currentItem)
       // this.finalChange()
@@ -412,7 +414,7 @@ export default {
     },
     removeProperty (key) {
       this.$delete(this.localSchema.properties, key)
-      this.triggerDeepChange()
+      this.handleDeepChange()
       this.$forceUpdate()
     },
     addProperty () {
@@ -423,11 +425,8 @@ export default {
         type: this.types[0],
         init: ''
       })
-      this.triggerDeepChange()
+      this.handleDeepChange()
       this.$forceUpdate()
-    },
-    triggerDeepChange () {
-      if (!this._isRoot) this.$emit('deep-change')
     }
   }
 }

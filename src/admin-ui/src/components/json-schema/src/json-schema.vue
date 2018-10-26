@@ -10,9 +10,6 @@
     justify-content: flex-end;
     align-items: center;
     font-size: 0;
-    & > * {
-      // flex:
-    }
     & > *:not(:last-child) {
       margin-right: 10px;
     }
@@ -26,6 +23,7 @@
       }
     }
     .au-json-schema-init,
+    .au-json-schema-custom,
     .au-json-schema-type {
       width: 94px;
       flex-shrink: 0;
@@ -80,7 +78,13 @@
           :size="formItemSize"
           v-model="localKey"/>
       </div>
-      <div class="au-json-schema-init"
+      <au-select
+        :options="typeOptions"
+        :disabled="typeOptions.length < 2"
+        class="au-json-schema-type"
+        :size="formItemSize"
+        v-model="localSchema.type"/>
+      <!-- <div class="au-json-schema-init"
         v-if="init"
         @click="isReferenceType ? '' : setInit(Object.assign(localSchema, {
           key: localKey,
@@ -92,14 +96,22 @@
           :value="localSchema.init"
           full-width
           :size="formItemSize"/>
-        <!-- <au-button :disabled="isReferenceType" full-width :size="formItemSize">初始值</au-button> -->
+      </div> -->
+      <div class="au-json-schema-type"
+        v-for="item of customSchemaProperties"
+        :key="item.key"
+        @click="isReferenceType ? '' : setCustom(Object.assign(localSchema, {
+          key: localKey,
+          custom: item,
+        }), !_isRoot)">
+        <au-input
+          :placeholder="item.text"
+          :disabled="isReferenceType"
+          :readonly="!isReferenceType"
+          :value="localSchema[item.key]"
+          full-width
+          :size="formItemSize"/>
       </div>
-      <au-select
-        :options="typeOptions"
-        :disabled="typeOptions.length < 2"
-        class="au-json-schema-type"
-        :size="formItemSize"
-        v-model="localSchema.type"/>
       <div class="au-json-schema-icons">
         <au-icon type="times"
           v-show="!_isRoot && !_isItem"
@@ -122,11 +134,11 @@
         :_key="key"
         :_is-root="false"
         :_is-item="false"
+        :customSchemaProperties="customSchemaProperties"
         v-model="localSchema.properties[key]"
         @deep-change="handleDeepChange"
         @remove="removeProperty"
-        :init="init"
-        @set-init="setInit"
+        @set-custom="setCustom"
         :types="types"/>
     </div>
     <div class="au-json-schema-children-container" v-if="
@@ -137,46 +149,46 @@
         :_key="'item'"
         :_is-item="true"
         :_is-root="false"
+        :customSchemaProperties="customSchemaProperties"
         v-model="localSchema.items"
         @deep-change="handleDeepChange"
-        :init="init"
-        @set-init="setInit"
+        @set-custom="setCustom"
         :types="types"/>
     </div>
     <au-modal
       v-if="_isRoot"
-      :title="`设置 ${currentItem.key} 的初始值`"
-      :visible="initModalVisible"
-      @hide="cancelSetInit"
+      :title="`设置 ${currentItem.key || rootName || 'root'} 的${currentItem.custom.text}`"
+      :visible="customModalVisible"
+      @hide="cancelSetCustom"
       :buttons="[
         {
           text: '取消',
           type: 'default',
           handler () {
-            initModalVisible = false
+            customModalVisible = false
           }
         },{
           text: '确认',
           type: 'primary',
-          handler: confirmSetInit
+          handler: confirmSetCustom
         }
       ]">
       <au-input
-        v-show="currentItem.type !== 'boolean'"
-        :type="currentItem.type !== 'string' ? 'text' : 'textarea'"
+        v-show="currentItem.custom.type ? currentItem.custom.type !== 'boolean' : currentItem.type !== 'boolean'"
+        :type="(currentItem.custom.type ? currentItem.custom.type !== 'string' : currentItem.type !== 'string') ? 'text' : 'textarea'"
         width="100%"
         height="100px"
         min-height="100px"
         max-height="100px"
-        @change="correctNumberInit(currentItem.type)"
-        v-model="currentItemNewInit" full-width/>
+        @change="correctNumber(currentItem.type)"
+        v-model="currentItemNewCustom" full-width/>
       <au-radio
-        v-show="currentItem.type === 'boolean'"
+        v-show="currentItem.custom.type ? currentItem.custom.type === 'boolean' : currentItem.type === 'boolean'"
         :radios="[
           { text: 'true', value: true },
           { text: 'false', value: false }
         ]"
-        v-model="currentItemNewInit"/>
+        v-model="currentItemNewCustom"/>
     </au-modal>
   </div>
 </template>
@@ -225,6 +237,19 @@ export default {
     },
     rootName: String,
     init: Boolean,
+    customSchemaProperties: { // only available on literals
+      type: Array,
+      default () {
+        return [
+          // {
+          //   key: 'sourceMap', // schema key
+          //   // type: 'string', // schema type
+          //   text: '数据集映射', // schema name
+          //   default: ''
+          // }
+        ]
+      }
+    },
     formItemSize: String
     // TODO: reqiure, mock
   },
@@ -238,11 +263,11 @@ export default {
       showChildren: true,
       currentItem: {
         key: '',
-        init: '',
+        custom: {},
         type: ''
       },
-      currentItemNewInit: '',
-      initModalVisible: false,
+      currentItemNewCustom: '',
+      customModalVisible: false,
       localKey: this._key,
       finalChangeTimer: null
     }
@@ -268,7 +293,7 @@ export default {
       }
     },
     'localSchema.type' (v) {
-      this.localSchema.init = ''
+      this.clearSchemaCustomKey(this.localSchema)
       this.localSchema.properties = {}
       this.localSchema.items = {}
       if (v === 'object') {
@@ -276,11 +301,11 @@ export default {
       }
       if (v === 'array') {
         this.$set(this.localSchema, 'items', {
-          type: this.types[0],
-          init: ''
+          type: this.types[0]
         })
       }
       this.handleDeepChange()
+      if (this._isRoot) this.handleCustomSchemaDefaultValue(this.localSchema)
     },
     // localSchema: {
     //   deep: true,
@@ -304,42 +329,64 @@ export default {
         } else {
           this.localSchema = v
         }
+        this.handleCustomSchemaDefaultValue(this.localSchema)
       }
     }
   },
   methods: {
-    setInit (item, source) {
+    handleCustomSchemaDefaultValue (schema) {
+      if (this.customSchemaProperties instanceof Array) {
+        if (!types.isReferenceType(schema.type)) {
+          this.customSchemaProperties.forEach(p => {
+            if (p.default !== undefined) {
+              if (p.default instanceof Function) {
+                this.$set(schema, p.key, p.default(schema.type))
+                // schema[p.key] = p.default(schema.type)
+              } else {
+                this.$set(schema, p.key, p.default)
+                // schema[p.key] = p.default
+              }
+            }
+          })
+        }
+      }
+    },
+    setCustom (item, source) {
       if (this._isRoot) {
         this.currentItem = item
-        this.currentItemNewInit = item.init
-        this.initModalVisible = true
+        this.currentItemNewCustom = item[item.custom.key]
+        this.customModalVisible = true
       } else {
         if (source) {
           item.set = this.$set.bind(this)
           item.forceUpdate = this.$forceUpdate.bind(this)
         }
-        this.$emit('set-init', item)
+        this.$emit('set-custom', item)
       }
     },
-    cancelSetInit () {
+    cancelSetCustom () {
       this.currentItemNewInit = ''
-      this.initModalVisible = false
+      this.customModalVisible = false
     },
-    confirmSetInit () {
+    confirmSetCustom () {
       if (this.currentItem.set instanceof Function) {
-        this.currentItem.set(this.currentItem, 'init', this.currentItemNewInit)
+        this.currentItem.set(
+          this.currentItem,
+          this.currentItem.custom.key,
+          this.currentItemNewCustom
+        )
         this.currentItem.forceUpdate()
       } else {
-        this.currentItem.init = this.currentItemNewInit
+        this.currentItem[this.currentItem.custom.key] = this.currentItemNewCustom
       }
-      this.initModalVisible = false
-      this.currentItemNewInit = ''
+      this.customModalVisible = false
+      this.currentItemNewCustom = ''
       this.handleDeepChange()
       // this.currentItem.forceUpdate()
       // console.log(this.currentItem)
       // this.finalChange()
     },
-    correctNumberInit (type) {
+    correctNumber (type) {
       if (!this.currentItemNewInit) return
       if (type === 'integer') {
         if (!/^\d$/g.test(this.currentItemNewInit)) {
@@ -363,16 +410,24 @@ export default {
         }
       }
     },
+    clearSchemaCustomKey (schema) {
+      for (let item of this.customSchemaProperties) {
+        schema[item.key] = ''
+      }
+    },
     purifySchema (schema) {
       let res = {}
       res.type = schema.type
 
-      if (schema.type !== 'object' && schema.type !== 'array') {
-        if (this.init) {
-          if (types.isNumberType(schema.type)) {
-            res.init = schema.init ? schema.init * 1 : null
-          } else {
-            res.init = schema.init || null
+      if (!types.isReferenceType(schema.type)) {
+        if (this.customSchemaProperties && this.customSchemaProperties.length) {
+          for (let item of this.customSchemaProperties) {
+            // console.log(item, schema)
+            if (types.isNumberType(item.type || schema.type)) {
+              res[item.key] = schema[item.key] !== undefined ? schema[item.key] * 1 : null
+            } else {
+              res[item.key] = schema[item.key] !== undefined ? schema[item.key] : null
+            }
           }
         }
       } else if (schema.type === 'object') {
@@ -428,6 +483,9 @@ export default {
       this.handleDeepChange()
       this.$forceUpdate()
     }
+  },
+  created () {
+    this.handleCustomSchemaDefaultValue(this.localSchema)
   }
 }
 </script>

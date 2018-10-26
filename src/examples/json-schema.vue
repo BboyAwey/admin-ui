@@ -8,7 +8,7 @@
       <div class="component-example">
         <au-json-schema
           v-model="jsonSchema"
-          init
+          :customSchemaProperties="customSchemaProperties"
           label="JSON Schema 编辑器"/>
       </div>
       <!-- 组件示例 -->
@@ -56,23 +56,35 @@
             </td>
           </tr>
           <tr>
-            <td>init</td>
+            <td>customSchemaPropertie</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
             </td>
             <td>
-              Boolean
+              Array<br>
+              - Object
             </td>
-            <td>false</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">true</li>
-                <li class="au-theme-border-color--base-8">false</li>
+                -key:属性的key<br>
+                -text:属性的描述<br>
+                -type:属性的类型<br>
+                --boolean<br>
+                --number<br>
+                --integer<br>
+                --string<br>
+                -default:该属性的默认值
               </ol>
             </td>
             <td>
-              是否显示初始值设置框<br>
+              自定义schema属性<br>
+              其中key和text为必填项，type为选填项，不指定则与当前项本身的类型保持一致<br>
+              key不能是schema的官方保留字：'type'/'items'/'properties'<br>
+              default可以是字面量也可以是函数，当是函数的时候接受一个参数type表示当前描述项的类型，通常在不指定type时使用函数
             </td>
           </tr>
           <tr>
@@ -86,7 +98,7 @@
               - String
             </td>
             <td>
-              所有类型
+              所有可选类型
             </td>
             <td>
               <ol class="option-list">
@@ -113,7 +125,7 @@
               - String
             </td>
             <td>
-              所有类型
+              所有可选类型
             </td>
             <td>
               <ol class="option-list">
@@ -248,36 +260,55 @@
       <code-h lang="html" content='
         <au-json-schema
           v-model="jsonSchema"
-          init
+          :customSchemaProperties="customSchemaProperties"
           label="JSON Schema 编辑器"/>
       '></code-h>
       <code-h lang="js">
         export default {
-          name: 'json-schema',
-          data () {
-            return {
-              jsonSchema: {
-                type: 'object',
-                properties: {
-                  'a': {
+        data () {
+          return {
+            jsonSchema: {
+              type: 'object',
+              properties: {
+                'a': {
+                  type: 'string'
+                },
+                'b': {
+                  type: 'array',
+                  items: {
                     type: 'string'
-                  },
-                  'b': {
-                    type: 'array',
-                    items: {
-                      type: 'string'
-                    }
                   }
                 }
               }
-            }
-          },
-          watch: {
-            jsonSchema (v) {
-              console.log(v)
-            }
+            },
+            customSchemaProperties: [
+              {
+                key: 'init',
+                text: '初始值',
+                default (type) {
+                  switch (type) {
+                    case 'string': return 'test'
+                    case 'boolean': return false
+                    case 'number':
+                    case 'integer': return 999
+                  }
+                }
+              },
+              {
+                key: 'vala',
+                text: 'VALA',
+                type: 'boolean',
+                default: false
+              }
+            ]
+          }
+        },
+        watch: {
+          jsonSchema (v) {
+            console.log(JSON.stringify(v))
           }
         }
+      }
       </code-h>
     </au-panel>
   </div>
@@ -301,12 +332,32 @@ export default {
             }
           }
         }
-      }
+      },
+      customSchemaProperties: [
+        {
+          key: 'init',
+          text: '初始值',
+          default (type) {
+            switch (type) {
+              case 'string': return 'test'
+              case 'boolean': return false
+              case 'number':
+              case 'integer': return 999
+            }
+          }
+        },
+        {
+          key: 'vala',
+          text: 'VALA',
+          type: 'boolean',
+          default: false
+        }
+      ]
     }
   },
   watch: {
     jsonSchema (v) {
-      console.log(v)
+      console.log(JSON.stringify(v))
     }
   }
 }

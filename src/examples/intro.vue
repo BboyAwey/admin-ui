@@ -12,9 +12,9 @@
         <a class="au-theme-color--info" href="http://wiki.dataengine.com/display/AD/Admin-UI" target="_blank">1.X版本</a>
         Admin UI 2做了很多改进，比如增加了主题系统，新增了不少基础组件，简化了API命名，优化了原有组件设计同时修复了BUG。Admin UI 3在2的基础上继续改进，新增了组件，优化了接口命名，组件本身的特性也得到了增强和扩展。
       </cite>
-      <!-- <p class="paragraph">
-        travis test
-      </p> -->
+      <p class="paragraph">
+        欢迎访问我们的<a class="au-theme-color--info" href="https://github.com/BboyAwey/admin-ui" target="_blank">【Github】</a>主页，提Issue、pull request或者fork项目。
+      </p>
     </au-panel>
   </div>
 </template>

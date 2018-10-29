@@ -254,7 +254,13 @@
       <au-icon type="minus"></au-icon>
     </au-panel>
     <au-panel class="section" title="Methods">
-      <au-icon type="minus"></au-icon>
+      <h4 class="title-1"><span class="code au-theme-radius au-theme-background-color--warning-bottom">yourComponentInstance.$root.reorderAuGrids()</span>重新排序</h4>
+      <p class="paragraph">
+        由于我们并没有使用行的概念，并且基本无视了父级容器元素，所以所有的grid的cell位置，都是动态计算出来，然后使用flex来进行布局的。由于并不是纯CSS布局，会导致一个问题，就是外部元素的尺寸变化导致的父级容器元素宽度变化后，内部grid并不能感知。所以需要你在这种时候通知grid宽度变化。由于重排并不是一个grid组件的事情，而是所有grid组件的事情，所以我们把通知重排的方法挂载到了根组件上，只需在合适的时候调用<span class="code au-theme-radius au-theme-background-color--warning-bottom">this.$root.reorderAuGrids()</span>方法即可。
+      </p>
+      <p class="paragraph">
+        但并不需要在<span class="code au-theme-radius au-theme-background-color--warning-bottom">window.resize</span>中使用这个方法，grid已经自己处理好了窗口尺寸变化事件。
+      </p>
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>

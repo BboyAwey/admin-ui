@@ -223,10 +223,7 @@ export default {
       type: Object,
       reqiure: true
     },
-    label: {
-      type: String,
-      default: 'JSON Schema'
-    },
+    label: String,
     types: {
       type: Array,
       default: _ => types

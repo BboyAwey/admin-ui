@@ -203,6 +203,7 @@ export default {
     window.removeEventListener('resize', this.handleWindowResize)
     window.removeEventListener('click', this.handleWindowClick, true)
     this.hide()
+    namespace.remove('au-popover-' + this._uid)
     // if (this.observe) this.observer.disconnect()
   },
   watch: {

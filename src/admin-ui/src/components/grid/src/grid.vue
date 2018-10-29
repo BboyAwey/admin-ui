@@ -37,6 +37,10 @@
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
 import getWindowSize from '../../../helpers/dom/get-window-size'
+import namespace from '../../../helpers/utils/namespace'
+
+if (!namespace.get('__gridReorderStack__')) namespace.set('__gridReorderStack__', {})
+let stack = namespace.get('__gridReorderStack__')
 
 function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
 function getElementInnerWidth (el) {
@@ -106,7 +110,8 @@ export default {
       containerWidth: 0,
       row: [],
       isLastRow: false,
-      timer: null
+      timer: null,
+      shit: null
     }
   },
   mounted () {
@@ -114,8 +119,7 @@ export default {
     //   throw new Error('Admin UI@au-grid@ Atleast you should pass one width-* prop to grid')
     // }
     this.setContainer()
-    this.getNumber(false)
-    window.addEventListener('resize', this.getNumber)
+    this.reorder(false)
     let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     if (MutationObserver) {
       let config = {
@@ -143,35 +147,53 @@ export default {
       })
       vm.observer.observe(vm.$el.parentNode, config)
     }
+    // if (!this.shit) {
+    //   let vm = this
+    //   vm.shit = setInterval(_ => {
+    //     vm.reorder(false)
+    //   }, 300)
+    // }
+    stack[this._uid] = this.reorder.bind(this)
+
+    if (!this.$root.reorderAuGrids) {
+      this.$root.reorderAuGrids = _ => {
+        Object.values(stack).forEach(reorder => {
+          reorder()
+        })
+      }
+      window.addEventListener('resize', this.$root.reorderAuGrids)
+    }
   },
-  destroyed () {
-    window.removeEventListener('resize', this.getNumber)
+  beforeDestroy () {
+    // window.removeEventListener('resize', this.$root.reorderAuGrids)
     if (this.observe) this.observer.disconnect()
+    if (this.shit) clearInterval(this.shit)
+    if (stack[this._uid]) delete stack[this._uid]
   },
   watch: {
     widthLg () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     widthMd () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     widthSm () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     widthXs () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     offsetLg () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     offsetMd () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     offsetSm () {
-      this.getNumber(false)
+      this.reorder(false)
     },
     offsetXs () {
-      this.getNumber(false)
+      this.reorder(false)
     }
   },
   methods: {
@@ -180,7 +202,7 @@ export default {
       container.style.display = 'flex'
       container.style.flexWrap = 'wrap'
     },
-    getNumber (throttling = true) {
+    reorder (throttling = true) {
       let vm = this
       function getAll () {
         vm.getCellNumber()

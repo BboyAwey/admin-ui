@@ -25,7 +25,8 @@
           @select="go"
           class="menu"
           :collapsable="true"
-          :collapse="false"/>
+          :collapse="false"
+          @toggle="$root.reorderAuGrids()"/>
       </div>
       <div slot="content">
         <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll" hide-popovers>

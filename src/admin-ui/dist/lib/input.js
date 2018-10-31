@@ -744,7 +744,7 @@ module.exports = { "default": __webpack_require__("BwfY"), __esModule: true };
       var res = this.associations.map(function (a) {
         if ((typeof a === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default()(a)) === 'object') return a;else return { _text: a };
       }).filter(function (a) {
-        return a._text.indexOf(_this.localValue) !== -1 && a._text !== _this.localValue;
+        return a._text.indexOf(_this.localValue || '') !== -1 && a._text !== _this.localValue;
       });
       return res;
     }

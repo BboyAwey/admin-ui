@@ -26,11 +26,14 @@ export default (config = {}) => {
     borderTopWidth,
     borderBottomWidth,
     borderLeftWidth,
-    borderRightWidth
+    borderRightWidth,
+    zIndex
   } = getComputedStyle(target)
   if (position === 'static') {
     target.style.position = 'relative'
   }
+
+  if (!zIndex || zIndex === 'auto') target.style.zIndex = 0
 
   if (!size) {
     size = Math.min(

@@ -332,6 +332,61 @@ module.exports = function (key) {
 
 /***/ }),
 
+/***/ "3FMr":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__ = __webpack_require__("gRE1");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__ = __webpack_require__("BO1k");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__namespace__ = __webpack_require__("G6Xs");
+
+
+
+
+if (!__WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].get('heartbeatStack')) __WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].set('heartbeatStack', {});
+var stack = __WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].get('heartbeatStack');
+
+if (!__WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].get('heartbeat')) {
+  __WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].set('heartbeat', window.setInterval(function () {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator___default()(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default()(stack)), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var f = _step.value;
+        f();
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  }, 100));
+}
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  add: function add(f, id) {
+    stack[id] = f;
+  },
+  remove: function remove(id) {
+    delete stack[id];
+  }
+});
+
+/***/ }),
+
 /***/ "3fs2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -388,7 +443,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/popover/src/popover.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,cAAc;EACd,qBAAqB;CACtB;AACD;EACE,cAAc;CACf;AACD;EACE,mBAAmB;EACnB,UAAU;EACV,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,WAAW;EACX,WAAW;CACZ;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,YAAY;CACb;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,UAAU;EACV,aAAa;EACb,YAAY;EACZ,WAAW;CACZ;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,iBAAiB;EACjB,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,YAAY;EACZ,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,YAAY;EACZ,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,iBAAiB;EACjB,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,gCAAgC;UACxB,wBAAwB;CACjC;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB","file":"popover.vue","sourcesContent":["\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n  -webkit-transition-property: left, top, bottom, right;\n  transition-property: left, top, bottom, right;\n  -webkit-transition-duration: .2s;\n          transition-duration: .2s;\n  -webkit-transition-timing-function: ease;\n          transition-timing-function: ease;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/popover/src/popover.vue"],"names":[],"mappings":";AACA;EACE,mBAAmB;EACnB,cAAc;EACd,qBAAqB;EACrB,sDAAsD;EACtD,8CAA8C;EAC9C,iCAAiC;UACzB,yBAAyB;EACjC,yCAAyC;UACjC,iCAAiC;CAC1C;AACD;EACE,cAAc;CACf;AACD;EACE,mBAAmB;EACnB,UAAU;EACV,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,WAAW;EACX,WAAW;CACZ;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,YAAY;CACb;AACD;EACE,UAAU;EACV,aAAa;EACb,UAAU;EACV,kBAAkB;CACnB;AACD;EACE,UAAU;EACV,aAAa;EACb,YAAY;EACZ,WAAW;CACZ;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,SAAS;EACT,iBAAiB;EACjB,aAAa;EACb,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,YAAY;EACZ,kCAAkC;UAC1B,0BAA0B;CACnC;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,YAAY;EACZ,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,iBAAiB;EACjB,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,YAAY;EACZ,WAAW;EACX,SAAS;EACT,aAAa;EACb,iCAAiC;UACzB,yBAAyB;CAClC;AACD;EACE,gCAAgC;UACxB,wBAAwB;CACjC;AACD;;EAEE,kBAAkB;EAClB,oBAAoB;CACrB","file":"popover.vue","sourcesContent":["\n.au-popover {\n  position: absolute;\n  z-index: 9999;\n  line-height: inherit;\n  -webkit-transition-property: left, top, bottom, right;\n  transition-property: left, top, bottom, right;\n  -webkit-transition-duration: .2s;\n          transition-duration: .2s;\n  -webkit-transition-timing-function: ease;\n          transition-timing-function: ease;\n}\n.au-popover:focus {\n  outline: none;\n}\n.au-popover-triangle {\n  position: absolute;\n  left: 8px;\n  bottom: -4px;\n  z-index: -1;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.top-center {\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.top-right {\n  right: 8px;\n  left: auto;\n}\n.au-popover-triangle.bottom-left {\n  top: -5px;\n  bottom: auto;\n  left: 8px;\n  right: auto;\n}\n.au-popover-triangle.bottom-center {\n  top: -5px;\n  bottom: auto;\n  left: 50%;\n  margin-left: -7px;\n}\n.au-popover-triangle.bottom-right {\n  top: -5px;\n  bottom: auto;\n  right: 10px;\n  left: auto;\n}\n.au-popover-triangle.left-top {\n  left: auto;\n  right: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-middle {\n  left: auto;\n  right: -5px;\n  top: 50%;\n  margin-top: -7px;\n  bottom: auto;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.left-bottom {\n  left: auto;\n  right: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.au-popover-triangle.right-bottom {\n  right: auto;\n  left: -5px;\n  top: auto;\n  bottom: 8px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-middle {\n  right: auto;\n  left: -5px;\n  top: 50%;\n  margin-top: -7px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-triangle.right-top {\n  right: auto;\n  left: -5px;\n  top: 8px;\n  bottom: auto;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.au-popover-plain {\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.au-popover-plain-triangle,\n.au-popover-plain {\n  border-width: 1px;\n  border-style: solid;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -755,6 +810,13 @@ var $export = __webpack_require__("kM2E");
 
 $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__("m9gC")('Set') });
 
+
+/***/ }),
+
+/***/ "BO1k":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__("fxRn"), __esModule: true };
 
 /***/ }),
 
@@ -3114,6 +3176,16 @@ module.exports = function (index, length) {
 
 /***/ }),
 
+/***/ "fxRn":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("+tPU");
+__webpack_require__("zQR9");
+module.exports = __webpack_require__("g8Ux");
+
+
+/***/ }),
+
 /***/ "g3KR":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3167,6 +3239,20 @@ if (false) {(function () {
 })()}
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "g8Ux":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("77Pl");
+var get = __webpack_require__("3fs2");
+module.exports = __webpack_require__("FeBl").getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
 
 
 /***/ }),
@@ -3332,6 +3418,7 @@ module.exports = $export;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_page_pos__ = __webpack_require__("BcU/");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_dom_is_ancestor__ = __webpack_require__("lQrO");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__ = __webpack_require__("G6Xs");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__ = __webpack_require__("3FMr");
 
 //
 //
@@ -3464,11 +3551,18 @@ module.exports = $export;
 //
 //
 //
+//
+//
+//
 
 
 
 
 
+
+
+if (!__WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].get('popoverCollections')) __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].set('popoverCollections', {});
+var popoverCollections = __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].get('popoverCollections');
 
 function getRealZIndex(el) {
   if (!el || el === document) return 0;
@@ -3525,37 +3619,22 @@ function getRealZIndex(el) {
   mounted: function mounted() {
     this.reconstruct();
     this.addEvents();
-    // this.calPos()
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('click', this.handleWindowClick, true);
-    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    // if (MutationObserver) {
-    //   this.observer = new MutationObserver((mutations) => {
-    //     console.log(mutations)
-    //     this.calPos()
-    //   })
-    //   let config = { attributes: true, childList: true, subtree: true }
-    //   this.observer.observe(this.$refs.pop, config)
-    // }
   },
   beforeDestroy: function beforeDestroy() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('click', this.handleWindowClick, true);
     this.hide();
-    __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].remove('au-popover-' + this._uid);
-    // if (this.observe) this.observer.disconnect()
+    __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].remove(this.heartbeatIndex);
   },
 
   watch: {
     trigger: function trigger() {
-      this.removeEvents();
       this.addEvents();
     },
     visible: function visible(v) {
       if (v) this.$emit('show');else this.$emit('hide');
-    },
-    disabled: function disabled(v) {
-      // this.reconstruct()
     },
     placement: function placement(v) {
       this.calPos();
@@ -3567,7 +3646,7 @@ function getRealZIndex(el) {
       var id = target.getAttribute('data-au-popover');
       if (id) {
         // nested popover
-        target = __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].get('au-popover-' + id).$slots.target[0].elm;
+        target = popoverCollections[id].$slots.target[0].elm;
       }
       return target;
     },
@@ -3577,10 +3656,8 @@ function getRealZIndex(el) {
       var pop = this.$refs.pop;
       var id = 'au-popover-' + this._uid;
       var zIndex = getRealZIndex(pop.parentNode) || 9999; // sometimes it will use in a modal or other elements witch has z-index style
-      // console.log(zIndex)
-      // register popover on root
       pop.setAttribute('data-au-popover', id);
-      __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].set('au-popover-' + id, this);
+      popoverCollections[id] = this;
 
       if (target.parentNode === pop) {
         pop.parentNode.insertBefore(target, pop);
@@ -3590,33 +3667,30 @@ function getRealZIndex(el) {
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
     addEvents: function addEvents() {
+      this.removeEvents();
       var target = this.getTarget();
       if (this.trigger === 'click') {
         target.addEventListener('click', this.handleClick);
       } else if (this.trigger === 'hover') {
-        target.addEventListener('mouseenter', this.handleMouseover);
-        target.addEventListener('mouseleave', this.handleMouseout);
+        target.addEventListener('mouseenter', this.handleMouseenter);
+        target.addEventListener('mouseleave', this.handleMouseleave);
       }
     },
     removeEvents: function removeEvents() {
       var target = this.getTarget();
       target.removeEventListener('click', this.handleClick);
-      target.removeEventListener('mouseenter', this.handleMouseover);
-      target.removeEventListener('mouseleave', this.handleMouseout);
+      target.removeEventListener('mouseenter', this.handleMouseenter);
+      target.removeEventListener('mouseleave', this.handleMouseleave);
     },
     handleClick: function handleClick() {
       if (this.trigger === 'click') {
         this.visible ? this.hide() : this.show();
       }
     },
-
-    // handleBlur (e) { // pop blur
-    //   if (this.trigger === 'click' && this.visible && this.hideOnBlur) this.hide()
-    // },
-    handleMouseover: function handleMouseover() {
+    handleMouseenter: function handleMouseenter() {
       this.show();
     },
-    handleMouseout: function handleMouseout() {
+    handleMouseleave: function handleMouseleave() {
       if (this.trigger !== 'click' && this.visible) this.hide();
     },
     show: function show() {
@@ -3631,18 +3705,15 @@ function getRealZIndex(el) {
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop);
       if (this.trigger && this.hideOnBlur) this.$refs.pop.focus();
       this.visible = true;
-      if (!this.$root._auPopovers) this.$root._auPopovers = {};
-      this.$root._auPopovers[this._uid] = this;
-      this.rootIndex = this.$root._auPopovers.length - 1;
-      // setInterval(this.calPos.bind(this), 500)
+
+      __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].add(this.calPos.bind(this), this._uid);
     },
     hide: function hide() {
+      __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].remove(this._uid);
       try {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop);
       } catch (e) {}
       this.visible = false;
-      if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid];
-      // clearInterval(this.calPos.bind(this))
     },
     calPos: function calPos() {
       var pop = this.$refs.pop;

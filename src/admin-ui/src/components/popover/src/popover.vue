@@ -5,6 +5,9 @@
     position: absolute;
     z-index: $z-level-1;
     line-height: inherit;
+    transition-property: left, top, bottom, right;
+    transition-duration: .2s;
+    transition-timing-function: ease;
   }
   .au-popover:focus {
     outline: none;
@@ -134,6 +137,10 @@ import getElementSize from '../../../helpers/dom/get-element-size'
 import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
 import isAncestor from '../../../helpers/dom/is-ancestor'
 import namespace from '../../../helpers/utils/namespace'
+import heartbeat from '../../../helpers/utils/heartbeat'
+
+if (!namespace.get('popoverCollections')) namespace.set('popoverCollections', {})
+let popoverCollections = namespace.get('popoverCollections')
 
 function getRealZIndex (el) {
   if (!el || el === document) return 0
@@ -186,37 +193,22 @@ export default {
   mounted () {
     this.reconstruct()
     this.addEvents()
-    // this.calPos()
     window.addEventListener('resize', this.handleWindowResize)
     window.addEventListener('click', this.handleWindowClick, true)
-    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    // if (MutationObserver) {
-    //   this.observer = new MutationObserver((mutations) => {
-    //     console.log(mutations)
-    //     this.calPos()
-    //   })
-    //   let config = { attributes: true, childList: true, subtree: true }
-    //   this.observer.observe(this.$refs.pop, config)
-    // }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleWindowResize)
     window.removeEventListener('click', this.handleWindowClick, true)
     this.hide()
-    namespace.remove('au-popover-' + this._uid)
-    // if (this.observe) this.observer.disconnect()
+    heartbeat.remove(this.heartbeatIndex)
   },
   watch: {
     trigger () {
-      this.removeEvents()
       this.addEvents()
     },
     visible (v) {
       if (v) this.$emit('show')
       else this.$emit('hide')
-    },
-    disabled (v) {
-      // this.reconstruct()
     },
     placement (v) {
       this.calPos()
@@ -227,7 +219,7 @@ export default {
       let target = this.$slots.target[0].elm
       let id = target.getAttribute('data-au-popover')
       if (id) { // nested popover
-        target = namespace.get('au-popover-' + id).$slots.target[0].elm
+        target = popoverCollections[id].$slots.target[0].elm
       }
       return target
     },
@@ -237,10 +229,8 @@ export default {
       let pop = this.$refs.pop
       let id = 'au-popover-' + this._uid
       let zIndex = getRealZIndex(pop.parentNode) || 9999 // sometimes it will use in a modal or other elements witch has z-index style
-      // console.log(zIndex)
-      // register popover on root
       pop.setAttribute('data-au-popover', id)
-      namespace.set('au-popover-' + id, this)
+      popoverCollections[id] = this
 
       if (target.parentNode === pop) {
         pop.parentNode.insertBefore(target, pop)
@@ -250,32 +240,30 @@ export default {
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
     addEvents () {
+      this.removeEvents()
       let target = this.getTarget()
       if (this.trigger === 'click') {
         target.addEventListener('click', this.handleClick)
       } else if (this.trigger === 'hover') {
-        target.addEventListener('mouseenter', this.handleMouseover)
-        target.addEventListener('mouseleave', this.handleMouseout)
+        target.addEventListener('mouseenter', this.handleMouseenter)
+        target.addEventListener('mouseleave', this.handleMouseleave)
       }
     },
     removeEvents () {
       let target = this.getTarget()
       target.removeEventListener('click', this.handleClick)
-      target.removeEventListener('mouseenter', this.handleMouseover)
-      target.removeEventListener('mouseleave', this.handleMouseout)
+      target.removeEventListener('mouseenter', this.handleMouseenter)
+      target.removeEventListener('mouseleave', this.handleMouseleave)
     },
     handleClick () {
       if (this.trigger === 'click') {
         this.visible ? this.hide() : this.show()
       }
     },
-    // handleBlur (e) { // pop blur
-    //   if (this.trigger === 'click' && this.visible && this.hideOnBlur) this.hide()
-    // },
-    handleMouseover () {
+    handleMouseenter () {
       this.show()
     },
-    handleMouseout () {
+    handleMouseleave () {
       if (this.trigger !== 'click' && this.visible) this.hide()
     },
     show () {
@@ -290,18 +278,15 @@ export default {
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
       if (this.trigger && this.hideOnBlur) this.$refs.pop.focus()
       this.visible = true
-      if (!this.$root._auPopovers) this.$root._auPopovers = {}
-      this.$root._auPopovers[this._uid] = this
-      this.rootIndex = this.$root._auPopovers.length - 1
-      // setInterval(this.calPos.bind(this), 500)
+
+      heartbeat.add(this.calPos.bind(this), this._uid)
     },
     hide () {
+      heartbeat.remove(this._uid)
       try {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop)
       } catch (e) {}
       this.visible = false
-      if (this.$root._auPopovers && this.$root._auPopovers[this._uid]) delete this.$root._auPopovers[this._uid]
-      // clearInterval(this.calPos.bind(this))
     },
     calPos () {
       let pop = this.$refs.pop

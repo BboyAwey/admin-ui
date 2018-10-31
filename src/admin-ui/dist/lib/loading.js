@@ -886,11 +886,14 @@ function listToStyles (parentId, list) {
       borderTopWidth = _getComputedStyle.borderTopWidth,
       borderBottomWidth = _getComputedStyle.borderBottomWidth,
       borderLeftWidth = _getComputedStyle.borderLeftWidth,
-      borderRightWidth = _getComputedStyle.borderRightWidth;
+      borderRightWidth = _getComputedStyle.borderRightWidth,
+      zIndex = _getComputedStyle.zIndex;
 
   if (position === 'static') {
     target.style.position = 'relative';
   }
+
+  if (!zIndex || zIndex === 'auto') target.style.zIndex = 0;
 
   if (!size) {
     size = Math.min(parseInt(width) - parseInt(borderLeftWidth) - parseInt(borderRightWidth), parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth));

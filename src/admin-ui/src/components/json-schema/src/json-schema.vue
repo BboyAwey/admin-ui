@@ -477,6 +477,7 @@ export default {
         type: this.types[0],
         init: ''
       })
+      this.showChildren = true
       this.handleDeepChange()
       this.$forceUpdate()
     }

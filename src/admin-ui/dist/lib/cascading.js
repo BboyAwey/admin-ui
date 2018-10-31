@@ -4587,6 +4587,7 @@ function getRealZIndex(el) {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('click', this.handleWindowClick, true);
     this.hide();
+    __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].remove('au-popover-' + this._uid);
     // if (this.observe) this.observer.disconnect()
   },
 

@@ -324,7 +324,7 @@ export default {
       let res = this.associations.map(a => {
         if (typeof a === 'object') return a
         else return { _text: a }
-      }).filter(a => a._text.indexOf(this.localValue) !== -1 && a._text !== this.localValue)
+      }).filter(a => a._text.indexOf(this.localValue || '') !== -1 && a._text !== this.localValue)
       return res
     }
   },

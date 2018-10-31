@@ -8,7 +8,7 @@
       <div class="component-example">
         <au-json-schema
           v-model="jsonSchema"
-          :customSchemaProperties="customSchemaProperties"
+          :custom-schema-properties="customSchemaProperties"
           label="JSON Schema 编辑器"/>
       </div>
       <!-- 组件示例 -->
@@ -56,7 +56,7 @@
             </td>
           </tr>
           <tr>
-            <td>customSchemaPropertie</td>
+            <td>custom-schema-propertie</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -260,7 +260,7 @@
       <code-h lang="html" content='
         <au-json-schema
           v-model="jsonSchema"
-          :customSchemaProperties="customSchemaProperties"
+          :custom-schema-properties="customSchemaProperties"
           label="JSON Schema 编辑器"/>
       '></code-h>
       <code-h lang="js">

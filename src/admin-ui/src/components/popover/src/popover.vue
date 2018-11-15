@@ -134,7 +134,7 @@
 </template>
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
-import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
+// import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
 import isAncestor from '../../../helpers/dom/is-ancestor'
 import namespace from '../../../helpers/utils/namespace'
 import heartbeat from '../../../helpers/utils/heartbeat'
@@ -313,7 +313,6 @@ export default {
       }
 
       let targetSize = getElementSize(target)
-      let targetPos = getElementPagePos(target)
       let popSize = getElementSize(content)
       let windowSize = {
         width: document.body.clientWidth,
@@ -376,24 +375,24 @@ export default {
       let offset = 10
       let vertical = {
         x: {
-          left: targetPos.left + parseInt(this.xFix),
-          center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
-          right: targetPos.left + targetSize.width - popSize.width + parseInt(this.xFix)
+          left: targetRect.left + parseInt(this.xFix),
+          center: targetRect.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
+          right: targetRect.left + targetSize.width - popSize.width + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
+          top: targetRect.top - popSize.height - offset + parseInt(this.yFix),
+          bottom: targetRect.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       }
       let horizontal = {
         x: {
-          left: targetPos.left - offset - popSize.width + parseInt(this.xFix),
-          right: targetPos.left + targetSize.width + offset + parseInt(this.xFix)
+          left: targetRect.left - offset - popSize.width + parseInt(this.xFix),
+          right: targetRect.left + targetSize.width + offset + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top + parseInt(this.yFix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
+          top: targetRect.top + parseInt(this.yFix),
+          middle: targetRect.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
+          bottom: targetRect.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
         }
       }
       let res = {}

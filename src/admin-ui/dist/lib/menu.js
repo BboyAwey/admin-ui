@@ -820,43 +820,6 @@ module.exports = { "default": __webpack_require__("fxRn"), __esModule: true };
 
 /***/ }),
 
-/***/ "BcU/":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function getLeft(el) {
-  var actualLeft = el.offsetLeft;
-  var current = el.offsetParent;
-
-  while (current !== null) {
-    actualLeft += current.offsetLeft;
-    current = current.offsetParent;
-  }
-
-  return actualLeft;
-}
-
-function getTop(el) {
-  var actualTop = el.offsetTop;
-  var current = el.offsetParent;
-
-  while (current !== null) {
-    actualTop += current.offsetTop;
-    current = current.offsetParent;
-  }
-
-  return actualTop;
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (function (el) {
-  return {
-    left: getLeft(el),
-    top: getTop(el)
-  };
-});
-
-/***/ }),
-
 /***/ "D2L2":
 /***/ (function(module, exports) {
 
@@ -3415,10 +3378,9 @@ module.exports = $export;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set__ = __webpack_require__("lHA8");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_set__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__ = __webpack_require__("/PwX");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_page_pos__ = __webpack_require__("BcU/");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_dom_is_ancestor__ = __webpack_require__("lQrO");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__ = __webpack_require__("G6Xs");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__ = __webpack_require__("3FMr");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_is_ancestor__ = __webpack_require__("lQrO");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_utils_namespace__ = __webpack_require__("G6Xs");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_utils_heartbeat__ = __webpack_require__("3FMr");
 
 //
 //
@@ -3556,13 +3518,13 @@ module.exports = $export;
 //
 
 
+// import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
 
 
 
 
-
-if (!__WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].get('popoverCollections')) __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].set('popoverCollections', {});
-var popoverCollections = __WEBPACK_IMPORTED_MODULE_4__helpers_utils_namespace__["a" /* default */].get('popoverCollections');
+if (!__WEBPACK_IMPORTED_MODULE_3__helpers_utils_namespace__["a" /* default */].get('popoverCollections')) __WEBPACK_IMPORTED_MODULE_3__helpers_utils_namespace__["a" /* default */].set('popoverCollections', {});
+var popoverCollections = __WEBPACK_IMPORTED_MODULE_3__helpers_utils_namespace__["a" /* default */].get('popoverCollections');
 
 function getRealZIndex(el) {
   if (!el || el === document) return 0;
@@ -3626,7 +3588,7 @@ function getRealZIndex(el) {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('click', this.handleWindowClick, true);
     this.hide();
-    __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].remove(this.heartbeatIndex);
+    __WEBPACK_IMPORTED_MODULE_4__helpers_utils_heartbeat__["a" /* default */].remove(this.heartbeatIndex);
   },
 
   watch: {
@@ -3706,10 +3668,10 @@ function getRealZIndex(el) {
       if (this.trigger && this.hideOnBlur) this.$refs.pop.focus();
       this.visible = true;
 
-      __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].add(this.calPos.bind(this), this._uid);
+      __WEBPACK_IMPORTED_MODULE_4__helpers_utils_heartbeat__["a" /* default */].add(this.calPos.bind(this), this._uid);
     },
     hide: function hide() {
-      __WEBPACK_IMPORTED_MODULE_5__helpers_utils_heartbeat__["a" /* default */].remove(this._uid);
+      __WEBPACK_IMPORTED_MODULE_4__helpers_utils_heartbeat__["a" /* default */].remove(this._uid);
       try {
         this.$refs.pop.parentNode.removeChild(this.$refs.pop);
       } catch (e) {}
@@ -3740,7 +3702,6 @@ function getRealZIndex(el) {
       }
 
       var targetSize = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(target);
-      var targetPos = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_page_pos__["a" /* default */])(target);
       var popSize = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(content);
       var windowSize = {
         width: document.body.clientWidth,
@@ -3800,24 +3761,24 @@ function getRealZIndex(el) {
       var offset = 10;
       var vertical = {
         x: {
-          left: targetPos.left + parseInt(this.xFix),
-          center: targetPos.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
-          right: targetPos.left + targetSize.width - popSize.width + parseInt(this.xFix)
+          left: targetRect.left + parseInt(this.xFix),
+          center: targetRect.left + targetSize.width / 2 - popSize.width / 2 + parseInt(this.xFix),
+          right: targetRect.left + targetSize.width - popSize.width + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top - popSize.height - offset + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
+          top: targetRect.top - popSize.height - offset + parseInt(this.yFix),
+          bottom: targetRect.top + targetSize.height + offset + parseInt(this.yFix) // do not kown why should add 10 but it works
         }
       };
       var horizontal = {
         x: {
-          left: targetPos.left - offset - popSize.width + parseInt(this.xFix),
-          right: targetPos.left + targetSize.width + offset + parseInt(this.xFix)
+          left: targetRect.left - offset - popSize.width + parseInt(this.xFix),
+          right: targetRect.left + targetSize.width + offset + parseInt(this.xFix)
         },
         y: {
-          top: targetPos.top + parseInt(this.yFix),
-          middle: targetPos.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
-          bottom: targetPos.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
+          top: targetRect.top + parseInt(this.yFix),
+          middle: targetRect.top + targetSize.height / 2 - popSize.height / 2 + parseInt(this.yFix),
+          bottom: targetRect.top + targetSize.height - popSize.height + 11 + parseInt(this.yFix) // do not kown why should add 11 but it works
         }
       };
       var res = {};
@@ -3836,7 +3797,7 @@ function getRealZIndex(el) {
       pop.style.top = this.y || res.y + 'px';
     },
     handleWindowClick: function handleWindowClick(e) {
-      if (this.trigger === 'click' && this.visible && this.hideOnBlur && !Object(__WEBPACK_IMPORTED_MODULE_3__helpers_dom_is_ancestor__["a" /* default */])(e.target, this.$el) && !Object(__WEBPACK_IMPORTED_MODULE_3__helpers_dom_is_ancestor__["a" /* default */])(e.target, this.getTarget())) this.hide();
+      if (this.trigger === 'click' && this.visible && this.hideOnBlur && !Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_is_ancestor__["a" /* default */])(e.target, this.$el) && !Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_is_ancestor__["a" /* default */])(e.target, this.getTarget())) this.hide();
     },
     handleWindowResize: function handleWindowResize() {
       if (this.visible) this.calPos();

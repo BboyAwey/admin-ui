@@ -1354,8 +1354,10 @@ module.exports = Object.keys || function keys(O) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
 
 /* harmony default export */ __webpack_exports__["a"] = (function (obj) {
-  if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object');
-  return JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(obj));
+  if (!(obj instanceof Array || obj instanceof Object)) {
+    console.warn('Admin UI@deep-clone@ can only deepCopy array or plain object');
+    return {};
+  } else return JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(obj));
 });
 
 /***/ }),

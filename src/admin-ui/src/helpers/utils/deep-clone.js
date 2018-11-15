@@ -1,4 +1,6 @@
 export default (obj) => {
-  if (!(obj instanceof Array || obj instanceof Object)) throw new Error('can only deepCopy Array or Object')
-  return JSON.parse(JSON.stringify(obj))
+  if (!(obj instanceof Array || obj instanceof Object)) {
+    console.warn('Admin UI@deep-clone@ can only deepCopy array or plain object')
+    return {}
+  } else return JSON.parse(JSON.stringify(obj))
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import template from './loading.vue'
+import { addClass } from '../../../helpers/dom/class'
 
 export default (config = {}) => {
   let instance = new (Vue.extend(template))()
@@ -29,11 +30,9 @@ export default (config = {}) => {
     borderRightWidth,
     zIndex
   } = getComputedStyle(target)
-  if (position === 'static') {
-    target.style.position = 'relative'
-  }
+  if (position === 'static') addClass(target, 'au-loading-position-fixed')
 
-  if (!zIndex || zIndex === 'auto') target.style.zIndex = 0
+  if (!zIndex || zIndex === 'auto') addClass(target, 'au-loading-z-index-fixed')
 
   if (!size) {
     size = Math.min(

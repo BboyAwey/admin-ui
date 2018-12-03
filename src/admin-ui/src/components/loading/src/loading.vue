@@ -39,6 +39,12 @@
     text-align: center;
     font-size: $normal;
   }
+  .au-loading-position-fixed {
+    position: relative !important;
+  }
+  .au-loading-z-index-fixed {
+    z-index: 0 !important;
+  }
 </style>
 <template>
   <div class="au-loading" :class="{
@@ -63,6 +69,7 @@
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
 import namespace from '../../../helpers/utils/namespace.js'
+import { removeClass } from '../../../helpers/dom/class.js'
 
 export default {
   name: 'au-loading',
@@ -85,7 +92,9 @@ export default {
       type: String,
       default: 'primary'
     },
-    mask: Boolean
+    mask: Boolean,
+    resetPosition: String,
+    resetZIndex: String
   },
   computed: {
     stroke () {
@@ -128,6 +137,8 @@ export default {
     close () {
       if (!this.closed) {
         let el = this.el ? this.el : this.$el
+        removeClass(el.parentNode, 'au-loading-z-index-fixed')
+        removeClass(el.parentNode, 'au-loading-position-fixed')
         el.parentNode.removeChild(el)
         this.closed = true
       }

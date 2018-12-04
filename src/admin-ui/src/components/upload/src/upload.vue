@@ -27,11 +27,11 @@
     & > li:not(:last-child) {
       margin-bottom: 8px;
     }
-    & > li:hover {
-      .au-upload-file-operation-icon {
-        display: inline-block;
-      }
-    }
+    // & > li:hover {
+    //   .au-upload-file-operation-icon {
+    //     display: inline-block;
+    //   }
+    // }
     & > li.au-upload-desc-mode {
       .au-upload-file-desc-icon {
         display: inline-block;
@@ -97,7 +97,7 @@
       font-size: $normal;
     }
     .au-upload-file-operation-icon {
-      display: none;
+      // display: none;
       cursor: pointer;
     }
     .au-upload-file-desc-icon {
@@ -288,12 +288,12 @@
         </p>
         <span class="au-upload-file-edit-icon-container">
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-11 au-theme-hover-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-8 au-theme-hover-color--base-3"
             type="close"
             v-show="canRemove"
             @click.native="remove(index)"/>
           <au-icon
-            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-color--base-11 au-theme-hover-color--base-3"
+            class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-download au-theme-color--base-8 au-theme-hover-color--base-3"
             type="cloud-download"
             v-show="canDownload && file.url"
             @click.native="download(file, index)"/>

@@ -229,7 +229,7 @@
           :style="{ cursor: canPreview ? 'pointer' : 'default' }"
           :src="autoUpload ? (file.base64 || file.url) : file.base64"
           @click="preview(index)"
-          v-show="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
+          v-if="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
         <p class="au-upload-file-info au-theme-color--base-3" :class="{'au-upload-no-desc': !canDescribe}">
           <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
           <span class="au-upload-file-description"

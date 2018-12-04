@@ -5469,29 +5469,24 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("img", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.autoUpload
-                      ? file.isImage && file.url
-                      : file.isImage && file.base64,
-                    expression:
-                      "autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)"
-                  }
-                ],
-                staticClass: "au-upload-preview-icon",
-                style: { cursor: _vm.canPreview ? "pointer" : "default" },
-                attrs: {
-                  src: _vm.autoUpload ? file.base64 || file.url : file.base64
-                },
-                on: {
-                  click: function($event) {
-                    _vm.preview(index)
-                  }
-                }
-              }),
+              (_vm.autoUpload
+              ? file.isImage && file.url
+              : file.isImage && file.base64)
+                ? _c("img", {
+                    staticClass: "au-upload-preview-icon",
+                    style: { cursor: _vm.canPreview ? "pointer" : "default" },
+                    attrs: {
+                      src: _vm.autoUpload
+                        ? file.base64 || file.url
+                        : file.base64
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.preview(index)
+                      }
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "p",

@@ -86,17 +86,17 @@
           </au-scroller>
         </div>
         <div class="au-modal-dec-line au-theme-border-color--base-10" ref="decline"></div>
-        <div class="au-modal-operations" v-show="buttonList.length" ref="operations">
+        <div class="au-modal-operations" v-show="buttons && buttons.length" ref="operations">
           <au-button
             class="au-modal-button"
-            v-for="(button, i) in buttonList"
+            v-for="(button, i) in buttons"
             :key="i"
             :type="button.type"
             :size="button.size"
             :plain="button.plain"
             :disabled="button.disabled"
-            :loading="button.loading"
-            @click="operate(button)">{{ button.text }}</au-button>
+            :loading="buttonLoadings[i]"
+            @click="operate(i)">{{ button.text }}</au-button>
         </div>
         <au-icon type="times" @click="hide" class="au-modal-close-icon au-theme-hover-color--primary"></au-icon>
       </div>
@@ -121,7 +121,8 @@ export default {
   },
   data () {
     return {
-      localDisplay: this.visible
+      localDisplay: this.visible,
+      buttonLoadings: []
     }
   },
   props: {
@@ -161,22 +162,6 @@ export default {
       this.$emit(v ? 'show' : 'hide')
     }
   },
-  computed: {
-    buttonList () {
-      let buttons = this.buttons
-      let buttonList = []
-      if (buttons instanceof Array) {
-        buttons.forEach(button => {
-          if (typeof button === 'string') {
-            if (this.builtInButtons[button]) buttonList.push(this.builtInButtons[button])
-          } else if (typeof button === 'object') {
-            buttonList.push(button)
-          }
-        })
-      }
-      return buttonList
-    }
-  },
   methods: {
     hide () {
       this.localDisplay = false
@@ -184,14 +169,14 @@ export default {
     show () {
       this.localDisplay = true
     },
-    operate (button) {
+    operate (index) {
       let vm = this
-      button.handler.call(this.$parent, {
+      vm.buttons[index].handler.call(vm.$parent, {
         start () {
-          vm.$set(button, 'loading', true)
+          vm.$set(vm.buttonLoadings, index, true)
         },
         stop () {
-          vm.$set(button, 'loading', false)
+          vm.$set(vm.buttonLoadings, index, false)
         }
       })
     },
@@ -221,7 +206,7 @@ export default {
 
       let operationHeight = 0
       let titleHeight = 0
-      if (this.buttonList.length && this.$refs.operations) {
+      if (this.buttons.length && this.$refs.operations) {
         operationHeight = getElementSize(this.$refs.operations).height
       }
       if (this.title) {

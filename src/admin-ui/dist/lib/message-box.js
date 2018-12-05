@@ -674,14 +674,14 @@ var render = function() {
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: _vm.buttonList.length,
-                    expression: "buttonList.length"
+                    value: _vm.buttons && _vm.buttons.length,
+                    expression: "buttons && buttons.length"
                   }
                 ],
                 ref: "operations",
                 staticClass: "au-modal-operations"
               },
-              _vm._l(_vm.buttonList, function(button, i) {
+              _vm._l(_vm.buttons, function(button, i) {
                 return _c(
                   "au-button",
                   {
@@ -692,11 +692,11 @@ var render = function() {
                       size: button.size,
                       plain: button.plain,
                       disabled: button.disabled,
-                      loading: button.loading
+                      loading: _vm.buttonLoadings[i]
                     },
                     on: {
                       click: function($event) {
-                        _vm.operate(button)
+                        _vm.operate(i)
                       }
                     }
                   },
@@ -1033,14 +1033,11 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__ = __webpack_require__("bOdI");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__("pFYg");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_size__ = __webpack_require__("/PwX");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_dom_get_window_size__ = __webpack_require__("KFyd");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__button__ = __webpack_require__("Wz8r");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__scroller__ = __webpack_require__("ovkV");
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__ = __webpack_require__("/PwX");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_window_size__ = __webpack_require__("KFyd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__button__ = __webpack_require__("Wz8r");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scroller__ = __webpack_require__("ovkV");
 
 //
 //
@@ -1156,7 +1153,7 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-modal',
-  components: { AuButton: __WEBPACK_IMPORTED_MODULE_4__button__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_5__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_6__scroller__["a" /* default */] },
+  components: { AuButton: __WEBPACK_IMPORTED_MODULE_3__button__["a" /* default */], AuIcon: __WEBPACK_IMPORTED_MODULE_4__icon__["a" /* default */], AuScroller: __WEBPACK_IMPORTED_MODULE_5__scroller__["a" /* default */] },
   mounted: function mounted() {
     window.addEventListener('resize', this.resizeHandler);
   },
@@ -1165,7 +1162,8 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      localDisplay: this.visible
+      localDisplay: this.visible,
+      buttonLoadings: []
     };
   },
 
@@ -1208,24 +1206,6 @@ if (false) {(function () {
       this.$emit(v ? 'show' : 'hide');
     }
   },
-  computed: {
-    buttonList: function buttonList() {
-      var _this2 = this;
-
-      var buttons = this.buttons;
-      var buttonList = [];
-      if (buttons instanceof Array) {
-        buttons.forEach(function (button) {
-          if (typeof button === 'string') {
-            if (_this2.builtInButtons[button]) buttonList.push(_this2.builtInButtons[button]);
-          } else if ((typeof button === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default()(button)) === 'object') {
-            buttonList.push(button);
-          }
-        });
-      }
-      return buttonList;
-    }
-  },
   methods: {
     hide: function hide() {
       this.localDisplay = false;
@@ -1233,14 +1213,14 @@ if (false) {(function () {
     show: function show() {
       this.localDisplay = true;
     },
-    operate: function operate(button) {
+    operate: function operate(index) {
       var vm = this;
-      button.handler.call(this.$parent, {
+      vm.buttons[index].handler.call(vm.$parent, {
         start: function start() {
-          vm.$set(button, 'loading', true);
+          vm.$set(vm.buttonLoadings, index, true);
         },
         stop: function stop() {
-          vm.$set(button, 'loading', false);
+          vm.$set(vm.buttonLoadings, index, false);
         }
       });
     },
@@ -1253,7 +1233,7 @@ if (false) {(function () {
 
       var maxWidth = null;
       var maxHeight = null;
-      var winSize = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_dom_get_window_size__["a" /* default */])();
+      var winSize = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_window_size__["a" /* default */])();
       // if not given height we should set a max height
       if (!height) maxHeight = winSize.height - 80 + 'px';
       // if not given width
@@ -1271,13 +1251,13 @@ if (false) {(function () {
 
       var operationHeight = 0;
       var titleHeight = 0;
-      if (this.buttonList.length && this.$refs.operations) {
-        operationHeight = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_size__["a" /* default */])(this.$refs.operations).height;
+      if (this.buttons.length && this.$refs.operations) {
+        operationHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.operations).height;
       }
       if (this.title) {
-        titleHeight = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_size__["a" /* default */])(this.$refs.title).height;
+        titleHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.title).height;
       }
-      var modalHeight = Object(__WEBPACK_IMPORTED_MODULE_2__helpers_dom_get_element_size__["a" /* default */])(this.$refs.modal).height;
+      var modalHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.modal).height;
 
       // we need to minus the padding value of modal and opreation divs and the decline height
       this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px';
@@ -1294,11 +1274,11 @@ if (false) {(function () {
       this.hide();
     },
     enterHandler: function enterHandler(e) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (e.keyCode !== 13) return;
       this.buttonList.forEach(function (button) {
-        if (button.text === _this3.onEnter) _this3.operate(button);
+        if (button.text === _this2.onEnter) _this2.operate(button);
       });
     }
   }

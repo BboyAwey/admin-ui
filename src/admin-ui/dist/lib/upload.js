@@ -1360,6 +1360,20 @@ module.exports = function (it) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1382,8 +1396,7 @@ module.exports = function (it) {
       fileReader: new window.FileReader(),
       images: [],
       previewerVisible: false,
-      currentPreview: 0,
-      mouseenter: false
+      currentPreview: 0
     };
   },
 
@@ -1394,13 +1407,10 @@ module.exports = function (it) {
         var _this = this;
 
         this.getFilesPreviewInfo(v).then(function (files) {
-          if (_this.multiple) {
-            _this.localFileList = _this.localFileList.concat(files);
-          } else {
-            _this.localFileList = files;
-          }
+          _this.localFileList = files;
           if (_this.autoUpload) _this.uploadFiles();
         });
+        this.$refs.core.value = '';
       }
     },
     value: {
@@ -1443,7 +1453,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n    color: #fff;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border: 11px solid transparent;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/upload/src/upload.vue"],"names":[],"mappings":";AACA;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,mBAAmB;EACnB,UAAU;CACX;AACD;EACE,cAAc;CACf;AACD;EACE,iBAAiB;CAClB;AACD;IACI,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;IACb,kBAAkB;IAClB,oBAAoB;CACvB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,YAAY;IACZ,eAAe;IACf,YAAY;CACf;AACD;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,gBAAgB;IAChB,mBAAmB;IACnB,YAAY;CACf;AACD;IACI,mBAAmB;IACnB,qBAAqB;CACxB;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,YAAY;IACZ,UAAU;IACV,YAAY;IACZ,aAAa;IACb,YAAY;CACf;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,+BAA+B;IAC/B,mCAAmC;YAC3B,2BAA2B;CACtC;AACD;IACI,mBAAmB;IACnB,iBAAiB;CACpB;AACD;IACI,UAAU;IACV,aAAa;IACb,kBAAkB;CACrB;AACD;IACI,kBAAkB;CACrB;AACD;IACI,sBAAsB;IACtB,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,oBAAoB;IACpB,wBAAwB;IACxB,iBAAiB;IACjB,gBAAgB;CACnB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;IACV,kBAAkB;CACrB;AACD;IACI,OAAO;CACV;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,WAAW;CACd;AACD;IACI,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,aAAa;CAChB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,kBAAkB;CACrB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,eAAe;IACf,YAAY;IACZ,gBAAgB;CACnB;AACD;IACI,WAAW;CACd;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb","file":"upload.vue","sourcesContent":["\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n    color: #fff;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border: 11px solid transparent;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/upload/src/upload.vue"],"names":[],"mappings":";AACA;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,mBAAmB;EACnB,UAAU;CACX;AACD;EACE,cAAc;CACf;AACD;EACE,iBAAiB;CAClB;AACD;IACI,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;IACb,kBAAkB;IAClB,oBAAoB;IACpB,iBAAiB;CACpB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,YAAY;IACZ,eAAe;IACf,YAAY;CACf;AACD;IACI,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;CACtC;AACD;IACI,WAAW;CACd;AACD;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,qBAAqB;CACxB;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,YAAY;IACZ,UAAU;IACV,YAAY;IACZ,aAAa;IACb,YAAY;CACf;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;IACnC,WAAW;CACd;AACD;IACI,mBAAmB;IACnB,iBAAiB;CACpB;AACD;IACI,UAAU;IACV,aAAa;IACb,kBAAkB;CACrB;AACD;IACI,kBAAkB;CACrB;AACD;IACI,sBAAsB;IACtB,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,oBAAoB;IACpB,wBAAwB;IACxB,iBAAiB;IACjB,gBAAgB;CACnB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;IACV,kBAAkB;CACrB;AACD;IACI,OAAO;CACV;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,WAAW;CACd;AACD;IACI,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,aAAa;CAChB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,kBAAkB;CACrB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,eAAe;IACf,YAAY;IACZ,gBAAgB;CACnB;AACD;IACI,WAAW;CACd;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb","file":"upload.vue","sourcesContent":["\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -3195,10 +3205,10 @@ $exports.store = store;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_get_iterator__ = __webpack_require__("BO1k");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_get_iterator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator__ = __webpack_require__("BO1k");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__ = __webpack_require__("dq6F");
 
 
@@ -3262,36 +3272,77 @@ $exports.store = store;
       this.$set(this.editingStatus, i, false);
     },
     loadFiles: function loadFiles(evt) {
-      this.files = evt.target.files;
-    },
-    getFilesPreviewInfo: function getFilesPreviewInfo(files) {
       var _this3 = this;
 
-      return __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var res, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file, type, name, temp, readRes;
+      if (evt.target.files && evt.target.files.length) {
+        if (!this.files.length || !this.multiple) {
+          this.files = Array.prototype.map.call(evt.target.files, function (f) {
+            return f;
+          });
+        } else {
+          Array.prototype.forEach.call(evt.target.files, function (f) {
+            var exists = false;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+              for (var _iterator = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default()(_this3.files), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var fi = _step.value;
+
+                if (fi.lastModified === f.lastModified && fi.name === f.name && fi.size === f.size && fi.type === f.type) {
+                  exists = true;
+                  break;
+                }
+              }
+            } catch (err) {
+              _didIteratorError = true;
+              _iteratorError = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                  _iterator.return();
+                }
+              } finally {
+                if (_didIteratorError) {
+                  throw _iteratorError;
+                }
+              }
+            }
+
+            if (!exists) _this3.files.push(f);
+          });
+        }
+      }
+    },
+    getFilesPreviewInfo: function getFilesPreviewInfo(files) {
+      var _this4 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var res, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, file, type, name, temp, readRes;
 
         return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 res = [];
-                _iteratorNormalCompletion = true;
-                _didIteratorError = false;
-                _iteratorError = undefined;
+                _iteratorNormalCompletion2 = true;
+                _didIteratorError2 = false;
+                _iteratorError2 = undefined;
                 _context.prev = 4;
-                _iterator = __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_get_iterator___default()(files);
+                _iterator2 = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default()(files);
 
               case 6:
-                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
                   _context.next = 24;
                   break;
                 }
 
-                file = _step.value;
+                file = _step2.value;
                 type = file.type, name = file.name;
                 temp = { type: type, name: name };
 
-                temp.extension = _this3.getExtension(name);
+                temp.extension = _this4.getExtension(name);
 
                 if (!/^image/ig.test(type)) {
                   _context.next = 17;
@@ -3299,7 +3350,7 @@ $exports.store = store;
                 }
 
                 _context.next = 14;
-                return _this3.readUrlPromise(file);
+                return _this4.readUrlPromise(file);
 
               case 14:
                 readRes = _context.sent;
@@ -3314,7 +3365,7 @@ $exports.store = store;
                 res.push(temp);
 
               case 21:
-                _iteratorNormalCompletion = true;
+                _iteratorNormalCompletion2 = true;
                 _context.next = 6;
                 break;
 
@@ -3325,26 +3376,26 @@ $exports.store = store;
               case 26:
                 _context.prev = 26;
                 _context.t0 = _context['catch'](4);
-                _didIteratorError = true;
-                _iteratorError = _context.t0;
+                _didIteratorError2 = true;
+                _iteratorError2 = _context.t0;
 
               case 30:
                 _context.prev = 30;
                 _context.prev = 31;
 
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                  _iterator.return();
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
                 }
 
               case 33:
                 _context.prev = 33;
 
-                if (!_didIteratorError) {
+                if (!_didIteratorError2) {
                   _context.next = 36;
                   break;
                 }
 
-                throw _iteratorError;
+                throw _iteratorError2;
 
               case 36:
                 return _context.finish(33);
@@ -3360,7 +3411,7 @@ $exports.store = store;
                 return _context.stop();
             }
           }
-        }, _callee, _this3, [[4, 26, 30, 38], [31,, 33, 37]]);
+        }, _callee, _this4, [[4, 26, 30, 38], [31,, 33, 37]]);
       }))();
     },
     getExtension: function getExtension(filename) {
@@ -3449,11 +3500,11 @@ $exports.store = store;
       }
     },
     download: function download(file, index) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (typeof this.beforeDownload === 'function') {
         this.exceEventHandler(this.beforeDownload, [file, index], function (data) {
-          _this4.triggleDownload(file.url);
+          _this5.triggleDownload(file.url);
         }, function (err) {
           if (err) console.warn(err);
         });
@@ -3471,24 +3522,27 @@ $exports.store = store;
       }
     },
     remove: function remove(index) {
-      var _this5 = this;
+      var _this6 = this;
 
       if (!this.autoUpload) {
         this.localFileList.splice(index, 1);
+        this.files.splice(index, 1);
       } else {
         if (typeof this.beforeRemove === 'function') {
           this.exceEventHandler(this.beforeRemove, [this.localFileList[index], index], function (data) {
-            _this5.localFileList.splice(index, 1);
+            _this6.localFileList.splice(index, 1);
+            _this6.files.splice(index, 1);
           }, function (err) {
             if (err) console.warn(err);
           });
         } else {
           this.localFileList.splice(index, 1);
+          this.files.splice(index, 1);
         }
       }
     },
     preview: function preview(index) {
-      var _this6 = this;
+      var _this7 = this;
 
       function showPreviewer(current) {
         this.images = this.getImgs(index);
@@ -3498,7 +3552,7 @@ $exports.store = store;
       if (this.canPreview) {
         if (typeof this.beforePreview === 'function') {
           this.exceEventHandler(this.beforePreview, [this.localFileList[index], index], function (data) {
-            showPreviewer.call(_this6, index);
+            showPreviewer.call(_this7, index);
           }, function (err) {
             if (err) console.warn(err);
           });
@@ -5416,15 +5470,7 @@ var render = function() {
               key: file.timestamp,
               staticClass:
                 "\n        au-theme-border-color--base-10\n        au-theme-background-color--base-12\n        au-theme-hover-background-color--base-11\n        au-theme-border-radius--small\n      ",
-              class: { "au-upload-desc-mode": _vm.editingStatus[index] },
-              on: {
-                mouseenter: function($event) {
-                  _vm.mouseenter = true
-                },
-                mouseleave: function($event) {
-                  _vm.mouseenter = false
-                }
-              }
+              class: { "au-upload-desc-mode": _vm.editingStatus[index] }
             },
             [
               _c(
@@ -5442,7 +5488,7 @@ var render = function() {
                     }
                   ],
                   staticClass:
-                    "\n          au-upload-preview-icon\n          au-theme-border-radius--small\n        ",
+                    "\n          au-upload-preview-icon\n          au-theme-border-radius--small\n          au-theme-color--base-12\n        ",
                   class: {
                     "au-theme-background-color--base-9": !file.url,
                     "au-theme-background-color--primary": file.url
@@ -5453,16 +5499,17 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "\n            au-upload-preview-default-icon\n            au-theme-before-border-radius--small\n            au-theme-before-background-color--base-12\n        ",
-                      class: {
-                        "au-theme-after-border-top-color--base-12-important": !_vm.mouseenter,
-                        "au-theme-after-border-top-color--base-11-important":
-                          _vm.mouseenter
-                      }
+                        "\n            au-upload-preview-default-icon\n            au-theme-before-border-radius--small\n            au-theme-before-background-color--base-12\n            au-theme-after-border-color--base-11-important"
                     },
                     [
+                      _c("span", {
+                        staticClass:
+                          "au-upload-white-overlay au-theme-after-border-color--base-12-important"
+                      }),
                       _vm._v(
-                        _vm._s(file.extension.toUpperCase().substring(0, 4))
+                        "\n          " +
+                          _vm._s(file.extension.toUpperCase().substring(0, 4)) +
+                          "\n        "
                       )
                     ]
                   )

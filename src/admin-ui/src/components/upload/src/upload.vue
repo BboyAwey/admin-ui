@@ -23,6 +23,7 @@
       padding: 8px;
       border-width: 1px;
       border-style: solid;
+      overflow: hidden;
     }
     & > li:not(:last-child) {
       margin-bottom: 8px;
@@ -42,6 +43,20 @@
       display: block;
       clear: both;
     }
+    .au-upload-white-overlay {
+      display: block;
+      position: absolute;
+      right: -12px;
+      top: -12px;
+      border-width: 11px;
+      border-style: solid;
+      transform: rotate(-135deg);
+    }
+    & > li:hover {
+      .au-upload-preview-default-icon:after {
+        opacity: 1;
+      }
+    }
     .au-upload-preview-icon {
       float: left;
       width: 64px;
@@ -49,7 +64,6 @@
       line-height: 64px;
       font-size: 16px;
       text-align: center;
-      color: #fff;
     }
     .au-upload-preview-default-icon {
       position: relative;
@@ -71,8 +85,10 @@
       position: absolute;
       right: -12px;
       top: -12px;
-      border: 11px solid transparent;
-      transform: rotate(-135deg)
+      border-width: 11px;
+      border-style: solid;
+      transform: rotate(-135deg);
+      opacity: 0;
     }
     .au-upload-file-info {
       padding-left: 80px;
@@ -195,8 +211,6 @@
       <li
         v-for="(file, index) in localFileList"
         :key='file.timestamp'
-        @mouseenter="mouseenter = true"
-        @mouseleave="mouseenter = false"
         :class="{'au-upload-desc-mode': editingStatus[index]}"
         class="
           au-theme-border-color--base-10
@@ -208,6 +222,7 @@
           class="
             au-upload-preview-icon
             au-theme-border-radius--small
+            au-theme-color--base-12
           "
           :class="{
             'au-theme-background-color--base-9': !file.url,
@@ -215,15 +230,14 @@
           }"
           v-show="!(autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64))">
           <div
-            :class="{
-              'au-theme-after-border-top-color--base-12-important': !mouseenter,
-              'au-theme-after-border-top-color--base-11-important': mouseenter
-            }"
             class="
               au-upload-preview-default-icon
               au-theme-before-border-radius--small
               au-theme-before-background-color--base-12
-          ">{{ file.extension.toUpperCase().substring(0, 4) }}</div>
+              au-theme-after-border-color--base-11-important">
+            <span class="au-upload-white-overlay au-theme-after-border-color--base-12-important"></span>
+            {{ file.extension.toUpperCase().substring(0, 4) }}
+          </div>
         </div>
         <img class="au-upload-preview-icon"
           :style="{ cursor: canPreview ? 'pointer' : 'default' }"
@@ -329,8 +343,7 @@ export default {
       fileReader: new window.FileReader(),
       images: [],
       previewerVisible: false,
-      currentPreview: 0,
-      mouseenter: false
+      currentPreview: 0
     }
   },
   watch: {
@@ -338,13 +351,10 @@ export default {
       deep: true,
       handler (v) {
         this.getFilesPreviewInfo(v).then(files => {
-          if (this.multiple) {
-            this.localFileList = this.localFileList.concat(files)
-          } else {
-            this.localFileList = files
-          }
+          this.localFileList = files
           if (this.autoUpload) this.uploadFiles()
         })
+        this.$refs.core.value = ''
       }
     },
     value: {

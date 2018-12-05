@@ -50,7 +50,29 @@ export default {
       this.$set(this.editingStatus, i, false)
     },
     loadFiles (evt) {
-      this.files = evt.target.files
+      if (evt.target.files && evt.target.files.length) {
+        if (!this.files.length || !this.multiple) {
+          this.files = Array.prototype.map.call(evt.target.files, (f) => {
+            return f
+          })
+        } else {
+          Array.prototype.forEach.call(evt.target.files, f => {
+            let exists = false
+            for (let fi of this.files) {
+              if (
+                fi.lastModified === f.lastModified &&
+                fi.name === f.name &&
+                fi.size === f.size &&
+                fi.type === f.type
+              ) {
+                exists = true
+                break
+              }
+            }
+            if (!exists) this.files.push(f)
+          })
+        }
+      }
     },
     async getFilesPreviewInfo (files) {
       let res = []
@@ -173,15 +195,18 @@ export default {
     remove (index) {
       if (!this.autoUpload) {
         this.localFileList.splice(index, 1)
+        this.files.splice(index, 1)
       } else {
         if (typeof this.beforeRemove === 'function') {
           this.exceEventHandler(this.beforeRemove, [this.localFileList[index], index], (data) => {
             this.localFileList.splice(index, 1)
+            this.files.splice(index, 1)
           }, (err) => {
             if (err) console.warn(err)
           })
         } else {
           this.localFileList.splice(index, 1)
+          this.files.splice(index, 1)
         }
       }
     },

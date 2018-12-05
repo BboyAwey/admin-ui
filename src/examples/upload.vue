@@ -623,7 +623,27 @@
       <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="Methods">
-      <au-icon type="minus"></au-icon>
+      <!-- <au-icon type="minus"></au-icon> -->
+      <au-table>
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>chooseFiles()</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              你可能希望自定义上传按钮，可以将<span class="code au-theme-radius au-theme-background-color--warning-bottom">show-upload-button</span>设置为<span class="code au-theme-radius au-theme-background-color--warning-bottom">true</span>，然后使用这个方法来触发选文件选择动作。
+            </td>
+          </tr>
+        </tbody>
+      </au-table>
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>

@@ -202,7 +202,7 @@
         :plain="buttonPlain"
         v-show="showUploadButton"
         :disabled="disabled"
-        @click="uploadButtonClickHandler">
+        @click="chooseFiles">
         <au-icon class="au-upload-button-icon" type="upload" />
         <span class="au-upload-button-text">{{ buttonText }}</span>
       </au-button>

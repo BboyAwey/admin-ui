@@ -3220,7 +3220,7 @@ $exports.store = store;
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   methods: {
-    uploadButtonClickHandler: function uploadButtonClickHandler() {
+    chooseFiles: function chooseFiles() {
       this.$refs.core.click();
     },
     intoDescEditingMode: function intoDescEditingMode(i) {
@@ -5431,7 +5431,7 @@ var render = function() {
                 plain: _vm.buttonPlain,
                 disabled: _vm.disabled
               },
-              on: { click: _vm.uploadButtonClickHandler }
+              on: { click: _vm.chooseFiles }
             },
             [
               _c("au-icon", {

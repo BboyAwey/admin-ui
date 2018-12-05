@@ -2,7 +2,7 @@ import upload from '../../../helpers/utils/upload'
 
 export default {
   methods: {
-    uploadButtonClickHandler () {
+    chooseFiles () {
       this.$refs.core.click()
     },
     intoDescEditingMode (i) {

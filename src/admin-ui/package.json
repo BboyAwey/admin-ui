@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.15",
+  "version": "3.2.17",
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
   "main": "./dist/index.js",
@@ -17,6 +17,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "theme-class-generator": "^1.0.1"
+    "theme-class-generator": "^1.0.2"
   }
 }

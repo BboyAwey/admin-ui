@@ -206,7 +206,7 @@ export default {
 
       let operationHeight = 0
       let titleHeight = 0
-      if (this.buttons.length && this.$refs.operations) {
+      if (this.buttons && this.buttons.length && this.$refs.operations) {
         operationHeight = getElementSize(this.$refs.operations).height
       }
       if (this.title) {
@@ -218,6 +218,7 @@ export default {
       this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
     },
     resizeHandler () {
+      if (!this.visible) return
       this.calcModalStyle()
       this.calModalContentStyle()
     },

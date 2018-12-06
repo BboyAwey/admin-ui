@@ -655,7 +655,7 @@ if (false) {(function () {
 
       var operationHeight = 0;
       var titleHeight = 0;
-      if (this.buttons.length && this.$refs.operations) {
+      if (this.buttons && this.buttons.length && this.$refs.operations) {
         operationHeight = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_dom_get_element_size__["a" /* default */])(this.$refs.operations).height;
       }
       if (this.title) {
@@ -667,6 +667,7 @@ if (false) {(function () {
       this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px';
     },
     resizeHandler: function resizeHandler() {
+      if (!this.visible) return;
       this.calcModalStyle();
       this.calModalContentStyle();
     },

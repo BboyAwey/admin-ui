@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.15",
+  "version": "3.2.17",
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
   "private": false,
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "highlightjs": "^9.10.0",
-    "theme-class-generator": "^1.0.1",
+    "theme-class-generator": "^1.0.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

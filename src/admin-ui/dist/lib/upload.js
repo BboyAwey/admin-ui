@@ -3247,7 +3247,7 @@ $exports.store = store;
             _this2.changeDescription(i);
           }, function (err) {
             // modify fail
-            if (err) console.warn(err);
+            if (err) console.warn('Admin UI@upload@checkDescEditingMode: ' + err);
             _this2.fallbackDescription(i);
           });
         } else {
@@ -3319,7 +3319,7 @@ $exports.store = store;
       var _this4 = this;
 
       return __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var res, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, file, type, name, temp, readRes;
+        var res, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, file, type, name, url, temp, readRes;
 
         return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -3334,84 +3334,98 @@ $exports.store = store;
 
               case 6:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                  _context.next = 24;
+                  _context.next = 28;
                   break;
                 }
 
                 file = _step2.value;
-                type = file.type, name = file.name;
-                temp = { type: type, name: name };
+                type = file.type, name = file.name, url = file.url;
+                temp = { type: type, name: name, url: url
+                  // extract name from url if not provide name
+                };
 
-                temp.extension = _this4.getExtension(name);
-
-                if (!/^image/ig.test(type)) {
-                  _context.next = 17;
+                if (!(!temp.name && !temp.url)) {
+                  _context.next = 13;
                   break;
                 }
 
-                _context.next = 14;
+                console.warn('Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.');
+                return _context.abrupt('return', []);
+
+              case 13:
+                if (!temp.name && temp.url) {
+                  temp.name = _this4.getNameFromUrl(temp.url);
+                }
+                temp.extension = _this4.getExtension(name);
+
+                if (!/^image/ig.test(type)) {
+                  _context.next = 21;
+                  break;
+                }
+
+                _context.next = 18;
                 return _this4.readUrlPromise(file);
 
-              case 14:
+              case 18:
                 readRes = _context.sent;
 
                 temp.base64 = readRes;
                 temp.isImage = true;
 
-              case 17:
+              case 21:
                 temp.file = file;
                 temp.description = '';
                 temp.timestamp = new Date().getTime() + res.length;
                 res.push(temp);
 
-              case 21:
+              case 25:
                 _iteratorNormalCompletion2 = true;
                 _context.next = 6;
                 break;
 
-              case 24:
-                _context.next = 30;
+              case 28:
+                _context.next = 34;
                 break;
 
-              case 26:
-                _context.prev = 26;
+              case 30:
+                _context.prev = 30;
                 _context.t0 = _context['catch'](4);
                 _didIteratorError2 = true;
                 _iteratorError2 = _context.t0;
 
-              case 30:
-                _context.prev = 30;
-                _context.prev = 31;
+              case 34:
+                _context.prev = 34;
+                _context.prev = 35;
 
                 if (!_iteratorNormalCompletion2 && _iterator2.return) {
                   _iterator2.return();
                 }
 
-              case 33:
-                _context.prev = 33;
+              case 37:
+                _context.prev = 37;
 
                 if (!_didIteratorError2) {
-                  _context.next = 36;
+                  _context.next = 40;
                   break;
                 }
 
                 throw _iteratorError2;
 
-              case 36:
-                return _context.finish(33);
+              case 40:
+                return _context.finish(37);
 
-              case 37:
-                return _context.finish(30);
+              case 41:
+                return _context.finish(34);
 
-              case 38:
+              case 42:
                 return _context.abrupt('return', res);
 
-              case 39:
+              case 43:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, _this4, [[4, 26, 30, 38], [31,, 33, 37]]);
+        }, _callee, _this4, [[4, 30, 34, 42], [35,, 37, 41]]);
       }))();
     },
     getExtension: function getExtension(filename) {
@@ -3421,6 +3435,9 @@ $exports.store = store;
       } else {
         return filename.substring(filename.lastIndexOf('.') + 1) || filename;
       }
+    },
+    getNameFromUrl: function getNameFromUrl(url) {
+      return url.substring(url.lastIndexOf('/') + 1);
     },
     isImage: function isImage(extension) {
       var imageExts = {
@@ -3433,9 +3450,19 @@ $exports.store = store;
       return !!imageExts[extension];
     },
     getValuePreviewInfo: function getValuePreviewInfo(value) {
+      var _this5 = this;
+
       var vm = this;
       return value.map(function (e) {
         var temp = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign___default()({}, e);
+        // extract name from url if not provide name
+        if (!temp.name && !temp.url) {
+          console.warn('Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.');
+          return [];
+        }
+        if (!temp.name && temp.url) {
+          temp.name = _this5.getNameFromUrl(temp.url);
+        }
         temp.extension = vm.getExtension(temp.name);
         temp.isImage = vm.isImage(temp.extension);
         return temp;
@@ -3488,7 +3515,7 @@ $exports.store = store;
           vm.exceEventHandler(vm.beforeUpload, [vm.localFileList, index], function (data) {
             Object(__WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__["a" /* default */])(uploadConfig);
           }, function (err) {
-            if (err) console.warn(err);
+            if (err) console.warn('Admin UI@upload@uploadFiles: ' + err);
           });
         } else {
           Object(__WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__["a" /* default */])(uploadConfig);
@@ -3500,13 +3527,13 @@ $exports.store = store;
       }
     },
     download: function download(file, index) {
-      var _this5 = this;
+      var _this6 = this;
 
       if (typeof this.beforeDownload === 'function') {
         this.exceEventHandler(this.beforeDownload, [file, index], function (data) {
-          _this5.triggleDownload(file.url);
+          _this6.triggleDownload(file.url);
         }, function (err) {
-          if (err) console.warn(err);
+          if (err) console.warn('Admin UI@upload@download: ' + err);
         });
       } else {
         this.triggleDownload(file.url);
@@ -3522,7 +3549,7 @@ $exports.store = store;
       }
     },
     remove: function remove(index) {
-      var _this6 = this;
+      var _this7 = this;
 
       if (!this.autoUpload) {
         this.localFileList.splice(index, 1);
@@ -3530,10 +3557,10 @@ $exports.store = store;
       } else {
         if (typeof this.beforeRemove === 'function') {
           this.exceEventHandler(this.beforeRemove, [this.localFileList[index], index], function (data) {
-            _this6.localFileList.splice(index, 1);
-            _this6.files.splice(index, 1);
+            _this7.localFileList.splice(index, 1);
+            _this7.files.splice(index, 1);
           }, function (err) {
-            if (err) console.warn(err);
+            if (err) console.warn('Admin UI@upload@remove: ' + err);
           });
         } else {
           this.localFileList.splice(index, 1);
@@ -3542,7 +3569,7 @@ $exports.store = store;
       }
     },
     preview: function preview(index) {
-      var _this7 = this;
+      var _this8 = this;
 
       function showPreviewer(current) {
         this.images = this.getImgs(index);
@@ -3552,9 +3579,9 @@ $exports.store = store;
       if (this.canPreview) {
         if (typeof this.beforePreview === 'function') {
           this.exceEventHandler(this.beforePreview, [this.localFileList[index], index], function (data) {
-            showPreviewer.call(_this7, index);
+            showPreviewer.call(_this8, index);
           }, function (err) {
-            if (err) console.warn(err);
+            if (err) console.warn('Admin UI@upload@preview: ' + err);
           });
         } else {
           showPreviewer.call(this, index);

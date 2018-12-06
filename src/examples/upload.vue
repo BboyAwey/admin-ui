@@ -47,10 +47,12 @@
                 <li class="au-theme-border-color--base-8">type: String, 文件类型，参考<a class="au-theme-color--info" href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">Media Types</a></li>
                 <li class="au-theme-border-color--base-8">url: String, 文件地址</li>
               </ol>
+
               <!-- <au-icon type="minus"></au-icon> -->
             </td>
             <td>
               上传组件中已经选中或已经上传的文件<br>
+              所有属性都是可选的，但url和name需要至少提供一个<br>
               支持v-model语法
             </td>
           </tr>

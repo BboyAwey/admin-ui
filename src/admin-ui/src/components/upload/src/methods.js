@@ -25,7 +25,7 @@ export default {
             this.changeDescription(i)
           }, err => {
             // modify fail
-            if (err) console.warn(err)
+            if (err) console.warn(`Admin UI@upload@checkDescEditingMode: ${err}`)
             this.fallbackDescription(i)
           })
         } else {
@@ -77,8 +77,16 @@ export default {
     async getFilesPreviewInfo (files) {
       let res = []
       for (let file of files) {
-        let { type, name } = file
-        let temp = { type, name }
+        let { type, name, url } = file
+        let temp = { type, name, url }
+        // extract name from url if not provide name
+        if (!temp.name && !temp.url) {
+          console.warn(`Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.`)
+          return []
+        }
+        if (!temp.name && temp.url) {
+          temp.name = this.getNameFromUrl(temp.url)
+        }
         temp.extension = this.getExtension(name)
         if (/^image/ig.test(type)) {
           let readRes = await this.readUrlPromise(file)
@@ -100,6 +108,9 @@ export default {
         return filename.substring(filename.lastIndexOf('.') + 1) || filename
       }
     },
+    getNameFromUrl (url) {
+      return url.substring(url.lastIndexOf('/') + 1)
+    },
     isImage (extension) {
       let imageExts = {
         bmp: true,
@@ -114,6 +125,14 @@ export default {
       let vm = this
       return value.map(e => {
         let temp = Object.assign({}, e)
+        // extract name from url if not provide name
+        if (!temp.name && !temp.url) {
+          console.warn(`Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.`)
+          return []
+        }
+        if (!temp.name && temp.url) {
+          temp.name = this.getNameFromUrl(temp.url)
+        }
         temp.extension = vm.getExtension(temp.name)
         temp.isImage = vm.isImage(temp.extension)
         return temp
@@ -165,7 +184,7 @@ export default {
           vm.exceEventHandler(vm.beforeUpload, [vm.localFileList, index], (data) => {
             upload(uploadConfig)
           }, (err) => {
-            if (err) console.warn(err)
+            if (err) console.warn(`Admin UI@upload@uploadFiles: ${err}`)
           })
         } else {
           upload(uploadConfig)
@@ -177,7 +196,7 @@ export default {
         this.exceEventHandler(this.beforeDownload, [file, index], (data) => {
           this.triggleDownload(file.url)
         }, (err) => {
-          if (err) console.warn(err)
+          if (err) console.warn(`Admin UI@upload@download: ${err}`)
         })
       } else {
         this.triggleDownload(file.url)
@@ -202,7 +221,7 @@ export default {
             this.localFileList.splice(index, 1)
             this.files.splice(index, 1)
           }, (err) => {
-            if (err) console.warn(err)
+            if (err) console.warn(`Admin UI@upload@remove: ${err}`)
           })
         } else {
           this.localFileList.splice(index, 1)
@@ -221,7 +240,7 @@ export default {
           this.exceEventHandler(this.beforePreview, [this.localFileList[index], index], (data) => {
             showPreviewer.call(this, index)
           }, (err) => {
-            if (err) console.warn(err)
+            if (err) console.warn(`Admin UI@upload@preview: ${err}`)
           })
         } else {
           showPreviewer.call(this, index)

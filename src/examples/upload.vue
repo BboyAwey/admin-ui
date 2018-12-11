@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload" :auto-upload="false" :can-describe="false"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload" :auto-upload="true" :can-describe="true" @change="change" list-type="block"></au-upload>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -615,6 +615,18 @@
               </ol>
             </td>
             <td>
+              value值变化时触发<br>
+              参数files表示当前用户选中的所有文件
+            </td>
+          </tr>
+          <tr>
+            <td>@native-change</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">files</li>
+              </ol>
+            </td>
+            <td>
               用户选择文件后触发<br>
               参数files表示当前用户选中的所有文件
             </td>
@@ -670,6 +682,11 @@ export default {
   data () {
     return {
       files: []
+    }
+  },
+  methods: {
+    change (files) {
+      console.log(files)
     }
   }
 }

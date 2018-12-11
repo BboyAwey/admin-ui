@@ -1046,11 +1046,27 @@ module.exports = function (it) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__icon__ = __webpack_require__("dJt8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__previewer__ = __webpack_require__("0AN5");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__methods__ = __webpack_require__("dUv6");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__props__ = __webpack_require__("68fy");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_form_item_vue__ = __webpack_require__("+FN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__("woOf");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__icon__ = __webpack_require__("dJt8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__previewer__ = __webpack_require__("0AN5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__methods__ = __webpack_require__("dUv6");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__props__ = __webpack_require__("68fy");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_form_item_vue__ = __webpack_require__("+FN5");
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1383,8 +1399,12 @@ module.exports = function (it) {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'au-upload',
-  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_0__icon__["a" /* default */], AuPreviewer: __WEBPACK_IMPORTED_MODULE_1__previewer__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_4__helpers_form_item_vue__["a" /* default */] },
-  mixins: [__WEBPACK_IMPORTED_MODULE_2__methods__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__props__["a" /* default */]],
+  components: { AuIcon: __WEBPACK_IMPORTED_MODULE_1__icon__["a" /* default */], AuPreviewer: __WEBPACK_IMPORTED_MODULE_2__previewer__["a" /* default */], FormItem: __WEBPACK_IMPORTED_MODULE_5__helpers_form_item_vue__["a" /* default */] },
+  mixins: [__WEBPACK_IMPORTED_MODULE_3__methods__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__props__["a" /* default */]],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   data: function data() {
     return {
       desc: 'this is a file desc. this is a file desc. this is a file desc. this is a file desc. this is a file desc.',
@@ -1393,6 +1413,7 @@ module.exports = function (it) {
       editingStatus: [],
       descriptions: [],
       lastDescriptions: [],
+      tempDescriptions: [],
       fileReader: new window.FileReader(),
       images: [],
       previewerVisible: false,
@@ -1416,24 +1437,16 @@ module.exports = function (it) {
     value: {
       deep: true,
       handler: function handler(v) {
-        if (v.length !== this.localFileList.length) this.localFileList = this.getValuePreviewInfo(v);
+        if (!this.sameFiles(v, this.localFileList)) this.localFileList = this.getValuePreviewInfo(v);
       }
     },
     localFileList: {
       deep: true,
       handler: function handler(v) {
-        if (!this.autoUpload) {
-          var isSame = true;
-          for (var i = 0; i < v.length; i++) {
-            if (!this.value || !this.value[i] || v[i].file !== this.value[i].file) {
-              isSame = false;
-              break;
-            }
-          }
-          if (!!v.length || !isSame) {
-            this.$emit('input', v);
-            this.$emit('change', v);
-          }
+        if (!this.sameFiles(v, this.value)) {
+          this.$emit('change', v.map(function (f) {
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, f);
+          }));
         }
       }
     },
@@ -1453,7 +1466,7 @@ exports = module.exports = __webpack_require__("FZ+f")(true);
 
 
 // module
-exports.push([module.i, "\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/upload/src/upload.vue"],"names":[],"mappings":";AACA;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,mBAAmB;EACnB,UAAU;CACX;AACD;EACE,cAAc;CACf;AACD;EACE,iBAAiB;CAClB;AACD;IACI,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;IACb,kBAAkB;IAClB,oBAAoB;IACpB,iBAAiB;CACpB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,YAAY;IACZ,eAAe;IACf,YAAY;CACf;AACD;IACI,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;CACtC;AACD;IACI,WAAW;CACd;AACD;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,qBAAqB;CACxB;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,YAAY;IACZ,UAAU;IACV,YAAY;IACZ,aAAa;IACb,YAAY;CACf;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;IACnC,WAAW;CACd;AACD;IACI,mBAAmB;IACnB,iBAAiB;CACpB;AACD;IACI,UAAU;IACV,aAAa;IACb,kBAAkB;CACrB;AACD;IACI,kBAAkB;CACrB;AACD;IACI,sBAAsB;IACtB,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,oBAAoB;IACpB,wBAAwB;IACxB,iBAAiB;IACjB,gBAAgB;CACnB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;IACV,kBAAkB;CACrB;AACD;IACI,OAAO;CACV;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,WAAW;CACd;AACD;IACI,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,aAAa;CAChB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,kBAAkB;CACrB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,eAAe;IACf,YAAY;IACZ,gBAAgB;CACnB;AACD;IACI,WAAW;CACd;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb","file":"upload.vue","sourcesContent":["\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    min-height: 80px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n    margin-top: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    height: 82px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    position: relative;\n    height: 100%;\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-file-info > p {\n      position: relative;\n      height: 100%;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar {\n    position: absolute;\n    width: 100%;\n    left: 0;\n    bottom: 5px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n", "", {"version":3,"sources":["/Users/awey/Documents/projects/admin-ui/src/admin-ui/src/components/upload/src/upload.vue"],"names":[],"mappings":";AACA;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,mBAAmB;EACnB,UAAU;CACX;AACD;EACE,cAAc;CACf;AACD;EACE,iBAAiB;CAClB;AACD;IACI,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,kBAAkB;IAClB,oBAAoB;IACpB,iBAAiB;CACpB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,sBAAsB;CACzB;AACD;IACI,YAAY;IACZ,eAAe;IACf,YAAY;CACf;AACD;IACI,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;CACtC;AACD;IACI,WAAW;CACd;AACD;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,qBAAqB;CACxB;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,YAAY;IACZ,UAAU;IACV,YAAY;IACZ,aAAa;IACb,YAAY;CACf;AACD;IACI,YAAY;IACZ,eAAe;IACf,mBAAmB;IACnB,aAAa;IACb,WAAW;IACX,mBAAmB;IACnB,oBAAoB;IACpB,mCAAmC;YAC3B,2BAA2B;IACnC,WAAW;CACd;AACD;IACI,mBAAmB;IACnB,aAAa;IACb,mBAAmB;IACnB,iBAAiB;CACpB;AACD;MACM,mBAAmB;MACnB,aAAa;CAClB;AACD;IACI,UAAU;IACV,aAAa;IACb,kBAAkB;CACrB;AACD;IACI,kBAAkB;CACrB;AACD;IACI,sBAAsB;IACtB,eAAe;IACf,cAAc;IACd,kBAAkB;IAClB,oBAAoB;IACpB,wBAAwB;IACxB,iBAAiB;IACjB,gBAAgB;CACnB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,mBAAmB;IACnB,UAAU;IACV,kBAAkB;CACrB;AACD;IACI,OAAO;CACV;AACD;IACI,mBAAmB;IACnB,SAAS;IACT,WAAW;CACd;AACD;IACI,gBAAgB;IAChB,mBAAmB;CACtB;AACD;IACI,aAAa;CAChB;AACD;IACI,mBAAmB;CACtB;AACD;IACI,mBAAmB;IACnB,kBAAkB;CACrB;AACD;IACI,gBAAgB;CACnB;AACD;IACI,eAAe;IACf,YAAY;CACf;AACD;IACI,mBAAmB;IACnB,YAAY;IACZ,QAAQ;IACR,YAAY;CACf;AACD;IACI,WAAW;CACd;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;CACnB;AACD;EACE,gBAAgB;CACjB;AACD;EACE,iBAAiB;CAClB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,eAAe;EACf,YAAY;CACb","file":"upload.vue","sourcesContent":["\n.au-upload .au-upload-button {\n  padding-bottom: 4px;\n}\n.au-upload .au-upload-button-icon {\n  margin-right: 4px;\n}\n.au-upload .au-upload-button-text {\n  position: relative;\n  top: -1px;\n}\n.au-upload-inner {\n  display: none;\n}\n.au-upload-file-list {\n  margin-top: 16px;\n}\n.au-upload-file-list > li {\n    position: relative;\n    height: 82px;\n    padding: 8px;\n    border-width: 1px;\n    border-style: solid;\n    overflow: hidden;\n}\n.au-upload-file-list > li:not(:last-child) {\n    margin-bottom: 8px;\n}\n.au-upload-file-list > li.au-upload-desc-mode .au-upload-file-desc-icon {\n    display: inline-block;\n}\n.au-upload-file-list > li:after {\n    content: '';\n    display: block;\n    clear: both;\n}\n.au-upload-file-list .au-upload-white-overlay {\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n}\n.au-upload-file-list > li:hover .au-upload-preview-default-icon:after {\n    opacity: 1;\n}\n.au-upload-file-list .au-upload-preview-icon {\n    float: left;\n    width: 64px;\n    height: 64px;\n    line-height: 64px;\n    font-size: 16px;\n    text-align: center;\n}\n.au-upload-file-list .au-upload-preview-default-icon {\n    position: relative;\n    line-height: inherit;\n}\n.au-upload-file-list .au-upload-preview-default-icon:before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -2px;\n    top: -2px;\n    width: 16px;\n    height: 16px;\n    opacity: .4;\n}\n.au-upload-file-list .au-upload-preview-default-icon:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    right: -12px;\n    top: -12px;\n    border-width: 11px;\n    border-style: solid;\n    -webkit-transform: rotate(-135deg);\n            transform: rotate(-135deg);\n    opacity: 0;\n}\n.au-upload-file-list .au-upload-file-info {\n    position: relative;\n    height: 100%;\n    padding-left: 80px;\n    margin-bottom: 0;\n}\n.au-upload-file-list .au-upload-file-info > p {\n      position: relative;\n      height: 100%;\n}\n.au-upload-file-list .au-upload-no-desc {\n    margin: 0;\n    height: 64px;\n    line-height: 64px;\n}\n.au-upload-file-list .au-upload-file-name {\n    line-height: 14px;\n}\n.au-upload-file-list .au-upload-file-description {\n    display: inline-block;\n    max-width: 75%;\n    outline: none;\n    line-height: 28px;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 14px;\n}\n.au-upload-file-list .au-upload-file-operation-icon {\n    cursor: pointer;\n}\n.au-upload-file-list .au-upload-file-desc-icon {\n    position: relative;\n    top: -8px;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-desc-icon-editing {\n    top: 0;\n}\n.au-upload-file-list .au-upload-file-edit-icon-container {\n    position: absolute;\n    top: 8px;\n    right: 8px;\n}\n.au-upload-file-list .au-upload-desc-core {\n    margin-top: 5px;\n    margin-bottom: 6px;\n}\n.au-upload-file-list .au-upload-file-edit-icon {\n    float: right;\n}\n.au-upload-file-list .au-upload-file-download {\n    position: relative;\n}\n.au-upload-file-list .au-upload-file-delete {\n    position: relative;\n    margin-left: 10px;\n}\n.au-upload-file-list .au-upload-file-progress {\n    margin-top: 2px;\n}\n.au-upload-file-list .au-upload-progress-bar, .au-upload-file-list .au-upload-progress-bar-core {\n    display: block;\n    height: 4px;\n}\n.au-upload-file-list .au-upload-progress-bar {\n    position: absolute;\n    width: 100%;\n    left: 0;\n    bottom: 5px;\n}\n.au-upload-file-list .au-upload-progress-bar-core {\n    width: 50%;\n}\n.au-upload-file-inline-list > li {\n  float: left;\n  width: 320px;\n  margin-right: 8px;\n}\n.au-upload-file-inline-list .au-upload-progress-bar {\n  margin-top: 4px;\n}\n.au-upload-file-inline-list .au-upload-file-description {\n  max-width: 170px;\n}\n.au-upload-file-inline-list .au-upload-desc-core {\n  width: 142px;\n}\n.au-upload-file-inline-list:after {\n  content: \"\";\n  display: block;\n  clear: both;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -3197,19 +3210,22 @@ $exports.store = store;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_promise__ = __webpack_require__("//Fk");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign__ = __webpack_require__("woOf");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator__ = __webpack_require__("BO1k");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__ = __webpack_require__("dq6F");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__("fZjL");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise__ = __webpack_require__("//Fk");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_object_assign__ = __webpack_require__("woOf");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_babel_runtime_core_js_get_iterator__ = __webpack_require__("BO1k");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_babel_runtime_core_js_get_iterator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_utils_upload__ = __webpack_require__("dq6F");
+
 
 
 
@@ -3228,6 +3244,7 @@ $exports.store = store;
 
       this.$set(this.editingStatus, i, true);
       this.lastDescriptions[i] = this.$refs.desc[i].localValue;
+      this.$set(this.tempDescriptions, i, this.lastDescriptions[i]);
       this.$nextTick(function () {
         _this.$refs.desc[i].$refs.core.focus();
       });
@@ -3242,7 +3259,7 @@ $exports.store = store;
 
       if (this.autoUpload) {
         if (typeof this.beforeDescribe === 'function') {
-          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].localValue, i], function (data) {
+          this.exceEventHandler(this.beforeDescribe, [this.tempDescriptions[i], i], function (data) {
             // modify success
             _this2.changeDescription(i);
           }, function (err) {
@@ -3274,6 +3291,7 @@ $exports.store = store;
     loadFiles: function loadFiles(evt) {
       var _this3 = this;
 
+      this.$emit('native-change', evt.target.files);
       if (evt.target.files && evt.target.files.length) {
         if (!this.files.length || !this.multiple) {
           this.files = Array.prototype.map.call(evt.target.files, function (f) {
@@ -3287,7 +3305,7 @@ $exports.store = store;
             var _iteratorError = undefined;
 
             try {
-              for (var _iterator = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default()(_this3.files), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              for (var _iterator = __WEBPACK_IMPORTED_MODULE_6_babel_runtime_core_js_get_iterator___default()(_this3.files), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var fi = _step.value;
 
                 if (fi.lastModified === f.lastModified && fi.name === f.name && fi.size === f.size && fi.type === f.type) {
@@ -3318,10 +3336,10 @@ $exports.store = store;
     getFilesPreviewInfo: function getFilesPreviewInfo(files) {
       var _this4 = this;
 
-      return __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.mark(function _callee() {
+      return __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_4_babel_runtime_regenerator___default.a.mark(function _callee() {
         var res, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, file, type, name, url, temp, readRes;
 
-        return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_4_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -3330,7 +3348,7 @@ $exports.store = store;
                 _didIteratorError2 = false;
                 _iteratorError2 = undefined;
                 _context.prev = 4;
-                _iterator2 = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_get_iterator___default()(files);
+                _iterator2 = __WEBPACK_IMPORTED_MODULE_6_babel_runtime_core_js_get_iterator___default()(files);
 
               case 6:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
@@ -3454,7 +3472,7 @@ $exports.store = store;
 
       var vm = this;
       return value.map(function (e) {
-        var temp = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_object_assign___default()({}, e);
+        var temp = __WEBPACK_IMPORTED_MODULE_3_babel_runtime_core_js_object_assign___default()({}, e);
         // extract name from url if not provide name
         if (!temp.name && !temp.url) {
           console.warn('Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.');
@@ -3470,7 +3488,7 @@ $exports.store = store;
     },
     readUrlPromise: function readUrlPromise(file) {
       var reader = this.fileReader;
-      return new __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+      return new __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
         reader.readAsDataURL(file);
         reader.onload = function (e) {
           resolve(reader.result);
@@ -3513,12 +3531,12 @@ $exports.store = store;
         };
         if (typeof vm.beforeUpload === 'function') {
           vm.exceEventHandler(vm.beforeUpload, [vm.localFileList, index], function (data) {
-            Object(__WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__["a" /* default */])(uploadConfig);
+            Object(__WEBPACK_IMPORTED_MODULE_7__helpers_utils_upload__["a" /* default */])(uploadConfig);
           }, function (err) {
             if (err) console.warn('Admin UI@upload@uploadFiles: ' + err);
           });
         } else {
-          Object(__WEBPACK_IMPORTED_MODULE_6__helpers_utils_upload__["a" /* default */])(uploadConfig);
+          Object(__WEBPACK_IMPORTED_MODULE_7__helpers_utils_upload__["a" /* default */])(uploadConfig);
         }
       };
 
@@ -3602,12 +3620,10 @@ $exports.store = store;
       return res;
     },
     modifyLocalFileList: function modifyLocalFileList(index, key, value) {
-      var temp = [].concat(this.localFileList);
-      temp[index][key] = value;
-      this.localFileList = temp;
+      this.$set(this.localFileList[index], key, value);
     },
     exceEventHandler: function exceEventHandler(handler, args, resolve, reject) {
-      var p = handler.apply(undefined, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(args));
+      var p = handler.apply(undefined, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(args));
       if (p && p.then) {
         p.then(function (data) {
           resolve(data);
@@ -3621,6 +3637,33 @@ $exports.store = store;
           reject();
         }
       }
+    },
+    sameFiles: function sameFiles(a, b) {
+      if (!a || !b) return false;
+      var same = true;
+      if (a.length !== b.length) {
+        same = false;
+      } else {
+        for (var i = 0; i < a.length; i++) {
+          if (!a[i] || !b[i]) {
+            same = false;
+            break;
+          } else {
+            if (__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(a[i]).length !== __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(b[i]).length) {
+              same = false;
+              break;
+            } else {
+              for (var key in a[i]) {
+                if (a[i][key] !== b[i][key]) {
+                  same = false;
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+      return same;
     }
   }
 });
@@ -5563,167 +5606,174 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c(
-                "p",
-                {
-                  staticClass: "au-upload-file-info au-theme-color--base-3",
-                  class: { "au-upload-no-desc": !_vm.canDescribe }
-                },
+                "div",
+                { staticClass: "au-upload-file-info au-theme-color--base-3" },
                 [
                   _c(
-                    "span",
-                    {
-                      staticClass: "au-upload-file-name au-theme-color--primary"
-                    },
-                    [_vm._v(_vm._s(file.name))]
-                  ),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.canDescribe && !_vm.editingStatus[index],
-                          expression: "canDescribe && !editingStatus[index]"
-                        }
-                      ],
-                      staticClass: "au-upload-file-description",
-                      class: {
-                        "au-theme-color--base-8":
-                          (!_vm.value[index] && !file.description) ||
-                          (_vm.value[index] && !_vm.value[index].description),
-                        "au-upload-inline-desc": _vm.listType === "inline"
-                      }
-                    },
+                    "p",
+                    { class: { "au-upload-no-desc": !_vm.canDescribe } },
                     [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(
-                            (_vm.value[index]
-                              ? _vm.value[index].description
-                              : file.description) || "填写文件描述"
-                          ) +
-                          "\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("au-input", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.canDescribe && _vm.editingStatus[index],
-                        expression: "canDescribe && editingStatus[index]"
-                      }
-                    ],
-                    ref: "desc",
-                    refInFor: true,
-                    staticClass: "au-upload-desc-core",
-                    attrs: { size: "small" },
-                    model: {
-                      value: file.description,
-                      callback: function($$v) {
-                        _vm.$set(file, "description", $$v)
-                      },
-                      expression: "file.description"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("au-icon", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.canDescribe && !_vm.editingStatus[index],
-                        expression: "canDescribe && !editingStatus[index]"
-                      }
-                    ],
-                    staticClass:
-                      "\n            au-upload-file-operation-icon\n            au-upload-file-desc-icon\n            au-theme-color--base-8\n            au-theme-hover-color--base-3",
-                    attrs: { type: "pencil" },
-                    nativeOn: {
-                      click: function($event) {
-                        _vm.intoDescEditingMode(index)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("au-icon", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.canDescribe && _vm.editingStatus[index],
-                        expression: "canDescribe && editingStatus[index]"
-                      }
-                    ],
-                    staticClass:
-                      "\n            au-upload-file-operation-icon\n            au-upload-file-desc-icon\n            au-upload-desc-icon-editing\n            au-theme-color--base-8\n            au-theme-hover-color--base-3",
-                    attrs: { type: "check" },
-                    nativeOn: {
-                      click: function($event) {
-                        _vm.checkDescEditingMode(index)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("au-icon", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.canDescribe && _vm.editingStatus[index],
-                        expression: "canDescribe && editingStatus[index]"
-                      }
-                    ],
-                    staticClass:
-                      "au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3",
-                    attrs: { type: "times" },
-                    nativeOn: {
-                      click: function($event) {
-                        _vm.cancelDescEditingMode(index)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
+                      _c(
+                        "span",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: file.isError
-                            ? true
-                            : file.percent !== 100 &&
-                              file.percent !== undefined,
-                          expression:
-                            "file.isError ? true : (file.percent !== 100 && file.percent !== undefined)"
-                        }
-                      ],
-                      staticClass: "au-upload-progress-bar",
-                      class: {
-                        "au-theme-background-color--danger-bottom":
-                          file.isError,
-                        "au-theme-background-color--primary-bottom": !file.isError
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "au-upload-progress-bar-core",
-                        class: {
-                          "au-theme-background-color--danger": file.isError,
-                          "au-theme-background-color--primary": !file.isError
+                          staticClass:
+                            "au-upload-file-name au-theme-color--primary"
                         },
-                        style: { width: file.percent + "%" }
-                      })
-                    ]
+                        [_vm._v(_vm._s(file.name))]
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.canDescribe && !_vm.editingStatus[index],
+                              expression: "canDescribe && !editingStatus[index]"
+                            }
+                          ],
+                          staticClass: "au-upload-file-description",
+                          class: {
+                            "au-theme-color--base-8":
+                              (!_vm.localFileList[index] &&
+                                !file.description) ||
+                              (_vm.localFileList[index] &&
+                                !_vm.localFileList[index].description),
+                            "au-upload-inline-desc": _vm.listType === "inline"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(
+                                (_vm.localFileList[index]
+                                  ? _vm.localFileList[index].description
+                                  : file.description) || "填写文件描述"
+                              ) +
+                              "\n          "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("au-input", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.canDescribe && _vm.editingStatus[index],
+                            expression: "canDescribe && editingStatus[index]"
+                          }
+                        ],
+                        ref: "desc",
+                        refInFor: true,
+                        staticClass: "au-upload-desc-core",
+                        attrs: { size: "small" },
+                        model: {
+                          value: _vm.tempDescriptions[index],
+                          callback: function($$v) {
+                            _vm.$set(_vm.tempDescriptions, index, $$v)
+                          },
+                          expression: "tempDescriptions[index]"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("au-icon", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.canDescribe && !_vm.editingStatus[index],
+                            expression: "canDescribe && !editingStatus[index]"
+                          }
+                        ],
+                        staticClass:
+                          "\n              au-upload-file-operation-icon\n              au-upload-file-desc-icon\n              au-theme-color--base-8\n              au-theme-hover-color--base-3",
+                        attrs: { type: "pencil" },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.intoDescEditingMode(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("au-icon", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.canDescribe && _vm.editingStatus[index],
+                            expression: "canDescribe && editingStatus[index]"
+                          }
+                        ],
+                        staticClass:
+                          "\n              au-upload-file-operation-icon\n              au-upload-file-desc-icon\n              au-upload-desc-icon-editing\n              au-theme-color--base-8\n              au-theme-hover-color--base-3",
+                        attrs: { type: "check" },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.checkDescEditingMode(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("au-icon", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.canDescribe && _vm.editingStatus[index],
+                            expression: "canDescribe && editingStatus[index]"
+                          }
+                        ],
+                        staticClass:
+                          "au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3",
+                        attrs: { type: "times" },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.cancelDescEditingMode(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: file.isError
+                                ? true
+                                : file.percent !== 100 &&
+                                  file.percent !== undefined,
+                              expression:
+                                "file.isError ? true : (file.percent !== 100 && file.percent !== undefined)"
+                            }
+                          ],
+                          staticClass: "au-upload-progress-bar",
+                          class: {
+                            "au-theme-background-color--danger-bottom":
+                              file.isError,
+                            "au-theme-background-color--primary-bottom": !file.isError
+                          }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "au-upload-progress-bar-core",
+                            class: {
+                              "au-theme-background-color--danger": file.isError,
+                              "au-theme-background-color--primary": !file.isError
+                            },
+                            style: { width: file.percent + "%" }
+                          })
+                        ]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
+                ]
               ),
               _vm._v(" "),
               _c(

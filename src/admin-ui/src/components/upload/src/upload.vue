@@ -19,7 +19,7 @@
     margin-top: 16px;
     & > li {
       position: relative;
-      min-height: 80px;
+      height: 82px;
       padding: 8px;
       border-width: 1px;
       border-style: solid;
@@ -91,8 +91,14 @@
       opacity: 0;
     }
     .au-upload-file-info {
+      position: relative;
+      height: 100%;
       padding-left: 80px;
       margin-bottom: 0;
+      & > p {
+        position: relative;
+        height: 100%;
+      }
     }
     .au-upload-no-desc {
       margin: 0;
@@ -150,7 +156,12 @@
     .au-upload-progress-bar, .au-upload-progress-bar-core {
       display: block;
       height: 4px;
-      margin-top: 4px;
+    }
+    .au-upload-progress-bar {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom:5px;
     }
     .au-upload-progress-bar-core {
       width: 50%;
@@ -244,62 +255,64 @@
           :src="autoUpload ? (file.base64 || file.url) : file.base64"
           @click="preview(index)"
           v-if="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
-        <p class="au-upload-file-info au-theme-color--base-3" :class="{'au-upload-no-desc': !canDescribe}">
-          <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
-          <span class="au-upload-file-description"
-            :class="{
-              'au-theme-color--base-8': !value[index] && !file.description || (value[index] && !value[index].description),
-              'au-upload-inline-desc': listType === 'inline'
-            }"
-            v-show="canDescribe && !editingStatus[index]">
-            {{ (value[index] ? value[index].description : file.description) || '填写文件描述' }}
-          </span>
-          <au-input
-            class="au-upload-desc-core"
-            size="small"
-            v-show="canDescribe && editingStatus[index]"
-            ref="desc"
-            v-model="file.description"></au-input>
-          <au-icon
-            class="
-              au-upload-file-operation-icon
-              au-upload-file-desc-icon
-              au-theme-color--base-8
-              au-theme-hover-color--base-3"
-            type="pencil"
-            v-show="canDescribe && !editingStatus[index]"
-            @click.native="intoDescEditingMode(index)"/>
-          <au-icon
-            class="
-              au-upload-file-operation-icon
-              au-upload-file-desc-icon
-              au-upload-desc-icon-editing
-              au-theme-color--base-8
-              au-theme-hover-color--base-3"
-            type="check"
-            v-show="canDescribe && editingStatus[index]"
-            @click.native="checkDescEditingMode(index)"/>
-          <au-icon
-            class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3"
-            type="times"
-            v-show="canDescribe && editingStatus[index]"
-            @click.native="cancelDescEditingMode(index)"/>
-          <span
-            class="au-upload-progress-bar"
-            :class="{
-              'au-theme-background-color--danger-bottom': file.isError,
-              'au-theme-background-color--primary-bottom': !file.isError
-            }"
-            v-show="file.isError ? true : (file.percent !== 100 && file.percent !== undefined)">
-            <span
-              class="au-upload-progress-bar-core"
+        <div class="au-upload-file-info au-theme-color--base-3">
+          <p :class="{'au-upload-no-desc': !canDescribe}">
+            <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
+            <span class="au-upload-file-description"
               :class="{
-                'au-theme-background-color--danger': file.isError,
-                'au-theme-background-color--primary': !file.isError
+                'au-theme-color--base-8': !localFileList[index] && !file.description || (localFileList[index] && !localFileList[index].description),
+                'au-upload-inline-desc': listType === 'inline'
               }"
-              :style="{width: file.percent + '%'}"></span>
-          </span>
-        </p>
+              v-show="canDescribe && !editingStatus[index]">
+              {{ (localFileList[index] ? localFileList[index].description : file.description) || '填写文件描述' }}
+            </span>
+            <au-input
+              class="au-upload-desc-core"
+              size="small"
+              v-show="canDescribe && editingStatus[index]"
+              ref="desc"
+              v-model="tempDescriptions[index]"></au-input>
+            <au-icon
+              class="
+                au-upload-file-operation-icon
+                au-upload-file-desc-icon
+                au-theme-color--base-8
+                au-theme-hover-color--base-3"
+              type="pencil"
+              v-show="canDescribe && !editingStatus[index]"
+              @click.native="intoDescEditingMode(index)"/>
+            <au-icon
+              class="
+                au-upload-file-operation-icon
+                au-upload-file-desc-icon
+                au-upload-desc-icon-editing
+                au-theme-color--base-8
+                au-theme-hover-color--base-3"
+              type="check"
+              v-show="canDescribe && editingStatus[index]"
+              @click.native="checkDescEditingMode(index)"/>
+            <au-icon
+              class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3"
+              type="times"
+              v-show="canDescribe && editingStatus[index]"
+              @click.native="cancelDescEditingMode(index)"/>
+            <span
+              class="au-upload-progress-bar"
+              :class="{
+                'au-theme-background-color--danger-bottom': file.isError,
+                'au-theme-background-color--primary-bottom': !file.isError
+              }"
+              v-show="file.isError ? true : (file.percent !== 100 && file.percent !== undefined)">
+              <span
+                class="au-upload-progress-bar-core"
+                :class="{
+                  'au-theme-background-color--danger': file.isError,
+                  'au-theme-background-color--primary': !file.isError
+                }"
+                :style="{width: file.percent + '%'}"></span>
+            </span>
+          </p>
+        </div>
         <span class="au-upload-file-edit-icon-container">
           <au-icon
             class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-8 au-theme-hover-color--base-3"
@@ -332,6 +345,10 @@ export default {
   name: 'au-upload',
   components: { AuIcon, AuPreviewer, FormItem },
   mixins: [methods, props],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   data () {
     return {
       desc: 'this is a file desc. this is a file desc. this is a file desc. this is a file desc. this is a file desc.',
@@ -340,6 +357,7 @@ export default {
       editingStatus: [],
       descriptions: [],
       lastDescriptions: [],
+      tempDescriptions: [],
       fileReader: new window.FileReader(),
       images: [],
       previewerVisible: false,
@@ -360,24 +378,14 @@ export default {
     value: {
       deep: true,
       handler (v) {
-        if (v.length !== this.localFileList.length) this.localFileList = this.getValuePreviewInfo(v)
+        if (!this.sameFiles(v, this.localFileList)) this.localFileList = this.getValuePreviewInfo(v)
       }
     },
     localFileList: {
       deep: true,
       handler (v) {
-        if (!this.autoUpload) {
-          let isSame = true
-          for (let i = 0; i < v.length; i++) {
-            if (!this.value || !this.value[i] || v[i].file !== this.value[i].file) {
-              isSame = false
-              break
-            }
-          }
-          if (!!v.length || !isSame) {
-            this.$emit('input', v)
-            this.$emit('change', v)
-          }
+        if (!this.sameFiles(v, this.value)) {
+          this.$emit('change', v.map(f => Object.assign({}, f)))
         }
       }
     },

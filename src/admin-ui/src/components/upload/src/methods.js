@@ -8,6 +8,7 @@ export default {
     intoDescEditingMode (i) {
       this.$set(this.editingStatus, i, true)
       this.lastDescriptions[i] = this.$refs.desc[i].localValue
+      this.$set(this.tempDescriptions, i, this.lastDescriptions[i])
       this.$nextTick(() => {
         this.$refs.desc[i].$refs.core.focus()
       })
@@ -20,7 +21,7 @@ export default {
     checkDescEditingMode (i) {
       if (this.autoUpload) {
         if (typeof this.beforeDescribe === 'function') {
-          this.exceEventHandler(this.beforeDescribe, [this.$refs.desc[i].localValue, i], (data) => {
+          this.exceEventHandler(this.beforeDescribe, [this.tempDescriptions[i], i], (data) => {
             // modify success
             this.changeDescription(i)
           }, err => {
@@ -50,6 +51,7 @@ export default {
       this.$set(this.editingStatus, i, false)
     },
     loadFiles (evt) {
+      this.$emit('native-change', evt.target.files)
       if (evt.target.files && evt.target.files.length) {
         if (!this.files.length || !this.multiple) {
           this.files = Array.prototype.map.call(evt.target.files, (f) => {
@@ -261,9 +263,7 @@ export default {
       return res
     },
     modifyLocalFileList (index, key, value) {
-      let temp = [].concat(this.localFileList)
-      temp[index][key] = value
-      this.localFileList = temp
+      this.$set(this.localFileList[index], key, value)
     },
     exceEventHandler (handler, args, resolve, reject) {
       let p = handler(...args)
@@ -280,6 +280,33 @@ export default {
           reject()
         }
       }
+    },
+    sameFiles (a, b) {
+      if (!a || !b) return false
+      let same = true
+      if (a.length !== b.length) {
+        same = false
+      } else {
+        for (let i = 0; i < a.length; i++) {
+          if (!a[i] || !b[i]) {
+            same = false
+            break
+          } else {
+            if (Object.keys(a[i]).length !== Object.keys(b[i]).length) {
+              same = false
+              break
+            } else {
+              for (let key in a[i]) {
+                if (a[i][key] !== b[i][key]) {
+                  same = false
+                  break
+                }
+              }
+            }
+          }
+        }
+      }
+      return same
     }
   }
 }

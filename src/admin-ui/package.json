@@ -17,6 +17,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "theme-class-generator": "^1.0.2"
+    "theme-class-generator": "^1.0.2",
+    "resize-detector": "^0.1.9"
   }
 }

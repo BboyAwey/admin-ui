@@ -37,7 +37,8 @@
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
 import getWindowSize from '../../../helpers/dom/get-window-size'
-import heartbeat from '../../../helpers/utils/heartbeat.js'
+// import heartbeat from '../../../helpers/utils/heartbeat.js'
+import { addListener, removeListener } from 'resize-detector'
 
 function validateWidth (v) { return v >= 1 && v <= 24 && parseInt(v) === Number(v) }
 function getElementInnerWidth (el) {
@@ -150,11 +151,14 @@ export default {
     //   vm.observer.observe(vm.$el.parentNode, config)
     // }
 
-    heartbeat.add(this.reorder.bind(this), this._uid)
+    // heartbeat.add(this.reorder.bind(this), this._uid)
+    this.reorder()
+    addListener(this.$el.parentElement, this.reorder)
   },
   beforeDestroy () {
     if (this.observe) this.observer.disconnect()
-    heartbeat.remove(this._uid)
+    // heartbeat.remove(this._uid)
+    removeListener(this.$el.parentElement, this.reorder)
   },
   watch: {
     widthXl () {

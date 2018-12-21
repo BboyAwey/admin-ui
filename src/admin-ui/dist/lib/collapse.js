@@ -473,7 +473,7 @@ if (false) {(function () {
       this.observer.observe(this.$refs.el, config);
     }
   },
-  destroyed: function destroyed() {
+  beforeDestroy: function beforeDestroy() {
     if (this.observe) this.observer.disconnect();
     this.observer = null;
   },

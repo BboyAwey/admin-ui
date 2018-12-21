@@ -321,6 +321,10 @@ if (!__WEBPACK_IMPORTED_MODULE_2__namespace__["a" /* default */].get('heartbeat'
       }
     }
   }, 100));
+  // namespace.set('heartbeat', window.requestAnimationFrame(function heatbeat () {
+  //   for (let f of Object.values(stack)) f()
+  //   namespace.set('heartbeat', window.requestAnimationFrame(heatbeat))
+  // }))
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({

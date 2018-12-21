@@ -6,18 +6,18 @@
     // transition-duration: .2s;
     // transition-timing-function: ease-out;
   }
-  // 12 sizes of grid cell
-  @for $i from 1 through 12 {
+  // 24 sizes of grid cell
+  @for $i from 1 through 24 {
     .au-grid-cell-#{$i} {
-      flex: 0 0 $i/12*100%;
+      flex: 0 0 $i/24*100%;
       flex-basis: auto;
-      // width: $i/12*100%;
+      // width: $i/24*100%;
     }
   }
   // simple offset rule
-  @for $i from 1 through 12 {
+  @for $i from 1 through 24 {
     .au-grid-offset-#{$i} {
-      margin-left: $i/12*100%;
+      margin-left: $i/24*100%;
     }
   }
 </style>
@@ -28,7 +28,7 @@
     :class="`au-grid-cell-${cellNumber} au-grid-offset-${offsetNumber}`"
     :style="{
       margin: `0 ${row[row.length - 1] === $el ? 0 : space} ${isLastRow ? 0 : space} 0`,
-      width: `${(containerWidth + parseInt(space)) / (12 / cellNumber) - parseInt(space)}px`
+      width: `${(containerWidth + parseInt(space)) / (24 / cellNumber) - parseInt(space)}px`
     }">
       <slot></slot>
   </div>
@@ -39,7 +39,7 @@ import getElementSize from '../../../helpers/dom/get-element-size'
 import getWindowSize from '../../../helpers/dom/get-window-size'
 import heartbeat from '../../../helpers/utils/heartbeat.js'
 
-function validateWidth (v) { return v >= 1 && v <= 12 && parseInt(v) === Number(v) }
+function validateWidth (v) { return v >= 1 && v <= 24 && parseInt(v) === Number(v) }
 function getElementInnerWidth (el) {
   let copy = el.cloneNode()
   copy.innerHTML = ''
@@ -55,6 +55,10 @@ function getElementInnerWidth (el) {
 export default {
   name: 'au-grid',
   props: {
+    widthXl: {
+      type: [String, Number],
+      validator: validateWidth
+    },
     widthLg: {
       type: [String, Number],
       validator: validateWidth
@@ -70,6 +74,10 @@ export default {
     widthXs: {
       type: [String, Number],
       validator: validateWidth
+    },
+    offsetXl: {
+      type: [String, Number],
+      default: 0
     },
     offsetLg: {
       type: [String, Number],
@@ -94,12 +102,14 @@ export default {
   },
   data () {
     return {
-      cellNumber: 12,
+      cellNumber: 24,
       offsetNumber: 0,
       breakPoint: { // base on this size to pile cells or list them horizontally
-        lg: 1170,
-        md: 970,
-        sm: 750
+        xl: 1900,
+        lg: 1180,
+        md: 940,
+        sm: 748,
+        xs: 0
       },
       observer: null,
       observerCount: 0,
@@ -111,35 +121,34 @@ export default {
     }
   },
   mounted () {
-    this.setContainer()
     // this.reorder()
-    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    if (MutationObserver) {
-      let config = {
-        attributes: true,
-        childList: false,
-        subtree: false,
-        characterData: false,
-        attributeOldValue: false,
-        characterDataOldValue: false,
-        attributeFilter: ['style']
-      }
-      let vm = this
-      vm.observer = new MutationObserver(function (mutations) {
-        let hasDisplayChange = false
-        mutations.forEach(m => {
-          if (m.attributeName === 'style' && m.target.style.display !== 'none') {
-            hasDisplayChange = true
-          }
-        })
-        if (hasDisplayChange) {
-          vm.observer.disconnect() // need pause observe to prevent infinity loop
-          vm.$el.parentNode.style.display = 'flex'
-          vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
-        }
-      })
-      vm.observer.observe(vm.$el.parentNode, config)
-    }
+    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    // if (MutationObserver) {
+    //   let config = {
+    //     attributes: true,
+    //     childList: false,
+    //     subtree: false,
+    //     characterData: false,
+    //     attributeOldValue: false,
+    //     characterDataOldValue: false,
+    //     attributeFilter: ['style']
+    //   }
+    //   let vm = this
+    //   vm.observer = new MutationObserver(function (mutations) {
+    //     let hasDisplayChange = false
+    //     mutations.forEach(m => {
+    //       if (m.attributeName === 'style' && m.target.style.display !== 'none') {
+    //         hasDisplayChange = true
+    //       }
+    //     })
+    //     if (hasDisplayChange) {
+    //       vm.observer.disconnect() // need pause observe to prevent infinity loop
+    //       vm.$el.parentNode.style.display = 'flex'
+    //       vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
+    //     }
+    //   })
+    //   vm.observer.observe(vm.$el.parentNode, config)
+    // }
 
     heartbeat.add(this.reorder.bind(this), this._uid)
   },
@@ -148,6 +157,9 @@ export default {
     heartbeat.remove(this._uid)
   },
   watch: {
+    widthXl () {
+      this.reorder()
+    },
     widthLg () {
       this.reorder()
     },
@@ -158,6 +170,9 @@ export default {
       this.reorder()
     },
     widthXs () {
+      this.reorder()
+    },
+    offsetXl () {
       this.reorder()
     },
     offsetLg () {
@@ -180,6 +195,8 @@ export default {
       container.style.flexWrap = 'wrap'
     },
     reorder () {
+      if (window.getComputedStyle(this.$el.parentNode).display === 'none') return
+      this.setContainer()
       this.getCellNumber()
       this.getOffsetNumber()
       this.getContainerWidth()
@@ -187,35 +204,34 @@ export default {
     },
     getCellNumber () {
       // let containerWidth = getElementSize(this.$el.parentNode).width
-      let windowWidth = getWindowSize().width
+      let referenceWidth = getWindowSize().width
 
-      if (this.widthLg && windowWidth >= this.breakPoint.lg) {
+      if (this.widthXl && referenceWidth >= this.breakPoint.xl) {
+        this.cellNumber = this.widthXl
+      } else if (this.widthLg && referenceWidth >= this.breakPoint.lg) {
         this.cellNumber = this.widthLg
-        // this.offsetNumber = this.offsetLg
-      } else if (this.widthMd && windowWidth >= this.breakPoint.md) {
+      } else if (this.widthMd && referenceWidth >= this.breakPoint.md) {
         this.cellNumber = this.widthMd
-        // this.offsetNumber = this.offsetMd
-      } else if (this.widthSm && windowWidth >= this.breakPoint.sm) {
+      } else if (this.widthSm && referenceWidth >= this.breakPoint.sm) {
         this.cellNumber = this.widthSm
-        // this.offsetNumber = this.offsetSm
       } else if (this.widthXs) {
         this.cellNumber = this.widthXs
-        // this.offsetNumber = this.offsetXs
       } else {
-        this.cellNumber = 12
-        // this.offsetNumber = 0
+        this.cellNumber = 24
       }
       this.$el.setAttribute('data-grid', this.cellNumber)
     },
     getOffsetNumber () {
       // let containerWidth = getElementSize(this.$el.parentNode).width
-      let windowWidth = getWindowSize().width
+      let referenceWidth = getWindowSize().width
 
-      if (this.offsetLg && windowWidth >= this.breakPoint.lg) {
+      if (this.offsetXl && referenceWidth >= this.breakPoint.xl) {
+        this.offsetNumber = this.offsetXl
+      } else if (this.offsetLg && referenceWidth >= this.breakPoint.lg) {
         this.offsetNumber = this.offsetLg
-      } else if (this.offsetMd && windowWidth >= this.breakPoint.md) {
+      } else if (this.offsetMd && referenceWidth >= this.breakPoint.md) {
         this.offsetNumber = this.offsetMd
-      } else if (this.offsetSm && windowWidth >= this.breakPoint.sm) {
+      } else if (this.offsetSm && referenceWidth >= this.breakPoint.sm) {
         this.offsetNumber = this.offsetSm
       } else if (this.offsetXs) {
         this.offsetNumber = this.offsetXs
@@ -231,24 +247,24 @@ export default {
       let cellCount = 0
       for (let i = 0; i < allGrid.length; i++) {
         cellCount += parseInt(allGrid[i].getAttribute('data-grid'))
-        if (allGrid[i + 1] && cellCount + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount / 12) + 1) * 12) {
-          cellCount = (parseInt(cellCount / 12) + 1) * 12
+        if (allGrid[i + 1] && cellCount + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount / 24) + 1) * 24) {
+          cellCount = (parseInt(cellCount / 24) + 1) * 24
         }
         if (allGrid[i] === this.$el) break
       }
       let start = 0
       let end = 0
-      if (cellCount % 12) {
-        start = parseInt(cellCount / 12) * 12
+      if (cellCount % 24) {
+        start = parseInt(cellCount / 24) * 24
       } else {
-        start = parseInt(cellCount / 12 - 1) * 12
+        start = parseInt(cellCount / 24 - 1) * 24
       }
-      end = start + 12
+      end = start + 24
       let cellCount2 = 0
       for (let i = 0; i < allGrid.length; i++) {
         cellCount2 += parseInt(allGrid[i].getAttribute('data-grid'))
-        if (allGrid[i + 1] && cellCount2 + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount2 / 12) + 1) * 12) {
-          cellCount2 = (parseInt(cellCount2 / 12) + 1) * 12
+        if (allGrid[i + 1] && cellCount2 + parseInt(allGrid[i + 1].getAttribute('data-grid')) > (parseInt(cellCount2 / 24) + 1) * 24) {
+          cellCount2 = (parseInt(cellCount2 / 24) + 1) * 24
         }
         if (cellCount2 > start && cellCount2 <= end) {
           this.row.push(allGrid[i])

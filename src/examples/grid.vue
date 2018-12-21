@@ -20,31 +20,31 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example au-theme-border-color--base-8">
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="8" width-md="4" width-sm="3" width-xs="6">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="16" width-md="8" width-sm="6" width-xs="12">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="7" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="6" width-md="14" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="6" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="6" width-md="12" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="9" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="6" width-md="18" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="6" width-md="8" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="5" width-md="5" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="10" width-md="10" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Esta occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="7" width-md="3" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="14" width-md="6" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="4" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="8" width-md="8" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaec
         </au-grid>
-        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="au-theme-background-color--warning au-theme-border-color--base-8" space="10px" width-xl="23" width-lg="6" width-md="8" width-sm="12" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
       </div>
@@ -67,7 +67,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>width-lg</td>
+            <td>width-xl="23" width-lg</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
               <au-icon type="times"></au-icon>
@@ -78,7 +78,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -97,7 +97,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -116,7 +116,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -135,7 +135,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -155,7 +155,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -174,7 +174,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -193,7 +193,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -212,7 +212,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">1~12</li>
+                <li class="au-theme-border-color--base-8">1~24</li>
               </ol>
             </td>
             <td>
@@ -266,13 +266,13 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="my-grid au-theme-border-color--base-8" width-xl="23" width-lg="3" width-md="4" width-sm="6" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="my-grid au-theme-border-color--base-8" width-xl="23" width-lg="3" width-md="4" width-sm="6" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
-        <au-grid class="my-grid au-theme-border-color--base-8" width-lg="3" width-md="4" width-sm="6" width-xs="12">
+        <au-grid class="my-grid au-theme-border-color--base-8" width-xl="23" width-lg="3" width-md="4" width-sm="6" width-xs="24">
           Enim consequat excepteur ut adipisicing Lorem sint. Enim excepteur culpa nostrud velit id occaecat labore eu fugiat est est ad minim in. Est excepteur fugiat enim id ea occaecat elit. Anim ad laborum qui id velit non laborum incididunt excepteur culpa eiusmod nostrud eu ex. Quis officia veniam ex sit qui est qui duis irure officia incididunt laborum enim. Deserunt aliquip consectetur ullamco eu aliqua.
         </au-grid>
       '></code-h>

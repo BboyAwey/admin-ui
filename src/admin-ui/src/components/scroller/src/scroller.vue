@@ -78,6 +78,7 @@
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
 import mousewheel from '../../../helpers/dom/mousewheel.js'
+import { addListener, removeListener } from 'resize-detector'
 
 export default {
   name: 'au-scroller',
@@ -103,10 +104,12 @@ export default {
       let next = this.contentTop
       if (this.stopPropagation || prev !== next) e.stopPropagation()
     })
-    window.addEventListener('resize', this.handlerResize)
+    // window.addEventListener('resize', this.handlerResize)
+    addListener(this.$refs.content, this.handlerResize)
   },
   destroyed () {
-    window.removeEventListener('resize', this.handlerResize)
+    // window.removeEventListener('resize', this.handlerResize)
+    removeListener(this.$refs.content, this.handlerResize)
   },
   props: {
     scrollTop: {
@@ -151,6 +154,7 @@ export default {
       }
     },
     handleScroll (direction) {
+      this.handleMouseenter()
       this.setContentTop(this.contentTop - direction * this.step)
     },
     detectIfNeedScroll () {
@@ -305,6 +309,7 @@ export default {
     },
     handlerResize () {
       this.setScrollCoreTop(this.scrollCoreTop)
+      this.$nextTick(this.handleMouseenter)
     }
   }
 }

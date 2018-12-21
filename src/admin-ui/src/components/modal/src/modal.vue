@@ -81,7 +81,7 @@
       <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" ref="modal">
         <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
-          <au-scroller class="au-modal-content-scroller" stop-propagation>
+          <au-scroller class="au-modal-content-scroller" stop-propagation ref="contentScroller">
             <slot></slot>
           </au-scroller>
         </div>
@@ -109,16 +109,11 @@ import getWindowSize from '../../../helpers/dom/get-window-size'
 import AuButton from '../../button'
 import AuIcon from '../../icon'
 import AuScroller from '../../scroller'
+import { addListener, removeListener } from 'resize-detector'
 
 export default {
   name: 'au-modal',
   components: { AuButton, AuIcon, AuScroller },
-  mounted () {
-    window.addEventListener('resize', this.resizeHandler)
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.resizeHandler)
-  },
   data () {
     return {
       localDisplay: this.visible,
@@ -153,9 +148,11 @@ export default {
         })
         window.addEventListener('keyup', this.escHandler)
         if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
+        addListener(this.$refs.contentScroller.$refs.content, this.resizeHandler)
       } else {
         window.removeEventListener('keyup', this.escHandler)
         if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
+        removeListener(this.$refs.contentScroller.$refs.content, this.resizeHandler)
       }
     },
     localDisplay (v) {

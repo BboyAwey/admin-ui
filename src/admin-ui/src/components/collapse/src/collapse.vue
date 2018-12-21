@@ -32,7 +32,7 @@ export default {
       this.observer.observe(this.$refs.el, config)
     }
   },
-  destroyed () {
+  beforeDestroy () {
     if (this.observe) this.observer.disconnect()
     this.observer = null
   },

@@ -107,7 +107,7 @@ export default {
     // window.addEventListener('resize', this.handlerResize)
     addListener(this.$refs.content, this.handlerResize)
   },
-  destroyed () {
+  beforeDestroy () {
     // window.removeEventListener('resize', this.handlerResize)
     removeListener(this.$refs.content, this.handlerResize)
   },

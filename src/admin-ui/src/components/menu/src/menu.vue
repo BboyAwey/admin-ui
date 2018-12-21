@@ -413,7 +413,7 @@ export default {
       if (!this.$route) window.addEventListener('hashchange', this.handleHashchange)
     } else this.localItems = this.items
   },
-  destroyed () {
+  beforeDestroy () {
     if (this.isTopLevel && !this.$route) window.removeEventListener('hashchange', this.handleHashchange)
   },
   watch: {

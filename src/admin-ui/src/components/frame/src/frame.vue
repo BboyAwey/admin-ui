@@ -110,7 +110,7 @@ export default {
   created () {
     window.addEventListener('resize', this.resize)
   },
-  destroyed () {
+  beforeDestroy () {
     window.removeEventListener('resize', this.resize)
   },
   mounted () {

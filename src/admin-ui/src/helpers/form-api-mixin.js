@@ -52,6 +52,9 @@ export default {
       this.$emit('change', this.localValue, e)
     },
     focus (e) {
+      if (this.$refs.core && this.$refs.core.focus instanceof Function) {
+        this.$refs.core.focus()
+      }
       this.$emit('focus', this.localValue, e)
     },
     blur (e) {

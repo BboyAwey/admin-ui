@@ -96,7 +96,7 @@
           }"
           @click.native.stop="handleClick">
           <div
-            class="au-tagfactory-placeholder au-theme-color--base-11"
+            class="au-tagfactory-placeholder au-theme-color--base-8"
             v-show="!localTags.length && !inputValue.length">
             {{ placeholder }}
           </div>

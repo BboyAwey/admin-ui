@@ -8,10 +8,11 @@
   .au-json-schema-item {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    // align-items: center;
     font-size: 0;
     & > *:not(:last-child) {
       margin-right: 10px;
+      vertical-align: top;
     }
     .au-json-schema-key {
       flex-grow: 1;
@@ -32,6 +33,7 @@
   .au-json-schema-icons {
     width: 34px;
     font-size: 14px;
+    padding-top: 7px;
     & > * {
       cursor: pointer;
     }
@@ -76,7 +78,9 @@
           :placeholder="_isRoot ? (rootName || 'root') : localKey"
           full-width
           :size="formItemSize"
-          v-model="localKey"/>
+          v-model="localKey"
+          :validators="(_isRoot || _isItem) ? [] : validators.propertyName || []"
+          ref="key"/>
       </div>
       <au-select
         :options="typeOptions"
@@ -100,10 +104,7 @@
       <div class="au-json-schema-type"
         v-for="item of customSchemaProperties"
         :key="item.key"
-        @click="isReferenceType ? '' : setCustom(Object.assign(localSchema, {
-          key: localKey,
-          custom: item,
-        }), !_isRoot)">
+        @click="isReferenceType ? '' : setCustom(item, !_isRoot)">
         <au-input
           :placeholder="item.text"
           :disabled="isReferenceType"
@@ -135,11 +136,13 @@
         :_is-root="false"
         :_is-item="false"
         :customSchemaProperties="customSchemaProperties"
+        :validators="validators"
         v-model="localSchema.properties[key]"
         @deep-change="handleDeepChange"
         @remove="removeProperty"
         @set-custom="setCustom"
-        :types="types"/>
+        :types="types"
+        ref="objectChildren"/>
     </div>
     <div class="au-json-schema-children-container" v-if="
       showChildren &&
@@ -150,14 +153,16 @@
         :_is-item="true"
         :_is-root="false"
         :customSchemaProperties="customSchemaProperties"
+        :validators="validators"
         v-model="localSchema.items"
         @deep-change="handleDeepChange"
         @set-custom="setCustom"
-        :types="types"/>
+        :types="types"
+        ref="arrayChildren"/>
     </div>
     <au-modal
       v-if="_isRoot"
-      :title="`设置 ${currentItem.key || rootName || 'root'} 的${currentItem.custom.text}`"
+      :title="`设置 ${currentItem.__key || rootName || 'root'} 的${currentItem.__custom.text}`"
       :visible="customModalVisible"
       @hide="cancelSetCustom"
       :buttons="[
@@ -174,16 +179,18 @@
         }
       ]">
       <au-input
-        v-show="currentItem.custom.type ? currentItem.custom.type !== 'boolean' : currentItem.type !== 'boolean'"
-        :type="(currentItem.custom.type ? currentItem.custom.type !== 'string' : currentItem.type !== 'string') ? 'text' : 'textarea'"
+        v-show="currentItem.__custom.type ? currentItem.__custom.type !== 'boolean' : currentItem.__localSchema.type !== 'boolean'"
+        :type="(currentItem.__custom.type ? currentItem.__custom.type !== 'string' : currentItem.__localSchema.type !== 'string') ? 'text' : 'textarea'"
         width="100%"
         height="100px"
         min-height="100px"
         max-height="100px"
-        @change="correctNumber(currentItem.type)"
-        v-model="currentItemNewCustom" full-width/>
+        @change="correctNumber(currentItem.__custom.type)"
+        v-model="currentItemNewCustom" full-width
+        :validators="validators[currentItem.__custom.key] || []"
+        ref="newCustomInput"/>
       <au-radio
-        v-show="currentItem.custom.type ? currentItem.custom.type === 'boolean' : currentItem.type === 'boolean'"
+        v-show="currentItem.__custom.type ? currentItem.__custom.type === 'boolean' : currentItem.__localSchema.type === 'boolean'"
         :radios="[
           { text: 'true', value: true },
           { text: 'false', value: false }
@@ -247,8 +254,11 @@ export default {
         ]
       }
     },
-    formItemSize: String
-    // TODO: reqiure, mock
+    formItemSize: String,
+    validators: {
+      type: Object,
+      default () { return {} }
+    }
   },
   model: {
     prop: 'schema',
@@ -259,9 +269,9 @@ export default {
       localSchema: this._isRoot ? deepClone(this.schema) : this.schema,
       showChildren: true,
       currentItem: {
-        key: '',
-        custom: {},
-        type: ''
+        __key: '',
+        __custom: {},
+        __localSchema: {}
       },
       currentItemNewCustom: '',
       customModalVisible: false,
@@ -335,28 +345,36 @@ export default {
       if (this.customSchemaProperties instanceof Array) {
         if (!types.isReferenceType(schema.type)) {
           this.customSchemaProperties.forEach(p => {
-            if (p.default !== undefined) {
+            if (p.default !== undefined && schema[p.key] === undefined) {
               if (p.default instanceof Function) {
                 this.$set(schema, p.key, p.default(schema.type))
-                // schema[p.key] = p.default(schema.type)
               } else {
                 this.$set(schema, p.key, p.default)
-                // schema[p.key] = p.default
               }
             }
           })
         }
       }
     },
+    setCustomSchemaValue (key, value) {
+      this.$set(this.localSchema, key, value)
+    },
     setCustom (item, source) {
       if (this._isRoot) {
         this.currentItem = item
-        this.currentItemNewCustom = item[item.custom.key]
+        this.currentItemNewCustom = item.__localSchema[item.__custom.key]
         this.customModalVisible = true
+        this.$nextTick(_ => {
+          this.$refs.newCustomInput.focus()
+        })
       } else {
         if (source) {
-          item.set = this.$set.bind(this)
-          item.forceUpdate = this.$forceUpdate.bind(this)
+          item = {
+            __custom: item,
+            __key: this.localKey,
+            __set: this.setCustomSchemaValue.bind(this),
+            __localSchema: this.localSchema
+          }
         }
         this.$emit('set-custom', item)
       }
@@ -366,22 +384,19 @@ export default {
       this.customModalVisible = false
     },
     confirmSetCustom () {
-      if (this.currentItem.set instanceof Function) {
-        this.currentItem.set(
-          this.currentItem,
-          this.currentItem.custom.key,
-          this.currentItemNewCustom
-        )
-        this.currentItem.forceUpdate()
-      } else {
-        this.currentItem[this.currentItem.custom.key] = this.currentItemNewCustom
-      }
-      this.customModalVisible = false
-      this.currentItemNewCustom = ''
-      this.handleDeepChange()
-      // this.currentItem.forceUpdate()
-      // console.log(this.currentItem)
-      // this.finalChange()
+      this.$refs.newCustomInput.validate().then(res => {
+        if (res) {
+          this.currentItem.__set(this.currentItem.__custom.key, this.currentItemNewCustom)
+          this.customModalVisible = false
+          this.currentItemNewCustom = ''
+          this.currentItem = {
+            __key: '',
+            __custom: {},
+            __localSchema: {}
+          }
+          this.handleDeepChange()
+        }
+      })
     },
     correctNumber (type) {
       if (!this.currentItemNewInit) return
@@ -480,6 +495,19 @@ export default {
       this.showChildren = true
       this.handleDeepChange()
       this.$forceUpdate()
+    },
+    validate () {
+      return Promise.all([
+        this.$refs.key.validate(),
+        ...(this.localSchema.type === 'object'
+          ? this.$refs.objectChildren.map(c => c.validate())
+          : [Promise.resolve(true)]),
+        this.localSchema.type === 'array'
+          ? this.$refs.arrayChildren.validate()
+          : Promise.resolve(true)
+      ]).then(res => {
+        return !res.includes(false)
+      })
     }
   },
   created () {

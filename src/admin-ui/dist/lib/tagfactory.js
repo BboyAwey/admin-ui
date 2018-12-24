@@ -1422,7 +1422,7 @@ var render = function() {
             "div",
             {
               key: tip + "" + i,
-              staticClass: "au-form-warning au-theme-color--base-11"
+              staticClass: "au-form-warning au-theme-color--base-8"
             },
             [_vm._v(_vm._s(tip))]
           )
@@ -3984,6 +3984,9 @@ module.exports = { "default": __webpack_require__("TmV0"), __esModule: true };
       this.$emit('change', this.localValue, e);
     },
     focus: function focus(e) {
+      if (this.$refs.core && this.$refs.core.focus instanceof Function) {
+        this.$refs.core.focus();
+      }
       this.$emit('focus', this.localValue, e);
     },
     blur: function blur(e) {
@@ -6361,7 +6364,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "au-tagfactory-placeholder au-theme-color--base-11"
+                        "au-tagfactory-placeholder au-theme-color--base-8"
                     },
                     [
                       _vm._v(

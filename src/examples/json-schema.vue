@@ -6,10 +6,15 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-json-schema
+        <a-json-schema
           v-model="jsonSchema"
           :custom-schema-properties="customSchemaProperties"
-          label="JSON Schema 编辑器"/>
+          label="JSON Schema 编辑器"
+          :validators="{
+            propertyName: [required],
+            init: [required]
+          }" ref="jsonSchema"/>
+        <au-button @click="validate">validate</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -139,6 +144,7 @@
             </td>
             <td>
               根节点可用的数据类型<br>
+              不指定则使用types指定的所有类型作为根节点类型
             </td>
           </tr>
           <tr>
@@ -182,6 +188,32 @@
             </td>
             <td>
               根节点的名称，仅用于显示<br>
+            </td>
+          </tr>
+          <tr>
+            <td>validators</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Object<br>
+              -Array
+            </td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">validator: Function，接受一个表示当前值的参数value</li>
+                <li class="au-theme-border-color--base-8">warning: String，当验证失败时需要显示的警告信息</li>
+                <li class="au-theme-border-color--base-8">async: Boolean，是否为异步验证，默认为false</li>
+              </ol>
+            </td>
+            <td>
+              验证器配置<br>
+              对象的键为"key"或者custom-schema-properties的key属性值<br>
+              为“key”时，配置的是schema的key属性的验证器<br>
+              为custom-schema-properties的key属性值时，配置的是自定义schema属性的的验证器<br>
+              具体验证器规则与input组件的验证器规则一致，详见：<router-link class="au-theme-color--info" :to="{path: '/input'}" target="_blank">输入框组件</router-link>
             </td>
           </tr>
         </tbody>
@@ -230,7 +262,7 @@
       </au-table>
     </au-panel>
     <au-panel class="section" title="Methods">
-      <!-- <au-table>
+      <au-table>
         <thead>
           <tr>
             <th>名称</th>
@@ -240,20 +272,18 @@
         </thead>
         <tbody>
           <tr>
-            <td>method1</td>
+            <td>validate()</td>
             <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">arg1</li>
-                <li class="au-theme-border-color--base-8">arg2</li>
-              </ol>
+              <au-icon type="minus"></au-icon>
             </td>
             <td>
-              该方法及参数的详细说明
+              在给定了验证器的情况下执行验证<br>
+              返回一个Promise实例<br>
             </td>
           </tr>
         </tbody>
-      </au-table> -->
-      <au-icon type="minus"></au-icon>
+      </au-table>
+      <!-- <au-icon type="minus"></au-icon> -->
     </au-panel>
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
@@ -315,8 +345,10 @@
 </template>
 
 <script>
+import AJsonSchema from '../admin-ui/src/components/json-schema'
 export default {
   name: 'json-schema',
+  components: { AJsonSchema },
   data () {
     return {
       jsonSchema: {
@@ -339,7 +371,7 @@ export default {
           text: '初始值',
           default (type) {
             switch (type) {
-              case 'string': return 'test'
+              case 'string': return 'test123'
               case 'boolean': return false
               case 'number':
               case 'integer': return 999
@@ -352,12 +384,26 @@ export default {
           type: 'boolean',
           default: false
         }
-      ]
+      ],
+      required: {
+        validator (v) {
+          // console.log(v, '---')
+          return v && v.trim()
+        },
+        warning: '必填哟！！！'
+      }
     }
   },
   watch: {
     jsonSchema (v) {
-      console.log(JSON.stringify(v))
+      console.log(v)
+    }
+  },
+  methods: {
+    validate () {
+      this.$refs.jsonSchema.validate().then(res => {
+        console.log('out res', res)
+      })
     }
   }
 }

@@ -619,7 +619,7 @@ var render = function() {
             "div",
             {
               key: tip + "" + i,
-              staticClass: "au-form-warning au-theme-color--base-11"
+              staticClass: "au-form-warning au-theme-color--base-8"
             },
             [_vm._v(_vm._s(tip))]
           )

@@ -4128,6 +4128,8 @@ module.exports = !__webpack_require__("+E39") && !__webpack_require__("S82l")(fu
   },
   methods: {
     validate: function validate() {
+      var _this = this;
+
       var vm = this;
       if (vm.warnings && vm.warnings.length) return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.resolve(true);
       if (!vm.validators) return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.resolve(true);
@@ -4176,6 +4178,9 @@ module.exports = !__webpack_require__("+E39") && !__webpack_require__("S82l")(fu
           // if sync validation failed
           resolve(!vm.hasLocalWarnings);
         }
+      }).catch(function (e) {
+        console.warn("Admin UI@" + _this.$options._componentTag + "@validate: " + e);
+        return false;
       });
     }
   }

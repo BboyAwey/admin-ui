@@ -14,6 +14,7 @@
             propertyName: [required],
             init: [required]
           }" ref="jsonSchema"/>
+        <br>
         <au-button @click="validate">validate</au-button>
       </div>
       <!-- 组件示例 -->

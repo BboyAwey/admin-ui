@@ -105,6 +105,9 @@ export default {
         } else { // if sync validation failed
           resolve(!vm.hasLocalWarnings)
         }
+      }).catch(e => {
+        console.warn(`Admin UI@${this.$options._componentTag}@validate: ${e}`)
+        return false
       })
     }
   }

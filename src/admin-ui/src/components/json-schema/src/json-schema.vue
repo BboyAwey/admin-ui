@@ -179,7 +179,7 @@
         }
       ]">
       <au-input
-        v-show="currentItem.__custom.type ? currentItem.__custom.type !== 'boolean' : currentItem.__localSchema.type !== 'boolean'"
+        v-if="currentItem.__custom.type ? currentItem.__custom.type !== 'boolean' : currentItem.__localSchema.type !== 'boolean'"
         :type="(currentItem.__custom.type ? currentItem.__custom.type !== 'string' : currentItem.__localSchema.type !== 'string') ? 'text' : 'textarea'"
         width="100%"
         height="100px"
@@ -190,12 +190,14 @@
         :validators="validators[currentItem.__custom.key] || []"
         ref="newCustomInput"/>
       <au-radio
-        v-show="currentItem.__custom.type ? currentItem.__custom.type === 'boolean' : currentItem.__localSchema.type === 'boolean'"
+        v-if="currentItem.__custom.type ? currentItem.__custom.type === 'boolean' : currentItem.__localSchema.type === 'boolean'"
         :radios="[
           { text: 'true', value: true },
           { text: 'false', value: false }
         ]"
-        v-model="currentItemNewCustom"/>
+        :validators="validators[currentItem.__custom.key] || []"
+        v-model="currentItemNewCustom"
+        ref="newCustomInput"/>
     </au-modal>
   </div>
 </template>
@@ -360,22 +362,22 @@ export default {
       this.$set(this.localSchema, key, value)
     },
     setCustom (item, source) {
+      if (!item.__custom) {
+        item = {
+          __custom: item,
+          __key: this.localKey,
+          __set: this.setCustomSchemaValue.bind(this),
+          __localSchema: this.localSchema
+        }
+      }
       if (this._isRoot) {
         this.currentItem = item
         this.currentItemNewCustom = item.__localSchema[item.__custom.key]
         this.customModalVisible = true
         this.$nextTick(_ => {
-          this.$refs.newCustomInput.focus()
+          this.$refs.newCustomInput && this.$refs.newCustomInput.focus()
         })
       } else {
-        if (source) {
-          item = {
-            __custom: item,
-            __key: this.localKey,
-            __set: this.setCustomSchemaValue.bind(this),
-            __localSchema: this.localSchema
-          }
-        }
         this.$emit('set-custom', item)
       }
     },
@@ -500,12 +502,24 @@ export default {
       return Promise.all([
         this.$refs.key.validate(),
         ...(this.localSchema.type === 'object'
-          ? this.$refs.objectChildren.map(c => c.validate())
+          ? this.$refs.objectChildren.map(c => {
+            return new Promise(resolve => {
+              c.validate().then(res => resolve(res))
+            }).catch(e => {
+              console.warn(`Admin UI@json-schema@validate: ${e}`)
+              return false
+            })
+          })
           : [Promise.resolve(true)]),
         this.localSchema.type === 'array'
-          ? this.$refs.arrayChildren.validate()
+          ? this.$refs.arrayChildren.validate().catch(e => {
+            console.warn(`Admin UI@json-schema@validate: ${e}`)
+            return false
+          })
           : Promise.resolve(true)
-      ]).then(res => {
+      ]).catch(e => {
+        console.warn(`Admin UI@json-schema@validate: ${e}`)
+      }).then(res => {
         return !res.includes(false)
       })
     }

@@ -321,6 +321,8 @@ export default {
         } else {
           resolve(true)
         }
+      }).catch(e => {
+        console.warn(`Admin UI@${this.$options._componentTag}@throughMatcher: ${e}`)
       })
     },
     setTag (value) {

@@ -7,7 +7,7 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-input label="表白吧" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" :associations="associations" @association-select="handleAssociationSelect"></au-input><br><br>
-        <au-input label="我是一个textarea" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="validators" type="textarea"></au-input><br>
+        <au-input label="我是一个textarea" label-width="150px" :tips="tips" v-model="value" placeholder="说你爱我" :validators="[]" type="textarea"></au-input><br>
       </div>
       <!-- 组件示例 -->
     </au-panel>

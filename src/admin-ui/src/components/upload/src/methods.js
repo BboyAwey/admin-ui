@@ -150,6 +150,8 @@ export default {
         reader.onError = err => {
           reject(err)
         }
+      }).catch(e => {
+        console.warn(`Admin UI@${this.$options._componentTag}@readUrlPromise: ${e}`)
       })
     },
     uploadFiles () {

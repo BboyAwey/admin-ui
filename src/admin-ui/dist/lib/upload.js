@@ -3487,6 +3487,8 @@ $exports.store = store;
       });
     },
     readUrlPromise: function readUrlPromise(file) {
+      var _this6 = this;
+
       var reader = this.fileReader;
       return new __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
         reader.readAsDataURL(file);
@@ -3496,6 +3498,8 @@ $exports.store = store;
         reader.onError = function (err) {
           reject(err);
         };
+      }).catch(function (e) {
+        console.warn('Admin UI@' + _this6.$options._componentTag + '@readUrlPromise: ' + e);
       });
     },
     uploadFiles: function uploadFiles() {
@@ -3545,11 +3549,11 @@ $exports.store = store;
       }
     },
     download: function download(file, index) {
-      var _this6 = this;
+      var _this7 = this;
 
       if (typeof this.beforeDownload === 'function') {
         this.exceEventHandler(this.beforeDownload, [file, index], function (data) {
-          _this6.triggleDownload(file.url);
+          _this7.triggleDownload(file.url);
         }, function (err) {
           if (err) console.warn('Admin UI@upload@download: ' + err);
         });
@@ -3567,7 +3571,7 @@ $exports.store = store;
       }
     },
     remove: function remove(index) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (!this.autoUpload) {
         this.localFileList.splice(index, 1);
@@ -3575,8 +3579,8 @@ $exports.store = store;
       } else {
         if (typeof this.beforeRemove === 'function') {
           this.exceEventHandler(this.beforeRemove, [this.localFileList[index], index], function (data) {
-            _this7.localFileList.splice(index, 1);
-            _this7.files.splice(index, 1);
+            _this8.localFileList.splice(index, 1);
+            _this8.files.splice(index, 1);
           }, function (err) {
             if (err) console.warn('Admin UI@upload@remove: ' + err);
           });
@@ -3587,7 +3591,7 @@ $exports.store = store;
       }
     },
     preview: function preview(index) {
-      var _this8 = this;
+      var _this9 = this;
 
       function showPreviewer(current) {
         this.images = this.getImgs(index);
@@ -3597,7 +3601,7 @@ $exports.store = store;
       if (this.canPreview) {
         if (typeof this.beforePreview === 'function') {
           this.exceEventHandler(this.beforePreview, [this.localFileList[index], index], function (data) {
-            showPreviewer.call(_this8, index);
+            showPreviewer.call(_this9, index);
           }, function (err) {
             if (err) console.warn('Admin UI@upload@preview: ' + err);
           });

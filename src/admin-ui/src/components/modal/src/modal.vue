@@ -228,8 +228,8 @@ export default {
     },
     enterHandler (e) {
       if (e.keyCode !== 13) return
-      this.buttonList.forEach(button => {
-        if (button.text === this.onEnter) this.operate(button)
+      this.buttons.forEach((button, index) => {
+        if (button.text === this.onEnter) this.operate(index)
       })
     }
   }

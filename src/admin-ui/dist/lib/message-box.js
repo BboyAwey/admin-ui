@@ -1576,8 +1576,8 @@ if (false) {(function () {
       var _this2 = this;
 
       if (e.keyCode !== 13) return;
-      this.buttonList.forEach(function (button) {
-        if (button.text === _this2.onEnter) _this2.operate(button);
+      this.buttons.forEach(function (button, index) {
+        if (button.text === _this2.onEnter) _this2.operate(index);
       });
     }
   }

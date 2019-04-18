@@ -1,6 +1,6 @@
 <style lang="scss">
   .au-scroller {
-    // position: relative;
+    position: relative;
     overflow-y: hidden;
   }
   .au-scroller-content {
@@ -9,7 +9,7 @@
     min-height: 100%;
     top: 0;
     left: 0;
-    transition: top .3s ease-out;
+    transition: transform .3s ease-out;
   }
   .au-scroller-content:after {
     content: "";
@@ -35,7 +35,7 @@
     height: 100%;
     border-radius: 6px;
     opacity: .2;
-    transition-property: top, width, opacity;
+    transition-property: transform, width, opacity;
     transition-duration: .3s;
     transition-timing-function: ease-out;
     cursor: pointer;
@@ -56,7 +56,7 @@
     <div
       class="au-scroller-content"
       ref="content"
-      :style="{ top: contentTop + 'px' }"
+      :style="{ transform:  `translateY(${contentTop}px)` }"
       :class="{ 'au-no-select': onDrag }">
       <slot></slot>
     </div>
@@ -69,7 +69,7 @@
       <div
         class="au-scroller-bar-core au-theme-background-color--base-0"
         ref="core"
-        :style="{ top: scrollCoreTop + 'px', height: coreHeight + 'px' }"
+        :style="{ transform:  `translateY(${scrollCoreTop}px)`, height: coreHeight + 'px' }"
         @mousedown="handleCoreMousedown"
         @mouseup="handleCoreMouseUp"></div>
     </div>

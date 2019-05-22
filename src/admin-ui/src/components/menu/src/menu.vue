@@ -93,10 +93,6 @@
       // line-height: 60px;
       cursor: pointer;
     }
-    // & > li {
-    //   height: 60px;
-    //   line-height: 60px;
-    // }
     .menu-icon {
       // top: 4px;
       // left: 10px;

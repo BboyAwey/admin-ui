@@ -81,9 +81,12 @@
       <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" ref="modal">
         <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title" ref="title">{{ title }}</h4>
         <div class="au-modal-content" ref="content">
-          <au-scroller class="au-modal-content-scroller" stop-propagation ref="contentScroller">
-            <slot></slot>
+          <au-scroller class="au-modal-content-scroller" stop-propagation>
+            <div ref="contentCore"><slot></slot></div>
           </au-scroller>
+          <!-- <div>
+            Pariatur Lorem laboris excepteur Lorem Lorem anim veniam in. Magna velit duis anim aliquip laboris labore fugiat. Ullamco magna eiusmod ullamco sit voluptate. Sunt eiusmod magna anim ullamco elit sunt minim in proident ad aute. Laborum aliquip sint esse enim incididunt pariatur aliqua incididunt.
+          </div> -->
         </div>
         <div class="au-modal-dec-line au-theme-border-color--base-10" ref="decline"></div>
         <div class="au-modal-operations" v-show="buttons && buttons.length" ref="operations">
@@ -117,7 +120,8 @@ export default {
   data () {
     return {
       localDisplay: this.visible,
-      buttonLoadings: []
+      buttonLoadings: [],
+      placement: null
     }
   },
   props: {
@@ -142,17 +146,30 @@ export default {
     visible (v) {
       this.localDisplay = v
       if (v) {
+        if (!this.placement) {
+          this.placement = document.createElement('span')
+        }
+        this.$el.parentNode.insertBefore(this.placement, this.$el)
+        document.body.appendChild(this.$el)
+
+        window.addEventListener('keyup', this.escHandler)
+        if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
+        addListener(this.$refs.contentCore, this.resizeHandler)
+
+        let timer = setTimeout(_ => {
+          this.resizeHandler()
+          clearTimeout(timer)
+          timer = null
+        }, 0)
         this.$nextTick(_ => {
           this.calcModalStyle()
           this.calModalContentStyle()
         })
-        window.addEventListener('keyup', this.escHandler)
-        if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
-        addListener(this.$refs.contentScroller.$refs.content, this.resizeHandler)
       } else {
+        this.placement.parentNode.insertBefore(this.$el, this.placement)
         window.removeEventListener('keyup', this.escHandler)
         if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
-        removeListener(this.$refs.contentScroller.$refs.content, this.resizeHandler)
+        removeListener(this.$refs.contentCore, this.resizeHandler)
       }
     },
     localDisplay (v) {
@@ -210,7 +227,6 @@ export default {
         titleHeight = getElementSize(this.$refs.title).height
       }
       let modalHeight = getElementSize(this.$refs.modal).height
-
       // we need to minus the padding value of modal and opreation divs and the decline height
       this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
     },

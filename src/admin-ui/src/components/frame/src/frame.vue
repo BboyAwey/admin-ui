@@ -102,11 +102,9 @@
 </template>
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
-import Scroller from '../../scroller'
 
 export default {
   name: 'au-frame',
-  components: { Scroller },
   created () {
     window.addEventListener('resize', this.resize)
   },

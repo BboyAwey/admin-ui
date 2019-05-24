@@ -11,6 +11,7 @@
           :associations="associations"
           @input-change="inputChange"
           :loading="loading"
+          width="300px"
           label="打标签"/>
       </div>
       <!-- 组件示例 -->
@@ -500,9 +501,11 @@ export default {
         'tag3'
       ],
       associations: [
-        'abcd',
-        'efgh',
-        '1234'
+        '8duy73',
+        'idl29d',
+        'a8d20s',
+        'f3du92',
+        '7uij29'
       ],
       tagMatcher (v) {
         return /\d/g.test(v)
@@ -519,7 +522,6 @@ export default {
     inputChange (v) {
       this.loading = true
       setTimeout(() => {
-        this.associations.push(v)
         this.loading = false
       }, 2000)
     }

@@ -18,16 +18,26 @@
     opacity: .75;
   }
   .au-loading-core-container {
-    position: relative;
-    max-height: 100%;
-    text-align: left;
-    line-height: 0; // let container height just the same as svg height plus message height
-    overflow: hidden; // let container height just the same as svg height plus message height
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .au-loading-svg {
     display: inline-block;
-    position: relative;
-    left: 50%;
+    // position: relative;
+    // left: 50%;
   }
   .au-loading-message {
     position: relative;
@@ -52,22 +62,22 @@
   }">
     <div class="au-loading-mask au-theme-background-color--base-12" v-show="mask"></div>
     <div class="au-loading-core-container" ref="coreContainer">
-      <svg ref="svg" viewBox="0 0 50 50" class="au-loading-svg"
-        :width="size || 0" :height="size || 0"
-        :style="{
-          animation: '1.33333s linear 0s normal none infinite running Rotate',
-          marginLeft: size / 2 * -1 + 'px'
-        }">
-        <circle ref="core" fill="none" :stroke="stroke" stroke-width="5" stroke-linecap="round" cx="25" cy="25" r="20" style="
-        transform-origin: center center 0px;
-        animation: 1s ease 0s normal none infinite running CircularBarDash;"></circle>
-      </svg>
-      <p class="au-loading-message" v-show="message">{{ message }}</p>
+      <div>
+        <svg ref="svg" viewBox="0 0 50 50" class="au-loading-svg"
+          :width="size || 0" :height="size || 0"
+          :style="{
+            animation: '1.33333s linear 0s normal none infinite running Rotate',
+          }">
+          <circle ref="core" fill="none" :stroke="stroke" stroke-width="5" stroke-linecap="round" cx="25" cy="25" r="20" style="
+          transform-origin: center center 0px;
+          animation: 1s ease 0s normal none infinite running CircularBarDash;"></circle>
+        </svg>
+        <p class="au-loading-message" v-show="message">{{ message }}</p>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import getElementSize from '../../../helpers/dom/get-element-size'
 import namespace from '../../../helpers/utils/namespace.js'
 import { removeClass } from '../../../helpers/dom/class.js'
 
@@ -102,9 +112,6 @@ export default {
     }
   },
   methods: {
-    setTop (elHeight) { // exec in loading.js
-      this.$refs.coreContainer.style.top = (elHeight - getElementSize(this.$refs.coreContainer).height) / 2 + 'px'
-    },
     insertSvgStyleTag () {
       let style = document.createElement('style')
       style.innerHTML = `

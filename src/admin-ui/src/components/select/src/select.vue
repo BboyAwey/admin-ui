@@ -83,6 +83,7 @@
     }
   }
   .au-select-close-icon {
+    margin-left: 3px;
     cursor: pointer;
   }
 </style>
@@ -138,7 +139,13 @@
               <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
               <li v-else v-for="(option, i) in selectedOptions" :key="i">
                 <span>{{ option.text }}</span>
-                <span @click.stop="deleteSelectedOption(i)" class="au-select-close-icon">
+                <span
+                  @click.stop="deleteSelectedOption(i)"
+                  class="
+                    au-select-close-icon
+                    au-theme-color--base-10
+                    au-theme-hover-color--danger
+                  ">
                   <au-icon type="times"/>
                 </span>
               </li>
@@ -182,7 +189,7 @@ import Loading from '../../loading'
 export default {
   name: 'au-select',
   mixins: [ValidatorMixin, FormApiMixin],
-  components: {AuIcon, AuScroller, FormItem, AuPopover},
+  components: { AuIcon, AuScroller, FormItem, AuPopover },
   created () {
     this.localValueToSelectedOptions()
   },
@@ -278,7 +285,7 @@ export default {
       this.$refs.core.style.height = height + 'px'
     },
     localValueToSelectedOptions () {
-      let {options, localValue} = this
+      let { options, localValue } = this
       let res = []
       let findSelectedOptionByValue = (value, options) => {
         for (let i = 0; i < options.length; i++) {

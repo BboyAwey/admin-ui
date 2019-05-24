@@ -178,19 +178,19 @@
               visible: false,
               images: [
                 {
-                  src: '/static/images/1.jpg',
+                  src: '/images/1.jpg',
                   alt: 'Nice Scence 1'
                 },
                 {
-                  src: '/static/images/2.jpg',
+                  src: '/images/2.jpg',
                   alt: 'Nice Scence 2'
                 },
                 {
-                  src: '/static/images/3.jpg',
+                  src: '/images/3.jpg',
                   alt: 'Nice Scence 3'
                 },
                 {
-                  src: '/static/images/4.jpg',
+                  src: '/images/4.jpg',
                   alt: 'Nice Scence 4'
                 }
               ]
@@ -209,19 +209,19 @@ export default {
       visible: false,
       images: [
         {
-          src: '/static/images/1.jpg',
+          src: '/images/1.jpg',
           alt: 'Nice Scence 1'
         },
         {
-          src: '/static/images/2.jpg',
+          src: '/images/2.jpg',
           alt: 'Nice Scence 2'
         },
         {
-          src: '/static/images/3.jpg',
+          src: '/images/3.jpg',
           alt: 'Nice Scence 3'
         },
         {
-          src: '/static/images/4.jpg',
+          src: '/images/4.jpg',
           alt: 'Nice Scence 4'
         }
       ]

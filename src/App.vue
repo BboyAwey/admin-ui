@@ -28,7 +28,11 @@
           :collapse="false"/>
       </div>
       <div slot="content">
-        <au-scroller style="height: 100%;" ref="scroller" :scroll-top="scrollTop" @scroll="handleScroll" hide-popovers>
+        <au-scroller
+          style="height: 100%;"
+          ref="scroller"
+          :scroll-top="scrollTop"
+          @scroll="handleScroll">
           <router-view></router-view>
         </au-scroller>
       </div>
@@ -57,7 +61,7 @@ export default {
       }
     },
     handleScroll (v) {
-      this.scrollTop = v
+      this.scrollTop = v.scrollTop
     }
   }
 }

@@ -301,7 +301,7 @@ export default {
 
       // save the renderd value
       this.renderedDateObj = calcYmdObj(value)
-      let {year, month} = this.renderedDateObj
+      let { year, month } = this.renderedDateObj
       // the day of the first date in this month
       let firstDay = new Date(year, month - 1, 1).getDay()
       let monthDayCount = this.monthDayCount(year)

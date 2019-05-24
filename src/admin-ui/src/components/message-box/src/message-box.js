@@ -138,7 +138,7 @@ function MessageBox (config) {
     }
   }
   // set content instance props
-  Object.assign(contentInstance, {message, icon, messageType, validators, placeholder})
+  Object.assign(contentInstance, { message, icon, messageType, validators, placeholder })
   // put the content into modal and show them on document
   refreshContent(instances.modal.$refs.content, contentInstance)
   instances.modal.title = title

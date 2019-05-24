@@ -22,7 +22,6 @@
             v-for="(tab, i) in tabs"
             :name="tab.name" :key="i">
             {{ tab.text }}
-            <div>hhhhhhh</div>
           </div>
         </au-tabs>
       </div>

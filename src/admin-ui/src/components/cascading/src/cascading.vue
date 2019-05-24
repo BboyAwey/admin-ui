@@ -56,13 +56,13 @@
 <script>
 import FormApiMixin from '../../../helpers/form-api-mixin'
 import ValidatorMixin from '../../../helpers/validator-mixin'
-import auSelect from '../../select'
+import AuSelect from '../../select'
 import FormItem from '../../../helpers/form-item.vue'
 
 export default {
   name: 'au-cascading',
   mixins: [FormApiMixin, ValidatorMixin],
-  components: {auSelect, FormItem},
+  components: { AuSelect, FormItem },
   data () {
     return {
       // ancestor chain, used to save selected value

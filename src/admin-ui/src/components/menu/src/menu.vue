@@ -9,7 +9,7 @@
     li {
       position: relative;
     }
-    .menu {
+    .menu-item {
       position: relative;
       height: 40px;
       padding: 0 20px 0 0;
@@ -87,7 +87,7 @@
   }
   .au-menu.collapse {
     width: 60px !important;
-    .menu {
+    .menu-item {
       // height: 60px;
       padding: 0;
       // line-height: 60px;
@@ -144,7 +144,7 @@
         transform: localCollapse ? '' : 'rotate(180deg)'
       }" unify-size/>
     </div>
-    <au-scroller v-if="isTopLevel" style="height: 100%;" :scroll-top="scrollTop" @scroll="v => scrollTop = v">
+    <au-scroller v-if="isTopLevel" style="height: 100%;">
       <ul>
         <li
           v-for="(item, i) in localItems"
@@ -155,14 +155,15 @@
             :trigger="hasChildren(item) ? 'click' : 'hover'"
             :hide-on-blur="true"
             :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
-            :plain="hasChildren(item)">
+            :plain="hasChildren(item)"
+            @show="_ => hasChildren(item) && handlePopoverHide(i)">
             <au-popover
               ref="tipPopover"
               slot="target"
               :disabled="!localCollapse"
               :trigger="'hover'"
               :placement="'right middle'">
-              <div class="menu"
+              <div class="menu-item"
                 slot="target"
                 :class="{
                   [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
@@ -200,12 +201,12 @@
             <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
               {{ item.text }}
             </div>
-            <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-color--base-3">
+
+            <au-scroller v-if="hasChildren(item)" ref="scroller" slot="content" class="au-menu-popover-content au-theme-color--base-3">
               <au-menu
                 :items="item.children"
                 :collapsable="false"
                 :is-popover="true"
-                :popover-ins="$refs.popover"
                 :is-top-level="false"
                 :all="isTopLevel ? localItems : all"
                 @select="handlePopSelect"
@@ -243,77 +244,36 @@
       <li
         v-for="(item, i) in localItems"
         :key="i">
-        <au-popover
-          ref="popover"
-          :disabled="!localCollapse"
-          :trigger="hasChildren(item) ? 'click' : 'hover'"
-          :hide-on-blur="true"
-          :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
-          :plain="hasChildren(item)">
-          <au-popover
-            ref="tipPopover"
-            slot="target"
-            :disabled="!localCollapse"
-            :trigger="'hover'"
-            :placement="'right middle'">
-            <div class="menu"
-              slot="target"
-              :class="{
-                [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
-                [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
-                [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'primary-bottom'}`]: !isItemActive(item),
-                [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
-                [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
-                [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
-              }"
-              :style="{
-                paddingLeft: calcPaddingLeft(item)
-              }"
-              @click="select(item, i)">
-              <div
-                v-show="isItemActive(item)"
-                class="active-dec"
-                :class="`au-theme-background-color--${itemActiveFontColor || 'primary'}`"
-              ></div>
-              <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
-              <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
-              <au-icon class="menu-fold-icon
-                au-theme-color--base-3
-                au-theme-hover-color--primary"
-                type="angle-down"
-                v-if="hasChildren(item)"
-                v-show="!localCollapse"
-                :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '12px' : ''}"
-                @click.native.stop="toggleCollapse(item)"/>
-            </div>
-            <div slot="content" class="au-menu-pop-content">
-              {{ item.text }}
-            </div>
-          </au-popover>
-
-          <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
-            {{ item.text }}
-          </div>
-          <au-scroller v-if="hasChildren(item)" slot="content" class="au-menu-popover-content au-theme-color--base-3">
-            <au-menu
-              :items="item.children"
-              :collapsable="false"
-              :is-popover="true"
-              :popover-ins="$refs.popover"
-              :is-top-level="false"
-              :all="isTopLevel ? localItems : all"
-              @select="handlePopSelect"
-              :background-color="backgroundColor"
-              :item-font-color="itemFontColor"
-              :item-background-color="itemBackgroundColor"
-              :item-unlink-font-color="itemUnlinkTextColor"
-              :item-hover-font-color="itemHoverFontColor"
-              :item-hover-background-color="itemHoverBackgroundColor"
-              :item-active-font-color="itemActiveFontColor"
-              :item-active-background-color="itemActiveBackgroundColor"
-              :collapse-handlebar-seprator-color="collapseHandlebarSepratorColor"/>
-          </au-scroller>
-        </au-popover>
+        <div class="menu-item"
+          slot="target"
+          :class="{
+            [`au-theme-background-color--${itemBackgroundColor}`]: !!itemBackgroundColor && !isItemActive(item),
+            [`au-theme-color--${itemFontColor}`]: !!itemFontColor && !isItemActive(item) && item.url,
+            [`au-theme-hover-background-color--${itemHoverBackgroundColor || 'primary-bottom'}`]: !isItemActive(item),
+            [`au-theme-hover-color--${itemHoverFontColor || 'primary'}`]: !isItemActive(item) && item.url,
+            [`au-theme-color--${itemUnlinkTextColor || 'base-7'}`]: !item.url && !isItemActive(item) && !localCollapse,
+            [`au-theme-color--${itemActiveFontColor || 'primary'} au-theme-background-color--${itemActiveBackgroundColor || 'primary-bottom'}`]: isItemActive(item),
+          }"
+          :style="{
+            paddingLeft: calcPaddingLeft(item)
+          }"
+          @click="select(item, i)">
+          <div
+            v-show="isItemActive(item)"
+            class="active-dec"
+            :class="`au-theme-background-color--${itemActiveFontColor || 'primary'}`"
+          ></div>
+          <au-icon class="menu-icon" v-if="item.icon" :type="item.icon" unify-size/>
+          <span class="menu-text" :style="{ marginRight: hasChildren(item) ? '16px' : ''}">{{ item.text }}</span>
+          <au-icon class="menu-fold-icon
+            au-theme-color--base-3
+            au-theme-hover-color--primary"
+            type="angle-down"
+            v-if="hasChildren(item)"
+            v-show="!localCollapse"
+            :style="{transform: `rotate(${item.collapse ? '-90' : '0'}deg)`, right: item.collapse ? '12px' : ''}"
+            @click.native.stop="toggleCollapse(item)"/>
+        </div>
         <au-menu
           v-if="hasChildren(item)"
           v-show="!localCollapse && !item.collapse"
@@ -590,6 +550,13 @@ export default {
         this.$refs.popover.forEach(p => p.hide())
       }
       this.$emit('select', item)
+    },
+    handlePopoverHide (i) {
+      if (this.$refs.scroller && this.$refs.scroller.length) {
+        for (let s of this.$refs.scroller) {
+          s.scrollTo({ scrollTop: 0 })
+        }
+      }
     },
     isColorNum (color) {
       return /^#/.test(color)

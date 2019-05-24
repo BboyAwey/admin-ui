@@ -13,9 +13,7 @@
           :relative="true"
           :absolute="true"
           size="normal"
-          :disabled="false"
-        ></au-rangepicker>
-        <au-button @click="handleButtonClick">最近30分钟</au-button>
+          :disabled="false"></au-rangepicker>
       </div>
       <!-- 组件示例 -->
     </au-panel>

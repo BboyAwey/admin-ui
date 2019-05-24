@@ -6,11 +6,11 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-tag type="primary" hoverable>标签</au-tag>
-        <au-tag type="danger" size="small">标签</au-tag>
-        <au-tag type="info" size="mini">标签</au-tag>
-        <au-tag type="warning" closable active>标签</au-tag>
-        <au-tag type="success" closable hoverable>标签</au-tag>
+        <!-- <au-tag style="margin-right: 10px;" type="primary" hoverable>标签</au-tag>
+        <au-tag style="margin-right: 10px;" type="danger" size="small">标签</au-tag>
+        <au-tag style="margin-right: 10px;" type="info" size="mini">标签</au-tag> -->
+        <au-tag style="margin-right: 10px;" type="warning" closable active>标签</au-tag>
+        <au-tag style="margin-right: 10px;" type="success" closable hoverable>标签</au-tag>
       </div>
       <!-- 组件示例 -->
     </au-panel>

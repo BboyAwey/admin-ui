@@ -525,7 +525,7 @@ export default {
       handler (v) {
         if (isRangeChange(v, this.localRange, this.type)) {
           this.localRange = Object.assign(
-            {relative: v.relative},
+            { relative: v.relative },
             resolveRange(v.relative ? getRangeFromDateObj(new Date(), v.relative) : v)
           )
         }

@@ -7,7 +7,7 @@ let getMessageInstance = function () {
   if (pool.length) {
     return pool.shift()
   } else {
-    let ins = new (Vue.extend(MessageConfig))({el: document.createElement('div')})
+    let ins = new (Vue.extend(MessageConfig))({ el: document.createElement('div') })
     return ins
   }
 }

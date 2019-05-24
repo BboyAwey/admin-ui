@@ -56,7 +56,7 @@
             </tr>
           </tfoot>
         </au-table>
-        <au-button @click="add">插入</au-button>
+        <!-- <au-button @click="add">插入</au-button> -->
       </div>
       <!-- 组件示例 -->
     </au-panel>

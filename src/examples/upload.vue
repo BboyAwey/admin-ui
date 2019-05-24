@@ -686,7 +686,7 @@ export default {
   },
   methods: {
     change (files) {
-      console.log(files)
+      // console.log(files)
     }
   }
 }

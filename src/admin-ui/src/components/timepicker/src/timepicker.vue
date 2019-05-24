@@ -28,9 +28,10 @@
     position: relative;
     float: left;
     width: 65px;
+    height: 100%;
     padding: 64px 0;
     transition: top .2s ease-out;
-    & > li {
+    li {
       height: 32px;
       line-height: 32px;
       font-size: $normal;
@@ -101,59 +102,70 @@
           au-theme-box-shadow--base
           au-sizegap-${size}
         `" ref="popup" v-show="popup" tabindex="0" @blur="popupBlur">
-          <ul
+          <au-scroller
+            ref="hours"
             class="au-timepicker-timelist au-timepicker-hours au-theme-border-color--base-10"
             :class="{'au-timepicker-no-seconds': !seconds}"
-            ref="hours"
-            @click.stop
-            :style="{
-              top: hoursOffset + 'px'
-            }">
-            <li
-              v-for="(num, index) in 24"
-              :key="index"
-              @click.stop="selectTime(num, 'hour')"
-              :class="{
-                'au-theme-color--primary': isValid(num, 'h') && num - 1 == hour,
-                'au-theme-color--base-11': !isValid(num, 'h'),
-              }" :style="{
-                cursor: isValid(num, 'h') ? '' : 'not-allowed'
-              }">{{ formatNum(num - 1) }}</li>
-          </ul>
-          <ul
+            direction="vertical"
+            :scrollTop="hScrollTop"
+            @scroll="v => hScrollTop = v.scrollTop">
+            <ul>
+              <li
+                v-for="(num, index) in 24"
+                :key="index"
+                @click.stop="selectTime(num, 'hour')"
+                :class="{
+                  'au-theme-hover-background-color--primary-bottom': isValid(num, 'h'),
+                  'au-theme-color--primary': isValid(num, 'h') && num - 1 == hour,
+                  'au-theme-color--base-11': !isValid(num, 'h'),
+                }" :style="{
+                  cursor: isValid(num, 'h') ? '' : 'not-allowed'
+                }">{{ formatNum(num - 1) }}</li>
+            </ul>
+          </au-scroller>
+          <au-scroller
+            ref="minutes"
             class="au-timepicker-timelist au-timepicker-minutes au-theme-border-color--base-10"
             :class="{'au-timepicker-no-seconds': !seconds}"
-            ref="minutes"
-            @click.stop
-            :style="{ top: minutesOffset + 'px' }">
-            <li
-              v-for="num in 60"
-              :key="num"
-              @click.stop="selectTime(num, 'minute')"
-              :class="{
-                'au-theme-color--primary': isValid(num, 'm') && num - 1 == minute,
-                'au-theme-color--base-11': !isValid(num, 'm')
-              }" :style="{
-                cursor: isValid(num, 'm') ? '' : 'not-allowed'
-              }">{{ formatNum(num - 1) }}</li>
-          </ul>
-          <ul
+            direction="vertical"
+            :scrollTop="mScrollTop"
+            @scroll="v => mScrollTop = v.scrollTop">
+            <ul>
+             <li
+                v-for="num in 60"
+                :key="num"
+                @click.stop="selectTime(num, 'minute')"
+                :class="{
+                  'au-theme-hover-background-color--primary-bottom': isValid(num, 'm'),
+                  'au-theme-color--primary': isValid(num, 'm') && num - 1 == minute,
+                  'au-theme-color--base-11': !isValid(num, 'm')
+                }" :style="{
+                  cursor: isValid(num, 'm') ? '' : 'not-allowed'
+                }">{{ formatNum(num - 1) }}</li>
+            </ul>
+          </au-scroller>
+          <au-scroller
             v-if="seconds"
             class="au-timepicker-timelist au-timepicker-seconds au-theme-border-color--base-10"
             ref="seconds"
-            @click.stop
-            :style="{ top: secondsOffset + 'px' }">
-            <li
-              v-for="num in 60"
-              :key="num"
-              @click.stop="selectTime(num, 'second')"
-              :class="{
-                'au-theme-color--primary': isValid(num, 's') && num - 1 == second,
-                'au-theme-color--base-11': !isValid(num, 's')
-              }" :style="{
-                cursor: isValid(num, 's') ? '' : 'not-allowed'
-              }">{{ formatNum(num - 1) }}</li>
-          </ul>
+            direction="vertical"
+            :scrollTop="sScrollTop"
+            @scroll="v => sScrollTop = v.scrollTop">
+            <ul>
+              <li
+                v-for="num in 60"
+                :key="num"
+                @click.stop="selectTime(num, 'second')"
+                :class="{
+                  'au-theme-hover-background-color--primary-bottom': isValid(num, 's'),
+                  'au-theme-color--primary': isValid(num, 's') && num - 1 == second,
+                  'au-theme-color--base-11': !isValid(num, 's')
+                }" :style="{
+                  cursor: isValid(num, 's') ? '' : 'not-allowed'
+                }">{{ formatNum(num - 1) }}</li>
+            </ul>
+          </au-scroller>
+
         </div>
       </div>
     </form-item>
@@ -162,8 +174,8 @@
 <script>
 import FormApiMixin from '../../../helpers/form-api-mixin'
 import ValidatorMixin from '../../../helpers/validator-mixin'
-import mousewheel from '../../../helpers/dom/mousewheel'
 import isEmptyString from '../../../helpers/utils/is-empty-string'
+import AuScroller from '../../scroller'
 import AuInput from '../../input'
 import FormItem from '../../../helpers/form-item.vue'
 
@@ -179,12 +191,8 @@ function getNumberIncludeZero (number) {
 export default {
   name: 'au-timepicker',
   mixins: [FormApiMixin, ValidatorMixin],
-  components: { AuInput, FormItem },
+  components: { AuInput, FormItem, AuScroller },
   mounted () {
-    mousewheel('add', this.$refs.hours, (e) => { this.listScroll(e, 'hour') })
-    mousewheel('add', this.$refs.minutes, (e) => { this.listScroll(e, 'minute') })
-    mousewheel('add', this.$refs.seconds, (e) => { this.listScroll(e, 'second') })
-
     this.initSeparateTime()
   },
   data () {
@@ -194,10 +202,10 @@ export default {
       hour: '',
       minute: '',
       second: '',
-      hoursOffset: 0,
-      minutesOffset: 0,
-      secondsOffset: 0,
-      popup: false
+      popup: false,
+      hScrollTop: 0,
+      mScrollTop: 0,
+      sScrollTop: 0
     }
   },
   props: {
@@ -219,10 +227,15 @@ export default {
     popup (v) {
       if (v) {
         let now = new Date()
-        this.scrollTo([
-          getNumberIncludeZero(this.hour) || this.formatNum(now.getHours()),
-          getNumberIncludeZero(this.minute) || this.formatNum(now.getMinutes()),
-          getNumberIncludeZero(this.second) || this.formatNum(now.getSeconds())])
+        let timer = setTimeout(() => {
+          this.scrollTo([
+            getNumberIncludeZero(this.hour) || this.formatNum(now.getHours()),
+            getNumberIncludeZero(this.minute) || this.formatNum(now.getMinutes()),
+            getNumberIncludeZero(this.second) || this.formatNum(now.getSeconds())
+          ])
+          clearTimeout(timer)
+          timer = null
+        }, 0)
         this.$emit('focus', this.time)
       } else {
         if (isEmptyString(this.inputTime)) {
@@ -379,18 +392,15 @@ export default {
       this.minute = timeArr[1]
       this.second = timeArr[2]
 
-      this.hoursOffset =
-        Number(this.hour) * SPEED > HOURSRANGE
-          ? -HOURSRANGE
-          : -Number(this.hour) * SPEED
-      this.minutesOffset =
-        Number(this.minute) * SPEED > MSRANGE
-          ? -MSRANGE
-          : -Number(this.minute) * SPEED
-      this.secondsOffset =
-        Number(this.second) * SPEED > MSRANGE
-          ? -MSRANGE
-          : -Number(this.second) * SPEED
+      this.hScrollTop = Number(this.hour) * SPEED > HOURSRANGE
+        ? HOURSRANGE
+        : Number(this.hour) * SPEED
+      this.mScrollTop = Number(this.minute) * SPEED > MSRANGE
+        ? MSRANGE
+        : Number(this.minute) * SPEED
+      this.sScrollTop = Number(this.second) * SPEED > MSRANGE
+        ? MSRANGE
+        : Number(this.second) * SPEED
     },
     clear () {
       this.inputTime = ''

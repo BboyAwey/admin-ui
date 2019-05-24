@@ -63,7 +63,6 @@ export default (config = {}) => {
   } else el = instance.$el
   target.appendChild(el)
   // instance.setColor()
-  instance.setTop(parseInt(height) - parseInt(borderTopWidth) - parseInt(borderBottomWidth))
 
   return instance
 }

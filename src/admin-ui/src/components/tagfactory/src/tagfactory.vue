@@ -3,12 +3,15 @@
 .au-tagfactory-body {
   position: relative;
   display: inline-block;
+  z-index: 1;
+  max-width: 100%;
 }
 .au-tagfactory-core {
   position: relative;
   display: inline-block;
   min-width: 83px;
   width: 100%;
+  height: 100%;
   padding: 5px;
   padding-bottom: 0;
   border-width: 1px;
@@ -49,11 +52,12 @@
   border-width: 1px;
   border-style: solid;
   font-size: $normal;
-  li {
+}
+.au-tagfactory-associations-item {
     display: block;
-    height: 28px;
+    height: 32px;
     padding: 0 8px;
-    margin: 4px 0;
+    margin: 0;
     line-height: 28px;
     font-size: $normal;
     word-break: keep-all;
@@ -63,7 +67,6 @@
     user-select: none;
     cursor: pointer;
   }
-}
 </style>
 <template>
   <div class="au-tagfactory au-theme-color--base-3" :style="{display: fullWidth ? 'block' : ''}">
@@ -78,7 +81,7 @@
       <div
         class="au-tagfactory-body"
         ref="body">
-        <au-scroller
+        <div
           ref="tagsContainer"
           class="au-tagfactory-core au-theme-border-radius--small"
           :class="{
@@ -94,7 +97,7 @@
             cursor: disabled ? 'not-allowed' : '',
             width, maxWidth, minWidth, minHeight, maxHeight
           }"
-          @click.native.stop="handleClick">
+          @click.stop="handleClick">
           <div
             class="au-tagfactory-placeholder au-theme-color--base-8"
             v-show="!localTags.length && !inputValue.length">
@@ -127,24 +130,25 @@
               @focus="handleCoreFocus"
               @blur="handleCoreBlur">
           </div>
-        </au-scroller>
+        </div>
         <au-scroller class="
           au-tagfactory-associations-container
           au-theme-border-color--base-11
           au-theme-background-color--base-12"
           v-show="(associationsShow && localAssociations.length) || (canCreate && inputValue && active)"
           ref="associationsContainer"
-          :scroll-top="associationsScrollTop" @scroll="v => associationsScrollTop = v">
-          <ul
-            class="au-tagfactory-associations">
+          direction="vertical"
+          :scrollTop="associationsScrollTop" @scroll="v => associationsScrollTop = v.scrollTop">
+          <ul>
             <li
-              class="au-theme-hover-background-color--base-11 au-theme-color--primary"
+              class="au-tagfactory-associations-item au-theme-hover-background-color--base-11 au-theme-color--primary"
               v-show="canCreate && inputValue && associations.indexOf(inputValue) === -1"
               @click="handleAssociationClick(inputValue)"> {{ inputValue }} </li>
             <li
               v-for="(association, i) in localAssociations"
               :key="i"
               :class="{
+                'au-tagfactory-associations-item': true,
                 'au-theme-background-color--primary-bottom': activeAssociationIndex === i + 1
               }"
               @mousemove="activeAssociationIndex = i + 1"
@@ -161,7 +165,7 @@
 import ValidatorMixin from '../../../helpers/validator-mixin'
 import FormApiMixin from '../../../helpers/form-api-mixin'
 import AuTag from '../../tag'
-import AuPopover from '../../popover'
+// import AuPopover from '../../popover'
 import AuScroller from '../../scroller'
 import Loading from '../../loading'
 import FormItem from '../../../helpers/form-item.vue'
@@ -169,7 +173,7 @@ import isAncestor from '../../../helpers/dom/is-ancestor'
 
 export default {
   name: 'au-tagfactory',
-  components: { AuTag, AuPopover, AuScroller, FormItem },
+  components: { AuTag, AuScroller, FormItem },
   mixins: [ValidatorMixin, FormApiMixin],
   model: {
     prop: 'tags',
@@ -214,7 +218,10 @@ export default {
     },
     warnings: Array,
     warning: Boolean,
-    loading: false
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -290,7 +297,8 @@ export default {
       if (v) {
         this.$nextTick(() => {
           this.loadingInstance = Loading({
-            target: this.associationsShow ? this.$refs.associationsContainer.$el : this.$refs.tagsContainer.$el
+            target: this.associationsShow ? this.$refs.associationsContainer.$el : this.$refs.tagsContainer.$el,
+            size: 30
           })
         })
       } else {
@@ -301,11 +309,8 @@ export default {
       }
     },
     activeAssociationIndex (v) {
-      if (v * 32 + 4 > this.associationsScrollTop + 8 * 32) {
-        this.associationsScrollTop = (v - 7) * 32
-      } else if ((v - 1) * 32 < this.associationsScrollTop) {
-        this.associationsScrollTop = (v - 1) * 32
-      }
+      console.log(v, this.associationsScrollTop)
+      this.associationsScrollTop = (v - 2) * 32
     }
   },
   methods: {
@@ -389,7 +394,7 @@ export default {
       }
     },
     handleCoreBlur (e) {
-      this.active = false
+      // this.active = false
       this.$emit('blur', this.localTags)
     },
     handleWindowClick (e) {

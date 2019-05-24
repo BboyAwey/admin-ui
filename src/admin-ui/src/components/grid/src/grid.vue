@@ -37,7 +37,6 @@
 <script>
 import getElementSize from '../../../helpers/dom/get-element-size'
 import getWindowSize from '../../../helpers/dom/get-window-size'
-// import heartbeat from '../../../helpers/utils/heartbeat.js'
 import { addListener, removeListener } from 'resize-detector'
 
 function validateWidth (v) { return v >= 1 && v <= 24 && parseInt(v) === Number(v) }
@@ -122,42 +121,11 @@ export default {
     }
   },
   mounted () {
-    // this.reorder()
-    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    // if (MutationObserver) {
-    //   let config = {
-    //     attributes: true,
-    //     childList: false,
-    //     subtree: false,
-    //     characterData: false,
-    //     attributeOldValue: false,
-    //     characterDataOldValue: false,
-    //     attributeFilter: ['style']
-    //   }
-    //   let vm = this
-    //   vm.observer = new MutationObserver(function (mutations) {
-    //     let hasDisplayChange = false
-    //     mutations.forEach(m => {
-    //       if (m.attributeName === 'style' && m.target.style.display !== 'none') {
-    //         hasDisplayChange = true
-    //       }
-    //     })
-    //     if (hasDisplayChange) {
-    //       vm.observer.disconnect() // need pause observe to prevent infinity loop
-    //       vm.$el.parentNode.style.display = 'flex'
-    //       vm.$nextTick(() => vm.observer.observe(vm.$el.parentNode, config)) // and after render the observing should continue
-    //     }
-    //   })
-    //   vm.observer.observe(vm.$el.parentNode, config)
-    // }
-
-    // heartbeat.add(this.reorder.bind(this), this._uid)
     this.reorder()
     addListener(this.$el.parentElement, this.reorder)
   },
   beforeDestroy () {
     if (this.observe) this.observer.disconnect()
-    // heartbeat.remove(this._uid)
     removeListener(this.$el.parentElement, this.reorder)
   },
   watch: {

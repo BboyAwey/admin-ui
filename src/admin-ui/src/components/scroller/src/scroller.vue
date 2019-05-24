@@ -28,6 +28,11 @@ export default {
         direction: this.direction,
         trackClassName: 'au-theme-background-color--base-0',
         barClassName: 'au-theme-background-color--base-0'
+      }).onScroll(e => {
+        this.$emit('scroll', {
+          scrollTop: e.target.scrollTop,
+          scrollLeft: e.target.scrollLeft
+        })
       })
     }, 0)
   },
@@ -38,24 +43,35 @@ export default {
   props: {
     direction: {
       type: String,
-      default: 'both'
+      default: 'vertical'
     },
     scrollTop: {
-      type: [Number, String],
+      type: Number,
       default: 0
     },
     scrollLeft: {
-      type: [Number, String],
+      type: Number,
       default: 0
     }
   },
-  data () {
-    return {
+  watch: {
+    direction (v) {
+      this.scroller.setDirection(v)
+    },
+    scrollTop (v) {
+      this.scroller.scrollTo({ scrollTop: v })
+    },
+    scrollLeft (v) {
+      this.scroller.scrollTo({ scrollLeft: v })
     }
   },
-  watch: {
-  },
   methods: {
+    scrollTo (v) {
+      this.scroller.scrollTo(v)
+      if (v === 0 || v === '0') {
+        this.$forceUpdate()
+      }
+    }
   }
 }
 </script>

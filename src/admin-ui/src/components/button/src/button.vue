@@ -148,6 +148,7 @@ export default {
         case 'large': // 38
           return 28
       }
+      return 24
     }
   },
   methods: {

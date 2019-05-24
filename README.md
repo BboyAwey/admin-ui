@@ -1,15 +1,34 @@
 # admin-ui
 
-[![Build Status](https://www.travis-ci.org/BboyAwey/admin-ui.svg?branch=master)](https://www.travis-ci.org/BboyAwey/admin-ui)
+## Project setup
+```
+yarn install
+```
 
-> A concise and elegant admin-system-like ui component library
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
 
-Please visit our [homepage](http://www.admin-ui.com) to get started.
+### Compiles and minifies for production
+```
+yarn run build
+```
 
-## Installation
+### Run your tests
+```
+yarn run test
+```
 
-TODO:
+### Lints and fixes files
+```
+yarn run lint
+```
 
-## Getting started
+### Run your unit tests
+```
+yarn run test:unit
+```
 
-TODO:
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

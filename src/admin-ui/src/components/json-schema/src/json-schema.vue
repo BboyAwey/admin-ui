@@ -208,7 +208,6 @@ import AuSelect from '../../select'
 import AuRadio from '../../radio'
 import AuIcon from '../../icon'
 import deepClone from '../../../helpers/utils/deep-clone.js'
-import AuButton from '../../button'
 import AuModal from '../../modal'
 
 let types = ['boolean', 'integer', 'number', 'string', 'object', 'array']
@@ -219,7 +218,7 @@ let propertyCount = 1
 
 export default {
   name: 'au-json-schema',
-  components: { AuInput, AuSelect, AuIcon, AuButton, AuModal, AuRadio },
+  components: { AuInput, AuSelect, AuIcon, AuModal, AuRadio },
   props: {
     _index: Number,
     _key: String,
@@ -287,8 +286,8 @@ export default {
     },
     typeOptions () {
       return this._isRoot
-        ? this.rootTypes.map(t => ({text: t, value: t}))
-        : this.types.map(t => ({text: t, value: t}))
+        ? this.rootTypes.map(t => ({ text: t, value: t }))
+        : this.types.map(t => ({ text: t, value: t }))
     }
   },
   watch: {

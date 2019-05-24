@@ -143,7 +143,8 @@ export default {
                 'fa': true,
                 'fa-chevron-down': item.showChildren,
                 'fa-chevron-right': !item.showChildren
-              }}) : null, c(
+              }
+            }) : null, c(
             'au-checkbox', {
               props: {
                 text: item.label,

@@ -1,3 +1,95 @@
+<style lang="scss">
+  @import '../../../style/vars';
+  .au-tabs {
+    // position: relative;
+    // padding-top: 36px;
+    // width: 100%;
+    // height: 100%;
+    // display: block;
+  }
+  .au-tabs-nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 40px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    & > ul {
+      position: relative;
+      top: 1px;
+    }
+    & > ul:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    li {
+      position: relative;
+      float: left;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      padding: 0 16px;
+      cursor: pointer;
+      // min-width: 88px;
+      overflow: hidden;
+      max-width: 156px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      a {
+        text-decoration: none;
+        font-size: $normal;
+      }
+    }
+    li:last-child {
+      padding: 0 12px;
+      font-size: $normal;
+      line-height: 36px;
+    }
+    li:hover > .au-tabs-delete-btn,
+    li:hover > .au-tabs-rename-btn {
+      display: inline-block;
+    }
+  }
+  li.au-tabs-active {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+  }
+  .au-tabs-container {
+    display: block;
+    & > * {
+      display: none;
+    }
+    & > *:first-child {
+      display: block;
+    }
+  }
+  button.au-tabs-btn {
+    position: absolute;
+  }
+  .au-tabs-btn {
+    position: absolute;
+    font-size: $normal;
+    cursor: pointer;
+  }
+  .au-tabs-create-btn {
+    right: 19px;
+    bottom: 6px;
+  }
+  .au-tabs-delete-btn {
+    right: 2px;
+    top: 5px;
+    display: none;
+  }
+  .au-tabs-rename-btn {
+    left: 3px;
+    top: 12px;
+    display: none;
+    font-size: $small
+  }
+</style>
+
 <template>
   <div class="au-tabs">
     <div class="au-tabs-nav au-theme-border-color--base-10" v-show="tabs && tabs.length">
@@ -31,12 +123,11 @@
 </template>
 <script>
 import AuIcon from '../../icon'
-import AuButton from '../../button'
 import MessageBox from '../../message-box'
 
 export default {
   name: 'au-tabs',
-  components: { AuIcon, AuButton },
+  components: { AuIcon },
   data () {
     return {
       localCurrent: this.current
@@ -148,94 +239,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-  @import '../../../style/vars';
-  .au-tabs {
-    // position: relative;
-    // padding-top: 36px;
-    // width: 100%;
-    // height: 100%;
-    // display: block;
-  }
-  .au-tabs-nav {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0 40px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    & > ul {
-      position: relative;
-      top: 1px;
-    }
-    & > ul:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-    li {
-      position: relative;
-      float: left;
-      height: 35px;
-      line-height: 35px;
-      text-align: center;
-      padding: 0 16px;
-      cursor: pointer;
-      // min-width: 88px;
-      overflow: hidden;
-      max-width: 156px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      a {
-        text-decoration: none;
-        font-size: $normal;
-      }
-    }
-    li:last-child {
-      padding: 0 12px;
-      font-size: $normal;
-      line-height: 36px;
-    }
-    li:hover > .au-tabs-delete-btn,
-    li:hover > .au-tabs-rename-btn {
-      display: inline-block;
-    }
-  }
-  li.au-tabs-active {
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-  }
-  .au-tabs-container {
-    display: block;
-    & > * {
-      display: none;
-    }
-    & > *:first-child {
-      display: block;
-    }
-  }
-  button.au-tabs-btn {
-    position: absolute;
-  }
-  .au-tabs-btn {
-    position: absolute;
-    font-size: $normal;
-    cursor: pointer;
-  }
-  .au-tabs-create-btn {
-    right: 19px;
-    bottom: 6px;
-  }
-  .au-tabs-delete-btn {
-    right: 6px;
-    top: 5px;
-    display: none;
-  }
-  .au-tabs-rename-btn {
-    left: 6px;
-    top: 12px;
-    display: none;
-    font-size: $small
-  }
-</style>

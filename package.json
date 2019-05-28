@@ -1,6 +1,7 @@
 {
   "name": "admin-ui",
   "version": "3.2.24",
+  "sideEffects": false,
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
   "private": false,
@@ -34,6 +35,8 @@
     "theme-class-generator": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
     "@vue/cli-plugin-unit-jest": "^3.7.0",
@@ -43,14 +46,27 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.6",
+    "cli-spinner": "^0.2.10",
     "core-js": "^2.6.5",
+    "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.0.0",
+    "file-loader": "^3.0.1",
     "highlightjs": "^9.10.0",
+    "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "shelljs": "^0.8.3",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
     "vue-router": "^3.0.3",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }

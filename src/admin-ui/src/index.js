@@ -39,7 +39,7 @@ import Tagfactory from './components/tagfactory'
 import JsonSchema from './components/json-schema'
 
 // add all comps into an array
-const components = [
+export const components = [
   Button,
   Menu,
   Breadcrumb,
@@ -111,7 +111,7 @@ export {
 }
 
 // export all comps as an object
-const adminUi = {
+const AdminUi = {
   Button,
   Menu,
   Breadcrumb,
@@ -146,7 +146,7 @@ const adminUi = {
   JsonSchema
 }
 
-adminUi.install = function (Vue, options = {}) {
+AdminUi.install = function (Vue, options = {}) {
   // install all the comps
   components.forEach(component => {
     if (component.name) Vue.component(component.name, component)
@@ -160,18 +160,18 @@ adminUi.install = function (Vue, options = {}) {
 }
 
 // add direvtives installing function
-adminUi.direvtive = function (Vue) {
+AdminUi.direvtive = function (Vue) {
   for (let name in Directives) {
     Vue.directive(name, Directives[name])
   }
 }
 
 // add theme generator function
-adminUi.theme = theme
+AdminUi.theme = theme
 // gen default theme
-adminUi.theme()
+AdminUi.theme()
 // set font family for html and body
 document.body.style.fontFamily = '"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif'
 // gen directive
-adminUi.direvtive(Vue)
-export default adminUi
+AdminUi.direvtive(Vue)
+export default AdminUi

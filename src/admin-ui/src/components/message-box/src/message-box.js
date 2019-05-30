@@ -1,9 +1,10 @@
 import Vue from 'vue'
-import AuModalTemplate from '../../modal'
+import AuModalTemplate from 'components/modal'
+import { namespace } from 'helpers/utils'
+
 import AuAlertTemplate from './alert'
 import AuConfirmTemplate from './confirm'
 import AuPromptTemplate from './prompt'
-import namespace from '../../../helpers/utils/namespace'
 
 // make sure only single vue instance to save memos
 function getInstance (type) {

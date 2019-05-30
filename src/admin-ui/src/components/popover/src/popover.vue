@@ -133,11 +133,8 @@
   </div>
 </template>
 <script>
-import getElementSize from '../../../helpers/dom/get-element-size'
-// import getElementPagePos from '../../../helpers/dom/get-element-page-pos'
-import isAncestor from '../../../helpers/dom/is-ancestor'
-import namespace from '../../../helpers/utils/namespace'
-import heartbeat from '../../../helpers/utils/heartbeat'
+import { getElementSize, isAncestor } from 'helpers/dom'
+import { namespace, heartbeat } from 'helpers/utils'
 
 if (!namespace.get('popoverCollections')) namespace.set('popoverCollections', {})
 let popoverCollections = namespace.get('popoverCollections')

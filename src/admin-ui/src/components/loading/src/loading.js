@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import template from './loading.vue'
-import { addClass } from '../../../helpers/dom/class'
+import { addClass } from 'helpers/dom'
 
 export default (config = {}) => {
   let instance = new (Vue.extend(template))()

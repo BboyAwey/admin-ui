@@ -211,12 +211,12 @@
   </div>
 </template>
 <script>
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import isEmptyString from '../../../helpers/utils/is-empty-string'
-import AuInput from '../../input'
-import AuIcon from '../../icon'
-import FormItem from '../../../helpers/form-item.vue'
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormApiMixin from 'helpers/form-api-mixin'
+import { isEmptyString } from 'helpers/utils'
+import AuInput from 'components/input'
+import AuIcon from 'components/icon'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-datepicker',

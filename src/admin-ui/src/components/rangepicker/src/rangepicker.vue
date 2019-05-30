@@ -147,15 +147,16 @@
   </div>
 </template>
 <script>
-import Button from '../../button'
-import Popover from '../../popover'
-import Datepicker from '../../datepicker'
-import Timepicker from '../../timepicker'
-import Tag from '../../tag'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import isEmptyString from '../../../helpers/utils/is-empty-string'
-import getElementSize from '../../../helpers/dom/get-element-size'
-import FormItem from '../../../helpers/form-item.vue'
+import Button from 'components/button'
+import Popover from 'components/popover'
+import Datepicker from 'components/datepicker'
+import Timepicker from 'components/timepicker'
+import Tag from 'components/tag'
+import FormApiMixin from 'helpers/form-api-mixin'
+import { isEmptyString } from 'helpers/utils'
+import { getElementSize } from 'helpers/dom'
+import FormItem from 'helpers/form-item.vue'
+
 let formApiMixin = { props: FormApiMixin.props }
 formApiMixin.props.value = null
 

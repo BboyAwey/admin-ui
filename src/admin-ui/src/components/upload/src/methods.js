@@ -1,4 +1,4 @@
-import upload from '../../../helpers/utils/upload'
+import { upload } from 'helpers/dom'
 
 export default {
   methods: {

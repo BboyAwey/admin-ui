@@ -69,7 +69,7 @@
   </button>
 </template>
 <script>
-import Loading from '../../loading'
+import Loading from 'components/loading'
 
 export default {
   name: 'au-button',

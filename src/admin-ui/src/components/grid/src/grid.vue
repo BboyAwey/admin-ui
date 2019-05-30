@@ -35,8 +35,7 @@
 </template>
 
 <script>
-import getElementSize from '../../../helpers/dom/get-element-size'
-import getWindowSize from '../../../helpers/dom/get-window-size'
+import { getElementSize, getWindowSize } from 'helpers/dom'
 import { addListener, removeListener } from 'resize-detector'
 
 function validateWidth (v) { return v >= 1 && v <= 24 && parseInt(v) === Number(v) }

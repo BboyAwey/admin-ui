@@ -54,10 +54,10 @@
   </div>
 </template>
 <script>
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import AuSelect from '../../select'
-import FormItem from '../../../helpers/form-item.vue'
+import FormApiMixin from 'helpers/form-api-mixin'
+import ValidatorMixin from 'helpers/validator-mixin'
+import AuSelect from 'components/select'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-cascading',

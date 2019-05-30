@@ -121,9 +121,9 @@
   </div>
 </template>
 <script>
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import FormItem from '../../../helpers/form-item.vue'
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormApiMixin from 'helpers/form-api-mixin'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-checkbox',

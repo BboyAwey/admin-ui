@@ -1,6 +1,5 @@
 import themeClassGenerator from 'theme-class-generator'
-import namespace from '../../helpers/utils/namespace'
-import deepClone from '../../helpers/utils/deep-clone'
+import { namespace, deepClone } from 'helpers/utils'
 import defaultConfig from './default'
 
 function isObject (obj, name) {

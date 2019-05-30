@@ -78,8 +78,8 @@
   </div>
 </template>
 <script>
-import namespace from '../../../helpers/utils/namespace.js'
-import { removeClass } from '../../../helpers/dom/class.js'
+import { namespace } from 'helpers/utils'
+import { removeClass } from 'helpers/dom'
 
 export default {
   name: 'au-loading',

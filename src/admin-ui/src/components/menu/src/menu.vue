@@ -308,10 +308,10 @@
   </div>
 </template>
 <script>
-import AuIcon from '../../icon'
-import AuPopover from '../../popover'
-import AuScroller from '../../scroller'
-import isEmptyString from '../../../helpers/utils/is-empty-string.js'
+import AuIcon from 'components/icon'
+import AuPopover from 'components/popover'
+import AuScroller from 'components/scroller'
+import { isEmptyString } from 'helpers/utils'
 
 function plainObjectEqual (o1, o2) {
   return JSON.stringify(o1) === JSON.stringify(o2)

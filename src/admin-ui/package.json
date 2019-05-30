@@ -1,0 +1,37 @@
+{
+  "name": "admin-ui",
+  "version": "3.2.24",
+  "sideEffects": false,
+  "description": "An elegant admin-system-like vue ui components library",
+  "author": "bboyawey<bboyawey@sina.cn>",
+  "private": false,
+  "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:BboyAwey/admin-ui.git"
+  },
+  "homepage": "http://www.admin-ui.com",
+  "keywords": [
+    "vue",
+    "admin",
+    "ui",
+    "components",
+    "admin-ui",
+    "ui-library",
+    "vue-ui-library",
+    "libraty"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve --port 3478",
+    "build": "vue-cli-service build",
+    "package": "rollup -c ./build/rollup.config.js",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "@awey/scroller": "^1.1.7",
+    "resize-detector": "^0.1.9",
+    "theme-class-generator": "^1.0.2"
+  }
+}

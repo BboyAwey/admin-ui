@@ -2,32 +2,29 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const friendlyFommater = require('eslint-friendly-formatter')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const chalk = require('chalk')
-var Spinner = require('cli-spinner').Spinner
+const Spinner = require('cli-spinner').Spinner
+const nodeExternals = require('webpack-node-externals')
 
-process.stdout.write(chalk.cyan('Let\'s go! \n'))
-var spinner = new Spinner(chalk.green('%s Building Admin UI..'))
+const config = require('./config')
+
+// console.log(Object.assign({}, config.components, config.directives, config.helpers, config.theme))
+
+process.stdout.write('\n')
+var spinner = new Spinner(chalk.green('%s Building Admin UI Components..'))
 spinner.setSpinnerString('⣾⣽⣻⢿⡿⣟⣯⣷')
 spinner.start()
 
-function resolve (dir) {
-  return path.resolve(__dirname, dir)
-}
-
 module.exports = {
-  entry: {
-    index: resolve('../src/admin-ui/src/index.js')
-  },
+  mode: 'production',
+  entry: Object.assign({}, config.components, config.directives, config.helpers, config.theme),
   output: {
-    path: resolve('../src/admin-ui/dist'),
+    path: path.resolve(__dirname, '../src/admin-ui/dist/'),
+    // publicPath: '/dist/',
     pathinfo: false,
     filename: '[name].js',
-    // tag
-    library: 'AdminUi',
-    libraryTarget: 'amd'
+    libraryTarget: 'commonjs2'
   },
-  mode: 'none',
   stats: {
     assets: true,
     assetsSort: '!size',
@@ -66,7 +63,7 @@ module.exports = {
         test: /\.js|vue$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../tests')],
         exclude: /node_nodules/,
         options: {
           formatter: friendlyFommater,
@@ -87,7 +84,8 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'vue-style-loader',
+          // MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -104,27 +102,21 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
-    }
+    alias: config.alias
   },
-  externals: {
-    vue: 'Vue'
+  externals: Object.assign({}, config.externals, nodeExternals()),
+  optimization: {
+    minimize: false,
+    sideEffects: false
   },
   plugins: [
     new webpack.ProgressPlugin((percentage, msg, ...args) => {
-      spinner.setSpinnerTitle(chalk.green('%s ' + parseInt(percentage * 100) + '%' + ' Building Admin UI..'))
+      spinner.setSpinnerTitle(chalk.green('%s ' + parseInt(percentage * 100) + '%' + ' Building admin-ui components.. ' + args[0]))
       if (percentage === 1) {
         spinner.stop()
         process.stdout.write('\n')
       }
     }),
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new VueLoaderPlugin()
   ]
 }

@@ -203,12 +203,12 @@
 </template>
 
 <script>
-import AuInput from '../../input'
-import AuSelect from '../../select'
-import AuRadio from '../../radio'
-import AuIcon from '../../icon'
-import deepClone from '../../../helpers/utils/deep-clone.js'
-import AuModal from '../../modal'
+import AuInput from 'components/input'
+import AuSelect from 'components/select'
+import AuRadio from 'components/radio'
+import AuIcon from 'components/icon'
+import { deepClone } from 'helpers/utils'
+import AuModal from 'components/modal'
 
 let types = ['boolean', 'integer', 'number', 'string', 'object', 'array']
 types.isNumberType = type => type === 'number' || type === 'integer'

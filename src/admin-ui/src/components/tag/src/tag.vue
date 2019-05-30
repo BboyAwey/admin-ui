@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import auIcon from '../../icon'
+import auIcon from 'components/icon'
 export default {
   name: 'au-tag',
   components: { auIcon },

@@ -49,8 +49,7 @@
 <script>
 // Author: yuhaijun
 // email: yuhaijun@rongcapital.cn
-import deepClone from '../../../helpers/utils/deep-clone'
-import getDataType from '../../../helpers/utils/get-data-type'
+import { deepClone, getDataType } from 'helpers/utils'
 export default {
   name: 'au-tree',
   created () {

@@ -335,11 +335,11 @@
   </div>
 </template>
 <script>
-import AuIcon from '../../icon'
-import AuPreviewer from '../../previewer'
+import AuIcon from 'components/icon'
+import AuPreviewer from 'components/previewer'
 import methods from './methods'
 import props from './props'
-import FormItem from '../../../helpers/form-item.vue'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-upload',

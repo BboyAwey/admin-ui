@@ -83,9 +83,9 @@
   </div>
 </template>
 <script>
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormItem from '../../../helpers/form-item.vue'
+import FormApiMixin from 'helpers/form-api-mixin'
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-radio',

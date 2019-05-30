@@ -267,11 +267,11 @@
   </div>
 </template>
 <script>
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import FormItem from '../../../helpers/form-item.vue'
-import AuIcon from '../../icon'
-import AuScroller from '../../scroller'
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormApiMixin from 'helpers/form-api-mixin'
+import FormItem from 'helpers/form-item.vue'
+import AuIcon from 'components/icon'
+import AuScroller from 'components/scroller'
 
 export default {
   name: 'au-input',

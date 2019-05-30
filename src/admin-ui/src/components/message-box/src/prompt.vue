@@ -64,8 +64,8 @@
   </div>
 </template>
 <script>
-import AuInput from '../../input'
-import AuIcon from '../../icon'
+import AuInput from 'components/input'
+import AuIcon from 'components/icon'
 
 export default {
   name: 'au-prompt',

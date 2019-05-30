@@ -172,12 +172,12 @@
   </div>
 </template>
 <script>
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import isEmptyString from '../../../helpers/utils/is-empty-string'
-import AuScroller from '../../scroller'
-import AuInput from '../../input'
-import FormItem from '../../../helpers/form-item.vue'
+import AuScroller from 'components/scroller'
+import AuInput from 'components/input'
+import FormApiMixin from 'helpers/form-api-mixin'
+import ValidatorMixin from 'helpers/validator-mixin'
+import { isEmptyString } from 'helpers/utils'
+import FormItem from 'helpers/form-item.vue'
 
 const SPEED = 32
 const HOURSRANGE = 736

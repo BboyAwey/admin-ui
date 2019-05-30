@@ -162,14 +162,15 @@
   </div>
 </template>
 <script>
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import AuTag from '../../tag'
-// import AuPopover from '../../popover'
-import AuScroller from '../../scroller'
-import Loading from '../../loading'
-import FormItem from '../../../helpers/form-item.vue'
-import isAncestor from '../../../helpers/dom/is-ancestor'
+import AuTag from 'components/tag'
+// import AuPopover from 'components/popover'
+import AuScroller from 'components/scroller'
+import Loading from 'components/loading'
+
+import FormItem from 'helpers/form-item.vue'
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormApiMixin from 'helpers/form-api-mixin'
+import { isAncestor } from 'helpers/dom'
 
 export default {
   name: 'au-tagfactory',

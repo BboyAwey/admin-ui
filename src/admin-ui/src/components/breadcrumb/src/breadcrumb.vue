@@ -34,7 +34,7 @@
   </ul>
 </template>
 <script>
-import deepClone from '../../../helpers/utils/deep-clone'
+import { deepClone } from 'helpers/utils'
 
 export default {
   name: 'au-breadcrumb',

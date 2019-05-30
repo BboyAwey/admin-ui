@@ -177,14 +177,15 @@
   </div>
 </template>
 <script>
-import ValidatorMixin from '../../../helpers/validator-mixin'
-import FormApiMixin from '../../../helpers/form-api-mixin'
-import getElementSize from '../../../helpers/dom/get-element-size'
-import AuIcon from '../../icon'
-import AuScroller from '../../scroller'
-import FormItem from '../../../helpers/form-item.vue'
-import AuPopover from '../../popover'
-import Loading from '../../loading'
+import AuIcon from 'components/icon'
+import AuScroller from 'components/scroller'
+import AuPopover from 'components/popover'
+import Loading from 'components/loading'
+
+import ValidatorMixin from 'helpers/validator-mixin'
+import FormApiMixin from 'helpers/form-api-mixin'
+import { getElementSize } from 'helpers/dom'
+import FormItem from 'helpers/form-item.vue'
 
 export default {
   name: 'au-select',

@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import AuIcon from '../../icon'
+import AuIcon from 'components/icon'
 export default {
   name: 'au-confirm',
   components: { AuIcon },

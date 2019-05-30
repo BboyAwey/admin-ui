@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import getElementSize from '../../../helpers/dom/get-element-size'
+import { getElementSize } from 'helpers/dom'
 
 export default {
   name: 'au-collapse',

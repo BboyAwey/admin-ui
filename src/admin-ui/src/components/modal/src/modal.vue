@@ -107,11 +107,10 @@
   </div>
 </template>
 <script>
-import getElementSize from '../../../helpers/dom/get-element-size'
-import getWindowSize from '../../../helpers/dom/get-window-size'
-import AuButton from '../../button'
-import AuIcon from '../../icon'
-import AuScroller from '../../scroller'
+import { getElementSize, getWindowSize } from 'helpers/dom'
+import AuButton from 'components/button'
+import AuIcon from 'components/icon'
+import AuScroller from 'components/scroller'
 import { addListener, removeListener } from 'resize-detector'
 
 export default {

@@ -1,56 +1,36 @@
 const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const friendlyFommater = require('eslint-friendly-formatter')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const chalk = require('chalk')
 const Spinner = require('cli-spinner').Spinner
 
-const fs = require('fs')
-
-function getFolders (dir) {
-  return fs.readdirSync(dir).filter(function (file) {
-    return fs.statSync(path.join(dir, file)).isDirectory()
-  })
-}
-
-function transformName (dashname) {
-  return dashname.split('-').map(t => t[0].toUpperCase() + t.slice(1)).join('')
-}
-
-let components = getFolders(path.join(__dirname, '../src/admin-ui/src/components')).reduce((p, c) => {
-  p[transformName(c)] = c
-  return p
-}, {})
+const config = require('./config')
 
 process.stdout.write(chalk.cyan('Let\'s go! \n'))
-var spinner = new Spinner(chalk.green('%s Building Admin UI Components..'))
+const spinner = new Spinner(chalk.green('%s Building Admin UI..'))
 spinner.setSpinnerString('⣾⣽⣻⢿⡿⣟⣯⣷')
 spinner.start()
 
-function resolve (...dir) {
-  return path.resolve(__dirname, ...dir)
+function resolve (dir) {
+  return path.resolve(__dirname, dir)
 }
-
-function resolveComponentPath (name) {
-  return resolve(__dirname, '../src/admin-ui/src/components/', name, './index.js')
-}
-
-const entry = Object.entries(components).reduce((prev, e) => {
-  prev[e[0]] = resolveComponentPath(e[1])
-  return prev
-}, {})
 
 module.exports = {
-  entry,
-  output: {
-    path: resolve('../src/admin-ui/dist/lib'),
-    pathinfo: false,
-    filename: '[name].js',
-    library: '[name]',
-    libraryTarget: 'umd'
+  mode: 'production',
+  entry: {
+    index: resolve('../src/admin-ui/src/index.js')
   },
-  mode: 'none',
+  output: {
+    path: resolve('../src/admin-ui/dist'),
+    filename: '[name].js',
+    library: 'AdminUi',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    umdNamedDefine: true,
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
+  },
   stats: {
     assets: true,
     assetsSort: '!size',
@@ -110,8 +90,7 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          'vue-style-loader',
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -120,58 +99,27 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: '../assets/[name].[ext]',
-          publicPath: '../assets'
+          name: 'assets/[name].[ext]'
+          // publicPath: '/'
         }
       }
     ]
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
-    }
+    alias: config.alias
   },
   externals: {
-    vue: 'Vue'
+    vue: {
+      root: 'Vue',
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue'
+    }
   },
   optimization: {
-    namedModules: false,
-    namedChunks: false,
-    flagIncludedChunks: true,
-    occurrenceOrder: true,
-    // sideEffects: false,
-    sideEffects: true,
-    usedExports: true,
-    concatenateModules: true,
-    noEmitOnErrors: true
-    // splitChunks: {
-    //   hidePathInfo: true,
-    //   chunks: 'all',
-    //   minSize: 30000,
-    //   maxSize: 0,
-    //   minChunks: 1,
-    //   maxAsyncRequests: 5,
-    //   maxInitialRequests: 3,
-    //   name: true,
-    //   cacheGroups: {
-    //     vendors: {
-    //       // test: /[\\/]node_modules[\\/]/,
-    //       // priority: -10,
-    //       filename: '../common/[name].js'
-    //     },
-    //     styles: {
-    //       name: 'styles',
-    //       test: /\.css$/,
-    //       chunks: 'all',
-    //       enforce: true
-    //     }
-    //   }
-    // },
-    // runtimeChunk: {
-    //   name: '../common/runtime'
-    // }
+    minimize: false,
+    sideEffects: false
   },
   plugins: [
     new webpack.ProgressPlugin((percentage, msg, ...args) => {
@@ -182,10 +130,8 @@ module.exports = {
       }
     }),
     new VueLoaderPlugin(),
-    // new MiniCssExtractPlugin({
-    //   filename: '[name].css'
-    // }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
   ]
 }

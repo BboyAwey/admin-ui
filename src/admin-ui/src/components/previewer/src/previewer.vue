@@ -154,7 +154,7 @@
   </div>
 </template>
 <script>
-import Icon from '../../icon'
+import Icon from 'components/icon'
 
 export default {
   name: 'au-previewer',

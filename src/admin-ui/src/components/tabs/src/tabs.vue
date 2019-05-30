@@ -122,8 +122,8 @@
   </div>
 </template>
 <script>
-import AuIcon from '../../icon'
-import MessageBox from '../../message-box'
+import AuIcon from 'components/icon'
+import MessageBox from 'components/message-box'
 
 export default {
   name: 'au-tabs',

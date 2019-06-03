@@ -5,11 +5,6 @@
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
   "private": false,
-  "main": "./dist/index.js",
-  "files": [
-    "src/admin-ui/dist",
-    "src/admin-ui/src"
-  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:BboyAwey/admin-ui.git"

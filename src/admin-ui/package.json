@@ -22,13 +22,6 @@
     "libraty"
   ],
   "license": "MIT",
-  "scripts": {
-    "serve": "vue-cli-service serve --port 3478",
-    "build": "vue-cli-service build",
-    "package": "rollup -c ./build/rollup.config.js",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
-  },
   "dependencies": {
     "@awey/scroller": "^1.1.7",
     "resize-detector": "^0.1.9",

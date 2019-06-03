@@ -51,10 +51,9 @@ export default {
   methods: {
     normalizeContent (v) {
       let content = v.split('\n')
-        .filter(c => !/^\n+$/g.test(c) && c)
         .map(c => {
-          c = c.replace('<', '&lt;')
-          c = c.replace('>', '&gt;')
+          c = c.replace(/</g, '&lt;')
+          c = c.replace(/>/g, '&gt;')
           c = c.replace(/\\\{/g, '{')
           c = c.replace(/\\\}/g, '}')
           return c

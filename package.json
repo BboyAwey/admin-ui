@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.23",
+  "version": "3.2.25",
   "sideEffects": false,
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
@@ -30,10 +30,11 @@
   },
   "dependencies": {
     "@awey/scroller": "^1.1.7",
+    "highlightjs": "^9.10.0",
+    "prismjs": "^1.16.0",
     "resize-detector": "^0.1.9",
     "theme-class-generator": "^1.0.2",
     "vue": "^2.6.10",
-    "highlightjs": "^9.10.0",
     "vue-router": "^3.0.3"
   },
   "devDependencies": {
@@ -49,6 +50,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-prismjs": "^1.0.2",
     "cli-spinner": "^0.2.10",
     "core-js": "^2.6.5",
     "css-loader": "^2.1.1",

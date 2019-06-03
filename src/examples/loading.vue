@@ -153,12 +153,16 @@
     <au-panel class="section" title="使用示例">
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
-        <au-button type="warning" @click="toggle">&#123;&#123; (loading ? "结束" : "开始") + "加载" &#125;&#125;</au-button>
+        <au-button
+          type="warning"
+          @click="toggle">
+          {\{ (loading ? "结束" : "开始") + "加载" }\};
+        </au-button>
         <div ref="target" class="au-theme-border-color--base-8" style="margin-top: 10px; border-style: solid; border-width: 1px; width: 300px; padding: 20px;">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum fuga ipsa odit atque cumque perferendis et facere aperiam numquam doloribus dolor quasi molestias esse, aut tenetur eaque architecto consequatur quaerat.
         </div>
       '></code-h>
-      <code-h lang="js">
+      <code-h lang="javascript">
         export default {
           data () {
             return {

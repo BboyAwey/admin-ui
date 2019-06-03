@@ -505,7 +505,12 @@ export default {
         'idl29d',
         'a8d20s',
         'f3du92',
-        '7uij29'
+        '7uij29',
+        'df5466',
+        'l9ou78',
+        '9urifu',
+        '1i2jdu',
+        'mbjdu8'
       ],
       tagMatcher (v) {
         return /\d/g.test(v)

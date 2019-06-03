@@ -151,7 +151,6 @@
                 'au-tagfactory-associations-item': true,
                 'au-theme-background-color--primary-bottom': activeAssociationIndex === i + 1
               }"
-              @mousemove="activeAssociationIndex = i + 1"
               @click="handleAssociationClick(association)">
               {{ association }}
             </li>
@@ -310,8 +309,12 @@ export default {
       }
     },
     activeAssociationIndex (v) {
-      console.log(v, this.associationsScrollTop)
-      this.associationsScrollTop = (v - 2) * 32
+      const viewHeight = 32 * 7
+      if (viewHeight + this.associationsScrollTop < v * 32) {
+        this.associationsScrollTop = v * 32 - viewHeight
+      } else if ((v - 1) * 32 < this.associationsScrollTop) {
+        this.associationsScrollTop = (v - 1) * 32 - 15
+      }
     }
   },
   methods: {

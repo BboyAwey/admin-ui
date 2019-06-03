@@ -5,6 +5,9 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: config.alias
+    },
+    optimization: {
+      sideEffects: false
     }
   }
 }

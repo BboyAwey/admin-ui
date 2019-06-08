@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@awey/scroller@^1.1.7":
-  version "1.1.9"
-  resolved "https://registry.npm.taobao.org/@awey/scroller/download/@awey/scroller-1.1.9.tgz#467bf754802ebc97325d86e90135bdfe4f6ca026"
+"@awey/scroller@^1.1.15":
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.1.17.tgz#7636e0a9df829dfc6919d7bdd88b533a2efd89e5"
   dependencies:
     resize-observer-polyfill "^1.5.1"
 
@@ -7666,7 +7666,7 @@ resize-detector@^0.1.9:
 
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"
-  resolved "https://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fresize-observer-polyfill%2Fdownload%2Fresize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"

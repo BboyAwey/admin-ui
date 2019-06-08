@@ -156,13 +156,15 @@
             :hide-on-blur="true"
             :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
             :plain="hasChildren(item)"
+            x-fix="-20px"
             @show="_ => hasChildren(item) && handlePopoverHide(i)">
             <au-popover
               ref="tipPopover"
               slot="target"
               :disabled="!localCollapse"
               :trigger="'hover'"
-              :placement="'right middle'">
+              :placement="'right middle'"
+              x-fix="-20px">
               <div class="menu-item"
                 slot="target"
                 :class="{

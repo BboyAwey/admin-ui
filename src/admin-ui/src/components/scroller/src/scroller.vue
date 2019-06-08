@@ -1,12 +1,13 @@
 <style lang="scss">
   .au-scroller {
-    position: relative;
-    overflow: hidden;
+    // position: relative;
+    // overflow: hidden;
+    // padding-bottom: 10px;
   }
   .au-scroller-wrapper {
     width: 100%;
     height: 100%;
-    max-height: 100%;
+    // max-height: 100%;
   }
 </style>
 <template>
@@ -59,10 +60,38 @@ export default {
       this.scroller.setDirection(v)
     },
     scrollTop (v) {
-      this.scroller.scrollTo({ scrollTop: v })
+      if (!this.scrollTopTimer) {
+        this.scrollTopTimer = setTimeout(() => {
+          this.scroller.scrollTo({ scrollTop: v })
+          clearTimeout(this.scrollTopTimer)
+          this.scrollTopTimer = null
+        }, 100)
+      } else {
+        clearTimeout(this.scrollTopTimer)
+        this.scrollTopTimer = setTimeout(() => {
+          this.scroller.scrollTo({ scrollTop: v })
+          clearTimeout(this.scrollTopTimer)
+          this.scrollTopTimer = null
+        }, 100)
+      }
+      // this.scroller.scrollTo({ scrollTop: v })
     },
     scrollLeft (v) {
-      this.scroller.scrollTo({ scrollLeft: v })
+      if (!this.scrollLeftTimer) {
+        this.scrollLeftTimer = setTimeout(() => {
+          this.scroller.scrollTo({ scrollLeft: v })
+          clearTimeout(this.scrollLeftTimer)
+          this.scrollLeftTimer = null
+        }, 100)
+      } else {
+        clearTimeout(this.scrollLeftTimer)
+        this.scrollLeftTimer = setTimeout(() => {
+          this.scroller.scrollTo({ scrollLeft: v })
+          clearTimeout(this.scrollLeftTimer)
+          this.scrollLeftTimer = null
+        }, 100)
+      }
+      // this.scroller.scrollTo({ scrollLeft: v })
     }
   },
   methods: {

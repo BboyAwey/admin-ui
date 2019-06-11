@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const friendlyFommater = require('eslint-friendly-formatter')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const nodeExternals = require('webpack-node-externals')
 const chalk = require('chalk')
 const Spinner = require('cli-spinner').Spinner
 
@@ -109,14 +110,14 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: config.alias
   },
-  externals: {
+  externals: Object.assign({}, nodeExternals(), {
     vue: {
       root: 'Vue',
       commonjs: 'vue',
       commonjs2: 'vue',
       amd: 'vue'
     }
-  },
+  }),
   optimization: {
     minimize: false,
     sideEffects: false

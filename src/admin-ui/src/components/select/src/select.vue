@@ -158,8 +158,8 @@
               }"/>
           </div>
         </div>
-        <au-scroller class="au-select-option-scroller" slot="content" @scroll="v => scrollTop = v" :scroll-top="scrollTop">
-          <ul class="au-select-option" ref="options" :style="{paddingBottom: scrollTop < 32 ? 0 : '5px'}">
+        <au-scroller class="au-select-option-scroller" slot="content">
+          <ul class="au-select-option" ref="options">
             <li v-show="!options.length" class="empty-item au-theme-color--base-8">没有选项</li>
             <li
               v-for="(option, i) in options" :key="i"
@@ -244,7 +244,11 @@ export default {
     },
     popoverVisibal (v) {
       if (!v) this.tempSelectIndex = null
-      if (v) this.$refs.options.style.minWidth = this.$refs.core.getBoundingClientRect().width - 2 + 'px'
+      if (v) {
+        console.log(this.$refs.core.getBoundingClientRect().width)
+        this.$refs.options.style.minWidth =
+          this.$refs.core.getBoundingClientRect().width - 2 + 'px'
+      }
     },
     tempSelectIndex (v) {
       this.updateScrollTop()

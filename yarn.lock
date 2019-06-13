@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@awey/scroller@^1.1.20":
-  version "1.1.20"
-  resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.1.20.tgz#a7e107e6aae30f60a39e102e3bd3b9a953c158a0"
+"@awey/scroller@^1.1.22":
+  version "1.1.22"
+  resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.1.22.tgz#5e61be3901297be649def613be0de387d6b510cb"
   dependencies:
     resize-observer-polyfill "^1.5.1"
 

@@ -245,7 +245,6 @@ export default {
     popoverVisibal (v) {
       if (!v) this.tempSelectIndex = null
       if (v) {
-        console.log(this.$refs.core.getBoundingClientRect().width)
         this.$refs.options.style.minWidth =
           this.$refs.core.getBoundingClientRect().width - 2 + 'px'
       }

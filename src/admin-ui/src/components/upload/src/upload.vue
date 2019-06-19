@@ -239,7 +239,7 @@
             'au-theme-background-color--base-9': !file.url,
             'au-theme-background-color--primary': file.url
           }"
-          v-show="!(autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64))">
+          v-show="!(autoUpload ? (file.isMedia && file.url) : (file.isMedia && file.base64))">
           <div
             class="
               au-upload-preview-default-icon
@@ -254,7 +254,7 @@
           :style="{ cursor: canPreview ? 'pointer' : 'default' }"
           :src="autoUpload ? (file.base64 || file.url) : file.base64"
           @click="preview(index)"
-          v-if="autoUpload ? (file.isImage && file.url) : (file.isImage && file.base64)">
+          v-if="autoUpload ? (file.isMedia && file.url) : (file.isMedia && file.base64)">
         <div class="au-upload-file-info au-theme-color--base-3">
           <p :class="{'au-upload-no-desc': !canDescribe}">
             <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
@@ -328,7 +328,7 @@
       </li>
     </ul>
     <au-previewer
-      :images="images"
+      :media="media"
       :visible="previewerVisible"
       :current="currentPreview"
       @hide="() => { this.previewerVisible = false }"/>
@@ -359,7 +359,7 @@ export default {
       lastDescriptions: [],
       tempDescriptions: [],
       fileReader: new window.FileReader(),
-      images: [],
+      media: [],
       previewerVisible: false,
       currentPreview: 0
     }

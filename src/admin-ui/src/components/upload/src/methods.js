@@ -93,7 +93,7 @@ export default {
         if (/^image/ig.test(type)) {
           let readRes = await this.readUrlPromise(file)
           temp.base64 = readRes
-          temp.isImage = true
+          temp.isMedia = true
         }
         temp.file = file
         temp.description = ''
@@ -113,15 +113,13 @@ export default {
     getNameFromUrl (url) {
       return url.substring(url.lastIndexOf('/') + 1)
     },
-    isImage (extension) {
-      let imageExts = {
-        bmp: true,
-        jpg: true,
-        jpeg: true,
-        png: true,
-        gif: true
-      }
-      return !!imageExts[extension]
+    isMedia (extension) {
+      const extensions = [
+        'ogg', 'mp4', 'webm',
+        'wav', 'mp3', 'bmp',
+        'jpg', 'jpeg', 'png', 'gif'
+      ]
+      return extensions.includes(extension)
     },
     getValuePreviewInfo (value) {
       let vm = this
@@ -136,7 +134,7 @@ export default {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = vm.getExtension(temp.name)
-        temp.isImage = vm.isImage(temp.extension)
+        temp.isMedia = vm.isMedia(temp.extension)
         return temp
       })
     },
@@ -235,8 +233,8 @@ export default {
     },
     preview (index) {
       function showPreviewer (current) {
-        this.images = this.getImgs(index)
-        this.currentPreview = this.images.current
+        this.media = this.getMedia(index)
+        this.currentPreview = this.media.current
         this.previewerShow = true
       }
       if (this.canPreview) {
@@ -251,10 +249,10 @@ export default {
         }
       }
     },
-    getImgs (index) {
+    getMedia (index) {
       let res = []
       this.localFileList.forEach((file, i) => {
-        if (file.isImage) {
+        if (file.isMedia) {
           res.push({
             src: file.base64 || file.url,
             alt: file.name

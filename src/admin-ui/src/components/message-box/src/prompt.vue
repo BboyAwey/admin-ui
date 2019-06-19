@@ -35,6 +35,9 @@
     line-height: 32px;
     border-radius: 100%;
   }
+  .au-prompt-right {
+    max-width: 500px;
+  }
 </style>
 <template>
   <div class="au-prompt au-theme-color--base-3">

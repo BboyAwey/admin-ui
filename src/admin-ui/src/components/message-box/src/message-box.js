@@ -15,7 +15,6 @@ function getInstance (type) {
         res = namespace.get('adModalIntance')
       } else {
         res = new (Vue.extend(AuModalTemplate))({ el: document.createElement('div') })
-        if (res.$refs.decline) res.$refs.decline.parentNode.removeChild(res.$refs.decline)
         namespace.set('adModalIntance', res)
       }
       return res

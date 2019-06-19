@@ -7,7 +7,7 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-button type="info" @click="modalVisible = true">点我弹出模态框</au-button>
-        <au-modal :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons" onEnter="确认" width="40%">
+        <au-modal :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons" onEnter="确认">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
@@ -119,8 +119,7 @@
             <td>String</td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              合法的css宽度值<br>
-              不设置时自动计算
+              合法的css宽度值
             </td>
             <td>宽度</td>
           </tr>
@@ -133,10 +132,61 @@
             <td>String</td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              合法的css高度值<br>
-              不设置时自动计算
+              合法的css高度值
             </td>
             <td>高度</td>
+          </tr>
+          <tr>
+            <td>min-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css宽度值
+            </td>
+            <td>最小宽度</td>
+          </tr>
+          <tr>
+            <td>min-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css高度值
+            </td>
+            <td>最小高度</td>
+          </tr>
+          <tr>
+            <td>max-width</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css宽度值
+            </td>
+            <td>最大宽度</td>
+          </tr>
+          <tr>
+            <td>max-height</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>
+              合法的css高度值
+            </td>
+            <td>最大高度</td>
           </tr>
         </tbody>
       </au-table>

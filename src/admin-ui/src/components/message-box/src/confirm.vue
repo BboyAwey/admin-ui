@@ -18,6 +18,9 @@
     line-height: 32px;
     border-radius: 100%;
   }
+  .au-confirm-message {
+    max-width: 500px;
+  }
 </style>
 <template>
   <div class="au-confirm">
@@ -31,7 +34,8 @@
       class="au-confirm-message au-theme-color--base-3"
       :style="{
         paddingTop: iconType ? '6px' : '',
-        paddingLeft: iconType ? '48px' : ''
+        paddingLeft: iconType ? '48px' : '',
+        minHeight: iconType ? '32px' : '24px'
       }">{{ message }}</div>
   </div>
 </template>

@@ -1,8 +1,9 @@
 <style lang="scss">
   @import '../../../style/vars';
   .au-modal-container {
-    display: table;
-    // text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -21,24 +22,23 @@
     opacity: .75;
   }
   .au-modal-cell {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+    flex: none;
+    max-width: 90%;
+    max-height: 90%;
   }
   .au-modal {
     display: inline-block;
     position: relative;
-    vertical-align: middle;
-    margin: 0 auto;
+    height: 100%;
     z-index: 1;
     padding: 20px;
   }
   .au-modal-title {
-    // height: 30px;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    padding: 0 20px;
     margin: 0;
-    // padding-bottom: 12px;
-    // border-bottom-width: 1px;
-    // border-bottom-style: solid;
     overflow: hidden;
     text-align: left;
     font-weight: bold;
@@ -46,11 +46,16 @@
   }
   .au-modal-content {
     min-width: 320px;
+    height: 100%;
     margin: 12px 0 0 0;
     text-align: left;
   }
   .au-modal-operations {
-    padding-top: 12px;
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    padding: 12px 20px 0 20px;
     text-align: right;
   }
   .au-modal-button:not(:last-child) {
@@ -67,9 +72,6 @@
     font-size: $large;
     cursor: pointer;
   }
-  .au-modal-content-scroller {
-    height: 100%;
-  }
 </style>
 <template>
   <div
@@ -77,19 +79,26 @@
     v-show="localDisplay"
     ref="modalContainer"
     @click="handleModalMaskingClick">
-    <div class="au-modal-cell">
-      <div class="au-modal au-theme-border-radius--large au-theme-background-color--base-12" ref="modal">
-        <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title" ref="title">{{ title }}</h4>
-        <div class="au-modal-content" ref="content">
-          <au-scroller class="au-modal-content-scroller" stop-propagation>
-            <div ref="contentCore"><slot></slot></div>
-          </au-scroller>
-          <!-- <div>
-            Pariatur Lorem laboris excepteur Lorem Lorem anim veniam in. Magna velit duis anim aliquip laboris labore fugiat. Ullamco magna eiusmod ullamco sit voluptate. Sunt eiusmod magna anim ullamco elit sunt minim in proident ad aute. Laborum aliquip sint esse enim incididunt pariatur aliqua incididunt.
-          </div> -->
-        </div>
-        <div class="au-modal-dec-line au-theme-border-color--base-10" ref="decline"></div>
-        <div class="au-modal-operations" v-show="buttons && buttons.length" ref="operations">
+    <div class="au-modal-cell" :style="{
+      width, height,
+      minWidth, minHeight,
+      maxWidth, maxHeight
+    }">
+      <div class="
+        au-modal
+        au-theme-border-radius--large
+        au-theme-background-color--base-12"
+        :style="{
+          paddingTop: title ? '42px' : '20px',
+          paddingBottom: buttons && buttons.length ? '64px' : '20px'
+        }">
+        <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title">{{ title }}</h4>
+        <au-scroller class="au-modal-content" stop-propagation>
+          <!-- this ref will used by message-box, donot remove it -->
+          <div ref="content"><slot></slot></div>
+        </au-scroller>
+        <div class="au-modal-dec-line au-theme-border-color--base-10"></div>
+        <div class="au-modal-operations" v-show="buttons && buttons.length">
           <au-button
             class="au-modal-button"
             v-for="(button, i) in buttons"
@@ -111,7 +120,6 @@ import { getElementSize, getWindowSize } from 'helpers/dom'
 import AuButton from 'components/button'
 import AuIcon from 'components/icon'
 import AuScroller from 'components/scroller'
-import { addListener, removeListener } from 'resize-detector'
 
 export default {
   name: 'au-modal',
@@ -139,6 +147,18 @@ export default {
     height: {
       type: [String, Number]
     },
+    minWidth: {
+      type: [String, Number]
+    },
+    minHeight: {
+      type: [String, Number]
+    },
+    maxWidth: {
+      type: [String, Number]
+    },
+    maxHeight: {
+      type: [String, Number]
+    },
     onEnter: String
   },
   watch: {
@@ -153,22 +173,10 @@ export default {
 
         window.addEventListener('keyup', this.escHandler)
         if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
-        addListener(this.$refs.contentCore, this.resizeHandler)
-
-        let timer = setTimeout(_ => {
-          this.resizeHandler()
-          clearTimeout(timer)
-          timer = null
-        }, 0)
-        this.$nextTick(_ => {
-          this.calcModalStyle()
-          this.calModalContentStyle()
-        })
       } else {
         this.placement.parentNode.insertBefore(this.$el, this.placement)
         window.removeEventListener('keyup', this.escHandler)
         if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
-        removeListener(this.$refs.contentCore, this.resizeHandler)
       }
     },
     localDisplay (v) {
@@ -192,47 +200,6 @@ export default {
           vm.$set(vm.buttonLoadings, index, false)
         }
       })
-    },
-    calcModalStyle () {
-      // width and height has to be legal css value
-      let { width, height } = this
-      let maxWidth = null
-      let maxHeight = null
-      let winSize = getWindowSize()
-      // if not given height we should set a max height
-      if (!height) maxHeight = winSize.height - 80 + 'px'
-      // if not given width
-      if (!width) maxWidth = winSize.width - 200 + 'px'
-
-      let modalStyle = {
-        [maxWidth ? 'max-width' : 'width']: maxWidth || width,
-        [maxHeight ? 'max-height' : 'height']: maxHeight || height
-      }
-
-      for (let key in modalStyle) {
-        this.$refs.modal.style[key] = modalStyle[key]
-      }
-    },
-    calModalContentStyle () {
-      // clear the prev result
-      if (!this.height) this.$refs.content.style.height = 'auto'
-
-      let operationHeight = 0
-      let titleHeight = 0
-      if (this.buttons && this.buttons.length && this.$refs.operations) {
-        operationHeight = getElementSize(this.$refs.operations).height
-      }
-      if (this.title) {
-        titleHeight = getElementSize(this.$refs.title).height
-      }
-      let modalHeight = getElementSize(this.$refs.modal).height
-      // we need to minus the padding value of modal and opreation divs and the decline height
-      this.$refs.content.style.height = modalHeight - operationHeight - titleHeight - 40 + 'px'
-    },
-    resizeHandler () {
-      if (!this.visible) return
-      this.calcModalStyle()
-      this.calModalContentStyle()
     },
     handleModalMaskingClick (e) {
       if (e.target === this.$refs.modalContainer) this.hide()

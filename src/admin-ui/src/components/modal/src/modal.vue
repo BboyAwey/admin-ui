@@ -27,7 +27,6 @@
     max-height: 90%;
   }
   .au-modal {
-    display: inline-block;
     position: relative;
     height: 100%;
     z-index: 1;

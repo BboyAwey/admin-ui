@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@awey/scroller@^1.1.22":
+"@awey/scroller@^1.1.24":
   version "1.1.24"
   resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.1.24.tgz#743ba7a3b21f99142037bf12230e4ce43326769b"
   dependencies:

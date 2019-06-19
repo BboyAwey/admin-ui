@@ -185,8 +185,7 @@ export default {
       let messageIns = this.$message({
         message: '一则消息',
         type: 'primary',
-        closeable: true,
-        duration: 300000
+        closeable: true
       })
       messageIns.$on('close', () => {
         console.log('Closed!')

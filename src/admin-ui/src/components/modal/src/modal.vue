@@ -61,10 +61,10 @@
   .au-modal-button:not(:last-child) {
     margin-right: 8px;
   }
-  .au-modal-dec-line {
-    // border-bottom-width: 1px;
-    // border-bottom-style: solid;
-  }
+  // .au-modal-dec-line {
+  //   border-bottom-width: 1px;
+  //   border-bottom-style: solid;
+  // }
   .au-modal-close-icon {
     position: absolute;
     top: 5px;
@@ -97,7 +97,7 @@
           <!-- this ref will used by message-box, donot remove it -->
           <div ref="content"><slot></slot></div>
         </au-scroller>
-        <div class="au-modal-dec-line au-theme-border-color--base-10"></div>
+        <!-- <div class="au-modal-dec-line au-theme-border-color--base-10"></div> -->
         <div class="au-modal-operations" v-show="buttons && buttons.length">
           <au-button
             class="au-modal-button"
@@ -116,7 +116,6 @@
   </div>
 </template>
 <script>
-import { getElementSize, getWindowSize } from 'helpers/dom'
 import AuButton from 'components/button'
 import AuIcon from 'components/icon'
 import AuScroller from 'components/scroller'

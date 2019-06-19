@@ -5,9 +5,10 @@
     z-index: $z-level-3;
     top: 100px;
     left: 50%;
-    width: 380px;
+    transform: translate(-50%, 0);
+    // width: 380px;
     min-height: 32px;
-    margin-left: -190px;
+    // margin-left: -190px;
     padding: 16px;
     box-sizing: border-box;
     font-size: 0;
@@ -59,7 +60,7 @@
   .au-message-enter,
   .au-message-leave-to {
     opacity: 0;
-    transform: translateY(-100px)
+    transform: translate(-50%, -100px);
   }
 
 </style>

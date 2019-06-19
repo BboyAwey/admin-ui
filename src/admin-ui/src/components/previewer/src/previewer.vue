@@ -40,6 +40,8 @@
       display: inline-block;
       vertical-align: middle;
     }
+    .au-previewer-content > video,
+    .au-previewer-content > audio,
     .au-previewer-content > img {
       vertical-align: middle;
       max-width: 90%;
@@ -127,7 +129,7 @@
     <div
       class="au-previewer-header au-theme-color--base-12 au-theme-background-color--base-0"
       ref="header">
-      <span class="au-previewer-name">{{ currentImgAlt }}</span>
+      <span class="au-previewer-name">{{ currentMediaAlt }}</span>
       <icon
         type="times"
         class="au-previewer-close-icon"
@@ -142,7 +144,26 @@
         }"
         :class="{'au-previewer-disabled au-theme-': !allow('prev')}"></span>
       <i class="au-previewer-va-helper"></i>
-      <img v-for="(img, i) in images" :src="img.src" v-show="i == localCurrent" :alt="img.alt" :key="i">
+      <template v-for="(media, i) in localMedia">
+        <img
+          v-if="media.type === 'image'"
+          v-show="i == localCurrent"
+          :src="media.src"
+          :alt="media.alt"
+          :key="media.src"/>
+        <video
+          v-if="media.type === 'video'"
+          v-show="i == localCurrent"
+          :src="media.src"
+          :key="media.src"
+          controls/>
+        <audio
+          v-if="media.type === 'audio'"
+          v-show="i == localCurrent"
+          :src="media.src"
+          :key="media.src"
+          controls/>
+      </template>
       <span
         class="au-previewer-next au-theme-before-background-color--base-0 au-theme-after-border-color--base-12"
         @click.stop="next"
@@ -155,6 +176,13 @@
 </template>
 <script>
 import Icon from 'components/icon'
+
+const audioExtensions = [
+  'wav', 'mp3'
+]
+const videoExtensions = [
+  'ogg', 'mp4', 'webm'
+]
 
 export default {
   name: 'au-previewer',
@@ -169,7 +197,7 @@ export default {
     }
   },
   props: {
-    images: {
+    media: {
       type: Array,
       required: true
     },
@@ -182,9 +210,12 @@ export default {
     }
   },
   computed: {
-    currentImgAlt () {
-      if (this.images && this.images.length) {
-        return this.images[this.localCurrent].alt
+    localMedia () {
+      return this.media.map(item => this.resolveMediaItem(item))
+    },
+    currentMediaAlt () {
+      if (this.localMedia && this.localMedia.length) {
+        return this.localMedia[this.localCurrent].alt
       } else {
         return ''
       }
@@ -197,10 +228,10 @@ export default {
     localDisplay (v) {
       if (v) {
         document.body.appendChild(this.$refs.previewer)
-        this.$emit('show', this.images[this.localCurrent])
+        this.$emit('show', this.localMedia[this.localCurrent])
         window.addEventListener('keyup', this.escHandler)
       } else {
-        this.$emit('hide', this.images[this.localCurrent])
+        this.$emit('hide', this.localMedia[this.localCurrent])
         window.removeEventListener('keyup', this.escHandler)
       }
     },
@@ -208,7 +239,7 @@ export default {
       this.localCurrent = v
     },
     localCurrent (v) {
-      this.$emit('toggle', this.images[this.localCurrent])
+      this.$emit('toggle', this.localMedia[this.localCurrent])
     }
   },
   methods: {
@@ -219,20 +250,36 @@ export default {
       if (this.localCurrent > 0) --this.localCurrent
     },
     next () {
-      if (this.localCurrent < this.images.length - 1) ++this.localCurrent
+      if (this.localCurrent < this.localMedia.length - 1) ++this.localCurrent
     },
     isCurrentIllegal (c) {
-      if (!(this.images && this.images.length)) return true
+      if (!(this.localMedia && this.localMedia.length)) return true
       c = Number(c)
-      return c >= 0 && c <= this.images.length - 1
+      return c >= 0 && c <= this.localMedia.length - 1
     },
     allow (direc) {
-      if (direc === 'prev') return this.images && this.images.length && this.localCurrent > 0
-      else return this.images && this.images.length && this.localCurrent < this.images.length - 1
+      if (direc === 'prev') return this.localMedia && this.localMedia.length && this.localCurrent > 0
+      else return this.localMedia && this.localMedia.length && this.localCurrent < this.localMedia.length - 1
     },
     escHandler (e) {
       if (e.keyCode !== 27) return
       this.close()
+    },
+    resolveMediaItem (item) {
+      let res = {
+        src: item.src,
+        alt: item.alt,
+        extension: '',
+        type: ''
+      }
+      if (item.extension) res.extension = item.extension
+      else res.extension = item.src.slice(item.src.lastIndexOf('.') + 1)
+
+      if (videoExtensions.includes(res.extension)) res.type = 'video'
+      else if (audioExtensions.includes(res.extension)) res.type = 'audio'
+      else res.type = 'image'
+
+      return res
     }
   }
 }

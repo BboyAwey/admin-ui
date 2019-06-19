@@ -2,12 +2,12 @@
   <div class="page">
     <au-panel class="section" title="组件描述">
       <p class="paragraph">
-        一个全屏图片预览组件。
+        一个全屏多媒体预览组件，支持图片、视频和音频的预览。
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
         <au-button type="success" @click="visible = true">看看风景</au-button>
-        <au-previewer :visible="visible" :images="images" @hide="visible = false"></au-previewer>
+        <au-previewer :visible="visible" :media="media" @hide="visible = false"></au-previewer>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>images</td>
+            <td>media</td>
             <td>
               <au-icon type="check" class="au-theme-color--success"></au-icon>
               <!-- <au-icon type="times"></au-icon> -->
@@ -37,12 +37,15 @@
             <td><au-icon type="times"></au-icon></td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">src: 图片地址</li>
-                <li class="au-theme-border-color--base-8">alt: 图片描述</li>
+                <li class="au-theme-border-color--base-8">src: 媒体地址</li>
+                <li class="au-theme-border-color--base-8">alt: 媒体描述</li>
+                <li class="au-theme-border-color--base-8">extension: 媒体扩展名</li>
               </ol>
             </td>
             <td>
-              图片地址和描述
+              媒体地址和描述<br>
+              如果src中不包含扩展名，请指定extension<br>
+              反之则可不指定
             </td>
           </tr>
           <tr>
@@ -75,7 +78,7 @@
             <td>
               <au-icon type="minus"></au-icon>
             </td>
-            <td>当前显示的图片index<br>从0开始</td>
+            <td>当前显示的媒体index<br>从0开始</td>
           </tr>
         </tbody>
       </au-table>
@@ -102,7 +105,7 @@
             </td>
             <td>
               预览器打开的时候触发<br>
-              参数currentImage是一个表示当前正在显示的图片的对象
+              参数currentImage是一个表示当前正在显示的媒体的对象
             </td>
           </tr>
           <tr>
@@ -114,7 +117,7 @@
             </td>
             <td>
               预览器关闭的时候触发<br>
-              参数currentImage是一个表示当前正在显示的图片的对象
+              参数currentImage是一个表示当前正在显示的媒体的对象
             </td>
           </tr>
           <tr>
@@ -125,8 +128,8 @@
               </ol>
             </td>
             <td>
-              用户切换图片的时候触发<br>
-              参数currentImage是一个表示当前正在显示的图片的对象
+              用户切换媒体的时候触发<br>
+              参数currentImage是一个表示当前正在显示的媒体的对象
             </td>
           </tr>
         </tbody>
@@ -149,7 +152,7 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              显示上一张图片
+              显示上一媒体
             </td>
           </tr>
           <tr>
@@ -158,7 +161,7 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              显示下一张图片
+              显示下一媒体
             </td>
           </tr>
         </tbody>
@@ -168,7 +171,7 @@
       <h4 class="title-1">基础用例</h4>
       <code-h lang="html" content='
         <au-button type="success" @click="visible = true">看看风景</au-button>
-        <au-previewer :visible="visible" :images="images" @hide="visible = false"></au-previewer>
+        <au-previewer :visible="visible" :media="media" @hide="visible = false"></au-previewer>
       '></code-h>
       <code-h lang="js">
         export default {
@@ -176,14 +179,19 @@
           data () {
             return {
               visible: false,
-              images: [
+              media: [
                 {
                   src: '/images/1.jpg',
                   alt: 'Nice Scence 1'
                 },
                 {
-                  src: '/images/2.jpg',
-                  alt: 'Nice Scence 2'
+                  src: '/test.mp4',
+                  alt: '晚湖泛舟',
+                  extension: 'mp4'
+                },
+                {
+                  src: '/yes.wav',
+                  alt: '浪叫'
                 },
                 {
                   src: '/images/3.jpg',
@@ -207,13 +215,18 @@ export default {
   data () {
     return {
       visible: false,
-      images: [
+      media: [
         {
           src: '/images/1.jpg',
           alt: 'Nice Scence 1'
         },
         {
-          src: '/images/2.jpg',
+          src: '/test.mp4',
+          alt: 'Nice Scence 2',
+          extension: 'mp4'
+        },
+        {
+          src: '/yes.wav',
           alt: 'Nice Scence 2'
         },
         {

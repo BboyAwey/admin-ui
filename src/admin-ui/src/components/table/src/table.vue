@@ -1,16 +1,40 @@
 <style lang="scss">
   @import '../../../style/vars';
+  .border {
+    border-width: 1px;
+    border-style: solid;
+  }
+  .border-bottom {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  .border-right {
+    border-right-width: 1px;
+    border-right-style: solid;
+  }
+  .border-top {
+    border-top-width: 1px;
+    border-top-style: solid;
+  }
   .au-table {
     // the border around table
     // every tr except the last one in tbody has a bottom line
     width: 100%;
+    // border-top-width: 1px;
+    // border-top-style: solid;
+    // border-bottom-width: 1px;
+    // border-bottom-style: solid;
     & > tr:not(:last-child),
     tbody > tr,
     tfoot > tr:not(:last-child),
-    thead > tr {
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
+    thead > tr:not(:last-child) {
+      @extend .border-bottom;
     }
+
+    tbody > tr:first-child {
+      @extend .border-top;
+    }
+
     th, td {
       padding: 12px;
       text-align: left;
@@ -25,18 +49,20 @@
       font-size: $small;
       text-align: right;
     }
+
+    thead > tr:last-child, {
+      @extend .border-bottom;
+    }
+    tfoot > tr:first-child {
+      @extend .border-top;
+    }
   }
 
   .au-bordered {
-    border-width: 1px;
-    border-style: solid;
-    th:not(:last-child), td:not(:last-child) {
-      border-right-width: 1px;
-      border-right-style: solid;
-    }
-    thead > tr:last-child, tbody > tr:last-child {
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
+    @extend .border;
+    th,
+    td {
+      @extend .border-right;
     }
   }
 </style>
@@ -135,14 +161,22 @@ export default {
         }
       }
 
-      if (thead.length) {
-        for (let i = 0; i < thead.length; i++) {
-          addClass(thead[i].querySelector('tr:last-child'), 'au-theme-border-color--base-9-important')
+      if (tfoot.length && tbody.length) {
+        for (let i = 0; i < tbody.length; i++) {
+          let lastTr = tbody[i].querySelector('tr:last-child')
+          if (lastTr) addClass(lastTr, 'au-theme-border-bottom-color--base-8-important')
         }
       }
-      if (tbody.length && tfoot.length) {
-        for (let i = 0; i < tbody.length; i++) {
-          addClass(tbody[i].querySelector('tr:last-child'), 'au-theme-border-color--base-9-important')
+      if (tfoot.length) {
+        for (let i = 0; i < tfoot.length; i++) {
+          let firstTr = tfoot[i].querySelector('tr:first-child')
+          if (firstTr) addClass(firstTr, 'au-theme-border-top-color--base-8-important')
+        }
+      }
+      if (thead.length) {
+        for (let i = 0; i < thead.length; i++) {
+          let lastTr = thead[i].querySelector('tr:last-child')
+          if (lastTr) addClass(lastTr, 'au-theme-border-bottom-color--base-8-important')
         }
       }
     },

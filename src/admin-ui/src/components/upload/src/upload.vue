@@ -218,7 +218,7 @@
         <span class="au-upload-button-text">{{ buttonText }}</span>
       </au-button>
     </form-item>
-    <ul class="au-upload-file-list" :class="{'au-upload-file-inline-list': listType === 'inline' }" v-show="showFileList">
+    <ul class="au-upload-file-list" :class="{'au-upload-file-inline-list': listType === 'inline' }" v-show="showFileList && localFileList.length">
       <li
         v-for="(file, index) in localFileList"
         :key='file.timestamp'

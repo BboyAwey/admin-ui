@@ -69,7 +69,7 @@ export default [
         'url': '/panel'
       },
       {
-        'text': '图片预览',
+        'text': '多媒体预览',
         'url': '/previewer'
       },
       {

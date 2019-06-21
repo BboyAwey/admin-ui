@@ -2,30 +2,25 @@ var express = require('express')
 var router = express.Router()
 var multiparty = require('multiparty')
 var fs = require('fs')
+var path = require('path')
 
 router.get('/upload', (req, res) => {
   console.log(res.writeHead)
   res.end('Can not use GET to upload files')
 })
+
+const uploadDir = path.join(__dirname, '../../../public/upload')
 router.post('/upload', (req, res) => {
   var form = new multiparty.Form({
-    uploadDir: '../../../static/files/'
+    uploadDir
   })
   form.parse(req, (err, fields, files) => {
     if (err) {
       console.log('parse error: ' + err)
     } else {
-      var inputFile = null
-      for (let name in files) {
-        inputFile = files[name][0]
-      }
-      var uploadedPath = inputFile.path
-      var dstPsth = '../../../static/files/' + inputFile.originalFilename
-      fs.rename(uploadedPath, dstPsth, err => {
-        if (err) console.log('rename error: ' + err)
-        else {
-          res.end(JSON.stringify({url: '/static/files/' + inputFile.originalFilename}))
-        }
+      let file = Object.values(files)[0][0]
+      fs.rename(file.path, path.join(uploadDir, file.fieldName), () => {
+        res.end(JSON.stringify({ url: '/upload' + file.fieldName }))
       })
     }
   })
@@ -40,6 +35,6 @@ app.all('*', function (req, res, next) {
 })
 
 app.use('/', router)
-app.listen(3480, () => {
-  console.log('srever run on 3480')
+app.listen(1234, () => {
+  console.log('srever run on 1234')
 })

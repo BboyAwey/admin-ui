@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:3480/upload" :auto-upload="true" :can-describe="true" @change="change" list-type="block"></au-upload>
+        <au-upload label="请上传附件" button-text="选择文件" v-model="files" inline action="http://localhost:1234/upload" :auto-upload="true" :can-describe="true" @change="change" list-type="block" multiple></au-upload>
       </div>
       <!-- 组件示例 -->
     </au-panel>
@@ -176,6 +176,25 @@
               }<br>
               则其文件url的对象路径为'data.url'<br>
               如没有正确的文件url的对象路径，则下载和预览功能不可用<br>
+              仅在autoUpload为true时生效
+            </td>
+          </tr>
+          <tr>
+            <td>baseUrl</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>''</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              自动上传成功后后端接口返回的文件url有可能不包含baseUrl，<br>
+              比如可能只返回类似'some-path/your-file.ext'这样无法直接访问的地址，<br>
+              为了保证预览和下载功能能够正确访问到已上传的文件，<br>
+              需要提供baseUrl<br>
               仅在autoUpload为true时生效
             </td>
           </tr>

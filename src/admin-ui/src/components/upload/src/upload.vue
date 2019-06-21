@@ -58,12 +58,25 @@
       }
     }
     .au-upload-preview-icon {
-      float: left;
+      position: absolute;
+      top: 8px;
+      left: 8px;
       width: 64px;
       height: 64px;
       line-height: 64px;
       font-size: 16px;
       text-align: center;
+      background-size: cover;
+      background-position: center center;
+    }
+    .au-upload-preview-icon-video {
+      width: 100%;
+      height: 100%;
+    }
+    .au-upload-preview-icon-video-play {
+      position: absolute;
+      top: 20px;
+      left: 22px;
     }
     .au-upload-preview-default-icon {
       position: relative;
@@ -229,32 +242,6 @@
           au-theme-hover-background-color--base-11
           au-theme-border-radius--small
         ">
-        <div
-          class="
-            au-upload-preview-icon
-            au-theme-border-radius--small
-            au-theme-color--base-12
-          "
-          :class="{
-            'au-theme-background-color--base-9': !file.url,
-            'au-theme-background-color--primary': file.url
-          }"
-          v-show="!(autoUpload ? (file.isMedia && file.url) : (file.isMedia && file.base64))">
-          <div
-            class="
-              au-upload-preview-default-icon
-              au-theme-before-border-radius--small
-              au-theme-before-background-color--base-12
-              au-theme-after-border-color--base-11-important">
-            <span class="au-upload-white-overlay au-theme-after-border-color--base-12-important"></span>
-            {{ file.extension.toUpperCase().substring(0, 4) }}
-          </div>
-        </div>
-        <img class="au-upload-preview-icon"
-          :style="{ cursor: canPreview ? 'pointer' : 'default' }"
-          :src="autoUpload ? (file.base64 || file.url) : file.base64"
-          @click="preview(index)"
-          v-if="autoUpload ? (file.isMedia && file.url) : (file.isMedia && file.base64)">
         <div class="au-upload-file-info au-theme-color--base-3">
           <p :class="{'au-upload-no-desc': !canDescribe}">
             <span class="au-upload-file-name au-theme-color--primary">{{ file.name }}</span><br>
@@ -312,6 +299,63 @@
                 :style="{width: file.percent + '%'}"></span>
             </span>
           </p>
+        </div>
+        <!-- image icon -->
+        <div class="au-upload-preview-icon"
+          :style="{
+             cursor: canPreview ? 'pointer' : 'default',
+             backgroundImage: `url(${autoUpload ? (file.base64 || file.url) : file.base64})`
+          }"
+          @click="preview(index)"
+          v-if="(autoUpload && file.isImage) && (file.base64 || file.url)"></div>
+        <!-- video icon -->
+        <div class="au-upload-preview-icon au-theme-background-color--base-3"
+          :style="{
+            cursor: canPreview ? 'pointer' : 'default',
+            fontSize: '24px'
+          }"
+          @click="preview(index)"
+          v-else-if="autoUpload && file.isVideo && file.url">
+          <video class="au-upload-preview-icon-video"
+            :src="file.url"></video>
+          <au-icon type="play" class="au-upload-preview-icon-video-play au-theme-color--base-12"/>
+        </div>
+        <!-- audio icon -->
+        <div class="au-upload-preview-icon au-theme-background-color--base-3"
+          :style="{
+             cursor: canPreview ? 'pointer' : 'default',
+             fontSize: '24px'
+          }"
+          @click="preview(index)"
+          v-else-if="autoUpload && file.isAudio && file.url">
+          <audio class="au-upload-preview-icon-video"
+            :src="file.url"></audio>
+          <au-icon type="volume-up" class="au-upload-preview-icon-video-play au-theme-color--base-12"/>
+        </div>
+
+        <div
+          class="
+            au-upload-preview-icon
+            au-theme-border-radius--small
+            au-theme-color--base-12
+          "
+          :class="{
+            'au-theme-background-color--base-9': !file.url,
+            'au-theme-background-color--primary': file.url
+          }"
+          :style="{
+             cursor: file.isMedia ? 'pointer' : 'default'
+          }"
+          v-else>
+          <div
+            class="
+              au-upload-preview-default-icon
+              au-theme-before-border-radius--small
+              au-theme-before-background-color--base-12
+              au-theme-after-border-color--base-11-important">
+            <span class="au-upload-white-overlay au-theme-after-border-color--base-12-important"></span>
+            {{ file.extension.toUpperCase().substring(0, 4) }}
+          </div>
         </div>
         <span class="au-upload-file-edit-icon-container">
           <au-icon

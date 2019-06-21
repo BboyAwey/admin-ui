@@ -102,10 +102,15 @@ export default {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = this.getExtension(name)
-        if (/^image/ig.test(type)) {
+        let mediaType = this.getMediaType(temp.extension)
+        if (mediaType === 'image') {
           let readRes = await this.readUrlPromise(file)
           temp.base64 = readRes
-          temp.isMedia = true
+          temp.isImage = true
+        } else if (mediaType === 'video') {
+          temp.isVideo = true
+        } else if (mediaType === 'audio') {
+          temp.isAudio = true
         }
         temp.file = file
         temp.description = ''
@@ -125,13 +130,14 @@ export default {
     getNameFromUrl (url) {
       return url.substring(url.lastIndexOf('/') + 1)
     },
-    isMedia (extension) {
-      const extensions = [
-        'ogg', 'mp4', 'webm',
-        'wav', 'mp3', 'bmp',
-        'jpg', 'jpeg', 'png', 'gif'
-      ]
-      return extensions.includes(extension)
+    getMediaType (extension) {
+      const videos = ['ogg', 'mp4', 'webm']
+      const audios = ['wav', 'mp3', 'bmp']
+      const images = ['jpg', 'jpeg', 'png', 'gif']
+      if (videos.includes(extension)) return 'video'
+      if (audios.includes(extension)) return 'audio'
+      if (images.includes(extension)) return 'image'
+      return 'other'
     },
     getValuePreviewInfo (value) {
       let vm = this
@@ -146,7 +152,18 @@ export default {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = vm.getExtension(temp.name)
-        temp.isMedia = vm.isMedia(temp.extension)
+        let mediaType = vm.getMediaType(temp.extension)
+        switch (mediaType) {
+          case 'image':
+            temp.isImage = true
+            break
+          case 'audio':
+            temp.isAudio = true
+            break
+          case 'video':
+            temp.isVideo = true
+            break
+        }
         return temp
       })
     },
@@ -187,7 +204,7 @@ export default {
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
-            vm.modifyLocalFileList(relIndex, 'url', getValueFromObj(vm.urlPath || 'url', body))
+            vm.modifyLocalFileList(relIndex, 'url', vm.baseUrl + getValueFromObj(vm.urlPath || 'url', body))
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)
             if (typeof vm.onSuccess === 'function') vm.onSuccess(body)
@@ -243,27 +260,29 @@ export default {
       }
     },
     preview (index) {
-      function showPreviewer (current) {
+      console.log(index)
+      function showPreviewer () {
         this.media = this.getMedia(index)
         this.currentPreview = this.media.current
-        this.previewerShow = true
+        this.previewerVisible = true
+        console.log(this.previewerVisible)
       }
       if (this.canPreview) {
         if (typeof this.beforePreview === 'function') {
           this.exceEventHandler(this.beforePreview, [this.localFileList[index], index], (data) => {
-            showPreviewer.call(this, index)
+            showPreviewer.call(this)
           }, (err) => {
             if (err) console.warn(`Admin UI@upload@preview: ${err}`)
           })
         } else {
-          showPreviewer.call(this, index)
+          showPreviewer.call(this)
         }
       }
     },
     getMedia (index) {
       let res = []
       this.localFileList.forEach((file, i) => {
-        if (file.isMedia) {
+        if (file.isImage || file.isAudio || file.isVideo) {
           res.push({
             src: file.base64 || file.url,
             alt: file.name

@@ -70,6 +70,10 @@ export default {
       type: String,
       default: 'url'
     },
+    baseUrl: {
+      type: String,
+      default: ''
+    },
     method: String,
     data: Object,
     withCredentials: {

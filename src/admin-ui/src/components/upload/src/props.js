@@ -66,6 +66,10 @@ export default {
     accept: String,
     // upload xhr api
     action: String,
+    urlPath: {
+      type: String,
+      default: 'url'
+    },
     method: String,
     data: Object,
     withCredentials: {

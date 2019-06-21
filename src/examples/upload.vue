@@ -141,9 +141,41 @@
             </td>
             <td>
               自动上传时的上传接口地址<br>
-              无论是否设置为可多选文件，组件每次仅向该地址上传一个文件（如果一次选择了5个文件，则将会发送5个上传请求）<br>
-              该地址成功时应该返回一个json字符串，包含当前上传的文件的url字段<br>
-              （例如：{"message":"upload success","url":"http://127.0.0.1:3000/upload-files/me.jpg"}），否则下载功能不可用<br>
+              无论是否设置为可多选文件，组件每次仅向该地址上传一个文<br>
+              （如果一次选择了5个文件，则将会发送5个上传请求）<br>
+              该地址成功时应该返回一个json字符串，包含当前上传的文件的地址<br>
+              可以使用urlPath来解析和获取到这个地址<br>
+              否则下载功能不可用<br>
+              仅在autoUpload为true时生效
+            </td>
+          </tr>
+          <tr>
+            <td>urlPath</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>'url'</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              自动上传成功后后端接口返回的文件url的对象路径<br>
+              类似Object Path语法，使用"."作为分隔符<br>
+              <br>
+              例如：{<br>
+                "message":"upload success",<br>
+                "data":"http://127.0.0.1:3000/upload-files/me.jpg"<br>
+              }<br>
+              则其文件url的对象路径为'data'<br>
+              <br>
+              又如：{<br>
+                "message":"upload success",<br>
+                "data":{ "url": "http://127.0.0.1:3000/upload-files/me.jpg" }<br>
+              }<br>
+              则其文件url的对象路径为'data.url'<br>
+              如没有正确的文件url的对象路径，则下载和预览功能不可用<br>
               仅在autoUpload为true时生效
             </td>
           </tr>
@@ -671,7 +703,7 @@
               <au-icon type="minus"></au-icon>
             </td>
             <td>
-              你可能希望自定义上传按钮，可以将<span class="code au-theme-radius au-theme-background-color--warning-bottom">show-upload-button</span>设置为<span class="code au-theme-radius au-theme-background-color--warning-bottom">true</span>，然后使用这个方法来触发选文件选择动作。
+              你可能希望自定义上传按钮，可以将<span class="code au-theme-radius au-theme-background-color--warning-bottom">show-upload-button</span>设置为<span class="code au-theme-radius au-theme-background-color--warning-bottom">false</span>，然后使用这个方法来触发选文件选择动作。
             </td>
           </tr>
         </tbody>

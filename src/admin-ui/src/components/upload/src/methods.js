@@ -1,5 +1,17 @@
 import { upload } from 'helpers/dom'
 
+function getValueFromObj (path = '', target = {}) {
+  path = path.split('.')
+  let res = path.reduce((l, c) => {
+    if (typeof l === 'object') {
+      return l[c]
+    } else {
+      return null
+    }
+  }, target)
+  return res
+}
+
 export default {
   methods: {
     chooseFiles () {
@@ -175,8 +187,7 @@ export default {
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
-            // console.log(body.url)
-            vm.modifyLocalFileList(relIndex, 'url', body.url)
+            vm.modifyLocalFileList(relIndex, 'url', getValueFromObj(this.urlPath || 'url', body))
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)
             if (typeof vm.onSuccess === 'function') vm.onSuccess(body)

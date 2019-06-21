@@ -57,6 +57,24 @@
             </td>
           </tr>
           <tr>
+            <td>name</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              传递给后端接口的文件名<br>
+              也即添加到formData对象中时使用的key
+            </td>
+          </tr>
+          <tr>
             <td>multiple</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->

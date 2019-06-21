@@ -187,7 +187,7 @@ export default {
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
-            vm.modifyLocalFileList(relIndex, 'url', getValueFromObj(this.urlPath || 'url', body))
+            vm.modifyLocalFileList(relIndex, 'url', getValueFromObj(vm.urlPath || 'url', body))
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)
             if (typeof vm.onSuccess === 'function') vm.onSuccess(body)

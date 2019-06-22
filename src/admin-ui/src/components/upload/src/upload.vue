@@ -231,7 +231,11 @@
         <span class="au-upload-button-text">{{ buttonText }}</span>
       </au-button>
     </form-item>
-    <ul class="au-upload-file-list" :class="{'au-upload-file-inline-list': listType === 'inline' }" v-show="showFileList && localFileList.length">
+    <ul
+      class="au-upload-file-list"
+      :class="{'au-upload-file-inline-list': listType === 'inline' }"
+      v-show="showFileList && localFileList.length"
+      :style="{ marginTop: showUploadButton ? '16px' : 0 }">
       <li
         v-for="(file, index) in localFileList"
         :key='file.timestamp'
@@ -250,16 +254,17 @@
                 'au-theme-color--base-8': !localFileList[index] && !file.description || (localFileList[index] && !localFileList[index].description),
                 'au-upload-inline-desc': listType === 'inline'
               }"
-              v-show="canDescribe && !editingStatus[index]">
-              {{ (localFileList[index] ? localFileList[index].description : file.description) || '填写文件描述' }}
+              v-show="canDescribe && !editingStatus[index]" @click="intoDescEditingMode(index)">
+              {{ (localFileList[index] ? localFileList[index].description : file.description) || '点击填写文件描述' }}
             </span>
             <au-input
               class="au-upload-desc-core"
               size="small"
               v-show="canDescribe && editingStatus[index]"
               ref="desc"
+              width="142px"
               v-model="tempDescriptions[index]"></au-input>
-            <au-icon
+            <!-- <au-icon
               class="
                 au-upload-file-operation-icon
                 au-upload-file-desc-icon
@@ -267,7 +272,7 @@
                 au-theme-hover-color--base-3"
               type="pencil"
               v-show="canDescribe && !editingStatus[index]"
-              @click.native="intoDescEditingMode(index)"/>
+              @click.native="intoDescEditingMode(index)"/> -->
             <au-icon
               class="
                 au-upload-file-operation-icon

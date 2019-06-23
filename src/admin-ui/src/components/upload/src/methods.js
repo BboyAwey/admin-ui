@@ -293,7 +293,9 @@ export default {
       return res
     },
     modifyLocalFileList (index, key, value) {
-      this.$set(this.localFileList[index], key, value)
+      if (this.localFileList[index]) {
+        this.$set(this.localFileList[index], key, value)
+      }
     },
     exceEventHandler (handler, args, resolve, reject) {
       let p = handler(...args)

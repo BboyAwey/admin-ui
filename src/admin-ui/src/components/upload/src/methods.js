@@ -295,6 +295,8 @@ export default {
     modifyLocalFileList (index, key, value) {
       if (this.localFileList[index]) {
         this.$set(this.localFileList[index], key, value)
+      } else {
+        this.$emit('change', this.localFileList)
       }
     },
     exceEventHandler (handler, args, resolve, reject) {

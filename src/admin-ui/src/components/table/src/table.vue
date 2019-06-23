@@ -50,7 +50,7 @@
       text-align: right;
     }
 
-    thead > tr:last-child, {
+    thead > tr:last-child {
       @extend .border-bottom;
     }
     tfoot > tr:first-child {
@@ -70,8 +70,9 @@
 <template>
   <table class="
     au-table au-theme-border-color--base-9
-    au-theme-background-color--base-12"
-    :class="{ 'au-bordered' : bordered }" ref="table">
+    au-theme-background-color--base-12
+    au-theme-color--base-3"
+    :class="{ 'au-bordered' : bordered }">
     <slot></slot>
   </table>
 </template>
@@ -83,7 +84,11 @@ export default {
   name: 'au-table',
   props: {
     striped: Boolean,
-    bordered: Boolean
+    bordered: Boolean,
+    hovered: {
+      type: Boolean,
+      default: true
+    }
   },
   mounted () {
     this.handleAllStyle()
@@ -95,25 +100,23 @@ export default {
   watch: {
     striped () {
       this.handleStripe()
+    },
+    hovered () {
+      this.handleAllStyle()
     }
   },
   methods: {
     handleAllStyle () {
-      let table = this.$refs.table
+      let table = this.$el
 
-      let thead = table.querySelectorAll('thead')
-      let tbody = table.querySelectorAll('tbody')
-      let tfoot = table.querySelectorAll('tfoot')
+      let theads = table.querySelectorAll('thead')
+      let tbodys = table.querySelectorAll('tbody')
+      let tfoots = table.querySelectorAll('tfoot')
 
-      // console.log(thead)
       let allTr = table.querySelectorAll('tr')
       let allTd = table.querySelectorAll('td')
       let allTh = table.querySelectorAll('th')
-      // let allTd = table.querySelectorAll('td')
 
-      // let theadTr = thead.querySelectorAll('tr')
-      // let tbodyTr = tbody.querySelectorAll('tr')
-      // let tfootTr = tfoot.querySelectorAll('tr')
       for (let i = 0; i < allTr.length; i++) {
         addClass(allTr[i], 'au-theme-border-color--base-9')
       }
@@ -124,91 +127,84 @@ export default {
         addClass(allTd[i], 'au-theme-color--base-3 au-theme-border-color--base-9')
       }
 
-      for (let i = 0; i < tfoot.length; i++) {
-        let tds = tfoot[i].querySelectorAll('td')
+      for (let i = 0; i < tfoots.length; i++) {
+        let tds = tfoots[i].querySelectorAll('td')
         for (let i = 0; i < tds.length; i++) {
           addClass(tds[i], 'au-theme-color--base-7')
         }
       }
 
-      for (let i = 0; i < thead.length; i++) {
-        let ths = thead[i].querySelectorAll('th')
+      for (let i = 0; i < theads.length; i++) {
+        let ths = theads[i].querySelectorAll('th')
         for (let i = 0; i < ths.length; i++) {
           addClass(ths[i], 'au-theme-color--base-7 au-theme-border-color--base-9')
         }
       }
-
-      if (tbody.length) {
-        for (let i = 0; i < tbody.length; i++) {
-          let trs = table.querySelectorAll('tbody > tr')
-          for (let i = 0; i < trs.length; i++) {
-            addClass(trs[i], 'au-theme-hover-background-color--primary-bottom')
-          }
-          if (this.striped) {
+      // handle hovered color
+      if (this.hovered) {
+        if (tbodys.length) {
+          for (let i = 0; i < tbodys.length; i++) {
+            let trs = table.querySelectorAll('tbody > tr')
+            let tbody = tbodys[i]
             for (let i = 0; i < trs.length; i++) {
-              if (i % 2 === 0) addClass(trs[i], 'au-theme-background-color--base-11')
+              if (trs[i].parentNode === tbody) {
+                addClass(trs[i], 'au-theme-hover-background-color--primary-bottom')
+              }
             }
+          }
+        } else {
+          for (let i = 0; i < allTr.length; i++) {
+            if (allTr[i].parentNode === table) addClass(allTr[i], 'au-theme-hover-background-color--primary-bottom')
           }
         }
       } else {
         for (let i = 0; i < allTr.length; i++) {
-          if (allTr[i].parentNode === table) addClass(allTr[i], 'au-theme-hover-background-color--primary-bottom')
-        }
-        if (this.striped) {
-          for (let i = 0; i < allTr.length; i++) {
-            if (i % 2 === 0) addClass(allTr[i], 'au-theme-background-color--base-11')
-          }
+          removeClass(allTr[i], 'au-theme-hover-background-color--primary-bottom')
         }
       }
-
-      if (tfoot.length && tbody.length) {
-        for (let i = 0; i < tbody.length; i++) {
-          let lastTr = tbody[i].querySelector('tr:last-child')
+      // add tbody seprator line color
+      if (tfoots.length && tbodys.length) {
+        for (let i = 0; i < tbodys.length; i++) {
+          let lastTr = tbodys[i].querySelector('tr:last-child')
           if (lastTr) addClass(lastTr, 'au-theme-border-bottom-color--base-8-important')
         }
       }
-      if (tfoot.length) {
-        for (let i = 0; i < tfoot.length; i++) {
-          let firstTr = tfoot[i].querySelector('tr:first-child')
+      if (tfoots.length) {
+        for (let i = 0; i < tfoots.length; i++) {
+          let firstTr = tfoots[i].querySelector('tr:first-child')
           if (firstTr) addClass(firstTr, 'au-theme-border-top-color--base-8-important')
         }
       }
-      if (thead.length) {
-        for (let i = 0; i < thead.length; i++) {
-          let lastTr = thead[i].querySelector('tr:last-child')
+      if (theads.length) {
+        for (let i = 0; i < theads.length; i++) {
+          let lastTr = theads[i].querySelector('tr:last-child')
           if (lastTr) addClass(lastTr, 'au-theme-border-bottom-color--base-8-important')
         }
       }
     },
     handleStripe () {
-      let table = this.$refs.table
-      let tbody = table.querySelectorAll('tbody')
-      if (tbody.length) {
-        for (let i = 0; i < tbody.length; i++) {
-          let trs = table.querySelectorAll('tbody > tr')
-          // clean classes
-          for (let i = 0; i < trs.length; i++) {
-            removeClass(trs[i], 'au-theme-background-color--base-11')
-          }
-          if (this.striped) {
+      let table = this.$el
+      let tbodys = table.querySelectorAll('tbody')
+      // tbodys = Array.prototype.filter.call(tbodys, b => b.parentNode === table)
+      let allTrs = table.querySelectorAll('tr')
+      for (let tr of allTrs) {
+        removeClass(tr, 'au-theme-background-color--base-11')
+      }
+
+      if (this.striped) {
+        if (tbodys.length) {
+          for (let i = 0; i < tbodys.length; i++) {
+            let tbody = tbodys[i]
+            let trs = tbody.querySelectorAll('tr')
             for (let i = 0; i < trs.length; i++) {
-              if (i % 2 === 0) addClass(trs[i], 'au-theme-background-color--base-11')
-            }
-          } else {
-            for (let i = 0; i < trs.length; i++) {
-              if (i % 2 === 0) removeClass(trs[i], 'au-theme-background-color--base-11')
+              if (trs[i].parentNode === tbody && i % 2 === 0) addClass(trs[i], 'au-theme-background-color--base-11')
             }
           }
-        }
-      } else {
-        let allTr = table.querySelectorAll('tr')
-        for (let i = 0; i < allTr.length; i++) {
-          if (allTr[i].parentNode === table) {
-            removeClass(allTr[i], 'au-theme-background-color--base-11')
-            if (this.striped) {
+        } else {
+          let allTr = table.querySelectorAll('tr')
+          for (let i = 0; i < allTr.length; i++) {
+            if (allTr[i].parentNode === table) {
               if (i % 2 === 0) addClass(allTr[i], 'au-theme-background-color--base-11')
-            } else {
-              if (i % 2 === 0) removeClass(allTr[i], 'au-theme-background-color--base-11')
             }
           }
         }

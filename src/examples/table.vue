@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-table :bordered="true" :striped="true" style="width: 500px;">
+        <au-table :bordered="true" :striped="true" :hovered="true" style="width: 500px;">
           <thead>
             <tr>
               <th>#</th>

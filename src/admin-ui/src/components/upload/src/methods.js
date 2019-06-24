@@ -184,14 +184,16 @@ export default {
     uploadFiles () {
       let vm = this
       for (let index = 0; index < vm.files.length; index++) {
+        let file = vm.files[index]
+        if (file.url) continue
         let relIndex = vm.localFileList.length - (vm.files.length - index)
         let uploadConfig = {
           action: vm.action,
           method: vm.method,
           withCredentials: vm.withCredentials,
           headers: vm.headers,
-          file: vm.files[index],
-          filename: vm.name || vm.files[index].name,
+          file,
+          filename: vm.name || file.name,
           data: vm.data,
           index,
           relIndex,
@@ -260,12 +262,10 @@ export default {
       }
     },
     preview (index) {
-      console.log(index)
       function showPreviewer () {
         this.media = this.getMedia(index)
         this.currentPreview = this.media.current
         this.previewerVisible = true
-        console.log(this.previewerVisible)
       }
       if (this.canPreview) {
         if (typeof this.beforePreview === 'function') {

@@ -38,7 +38,7 @@ export default {
     }, 0)
   },
   beforeDestroy () {
-    this.scroller.destroy()
+    if (this.scroller) this.scroller.destroy()
   },
   // $emit scroll
   props: {

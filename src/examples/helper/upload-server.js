@@ -4,12 +4,15 @@ var multiparty = require('multiparty')
 var fs = require('fs')
 var path = require('path')
 
+const uploadDir = path.join(__dirname, './files')
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir)
+}
+
 router.get('/upload', (req, res) => {
-  console.log(res.writeHead)
   res.end('Can not use GET to upload files')
 })
-
-const uploadDir = path.join(__dirname, '../../../public/upload')
 router.post('/upload', (req, res) => {
   var form = new multiparty.Form({
     uploadDir
@@ -20,13 +23,13 @@ router.post('/upload', (req, res) => {
     } else {
       let file = Object.values(files)[0][0]
       fs.rename(file.path, path.join(uploadDir, file.fieldName), () => {
-        res.end(JSON.stringify({ url: '/upload' + file.fieldName }))
+        res.end(JSON.stringify({ url: 'http://127.0.0.1:1234/files/' + file.fieldName }))
       })
     }
   })
 })
 var app = express()
-app.all('*', function (req, res, next) {
+app.all('/upload', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With')
   res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
@@ -34,7 +37,8 @@ app.all('*', function (req, res, next) {
   next()
 })
 
+app.use('/files', express.static(uploadDir))
 app.use('/', router)
 app.listen(1234, () => {
-  console.log('srever run on 1234')
+  console.log('Upload srever run on 1234')
 })

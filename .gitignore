@@ -2,6 +2,7 @@
 node_modules
 /dist
 /src/admin-ui/dist
+/src/examples/helper/files
 
 # local env files
 .env.local

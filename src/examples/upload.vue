@@ -750,7 +750,10 @@ export default {
   name: 'upload-examples',
   data () {
     return {
-      files: []
+      files: [
+        { url: 'http://127.0.0.1:1234/files/liuyifei.png' },
+        { url: 'http://127.0.0.1:1234/files/yes.1.wav' }
+      ]
     }
   },
   methods: {

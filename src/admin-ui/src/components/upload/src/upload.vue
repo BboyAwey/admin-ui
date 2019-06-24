@@ -218,13 +218,14 @@
       :inline="inline"
       :tips="tips"
       :size="buttonSize"
+      v-if="showUploadButton || showFileList"
       :middle="inline">
       <au-button
         class="au-upload-button au-plain"
         :type="buttonType"
         :size="buttonSize"
         :plain="buttonPlain"
-        v-show="showUploadButton"
+        v-if="showUploadButton"
         :disabled="disabled"
         @click="chooseFiles">
         <au-icon class="au-upload-button-icon" type="upload" />
@@ -234,7 +235,7 @@
     <ul
       class="au-upload-file-list"
       :class="{'au-upload-file-inline-list': listType === 'inline' }"
-      v-show="showFileList && localFileList.length"
+      v-if="showFileList && localFileList.length"
       :style="{ marginTop: showUploadButton ? '16px' : 0 }">
       <li
         v-for="(file, index) in localFileList"
@@ -377,6 +378,7 @@
       </li>
     </ul>
     <au-previewer
+      v-if="showFileList"
       :media="media"
       :visible="previewerVisible"
       :current="currentPreview"
@@ -418,7 +420,9 @@ export default {
       deep: true,
       handler (v) {
         this.getFilesPreviewInfo(v).then(files => {
-          this.localFileList = files
+          if (!this.multiple) this.localFileList = files
+          else this.localFileList = this.localFileList.concat(files)
+          console.log(files, this.localFileList)
           if (this.autoUpload) this.uploadFiles()
         })
         this.$refs.core.value = ''
@@ -436,6 +440,10 @@ export default {
         if (!this.sameFiles(v, this.value)) {
           this.$emit('change', v.map(f => Object.assign({}, f)))
         }
+        // if (v.length !== this.files.length) {
+        //   // some of the file maybe undefined
+        //   this.files = v.map(f => f.file)
+        // }
       }
     },
     autoUpload (v) {

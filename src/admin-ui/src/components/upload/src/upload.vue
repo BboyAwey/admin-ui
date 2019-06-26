@@ -405,7 +405,7 @@ export default {
     return {
       desc: 'this is a file desc. this is a file desc. this is a file desc. this is a file desc. this is a file desc.',
       files: [],
-      localFileList: this.getValuePreviewInfo(this.value),
+      localFileList: [],
       editingStatus: [],
       descriptions: [],
       lastDescriptions: [],
@@ -450,6 +450,9 @@ export default {
     autoUpload (v) {
       if (v) this.uploadFiles()
     }
+  },
+  mounted () {
+    this.localFileList = this.getValuePreviewInfo(this.value)
   }
 }
 </script>

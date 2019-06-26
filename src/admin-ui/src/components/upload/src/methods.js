@@ -165,7 +165,7 @@ export default {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = vm.getExtension(temp.name)
-        if (this.baseUrl) temp.url = joinPath(this.baseUrl, temp.url)
+        if (this.baseUrl) temp.url = joinPath(this.baseUrl, temp.url || '')
         let mediaType = vm.getMediaType(temp.extension)
         switch (mediaType) {
           case 'image':
@@ -222,7 +222,7 @@ export default {
           onSuccess (body) {
             vm.modifyLocalFileList(
               relIndex, 'url',
-              joinPath(vm.baseUrl, getValueFromObj(vm.urlPath || 'url', body))
+              joinPath(vm.baseUrl, getValueFromObj(vm.urlPath || 'url', body) || '')
             )
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)

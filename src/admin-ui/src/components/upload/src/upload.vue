@@ -382,6 +382,7 @@
       :media="media"
       :visible="previewerVisible"
       :current="currentPreview"
+      @toggle="(c, i) => this.currentPreview = i"
       @hide="() => { this.previewerVisible = false }"/>
   </div>
 </template>

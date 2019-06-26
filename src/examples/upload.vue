@@ -751,8 +751,9 @@ export default {
   data () {
     return {
       files: [
-        { url: 'http://127.0.0.1:1234/files/liuyifei.png' },
-        { url: 'http://127.0.0.1:1234/files/yes.1.wav' }
+        { url: '/liuyifei.png' },
+        { url: '/yes.wav' },
+        { url: '/test.mp4' },
       ]
     }
   },

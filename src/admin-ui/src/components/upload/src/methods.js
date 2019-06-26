@@ -1,5 +1,18 @@
 import { upload } from 'helpers/dom'
 
+function joinPath (...pathes) {
+  return pathes.reduce((prev, curr, i) => {
+    curr = curr.trim()
+    if (!curr || /^\s+$/g.test(curr)) return prev
+    if (!i) return prev + curr
+    if (curr[0] === '/' && prev[prev.length - 1] === '/') {
+      return prev + curr.substring(1)
+    } else if (curr[0] !== '/' && prev[prev.length - 1] !== '/') {
+      return prev + '/' + curr
+    } else return prev + curr
+  }, '')
+}
+
 function getValueFromObj (path = '', target = {}) {
   path = path.split('.')
   let res = path.reduce((l, c) => {
@@ -152,6 +165,7 @@ export default {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = vm.getExtension(temp.name)
+        if (this.baseUrl) temp.url = joinPath(this.baseUrl, temp.url)
         let mediaType = vm.getMediaType(temp.extension)
         switch (mediaType) {
           case 'image':
@@ -206,7 +220,10 @@ export default {
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
-            vm.modifyLocalFileList(relIndex, 'url', vm.baseUrl + getValueFromObj(vm.urlPath || 'url', body))
+            vm.modifyLocalFileList(
+              relIndex, 'url',
+              joinPath(vm.baseUrl, getValueFromObj(vm.urlPath || 'url', body))
+            )
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)
             if (typeof vm.onSuccess === 'function') vm.onSuccess(body)
@@ -264,7 +281,7 @@ export default {
     preview (index) {
       function showPreviewer () {
         this.media = this.getMedia(index)
-        this.currentPreview = this.media.current
+        this.currentPreview = index
         this.previewerVisible = true
       }
       if (this.canPreview) {

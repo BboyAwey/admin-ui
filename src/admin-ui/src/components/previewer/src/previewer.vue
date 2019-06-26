@@ -236,10 +236,12 @@ export default {
       }
     },
     current (v) {
-      this.localCurrent = v
+      if (v !== this.localCurrent) {
+        this.localCurrent = v
+      }
     },
     localCurrent (v) {
-      this.$emit('toggle', this.localMedia[this.localCurrent])
+      this.$emit('toggle', this.localMedia[this.localCurrent], this.localCurrent)
     }
   },
   methods: {

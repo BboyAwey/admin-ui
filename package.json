@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.56",
+  "version": "3.2.62",
   "sideEffects": false,
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
@@ -24,7 +24,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 3478",
     "build": "vue-cli-service build",
-    "package": "npx webpack --config ./build/webpack.components.js & npx webpack --config ./build/webpack.config.js",
+    "package": "npx webpack --config ./build/webpack.components.js && npx webpack --config ./build/webpack.config.js && cd ./src/admin-ui && npm version patch && npm publish",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },

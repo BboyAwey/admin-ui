@@ -63,10 +63,7 @@ export default {
       }
     },
     changeDescription (i) {
-      // let temp = this.$refs.desc[i].localValue
-      // this.$refs.desc[i].innerText = ''
       this.modifyLocalFileList(i, 'description', this.$refs.desc[i].localValue)
-      // this.$refs.desc[i].innerText = temp.trim()
       this.lastDescriptions[i] = ''
       this.$set(this.editingStatus, i, false)
     },
@@ -76,29 +73,15 @@ export default {
       this.$set(this.editingStatus, i, false)
     },
     loadFiles (evt) {
-      this.$emit('native-change', evt.target.files)
-      if (evt.target.files && evt.target.files.length) {
-        if (!this.files.length || !this.multiple) {
-          this.files = Array.prototype.map.call(evt.target.files, (f) => {
-            return f
-          })
-        } else {
-          Array.prototype.forEach.call(evt.target.files, f => {
-            let exists = false
-            for (let fi of this.files) {
-              if (
-                fi.lastModified === f.lastModified &&
-                fi.name === f.name &&
-                fi.size === f.size &&
-                fi.type === f.type
-              ) {
-                exists = true
-                break
-              }
-            }
-            if (!exists) this.files.push(f)
-          })
-        }
+      const nativeFiles = evt.target.files
+      this.$emit('native-change', nativeFiles)
+      if (nativeFiles && nativeFiles.length) {
+        this.getFilesPreviewInfo(Array.prototype.map.call(nativeFiles, f => f)).then(files => {
+          if (!this.multiple) this.localFileList = files
+          else this.localFileList = this.localFileList.concat(files)
+          if (this.autoUpload) this.uploadFiles()
+        })
+        this.$refs.core.value = ''
       }
     },
     async getFilesPreviewInfo (files) {
@@ -106,14 +89,7 @@ export default {
       for (let file of files) {
         let { type, name, url } = file
         let temp = { type, name, url }
-        // extract name from url if not provide name
-        if (!temp.name && !temp.url) {
-          console.warn(`Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.`)
-          return []
-        }
-        if (!temp.name && temp.url) {
-          temp.name = this.getNameFromUrl(temp.url)
-        }
+
         temp.extension = this.getExtension(name)
         let mediaType = this.getMediaType(temp.extension)
         if (mediaType === 'image') {
@@ -158,14 +134,16 @@ export default {
         let temp = Object.assign({}, e)
         // extract name from url if not provide name
         if (!temp.name && !temp.url) {
-          console.warn(`Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.`)
+          // console.warn(`Admin UI@upload: the value of Upload component should be an Array and at least contains url or name property.`)
           return []
         }
         if (!temp.name && temp.url) {
           temp.name = this.getNameFromUrl(temp.url)
         }
         temp.extension = vm.getExtension(temp.name)
-        if (this.baseUrl) temp.url = joinPath(this.baseUrl, temp.url || '')
+        if (this.baseUrl && temp.url && temp.url.indexOf(this.baseUrl) !== 0) {
+          temp.url = joinPath(this.baseUrl, temp.url || '')
+        }
         let mediaType = vm.getMediaType(temp.extension)
         switch (mediaType) {
           case 'image':
@@ -197,32 +175,33 @@ export default {
     },
     uploadFiles () {
       let vm = this
-      for (let index = 0; index < vm.files.length; index++) {
-        let file = vm.files[index]
-        if (file.url) continue
-        let relIndex = vm.localFileList.length - (vm.files.length - index)
+      for (let index = 0; index < vm.localFileList.length; index++) {
+        let file = vm.localFileList[index]
+        if (file.url || !file.file) continue
         let uploadConfig = {
           action: vm.action,
           method: vm.method,
           withCredentials: vm.withCredentials,
           headers: vm.headers,
-          file,
-          filename: vm.name || file.name,
+          file: file.file,
+          filename: vm.name || file.file.name,
           data: vm.data,
           index,
-          relIndex,
           onError (e) {
-            vm.modifyLocalFileList(relIndex, 'isError', true)
+            vm.modifyLocalFileList(index, 'isError', true)
             if (typeof vm.onError === 'function') vm.onError(e)
           },
           onProgress (e) {
-            vm.modifyLocalFileList(relIndex, 'percent', e.percent)
+            vm.modifyLocalFileList(index, 'percent', e.percent)
             if (typeof vm.onProgress === 'function') vm.onProgress(e)
           },
           onSuccess (body) {
+            const url = getValueFromObj(vm.urlPath || 'url', body)
             vm.modifyLocalFileList(
-              relIndex, 'url',
-              joinPath(vm.baseUrl, getValueFromObj(vm.urlPath || 'url', body) || '')
+              index, 'url',
+              url && url.indexOf(vm.baseUrl) !== 0
+                ? joinPath(vm.baseUrl, url || '')
+                : url
             )
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)

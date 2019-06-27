@@ -360,7 +360,7 @@
               au-theme-before-background-color--base-12
               au-theme-after-border-color--base-11-important">
             <span class="au-upload-white-overlay au-theme-after-border-color--base-12-important"></span>
-            {{ file.extension.toUpperCase().substring(0, 4) }}
+            {{ file.extension && file.extension.toUpperCase().substring(0, 4) }}
           </div>
         </div>
         <span class="au-upload-file-edit-icon-container">
@@ -417,18 +417,6 @@ export default {
     }
   },
   watch: {
-    files: {
-      deep: true,
-      handler (v) {
-        this.getFilesPreviewInfo(v).then(files => {
-          if (!this.multiple) this.localFileList = files
-          else this.localFileList = this.localFileList.concat(files)
-          console.log(files, this.localFileList)
-          if (this.autoUpload) this.uploadFiles()
-        })
-        this.$refs.core.value = ''
-      }
-    },
     value: {
       deep: true,
       handler (v) {
@@ -438,13 +426,7 @@ export default {
     localFileList: {
       deep: true,
       handler (v) {
-        if (!this.sameFiles(v, this.value)) {
-          this.$emit('change', v.map(f => Object.assign({}, f)))
-        }
-        // if (v.length !== this.files.length) {
-        //   // some of the file maybe undefined
-        //   this.files = v.map(f => f.file)
-        // }
+        this.$emit('change', v.map(f => Object.assign({}, f)))
       }
     },
     autoUpload (v) {

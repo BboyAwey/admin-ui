@@ -3,32 +3,40 @@
 .au-size-mini {
   height: $size-mini;
   line-height: $size-mini;
+  font-size: $mini;
 }
 .au-size-small {
   height: $size-small;
   line-height: $size-small;
+  font-size: $small;
 }
 .au-size-normal {
   height: $size-normal;
   line-height: $size-normal;
+  font-size: $normal;
 }
 .au-size-large {
   height: $size-large;
   line-height: $size-large;
+  font-size: $normal;
 }
 .au-size-mini-bordered {
   height: $size-mini;
   line-height: $size-mini - 2px;
+  font-size: $mini;
 }
 .au-size-small-bordered {
   height: $size-small;
   line-height: $size-small - 2px;
+  font-size: $small;
 }
 .au-size-normal-bordered {
   height: $size-normal;
   line-height: $size-normal - 2px;
+  font-size: $normal;
 }
 .au-size-large-bordered {
   height: $size-large;
   line-height: $size-large - 2px;
+  font-size: $normal;
 }

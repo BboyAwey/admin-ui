@@ -25,7 +25,8 @@
       }"
       v-if="label"
       :style="{
-        width: inline ? labelWidth : ''
+        width: inline ? labelWidth : '',
+        lineHeight
       }">{{ label }}</div>
     <div :class="`au-form-item-main${inline ? '-inline' : '-block'}`">
       <slot></slot>
@@ -47,7 +48,8 @@ export default {
       type: String,
       default: 'normal'
     },
-    middle: Boolean
+    middle: Boolean,
+    lineHeight: String
   }
 }
 </script>

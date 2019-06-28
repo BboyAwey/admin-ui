@@ -11,18 +11,12 @@
     .au-input-icon {
       position: absolute;
       display: inline-block;
-      top: 50%;
-      height: 30px;
-      margin-top: -15px;
-      line-height: 30px;
-      font-size: $medium;
     }
     .au-input-core {
       border-width: 1px;
       border-style: solid;
       padding: 0 12px;
       font-family: $fontFamily;
-      font-size: $normal;
       outline: none;
       vertical-align: middle;
     }
@@ -32,6 +26,7 @@
     textarea.au-input-core {
       line-height: $normal * 1.5;
       padding: 8px 12px;
+      font-size: $normal;
     }
   }
   .au-input-associations-scroller {
@@ -120,6 +115,7 @@
             'au-theme-color--base-3': !active,
             'au-theme-color--primary': active && !hasWarnings,
             'au-theme-color--danger': hasWarnings,
+            [`au-size-${size}`]: true
           }"
           :style="{
             'left': !iconPosition || iconPosition === 'left' ? '8px' : 'auto',

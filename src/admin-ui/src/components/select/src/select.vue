@@ -94,6 +94,7 @@
       :labelWidth="labelWidth"
       :inline="inline"
       :tips="tips"
+      :size="size"
       :middle="inline"
       :warnings="warnings || localWarnings">
       <au-popover

@@ -66,6 +66,26 @@
             </td>
           </tr>
           <tr>
+            <td>size</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>normal</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">large</li>
+                <li class="au-theme-border-color--base-8">normal</li>
+                <li class="au-theme-border-color--base-8">small</li>
+                <li class="au-theme-border-color--base-8">mini</li>
+              </ol>
+            </td>
+            <td>
+              开关尺寸
+            </td>
+          </tr>
+          <tr>
             <td>tips</td>
             <td>
               <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->

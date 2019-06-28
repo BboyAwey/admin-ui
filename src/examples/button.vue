@@ -6,8 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button style="margin-right: 10px;" type="primary" @click="loading = !loading">按钮</au-button>
-        <au-button style="margin-right: 10px;" type="primary" @click="loading = !loading" plain>按钮</au-button>
+        <au-button icon="home" style="margin-right: 10px;" type="primary" @click="loading = !loading" plain>按钮</au-button>
         <au-button style="margin-right: 10px;" type="danger" :loading="loading">按钮</au-button>
         <au-button style="margin-right: 10px;" type="primary" plain :loading="loading">按钮</au-button>
       </div>
@@ -67,6 +66,19 @@
             </td>
             <td>
               按钮尺寸
+            </td>
+          </tr>
+          <tr>
+            <td>icon</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td><au-icon type="minus"></au-icon></td>
+            <td>参考<router-link class="au-theme-color--info" :to="{path: '/icon'}" target="_blank">图标组件</router-link></td>
+            <td>
+              按钮图标
             </td>
           </tr>
           <tr>

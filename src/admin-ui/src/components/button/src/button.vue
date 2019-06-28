@@ -49,6 +49,9 @@
     border-style: solid;
     // line-height: 30px;
   }
+  .au-button-icon {
+    margin-right: 4px;
+  }
 </style>
 <template>
   <button
@@ -63,6 +66,7 @@
     :disabled="disabled || loading"
     @click="handleClick" ref="button">
     <span class="before-mask au-theme-background-color--base-12"></span>
+    <icon v-if="icon" :type="icon" class="au-button-icon"/>
     <slot></slot>
     <span class="after-mask au-theme-background-color--base-12"
       :class="{'au-theme-border-color--base-12': plain}"></span>
@@ -70,9 +74,11 @@
 </template>
 <script>
 import Loading from 'components/loading'
+import Icon from 'components/icon'
 
 export default {
   name: 'au-button',
+  components: { Icon },
   mounted () {
     this.load()
   },
@@ -87,6 +93,7 @@ export default {
       type: String,
       default: 'normal'
     },
+    icon: String,
     plain: Boolean,
     disabled: Boolean,
     loading: Boolean,

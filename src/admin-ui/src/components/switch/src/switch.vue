@@ -23,6 +23,34 @@
     transition: all .1s ease-in-out;
     overflow: hidden;
   }
+
+  .au-switch-mini {
+    height: 14px;
+    width: 28px;
+    border-radius: 14px;
+    .au-switch-core {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  .au-switch-small {
+    width: 34px;
+    height: 16px;
+    border-radius: 16px;
+    .au-switch-core {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  .au-switch-large {
+    height: 24px;
+    border-radius: 24px;
+    .au-switch-core {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   .au-switch-disabled-cover {
     position: absolute;
     width: 100%;
@@ -38,14 +66,12 @@
       :labelWidth="labelWidth"
       :inline="inline"
       :tips="tips"
-      :size="size"
+      :lineHeight="lineHeight"
       :middle="false"
       :warnings="warnings || localWarnings">
       <div
         class="au-switch-container"
-        :class="{
-          [` au-theme-background-color--${bg}`]: true
-        }"
+        :class="`au-theme-background-color--${bg} au-switch-${size}`"
         :style="{ cursor: readonly ? 'default' : (localDisabled ? 'not-allowed' : 'pointer')}"
         @click="handleClick"
         ref="switch">
@@ -112,6 +138,15 @@ export default {
   computed: {
     localDisabled () {
       return this.disabled || this.loading || this.readonly
+    },
+    lineHeight () {
+      switch (this.size) {
+        case 'mini': return '14px'
+        case 'small': return '16px'
+        case 'normal': return '20px'
+        case 'large': return '24px'
+      }
+      return '20px'
     }
   },
   methods: {
@@ -121,7 +156,8 @@ export default {
     getLeft () {
       if (this.localValue) {
         let width = getElementSize(this.$refs.switch).width
-        this.left = width - 4 - 16 + 1 + 'px'
+        let coreWidth = getElementSize(this.$refs.core).width
+        this.left = width - 2 - coreWidth + 'px'
       } else this.left = '2px'
     },
     handleClick () {

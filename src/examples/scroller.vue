@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-scroller style="width: 300px; height:400px; border-width: 1px; border-style: solid;" class="au-theme-border-color--base-8">
+        <au-scroller style="width: 300px; height:400px; border-width: 1px; border-style: solid;" class="au-theme-border-color--base-8" :scaleable="false" :offset="0">
           <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
           <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
           <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>

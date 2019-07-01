@@ -749,7 +749,7 @@ export default {
       files: [
         { url: '/liuyifei.png' },
         { url: '/yes.wav' },
-        { url: '/test.mp4' },
+        { url: '/test.mp4' }
       ]
     }
   },

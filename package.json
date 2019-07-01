@@ -24,12 +24,13 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 3478",
     "build": "vue-cli-service build",
+    "package-no-patch": "npx webpack --config ./build/webpack.components.js && npx webpack --config ./build/webpack.config.js",
     "package": "npx webpack --config ./build/webpack.components.js && npx webpack --config ./build/webpack.config.js && cd ./src/admin-ui && npm version patch",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@awey/scroller": "^1.1.24",
+    "@awey/scroller": "^1.2.0",
     "highlightjs": "^9.10.0",
     "prismjs": "^1.16.0",
     "resize-detector": "^0.1.9",

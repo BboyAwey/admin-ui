@@ -3,8 +3,8 @@
 
 
 "@awey/scroller@^1.1.24":
-  version "1.1.24"
-  resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.1.24.tgz#743ba7a3b21f99142037bf12230e4ce43326769b"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.2.0.tgz#d4cf3de96b272d7a37e681f560a0cdbca1d4fb84"
   dependencies:
     resize-observer-polyfill "^1.5.1"
 

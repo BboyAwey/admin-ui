@@ -50,7 +50,7 @@ export default {
     },
     scaleable: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   watch: {

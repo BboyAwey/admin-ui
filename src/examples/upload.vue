@@ -261,11 +261,7 @@
             <td>Object</td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              <ol class="option-list">
-                <li class="au-theme-border-color--base-8">true</li>
-                <li class="au-theme-border-color--base-8">false</li>
-              </ol>
-              <!-- <au-icon type="minus"></au-icon> -->
+              <au-icon type="minus"></au-icon>
             </td>
             <td>
               设置或修改访问上传接口时的headers<br>

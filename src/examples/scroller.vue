@@ -99,6 +99,44 @@
               可以配合@scroll事件使用来动态控制滚动
             </td>
           </tr>
+          <tr>
+            <td>offset</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Number
+            </td>
+            <td>
+              4
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              滚动条到元素边缘的距离
+            </td>
+          </tr>
+          <tr>
+            <td>scaleable</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>
+              Boolean
+            </td>
+            <td>
+              true
+            </td>
+            <td>
+              <au-icon type="minus"></au-icon>
+            </td>
+            <td>
+              鼠标悬停时滚动条是否放大
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

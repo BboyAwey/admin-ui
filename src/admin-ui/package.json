@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.63",
+  "version": "3.2.64",
   "sideEffects": false,
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",
@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@awey/scroller": "^1.1.23",
+    "@awey/scroller": "^1.1.24",
     "resize-detector": "^0.1.9",
     "theme-class-generator": "^1.0.2"
   }

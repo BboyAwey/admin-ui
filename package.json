@@ -24,7 +24,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 3478",
     "build": "vue-cli-service build",
-    "package": "npx webpack --config ./build/webpack.components.js && npx webpack --config ./build/webpack.config.js && cd ./src/admin-ui && npm version patch && npm publish",
+    "package": "npx webpack --config ./build/webpack.components.js && npx webpack --config ./build/webpack.config.js && cd ./src/admin-ui && npm version patch",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },

@@ -1,15 +1,3 @@
-<style lang="scss">
-  .au-scroller {
-    // position: relative;
-    // overflow: hidden;
-    // padding-bottom: 10px;
-  }
-  .au-scroller-wrapper {
-    width: 100%;
-    height: 100%;
-    // max-height: 100%;
-  }
-</style>
 <template>
   <div class="au-scroller">
     <div>
@@ -27,6 +15,8 @@ export default {
       this.scroller = new Scroller({
         el: this.$el,
         direction: this.direction,
+        offset: this.offset,
+        scaleable: this.scaleable,
         trackClassName: 'au-theme-background-color--base-0',
         barClassName: 'au-theme-background-color--base-0'
       }).onScroll(e => {
@@ -53,6 +43,14 @@ export default {
     scrollLeft: {
       type: Number,
       default: 0
+    },
+    offset: {
+      type: Number,
+      default: 4
+    },
+    scaleable: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {

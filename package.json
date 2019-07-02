@@ -30,7 +30,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@awey/scroller": "^1.2.0",
+    "@awey/scroller": "^1.2.3",
     "highlightjs": "^9.10.0",
     "prismjs": "^1.16.0",
     "resize-detector": "^0.1.9",

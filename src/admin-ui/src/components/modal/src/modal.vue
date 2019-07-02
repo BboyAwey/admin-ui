@@ -162,22 +162,9 @@ export default {
   watch: {
     visible (v) {
       this.localDisplay = v
-      if (v) {
-        if (!this.placement) {
-          this.placement = document.createElement('span')
-        }
-        this.$el.parentNode.insertBefore(this.placement, this.$el)
-        document.body.appendChild(this.$el)
-
-        window.addEventListener('keyup', this.escHandler)
-        if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
-      } else {
-        this.placement.parentNode.insertBefore(this.$el, this.placement)
-        window.removeEventListener('keyup', this.escHandler)
-        if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
-      }
     },
     localDisplay (v) {
+      this.action()
       this.$emit(v ? 'show' : 'hide')
     }
   },
@@ -211,7 +198,26 @@ export default {
       this.buttons.forEach((button, index) => {
         if (button.text === this.onEnter) this.operate(index)
       })
+    },
+    action () {
+      if (this.localDisplay) {
+        if (!this.placement) {
+          this.placement = document.createElement('span')
+        }
+        this.$el.parentNode.insertBefore(this.placement, this.$el)
+        document.body.appendChild(this.$el)
+
+        window.addEventListener('keyup', this.escHandler)
+        if (this.onEnter) window.addEventListener('keyup', this.enterHandler)
+      } else {
+        if (this.placement) this.placement.parentNode.insertBefore(this.$el, this.placement)
+        window.removeEventListener('keyup', this.escHandler)
+        if (this.onEnter) window.removeEventListener('keyup', this.enterHandler)
+      }
     }
+  },
+  mounted () {
+    this.action()
   }
 }
 </script>

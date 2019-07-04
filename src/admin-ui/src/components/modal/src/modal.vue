@@ -59,9 +59,9 @@
     padding: 12px 20px 0 20px;
     text-align: right;
   }
-  .au-modal-button:not(:last-child) {
-    margin-right: 8px;
-  }
+  // .au-modal-button:not(:last-child) {
+  //   margin-right: 8px;
+  // }
   // .au-modal-dec-line {
   //   border-bottom-width: 1px;
   //   border-bottom-style: solid;

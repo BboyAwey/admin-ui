@@ -20,8 +20,11 @@
     & > * {
       vertical-align: middle;
     }
-    & > *:not(:last-child) {
+    & > *:not(:last-child):not(.au-button) {
       margin-right: 5px;
+    }
+    .au-button:not(:first-child) {
+      margin-left: 5px;
     }
   }
   .au-rangepicker-relative {
@@ -38,6 +41,7 @@
     padding: 0 8px;
     border-width: 1px;
     border-style: solid;
+    margin-left: 0 !important;
     margin-right: 5px;
     margin-bottom: 10px;
     font-size: 14px;
@@ -110,7 +114,7 @@
               v-model="endTime"
               :start="valid.endTime.start"
               :end="valid.endTime.end"/>
-            <au-button type="default" @click="clear" plain>清空</au-button>
+            <au-button type="default" style="margin-left: 0" @click="clear" plain>清空</au-button>
             <au-button type="default" @click="handleCancel">取消</au-button>
             <au-button type="primary" @click="handleConfirm" :disabled="!fullfill">确定</au-button>
           </div>

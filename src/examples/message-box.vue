@@ -6,9 +6,9 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-button type="warning" @click="alert" style="margin-right: 10px;">Alert</au-button>
-        <au-button type="success" @click="confirm" style="margin-right: 10px;">Confirm</au-button>
-        <au-button type="primary" @click="prompt" style="margin-right: 10px;">Prompt</au-button>
+        <au-button type="warning" @click="alert">Alert</au-button>
+        <au-button type="success" @click="confirm">Confirm</au-button>
+        <au-button type="primary" @click="prompt">Prompt</au-button>
       </div>
       <!-- 组件示例 -->
     </au-panel>

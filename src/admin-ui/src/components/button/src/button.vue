@@ -6,7 +6,7 @@
     position: relative;
     // min-width: 88px;
     // height: $size-normal;
-    padding: 0 8px;
+    padding: 0 10px;
     border-width: 0;
     outline: none;
     font-size: $normal;

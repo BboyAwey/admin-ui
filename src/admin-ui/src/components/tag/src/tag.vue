@@ -8,6 +8,9 @@
     border-style: solid;
     font-size: $normal;
   }
+  .au-tag + .au-tag {
+    margin-left: 10px;
+  }
   .au-tag-close {
     display: inline-block;
     position: relative;

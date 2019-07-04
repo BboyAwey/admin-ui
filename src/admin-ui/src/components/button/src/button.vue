@@ -14,6 +14,9 @@
     cursor: pointer;
     font-family: $fontFamily;
   }
+  .au-button + .au-button {
+    margin-left: 10px;
+  }
   .au-button:disabled {
     cursor: not-allowed;
   }
@@ -47,10 +50,9 @@
   .au-button.plain {
     border-width: 1px;
     border-style: solid;
-    // line-height: 30px;
   }
-  .au-button-icon {
-    margin-right: 4px;
+  .au-button-icon + * {
+    margin-left: 4px;
   }
 </style>
 <template>
@@ -67,7 +69,7 @@
     @click="handleClick" ref="button">
     <span class="before-mask au-theme-background-color--base-12"></span>
     <icon v-if="icon" :type="icon" class="au-button-icon"/>
-    <slot></slot>
+    <span><slot></slot></span>
     <span class="after-mask au-theme-background-color--base-12"
       :class="{'au-theme-border-color--base-12': plain}"></span>
   </button>

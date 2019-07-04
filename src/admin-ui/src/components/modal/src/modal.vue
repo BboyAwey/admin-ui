@@ -25,10 +25,13 @@
     flex: none;
     max-width: 90%;
     max-height: 90%;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
   }
   .au-modal {
     position: relative;
-    height: 100%;
+    width: 100%;
     z-index: 1;
     padding: 20px;
   }
@@ -46,7 +49,6 @@
   .au-modal-content {
     min-width: 320px;
     height: 100%;
-    margin: 12px 0 0 0;
     text-align: left;
   }
   .au-modal-operations {
@@ -88,7 +90,7 @@
         au-theme-border-radius--large
         au-theme-background-color--base-12"
         :style="{
-          paddingTop: title ? '42px' : '20px',
+          paddingTop: title ? '54px' : '32px',
           paddingBottom: buttons && buttons.length ? '64px' : '20px'
         }">
         <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title">{{ title }}</h4>

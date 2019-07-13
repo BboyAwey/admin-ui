@@ -63,14 +63,14 @@ export default {
           this.scroller.scrollTo({ scrollTop: v })
           clearTimeout(this.scrollTopTimer)
           this.scrollTopTimer = null
-        }, 100)
+        }, 0)
       } else {
         clearTimeout(this.scrollTopTimer)
         this.scrollTopTimer = setTimeout(() => {
           this.scroller.scrollTo({ scrollTop: v })
           clearTimeout(this.scrollTopTimer)
           this.scrollTopTimer = null
-        }, 100)
+        }, 0)
       }
       // this.scroller.scrollTo({ scrollTop: v })
     },
@@ -80,14 +80,14 @@ export default {
           this.scroller.scrollTo({ scrollLeft: v })
           clearTimeout(this.scrollLeftTimer)
           this.scrollLeftTimer = null
-        }, 100)
+        }, 0)
       } else {
         clearTimeout(this.scrollLeftTimer)
         this.scrollLeftTimer = setTimeout(() => {
           this.scroller.scrollTo({ scrollLeft: v })
           clearTimeout(this.scrollLeftTimer)
           this.scrollLeftTimer = null
-        }, 100)
+        }, 0)
       }
       // this.scroller.scrollTo({ scrollLeft: v })
     }

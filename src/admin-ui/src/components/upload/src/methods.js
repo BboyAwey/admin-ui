@@ -234,7 +234,9 @@ export default {
       if (url) {
         let a = window.document.createElement('a')
         a.href = url
-        a.download = url
+        let name = url.slice(url.lastIndexOf('/') + 1)
+        if (name.indexOf('.') === -1) name = url
+        a.download = name
         a.click()
         a = null
       }

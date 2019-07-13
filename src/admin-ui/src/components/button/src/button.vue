@@ -62,7 +62,8 @@
       au-theme-border-radius--small"
     :class="buttonClasses"
     :style="{
-      cursor: loading ? 'wait' : ''
+      cursor: loading ? 'wait' : '',
+      padding: size === 'small' || size === 'mini' ? '0 8px' : '0 10px'
     }"
     :type="nativeType"
     :disabled="disabled || loading"

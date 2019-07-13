@@ -94,6 +94,23 @@
             </td>
           </tr>
           <tr>
+            <td>list-type</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>inline</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">inline</li>
+                <li class="au-theme-border-color--base-8">block</li>
+              </ol>
+            </td>
+            <td>
+              选项的布局模式，inline为横向，block为纵向
+            </td>
+          </tr>
+          <tr>
             <td>value</td>
             <td>
               <au-icon type="times"></au-icon>

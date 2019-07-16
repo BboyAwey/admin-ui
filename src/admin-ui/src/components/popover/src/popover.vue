@@ -188,7 +188,11 @@ export default {
     }
   },
   mounted () {
-    this.reconstruct()
+    let timer = setTimeout(() => {
+      this.reconstruct()
+      clearTimeout(timer)
+      timer = null
+    }, 0)
     this.addEvents()
     window.addEventListener('resize', this.handleWindowResize)
     window.addEventListener('click', this.handleWindowClick, true)
@@ -230,8 +234,8 @@ export default {
       popoverCollections[id] = this
 
       if (target.parentNode === pop) {
-        pop.parentNode.insertBefore(target, pop)
-        pop.parentNode.removeChild(pop)
+        pop.parentNode && pop.parentNode.insertBefore(target, pop)
+        pop.parentNode && pop.parentNode.removeChild(pop)
         pop.style.zIndex = zIndex
       }
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)

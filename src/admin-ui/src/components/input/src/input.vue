@@ -334,7 +334,6 @@ export default {
           this.activeAssociationIndex = 0
         }
         if (!this.active) return
-        console.log(v.length)
         if (!v.length) this.pop(false)
         else this.pop(true)
       }
@@ -366,9 +365,9 @@ export default {
     pop (show) {
       if (show) {
         this.$refs.associations.style.width = this.$refs.core.getBoundingClientRect().width + 'px'
-        this.$refs.popover.show()
+        this.$refs.popover && this.$refs.popover.show()
       } else {
-        this.$refs.popover.hide()
+        this.$refs.popover && this.$refs.popover.hide()
       }
     },
     iconClick () {

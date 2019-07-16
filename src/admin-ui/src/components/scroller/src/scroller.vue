@@ -58,38 +58,38 @@ export default {
       this.scroller.setDirection(v)
     },
     scrollTop (v) {
-      if (!this.scrollTopTimer) {
-        this.scrollTopTimer = setTimeout(() => {
-          this.scroller.scrollTo({ scrollTop: v })
-          clearTimeout(this.scrollTopTimer)
-          this.scrollTopTimer = null
-        }, 0)
-      } else {
-        clearTimeout(this.scrollTopTimer)
-        this.scrollTopTimer = setTimeout(() => {
-          this.scroller.scrollTo({ scrollTop: v })
-          clearTimeout(this.scrollTopTimer)
-          this.scrollTopTimer = null
-        }, 0)
-      }
-      // this.scroller.scrollTo({ scrollTop: v })
+      // if (!this.scrollTopTimer) {
+      //   this.scrollTopTimer = setTimeout(() => {
+      //     this.scroller.scrollTo({ scrollTop: v })
+      //     clearTimeout(this.scrollTopTimer)
+      //     this.scrollTopTimer = null
+      //   }, 0)
+      // } else {
+      //   clearTimeout(this.scrollTopTimer)
+      //   this.scrollTopTimer = setTimeout(() => {
+      //     this.scroller.scrollTo({ scrollTop: v })
+      //     clearTimeout(this.scrollTopTimer)
+      //     this.scrollTopTimer = null
+      //   }, 0)
+      // }
+      this.scroller.scrollTo({ scrollTop: v })
     },
     scrollLeft (v) {
-      if (!this.scrollLeftTimer) {
-        this.scrollLeftTimer = setTimeout(() => {
-          this.scroller.scrollTo({ scrollLeft: v })
-          clearTimeout(this.scrollLeftTimer)
-          this.scrollLeftTimer = null
-        }, 0)
-      } else {
-        clearTimeout(this.scrollLeftTimer)
-        this.scrollLeftTimer = setTimeout(() => {
-          this.scroller.scrollTo({ scrollLeft: v })
-          clearTimeout(this.scrollLeftTimer)
-          this.scrollLeftTimer = null
-        }, 0)
-      }
-      // this.scroller.scrollTo({ scrollLeft: v })
+      // if (!this.scrollLeftTimer) {
+      //   this.scrollLeftTimer = setTimeout(() => {
+      //     this.scroller.scrollTo({ scrollLeft: v })
+      //     clearTimeout(this.scrollLeftTimer)
+      //     this.scrollLeftTimer = null
+      //   }, 0)
+      // } else {
+      //   clearTimeout(this.scrollLeftTimer)
+      //   this.scrollLeftTimer = setTimeout(() => {
+      //     this.scroller.scrollTo({ scrollLeft: v })
+      //     clearTimeout(this.scrollLeftTimer)
+      //     this.scrollLeftTimer = null
+      //   }, 0)
+      // }
+      this.scroller.scrollTo({ scrollLeft: v })
     }
   },
   methods: {

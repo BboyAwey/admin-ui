@@ -306,6 +306,9 @@ export default {
         icon: 'home',
         confirm () {
           console.log('confirm')
+        },
+        cancel () {
+          console.log('cancel')
         }
       })
     },
@@ -316,7 +319,13 @@ export default {
         confirmText: 'Yes',
         messageType: 'info',
         icon: 'home',
-        cancelText: 'No'
+        cancelText: 'No',
+        confirm () {
+          console.log('confim')
+        },
+        cancel () {
+          console.log('cancel')
+        }
       })
     },
     prompt () {
@@ -333,8 +342,11 @@ export default {
             warning: 'Write Sth!'
           }
         ],
-        confirm () {
-          console.log('yes!')
+        confirm (v) {
+          console.log('yes! u just wrote ' + '"' + v + '"')
+        },
+        cancel () {
+          console.log('cancel')
         }
       })
     }

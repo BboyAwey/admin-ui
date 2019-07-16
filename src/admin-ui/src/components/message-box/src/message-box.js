@@ -42,6 +42,10 @@ instances.modal.$on('hide', () => {
   if (instances.modal.$el.parentNode) {
     instances.modal.$el.parentNode.removeChild(instances.modal.$el)
     instances.modal.visible = false
+    if (instances.modal._callback instanceof Function) {
+      instances.modal._callback()
+    }
+    instances.modal._callback = null
   }
 })
 
@@ -52,22 +56,14 @@ function refreshContent (el, contentInstance) {
   el.appendChild(contentInstance.$el)
 }
 
-function getCancelButton (instance, config, value) {
+function getCancelButton (instance, config) {
   return {
     text: config.cancelText || '取消',
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler () {
-      if (config.cancel) {
-        // Vue.nextTick(() => {
-        //   config.cancel(value)
-        //   instance.visible = false
-        // })
-        config.cancel(value)
-        instance.visible = false
-      } else {
-        instance.visible = false
-      }
+      instance._callback = config.cancel
+      instance.visible = false
     }
   }
 }
@@ -79,12 +75,8 @@ function getConfirmButton (instance, config) {
     size: config.buttonSize,
     plain: config.buttonPlain,
     handler () {
-      if (config.confirm) {
-        config.confirm()
-        instance.visible = false
-      } else {
-        instance.visible = false
-      }
+      instance._callback = config.confirm
+      instance.visible = false
     }
   }
 }
@@ -96,7 +88,7 @@ function MessageBox (config) {
   }
 
   // deal with the modal config
-  instances.modal.config = config
+  instances.modal._callback = config.cancel // default is cancel callback
   if (type === 'alert') {
     instances.modal.buttons = [getConfirmButton(instances.modal, config)]
     instances.modal.onEnter = instances.modal.buttons[0].text
@@ -109,16 +101,17 @@ function MessageBox (config) {
     instances.modal.onEnter = instances.modal.buttons[1].text
   }
   if (type === 'prompt') {
+    instances.modal._config = config
     instances.modal.buttons = [
       getCancelButton(instances.modal, config),
       Object.assign({}, getConfirmButton(instances.modal, config), {
         handler (loading) {
-          let config = instances.modal.config
+          let config = instances.modal._config
           loading.start()
           instances[config.type].validate().then(res => {
             loading.stop()
             if (res) {
-              if (config.confirm) config.confirm(instances[config.type].value)
+              instances.modal._callback = () => config.confirm(instances[config.type].value)
               instances.modal.visible = false
             }
           })

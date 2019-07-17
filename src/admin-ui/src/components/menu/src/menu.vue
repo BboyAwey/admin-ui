@@ -151,12 +151,12 @@
           :key="i">
           <au-popover
             ref="popover"
-            :disabled="!localCollapse"
-            :trigger="hasChildren(item) ? 'click' : 'hover'"
+            :disabled="!isTopLevel || !localCollapse || !hasChildren(item)"
+            :trigger="'click'"
             :hide-on-blur="true"
-            :placement="hasChildren(item) ? (i < 5 ? 'right top' : 'right bottom') : 'right middle'"
-            :plain="hasChildren(item)"
-            @show="_ => hasChildren(item) && handlePopoverHide(i)">
+            :placement="'right bottom'"
+            :plain="true"
+            @show="_ => handlePopoverHide(i)">
             <au-popover
               ref="tipPopover"
               slot="target"
@@ -197,11 +197,6 @@
                 {{ item.text }}
               </div>
             </au-popover>
-
-            <div v-if="!hasChildren(item)" slot="content" class="au-menu-pop-content">
-              {{ item.text }}
-            </div>
-
             <au-scroller v-if="hasChildren(item)" ref="scroller" slot="content" class="au-menu-popover-content au-theme-color--base-3">
               <au-menu
                 :items="item.children"

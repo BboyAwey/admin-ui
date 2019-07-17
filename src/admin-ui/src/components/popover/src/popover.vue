@@ -188,11 +188,7 @@ export default {
     }
   },
   mounted () {
-    let timer = setTimeout(() => {
-      this.reconstruct()
-      clearTimeout(timer)
-      timer = null
-    }, 0)
+    this.reconstruct()
     this.addEvents()
     window.addEventListener('resize', this.handleWindowResize)
     window.addEventListener('click', this.handleWindowClick, true)
@@ -217,26 +213,26 @@ export default {
   },
   methods: {
     getTarget () {
-      let target = this.$slots.target[0].elm
-      let id = target.getAttribute('data-au-popover')
+      if (this._target) return this._target
+      this._target = this.$slots.target[0].elm
+      let id = this._target.getAttribute('data-au-popover')
       if (id) { // nested popover
-        target = popoverCollections[id].$slots.target[0].elm
+        this._target = popoverCollections[id].$slots.target[0].elm
       }
-      return target
+      return this._target
     },
     reconstruct () {
-      // if (this.disabled) return
       let target = this.getTarget()
       let pop = this.$refs.pop
       let id = 'au-popover-' + this._uid
-      let zIndex = getRealZIndex(pop.parentNode) || 9999 // sometimes it will use in a modal or other elements witch has z-index style
       pop.setAttribute('data-au-popover', id)
       popoverCollections[id] = this
 
       if (target.parentNode === pop) {
+        // sometimes it will use in a modal or other elements witch has z-index style
         pop.parentNode && pop.parentNode.insertBefore(target, pop)
         pop.parentNode && pop.parentNode.removeChild(pop)
-        pop.style.zIndex = zIndex
+        pop.style.zIndex = pop.parentNode && (getRealZIndex(pop.parentNode) || 9999)
       }
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
@@ -277,7 +273,9 @@ export default {
       //   height: window.getComputedStyle(this.$refs.pop).height
       // }
       if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
-      if (this.trigger && this.hideOnBlur) this.$refs.pop.focus()
+      if (this.trigger && this.hideOnBlur) {
+        this.$refs.pop.focus()
+      }
       this.visible = true
 
       heartbeat.add(this.calPos.bind(this), this._uid)

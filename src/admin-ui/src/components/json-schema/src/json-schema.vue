@@ -341,7 +341,7 @@ export default {
           }
         } else {
           this.localSchema = v
-            this._recieveSchema = true
+          this._recieveSchema = true
         }
         this.handleCustomSchemaDefaultValue(this.localSchema)
       }

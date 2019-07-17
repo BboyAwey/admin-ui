@@ -232,8 +232,8 @@ export default {
         // sometimes it will use in a modal or other elements witch has z-index style
         pop.parentNode && pop.parentNode.insertBefore(target, pop)
         pop.parentNode && pop.parentNode.removeChild(pop)
-        pop.style.zIndex = pop.parentNode && (getRealZIndex(pop.parentNode) || 9999)
       }
+      pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
     addEvents () {

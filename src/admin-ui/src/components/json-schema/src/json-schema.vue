@@ -301,6 +301,10 @@ export default {
       }
     },
     'localSchema.type' (v) {
+      if (this._recieveSchema) {
+        this._recieveSchema = false
+        return
+      }
       this.clearSchemaCustomKey(this.localSchema)
       this.localSchema.properties = {}
       this.localSchema.items = {}
@@ -333,9 +337,11 @@ export default {
         if (this._isRoot) {
           if (JSON.stringify(v) !== JSON.stringify(this.purifySchema(this.localSchema))) {
             this.localSchema = deepClone(v)
+            this._recieveSchema = true
           }
         } else {
           this.localSchema = v
+            this._recieveSchema = true
         }
         this.handleCustomSchemaDefaultValue(this.localSchema)
       }

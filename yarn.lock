@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@awey/scroller@^1.2.2":
+"@awey/scroller@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.2.3.tgz#86f6ac2da22c1554ed2612ee2b9f9bd88345ac70"
   dependencies:
@@ -5731,8 +5731,8 @@ locate-path@^3.0.0:
     path-exists "^3.0.0"
 
 lodash.defaultsdeep@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.0.tgz#bec1024f85b1bd96cbea405b23c14ad6443a6f81"
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
 
 lodash.kebabcase@^4.1.1:
   version "4.1.1"

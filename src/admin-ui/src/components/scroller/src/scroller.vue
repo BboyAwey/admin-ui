@@ -7,6 +7,8 @@
 </template>
 <script>
 import Scroller from '@awey/scroller'
+const isFirefox = typeof navigator !== 'undefined' &&
+  navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 
 export default {
   name: 'au-scroller',
@@ -57,39 +59,53 @@ export default {
     direction (v) {
       this.scroller.setDirection(v)
     },
+    /**
+     * use timer to fix sync bug between prop value and scroller in firefox
+     * in firefox the prop change will not completely sync to scroller
+     * because firefox's render performance is not high enough to let scroll element complete the render when prop value changes too fast
+     * and scroll element still will emit scroll value while it does not finish the scroll
+     * so the output of scroll is not what we expected
+     * so here we need to use timer to throttle it
+     */
     scrollTop (v) {
-      // if (!this.scrollTopTimer) {
-      //   this.scrollTopTimer = setTimeout(() => {
-      //     this.scroller.scrollTo({ scrollTop: v })
-      //     clearTimeout(this.scrollTopTimer)
-      //     this.scrollTopTimer = null
-      //   }, 0)
-      // } else {
-      //   clearTimeout(this.scrollTopTimer)
-      //   this.scrollTopTimer = setTimeout(() => {
-      //     this.scroller.scrollTo({ scrollTop: v })
-      //     clearTimeout(this.scrollTopTimer)
-      //     this.scrollTopTimer = null
-      //   }, 0)
-      // }
-      this.scroller.scrollTo({ scrollTop: v })
+      if (isFirefox) {
+        if (!this.scrollTopTimer) {
+          this.scrollTopTimer = setTimeout(() => {
+            this.scroller.scrollTo({ scrollTop: v })
+            clearTimeout(this.scrollTopTimer)
+            this.scrollTopTimer = null
+          }, 50)
+        } else {
+          clearTimeout(this.scrollTopTimer)
+          this.scrollTopTimer = setTimeout(() => {
+            this.scroller.scrollTo({ scrollTop: v })
+            clearTimeout(this.scrollTopTimer)
+            this.scrollTopTimer = null
+          }, 50)
+        }
+      } else {
+        this.scroller.scrollTo({ scrollTop: v })
+      }
     },
     scrollLeft (v) {
-      // if (!this.scrollLeftTimer) {
-      //   this.scrollLeftTimer = setTimeout(() => {
-      //     this.scroller.scrollTo({ scrollLeft: v })
-      //     clearTimeout(this.scrollLeftTimer)
-      //     this.scrollLeftTimer = null
-      //   }, 0)
-      // } else {
-      //   clearTimeout(this.scrollLeftTimer)
-      //   this.scrollLeftTimer = setTimeout(() => {
-      //     this.scroller.scrollTo({ scrollLeft: v })
-      //     clearTimeout(this.scrollLeftTimer)
-      //     this.scrollLeftTimer = null
-      //   }, 0)
-      // }
-      this.scroller.scrollTo({ scrollLeft: v })
+      if (isFirefox) {
+        if (!this.scrollLeftTimer) {
+          this.scrollLeftTimer = setTimeout(() => {
+            this.scroller.scrollTo({ scrollLeft: v })
+            clearTimeout(this.scrollLeftTimer)
+            this.scrollLeftTimer = null
+          }, 50)
+        } else {
+          clearTimeout(this.scrollLeftTimer)
+          this.scrollLeftTimer = setTimeout(() => {
+            this.scroller.scrollTo({ scrollLeft: v })
+            clearTimeout(this.scrollLeftTimer)
+            this.scrollLeftTimer = null
+          }, 50)
+        }
+      } else {
+        this.scroller.scrollTo({ scrollLeft: v })
+      }
     }
   },
   methods: {

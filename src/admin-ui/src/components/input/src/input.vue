@@ -66,7 +66,7 @@
         v-if="type==='textarea'"
         class="au-input-core"
         :class="{
-          'au-theme-border-radius--small au-theme-placeholder-color--base-11': true,
+          'au-theme-border-radius--small au-theme-placeholder-color--base-10': true,
           'au-theme-border-color--base-9': !active && !hasWarnings,
           'au-theme-border-color--primary': active && !hasWarnings,
           'au-theme-border-color--danger': hasWarnings,
@@ -123,7 +123,7 @@
             class="au-input-core"
             :class="{
               [`au-size-${size}-bordered`]: true,
-              'au-theme-border-radius--small au-theme-placeholder-color--base-11': true,
+              'au-theme-border-radius--small au-theme-placeholder-color--base-10': true,
               'au-theme-border-color--base-9': !active && !hasWarnings,
               'au-theme-border-color--primary': active && !hasWarnings,
               'au-theme-border-color--danger': hasWarnings,
@@ -161,7 +161,7 @@
             v-if="type === 'number'"
             :class="{
               [`au-size-${size}-bordered`]: true,
-              'au-theme-border-radius--small au-theme-placeholder-color--base-11': true,
+              'au-theme-border-radius--small au-theme-placeholder-color--base-10': true,
               'au-theme-border-color--base-9': !active && !hasWarnings,
               'au-theme-border-color--primary': active && !hasWarnings,
               'au-theme-border-color--danger': hasWarnings,
@@ -197,7 +197,7 @@
             v-if="type === 'password'"
             :class="{
               [`au-size-${size}-bordered`]: true,
-              'au-theme-border-radius--small au-theme-placeholder-color--base-11': true,
+              'au-theme-border-radius--small au-theme-placeholder-color--base-10': true,
               'au-theme-border-color--base-9': !active && !hasWarnings,
               'au-theme-border-color--primary': active && !hasWarnings,
               'au-theme-border-color--danger': hasWarnings,

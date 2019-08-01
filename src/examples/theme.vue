@@ -167,7 +167,7 @@
             </td>
             <td>
               <ol class="option-list">
-                <li class="au-theme-border-color--base-8">font-color</li>
+                <li class="au-theme-border-color--base-8">color</li>
                 <li class="au-theme-border-color--base-8">placeholder-color</li>
                 <li class="au-theme-border-color--base-8">border-color</li>
                 <li class="au-theme-border-color--base-8">border-top-color</li>

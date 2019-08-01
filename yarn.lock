@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@awey/scroller@^1.2.2":
+"@awey/scroller@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@awey/scroller/-/scroller-1.2.3.tgz#86f6ac2da22c1554ed2612ee2b9f9bd88345ac70"
   dependencies:
@@ -8598,8 +8598,8 @@ text-table@^0.2.0, text-table@~0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
 theme-class-generator@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/theme-class-generator/-/theme-class-generator-1.0.2.tgz#3dccc31ad6bd9b28dab1a522b9c6bf361a2a7636"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/theme-class-generator/-/theme-class-generator-1.0.3.tgz#927c83e45be20d399ad73e01050cb20c49e8bada"
 
 thenify-all@^1.0.0:
   version "1.6.0"

@@ -240,6 +240,6 @@
 </template>
 <script>
 export default {
-  name: 'icon-examples'
+  name: 'scroller-examples'
 }
 </script>

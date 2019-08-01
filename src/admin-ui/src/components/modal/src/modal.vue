@@ -159,7 +159,11 @@ export default {
     maxHeight: {
       type: [String, Number]
     },
-    onEnter: String
+    onEnter: String,
+    modalClick: {
+      type: Boolean,
+      default: true
+    }
   },
   watch: {
     visible (v) {
@@ -189,6 +193,7 @@ export default {
       })
     },
     handleModalMaskingClick (e) {
+      if (!this.modalClick) return
       if (e.target === this.$refs.modalContainer) this.hide()
     },
     escHandler (e) {

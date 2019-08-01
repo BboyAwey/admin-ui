@@ -7,7 +7,7 @@
       <!-- 组件示例 -->
       <div class="component-example">
         <au-button type="info" @click="modalVisible = true">点我弹出模态框</au-button>
-        <au-modal width="400px" height="300px" :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons" onEnter="确认">
+        <au-modal width="400px" height="300px" :visible="modalVisible" title="一个模态框" @hide="modalVisible = false" :buttons="buttons" onEnter="确认" :modal-click="false">
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
           <p style="font-size: 14px;">Sit nulla duis proident non mollit cupidatat anim. Deserunt pariatur enim ut aliqua velit id incididunt eu enim. Velit eiusmod pariatur mollit ad sunt enim. Non culpa ipsum duis non elit in consectetur sit laboris duis non. Ad nulla laboris sunt sit ea nostrud dolore velit id.</p>
@@ -93,6 +93,24 @@
             </td>
             <td>
               按钮配置
+            </td>
+          </tr>
+          <tr>
+            <td>modal-click</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              点击背景蒙版时是否关闭模态框
             </td>
           </tr>
           <tr>

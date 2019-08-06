@@ -163,8 +163,9 @@
     <au-modal
       v-if="_isRoot"
       :title="`设置 ${currentItem.__key || rootName || 'root'} 的${currentItem.__custom.text}`"
-      :visible="customModalVisible"
+      :visible="customModalVisible && _isRoot"
       @hide="cancelSetCustom"
+      on-enter="确认"
       :buttons="[
         {
           text: '取消',
@@ -185,7 +186,7 @@
         height="100px"
         min-height="100px"
         max-height="100px"
-        @change="correctNumber(currentItem.__custom.type)"
+        @change="correctNumber"
         v-model="currentItemNewCustom" full-width
         :validators="validators[currentItem.__custom.key] || []"
         ref="newCustomInput"/>
@@ -267,7 +268,7 @@ export default {
   },
   data () {
     return {
-      localSchema: this._isRoot ? deepClone(this.schema) : this.schema,
+      localSchema: this._isRoot ? deepClone(this.schema) : (this.schema || {}),
       showChildren: true,
       currentItem: {
         __key: '',
@@ -282,6 +283,7 @@ export default {
   },
   computed: {
     isReferenceType () {
+      // console.log(this.localSchema, this.schema, '---')
       return types.isReferenceType(this.localSchema.type)
     },
     typeOptions () {
@@ -301,6 +303,7 @@ export default {
       }
     },
     'localSchema.type' (v) {
+      // console.log('localSchemaChange', v, this._recieveSchema)
       if (this._recieveSchema) {
         this._recieveSchema = false
         return
@@ -315,9 +318,10 @@ export default {
         this.$set(this.localSchema, 'items', {
           type: this.types[0]
         })
+        // console.log(this.localSchema.items, '++++')
       }
       this.handleDeepChange()
-      if (this._isRoot) this.handleCustomSchemaDefaultValue(this.localSchema)
+      if (this._isRoot) this.handleCustomSchemaDefaultValue(v)
     },
     // localSchema: {
     //   deep: true,
@@ -334,6 +338,7 @@ export default {
     schema: {
       deep: true,
       handler (v) {
+        // console.log('localSchemaChange', v, this._recieveSchema)
         if (this._isRoot) {
           if (JSON.stringify(v) !== JSON.stringify(this.purifySchema(this.localSchema))) {
             this.localSchema = deepClone(v)
@@ -352,7 +357,7 @@ export default {
       if (this.customSchemaProperties instanceof Array) {
         if (!types.isReferenceType(schema.type)) {
           this.customSchemaProperties.forEach(p => {
-            if (p.default !== undefined && schema[p.key] === undefined) {
+            if (p.default !== undefined && (schema[p.key] === undefined || schema[p.key] === '')) {
               if (p.default instanceof Function) {
                 this.$set(schema, p.key, p.default(schema.type))
               } else {
@@ -369,17 +374,17 @@ export default {
     setCustom (item, source) {
       if (!item.__custom) {
         item = {
-          __custom: item,
+          __custom: { ...item },
           __key: this.localKey,
           __set: this.setCustomSchemaValue.bind(this),
-          __localSchema: this.localSchema
+          __localSchema: { ...this.localSchema }
         }
       }
       if (this._isRoot) {
+        this.customModalVisible = true
         this.currentItem = item
         this.currentItemNewCustom = item.__localSchema[item.__custom.key]
-        this.customModalVisible = true
-        this.$nextTick(_ => {
+        this.$nextTick(() => {
           this.$refs.newCustomInput && this.$refs.newCustomInput.focus()
         })
       } else {
@@ -387,7 +392,6 @@ export default {
       }
     },
     cancelSetCustom () {
-      this.currentItemNewInit = ''
       this.customModalVisible = false
     },
     confirmSetCustom () {
@@ -405,26 +409,27 @@ export default {
         }
       })
     },
-    correctNumber (type) {
-      if (!this.currentItemNewInit) return
+    correctNumber () {
+      const type = this.currentItem.__localSchema.type
+      if (!this.currentItemNewCustom) return
       if (type === 'integer') {
-        if (!/^\d$/g.test(this.currentItemNewInit)) {
-          let nums = this.currentItemNewInit.match(/\d/g)
-          if (nums) this.currentItemNewInit = nums.join('')
-          else this.currentItemNewInit = ''
+        if (!/^\d$/g.test(this.currentItemNewCustom)) {
+          let nums = this.currentItemNewCustom.match(/\d/g)
+          if (nums) this.currentItemNewCustom = nums.join('')
+          else this.currentItemNewCustom = ''
         }
       } else if (type === 'number') {
-        if (!/^\d+\.?\d*$/g.test(this.currentItemNewInit)) {
-          let nums = this.currentItemNewInit.match(/\d|\./g)
+        if (!/^\d+\.?\d*$/g.test(this.currentItemNewCustom)) {
+          let nums = this.currentItemNewCustom.match(/\d|\./g)
           if (nums) {
             nums = nums.join('')
             let dotIndex = nums.indexOf('.')
             let head = nums.substring(0, dotIndex + 1)
             if (head[0] === '.') head = '0' + head
             let tail = nums.substring(dotIndex + 1, nums.length).replace('.', '')
-            this.currentItemNewInit = head + (tail || '0')
+            this.currentItemNewCustom = head + (tail || '0')
           } else {
-            this.currentItemNewInit = ''
+            this.currentItemNewCustom = ''
           }
         }
       }
@@ -441,7 +446,6 @@ export default {
       if (!types.isReferenceType(schema.type)) {
         if (this.customSchemaProperties && this.customSchemaProperties.length) {
           for (let item of this.customSchemaProperties) {
-            // console.log(item, schema)
             if (types.isNumberType(item.type || schema.type)) {
               res[item.key] = schema[item.key] !== undefined ? schema[item.key] * 1 : null
             } else {
@@ -480,7 +484,6 @@ export default {
       }
       this.finalChangeTimer = window.setTimeout(_ => {
         // trigger final change
-        // console.log('final change', this.localSchema, this.purifySchema(this.localSchema))
         this.$emit('change', this.purifySchema(this.localSchema))
         window.clearTimeout(this.finalChangeTimer)
         this.finalChangeTimer = null
@@ -530,6 +533,7 @@ export default {
     }
   },
   created () {
+    // console.log(this.localSchema.type, '---')
     this.handleCustomSchemaDefaultValue(this.localSchema)
   }
 }

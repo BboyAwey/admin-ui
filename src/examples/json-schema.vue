@@ -83,14 +83,14 @@
                 --number<br>
                 --integer<br>
                 --string<br>
-                -default:该属性的默认值
+                <!-- -default:该属性的默认值 -->
               </ol>
             </td>
             <td>
               自定义schema属性<br>
               其中key和text为必填项，type为选填项，不指定则与当前项本身的类型保持一致<br>
               key不能是schema的官方保留字：'type'/'items'/'properties'<br>
-              default可以是字面量也可以是函数，当是函数的时候接受一个参数type表示当前描述项的类型，通常在不指定type时使用函数
+              <!-- default可以是字面量也可以是函数，当是函数的时候接受一个参数type表示当前描述项的类型，通常在不指定type时使用函数 -->
             </td>
           </tr>
           <tr>
@@ -372,10 +372,10 @@ export default {
           text: '初始值',
           default (type) {
             switch (type) {
-              case 'string': return 'test123'
+              case 'string': return 'some text'
               case 'boolean': return false
               case 'number':
-              case 'integer': return 999
+              case 'integer': return 123
             }
           }
         },
@@ -388,7 +388,8 @@ export default {
       ],
       required: {
         validator (v) {
-          // console.log(v, '---')
+          console.log(v, '---')
+          if (typeof v === 'boolean') return true
           return v && v.trim()
         },
         warning: '必填哟！！！'
@@ -397,13 +398,13 @@ export default {
   },
   watch: {
     jsonSchema (v) {
-      console.log(v)
+      // console.log(v)
     }
   },
   methods: {
     validate () {
       this.$refs.jsonSchema.validate().then(res => {
-        console.log('out res', res)
+        // console.log('out res', res)
       })
     }
   }

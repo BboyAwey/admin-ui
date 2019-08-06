@@ -63,7 +63,7 @@
       :middle="type !== 'textarea'"
       :warnings="warnings || localWarnings">
       <textarea
-        v-if="type==='textarea'"
+        v-if="type === 'textarea'"
         class="au-input-core"
         :class="{
           'au-theme-border-radius--small au-theme-placeholder-color--base-10': true,
@@ -96,10 +96,11 @@
         @keydown="keydown($event)"
         ref="core">
       </textarea>
-      <popover v-else ref="popover" plain placement="bottom left">
+      <popover ref="popover" plain placement="bottom left">
         <span
           slot="target"
           class="au-core-container"
+          v-show="type !== 'textarea'"
           :style="{
             verticalAlign: inline ? 'top' : '',
             width: !inline && fullWidth ? '100%' : width
@@ -236,7 +237,7 @@
           <ul class="au-input-associations"
             ref="associations"
             tabindex="0"
-            @blur="associationsBlur">
+            @blur="associationsBlur" v-if="type !== 'textarea'">
             <li
               v-for="(association, index) in localAssociations"
               @click="selectAssociation(association)"

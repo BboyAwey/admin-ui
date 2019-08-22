@@ -306,14 +306,6 @@
             </span>
           </p>
         </div>
-        <!-- image icon -->
-        <div class="au-upload-preview-icon"
-          :style="{
-             cursor: canPreview ? 'pointer' : 'default',
-             backgroundImage: `url(${autoUpload ? (file.base64 || file.url) : file.base64})`
-          }"
-          @click="preview(index)"
-          v-if="(autoUpload && file.isImage) && (file.base64 || file.url)"></div>
         <!-- video icon -->
         <div class="au-upload-preview-icon au-theme-background-color--base-3"
           :style="{
@@ -321,7 +313,7 @@
             fontSize: '24px'
           }"
           @click="preview(index)"
-          v-else-if="autoUpload && file.isVideo && file.url">
+          v-if="autoUpload && file.isVideo && file.url">
           <video class="au-upload-preview-icon-video"
             :src="file.url"></video>
           <au-icon type="play" class="au-upload-preview-icon-video-play au-theme-color--base-12"/>
@@ -338,7 +330,7 @@
             :src="file.url"></audio>
           <au-icon type="volume-up" class="au-upload-preview-icon-video-play au-theme-color--base-12"/>
         </div>
-
+        <!-- default icon -->
         <div
           class="
             au-upload-preview-icon
@@ -363,6 +355,14 @@
             {{ file.extension && file.extension.toUpperCase().substring(0, 4) }}
           </div>
         </div>
+        <!-- image icon -->
+        <div class="au-upload-preview-icon"
+          :style="{
+             cursor: canPreview ? 'pointer' : 'default',
+             backgroundImage: `url(${file.base64 || file.url})`
+          }"
+          @click="preview(index)"></div>
+        <!-- v-if="(autoUpload && file.isImage) && (file.base64 || file.url)"></div> -->
         <span class="au-upload-file-edit-icon-container">
           <au-icon
             class="au-upload-file-operation-icon au-upload-file-edit-icon au-upload-file-delete au-theme-color--base-8 au-theme-hover-color--base-3"

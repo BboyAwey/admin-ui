@@ -6,6 +6,7 @@
     position: relative;
     // min-width: 88px;
     // height: $size-normal;
+    overflow: hidden;
     padding: 0 10px;
     border-width: 0;
     outline: none;

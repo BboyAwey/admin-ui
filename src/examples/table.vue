@@ -94,10 +94,10 @@
           <tr>
             <td>striped</td>
             <td>
-              false
+              <au-icon type="times"></au-icon>
             </td>
             <td>Boolean</td>
-            <td><au-icon type="minus"></au-icon></td>
+            <td>true</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">true</li>
@@ -106,6 +106,23 @@
             </td>
             <td>
               是否为条纹表格
+            </td>
+          </tr>
+          <tr>
+            <td>hovered</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              行是否具有hover效果
             </td>
           </tr>
         </tbody>

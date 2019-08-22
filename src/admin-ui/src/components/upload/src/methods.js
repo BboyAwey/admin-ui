@@ -203,6 +203,9 @@ export default {
                 ? joinPath(vm.baseUrl, url || '')
                 : url
             )
+            if (body.description !== undefined || body.description !== null) {
+              vm.modifyLocalFileList(index, 'description', body.description)
+            }
             vm.$emit('input', vm.localFileList)
             vm.$emit('change', vm.localFileList)
             if (typeof vm.onSuccess === 'function') vm.onSuccess(body)

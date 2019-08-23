@@ -32,7 +32,7 @@ export default {
     },
     intoDescEditingMode (i) {
       this.$set(this.editingStatus, i, true)
-      this.lastDescriptions[i] = this.$refs.desc[i].localValue
+      this.lastDescriptions[i] = this.localFileList[i].description
       this.$set(this.tempDescriptions, i, this.lastDescriptions[i])
       this.$nextTick(() => {
         this.$refs.desc[i].$refs.core.focus()

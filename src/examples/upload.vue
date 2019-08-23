@@ -747,7 +747,7 @@ export default {
   data () {
     return {
       files: [
-        { url: '/liuyifei.png' },
+        { url: '/liuyifei.png', description: 'She is beautiful!' },
         { url: '/yes.wav' },
         { url: '/test.mp4' }
       ]

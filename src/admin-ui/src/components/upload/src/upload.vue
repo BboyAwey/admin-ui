@@ -123,7 +123,8 @@
     }
     .au-upload-file-description {
       display: inline-block;
-      max-width: 75%;
+      // max-width: 75%;
+      width: 100%;
       outline: none;
       line-height: $normal * 2;
       white-space: nowrap;
@@ -149,7 +150,7 @@
       right: 8px;
     }
     .au-upload-desc-core {
-      // width: 75%;
+      width: 100%;
       margin-top: 5px;
       margin-bottom: 6px;
     }
@@ -190,11 +191,11 @@
       margin-top: 4px;
     }
     .au-upload-file-description {
-      max-width: 170px;
+      // max-width: 170px;
     }
-    .au-upload-desc-core {
-      width: 142px;
-    }
+    // .au-upload-desc-core {
+    //   width: 142px;
+    // }
   }
   .au-upload-file-inline-list:after {
     content: "";
@@ -259,11 +260,11 @@
               {{ (localFileList[index] ? localFileList[index].description : file.description) || '点击填写文件描述' }}
             </span>
             <au-input
-              class="au-upload-desc-core"
-              size="small"
+              class="au-upload-desc-core" ref="desc"
+              size="small" :inline="false" full-width
               v-show="canDescribe && editingStatus[index]"
-              ref="desc"
-              width="142px"
+              @focus="() => intoDescEditingMode(index)"
+              @blur="() => checkDescEditingMode(index)"
               v-model="tempDescriptions[index]"></au-input>
             <!-- <au-icon
               class="
@@ -274,7 +275,7 @@
               type="pencil"
               v-show="canDescribe && !editingStatus[index]"
               @click.native="intoDescEditingMode(index)"/> -->
-            <au-icon
+            <!-- <au-icon
               class="
                 au-upload-file-operation-icon
                 au-upload-file-desc-icon
@@ -288,7 +289,7 @@
               class="au-upload-file-operation-icon au-upload-file-desc-icon au-upload-desc-icon-editing  au-theme-color--base-8 au-theme-hover-color--base-3"
               type="times"
               v-show="canDescribe && editingStatus[index]"
-              @click.native="cancelDescEditingMode(index)"/>
+              @click.native="cancelDescEditingMode(index)"/> -->
             <span
               class="au-upload-progress-bar"
               :class="{

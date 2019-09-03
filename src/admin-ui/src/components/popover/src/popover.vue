@@ -233,7 +233,7 @@ export default {
         pop.parentNode && pop.parentNode.insertBefore(target, pop)
         pop.parentNode && pop.parentNode.removeChild(pop)
       }
-      pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
+      // pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
     },
     addEvents () {
@@ -276,6 +276,11 @@ export default {
       if (this.trigger && this.hideOnBlur) {
         this.$refs.pop.focus()
       }
+
+      let target = this.getTarget()
+      let pop = this.$refs.pop
+      pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
+
       this.visible = true
 
       heartbeat.add(this.calPos.bind(this), this._uid)

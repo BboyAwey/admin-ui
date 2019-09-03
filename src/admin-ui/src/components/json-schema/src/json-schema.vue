@@ -249,8 +249,8 @@ export default {
         return [
           // {
           //   key: 'sourceMap', // schema key
-          //   // type: 'string', // schema type
           //   text: '数据集映射', // schema name
+          //   type: 'string', // schema type
           //   default: ''
           // }
         ]
@@ -308,7 +308,7 @@ export default {
         this._recieveSchema = false
         return
       }
-      this.clearSchemaCustomKey(this.localSchema)
+      // this.clearSchemaCustomKey(this.localSchema)
       this.localSchema.properties = {}
       this.localSchema.items = {}
       if (v === 'object') {
@@ -410,7 +410,7 @@ export default {
       })
     },
     correctNumber () {
-      const type = this.currentItem.__localSchema.type
+      const type = this.currentItem.__custom.type || this.currentItem.__localSchema.type
       if (!this.currentItemNewCustom) return
       if (type === 'integer') {
         if (!/^\d$/g.test(this.currentItemNewCustom)) {

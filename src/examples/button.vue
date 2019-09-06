@@ -9,6 +9,10 @@
         <au-button icon="home" type="primary" @click="loading = !loading" plain>按钮</au-button>
         <au-button type="danger" :loading="loading">按钮</au-button>
         <au-button type="primary" plain :loading="loading">按钮</au-button>
+        <!-- <au-button type="primary" icon="home"></au-button>
+        <au-button type="primary">hello</au-button>
+        <au-button type="primary" icon="home" style="width: 80px;">helloasdfjasfjasfllkafjsfdljalskdfjl</au-button>
+        <au-button type="primary" icon="home" disabled></au-button> -->
       </div>
       <!-- 组件示例 -->
     </au-panel>

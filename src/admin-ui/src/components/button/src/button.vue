@@ -6,7 +6,6 @@
     position: relative;
     // min-width: 88px;
     // height: $size-normal;
-    overflow: hidden;
     padding: 0 10px;
     border-width: 0;
     outline: none;
@@ -14,12 +13,19 @@
     // line-height: $size-normal;
     cursor: pointer;
     font-family: $fontFamily;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .au-button + .au-button {
     margin-left: 10px;
   }
   .au-button:disabled {
     cursor: not-allowed;
+  }
+  .after-mask {
+    display: none;
   }
   .au-button:disabled > .after-mask,
   .au-button:not(.plain) > .before-mask {
@@ -52,7 +58,7 @@
     border-width: 1px;
     border-style: solid;
   }
-  .au-button-icon + * {
+  .au-button-icon + *:not(:empty) {
     margin-left: 4px;
   }
 </style>

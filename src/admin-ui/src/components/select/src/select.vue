@@ -67,9 +67,11 @@
   .au-select-multiple {
     line-height: inherit;
     li {
+      position: relative;
       float: left;
       max-width: 100%;
       margin-right: 12px;
+      padding-right: 14px;
       line-height: inherit;
       word-break: keep-all;
       white-space: nowrap;
@@ -83,7 +85,9 @@
     }
   }
   .au-select-close-icon {
-    margin-left: 3px;
+    position: absolute;
+    top: 6px;
+    right: 0;
     cursor: pointer;
   }
 </style>
@@ -136,7 +140,7 @@
               cursor: disabled ? 'not-allowed' : 'default'
             }">
             <ul class="au-select-multiple" ref="selectMultiple">
-              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-color--base-8">{{ placeholder }}</li>
+              <li v-show="!selectedOptions.length" class="au-select-placeholder au-theme-color--base-8" :style="{opacity: placeholder ? 1 : 0}">{{ placeholder || 'placeholder' }}</li>
               <li v-if="!multiple && selectedOptions.length">{{ selectedOptions[0].text }}</li>
               <li v-else v-for="(option, i) in selectedOptions" :key="i">
                 <span>{{ option.text }}</span>
@@ -200,6 +204,9 @@ export default {
       console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
     }
     this.load()
+    this.$nextTick(() => {
+      this.resize()
+    })
   },
   data () {
     return {
@@ -213,8 +220,7 @@ export default {
   },
   props: {
     placeholder: {
-      type: String,
-      default: '请选择'
+      type: String
     },
     options: {
       type: Array,

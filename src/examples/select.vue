@@ -6,7 +6,7 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-select label="不如跳舞" v-model="value" :options="options" :validators="validators"></au-select><br><br>
+        <au-select label="不如跳舞" v-model="value" :options="options" :validators="validators" size="small"></au-select><br><br>
         <au-select label="不如跳舞" v-model="value" :options="options" :validators="validators"></au-select><br><br>
         <au-select label="不如跳舞" v-model="values" :options="options" :multiple="true" :validators="validators" width="300px" placeholder="请选择喜欢的舞蹈"></au-select>
       </div>

@@ -204,9 +204,7 @@ export default {
       console.error('Admin UI@au-select@ value should be Array if multiple selecting allowed.')
     }
     this.load()
-    this.$nextTick(() => {
-      this.resize()
-    })
+    this.multiple && this.$nextTick(this.resize)
   },
   data () {
     return {
@@ -267,7 +265,7 @@ export default {
     deleteSelectedOption (index) {
       this.selectedOptions.splice(index, 1)
       this.localValue.splice(index, 1)
-      this.$nextTick(this.resize)
+      this.multiple && this.$nextTick(this.resize)
     },
     select (option, e, silent) {
       if (this.multiple) {
@@ -292,8 +290,8 @@ export default {
     },
     resize () {
       let height = getElementSize(this.$refs.selectMultiple).height
-      this.$refs.coreContainer.style.height = height + 'px'
-      this.$refs.core.style.height = height + 'px'
+      this.$refs.coreContainer.style.height = height + 2 + 'px'
+      this.$refs.core.style.height = height + 2 + 'px'
     },
     localValueToSelectedOptions () {
       let { options, localValue } = this

@@ -24,11 +24,13 @@
       border-style: solid;
       outline: none;
       vertical-align: middle;
+      text-align: center;
     }
     .au-checkbox-icon {
-      position: absolute;
-      top: 2px;
-      left: 0;
+      // position: relative;
+      // top: -1px;
+      // left: 0;
+      // height: 100%;
       font-size: $small;
     }
     .au-checkbox-icon-minus {
@@ -42,6 +44,10 @@
     .au-checkbox-text {
       margin-left: 3px;
       vertical-align: middle;
+    }
+    .au-checkbox-icon-check {
+      position: relative;
+      top: -1px;
     }
   }
 </style>
@@ -73,7 +79,7 @@
         :style="{
           border: (localValue && !disabled) || localIndeterminate ? 'none' : ''
         }">
-          <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon"
+          <au-icon unify-size v-show="localValue && !localIndeterminate" type="check" class="au-checkbox-icon au-checkbox-icon-check"
           :class="{
             'au-checkbox-icon-disabled': disabled,
             'au-theme-color--base-12': true
@@ -109,7 +115,7 @@
           border: checkbox.checked && !disabled ? 'none' : ''
         }">
           <au-icon unify-size v-show="checkbox.checked" type="check"
-            class="au-checkbox-icon au-theme-color--base-12"
+            class="au-checkbox-icon au-checkbox-icon-check au-theme-color--base-12"
             :class="{
               'au-checkbox-icon-disabled': disabled,
               'au-theme-color--base-12': disabled

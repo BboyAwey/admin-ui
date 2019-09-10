@@ -151,7 +151,9 @@ export default {
   },
   methods: {
     getBg () {
-      this.bg = this.localValue ? this.color : 'base-9'
+      this.bg = this.localValue
+        ? (this.color === 'default' ? 'base-9' : this.color)
+        : 'base-9'
     },
     getLeft () {
       if (this.localValue) {

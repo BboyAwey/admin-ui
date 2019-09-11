@@ -13,21 +13,34 @@ const isFirefox = typeof navigator !== 'undefined' &&
 export default {
   name: 'au-scroller',
   mounted () {
-    setTimeout(() => {
-      this.scroller = new Scroller({
-        el: this.$el,
-        direction: this.direction,
-        offset: this.offset,
-        scaleable: this.scaleable,
-        trackClassName: 'au-theme-background-color--base-0',
-        barClassName: 'au-theme-background-color--base-0'
-      }).onScroll(e => {
-        this.$emit('scroll', {
-          scrollTop: e.target.scrollTop,
-          scrollLeft: e.target.scrollLeft
-        })
+    this.scroller = new Scroller({
+      el: this.$el,
+      direction: this.direction,
+      offset: this.offset,
+      scaleable: this.scaleable,
+      trackClassName: 'au-theme-background-color--base-0',
+      barClassName: 'au-theme-background-color--base-0'
+    }).onScroll(e => {
+      this.$emit('scroll', {
+        scrollTop: e.target.scrollTop,
+        scrollLeft: e.target.scrollLeft
       })
-    }, 0)
+    })
+    // setTimeout(() => {
+    //   this.scroller = new Scroller({
+    //     el: this.$el,
+    //     direction: this.direction,
+    //     offset: this.offset,
+    //     scaleable: this.scaleable,
+    //     trackClassName: 'au-theme-background-color--base-0',
+    //     barClassName: 'au-theme-background-color--base-0'
+    //   }).onScroll(e => {
+    //     this.$emit('scroll', {
+    //       scrollTop: e.target.scrollTop,
+    //       scrollLeft: e.target.scrollLeft
+    //     })
+    //   })
+    // }, 0)
   },
   beforeDestroy () {
     if (this.scroller) this.scroller.destroy()
@@ -71,46 +84,46 @@ export default {
       if (isFirefox) {
         if (!this.scrollTopTimer) {
           this.scrollTopTimer = setTimeout(() => {
-            this.scroller.scrollTo({ scrollTop: v })
+            this.scroller && this.scroller.scrollTo({ scrollTop: v })
             clearTimeout(this.scrollTopTimer)
             this.scrollTopTimer = null
           }, 50)
         } else {
           clearTimeout(this.scrollTopTimer)
           this.scrollTopTimer = setTimeout(() => {
-            this.scroller.scrollTo({ scrollTop: v })
+            this.scroller && this.scroller.scrollTo({ scrollTop: v })
             clearTimeout(this.scrollTopTimer)
             this.scrollTopTimer = null
           }, 50)
         }
       } else {
-        this.scroller.scrollTo({ scrollTop: v })
+        this.scroller && this.scroller.scrollTo({ scrollTop: v })
       }
     },
     scrollLeft (v) {
       if (isFirefox) {
         if (!this.scrollLeftTimer) {
           this.scrollLeftTimer = setTimeout(() => {
-            this.scroller.scrollTo({ scrollLeft: v })
+            this.scroller && this.scroller.scrollTo({ scrollLeft: v })
             clearTimeout(this.scrollLeftTimer)
             this.scrollLeftTimer = null
           }, 50)
         } else {
           clearTimeout(this.scrollLeftTimer)
           this.scrollLeftTimer = setTimeout(() => {
-            this.scroller.scrollTo({ scrollLeft: v })
+            this.scroller && this.scroller.scrollTo({ scrollLeft: v })
             clearTimeout(this.scrollLeftTimer)
             this.scrollLeftTimer = null
           }, 50)
         }
       } else {
-        this.scroller.scrollTo({ scrollLeft: v })
+        this.scroller && this.scroller.scrollTo({ scrollLeft: v })
       }
     }
   },
   methods: {
     scrollTo (v) {
-      this.scroller.scrollTo(v)
+      this.scroller && this.scroller.scrollTo(v)
       if (v === 0 || v === '0') {
         this.$forceUpdate()
       }

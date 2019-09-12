@@ -222,7 +222,7 @@
             <td><au-icon type="minus"></au-icon></td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              有效时间的开始时间（包含）<br>
+              可选择的最早时间（包含）<br>
               设置后该日期时间之后的时间才可被选中<br>
               格式必须为hh-mm-ss
             </td>
@@ -237,7 +237,7 @@
             <td><au-icon type="minus"></au-icon></td>
             <td><au-icon type="minus"></au-icon></td>
             <td>
-              有效时间的结束时间（包含）<br>
+              可选择的最晚时间（包含）<br>
               设置后该日期时间之前的时间才可被选中<br>
               格式必须为hh-mm-ss
             </td>

@@ -12,10 +12,10 @@
     // word-spacing: -4px;
     font-size: 0; // chrome firefox
     .au-rangepicker-date {
-      width: 116px;
+      // width: 116px;
     }
     .au-rangepicker-time {
-      width: 99px;
+      // width: 99px;
     }
     & > * {
       vertical-align: middle;
@@ -29,6 +29,7 @@
   }
   .au-rangepicker-relative {
     // margin-top: 10px;
+    max-width: 653px;
     padding: 10px;
     padding-bottom: 0;
     border-top-width: 1px;
@@ -51,9 +52,9 @@
   .au-rangepicker-to {
     font-size: $normal;
   }
-  .au-rangepicker-pop {
-    min-width: 633px;
-  }
+  // .au-rangepicker-pop {
+  //   min-width: 633px;
+  // }
 </style>
 <template>
   <div class="au-rangepicker">

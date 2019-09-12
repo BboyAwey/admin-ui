@@ -9,7 +9,7 @@
         <au-rangepicker
           v-model="range"
           label="选择日期范围"
-          type="all"
+          type="datetime"
           :relative="true"
           :absolute="true"
           size="normal"
@@ -30,6 +30,24 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>type</td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>String</td>
+            <td>'datetime'</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">date</li>
+                <li class="au-theme-border-color--base-8">time</li>
+                <li class="au-theme-border-color--base-8">datetime</li>
+              </ol>
+            </td>
+            <td>
+              选择器类型
+            </td>
+          </tr>
           <tr>
             <td>range</td>
             <td>

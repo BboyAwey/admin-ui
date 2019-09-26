@@ -203,7 +203,8 @@ export default {
         this.loading = this.$loading({
           target: this.$refs.target,
           message: '拼命加载中',
-          color: 'danger'
+          color: 'danger',
+          tag: 'p'
         })
       } else {
         this.loading.close()

@@ -59,7 +59,8 @@ export default (config = {}) => {
     el.style.left = '0px'
     el.style.right = '0px'
     el.appendChild(instance.$el)
-    // instance.el = el
+    // instance need to know which element should be removed before close
+    instance.el = el
   } else el = instance.$el
   target.appendChild(el)
   // instance.setColor()

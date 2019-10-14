@@ -206,6 +206,27 @@
             </td>
             <td>最大高度</td>
           </tr>
+          <tr>
+            <td>autoScroll</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">true</li>
+                <li class="au-theme-border-color--base-8">false</li>
+              </ol>
+            </td>
+            <td>
+              是否自动根据内容决定是否使用滚动条<br>
+              如果需要自己来控制滚动条或者内部高度需要设置为100%<br>
+              则应该禁用这个选项<br>
+              <br>
+            </td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

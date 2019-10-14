@@ -47,6 +47,7 @@
     font-size: 16px;
   }
   .au-modal-content {
+    position: relative;
     min-width: 320px;
     height: 100%;
     text-align: left;
@@ -94,10 +95,13 @@
           paddingBottom: buttons && buttons.length ? '64px' : '20px'
         }">
         <h4 class="au-modal-title au-theme-border-color--base-10" v-show="title">{{ title }}</h4>
-        <au-scroller class="au-modal-content" stop-propagation>
+        <au-scroller v-if="autoScroll" class="au-modal-content" stop-propagation>
           <!-- this ref will used by message-box, donot remove it -->
           <div ref="content"><slot></slot></div>
         </au-scroller>
+        <div v-if="!autoScroll" class="au-modal-content" ref="content">
+          <slot></slot>
+        </div>
         <!-- <div class="au-modal-dec-line au-theme-border-color--base-10"></div> -->
         <div class="au-modal-operations" v-show="buttons && buttons.length">
           <au-button
@@ -161,6 +165,10 @@ export default {
     },
     onEnter: String,
     modalClick: {
+      type: Boolean,
+      default: true
+    },
+    autoScroll: {
       type: Boolean,
       default: true
     }

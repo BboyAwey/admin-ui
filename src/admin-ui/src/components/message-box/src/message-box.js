@@ -14,7 +14,12 @@ function getInstance (type) {
       if (namespace.get('adModalIntance')) {
         res = namespace.get('adModalIntance')
       } else {
-        res = new (Vue.extend(AuModalTemplate))({ el: document.createElement('div') })
+        res = new (Vue.extend(AuModalTemplate))({
+          el: document.createElement('div'),
+          props: {
+            autoScroll: false
+          }
+        })
         namespace.set('adModalIntance', res)
       }
       return res

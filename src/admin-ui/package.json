@@ -1,6 +1,6 @@
 {
   "name": "admin-ui",
-  "version": "3.2.94",
+  "version": "3.2.95",
   "sideEffects": false,
   "description": "An elegant admin-system-like vue ui components library",
   "author": "bboyawey<bboyawey@sina.cn>",

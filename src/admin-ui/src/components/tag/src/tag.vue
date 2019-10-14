@@ -27,14 +27,13 @@
 </style>
 <template>
   <div class="au-tag au-theme-border-radius--small" :class="classes" :style="{
-    border: active ? 'none' : '',
     cursor: hoverable ? 'pointer' : ''
-  }">
+  }" @click="$emit('click', $event)">
     <slot></slot>
     <span class="au-tag-close au-theme-color--base-3" v-show="closable" :class="{
       [`au-theme-hover-color--${type}`]: !active,
       [`au-theme-hover-color--base-12`]: active
-    }" @click="$emit('close', $event)"><au-icon class="au-tag-close-icon" type="times"/></span>
+    }" @click.stop="$emit('close', $event)"><au-icon class="au-tag-close-icon" type="times"/></span>
     <!-- <span class="au-tag-close au-theme-color--base-5" v-show="closable" :class="{
       [`au-theme-hover-background-color--${type}-3`]: !active,
       [`au-theme-hover-background-color--base-12`]: active,
@@ -81,9 +80,9 @@ export default {
     classes () {
       let normal = ''
       let hover = ''
-      let size = this.size ? `au-size-${this.size}${this.active ? '' : '-bordered'}` : ''
+      let size = `au-size-${this.size}-bordered`
       if (this.active) {
-        normal = `au-theme-color--base-12 au-theme-background-color--${this.type}`
+        normal = `au-theme-border-color--${this.type} au-theme-color--base-12 au-theme-background-color--${this.type}`
       } else {
         if (this.hoverable) {
           normal = 'au-theme-border-color--base-8 au-theme-color--base-3'
@@ -92,7 +91,7 @@ export default {
           normal = `au-theme-border-color--${this.type} au-theme-color--${this.type}`
         }
       }
-
+      console.log(normal + ' ' + hover + ' ' + size)
       return normal + ' ' + hover + ' ' + size
     }
   }

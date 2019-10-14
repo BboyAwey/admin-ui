@@ -148,6 +148,15 @@
         </thead>
         <tbody>
           <tr>
+            <td>@click</td>
+            <td>
+              <ol class="option-list">
+                <li class="au-theme-border-color--base-8">event</li>
+              </ol>
+            </td>
+            <td>用户点击时</td>
+          </tr>
+          <tr>
             <td>@close</td>
             <td>
               <ol class="option-list">

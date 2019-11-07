@@ -6,18 +6,21 @@
       </p>
       <!-- 组件示例 -->
       <div class="component-example">
-        <au-scroller style="width: 300px; height:400px; border-width: 1px; border-style: solid;" class="au-theme-border-color--base-8" :scaleable="false" :offset="0">
+        <au-button @click="test = !test">hello</au-button>
+        <au-scroller style="width: 300px; height:480px; border-width: 1px; border-style: solid;" class="au-theme-border-color--base-8" :scaleable="false" :offset="0">
           <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
-          <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
-          <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
-          <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
-          <au-scroller style="width: 200px; height: 300px; border-width: 1px; border-style: solid; padding: 10px;" class="au-theme-border-color--base-8">
+          <div v-show="test">
+            <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
+            <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
+            <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
+          </div>
+          <!-- <au-scroller style="width: 200px; height: 300px; border-width: 1px; border-style: solid; padding: 10px;" class="au-theme-border-color--base-8">
             <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
             <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
             <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
             <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, ab. Odit consectetur incidunt error libero illum reiciendis, sint sunt voluptas nostrum iusto assumenda placeat beatae, nihil corporis. Laboriosam, ea esse?</p>
-          </au-scroller>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis ullam vel culpa laborum at libero in! Atque sequi excepturi quia ullam harum soluta minus, eos culpa nisi, quam officiis accusantium?</p>
+          </au-scroller> -->
+          <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis ullam vel culpa laborum at libero in! Atque sequi excepturi quia ullam harum soluta minus, eos culpa nisi, quam officiis accusantium?</p> -->
         </au-scroller>
       </div>
       <!-- 组件示例 -->
@@ -240,6 +243,11 @@
 </template>
 <script>
 export default {
-  name: 'scroller-examples'
+  name: 'scroller-examples',
+  data () {
+    return {
+      test: false
+    }
+  }
 }
 </script>

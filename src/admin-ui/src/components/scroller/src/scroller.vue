@@ -1,6 +1,6 @@
 <template>
   <div class="au-scroller">
-    <div>
+    <div ref='content'>
       <slot></slot>
     </div>
   </div>
@@ -27,26 +27,10 @@ export default {
         scrollLeft: e.target.scrollLeft
       })
     })
-    // setTimeout(() => {
-    //   this.scroller = new Scroller({
-    //     el: this.$el,
-    //     direction: this.direction,
-    //     offset: this.offset,
-    //     scaleable: this.scaleable,
-    //     trackClassName: 'au-theme-background-color--base-0',
-    //     barClassName: 'au-theme-background-color--base-0'
-    //   }).onScroll(e => {
-    //     this.$emit('scroll', {
-    //       scrollTop: e.target.scrollTop,
-    //       scrollLeft: e.target.scrollLeft
-    //     })
-    //   })
-    // }, 0)
   },
   beforeDestroy () {
     if (this.scroller) this.scroller.destroy()
   },
-  // $emit scroll
   props: {
     direction: {
       type: String,

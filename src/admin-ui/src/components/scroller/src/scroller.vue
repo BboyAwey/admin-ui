@@ -19,7 +19,8 @@ export default {
       offset: this.offset,
       scaleable: this.scaleable,
       trackClassName: 'au-theme-background-color--base-0',
-      barClassName: 'au-theme-background-color--base-0'
+      barClassName: 'au-theme-background-color--base-0',
+      fillHeight: true
     }).onScroll(e => {
       this.$emit('scroll', {
         scrollTop: e.target.scrollTop,

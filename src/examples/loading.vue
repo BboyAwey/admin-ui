@@ -147,6 +147,21 @@
               table元素是个例外，你只能在其外部再包一层父级元素比如div然后将其指定为target
             </td>
           </tr>
+          <tr>
+            <td>delay</td>
+            <td>
+              <!-- <au-icon type="check" class="au-theme-color--success"></au-icon> -->
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>Number</td>
+            <td>
+              500
+            </td>
+            <td>
+              <au-icon type="times"></au-icon>
+            </td>
+            <td>延迟出现，如果在延迟时间内关闭则不出现，单位为毫秒</td>
+          </tr>
         </tbody>
       </au-table>
     </au-panel>

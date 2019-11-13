@@ -144,6 +144,7 @@ export default {
     close () {
       if (!this.closed) {
         let el = this.el ? this.el : this.$el
+        if (!el) return
         removeClass(el.parentNode, 'au-loading-z-index-fixed')
         removeClass(el.parentNode, 'au-loading-position-fixed')
         el.parentNode.removeChild(el)

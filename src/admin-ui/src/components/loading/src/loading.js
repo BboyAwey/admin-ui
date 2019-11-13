@@ -71,8 +71,8 @@ export default (config = {}) => {
 
   return {
     close () {
-      instance.close()
       clearTimeout(timer)
+      instance.$destroy()
     }
   }
 }

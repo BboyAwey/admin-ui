@@ -67,12 +67,15 @@ export default (config = {}) => {
     target.appendChild(el)
     // instance.setColor()
     clearTimeout(timer)
+    timer = null
   }, delay)
 
   return {
     close () {
       clearTimeout(timer)
+      timer = null
       instance.$destroy()
+      instance = null
     }
   }
 }

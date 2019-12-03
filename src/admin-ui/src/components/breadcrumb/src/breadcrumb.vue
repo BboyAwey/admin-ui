@@ -8,7 +8,7 @@
     display: inline-block;
   }
   .au-breadcrumb-separator {
-    margin: 0 10px;
+    margin: 0 4px 0 8px;
   }
   .au-breadcrumb-text {
     cursor: pointer;

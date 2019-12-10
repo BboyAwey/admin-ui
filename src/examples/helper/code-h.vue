@@ -7,7 +7,9 @@
 </style>
 
 <template>
-  <pre class="code-h line-numbers"><code :class="'language-' + lang" ref="codeBlock"><slot></slot></code></pre>
+  <au-scroller direction="horizontal" :offset="0" :scaleable="false">
+    <pre class="code-h line-numbers"><code :class="'language-' + lang" ref="codeBlock"><slot></slot></code></pre>
+  </au-scroller>
 </template>
 <script>
 import Prism from 'prismjs'
@@ -17,7 +19,7 @@ Prism.plugins.NormalizeWhitespace.setDefaults({
   'remove-indent': true,
   'left-trim': true,
   'right-trim': true,
-  'break-lines': 80,
+  'break-lines': 8888,
   'remove-initial-line-feed': false
 })
 

@@ -22,6 +22,7 @@
         <au-icon class="icon-item au-theme-color--success" type="heart" size="44px"></au-icon>
         <au-icon class="icon-item au-theme-color--danger" type="globe" size="46px"></au-icon>
         <au-icon class="icon-item au-theme-color--warning" type="user" size="46px"></au-icon>
+        <au-icon class="icon-item au-theme-color--info" type="cog" size="46px"></au-icon>
       </div>
       <!-- 组件示例 -->
     </au-panel>

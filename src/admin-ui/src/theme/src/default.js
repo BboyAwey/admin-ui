@@ -1,11 +1,16 @@
 export default {
   theme: {
     colors: { // 彩色配置，默认配置如下
-      primary: '#1c86e2',
-      info: '#68217a',
-      warning: '#f5ae08',
-      danger: '#ea3a46',
-      success: '#0cb470'
+      // primary: '#1c86e2',
+      // success: '#0cb470',
+      // danger: '#ea3a46',
+      // warning: '#f5ae08',
+      // info: '#68217a'
+      primary: '#2196f3',
+      success: '#4caf50',
+      danger: '#f44336',
+      warning: '#ff9800',
+      info: '#607d8b'
     },
     shadows: { // 阴影配置，默认配置如下
       // primary: '0 0 4px #1c86e2',

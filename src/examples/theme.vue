@@ -19,11 +19,11 @@
           theme: {
             // 彩色配置
             colors: {
-              primary: '#1c86e2',
-              info: '#68217a',
-              warning: '#f5ae08',
-              danger: '#ea3a46',
-              success: '#0cb470'
+              primary: '#2196f3',
+              success: '#4caf50',
+              danger: '#f44336',
+              warning: '#ff9800',
+              info: '#607d8b'
             },
             // 阴影配置，默认基于primary颜色自动计算
             shadows: {

@@ -1,3 +1,32 @@
+export class Interval {
+  constructor (callback, time = 0, context) {
+    this.time = time
+    this.callback = callback
+    this.context = context
+    this.lastTimestamp = null
+    this.request = null
+    this.start()
+  }
+
+  start () {
+    this.request = window.requestAnimationFrame(this.step.bind(this))
+  }
+
+  step () {
+    const now = new Date().getTime()
+    if (this.time <= now - this.lastTimestamp) {
+      console.log('step')
+      this.lastTimestamp = now
+      this.callback.call(this.context)
+    }
+    this.request = window.requestAnimationFrame(this.step.bind(this))
+  }
+
+  stop () {
+    window.cancelAnimationFrame(this.request)
+  }
+}
+
 export const deepClone = (obj) => {
   if (!(obj instanceof Array || obj instanceof Object)) {
     console.warn('Admin UI@deep-clone@ can only deepCopy array or plain object')
@@ -35,9 +64,12 @@ if (!namespace.get('heartbeatStack')) namespace.set('heartbeatStack', {})
 let stack = namespace.get('heartbeatStack')
 
 if (!namespace.get('heartbeat')) {
-  namespace.set('heartbeat', window.setInterval(function () {
+  // namespace.set('heartbeat', window.setInterval(function () {
+  //   for (let f of Object.values(stack)) f()
+  // }, 300))
+  namespace.set('heartbeat', new Interval(function () {
     for (let f of Object.values(stack)) f()
-  }, 300))
+  }))
   // namespace.set('heartbeat', window.requestAnimationFrame(function heatbeat () {
   //   for (let f of Object.values(stack)) f()
   //   namespace.set('heartbeat', window.requestAnimationFrame(heatbeat))

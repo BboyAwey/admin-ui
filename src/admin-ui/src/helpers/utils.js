@@ -15,7 +15,6 @@ export class Interval {
   step () {
     const now = new Date().getTime()
     if (this.time <= now - this.lastTimestamp) {
-      console.log('step')
       this.lastTimestamp = now
       this.callback.call(this.context)
     }
@@ -70,10 +69,6 @@ if (!namespace.get('heartbeat')) {
   namespace.set('heartbeat', new Interval(function () {
     for (let f of Object.values(stack)) f()
   }))
-  // namespace.set('heartbeat', window.requestAnimationFrame(function heatbeat () {
-  //   for (let f of Object.values(stack)) f()
-  //   namespace.set('heartbeat', window.requestAnimationFrame(heatbeat))
-  // }))
 }
 
 export const heartbeat = {

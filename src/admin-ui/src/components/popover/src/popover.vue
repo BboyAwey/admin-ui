@@ -5,9 +5,9 @@
     position: absolute;
     z-index: $z-level-1;
     line-height: inherit;
-    transition-property: left, top, bottom, right;
+    /* transition-property: left, top, bottom, right;
     transition-duration: .2s;
-    transition-timing-function: ease;
+    transition-timing-function: ease; */
   }
   .au-popover:focus {
     outline: none;

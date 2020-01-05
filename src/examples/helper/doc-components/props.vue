@@ -33,12 +33,15 @@
           <td><prop-text :text="prop.type"/></td>
           <td><prop-text :text="prop.default"/></td>
           <td>
-            <prop-text v-if="prop.type.toLowerCase() !== 'boolean'" :text="prop.options"/>
-            <!-- v-if="prop.type.toLowerCase() === 'boolean'" -->
-            <ol class="option-list" v-if="prop.type.toLowerCase() === 'boolean'">
+            <ol class="option-list"
+              v-if="prop.options instanceof Array && prop.options.isList && prop.options.length ">
+              <li class="au-theme-border-color--base-8" v-for="(item, i) of prop.options" :key="i">{{ item }}</li>
+            </ol>
+            <ol class="option-list" v-else-if="prop.type.toLowerCase() === 'boolean'">
               <li class="au-theme-border-color--base-8">true</li>
               <li class="au-theme-border-color--base-8">false</li>
             </ol>
+            <prop-text v-else :text="prop.options"/>
           </td>
           <td><prop-text :text="prop.description"/></td>
         </tr>

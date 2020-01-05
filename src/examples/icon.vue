@@ -38,7 +38,7 @@
           type: 'Boolean',
           default: 'false',
           description: '是否统一图标尺寸。图表库中可能存在图标宽度不一致的情况，有时候需要纵向对齐时会有麻烦。将本接口设置为true会将图标宽度设置为一致，纵向居中对齐'
-        },
+        }
       ]"
       :links="{
         'Font Awesome Icons': 'https://fontawesome.com/icons?d=listing&m=free',

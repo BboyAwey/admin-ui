@@ -5,28 +5,47 @@
 </style>
 <template>
   <div class="page">
-    <au-panel class="section" title="组件描述">
-      <p class="paragraph">
-        Admin UI中的图标组件，是基于著名的
-        <a class="au-theme-color--info" href="http://fontawesome.io" target="_blank">Font Awesome 4</a>
-        ，我们将其内置到了Admin UI中。
-      </p>
-      <cite class="cite au-theme-before-background-color--base-8 au-theme-color--base-5">
+    <doc-section title="组件描述">
+      <doc-p>
+        Admin UI中的图标组件，是基于著名的<doc-link href="http://fontawesome.io">Font Awesome 4</doc-link>,我们将其内置到了Admin UI中。
+      </doc-p>
+      <doc-cite>
         Admin UI 1中的图标组件是基于
-        <a class="au-theme-color--info" href="http://ionicons.com/" target="_blank">Ionicons</a>
+        <doc-link href="http://ionicons.com/">Ionicons</doc-link>
         ，但由于其图标数量较少，这一版本中我们替换了它，如果你仍旧希望使用，可以手动引入到项目中，然后通过组件的"custom"接口来使用
-      </cite>
-      <!-- 组件示例 -->
-      <div class="component-example">
+      </doc-cite>
+      <doc-example>
         <au-icon class="icon-item au-theme-color--primary" type="home" size="48px"></au-icon>
         <au-icon class="icon-item au-theme-color--success" type="heart" size="44px"></au-icon>
         <au-icon class="icon-item au-theme-color--danger" type="globe" size="46px"></au-icon>
         <au-icon class="icon-item au-theme-color--warning" type="user" size="46px"></au-icon>
         <au-icon class="icon-item au-theme-color--info" type="cog" size="46px"></au-icon>
-      </div>
-      <!-- 组件示例 -->
-    </au-panel>
-    <au-panel class="section" title="Props">
+      </doc-example>
+    </doc-section>
+    <doc-props
+      :props="[
+        {
+          name: 'type',
+          required: false,
+          type: 'String',
+          default: '-',
+          options: '%%Font Awesome Icons%%，由于Font Awesome项目已经升级到5，其官网已经改版，建议优先参考：%%第三方提供的Font Awesome Icons列表%%',
+          description: '图标的类型（仅支持免费版的FontAwesome）'
+        },
+        {
+          name: 'unify-size',
+          required: false,
+          type: 'Boolean',
+          default: 'false',
+          description: '是否统一图标尺寸。图表库中可能存在图标宽度不一致的情况，有时候需要纵向对齐时会有麻烦。将本接口设置为true会将图标宽度设置为一致，纵向居中对齐'
+        },
+      ]"
+      :links="{
+        'Font Awesome Icons': 'https://fontawesome.com/icons?d=listing&m=free',
+        '第三方提供的Font Awesome Icons列表': 'https://9iphp.com/fa-icons'
+      }"
+    />
+    <doc-section title="Props">
       <au-table>
         <thead>
           <tr>
@@ -125,7 +144,7 @@
           </tr>
         </tbody>
       </au-table>
-    </au-panel>
+    </doc-section>
     <au-panel class="section" title="Slots">
       <!-- <au-table>
         <thead>

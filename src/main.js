@@ -6,6 +6,7 @@ import codeH from './examples/helper/code-h.vue'
 import router from './router'
 import adminUi from './admin-ui/src'
 import './style/_common.scss'
+import './examples/helper/doc-components'
 
 // adminUi.theme('dark')
 Vue.use(adminUi)

@@ -154,7 +154,7 @@
               <au-icon type="times"></au-icon>
             </td>
             <td>String</td>
-            <td>Success</td>
+            <td>success</td>
             <td>
               <ol class="option-list">
                 <li class="au-theme-border-color--base-8">default</li>

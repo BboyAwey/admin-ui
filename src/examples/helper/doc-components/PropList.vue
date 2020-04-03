@@ -20,9 +20,9 @@
         <tr>
           <th width="130">字段</th>
           <th width="60">必填</th>
-          <th width="120">类型</th>
-          <th width="130">默认</th>
-          <th width="200">可选</th>
+          <th width="160">类型</th>
+          <th width="160">默认</th>
+          <th>可选值 / 字段</th>
           <th>说明</th>
         </tr>
       </thead>
@@ -30,16 +30,21 @@
         <tr v-for="prop of resolvedProps" :key="prop.name">
           <td><prop-text :text="prop.name"/></td>
           <td><prop-text :text="prop.required"/></td>
-          <td><prop-text :text="prop.type"/></td>
+          <td><type-list :types="prop.type ? prop.type.split('>>') : ''"/></td>
           <td><prop-text :text="prop.default"/></td>
           <td>
-            <ol class="option-list"
-              v-if="prop.options instanceof Array && prop.options.isList && prop.options.length ">
-              <li class="au-theme-border-color--base-8" v-for="(item, i) of prop.options" :key="i">{{ item }}</li>
-            </ol>
-            <ol class="option-list" v-else-if="prop.type.toLowerCase() === 'boolean'">
+            <ol class="option-list" v-if="prop.type !== undefined && prop.type!== null && prop.type.toLowerCase() === 'boolean'">
               <li class="au-theme-border-color--base-8">true</li>
               <li class="au-theme-border-color--base-8">false</li>
+            </ol>
+            <ol class="option-list" v-else-if="prop.options.isList">
+              <li class="au-theme-border-color--base-8" v-for="option of prop.options" :key="option.key">
+                <doc-code>{{ option.key }}</doc-code>
+                :
+                <doc-code>{{ option.type }}</doc-code>
+                ，
+                <prop-text :text="option.description"/>
+              </li>
             </ol>
             <prop-text v-else :text="prop.options"/>
           </td>
@@ -51,10 +56,14 @@
 </template>
 
 <script>
-import PropText from './-prop-text'
+import PropText from './prop-text'
+import DocSection from './section'
+import TypeList from './type-list'
+import DocCode from './code'
+
 export default {
   name: 'doc-props',
-  components: { PropText },
+  components: { PropText, DocSection, TypeList, DocCode },
   props: {
     props: {
       type: Array,
@@ -105,7 +114,6 @@ export default {
             arrayfy.push(plainText.shift())
             arrayfy.push(links.shift())
           }
-          console.log(arrayfy.filter(item => item), '---')
           res[key] = arrayfy.filter(item => item)
         }
         return res

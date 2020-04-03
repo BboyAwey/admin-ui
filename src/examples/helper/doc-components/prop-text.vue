@@ -1,12 +1,18 @@
+<style lang="scss" scoped>
+  .props {
+    display: inline;
+  }
+</style>
+
 <template>
-  <div class="prop">
+  <div class="props">
     <span v-if="typeof text === 'string' && text !== '-'">
       {{ text || '\'\'' }}
     </span>
-    <span v-if="text === undefined">
+    <span v-else-if="text === undefined">
       undefined
     </span>
-    <span v-if="text === null">
+    <span v-else-if="text === null">
       null
     </span>
     <au-icon v-if="text === '-'" type="minus"/>
@@ -26,8 +32,11 @@
 </template>
 
 <script>
+import DocLink from './link'
+
 export default {
   name: 'doc-prop-text',
+  components: { DocLink },
   props: {
     text: {
       default: ''

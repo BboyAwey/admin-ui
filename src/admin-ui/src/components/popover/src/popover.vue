@@ -223,15 +223,20 @@ export default {
     },
     reconstruct () {
       let target = this.getTarget()
-      let pop = this.$refs.pop
+      // store pop and content refs to vm
+      // because sometimes it could be undefined
+      // when get them in async methods like show() or calcPos()
+      this.__pop = this.$refs.pop
+      this.__content = this.$refs.content
+
       let id = 'au-popover-' + this._uid
-      pop.setAttribute('data-au-popover', id)
+      this.__pop.setAttribute('data-au-popover', id)
       popoverCollections[id] = this
 
-      if (target.parentNode === pop) {
+      if (target.parentNode === this.__pop) {
         // sometimes it will use in a modal or other elements witch has z-index style
-        pop.parentNode && pop.parentNode.insertBefore(target, pop)
-        pop.parentNode && pop.parentNode.removeChild(pop)
+        this.__pop.parentNode && this.__pop.parentNode.insertBefore(target, this.__pop)
+        this.__pop.parentNode && this.__pop.parentNode.removeChild(this.__pop)
       }
       // pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
       // if (pop.parentNode !== document.body) document.body.appendChild(pop)
@@ -269,16 +274,16 @@ export default {
       if (res !== undefined && !res) return
       this.calPos()
       // this.originPopSize = {
-      //   width: window.getComputedStyle(this.$refs.pop).width,
-      //   height: window.getComputedStyle(this.$refs.pop).height
+      //   width: window.getComputedStyle(this.__pop).width,
+      //   height: window.getComputedStyle(this.__pop).height
       // }
-      if (!this.$refs.pop.parentNode) document.body.appendChild(this.$refs.pop)
+      if (!this.__pop.parentNode) document.body.appendChild(this.__pop)
       if (this.trigger && this.hideOnBlur) {
-        this.$refs.pop.focus()
+        this.__pop.focus()
       }
 
       let target = this.getTarget()
-      let pop = this.$refs.pop
+      let pop = this.__pop
       pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
 
       this.visible = true
@@ -288,19 +293,19 @@ export default {
     hide () {
       heartbeat.remove(this._uid)
       try {
-        this.$refs.pop.parentNode.removeChild(this.$refs.pop)
+        this.__pop.parentNode.removeChild(this.__pop)
       } catch (e) {}
       this.visible = false
     },
     calPos () {
-      let pop = this.$refs.pop
+      let pop = this.__pop
       let target = this.getTarget()
-      let content = this.$refs.content
+      let content = this.__content
       if (!target) return
 
       // let popElmSize = getElementSize(this.$slots.content[0].elm)
-      // this.$refs.pop.style.width = popElmSize.width + 'px'
-      // this.$refs.pop.style.height = popElmSize.height + 'px'
+      // this.__pop.style.width = popElmSize.width + 'px'
+      // this.__pop.style.height = popElmSize.height + 'px'
 
       let keys = this.placement.split(/\s+/)
       let xes = new Set(['top', 'bottom', 'left', 'right'])
@@ -374,8 +379,8 @@ export default {
       this.localPlacement = keys.join(' ')
 
       // fix the size bug witch caused by the wordwrap
-      // this.$refs.pop.style.width = popSize.width + 'px'
-      // this.$refs.pop.style.height = popSize.height + 'px'
+      // this.__pop.style.width = popSize.width + 'px'
+      // this.__pop.style.height = popSize.height + 'px'
       let offset = 10
       let vertical = {
         x: {

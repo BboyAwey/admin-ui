@@ -183,7 +183,7 @@ export default {
     return {
       visible: false,
       originPopSize: {},
-      localPlacement: '',
+      localPlacement: this.placement,
       rootIndex: 0
     }
   },
@@ -287,6 +287,7 @@ export default {
       pop.style.zIndex = getRealZIndex(target.parentNode) || 9999
 
       this.visible = true
+      this.$forceUpdate()
 
       heartbeat.add(this.calPos.bind(this), this._uid)
     },
@@ -313,7 +314,7 @@ export default {
       if (keys.length !== 2 || !xes.has(keys[0]) || !ys.has(keys[1])) {
         keys = ['top', 'center']
       }
-      this.localPlacement = keys.join(' ')
+      // this.localPlacement = keys.join(' ')
 
       if (this.x && this.y) {
         pop.style.left = this.x

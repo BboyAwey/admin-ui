@@ -283,6 +283,13 @@ export default {
 
       return res
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('keyup', this.escHandler)
+
+    this.$refs.previewer &&
+    this.$refs.previewer.parentNode === document.body &&
+    document.body.removeChild(this.$refs.previewer)
   }
 }
 </script>

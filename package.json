@@ -35,7 +35,7 @@
     "prismjs": "^1.16.0",
     "resize-detector": "^0.1.9",
     "theme-class-generator": "^1.0.2",
-    "vue": "^2.6.10",
+    "vue": "^3.0.0",
     "vue-router": "^3.0.3"
   },
   "devDependencies": {
